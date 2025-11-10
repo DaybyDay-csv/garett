@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Zap, Timer, Gift, Copy, Check, Flame, AlertCircle, Clock } from "lucide-react";
 import { toast } from "sonner";
 import { promotionalStages, getCurrentPromotionalStage } from "@/lib/promotions";
+import { gwpConfig } from "@/lib/bannerConfig";
+import gwpImage from "@/assets/gwp-headband.jpg";
 interface TimeLeft {
   days: number;
   hours: number;
@@ -515,14 +517,32 @@ const BlackFriday = () => {
                         </div>
                       )}
                       
-                      {/* GWP info without code */}
+                      {/* GWP - Gift With Purchase Block */}
                       {stage.gwp && (
-                        <div className="bg-pink-500/10 rounded-lg p-3 border border-pink-500/20 text-center">
-                          <div className="flex items-center justify-center gap-2">
-                            <Gift className="w-4 h-4 text-pink-600 dark:text-pink-400" />
-                            <span className="text-xs font-medium text-pink-700 dark:text-pink-300">
-                              Regalo gratis desde €70
-                            </span>
+                        <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-lg p-4 border-2 border-pink-500/30">
+                          <div className="flex items-center gap-3">
+                            <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border-2 border-white/50 shadow-md">
+                              <img 
+                                src={gwpImage} 
+                                alt={gwpConfig.giftName}
+                                className="w-full h-full object-cover"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-pink-500/20 to-transparent" />
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex items-center gap-1 mb-1">
+                                <Gift className="w-4 h-4 text-pink-600 dark:text-pink-400" />
+                                <span className="text-xs font-bold text-pink-700 dark:text-pink-300 uppercase tracking-wide">
+                                  Regalo Gratis
+                                </span>
+                              </div>
+                              <p className="text-sm font-semibold text-foreground mb-1">
+                                {gwpConfig.giftName}
+                              </p>
+                              <p className="text-xs text-muted-foreground">
+                                {gwpConfig.conditions}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       )}
