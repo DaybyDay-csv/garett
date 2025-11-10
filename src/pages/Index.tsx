@@ -25,7 +25,7 @@ const Index = () => {
   useEffect(() => {
     const loadProducts = async () => {
       try {
-        const data = await fetchProducts(20);
+        const data = await fetchProducts(50);
         setProducts(data);
       } catch (error) {
         console.error('Error loading products:', error);
