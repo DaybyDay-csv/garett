@@ -28,17 +28,26 @@ export const CartDrawer = () => {
   } = useCartStore();
   
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
+  
+  // Calculate original prices (without discounts)
+  const subtotalOriginal = items.reduce((sum, item) => {
+    // Get original price from the product
+    const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
+    return sum + (originalPrice * item.quantity);
+  }, 0);
+  
+  // Current stage and discount
+  const currentStage = getCurrentPromotionalStage();
+  const hasGWPActive = currentStage?.hasGWP ?? false;
+  const discountPercentage = currentStage?.baseDiscount ?? 0;
+  const discountAmount = subtotalOriginal * (discountPercentage / 100);
+  const subtotalWithDiscount = subtotalOriginal - discountAmount;
   
   // GWP threshold
   const GWP_THRESHOLD = 70;
-  const progressPercentage = Math.min((totalPrice / GWP_THRESHOLD) * 100, 100);
-  const remainingForGWP = Math.max(GWP_THRESHOLD - totalPrice, 0);
-  const hasUnlockedGWP = totalPrice >= GWP_THRESHOLD;
-  
-  // Check if current stage has GWP
-  const currentStage = getCurrentPromotionalStage();
-  const hasGWPActive = currentStage?.hasGWP ?? false;
+  const progressPercentage = Math.min((subtotalWithDiscount / GWP_THRESHOLD) * 100, 100);
+  const remainingForGWP = Math.max(GWP_THRESHOLD - subtotalWithDiscount, 0);
+  const hasUnlockedGWP = subtotalWithDiscount >= GWP_THRESHOLD;
 
   const handleCheckout = async () => {
     try {
@@ -192,11 +201,73 @@ export const CartDrawer = () => {
               </div>
               
               <div className="flex-shrink-0 space-y-4 pt-4 border-t bg-background mt-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-lg font-semibold">Total</span>
-                  <span className="text-xl font-bold">
-                    €{totalPrice.toFixed(2)}
-                  </span>
+                {/* Price Breakdown */}
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between text-muted-foreground">
+                    <span>Subtotal</span>
+                    <span>€{subtotalOriginal.toFixed(2)}</span>
+                  </div>
+                  
+                  {/* Active Discount */}
+                  {currentStage && discountPercentage > 0 && (
+                    <div className="flex justify-between text-green-600 dark:text-green-400">
+                      <span className="flex items-center gap-2">
+                        <Sparkles className="w-4 h-4" />
+                        Descuento {currentStage.badge} ({discountPercentage}%)
+                      </span>
+                      <span>-€{discountAmount.toFixed(2)}</span>
+                    </div>
+                  )}
+                  
+                  {/* Discount Code Info */}
+                  {currentStage?.code && (
+                    <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-lg p-3">
+                      <p className="text-xs text-green-800 dark:text-green-200 font-semibold mb-1">
+                        💎 Código de descuento activo
+                      </p>
+                      <div className="flex items-center justify-between gap-2">
+                        <code className="text-sm font-bold text-green-900 dark:text-green-100 bg-white dark:bg-green-950 px-3 py-1 rounded border border-green-300 dark:border-green-700">
+                          {currentStage.code}
+                        </code>
+                        <span className="text-xs text-green-700 dark:text-green-300">
+                          Ya aplicado
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Gift With Purchase */}
+                  {hasGWPActive && hasUnlockedGWP && (
+                    <div className="flex justify-between text-purple-600 dark:text-purple-400">
+                      <span className="flex items-center gap-2">
+                        <Gift className="w-4 h-4" />
+                        Regalo: Banda de pelo
+                      </span>
+                      <span className="font-semibold">GRATIS</span>
+                    </div>
+                  )}
+                  
+                  <div className="h-px bg-border my-2"></div>
+                  
+                  {/* Total */}
+                  <div className="flex justify-between items-center text-lg font-bold">
+                    <span>Total</span>
+                    <span>€{subtotalWithDiscount.toFixed(2)}</span>
+                  </div>
+                  
+                  {/* Total Savings */}
+                  {discountAmount > 0 && (
+                    <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200 dark:border-green-800 rounded-lg p-3 text-center">
+                      <p className="text-sm font-bold text-green-700 dark:text-green-300">
+                        🎉 ¡Ahorras €{discountAmount.toFixed(2)} en esta compra!
+                      </p>
+                      {hasUnlockedGWP && (
+                        <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+                          + Banda de pelo gratis incluida
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </div>
                 
                 <Button 
@@ -213,7 +284,7 @@ export const CartDrawer = () => {
                   ) : (
                     <>
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      Finalizar compra
+                      Finalizar compra (€{subtotalWithDiscount.toFixed(2)})
                     </>
                   )}
                 </Button>
