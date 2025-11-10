@@ -59,6 +59,18 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        promo: {
+          aeroglow: "hsl(var(--promo-aeroglow))",
+          "aeroglow-dark": "hsl(var(--promo-aeroglow-dark))",
+          gwp: "hsl(var(--promo-gwp))",
+          white: "hsl(var(--promo-white))",
+          "bf-start": "hsl(var(--promo-bf-start))",
+          "bf-mid": "hsl(var(--promo-bf-mid))",
+          "bf-end": "hsl(var(--promo-bf-end))",
+          "cm-start": "hsl(var(--promo-cm-start))",
+          "cm-mid": "hsl(var(--promo-cm-mid))",
+          "cm-end": "hsl(var(--promo-cm-end))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

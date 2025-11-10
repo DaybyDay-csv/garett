@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { TrustBadges } from "@/components/TrustBadges";
 import { Testimonials } from "@/components/Testimonials";
+import { PromotionalBanners } from "@/components/PromotionalBanners";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -16,7 +17,6 @@ import categoryLimpiezaFacial from "@/assets/category-limpieza-facial.jpg";
 import categoryMesoterapia from "@/assets/category-mesoterapia.jpg";
 import categoryCorporales from "@/assets/category-corporales.jpg";
 import categoryDepilacionIPL from "@/assets/category-depilacion-ipl.jpg";
-import garettPattern from "@/assets/garett-pattern-1.png";
 
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -44,92 +44,8 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Top Bar */}
-      <div className="bg-primary text-primary-foreground py-2 text-center text-sm">
-        <p>Envío gratuito a partir de 60€ • Garantía extendida 3 años • Soporte técnico en español</p>
-      </div>
-
-      {/* Hero Section - Clean & Professional */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[hsl(210,25%,92%)] to-[hsl(200,20%,95%)] py-16 md:py-24">
-        {/* Decorative Pattern Background */}
-        <div 
-          className="absolute inset-0 opacity-[0.03]" 
-          style={{
-            backgroundImage: `url(${garettPattern})`,
-            backgroundSize: '200px',
-            backgroundRepeat: 'repeat'
-          }}
-        />
-        
-        <div className="container relative">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div className="space-y-6">
-              <Badge className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20">
-                Black Friday 2025
-              </Badge>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
-                Tecnología de belleza profesional
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-lg">
-                Dispositivos avanzados con hasta <span className="font-bold text-primary">20% de descuento</span>. 
-                Resultados visibles en 8-12 semanas.
-              </p>
-              
-              {/* Key Features */}
-              <div className="flex flex-wrap gap-4 pt-4">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Timer className="w-4 h-4 text-primary" />
-                  </div>
-                  <span>Envío 24-48h</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Zap className="w-4 h-4 text-primary" />
-                  </div>
-                  <span>Garantía 3 años</span>
-                </div>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button asChild size="lg" className="bg-primary hover:bg-primary-glow text-white shadow-lg">
-                  <Link to="/black-friday">
-                    <ShoppingBag className="mr-2 h-5 w-5" />
-                    Ver Black Friday
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/5">
-                  <Link to="/productos">
-                    Ver productos
-                  </Link>
-                </Button>
-              </div>
-            </div>
-
-            {/* Right Content - Featured Product */}
-            <div className="relative">
-              <div className="aspect-square bg-white rounded-2xl shadow-xl overflow-hidden">
-                {bestSellers.length > 0 && bestSellers[0]?.node.images.edges[0] ? (
-                  <img 
-                    src={bestSellers[0].node.images.edges[0].node.url} 
-                    alt={bestSellers[0].node.title}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-muted">
-                    <Sparkles className="w-24 h-24 text-muted-foreground" />
-                  </div>
-                )}
-              </div>
-              {/* Floating badge */}
-              <div className="absolute -top-4 -right-4 bg-primary text-white px-6 py-3 rounded-full shadow-lg font-bold">
-                -20%
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Promotional Banners Carousel */}
+      <PromotionalBanners />
 
       {/* Categories Section */}
       <section className="py-20 bg-white">
