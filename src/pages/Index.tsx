@@ -244,13 +244,13 @@ const Index = () => {
           </section>
         )}
 
-        {/* Best Sellers */}
+        {/* Superventas */}
         {bestSellers.length > 0 && (
           <section className="py-8">
             <div className="flex items-center justify-between mb-10">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                  Best Sellers
+                  Superventas
                 </h2>
                 <p className="text-muted-foreground mt-2 text-lg">Los más vendidos de Garett</p>
               </div>
