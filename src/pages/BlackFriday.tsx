@@ -4,8 +4,112 @@ import { ProductCard } from "@/components/ProductCard";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Zap, Timer, Gift, Copy, Check, Flame, AlertCircle } from "lucide-react";
+import { Zap, Timer, Gift, Copy, Check, Flame, AlertCircle, Clock } from "lucide-react";
 import { toast } from "sonner";
+
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  isExpired: boolean;
+}
+
+const CountdownTimer = () => {
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    isExpired: false
+  });
+
+  useEffect(() => {
+    const calculateTimeLeft = (): TimeLeft => {
+      const targetDate = new Date('2025-11-30T23:59:59');
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
+
+      if (difference <= 0) {
+        return { days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true };
+      }
+
+      return {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+        isExpired: false
+      };
+    };
+
+    // Initial calculation
+    setTimeLeft(calculateTimeLeft());
+
+    // Update every second
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  if (timeLeft.isExpired) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-2xl font-bold text-white">¡Black Friday ha terminado!</p>
+        <p className="text-white/80 mt-2">Gracias por participar</p>
+      </div>
+    );
+  }
+
+  const timeUnits = [
+    { value: timeLeft.days, label: 'Días' },
+    { value: timeLeft.hours, label: 'Horas' },
+    { value: timeLeft.minutes, label: 'Minutos' },
+    { value: timeLeft.seconds, label: 'Segundos' }
+  ];
+
+  return (
+    <div className="mt-8">
+      <div className="flex items-center justify-center gap-2 mb-4">
+        <Clock className="w-5 h-5 text-white" />
+        <p className="text-white/90 font-medium">La oferta termina en:</p>
+      </div>
+      
+      <div className="flex justify-center gap-3 md:gap-4">
+        {timeUnits.map((unit, index) => (
+          <div key={unit.label} className="flex flex-col items-center">
+            <div className="relative">
+              {/* Animated background */}
+              <div className="absolute inset-0 bg-white/20 rounded-lg blur-sm animate-pulse" />
+              
+              {/* Time box */}
+              <div className="relative bg-white/10 backdrop-blur-md border border-white/30 rounded-lg p-3 md:p-4 min-w-[60px] md:min-w-[80px] hover:scale-110 transition-transform duration-300">
+                <div className="text-3xl md:text-5xl font-bold text-white text-center tabular-nums animate-scale-in">
+                  {String(unit.value).padStart(2, '0')}
+                </div>
+              </div>
+            </div>
+            
+            {/* Label */}
+            <div className="mt-2 text-xs md:text-sm text-white/80 font-medium uppercase tracking-wider">
+              {unit.label}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Urgency message */}
+      <div className="mt-6 text-center">
+        <Badge variant="destructive" className="animate-pulse">
+          <Flame className="w-3 h-3 mr-1" />
+          ¡Solo quedan {timeLeft.days} días!
+        </Badge>
+      </div>
+    </div>
+  );
+};
 
 const BlackFriday = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -102,12 +206,15 @@ const BlackFriday = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
             Black Friday
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl">
+          <p className="text-xl md:text-2xl text-white/90 mb-4 max-w-2xl">
             Hasta 50% de descuento + regalo gratis desde €70
           </p>
 
+          {/* Countdown Timer */}
+          <CountdownTimer />
+
           {/* Tier Info */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mt-8">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
               <Zap className="w-8 h-8 mb-3" />
               <h3 className="font-bold text-lg mb-1">Early Bird -50%</h3>
