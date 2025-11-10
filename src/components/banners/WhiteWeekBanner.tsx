@@ -39,7 +39,7 @@ export const WhiteWeekBanner = () => {
           </h1>
           <div className="flex items-center justify-center gap-3 md:gap-4">
             <div className="h-px w-8 md:w-16 bg-border" />
-            <p className="text-xl md:text-3xl lg:text-4xl font-bold text-primary">10% de descuento</p>
+            <p className="text-xl md:text-3xl lg:text-4xl font-bold text-primary">20% de descuento</p>
             <div className="h-px w-8 md:w-16 bg-border" />
           </div>
           <p className="text-sm md:text-lg lg:text-xl text-muted-foreground leading-relaxed px-4">
@@ -54,7 +54,7 @@ export const WhiteWeekBanner = () => {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6 text-sm md:text-base w-full max-w-2xl">
           <div className="flex items-center justify-center gap-2">
             <Percent className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
-            <span className="font-medium">10% en todo</span>
+            <span className="font-medium">20% en todo</span>
           </div>
           <div className="flex items-center justify-center gap-2">
             <Gift className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
@@ -68,16 +68,15 @@ export const WhiteWeekBanner = () => {
 
         {/* CTA */}
         <div className="pt-2">
-          <Button 
-            size="lg" 
-            className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 w-full sm:w-auto max-w-xs"
-            onClick={() => {
-              const element = document.getElementById('superventas');
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            }}
-          >
+          <Button size="lg" className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 w-full sm:w-auto max-w-xs" onClick={() => {
+          const element = document.getElementById('superventas');
+          if (element) {
+            element.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }}>
             Comprar ahora
           </Button>
 
