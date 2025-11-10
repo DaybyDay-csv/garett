@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
@@ -13,11 +14,20 @@ import {
 import { Button } from "@/components/ui/button";
 
 const Products = () => {
+  const [searchParams] = useSearchParams();
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("default");
+
+  // Initialize category from URL params
+  useEffect(() => {
+    const categoryParam = searchParams.get('category');
+    if (categoryParam) {
+      setCategoryFilter(categoryParam);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -63,6 +73,9 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "Todos" },
+    { value: "smartwatch", label: "Smartwatches" },
+    { value: "beauty", label: "Beauty Tech" },
+    { value: "accessories", label: "Accesorios" },
     { value: "masajeadores-faciales", label: "Masajeadores faciales" },
     { value: "limpieza-facial", label: "Limpieza facial" },
     { value: "mesoterapia", label: "Mesoterapia" },

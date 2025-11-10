@@ -5,9 +5,13 @@ import { TrustBadges } from "@/components/TrustBadges";
 import { Testimonials } from "@/components/Testimonials";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
-import { Sparkles, Zap, Timer, ShoppingBag } from "lucide-react";
+import { Sparkles, Zap, Timer, ShoppingBag, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import categorySmartwatch from "@/assets/category-smartwatches.jpg";
+import categoryBeauty from "@/assets/category-beauty.jpg";
+import categoryAccessories from "@/assets/category-accessories.jpg";
 
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -108,6 +112,97 @@ const Index = () => {
                 -20%
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Categories Section */}
+      <section className="py-20 bg-white">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Explora por categoría
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Encuentra el dispositivo perfecto para ti
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Smartwatches */}
+            <Link to="/productos?category=smartwatch" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={categorySmartwatch} 
+                    alt="Smartwatches Garett"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    Smartwatches
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Tecnología inteligente para tu muñeca
+                  </p>
+                  <div className="flex items-center gap-2 text-primary font-medium">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            {/* Beauty Devices */}
+            <Link to="/productos?category=beauty" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={categoryBeauty} 
+                    alt="Dispositivos de belleza"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    Beauty Tech
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Cuidado facial profesional en casa
+                  </p>
+                  <div className="flex items-center gap-2 text-primary font-medium">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            {/* Accessories */}
+            <Link to="/productos?category=accessories" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={categoryAccessories} 
+                    alt="Accesorios"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    Accesorios
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Correas, cargadores y más
+                  </p>
+                  <div className="flex items-center gap-2 text-primary font-medium">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
         </div>
       </section>
