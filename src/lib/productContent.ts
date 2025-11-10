@@ -495,73 +495,6 @@ const productContentMap: Record<string, ProductContent> = {
     }
   },
 
-  // Curly - Rizador automático inalámbrico
-  'curly': {
-    quickBenefits: [
-      { icon: 'Waves', text: 'Rizo automático' },
-      { icon: 'Battery', text: 'Inalámbrico 4800mAh' },
-      { icon: 'Thermometer', text: '4 niveles temperatura' }
-    ],
-    dropdowns: {
-      howItWorks: {
-        title: '¿Cómo funciona?',
-        summary: 'Sensor inteligente que riza automáticamente sin enredos',
-        details: [
-          'Función de rizo automático: inserta el mechón, presiona el botón, el sensor inteligente enrolla y mantiene temperatura exacta.',
-          '4 niveles de temperatura (150-200°C): ajusta según tu tipo de cabello. Fino 150-170°C, grueso 180-200°C.',
-          'Temporizador automático: señales sonoras indican cuándo el rizo está listo. Sin adivinar, sin quemar.',
-          'Batería 4800mAh + USB-C: rizos en cualquier lugar sin cables. Una carga = 30-40 rizos completos.'
-        ]
-      },
-      expectedResults: {
-        phases: [
-          {
-            timeframe: 'Primera aplicación',
-            description: 'Rizos definidos y uniformes en 15-20 minutos. Duran 24h+ con fijador ligero. Cero enredos.'
-          },
-          {
-            timeframe: '1 semana',
-            description: 'Dominas el control de dirección (horario/antihorario) para rizos naturales con volumen estratégico.'
-          },
-          {
-            timeframe: '1 mes',
-            description: 'Rizos profesionales en 10 minutos. Menos daño térmico por temperatura precisa. Cabello más sano.'
-          }
-        ],
-        usageNote: 'Usa 2-3 veces por semana. Alterna dirección de rizos para look natural. Fijador antes de rizar aumenta duración.'
-      },
-      howToUse: {
-        steps: [
-          'Carga el dispositivo (USB-C, 2h de carga completa)',
-          'Selecciona temperatura en la pantalla LCD según tu cabello',
-          'Toma un mechón de 2-3cm de ancho',
-          'Inserta el mechón en la cámara de rizado',
-          'Presiona el botón y selecciona dirección (horario/antihorario)',
-          'Espera la señal sonora (8-12 segundos) y suelta'
-        ],
-        additionalNote: 'Alterna la dirección de rizos para look natural. Batería visible en pantalla LCD. Ideal para retoques durante el día.'
-      },
-      whatMakesDifferent: [
-        {
-          title: 'Totalmente inalámbrico',
-          description: 'Batería 4800mAh real. Rizos en el coche, en el baño del trabajo, donde quieras. Carga con tu cargador de móvil (USB-C).'
-        },
-        {
-          title: 'Rizo automático sin enredos',
-          description: 'Sensor inteligente que detecta el mechón y lo enrolla perfectamente. Imposible enredarse, imposible quemarse.'
-        },
-        {
-          title: 'Control total con LCD',
-          description: 'Temperatura exacta. Nivel de batería. Dirección de rizo. Temporizador visual. Cero adivinanzas.'
-        },
-        {
-          title: 'Rizos que duran',
-          description: 'Temperatura constante sin picos que dañan. Rizos definidos que aguantan 24h+ incluso con humedad.'
-        }
-      ]
-    }
-  },
-
   // Smartwatches (GRC Activity, Men, Women, Kids)
   'smartwatches': {
     quickBenefits: [
@@ -769,12 +702,6 @@ export function detectProductCategory(product: any): string {
       handle.includes('multi care') || title.includes('multi care') || title.includes('multi cuidado') ||
       title.includes('multicuidado')) {
     return 'multi-care-brush';
-  }
-  
-  // Curly - Specific detection
-  if (handle.includes('curly') || title.includes('curly') || 
-      title.includes('rizador')) {
-    return 'curly';
   }
   
   // AeroGlow - Specific detection
