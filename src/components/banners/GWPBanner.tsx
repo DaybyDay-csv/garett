@@ -55,10 +55,17 @@ export const GWPBanner = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-2">
-            <Button asChild size="lg" className="text-sm md:text-base h-12 px-8 w-full sm:w-auto">
-              <Link to="/productos">
-                Comprar ahora
-              </Link>
+            <Button 
+              size="lg" 
+              className="text-sm md:text-base h-12 px-8 w-full sm:w-auto"
+              onClick={() => {
+                const element = document.getElementById('superventas');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
+              Comprar ahora
             </Button>
             <Dialog>
               <DialogTrigger asChild>

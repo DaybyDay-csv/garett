@@ -68,10 +68,17 @@ export const WhiteWeekBanner = () => {
 
         {/* CTA */}
         <div className="pt-2">
-          <Button asChild size="lg" className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 w-full sm:w-auto max-w-xs">
-            <Link to="/productos">
-              Comprar ahora
-            </Link>
+          <Button 
+            size="lg" 
+            className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 w-full sm:w-auto max-w-xs"
+            onClick={() => {
+              const element = document.getElementById('superventas');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
+          >
+            Comprar ahora
           </Button>
 
           {/* Countdown if active */}

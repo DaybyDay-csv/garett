@@ -54,7 +54,7 @@ const Index = () => {
 
       {/* Superventas */}
       {bestSellers.length > 0 && (
-        <section className="container py-8 md:py-12">
+        <section id="superventas" className="container py-8 md:py-12">
           <div className="flex items-center justify-between mb-8 md:mb-10">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground">
