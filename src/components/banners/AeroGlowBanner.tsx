@@ -131,8 +131,8 @@ export const AeroGlowBanner = () => {
                 size="lg" 
                 className="text-sm md:text-base h-14 px-10 border-2 border-[#8B6F47] text-[#5D4037] dark:text-[#D7B896] hover:bg-[#8B6F47]/10"
               >
-                <Link to="/productos">
-                  Ver Más Productos
+                <Link to="/producto/253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow">
+                  Ver Detalles
                 </Link>
               </Button>
             </div>
