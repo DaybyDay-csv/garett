@@ -19,6 +19,7 @@ const bannerComponents = {
 export const PromotionalBanners = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const activeBanners = getActiveBanners(true);
 
   // Auto-rotate banners
@@ -26,7 +27,11 @@ export const PromotionalBanners = () => {
     if (activeBanners.length <= 1 || isPaused) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % activeBanners.length);
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % activeBanners.length);
+        setIsTransitioning(false);
+      }, 300);
     }, 8000);
 
     return () => clearInterval(interval);
@@ -39,21 +44,29 @@ export const PromotionalBanners = () => {
   const CurrentBanner = bannerComponents[activeBanners[currentIndex] as keyof typeof bannerComponents];
 
   const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + activeBanners.length) % activeBanners.length);
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev - 1 + activeBanners.length) % activeBanners.length);
+      setIsTransitioning(false);
+    }, 300);
   };
 
   const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % activeBanners.length);
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev + 1) % activeBanners.length);
+      setIsTransitioning(false);
+    }, 300);
   };
 
   return (
     <div 
-      className="relative w-full overflow-hidden"
+      className="relative w-full overflow-hidden bg-background"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Banner */}
-      <div className="transition-all duration-500 ease-in-out">
+      {/* Banner with fade transition */}
+      <div className={`transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
         <CurrentBanner />
       </div>
 
@@ -63,26 +76,35 @@ export const PromotionalBanners = () => {
           <Button
             variant="secondary"
             size="icon"
-            className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full opacity-0 hover:opacity-100 transition-opacity shadow-lg"
+            className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity shadow-lg z-10 hover:scale-110"
             onClick={goToPrevious}
+            disabled={isTransitioning}
           >
             <ChevronLeft className="h-6 w-6" />
           </Button>
           <Button
             variant="secondary"
             size="icon"
-            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full opacity-0 hover:opacity-100 transition-opacity shadow-lg"
+            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity shadow-lg z-10 hover:scale-110"
             onClick={goToNext}
+            disabled={isTransitioning}
           >
             <ChevronRight className="h-6 w-6" />
           </Button>
 
           {/* Dots Navigation */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10 bg-background/50 backdrop-blur-sm px-4 py-2 rounded-full">
             {activeBanners.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => {
+                  setIsTransitioning(true);
+                  setTimeout(() => {
+                    setCurrentIndex(index);
+                    setIsTransitioning(false);
+                  }, 300);
+                }}
+                disabled={isTransitioning}
                 className={`h-2 rounded-full transition-all ${
                   index === currentIndex 
                     ? "w-8 bg-primary" 
@@ -91,6 +113,11 @@ export const PromotionalBanners = () => {
                 aria-label={`Go to banner ${index + 1}`}
               />
             ))}
+          </div>
+
+          {/* Banner Counter */}
+          <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium z-10">
+            {currentIndex + 1} / {activeBanners.length}
           </div>
         </>
       )}

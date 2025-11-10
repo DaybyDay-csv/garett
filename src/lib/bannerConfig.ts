@@ -12,8 +12,8 @@ export const bannerConfig: Record<string, BannerConfig> = {
   aeroglow: {
     id: 'aeroglow',
     active: true,
-    startDate: new Date('2025-11-10'),
-    endDate: new Date('2025-12-31'),
+    startDate: new Date('2024-01-01'), // Active now for demo
+    endDate: new Date('2026-12-31'),
     priority: 3,
     showInCarousel: true,
     showInAnnouncementBar: false,
@@ -21,8 +21,8 @@ export const bannerConfig: Record<string, BannerConfig> = {
   gwp: {
     id: 'gwp',
     active: true,
-    startDate: new Date('2025-11-10'),
-    endDate: new Date('2025-12-31'),
+    startDate: new Date('2024-01-01'), // Active now for demo
+    endDate: new Date('2026-12-31'),
     priority: 2,
     showInCarousel: true,
     showInAnnouncementBar: true,
@@ -30,8 +30,8 @@ export const bannerConfig: Record<string, BannerConfig> = {
   whiteWeek: {
     id: 'whiteWeek',
     active: true,
-    startDate: new Date('2025-11-17'),
-    endDate: new Date('2025-11-27T23:59:59'),
+    startDate: new Date('2024-01-01'), // Active now for demo
+    endDate: new Date('2026-12-31'),
     priority: 4,
     showInCarousel: true,
     showInAnnouncementBar: true,
@@ -39,8 +39,8 @@ export const bannerConfig: Record<string, BannerConfig> = {
   blackFriday: {
     id: 'blackFriday',
     active: true,
-    startDate: new Date('2025-11-28'),
-    endDate: new Date('2025-11-30T23:59:59'),
+    startDate: new Date('2024-01-01'), // Active now for demo
+    endDate: new Date('2026-12-31'),
     priority: 5,
     showInCarousel: true,
     showInAnnouncementBar: true,
@@ -48,8 +48,8 @@ export const bannerConfig: Record<string, BannerConfig> = {
   cyberMonday: {
     id: 'cyberMonday',
     active: true,
-    startDate: new Date('2025-12-01'),
-    endDate: new Date('2025-12-01T23:59:59'),
+    startDate: new Date('2024-01-01'), // Active now for demo
+    endDate: new Date('2026-12-31'),
     priority: 5,
     showInCarousel: true,
     showInAnnouncementBar: true,
