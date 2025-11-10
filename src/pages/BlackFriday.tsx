@@ -272,52 +272,89 @@ const BlackFriday = () => {
     }
   };
 
-  const discountCodes = [
+  // Promotional stages calendar
+  const promotionalStages = [
     {
-      code: "EARLYBIRD50",
-      discount: "50% OFF",
-      description: "Primeras 5 unidades",
-      remaining: 150,
-      total: 150,
-      urgency: "high",
+      name: "Warm-up",
+      dates: "10-16 Noviembre",
+      startDate: new Date('2025-11-10T00:00:00'),
+      endDate: new Date('2025-11-16T23:59:59'),
+      discount: "-10%",
+      description: "Descuento aplicado directamente en productos",
+      details: "10% de descuento en toda la tienda",
+      code: null,
+      gwp: false,
+      icon: Timer,
+      color: "from-blue-500 to-cyan-500",
+      badge: "CALENTAMIENTO"
+    },
+    {
+      name: "White Week",
+      dates: "17-27 Noviembre",
+      startDate: new Date('2025-11-17T00:00:00'),
+      endDate: new Date('2025-11-27T23:59:59'),
+      discount: "-20%",
+      description: "20% OFF (10% + 10% extra) + Regalo",
+      details: "Descuento aplicado en productos + Banda de pelo gratis desde €70",
+      code: "WHITEWEEK20",
+      gwp: true,
+      gwpCode: "REGALOWW70",
+      icon: Zap,
+      color: "from-slate-400 to-slate-600",
+      badge: "SEMANA BLANCA"
+    },
+    {
+      name: "Black Friday",
+      dates: "28-30 Noviembre",
+      startDate: new Date('2025-11-28T00:00:00'),
+      endDate: new Date('2025-11-30T23:59:59'),
+      discount: "hasta -50%",
+      description: "Descuentos por etapas + Regalo",
+      details: "20% base + códigos tier (-50%/-35%/-25%) + Banda de pelo gratis desde €70",
+      codes: [
+        { code: "EARLYBIRD50", discount: "50% OFF", limit: "150 usos", urgency: "high" },
+        { code: "EARLYBIRD35", discount: "35% OFF", limit: "450 usos", urgency: "medium" },
+        { code: "BF25", discount: "25% OFF", limit: "Ilimitado", urgency: "low" }
+      ],
+      gwp: true,
+      gwpCode: "REGALOBF70",
       icon: Flame,
       color: "from-red-500 to-orange-500",
-      badge: "SÚPER LIMITADO"
+      badge: "BLACK FRIDAY"
     },
     {
-      code: "EARLYBIRD35",
-      discount: "35% OFF",
-      description: "Siguientes 15 unidades",
-      remaining: 450,
-      total: 450,
-      urgency: "medium",
+      name: "Cyber Monday",
+      dates: "1 Diciembre",
+      startDate: new Date('2025-12-01T00:00:00'),
+      endDate: new Date('2025-12-01T23:59:59'),
+      discount: "-15%",
+      description: "15% OFF + Regalo",
+      details: "Descuento aplicado en productos + Banda de pelo gratis desde €70",
+      code: "CYBERMONDAY15",
+      gwp: true,
+      gwpCode: "REGALOCM70",
       icon: Zap,
-      color: "from-orange-500 to-yellow-500",
-      badge: "LIMITADO"
-    },
-    {
-      code: "BF25",
-      discount: "25% OFF",
-      description: "Descuento base toda la tienda",
-      remaining: null,
-      total: null,
-      urgency: "low",
-      icon: Timer,
-      color: "from-primary to-primary-glow",
-      badge: "PARA TODOS"
-    },
-    {
-      code: "REGALOBF70",
-      discount: "REGALO",
-      description: "Banda de pelo gratis desde €70",
-      remaining: null,
-      total: null,
-      urgency: "special",
-      icon: Gift,
-      color: "from-pink-500 to-purple-500",
-      badge: "REGALO"
+      color: "from-indigo-500 to-purple-500",
+      badge: "CYBER MONDAY"
     }
   ];
+
+  // Determine current stage
+  const getCurrentStage = () => {
+    const now = new Date();
+    return promotionalStages.find(stage => 
+      now >= stage.startDate && now <= stage.endDate
+    );
+  };
+
+  const getStageStatus = (stage: typeof promotionalStages[0]) => {
+    const now = new Date();
+    if (now < stage.startDate) return 'upcoming';
+    if (now > stage.endDate) return 'ended';
+    return 'active';
+  };
+
+  const currentStage = getCurrentStage();
 
   return (
     <div className="min-h-screen bg-background">
@@ -327,12 +364,15 @@ const BlackFriday = () => {
       <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary-glow to-accent py-16 md:py-24">
         <div className="container relative text-white">
           <Badge className="mb-4 bg-white/20 text-white border-white/30 backdrop-blur-sm">
-            Black Friday 2025
+            Promociones Noviembre-Diciembre 2025
           </Badge>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Black Friday
+            Calendario de Ofertas
           </h1>
           <p className="text-xl md:text-2xl text-white/90 mb-4 max-w-2xl">
+            Warm-up · White Week · Black Friday · Cyber Monday
+          </p>
+          <p className="text-lg text-white/80 mb-4 max-w-2xl">
             Hasta 50% de descuento + regalo gratis desde €70
           </p>
 
@@ -365,107 +405,200 @@ const BlackFriday = () => {
         <div className="bg-background rounded-2xl shadow-xl p-8 border border-border">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-3xl font-bold mb-2">Códigos de descuento</h2>
+              <h2 className="text-3xl font-bold mb-2">Calendario de Promociones</h2>
               <p className="text-muted-foreground">
-                Copia tu código y úsalo en el checkout
+                Descuentos progresivos desbloqueándose por etapas
               </p>
             </div>
-            <Badge variant="destructive" className="animate-pulse">
-              <AlertCircle className="w-3 h-3 mr-1" />
-              ¡Solo 72h!
-            </Badge>
+            {currentStage && (
+              <Badge variant="default" className={`bg-gradient-to-r ${currentStage.color} text-white border-0 animate-pulse`}>
+                <AlertCircle className="w-3 h-3 mr-1" />
+                {currentStage.badge} ACTIVO
+              </Badge>
+            )}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {discountCodes.map((item) => {
-              const Icon = item.icon;
-              const isCopied = copiedCode === item.code;
-              const percentage = item.remaining && item.total 
-                ? (item.remaining / item.total) * 100 
-                : null;
+          {/* Timeline of stages */}
+          <div className="space-y-6">
+            {promotionalStages.map((stage, index) => {
+              const Icon = stage.icon;
+              const status = getStageStatus(stage);
+              const isActive = status === 'active';
+              const isUpcoming = status === 'upcoming';
+              const isEnded = status === 'ended';
 
               return (
                 <div
-                  key={item.code}
-                  className={`group relative overflow-hidden rounded-xl border-2 transition-all duration-300 hover:scale-105 hover:shadow-2xl ${
-                    item.urgency === 'high' 
-                      ? 'border-red-500/50 hover:border-red-500' 
-                      : item.urgency === 'medium'
-                      ? 'border-orange-500/50 hover:border-orange-500'
-                      : item.urgency === 'special'
-                      ? 'border-pink-500/50 hover:border-pink-500'
-                      : 'border-primary/50 hover:border-primary'
+                  key={stage.name}
+                  className={`relative overflow-hidden rounded-xl border-2 transition-all duration-300 ${
+                    isActive 
+                      ? `border-${stage.color.split('-')[1]}-500 shadow-2xl scale-105` 
+                      : isEnded
+                      ? 'border-muted opacity-60'
+                      : 'border-border hover:border-primary/50'
                   }`}
                 >
-                  {/* Animated gradient background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-5 group-hover:opacity-10 transition-opacity`} />
-                  
-                  {/* Badge */}
+                  {/* Stage status indicator */}
                   <div className="absolute top-3 right-3 z-10">
-                    <Badge 
-                      variant={item.urgency === 'high' ? 'destructive' : 'secondary'}
-                      className="text-xs font-bold"
-                    >
-                      {item.badge}
-                    </Badge>
+                    {isActive && (
+                      <Badge className={`bg-gradient-to-r ${stage.color} text-white border-0 animate-pulse`}>
+                        <Clock className="w-3 h-3 mr-1" />
+                        ACTIVO AHORA
+                      </Badge>
+                    )}
+                    {isUpcoming && (
+                      <Badge variant="secondary">
+                        PRÓXIMAMENTE
+                      </Badge>
+                    )}
+                    {isEnded && (
+                      <Badge variant="outline" className="opacity-50">
+                        FINALIZADO
+                      </Badge>
+                    )}
                   </div>
 
+                  {/* Animated gradient background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${stage.color} ${isActive ? 'opacity-10' : 'opacity-5'} transition-opacity`} />
+                  
                   <div className="relative p-6">
-                    {/* Icon */}
-                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
-
-                    {/* Discount */}
-                    <div className="mb-3">
-                      <div className={`text-3xl font-bold bg-gradient-to-br ${item.color} bg-clip-text text-transparent`}>
-                        {item.discount}
+                    {/* Stage header */}
+                    <div className="flex items-start gap-4 mb-4">
+                      {/* Icon */}
+                      <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${stage.color} flex items-center justify-center flex-shrink-0 ${isActive ? 'animate-pulse' : ''}`}>
+                        <Icon className="w-7 h-7 text-white" />
                       </div>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {item.description}
-                      </p>
-                    </div>
 
-                    {/* Progress bar for limited codes */}
-                    {percentage !== null && (
-                      <div className="mb-4">
-                        <div className="flex justify-between text-xs mb-1">
-                          <span className="text-muted-foreground">Disponibles</span>
-                          <span className="font-bold">{item.remaining}/{item.total}</span>
+                      {/* Stage info */}
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h3 className="text-2xl font-bold">{stage.name}</h3>
+                          <Badge variant="outline" className="text-xs">
+                            {stage.dates}
+                          </Badge>
                         </div>
-                        <div className="h-2 bg-muted rounded-full overflow-hidden">
-                          <div 
-                            className={`h-full bg-gradient-to-r ${item.color} transition-all duration-500`}
-                            style={{ width: `${percentage}%` }}
-                          />
+                        <div className={`text-3xl font-bold bg-gradient-to-br ${stage.color} bg-clip-text text-transparent mb-2`}>
+                          {stage.discount}
                         </div>
+                        <p className="text-sm text-muted-foreground">
+                          {stage.description}
+                        </p>
                       </div>
-                    )}
-
-                    {/* Code */}
-                    <div className="flex items-center gap-2">
-                      <div className="flex-1 bg-muted/50 rounded-lg px-3 py-2 font-mono text-sm font-bold text-center border border-border">
-                        {item.code}
-                      </div>
-                      <Button
-                        size="icon"
-                        variant="outline"
-                        onClick={() => copyCode(item.code)}
-                        className="hover-scale"
-                      >
-                        {isCopied ? (
-                          <Check className="w-4 h-4 text-green-500" />
-                        ) : (
-                          <Copy className="w-4 h-4" />
-                        )}
-                      </Button>
                     </div>
 
-                    {/* Urgency indicator */}
-                    {item.urgency === 'high' && (
-                      <div className="mt-3 flex items-center gap-1 text-xs text-red-500 font-medium animate-pulse">
-                        <Flame className="w-3 h-3" />
-                        ¡Se están agotando!
+                    {/* Stage details */}
+                    <div className="bg-muted/50 rounded-lg p-4 mb-4">
+                      <p className="text-sm font-medium">{stage.details}</p>
+                    </div>
+
+                    {/* Codes section */}
+                    <div className="space-y-3">
+                      {/* Single code */}
+                      {stage.code && !('codes' in stage) && (
+                        <div className="flex items-center gap-3">
+                          <div className="flex-1 bg-background rounded-lg px-4 py-3 font-mono text-sm font-bold border border-border flex items-center justify-between">
+                            <span>Código: {stage.code}</span>
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              onClick={() => copyCode(stage.code)}
+                              className="hover-scale"
+                            >
+                              {copiedCode === stage.code ? (
+                                <Check className="w-4 h-4 text-green-500" />
+                              ) : (
+                                <Copy className="w-4 h-4" />
+                              )}
+                            </Button>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Multiple codes (Black Friday) */}
+                      {'codes' in stage && stage.codes && (
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                          {stage.codes.map((codeObj: any) => (
+                            <div
+                              key={codeObj.code}
+                              className={`border-2 rounded-lg p-3 ${
+                                codeObj.urgency === 'high'
+                                  ? 'border-red-500/50'
+                                  : codeObj.urgency === 'medium'
+                                  ? 'border-orange-500/50'
+                                  : 'border-primary/50'
+                              }`}
+                            >
+                              <div className="flex items-center justify-between mb-2">
+                                <Badge 
+                                  variant={codeObj.urgency === 'high' ? 'destructive' : 'secondary'}
+                                  className="text-xs"
+                                >
+                                  {codeObj.discount}
+                                </Badge>
+                                <span className="text-xs text-muted-foreground">{codeObj.limit}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <div className="flex-1 bg-muted/50 rounded px-2 py-1 font-mono text-xs font-bold text-center">
+                                  {codeObj.code}
+                                </div>
+                                <Button
+                                  size="icon"
+                                  variant="ghost"
+                                  className="h-7 w-7"
+                                  onClick={() => copyCode(codeObj.code)}
+                                >
+                                  {copiedCode === codeObj.code ? (
+                                    <Check className="w-3 h-3 text-green-500" />
+                                  ) : (
+                                    <Copy className="w-3 h-3" />
+                                  )}
+                                </Button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* GWP code */}
+                      {stage.gwp && 'gwpCode' in stage && stage.gwpCode && (
+                        <div className="flex items-center gap-3 pt-2 border-t">
+                          <Gift className="w-5 h-5 text-pink-500" />
+                          <div className="flex-1">
+                            <p className="text-xs text-muted-foreground mb-1">Regalo desde €70:</p>
+                            <div className="flex items-center gap-2">
+                              <div className="bg-pink-500/10 rounded px-3 py-1 font-mono text-sm font-bold text-pink-700 dark:text-pink-300">
+                                {stage.gwpCode}
+                              </div>
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                onClick={() => copyCode(stage.gwpCode!)}
+                              >
+                                {copiedCode === stage.gwpCode ? (
+                                  <Check className="w-4 h-4 text-green-500" />
+                                ) : (
+                                  <Copy className="w-4 h-4" />
+                                )}
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* No code needed */}
+                      {!stage.code && !('codes' in stage) && (
+                        <div className="text-center py-2">
+                          <Badge variant="secondary">
+                            ✓ Descuento aplicado automáticamente
+                          </Badge>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Stage progress connector */}
+                    {index < promotionalStages.length - 1 && (
+                      <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 z-10">
+                        <div className={`w-1 h-6 ${isEnded ? 'bg-primary' : 'bg-muted'}`} />
                       </div>
                     )}
                   </div>
@@ -477,10 +610,10 @@ const BlackFriday = () => {
           {/* CTA */}
           <div className="mt-8 p-6 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl border border-primary/20 text-center">
             <p className="text-sm font-medium mb-2">
-              💡 <span className="font-bold">Tip:</span> Los códigos Early Bird se agotan rápido - ¡Copia tu favorito ahora!
+              💡 <span className="font-bold">Importante:</span> Cada etapa se desbloquea automáticamente en su fecha. ¡Guarda esta página!
             </p>
             <p className="text-xs text-muted-foreground">
-              Los descuentos se aplican automáticamente en el carrito al introducir el código
+              Los descuentos Warm-up y White Week se aplican directamente en los productos. Para Black Friday y Cyber Monday, introduce el código en el checkout.
             </p>
           </div>
         </div>
@@ -489,9 +622,9 @@ const BlackFriday = () => {
       {/* Products */}
       <div className="container py-12">
         <div className="mb-8">
-          <h2 className="text-3xl font-bold mb-2">Productos en oferta</h2>
+          <h2 className="text-3xl font-bold mb-2">Productos en promoción</h2>
           <p className="text-muted-foreground">
-            Descuentos especiales válidos del 28/11 al 30/11
+            Descuentos especiales durante todo noviembre y principios de diciembre
           </p>
         </div>
 
@@ -516,14 +649,16 @@ const BlackFriday = () => {
 
         {/* T&C */}
         <div className="mt-12 p-6 bg-muted/50 rounded-lg">
-          <h3 className="font-bold mb-3">Condiciones de la promoción</h3>
+          <h3 className="font-bold mb-3">Calendario y condiciones de las promociones</h3>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>• Descuentos válidos del 28/11 al 30/11/2025</li>
-            <li>• <span className="font-semibold text-foreground">EARLYBIRD50:</span> 50% OFF - Limitado a 150 usos (1 por cliente)</li>
-            <li>• <span className="font-semibold text-foreground">EARLYBIRD35:</span> 35% OFF - Limitado a 450 usos (1 por cliente)</li>
-            <li>• <span className="font-semibold text-foreground">BF25:</span> 25% OFF - Descuento base en toda la tienda</li>
-            <li>• <span className="font-semibold text-foreground">REGALOBF70:</span> Banda de pelo premium gratis con compras superiores a €70 (después de descuentos)</li>
-            <li>• Introduce el código en el checkout antes de finalizar la compra</li>
+            <li>• <span className="font-semibold text-foreground">Warm-up (10-16 Nov):</span> 10% de descuento aplicado directamente en productos</li>
+            <li>• <span className="font-semibold text-foreground">White Week (17-27 Nov):</span> 20% OFF (10% + 10% extra) aplicado en productos + Código REGALOWW70 para banda de pelo gratis desde €70</li>
+            <li>• <span className="font-semibold text-foreground">Black Friday (28-30 Nov):</span> 20% base + códigos tier (EARLYBIRD50: 50% OFF limitado, EARLYBIRD35: 35% OFF limitado, BF25: 25% OFF) + Código REGALOBF70 para regalo desde €70</li>
+            <li>• <span className="font-semibold text-foreground">Cyber Monday (1 Dic):</span> 15% OFF aplicado en productos + Código REGALOCM70 para regalo desde €70</li>
+            <li>• Los descuentos Warm-up y White Week se aplican automáticamente en los precios de productos</li>
+            <li>• Para Black Friday y Cyber Monday, introduce los códigos en el checkout</li>
+            <li>• Los códigos EARLYBIRD tienen límite de usos (150 y 450 respectivamente, 1 por cliente)</li>
+            <li>• El regalo (banda de pelo premium) se añade con el código específico de cada etapa</li>
             <li>• Garantía de 3 años en todos los productos</li>
             <li>• Devoluciones gratuitas durante 30 días</li>
           </ul>
