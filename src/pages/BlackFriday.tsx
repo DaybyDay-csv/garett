@@ -15,19 +15,39 @@ interface TimeLeft {
   isExpired: boolean;
 }
 
-interface Stage {
+interface PromotionalStage {
+  name: string;
+  dates: string;
+  startDate: Date;
+  endDate: Date;
+  discount: string;
+  description: string;
+  details: string;
+  code?: string | null;
+  codes?: Array<{ code: string; discount: string; limit: string; urgency: string }>;
+  gwp?: boolean;
+  gwpCode?: string;
+  icon: any;
+  color: string;
+  badge: string;
+}
+
+interface BlackFridayTier {
   name: string;
   code: string;
   discount: string;
   startDate: Date;
   endDate: Date;
   remaining: number;
-  total: number;
   color: string;
   icon: any;
 }
 
-const CountdownTimer = () => {
+interface CountdownTimerProps {
+  promotionalStages: PromotionalStage[];
+}
+
+const CountdownTimer = ({ promotionalStages }: CountdownTimerProps) => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
     hours: 0,
@@ -35,19 +55,19 @@ const CountdownTimer = () => {
     seconds: 0,
     isExpired: false
   });
-  const [currentStage, setCurrentStage] = useState<Stage | null>(null);
-  const [nextStage, setNextStage] = useState<Stage | null>(null);
+  const [currentPromoStage, setCurrentPromoStage] = useState<PromotionalStage | null>(null);
+  const [nextPromoStage, setNextPromoStage] = useState<PromotionalStage | null>(null);
+  const [currentBFTier, setCurrentBFTier] = useState<BlackFridayTier | null>(null);
 
-  // Define Black Friday stages
-  const stages: Stage[] = [
+  // Black Friday tiers (only active during BF period)
+  const blackFridayTiers: BlackFridayTier[] = [
     {
       name: "SUPER EARLY BIRD",
       code: "EARLYBIRD50",
       discount: "50% OFF",
       startDate: new Date('2025-11-28T00:00:00'),
-      endDate: new Date('2025-11-28T12:00:00'), // Primeras 12 horas
+      endDate: new Date('2025-11-28T12:00:00'),
       remaining: 150,
-      total: 150,
       color: "from-red-500 to-orange-500",
       icon: Flame
     },
@@ -56,9 +76,8 @@ const CountdownTimer = () => {
       code: "EARLYBIRD35",
       discount: "35% OFF",
       startDate: new Date('2025-11-28T12:00:01'),
-      endDate: new Date('2025-11-29T12:00:00'), // Siguiente día y medio
+      endDate: new Date('2025-11-29T12:00:00'),
       remaining: 450,
-      total: 450,
       color: "from-orange-500 to-yellow-500",
       icon: Zap
     },
@@ -67,9 +86,8 @@ const CountdownTimer = () => {
       code: "BF25",
       discount: "25% OFF",
       startDate: new Date('2025-11-29T12:00:01'),
-      endDate: new Date('2025-11-30T23:59:59'), // Hasta el final
+      endDate: new Date('2025-11-30T23:59:59'),
       remaining: 0,
-      total: 0,
       color: "from-primary to-primary-glow",
       icon: Timer
     }
@@ -79,21 +97,27 @@ const CountdownTimer = () => {
     const calculateTimeAndStage = () => {
       const now = new Date();
       
-      // Find current stage
-      const active = stages.find(stage => 
+      // Find current promotional stage
+      const activePromo = promotionalStages.find(stage => 
         now >= stage.startDate && now <= stage.endDate
       );
 
-      // Find next stage
-      const upcoming = stages.find(stage => 
+      // Find next promotional stage
+      const upcomingPromo = promotionalStages.find(stage => 
         now < stage.startDate
       );
 
-      setCurrentStage(active || null);
-      setNextStage(upcoming || null);
+      setCurrentPromoStage(activePromo || null);
+      setNextPromoStage(upcomingPromo || null);
 
-      // Calculate time left for current stage or end of BF
-      const targetDate = active ? active.endDate : new Date('2025-11-30T23:59:59');
+      // If in Black Friday period, also check for active tier
+      const activeBFTier = blackFridayTiers.find(tier =>
+        now >= tier.startDate && now <= tier.endDate
+      );
+      setCurrentBFTier(activeBFTier || null);
+
+      // Calculate time left for current promotional stage
+      const targetDate = activePromo ? activePromo.endDate : promotionalStages[promotionalStages.length - 1].endDate;
       const difference = targetDate.getTime() - now.getTime();
 
       if (difference <= 0) {
@@ -137,32 +161,46 @@ const CountdownTimer = () => {
     { value: timeLeft.seconds, label: 'Segundos' }
   ];
 
+  // Display the active tier or stage
+  const displayStage = currentBFTier || currentPromoStage;
+  const StageIcon = displayStage?.icon;
+
   return (
     <div className="mt-8 space-y-6">
       {/* Current Stage Banner */}
-      {currentStage && (
+      {displayStage && (
         <div className="bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-6">
           <div className="flex items-center justify-center gap-3 mb-3">
-            <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${currentStage.color} flex items-center justify-center animate-pulse`}>
-              <currentStage.icon className="w-5 h-5 text-white" />
+            <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${displayStage.color} flex items-center justify-center animate-pulse`}>
+              {StageIcon && <StageIcon className="w-5 h-5 text-white" />}
             </div>
             <div className="text-center">
-              <div className="text-sm text-white/80 font-medium">ETAPA ACTIVA</div>
-              <div className="text-2xl font-bold text-white">{currentStage.name}</div>
+              <div className="text-sm text-white/80 font-medium">
+                {currentBFTier ? 'TIER ACTIVO BLACK FRIDAY' : 'ETAPA ACTIVA'}
+              </div>
+              <div className="text-2xl font-bold text-white">{displayStage.name}</div>
             </div>
           </div>
           
           <div className="flex items-center justify-center gap-4 flex-wrap">
-            <Badge className={`bg-gradient-to-r ${currentStage.color} text-white border-0 text-lg px-4 py-1`}>
-              {currentStage.discount}
+            <Badge className={`bg-gradient-to-r ${displayStage.color} text-white border-0 text-lg px-4 py-1`}>
+              {displayStage.discount}
             </Badge>
-            <div className="bg-white/20 rounded-lg px-4 py-2">
-              <span className="text-white font-mono font-bold">{currentStage.code}</span>
-            </div>
-            {currentStage.remaining > 0 && (
-              <Badge variant="destructive" className="animate-pulse">
-                Solo {currentStage.remaining} usos disponibles
-              </Badge>
+            {currentBFTier ? (
+              <>
+                <div className="bg-white/20 rounded-lg px-4 py-2">
+                  <span className="text-white font-mono font-bold">{currentBFTier.code}</span>
+                </div>
+                {currentBFTier.remaining > 0 && (
+                  <Badge variant="destructive" className="animate-pulse">
+                    Solo {currentBFTier.remaining} usos disponibles
+                  </Badge>
+                )}
+              </>
+            ) : currentPromoStage?.code && (
+              <div className="bg-white/20 rounded-lg px-4 py-2">
+                <span className="text-white font-mono font-bold">{currentPromoStage.code}</span>
+              </div>
             )}
           </div>
         </div>
@@ -173,7 +211,7 @@ const CountdownTimer = () => {
         <div className="flex items-center justify-center gap-2 mb-4">
           <Clock className="w-5 h-5 text-white animate-pulse" />
           <p className="text-white/90 font-medium">
-            {currentStage ? 'Esta etapa termina en:' : 'Black Friday termina en:'}
+            {currentPromoStage ? `${currentPromoStage.name} termina en:` : 'Promociones terminan en:'}
           </p>
         </div>
         
@@ -202,30 +240,33 @@ const CountdownTimer = () => {
       </div>
 
       {/* Next Stage Preview */}
-      {nextStage && (
+      {nextPromoStage && (
         <div className="bg-white/5 backdrop-blur-md border border-white/20 rounded-xl p-5">
           <div className="text-center">
             <div className="text-xs text-white/70 uppercase tracking-wider mb-2">
               SIGUIENTE ETAPA
             </div>
             <div className="flex items-center justify-center gap-3 mb-3">
-              <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${nextStage.color} flex items-center justify-center opacity-60`}>
-                <nextStage.icon className="w-4 h-4 text-white" />
+              <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${nextPromoStage.color} flex items-center justify-center opacity-60`}>
+                <nextPromoStage.icon className="w-4 h-4 text-white" />
               </div>
               <div>
-                <div className="font-bold text-white text-lg">{nextStage.name}</div>
-                <div className="text-sm text-white/70">Código: {nextStage.code}</div>
+                <div className="font-bold text-white text-lg">{nextPromoStage.name}</div>
+                <div className="text-sm text-white/70">{nextPromoStage.dates}</div>
+                {nextPromoStage.code && (
+                  <div className="text-xs text-white/60 mt-1">Código: {nextPromoStage.code}</div>
+                )}
               </div>
             </div>
-            <Badge className={`bg-gradient-to-r ${nextStage.color} text-white border-0`}>
-              {nextStage.discount}
+            <Badge className={`bg-gradient-to-r ${nextPromoStage.color} text-white border-0`}>
+              {nextPromoStage.discount}
             </Badge>
           </div>
         </div>
       )}
 
       {/* Urgency message */}
-      {currentStage && timeLeft.days === 0 && timeLeft.hours < 6 && (
+      {currentPromoStage && timeLeft.days === 0 && timeLeft.hours < 6 && (
         <div className="text-center">
           <Badge variant="destructive" className="animate-pulse text-base px-4 py-2">
             <Flame className="w-4 h-4 mr-2" />
@@ -377,7 +418,7 @@ const BlackFriday = () => {
           </p>
 
           {/* Countdown Timer */}
-          <CountdownTimer />
+          <CountdownTimer promotionalStages={promotionalStages} />
 
           {/* Tier Info */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mt-8">
