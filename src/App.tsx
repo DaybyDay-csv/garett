@@ -10,6 +10,7 @@ import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import BlackFriday from "./pages/BlackFriday";
 import NewArrivals from "./pages/NewArrivals";
+import Superventas from "./pages/Superventas";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/producto/:handle" element={<ProductDetail />} />
           <Route path="/black-friday" element={<BlackFriday />} />
           <Route path="/novedades" element={<NewArrivals />} />
+          <Route path="/superventas" element={<Superventas />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

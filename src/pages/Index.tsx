@@ -62,9 +62,9 @@ const Index = () => {
               </h2>
               <p className="text-muted-foreground mt-2 text-lg">Los más vendidos de Garett</p>
             </div>
-            <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5">
-              <Link to="/productos?filter=bestseller">Ver todos</Link>
-            </Button>
+              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5">
+                <Link to="/superventas">Ver todos</Link>
+              </Button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {bestSellers.slice(0, 4).map((product) => (
