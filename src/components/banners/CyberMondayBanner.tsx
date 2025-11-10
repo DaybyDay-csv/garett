@@ -7,7 +7,7 @@ import patternImage from "@/assets/garett-pattern-2.png";
 
 export const CyberMondayBanner = () => {
   const [copied, setCopied] = useState(false);
-  const [timeLeft, setTimeLeft] = useState({ hours: 24, minutes: 0, seconds: 0 });
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const discountCode = "CYBERMONDAY15";
 
   const copyCode = () => {
@@ -18,7 +18,7 @@ export const CyberMondayBanner = () => {
 
   useEffect(() => {
     // Cyber Monday 2025 - December 1st (Monday after Black Friday)
-    const targetDate = new Date('2025-12-01T23:59:59');
+    const targetDate = new Date('2025-12-01T00:00:00');
     
     const interval = setInterval(() => {
       const now = new Date();
@@ -26,10 +26,13 @@ export const CyberMondayBanner = () => {
       
       if (difference > 0) {
         setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
           hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
           minutes: Math.floor((difference / 1000 / 60) % 60),
           seconds: Math.floor((difference / 1000) % 60),
         });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
     }, 1000);
 
@@ -90,22 +93,23 @@ export const CyberMondayBanner = () => {
         </div>
 
         {/* Countdown Timer - Improved Spacing */}
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 md:p-6 max-w-md w-full">
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 md:p-6 max-w-2xl w-full">
           <p className="text-white/80 text-xs md:text-sm mb-2 md:mb-4 flex items-center justify-center gap-2">
             <Clock className="w-4 h-4 md:w-5 md:h-5" />
-            Termina en
+            Comienza en
           </p>
-          <div className="flex gap-2 md:gap-4 justify-center">
+          <div className="flex gap-2 md:gap-3 justify-center">
             {[
+              { label: 'Días', value: timeLeft.days },
               { label: 'Horas', value: timeLeft.hours },
               { label: 'Min', value: timeLeft.minutes },
               { label: 'Seg', value: timeLeft.seconds },
             ].map((item, index) => (
               <div key={index} className="flex flex-col">
-                <div className="bg-white text-promo-cm-start text-xl md:text-3xl font-bold rounded px-2 py-2 md:px-4 md:py-3 min-w-[50px] md:min-w-[70px]">
+                <div className="bg-white text-promo-cm-start text-lg md:text-3xl font-bold rounded px-2 py-2 md:px-3 md:py-3 min-w-[45px] md:min-w-[65px]">
                   {String(item.value).padStart(2, '0')}
                 </div>
-                <p className="text-white/70 text-[10px] md:text-sm mt-1">{item.label}</p>
+                <p className="text-white/70 text-[10px] md:text-xs mt-1">{item.label}</p>
               </div>
             ))}
           </div>
