@@ -47,8 +47,35 @@ const Index = () => {
       {/* Promotional Banners Carousel */}
       <PromotionalBanners />
 
+      <div className="container py-8 md:py-12">
+        {/* Trust Badges */}
+        <TrustBadges />
+      </div>
+
+      {/* Superventas */}
+      {bestSellers.length > 0 && (
+        <section className="container py-8 md:py-12">
+          <div className="flex items-center justify-between mb-8 md:mb-10">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                Superventas
+              </h2>
+              <p className="text-muted-foreground mt-2 text-lg">Los más vendidos de Garett</p>
+            </div>
+            <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5">
+              <Link to="/productos?filter=bestseller">Ver todos</Link>
+            </Button>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {bestSellers.slice(0, 4).map((product) => (
+              <ProductCard key={product.node.id} product={product} />
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Categories Section */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -213,11 +240,6 @@ const Index = () => {
         </div>
       </section>
 
-      <div className="container py-16">
-        {/* Trust Badges */}
-        <TrustBadges />
-      </div>
-
       {/* Testimonials Section */}
       <Testimonials />
 
@@ -238,28 +260,6 @@ const Index = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {newProducts.slice(0, 4).map((product) => (
-                <ProductCard key={product.node.id} product={product} />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Superventas */}
-        {bestSellers.length > 0 && (
-          <section className="py-8">
-            <div className="flex items-center justify-between mb-10">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                  Superventas
-                </h2>
-                <p className="text-muted-foreground mt-2 text-lg">Los más vendidos de Garett</p>
-              </div>
-              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5">
-                <Link to="/productos?filter=bestseller">Ver todos</Link>
-              </Button>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {bestSellers.slice(0, 4).map((product) => (
                 <ProductCard key={product.node.id} product={product} />
               ))}
             </div>
