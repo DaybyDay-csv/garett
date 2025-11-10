@@ -123,7 +123,7 @@ export const BlackFridayBanner = () => {
         </div>
 
         {/* Tiered Offers - Improved Mobile */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 w-full max-w-4xl px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 w-full max-w-2xl px-4">
           {tiers.map((tier, index) => {
             const Icon = tier.icon;
             return (
