@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { ShopifyProduct, createStorefrontCheckout } from '@/lib/shopify';
+import { ShopifyProduct, createStorefrontCheckout, fetchGWPProduct, GWP_VARIANT_ID, GWP_THRESHOLD } from '@/lib/shopify';
+import { getCurrentPromotionalStage } from '@/lib/promotions';
 
 export interface CartItem {
   product: ShopifyProduct;
@@ -15,6 +16,7 @@ export interface CartItem {
     name: string;
     value: string;
   }>;
+  isGWP?: boolean; // Mark if this is a gift with purchase
 }
 
 interface CartStore {
@@ -23,6 +25,7 @@ interface CartStore {
   checkoutUrl: string | null;
   isLoading: boolean;
   isOpen: boolean;
+  gwpProduct: ShopifyProduct | null;
   
   addItem: (item: CartItem) => void;
   updateQuantity: (variantId: string, quantity: number) => void;
@@ -33,6 +36,8 @@ interface CartStore {
   setLoading: (loading: boolean) => void;
   setIsOpen: (isOpen: boolean) => void;
   createCheckout: () => Promise<void>;
+  checkAndAddGWP: () => void;
+  loadGWPProduct: () => Promise<void>;
 }
 
 export const useCartStore = create<CartStore>()(
@@ -43,9 +48,59 @@ export const useCartStore = create<CartStore>()(
       checkoutUrl: null,
       isLoading: false,
       isOpen: false,
+      gwpProduct: null,
+
+      loadGWPProduct: async () => {
+        const gwpProduct = await fetchGWPProduct();
+        set({ gwpProduct });
+      },
+
+      checkAndAddGWP: () => {
+        const { items, gwpProduct } = get();
+        const currentStage = getCurrentPromotionalStage();
+        
+        // Only add GWP if stage has GWP active
+        if (!currentStage?.hasGWP || !gwpProduct) return;
+        
+        // Calculate subtotal without GWP items and with discount
+        const nonGWPItems = items.filter(item => !item.isGWP);
+        const subtotal = nonGWPItems.reduce((sum, item) => {
+          const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
+          return sum + (originalPrice * item.quantity);
+        }, 0);
+        
+        const discountPercentage = currentStage.baseDiscount ?? 0;
+        const subtotalWithDiscount = subtotal * (1 - discountPercentage / 100);
+        
+        const hasGWP = items.some(item => item.isGWP);
+        const meetsThreshold = subtotalWithDiscount >= GWP_THRESHOLD;
+        
+        // Add GWP if threshold met and not already in cart
+        if (meetsThreshold && !hasGWP) {
+          const gwpVariant = gwpProduct.node.variants.edges[0].node;
+          const gwpItem: CartItem = {
+            product: gwpProduct,
+            variantId: GWP_VARIANT_ID,
+            variantTitle: gwpVariant.title,
+            price: {
+              amount: '0.00', // Free gift
+              currencyCode: 'EUR'
+            },
+            quantity: 1,
+            selectedOptions: gwpVariant.selectedOptions,
+            isGWP: true
+          };
+          set({ items: [...items, gwpItem] });
+        }
+        
+        // Remove GWP if threshold not met
+        if (!meetsThreshold && hasGWP) {
+          set({ items: items.filter(item => !item.isGWP) });
+        }
+      },
 
       addItem: (item) => {
-        const { items } = get();
+        const { items, checkAndAddGWP } = get();
         const existingItem = items.find(i => i.variantId === item.variantId);
         
         if (existingItem) {
@@ -55,14 +110,19 @@ export const useCartStore = create<CartStore>()(
                 ? { ...i, quantity: i.quantity + item.quantity }
                 : i
             ),
-            isOpen: true // Auto-open drawer
+            isOpen: true
           });
         } else {
-          set({ items: [...items, item], isOpen: true }); // Auto-open drawer
+          set({ items: [...items, item], isOpen: true });
         }
+        
+        // Check if we should add GWP after adding item
+        setTimeout(() => checkAndAddGWP(), 100);
       },
 
       updateQuantity: (variantId, quantity) => {
+        const { checkAndAddGWP } = get();
+        
         if (quantity <= 0) {
           get().removeItem(variantId);
           return;
@@ -73,12 +133,19 @@ export const useCartStore = create<CartStore>()(
             item.variantId === variantId ? { ...item, quantity } : item
           )
         });
+        
+        // Check GWP threshold after quantity update
+        setTimeout(() => checkAndAddGWP(), 100);
       },
 
       removeItem: (variantId) => {
+        const { checkAndAddGWP } = get();
         set({
           items: get().items.filter(item => item.variantId !== variantId)
         });
+        
+        // Check GWP threshold after removal
+        setTimeout(() => checkAndAddGWP(), 100);
       },
 
       clearCart: () => {

@@ -186,6 +186,25 @@ export const CART_CREATE_MUTATION = `
   }
 `;
 
+// GWP Product Configuration
+export const GWP_PRODUCT_ID = 'gid://shopify/Product/14828986794347';
+export const GWP_VARIANT_ID = 'gid://shopify/ProductVariant/52558159380843';
+export const GWP_THRESHOLD = 70; // €70 threshold
+
+// Fetch GWP Product
+export async function fetchGWPProduct(): Promise<ShopifyProduct | null> {
+  try {
+    const data = await storefrontApiRequest(STOREFRONT_PRODUCTS_QUERY, { 
+      first: 1, 
+      query: 'tag:gwp:true' 
+    });
+    return data.data.products.edges[0] || null;
+  } catch (error) {
+    console.error('Failed to fetch GWP product:', error);
+    return null;
+  }
+}
+
 // Create Checkout
 export async function createStorefrontCheckout(items: Array<{ variantId: string; quantity: number }>): Promise<string> {
   const lines = items.map(item => ({

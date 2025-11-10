@@ -24,8 +24,20 @@ export const CartDrawer = () => {
     updateQuantity, 
     removeItem, 
     createCheckout,
-    setIsOpen
+    setIsOpen,
+    loadGWPProduct,
+    checkAndAddGWP
   } = useCartStore();
+  
+  // Load GWP product on mount
+  useEffect(() => {
+    loadGWPProduct();
+  }, [loadGWPProduct]);
+  
+  // Check GWP threshold whenever items change
+  useEffect(() => {
+    checkAndAddGWP();
+  }, [items.length, checkAndAddGWP]);
   
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   
@@ -144,8 +156,13 @@ export const CartDrawer = () => {
               <div className="flex-1 overflow-y-auto pr-2 min-h-0">
                 <div className="space-y-4">
                   {items.map((item) => (
-                    <div key={item.variantId} className="flex gap-4 p-2 border rounded-lg">
-                      <div className="w-16 h-16 bg-secondary/20 rounded-md overflow-hidden flex-shrink-0">
+                    <div 
+                      key={item.variantId} 
+                      className={`flex gap-4 p-2 border rounded-lg ${
+                        item.isGWP ? 'bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-800' : ''
+                      }`}
+                    >
+                      <div className="w-16 h-16 bg-secondary/20 rounded-md overflow-hidden flex-shrink-0 relative">
                         {item.product.node.images?.edges?.[0]?.node && (
                           <img
                             src={item.product.node.images.edges[0].node.url}
@@ -153,48 +170,68 @@ export const CartDrawer = () => {
                             className="w-full h-full object-cover"
                           />
                         )}
+                        {item.isGWP && (
+                          <div className="absolute top-0 right-0 bg-gradient-to-br from-purple-500 to-pink-500 text-white text-[8px] font-bold px-1 py-0.5 rounded-bl">
+                            GRATIS
+                          </div>
+                        )}
                       </div>
                       
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-medium truncate text-sm">{item.product.node.title}</h4>
+                        <div className="flex items-start gap-2">
+                          <h4 className="font-medium truncate text-sm flex-1">
+                            {item.product.node.title}
+                          </h4>
+                          {item.isGWP && <Gift className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />}
+                        </div>
                         <p className="text-xs text-muted-foreground">
                           {item.selectedOptions.map(option => option.value).join(' • ')}
                         </p>
-                        <p className="font-semibold text-sm mt-1">
-                          €{parseFloat(item.price.amount).toFixed(2)}
+                        <p className={`font-semibold text-sm mt-1 ${item.isGWP ? 'text-purple-600 dark:text-purple-400' : ''}`}>
+                          {item.isGWP ? 'GRATIS' : `€${parseFloat(item.price.amount).toFixed(2)}`}
                         </p>
                       </div>
                       
-                      <div className="flex flex-col items-end gap-2 flex-shrink-0">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-6 w-6"
-                          onClick={() => removeItem(item.variantId)}
-                        >
-                          <Trash2 className="h-3 w-3" />
-                        </Button>
-                        
-                        <div className="flex items-center gap-1">
+                      {!item.isGWP && (
+                        <div className="flex flex-col items-end gap-2 flex-shrink-0">
                           <Button
-                            variant="outline"
+                            variant="ghost"
                             size="icon"
                             className="h-6 w-6"
-                            onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
+                            onClick={() => removeItem(item.variantId)}
                           >
-                            <Minus className="h-3 w-3" />
+                            <Trash2 className="h-3 w-3" />
                           </Button>
-                          <span className="w-8 text-center text-sm">{item.quantity}</span>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="h-6 w-6"
-                            onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
-                          >
-                            <Plus className="h-3 w-3" />
-                          </Button>
+                          
+                          <div className="flex items-center gap-1">
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className="h-6 w-6"
+                              onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
+                            >
+                              <Minus className="h-3 w-3" />
+                            </Button>
+                            <span className="w-8 text-center text-sm">{item.quantity}</span>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className="h-6 w-6"
+                              onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
+                            >
+                              <Plus className="h-3 w-3" />
+                            </Button>
+                          </div>
                         </div>
-                      </div>
+                      )}
+                      
+                      {item.isGWP && (
+                        <div className="flex items-center text-purple-600 dark:text-purple-400">
+                          <Badge variant="outline" className="border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300">
+                            Regalo automático
+                          </Badge>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
