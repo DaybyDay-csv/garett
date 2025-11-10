@@ -26,7 +26,8 @@ export const CartDrawer = () => {
     createCheckout,
     setIsOpen,
     loadGWPProduct,
-    checkAndAddGWP
+    checkAndAddGWP,
+    gwpProduct
   } = useCartStore();
   
   // Load GWP product on mount
@@ -60,6 +61,10 @@ export const CartDrawer = () => {
   const progressPercentage = Math.min((subtotalWithDiscount / GWP_THRESHOLD) * 100, 100);
   const remainingForGWP = Math.max(GWP_THRESHOLD - subtotalWithDiscount, 0);
   const hasUnlockedGWP = subtotalWithDiscount >= GWP_THRESHOLD;
+  
+  // Calculate GWP value for total savings
+  const gwpValue = gwpProduct ? parseFloat(gwpProduct.node.priceRange.minVariantPrice.amount) : 0;
+  const totalSavings = discountAmount + (hasUnlockedGWP ? gwpValue : 0);
 
   const handleCheckout = async () => {
     try {
@@ -293,14 +298,14 @@ export const CartDrawer = () => {
                   </div>
                   
                   {/* Total Savings */}
-                  {discountAmount > 0 && (
+                  {totalSavings > 0 && (
                     <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200 dark:border-green-800 rounded-lg p-3 text-center">
                       <p className="text-sm font-bold text-green-700 dark:text-green-300">
-                        🎉 ¡Ahorras €{discountAmount.toFixed(2)} en esta compra!
+                        🎉 ¡Ahorras €{totalSavings.toFixed(2)} en esta compra!
                       </p>
                       {hasUnlockedGWP && (
                         <p className="text-xs text-green-600 dark:text-green-400 mt-1">
-                          + Banda de pelo gratis incluida
+                          Incluye banda de pelo gratis (€{gwpValue.toFixed(2)})
                         </p>
                       )}
                     </div>
