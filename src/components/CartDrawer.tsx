@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import {
   Sheet,
   SheetContent,
@@ -9,8 +10,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2 } from "lucide-react";
+import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Gift, Sparkles } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
+import { getCurrentPromotionalStage } from "@/lib/promotions";
 import { toast } from "sonner";
 
 export const CartDrawer = () => {
@@ -25,6 +27,16 @@ export const CartDrawer = () => {
   
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
+  
+  // GWP threshold
+  const GWP_THRESHOLD = 70;
+  const progressPercentage = Math.min((totalPrice / GWP_THRESHOLD) * 100, 100);
+  const remainingForGWP = Math.max(GWP_THRESHOLD - totalPrice, 0);
+  const hasUnlockedGWP = totalPrice >= GWP_THRESHOLD;
+  
+  // Check if current stage has GWP
+  const currentStage = getCurrentPromotionalStage();
+  const hasGWPActive = currentStage && !['Warm-up'].includes(currentStage.name);
 
   const handleCheckout = async () => {
     try {
@@ -63,7 +75,38 @@ export const CartDrawer = () => {
           </SheetDescription>
         </SheetHeader>
         
-        <div className="flex flex-col flex-1 pt-6 min-h-0">
+        {/* GWP Progress Bar */}
+        {hasGWPActive && items.length > 0 && (
+          <div className="flex-shrink-0 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-4 border border-purple-200 dark:border-purple-800 mt-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Gift className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+              <span className="font-semibold text-sm text-purple-900 dark:text-purple-100">
+                {hasUnlockedGWP ? '¡Regalo desbloqueado!' : 'Casi consigues tu regalo gratis'}
+              </span>
+            </div>
+            
+            {hasUnlockedGWP ? (
+              <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg p-3 animate-pulse">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-5 h-5" />
+                  <div className="flex-1">
+                    <p className="font-bold text-sm">¡Banda de pelo gratis incluida!</p>
+                    <p className="text-xs opacity-90">Se añadirá automáticamente en el checkout</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <>
+                <Progress value={progressPercentage} className="h-2 mb-2" />
+                <p className="text-xs text-purple-800 dark:text-purple-200">
+                  Añade <span className="font-bold">€{remainingForGWP.toFixed(2)}</span> más para obtener una <span className="font-bold">banda de pelo gratis</span>
+                </p>
+              </>
+            )}
+          </div>
+        )}
+        
+        <div className="flex flex-col flex-1 pt-4 min-h-0">
           {items.length === 0 ? (
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
