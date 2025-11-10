@@ -761,7 +761,10 @@ export function detectProductCategory(product: any): string {
   // Check for category tag first
   const categoryTag = product.tags?.find((tag: string) => tag.startsWith('category:'));
   if (categoryTag) {
-    return categoryTag.split(':')[1];
+    const category = categoryTag.split(':')[1];
+    // Normalize category names
+    if (category === 'capilar') return 'cuidado-capilar';
+    return category;
   }
   
   // Fallback: check product type or handle

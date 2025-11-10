@@ -12,6 +12,7 @@ export interface ShopifyProduct {
     description: string;
     handle: string;
     tags: string[];
+    productType: string;
     priceRange: {
       minVariantPrice: {
         amount: string;
@@ -92,6 +93,7 @@ export const STOREFRONT_PRODUCTS_QUERY = `
           description
           handle
           tags
+          productType
           priceRange {
             minVariantPrice {
               amount
