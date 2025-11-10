@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import { calculatePromotionalPrice, formatPrice } from "@/lib/promotions";
+import { Flame } from "lucide-react";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -14,8 +16,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const { node } = product;
   
   const firstVariant = node.variants.edges[0]?.node;
-  const price = parseFloat(node.priceRange.minVariantPrice.amount);
+  const originalPrice = node.priceRange.minVariantPrice;
   const image = node.images.edges[0]?.node;
+  
+  // Calculate promotional pricing
+  const priceInfo = calculatePromotionalPrice(originalPrice.amount);
   
   // Extract badges from tags
   const isNew = node.tags.includes('new:true');
@@ -32,14 +37,23 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       product,
       variantId: firstVariant.id,
       variantTitle: firstVariant.title,
-      price: firstVariant.price,
+      price: {
+        ...firstVariant.price,
+        // Store the discounted price in cart
+        amount: priceInfo.discountedPrice.toString()
+      },
       quantity: 1,
       selectedOptions: firstVariant.selectedOptions || []
     };
     
     addItem(cartItem);
+    
+    const discountText = priceInfo.hasDiscount 
+      ? ` (${priceInfo.discountLabel} aplicado)` 
+      : '';
+    
     toast.success('Añadido al carrito', {
-      description: node.title,
+      description: `${node.title}${discountText}`,
       position: 'top-center',
     });
   };
@@ -59,6 +73,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         )}
         
         <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+          {/* Promotional Stage Badge - Highest priority */}
+          {priceInfo.hasDiscount && priceInfo.stage && (
+            <Badge className={`bg-gradient-to-r ${priceInfo.stage.color} text-white border-0 animate-pulse`}>
+              <Flame className="w-3 h-3 mr-1" />
+              {priceInfo.stage.badge}
+            </Badge>
+          )}
           {isNew && (
             <Badge variant="default" className="bg-primary text-primary-foreground">
               Nuevo
@@ -95,8 +116,26 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         )}
         
         <div className="flex items-center justify-between mt-auto">
-          <div className="text-2xl font-bold">
-            €{price.toFixed(2)}
+          <div className="flex flex-col">
+            {priceInfo.hasDiscount ? (
+              <>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl font-bold text-primary">
+                    €{priceInfo.discountedPrice.toFixed(2)}
+                  </span>
+                  <Badge variant="destructive" className="text-xs">
+                    {priceInfo.discountLabel}
+                  </Badge>
+                </div>
+                <span className="text-sm text-muted-foreground line-through">
+                  €{priceInfo.originalPrice.toFixed(2)}
+                </span>
+              </>
+            ) : (
+              <span className="text-2xl font-bold">
+                €{priceInfo.originalPrice.toFixed(2)}
+              </span>
+            )}
           </div>
           
           <Button 

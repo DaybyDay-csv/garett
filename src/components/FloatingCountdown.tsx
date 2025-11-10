@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { X, Clock, Flame, Zap, Timer } from "lucide-react";
+import { X, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { getCurrentPromotionalStage } from "@/lib/promotions";
 
 interface TimeLeft {
   days: number;
@@ -9,18 +10,6 @@ interface TimeLeft {
   minutes: number;
   seconds: number;
   isExpired: boolean;
-}
-
-interface PromotionalStage {
-  name: string;
-  dates: string;
-  startDate: Date;
-  endDate: Date;
-  discount: string;
-  code?: string | null;
-  icon: any;
-  color: string;
-  badge: string;
 }
 
 export const FloatingCountdown = () => {
@@ -31,67 +20,18 @@ export const FloatingCountdown = () => {
     seconds: 0,
     isExpired: false
   });
-  const [currentStage, setCurrentStage] = useState<PromotionalStage | null>(null);
+  const [currentStage, setCurrentStage] = useState<ReturnType<typeof getCurrentPromotionalStage> | null>(null);
   const [isVisible, setIsVisible] = useState(true);
   const [isDismissed, setIsDismissed] = useState(false);
-
-  const promotionalStages: PromotionalStage[] = [
-    {
-      name: "Warm-up",
-      dates: "10-16 Nov",
-      startDate: new Date('2025-11-10T00:00:00'),
-      endDate: new Date('2025-11-16T23:59:59'),
-      discount: "-10%",
-      code: null,
-      icon: Timer,
-      color: "from-blue-500 to-cyan-500",
-      badge: "WARM-UP"
-    },
-    {
-      name: "White Week",
-      dates: "17-27 Nov",
-      startDate: new Date('2025-11-17T00:00:00'),
-      endDate: new Date('2025-11-27T23:59:59'),
-      discount: "-20%",
-      code: "WHITEWEEK20",
-      icon: Zap,
-      color: "from-slate-400 to-slate-600",
-      badge: "WHITE WEEK"
-    },
-    {
-      name: "Black Friday",
-      dates: "28-30 Nov",
-      startDate: new Date('2025-11-28T00:00:00'),
-      endDate: new Date('2025-11-30T23:59:59'),
-      discount: "hasta -50%",
-      code: "EARLYBIRD50",
-      icon: Flame,
-      color: "from-red-500 to-orange-500",
-      badge: "BLACK FRIDAY"
-    },
-    {
-      name: "Cyber Monday",
-      dates: "1 Dic",
-      startDate: new Date('2025-12-01T00:00:00'),
-      endDate: new Date('2025-12-01T23:59:59'),
-      discount: "-15%",
-      code: "CYBERMONDAY15",
-      icon: Zap,
-      color: "from-indigo-500 to-purple-500",
-      badge: "CYBER MONDAY"
-    }
-  ];
 
   useEffect(() => {
     const calculateTimeAndStage = () => {
       const now = new Date();
       
-      // Find current promotional stage
-      const activePromo = promotionalStages.find(stage => 
-        now >= stage.startDate && now <= stage.endDate
-      );
+      // Get current promotional stage from shared utility
+      const activePromo = getCurrentPromotionalStage();
 
-      setCurrentStage(activePromo || null);
+      setCurrentStage(activePromo);
 
       // If no active stage, hide widget
       if (!activePromo) {
@@ -161,7 +101,7 @@ export const FloatingCountdown = () => {
         {/* Discount badge */}
         <Badge className="bg-white/30 text-white border-0 mb-3">
           {currentStage.discount}
-          {currentStage.code && ` · ${currentStage.code}`}
+          {currentStage.code && ` · Code: ${currentStage.code}`}
         </Badge>
 
         {/* Countdown */}
