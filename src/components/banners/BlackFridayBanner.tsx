@@ -129,13 +129,13 @@ export const BlackFridayBanner = () => {
             return (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-5 md:p-6 text-white space-y-2 md:space-y-3 hover:bg-white/20 transition-all hover:scale-105"
+                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-3 md:p-4 text-white space-y-1 md:space-y-2 hover:bg-white/20 transition-all hover:scale-105"
               >
-                <Icon className="w-5 h-5 md:w-8 md:h-8 mx-auto" />
+                <Icon className="w-4 h-4 md:w-6 md:h-6 mx-auto" />
                 <div>
-                  <p className="text-xs md:text-sm font-semibold uppercase tracking-wider leading-tight">{tier.name}</p>
-                  <p className="text-2xl md:text-4xl font-bold my-2">-{tier.discount}</p>
-                  <p className="text-xs md:text-sm text-white/70">
+                  <p className="text-[10px] md:text-xs font-semibold uppercase tracking-wider leading-tight">{tier.name}</p>
+                  <p className="text-xl md:text-3xl font-bold my-1">-{tier.discount}</p>
+                  <p className="text-[10px] md:text-xs text-white/70">
                     {typeof tier.uses === 'number' ? `${tier.uses} usos` : 'Ilimitado'}
                   </p>
                 </div>
