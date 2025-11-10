@@ -7,15 +7,18 @@ import { Progress } from "@/components/ui/progress";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
-import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles } from "lucide-react";
+import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, ZoomIn, Maximize2 } from "lucide-react";
 import { calculatePromotionalPrice, formatPrice, getCurrentPromotionalStage } from "@/lib/promotions";
 import gwpHeadband from "@/assets/gwp-headband.jpg";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 
 const ProductDetail = () => {
   const { handle } = useParams();
   const [product, setProduct] = useState<ShopifyProduct | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedVariant, setSelectedVariant] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(0);
   const addItem = useCartStore(state => state.addItem);
   const items = useCartStore(state => state.items);
   
@@ -124,31 +127,70 @@ const ProductDetail = () => {
         </Button>
 
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-          {/* Images */}
+          {/* Images - Interactive Gallery */}
           <div className="space-y-4">
-            <div className="aspect-square bg-secondary/20 rounded-lg overflow-hidden">
-              {node.images.edges[0]?.node && (
-                <img
-                  src={node.images.edges[0].node.url}
-                  alt={node.images.edges[0].node.altText || node.title}
-                  className="w-full h-full object-cover"
-                />
+            {/* Main Image with Zoom */}
+            <div className="relative aspect-square bg-secondary/20 rounded-lg overflow-hidden group">
+              {node.images.edges[selectedImage]?.node && (
+                <Zoom>
+                  <img
+                    src={node.images.edges[selectedImage].node.url}
+                    alt={node.images.edges[selectedImage].node.altText || node.title}
+                    className="w-full h-full object-cover cursor-zoom-in transition-transform duration-300"
+                  />
+                </Zoom>
+              )}
+              
+              {/* Zoom Indicator */}
+              <div className="absolute top-4 right-4 bg-black/60 text-white px-3 py-2 rounded-lg flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <ZoomIn className="w-4 h-4" />
+                <span className="text-xs font-medium">Click para ampliar</span>
+              </div>
+              
+              {/* Image Counter */}
+              {node.images.edges.length > 1 && (
+                <div className="absolute bottom-4 left-4 bg-black/60 text-white px-3 py-1.5 rounded-lg">
+                  <span className="text-xs font-medium">
+                    {selectedImage + 1} / {node.images.edges.length}
+                  </span>
+                </div>
               )}
             </div>
             
+            {/* Thumbnail Gallery */}
             {node.images.edges.length > 1 && (
-              <div className="grid grid-cols-4 gap-4">
-                {node.images.edges.slice(1, 5).map((image, idx) => (
-                  <div key={idx} className="aspect-square bg-secondary/20 rounded-lg overflow-hidden">
+              <div className="grid grid-cols-5 gap-3">
+                {node.images.edges.map((image, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setSelectedImage(idx)}
+                    className={`aspect-square bg-secondary/20 rounded-lg overflow-hidden border-2 transition-all hover:scale-105 ${
+                      selectedImage === idx 
+                        ? 'border-primary shadow-lg scale-105' 
+                        : 'border-transparent hover:border-primary/50'
+                    }`}
+                  >
                     <img
                       src={image.node.url}
                       alt={image.node.altText || `${node.title} ${idx + 1}`}
                       className="w-full h-full object-cover"
                     />
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
+            
+            {/* Trust Indicators Below Images */}
+            <div className="bg-muted/30 rounded-lg p-4 space-y-2">
+              <div className="flex items-center gap-2 text-sm">
+                <Check className="w-4 h-4 text-green-600" />
+                <span className="text-muted-foreground">Imágenes reales del producto</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Maximize2 className="w-4 h-4 text-primary" />
+                <span className="text-muted-foreground">Haz click para ver en detalle</span>
+              </div>
+            </div>
           </div>
 
           {/* Product Info */}
