@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { TrustBadges } from "@/components/TrustBadges";
 import { Testimonials } from "@/components/Testimonials";
@@ -367,6 +368,8 @@ const Index = () => {
           </section>
         )}
       </div>
+
+      <Footer />
     </div>
   );
 };

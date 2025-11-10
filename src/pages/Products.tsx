@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { Filter, ShoppingBag } from "lucide-react";
@@ -164,6 +165,8 @@ const Products = () => {
           </>
         )}
       </div>
+
+      <Footer />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { Sparkles } from "lucide-react";
@@ -64,6 +65,8 @@ const NewArrivals = () => {
           </>
         )}
       </div>
+
+      <Footer />
     </div>
   );
 };
