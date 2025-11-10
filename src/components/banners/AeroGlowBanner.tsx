@@ -114,27 +114,20 @@ export const AeroGlowBanner = () => {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
-              <Button 
-                asChild 
-                size="lg" 
-                className="group text-sm md:text-base h-14 px-10 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-xl hover:shadow-2xl transition-all text-white border-0"
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2 relative z-20">
+              <Link 
+                to="/producto/253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow"
+                className="inline-flex items-center justify-center group text-sm md:text-base h-14 px-10 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-xl hover:shadow-2xl transition-all text-white border-0 rounded-md font-medium cursor-pointer"
               >
-                <Link to="/producto/253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow">
-                  Comprar Ahora
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
-              <Button 
-                asChild 
-                variant="outline" 
-                size="lg" 
-                className="text-sm md:text-base h-14 px-10 border-2 border-[#8B6F47] text-[#5D4037] dark:text-[#D7B896] hover:bg-[#8B6F47]/10"
+                Comprar Ahora
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link 
+                to="/producto/253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow"
+                className="inline-flex items-center justify-center text-sm md:text-base h-14 px-10 border-2 border-[#8B6F47] text-[#5D4037] dark:text-[#D7B896] hover:bg-[#8B6F47]/10 rounded-md font-medium transition-colors cursor-pointer bg-background"
               >
-                <Link to="/producto/253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow">
-                  Ver Detalles
-                </Link>
-              </Button>
+                Ver Detalles
+              </Link>
             </div>
 
             {/* Trust Indicators */}
@@ -248,16 +241,13 @@ export const AeroGlowBanner = () => {
 
           {/* Final CTA */}
           <div className="text-center mt-8 md:mt-12">
-            <Button 
-              asChild 
-              size="lg"
-              className="group text-base md:text-lg h-14 md:h-16 px-12 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-2xl hover:shadow-3xl transition-all text-white"
+            <Link 
+              to="/producto/253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow"
+              className="inline-flex items-center justify-center group text-base md:text-lg h-14 md:h-16 px-12 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-2xl hover:shadow-3xl transition-all text-white rounded-md font-medium cursor-pointer"
             >
-              <Link to="/producto/253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow">
-                Consigue tu AeroGlow Ahora
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" />
-              </Link>
-            </Button>
+              Consigue tu AeroGlow Ahora
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" />
+            </Link>
             <p className="text-xs md:text-sm text-muted-foreground mt-4">
               ⚡ Últimas unidades disponibles • Envío gratis en 24-48h
             </p>
