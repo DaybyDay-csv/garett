@@ -758,7 +758,33 @@ const productContentMap: Record<string, ProductContent> = {
 
 // Helper function to detect product category
 export function detectProductCategory(product: any): string {
-  // Check for category tag first
+  const handle = product.handle?.toLowerCase() || '';
+  const title = product.title?.toLowerCase() || '';
+  const productType = product.productType?.toLowerCase() || '';
+  
+  // ===== HAIR CARE - SPECIFIC PRODUCTS FIRST (before generic tags) =====
+  
+  // Multi Care Brush - Specific detection
+  if (handle.includes('multi-care') || handle.includes('multicare') || handle.includes('multi_care') ||
+      handle.includes('multi care') || title.includes('multi care') || title.includes('multi cuidado') ||
+      title.includes('multicuidado')) {
+    return 'multi-care-brush';
+  }
+  
+  // Curly - Specific detection
+  if (handle.includes('curly') || title.includes('curly') || 
+      title.includes('rizador')) {
+    return 'curly';
+  }
+  
+  // AeroGlow - Specific detection
+  if (handle.includes('aeroglow') || title.includes('aeroglow') ||
+      handle.includes('plancha-de-pelo') || handle.includes('plancha-pelo') ||
+      (handle.includes('plancha') && handle.includes('pelo'))) {
+    return 'cuidado-capilar';
+  }
+  
+  // ===== GENERIC CATEGORY TAGS (after specific products) =====
   const categoryTag = product.tags?.find((tag: string) => tag.startsWith('category:'));
   if (categoryTag) {
     const category = categoryTag.split(':')[1];
@@ -766,11 +792,6 @@ export function detectProductCategory(product: any): string {
     if (category === 'capilar') return 'cuidado-capilar';
     return category;
   }
-  
-  // Fallback: check product type or handle
-  const productType = product.productType?.toLowerCase() || '';
-  const handle = product.handle?.toLowerCase() || '';
-  const title = product.title?.toLowerCase() || '';
   
   // IPL devices
   if (handle.includes('flash') || handle.includes('cold-white') || handle.includes('ipl') || 
@@ -784,9 +805,9 @@ export function detectProductCategory(product: any): string {
     return 'masajeadores-faciales';
   }
   
-  // Cleansing
-  if (handle.includes('clean') || handle.includes('sonic-scrub') || 
-      title.includes('limpieza') || title.includes('cepillo')) {
+  // Cleansing (exclude Multi Care Brush)
+  if ((handle.includes('clean') || handle.includes('sonic-scrub') || title.includes('limpieza')) &&
+      !handle.includes('multi') && !title.includes('multi')) {
     return 'limpieza-facial';
   }
   
@@ -802,21 +823,9 @@ export function detectProductCategory(product: any): string {
     return 'corporales';
   }
   
-  // Hair care - Specific product detection
-  if (handle.includes('multi-care') || handle.includes('multicare') || handle.includes('multi_care') ||
-      title.toLowerCase().includes('multi care') || title.toLowerCase().includes('multi cuidado')) {
-    return 'multi-care-brush';
-  }
-  
-  if (handle.includes('curly') || title.toLowerCase().includes('curly') || 
-      title.toLowerCase().includes('rizador')) {
-    return 'curly';
-  }
-  
-  if (handle.includes('aeroglow') || handle.includes('plancha') || handle.includes('pelo') ||
-      handle.includes('capilar') || handle.includes('hair') || handle.includes('secador') ||
-      title.includes('aeroglow') || title.includes('plancha') || title.includes('pelo') || 
-      title.includes('capilar') || title.includes('cabello')) {
+  // Generic hair care fallback (only if not detected as specific product above)
+  if (handle.includes('capilar') || handle.includes('hair') || handle.includes('secador') ||
+      title.includes('capilar') || title.includes('cabello') || title.includes('pelo')) {
     return 'cuidado-capilar';
   }
   
