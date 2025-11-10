@@ -62,7 +62,7 @@ export const WhiteWeekBanner = () => {
           </div>
           <div className="flex items-center justify-center gap-2">
             <div className="w-4 h-4 md:w-5 md:h-5 flex items-center justify-center text-primary font-bold">✓</div>
-            <span className="font-medium">Envío gratis &gt;€60</span>
+            <span className="font-medium">Envío 24/48hrs</span>
           </div>
         </div>
 
