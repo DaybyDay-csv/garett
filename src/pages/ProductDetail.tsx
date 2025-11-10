@@ -3,11 +3,12 @@ import { useParams, Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
-import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame } from "lucide-react";
-import { calculatePromotionalPrice, formatPrice } from "@/lib/promotions";
+import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles } from "lucide-react";
+import { calculatePromotionalPrice, formatPrice, getCurrentPromotionalStage } from "@/lib/promotions";
 
 const ProductDetail = () => {
   const { handle } = useParams();
@@ -15,6 +16,13 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [selectedVariant, setSelectedVariant] = useState(0);
   const addItem = useCartStore(state => state.addItem);
+  const items = useCartStore(state => state.items);
+  
+  // Calculate cart total for GWP
+  const cartTotal = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
+  const GWP_THRESHOLD = 70;
+  const currentStage = getCurrentPromotionalStage();
+  const hasGWPActive = currentStage && !['Warm-up'].includes(currentStage.name);
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -95,6 +103,12 @@ const ProductDetail = () => {
 
   const isNew = node.tags.includes('new:true');
   const isBestseller = node.tags.includes('bestseller:true');
+  
+  // Calculate GWP progress with this product
+  const potentialTotal = cartTotal + priceInfo.discountedPrice;
+  const progressPercentage = Math.min((potentialTotal / GWP_THRESHOLD) * 100, 100);
+  const remainingForGWP = Math.max(GWP_THRESHOLD - potentialTotal, 0);
+  const willUnlockGWP = potentialTotal >= GWP_THRESHOLD && cartTotal < GWP_THRESHOLD;
 
   return (
     <div className="min-h-screen bg-background">
@@ -188,6 +202,51 @@ const ProductDetail = () => {
                 </div>
               )}
             </div>
+
+            {/* GWP Progress Incentive */}
+            {hasGWPActive && (
+              <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-4 border border-purple-200 dark:border-purple-800">
+                <div className="flex items-center gap-2 mb-3">
+                  <Gift className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                  <span className="font-semibold text-sm text-purple-900 dark:text-purple-100">
+                    ¡Obtén un regalo gratis!
+                  </span>
+                </div>
+                
+                {willUnlockGWP ? (
+                  <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg p-3">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-5 h-5" />
+                      <div className="flex-1">
+                        <p className="font-bold text-sm">¡Añadiendo este producto desbloqueas tu regalo!</p>
+                        <p className="text-xs opacity-90">Banda de pelo gratis incluida</p>
+                      </div>
+                    </div>
+                  </div>
+                ) : potentialTotal >= GWP_THRESHOLD ? (
+                  <div className="bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded-lg p-3">
+                    <div className="flex items-center gap-2">
+                      <Check className="w-5 h-5 text-green-600 dark:text-green-400" />
+                      <div className="flex-1">
+                        <p className="font-bold text-sm text-green-900 dark:text-green-100">¡Regalo desbloqueado!</p>
+                        <p className="text-xs text-green-700 dark:text-green-300">Banda de pelo gratis con tu compra</p>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <Progress value={progressPercentage} className="h-2 mb-2" />
+                    <p className="text-xs text-purple-800 dark:text-purple-200">
+                      {remainingForGWP > 0 ? (
+                        <>Añade <span className="font-bold">€{remainingForGWP.toFixed(2)}</span> más para obtener una <span className="font-bold">banda de pelo gratis</span></>
+                      ) : (
+                        <span className="font-bold">¡Banda de pelo gratis desbloqueada!</span>
+                      )}
+                    </p>
+                  </>
+                )}
+              </div>
+            )}
 
             {/* Variants */}
             {node.variants.edges.length > 1 && (
