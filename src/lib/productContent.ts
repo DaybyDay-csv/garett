@@ -559,25 +559,25 @@ const productContentMap: Record<string, ProductContent> = {
   // Default - Belleza general
   'default': {
     quickBenefits: [
-      { icon: 'Clock', text: '15 min/día' },
-      { icon: 'Check', text: 'Resultados en 8-12 semanas' },
-      { icon: 'Award', text: 'Tecnología profesional' }
+      { icon: 'Clock', text: 'Fácil de usar' },
+      { icon: 'Check', text: 'Resultados visibles' },
+      { icon: 'Award', text: 'Calidad premium' }
     ],
     dropdowns: {
       howItWorks: {
         title: '¿Por qué funciona?',
-        summary: 'Tecnología profesional adaptada para casa',
+        summary: 'Tecnología avanzada para resultados profesionales',
         details: [
-          'Este dispositivo utiliza tecnología de grado profesional, previamente disponible solo en clínicas de belleza y centros estéticos.',
-          'Trabaja en las capas profundas de tu piel donde realmente se producen los cambios visibles y duraderos.',
-          'No es magia, es ciencia aplicada de forma segura y efectiva. Cada sesión acumula resultados.'
+          'Este dispositivo utiliza tecnología de última generación diseñada para ofrecerte los mejores resultados.',
+          'Desarrollado con los más altos estándares de calidad y seguridad.',
+          'Fácil de usar en casa con resultados profesionales. Cada uso te acerca más a tus objetivos.'
         ]
       },
       expectedResults: {
         phases: [
           {
             timeframe: '2-4 semanas',
-            description: 'Primeras mejoras visibles. Tu piel luce más luminosa y descansada.'
+            description: 'Primeras mejoras visibles. Notarás la diferencia desde el inicio.'
           },
           {
             timeframe: '8-12 semanas',
@@ -585,37 +585,37 @@ const productContentMap: Record<string, ProductContent> = {
           },
           {
             timeframe: '3-6 meses',
-            description: 'Transformación completa. Resultados óptimos que se mantienen con uso regular.'
+            description: 'Resultados óptimos. Mejora continua con uso regular.'
           }
         ],
         usageNote: 'La constancia es clave. Usa según las instrucciones para resultados óptimos.'
       },
       howToUse: {
         steps: [
-          'Limpia y seca bien tu piel',
-          'Aplica gel o sérum según el dispositivo',
-          'Sigue los movimientos indicados en el manual',
+          'Lee el manual de instrucciones completo',
+          'Prepara según las indicaciones específicas',
+          'Sigue los pasos recomendados por el fabricante',
           'Usa regularmente según frecuencia recomendada',
-          'Finaliza con tu rutina habitual de cuidado'
+          'Mantén el dispositivo limpio y en buen estado'
         ],
-        additionalNote: 'Lee el manual completo antes del primer uso. Respeta tiempos y frecuencias recomendadas.'
+        additionalNote: 'Consulta el manual completo antes del primer uso. Respeta tiempos y frecuencias recomendadas.'
       },
       whatMakesDifferent: [
         {
-          title: 'Tecnología profesional en casa',
-          description: 'Los mismos tratamientos que cuestan 80-150€/sesión en clínica, ahora disponibles cuando quieras desde tu casa.'
+          title: 'Tecnología premium',
+          description: 'Dispositivo de alta calidad con características profesionales disponibles para uso en casa.'
         },
         {
           title: 'Garantía de 3 años',
           description: 'Confiamos en la durabilidad de nuestros dispositivos. 3 años de garantía completa para tu tranquilidad.'
         },
         {
-          title: 'Respaldado por El Corte Inglés',
-          description: 'Disponible en puntos de venta oficiales. No es una marca desconocida, es calidad certificada.'
+          title: 'Marca reconocida',
+          description: 'Garett es una marca de confianza con presencia en El Corte Inglés y principales retailers.'
         },
         {
-          title: 'Inversión vs gasto recurrente',
-          description: 'Una inversión única que se paga sola en pocos meses vs tratamientos de clínica que nunca terminan de cobrarse.'
+          title: 'Inversión inteligente',
+          description: 'Una inversión única que ofrece resultados duraderos vs tratamientos profesionales recurrentes.'
         }
       ]
     }
@@ -665,9 +665,11 @@ export function detectProductCategory(product: any): string {
     return 'corporales';
   }
   
-  // Hair care
-  if (handle.includes('aeroglow') || handle.includes('plancha') || 
-      title.includes('pelo') || title.includes('capilar')) {
+  // Hair care - MUST be checked early to catch plancha/aeroglow products
+  if (handle.includes('aeroglow') || handle.includes('plancha') || handle.includes('pelo') ||
+      handle.includes('capilar') || handle.includes('hair') || handle.includes('secador') ||
+      title.includes('aeroglow') || title.includes('plancha') || title.includes('pelo') || 
+      title.includes('capilar') || title.includes('cabello')) {
     return 'cuidado-capilar';
   }
   
