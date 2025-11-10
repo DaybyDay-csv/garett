@@ -24,7 +24,7 @@ export const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/90 shadow-sm">
       <div className="container flex h-20 items-center justify-between">
         <Link to="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary rounded-md flex items-center justify-center p-1.5">
+          <div className="w-10 h-10 bg-[#1a1f3a] rounded-md flex items-center justify-center p-1.5">
             <img src={garettIcon} alt="Garett" className="w-full h-full object-contain" />
           </div>
           <img src={garettLogo} alt="GARETT" className="h-8 object-contain" />
@@ -56,7 +56,7 @@ export const Header = () => {
             <SheetContent side="right" className="w-[300px]">
               <SheetHeader>
                 <SheetTitle className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center p-1">
+                  <div className="w-8 h-8 bg-[#1a1f3a] rounded-md flex items-center justify-center p-1">
                     <img src={garettIcon} alt="Garett" className="w-full h-full object-contain" />
                   </div>
                   <img src={garettLogo} alt="GARETT" className="h-6 object-contain" />
