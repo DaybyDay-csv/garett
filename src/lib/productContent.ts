@@ -361,68 +361,202 @@ const productContentMap: Record<string, ProductContent> = {
     }
   },
 
-  // Cuidado Capilar (AeroGlow plancha)
+  // AeroGlow - Plancha de pelo con tecnología iónica
   'cuidado-capilar': {
     quickBenefits: [
-      { icon: 'Wind', text: 'Motor 110.000 rpm' },
-      { icon: 'Sparkles', text: 'Iones negativos' },
+      { icon: 'Zap', text: 'Iones negativos anti-frizz' },
+      { icon: 'Wind', text: 'Motor 110.000 RPM' },
       { icon: 'Thermometer', text: '5 niveles temperatura' }
     ],
     dropdowns: {
       howItWorks: {
-        title: '¿Por qué funciona?',
-        summary: 'Motor de alta velocidad + iones negativos para secado inteligente',
+        title: '¿Cómo funciona?',
+        summary: 'Plancha de aire con ionización y motor profesional',
         details: [
-          'Motor BLDC de 110.000 rpm que genera un flujo de aire potente (11.2 m/s) pero controlado. Seca rápido sin necesidad de calor extremo que daña.',
-          'Iones negativos que neutralizan la electricidad estática del cabello y sellan la cutícula, dejándolo liso, brillante y sin frizz.',
-          '5 niveles de temperatura (80°-150°C) con control inteligente. Eliges la temperatura exacta para tu tipo de pelo: fino, normal, grueso.',
-          'El resultado: brillo de salón profesional con secado rápido, usando menos calor = menos daño a largo plazo.'
+          'Motor BLDC 110.000 RPM genera flujo de aire de 11.2 m/s que seca y alisa al mismo tiempo.',
+          'Iones negativos sellan las cutículas del cabello, eliminando el frizz y reteniendo la hidratación natural.',
+          '5 niveles de temperatura (80-150°C) con control inteligente que ajusta según humedad del cabello.',
+          'Modo húmedo/seco: úsala directamente después del lavado sin secador previo.'
         ]
       },
       expectedResults: {
         phases: [
           {
-            timeframe: 'Inmediato',
-            description: 'Pelo perfectamente liso, brillante y sin frizz. Ese acabado profesional que dura hasta el próximo lavado.'
+            timeframe: 'Primera aplicación',
+            description: 'Cabello liso y brillante en la mitad del tiempo. Frizz eliminado por 24h+ incluso con humedad.'
           },
           {
-            timeframe: '2-4 semanas',
-            description: 'Tu cabello se ve más sano. Menos puntas abiertas. La diferencia con tu plancha anterior es evidente.'
+            timeframe: '1 semana',
+            description: 'Tiempo de peinado reducido a 10-15 minutos. Cabello más manejable que "recuerda" el liso.'
           },
           {
-            timeframe: '3 meses',
-            description: 'Melena visiblemente más saludable. El cabello no está maltratado, está cuidado. Brilla con luz natural.'
+            timeframe: '1 mes',
+            description: 'Cabello más sano por usar temperaturas bajas. Menos puntas abiertas. Brillo natural recuperado.'
           }
         ],
-        usageNote: 'Usa protector térmico siempre. Aunque esta plancha es más segura, la protección extra nunca está de más.'
+        usageNote: 'Usa 2-3 veces por semana. Temperatura baja (80-110°C) para cabello fino, media-alta (120-150°C) para cabello grueso.'
       },
       howToUse: {
         steps: [
-          'Lava y seca completamente tu cabello',
-          'Aplica protector térmico de medios a puntas',
-          'Divide el pelo en secciones de 3-4 cm',
-          'Ajusta temperatura según tu tipo de pelo',
-          'Pasadas suaves y continuas de raíz a puntas',
-          'No repitas más de 2 veces por sección'
+          'Lava tu cabello (puede quedar húmedo, no necesitas secarlo)',
+          'Selecciona temperatura según tu tipo de cabello en la pantalla LCD',
+          'Divide el cabello en secciones de 3cm',
+          'Pasa lentamente desde 1cm de la raíz hasta las puntas',
+          'Una sola pasada por sección es suficiente',
+          'Finaliza con aire frío para sellar el resultado'
         ],
-        additionalNote: 'Pelo fino: 150-170°C. Pelo normal: 170-190°C. Pelo grueso/rizado: 190-210°C. Empieza siempre por temperatura baja.'
+        additionalNote: 'El modo inteligente detecta humedad y ajusta temperatura automáticamente. Cable giratorio 360° para máxima comodidad.'
       },
       whatMakesDifferent: [
         {
-          title: 'Motor profesional de 110.000 rpm',
-          description: 'Secado en minutos, no en media hora. Potencia de salón en casa. Cuanto menos tiempo de calor, menos daño.'
+          title: 'Plancha de aire profesional',
+          description: 'Combina potencia de secador (1400-1600W) con precisión de plancha. Alisa mientras seca = mitad del tiempo.'
         },
         {
-          title: 'Tecnología de iones negativos',
-          description: 'Elimina el frizz desde la raíz. El brillo no es artificial, es la cutícula del pelo perfectamente sellada.'
+          title: 'Iones negativos reales',
+          description: 'No es ionización simbólica. Genera millones de iones que neutralizan el frizz a nivel molecular.'
         },
         {
-          title: '5 temperaturas + modo inteligente',
-          description: 'Pelo húmedo y seco reconocidos automáticamente. No más quemar zonas porque olvidaste ajustar la temperatura.'
+          title: 'Temperatura inteligente con LCD',
+          description: 'Muestra temperatura exacta en tiempo real. Detecta humedad del cabello y ajusta potencia automáticamente.'
         },
         {
-          title: 'Apagado automático y seguridad',
-          description: 'Si te olvidas de apagarlo, él solo se cuida. Cable giratorio 360° de 2.5m para movimiento total sin enredos.'
+          title: 'Seguridad incorporada',
+          description: 'Apagado automático. Bloqueo de placas. Control de temperatura constante. Diseñada para uso diario sin daño.'
+        }
+      ]
+    }
+  },
+
+  // Multi Care Brush - Cepillo multifuncional con EMS
+  'multi-care-brush': {
+    quickBenefits: [
+      { icon: 'Zap', text: '5 niveles EMS' },
+      { icon: 'Sparkles', text: 'Fototerapia integrada' },
+      { icon: 'Grip', text: '3 cabezales magnéticos' }
+    ],
+    dropdowns: {
+      howItWorks: {
+        title: '¿Cómo funciona?',
+        summary: 'Electroestimulación + fototerapia + aplicación de activos',
+        details: [
+          'EMS (5 niveles): electroestimulación que relaja músculos, oxigena tejidos y estimula circulación en cuero cabelludo.',
+          'Fototerapia LED: luz roja que penetra hasta los folículos pilosos, activando el crecimiento y fortaleciendo la raíz.',
+          'Aplicación directa de cosméticos: las cerdas aplican sérums/tratamientos directamente en cuero cabelludo con masaje.',
+          '3 cabezales magnéticos intercambiables: cuero cabelludo (tratamiento capilar), rostro (lifting), cuerpo (masaje profundo).'
+        ]
+      },
+      expectedResults: {
+        phases: [
+          {
+            timeframe: '1-2 semanas',
+            description: 'Cuero cabelludo más irrigado. Reducción de descamación. Absorción visible de tratamientos aplicados.'
+          },
+          {
+            timeframe: '4-6 semanas',
+            description: 'Cabello más fuerte desde la raíz. Menos caída al cepillar. Mayor volumen y densidad aparente.'
+          },
+          {
+            timeframe: '3 meses',
+            description: 'Folículos pilosos fortalecidos. Cabello nuevo más grueso. Reducción notable de calvicie o zonas débiles.'
+          }
+        ],
+        usageNote: 'Usa 3 veces por semana en cuero cabelludo con tu tratamiento anticaída. También funciona en rostro y cuerpo.'
+      },
+      howToUse: {
+        steps: [
+          'Selecciona el cabezal adecuado (cuero cabelludo/rostro/cuerpo)',
+          'Aplica tu sérum o tratamiento capilar en la zona',
+          'Enciende el dispositivo y selecciona nivel EMS (1-5)',
+          'Masajea en movimientos circulares durante 5-10 minutos',
+          'El dispositivo aplica el producto mientras estimula con EMS y luz',
+          'Usa 3 veces por semana para resultados óptimos'
+        ],
+        additionalNote: 'Empieza con nivel EMS bajo (1-2) y aumenta según tolerancia. Ideal con tratamientos anticaída o sérums capilares.'
+      },
+      whatMakesDifferent: [
+        {
+          title: '3 dispositivos en 1',
+          description: 'Cuero cabelludo, rostro y cuerpo. Cabezales magnéticos que cambias en 1 segundo. Inversión que multiplica funciones.'
+        },
+        {
+          title: 'EMS de 5 niveles ajustable',
+          description: 'No es vibración genérica. Electroestimulación real que relaja músculos y estimula circulación profunda.'
+        },
+        {
+          title: 'Fototerapia LED integrada',
+          description: 'Luz roja que penetra hasta folículos pilosos. Tecnología usada en clínicas de tricología profesional.'
+        },
+        {
+          title: 'Aplicación efectiva de productos',
+          description: 'Tus tratamientos capilares penetran de verdad. No se quedan en superficie. Multiplica la eficacia de tus cosméticos.'
+        }
+      ]
+    }
+  },
+
+  // Curly - Rizador automático inalámbrico
+  'curly': {
+    quickBenefits: [
+      { icon: 'Waves', text: 'Rizo automático' },
+      { icon: 'Battery', text: 'Inalámbrico 4800mAh' },
+      { icon: 'Thermometer', text: '4 niveles temperatura' }
+    ],
+    dropdowns: {
+      howItWorks: {
+        title: '¿Cómo funciona?',
+        summary: 'Sensor inteligente que riza automáticamente sin enredos',
+        details: [
+          'Función de rizo automático: inserta el mechón, presiona el botón, el sensor inteligente enrolla y mantiene temperatura exacta.',
+          '4 niveles de temperatura (150-200°C): ajusta según tu tipo de cabello. Fino 150-170°C, grueso 180-200°C.',
+          'Temporizador automático: señales sonoras indican cuándo el rizo está listo. Sin adivinar, sin quemar.',
+          'Batería 4800mAh + USB-C: rizos en cualquier lugar sin cables. Una carga = 30-40 rizos completos.'
+        ]
+      },
+      expectedResults: {
+        phases: [
+          {
+            timeframe: 'Primera aplicación',
+            description: 'Rizos definidos y uniformes en 15-20 minutos. Duran 24h+ con fijador ligero. Cero enredos.'
+          },
+          {
+            timeframe: '1 semana',
+            description: 'Dominas el control de dirección (horario/antihorario) para rizos naturales con volumen estratégico.'
+          },
+          {
+            timeframe: '1 mes',
+            description: 'Rizos profesionales en 10 minutos. Menos daño térmico por temperatura precisa. Cabello más sano.'
+          }
+        ],
+        usageNote: 'Usa 2-3 veces por semana. Alterna dirección de rizos para look natural. Fijador antes de rizar aumenta duración.'
+      },
+      howToUse: {
+        steps: [
+          'Carga el dispositivo (USB-C, 2h de carga completa)',
+          'Selecciona temperatura en la pantalla LCD según tu cabello',
+          'Toma un mechón de 2-3cm de ancho',
+          'Inserta el mechón en la cámara de rizado',
+          'Presiona el botón y selecciona dirección (horario/antihorario)',
+          'Espera la señal sonora (8-12 segundos) y suelta'
+        ],
+        additionalNote: 'Alterna la dirección de rizos para look natural. Batería visible en pantalla LCD. Ideal para retoques durante el día.'
+      },
+      whatMakesDifferent: [
+        {
+          title: 'Totalmente inalámbrico',
+          description: 'Batería 4800mAh real. Rizos en el coche, en el baño del trabajo, donde quieras. Carga con tu cargador de móvil (USB-C).'
+        },
+        {
+          title: 'Rizo automático sin enredos',
+          description: 'Sensor inteligente que detecta el mechón y lo enrolla perfectamente. Imposible enredarse, imposible quemarse.'
+        },
+        {
+          title: 'Control total con LCD',
+          description: 'Temperatura exacta. Nivel de batería. Dirección de rizo. Temporizador visual. Cero adivinanzas.'
+        },
+        {
+          title: 'Rizos que duran',
+          description: 'Temperatura constante sin picos que dañan. Rizos definidos que aguantan 24h+ incluso con humedad.'
         }
       ]
     }
@@ -665,7 +799,17 @@ export function detectProductCategory(product: any): string {
     return 'corporales';
   }
   
-  // Hair care - MUST be checked early to catch plancha/aeroglow products
+  // Hair care - Specific product detection
+  if (handle.includes('multi-care') || handle.includes('multicare') || handle.includes('multi_care') ||
+      title.toLowerCase().includes('multi care') || title.toLowerCase().includes('multi cuidado')) {
+    return 'multi-care-brush';
+  }
+  
+  if (handle.includes('curly') || title.toLowerCase().includes('curly') || 
+      title.toLowerCase().includes('rizador')) {
+    return 'curly';
+  }
+  
   if (handle.includes('aeroglow') || handle.includes('plancha') || handle.includes('pelo') ||
       handle.includes('capilar') || handle.includes('hair') || handle.includes('secador') ||
       title.includes('aeroglow') || title.includes('plancha') || title.includes('pelo') || 
