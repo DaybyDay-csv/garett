@@ -4,65 +4,66 @@ import { Zap, Copy, Check, Gift, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import patternImage from "@/assets/garett-pattern-2.png";
-
 export const CyberMondayBanner = () => {
   const [copied, setCopied] = useState(false);
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
   const discountCode = "CYBERMONDAY15";
-
   const copyCode = () => {
     navigator.clipboard.writeText(discountCode);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-
   useEffect(() => {
     // Cyber Monday 2025 - December 1st (Monday after Black Friday)
     const targetDate = new Date('2025-12-01T00:00:00');
-    
     const interval = setInterval(() => {
       const now = new Date();
       const difference = targetDate.getTime() - now.getTime();
-      
       if (difference > 0) {
         setTimeLeft({
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
+          hours: Math.floor(difference / (1000 * 60 * 60) % 24),
+          minutes: Math.floor(difference / 1000 / 60 % 60),
+          seconds: Math.floor(difference / 1000 % 60)
         });
       } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        });
       }
     }, 1000);
-
     return () => clearInterval(interval);
   }, []);
-
-  return (
-    <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-cm-start via-promo-cm-mid to-promo-cm-end overflow-hidden">
+  return <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-cm-start via-promo-cm-mid to-promo-cm-end overflow-hidden">
       {/* Pattern overlay */}
-      <div 
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `url(${patternImage})`,
-          backgroundSize: '400px',
-          backgroundRepeat: 'repeat',
-          filter: 'brightness(0) invert(1)'
-        }}
-      />
+      <div className="absolute inset-0 opacity-10" style={{
+      backgroundImage: `url(${patternImage})`,
+      backgroundSize: '400px',
+      backgroundRepeat: 'repeat',
+      filter: 'brightness(0) invert(1)'
+    }} />
       
       {/* Circuit pattern effect */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-0 w-full h-full" style={{
-          backgroundImage: 'linear-gradient(white 2px, transparent 2px), linear-gradient(90deg, white 2px, transparent 2px)',
-          backgroundSize: '50px 50px'
-        }} />
+        backgroundImage: 'linear-gradient(white 2px, transparent 2px), linear-gradient(90deg, white 2px, transparent 2px)',
+        backgroundSize: '50px 50px'
+      }} />
       </div>
 
       {/* Glowing orbs */}
       <div className="absolute top-20 right-20 w-64 h-64 rounded-full bg-promo-cm-mid/40 blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-promo-cm-end/40 blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-promo-cm-end/40 blur-3xl animate-pulse" style={{
+      animationDelay: '1s'
+    }} />
       
       <div className="container mx-auto px-6 md:px-8 min-h-full flex flex-col items-center justify-center text-center relative z-10 space-y-4 md:space-y-8 py-16 md:py-20 pb-20 md:pb-20">
         {/* Date Badge */}
@@ -99,19 +100,24 @@ export const CyberMondayBanner = () => {
             Comienza en
           </p>
           <div className="flex gap-2 md:gap-3 justify-center">
-            {[
-              { label: 'Días', value: timeLeft.days },
-              { label: 'Horas', value: timeLeft.hours },
-              { label: 'Min', value: timeLeft.minutes },
-              { label: 'Seg', value: timeLeft.seconds },
-            ].map((item, index) => (
-              <div key={index} className="flex flex-col">
+            {[{
+            label: 'Días',
+            value: timeLeft.days
+          }, {
+            label: 'Horas',
+            value: timeLeft.hours
+          }, {
+            label: 'Min',
+            value: timeLeft.minutes
+          }, {
+            label: 'Seg',
+            value: timeLeft.seconds
+          }].map((item, index) => <div key={index} className="flex flex-col">
                 <div className="bg-white text-promo-cm-start text-lg md:text-3xl font-bold rounded px-2 py-2 md:px-3 md:py-3 min-w-[45px] md:min-w-[65px]">
                   {String(item.value).padStart(2, '0')}
                 </div>
                 <p className="text-white/70 text-[10px] md:text-xs mt-1">{item.label}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
 
@@ -122,24 +128,13 @@ export const CyberMondayBanner = () => {
             <code className="flex-1 bg-white text-promo-cm-start text-lg md:text-2xl font-mono font-bold px-3 md:px-4 py-2 md:py-3 rounded whitespace-nowrap overflow-x-auto">
               {discountCode}
             </code>
-            <Button
-              size="icon"
-              variant="secondary"
-              onClick={copyCode}
-              className="h-12 w-12 flex-shrink-0"
-            >
-              {copied ? (
-                <Check className="w-5 h-5 text-green-600" />
-              ) : (
-                <Copy className="w-5 h-5" />
-              )}
+            <Button size="icon" variant="secondary" onClick={copyCode} className="h-12 w-12 flex-shrink-0">
+              {copied ? <Check className="w-5 h-5 text-green-600" /> : <Copy className="w-5 h-5" />}
             </Button>
           </div>
-          {copied && (
-            <p className="text-xs md:text-sm text-white animate-in fade-in">
+          {copied && <p className="text-xs md:text-sm text-white animate-in fade-in">
               ✓ Código copiado
-            </p>
-          )}
+            </p>}
         </div>
 
         {/* Benefits - Grid Layout */}
@@ -161,9 +156,7 @@ export const CyberMondayBanner = () => {
         {/* CTA */}
         <div className="pt-2">
           <Button asChild size="lg" variant="secondary" className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 shadow-2xl hover:scale-105 transition-transform w-full sm:w-auto max-w-xs">
-            <Link to="/productos">
-              Última oportunidad
-            </Link>
+            
           </Button>
 
           <p className="text-xs md:text-sm text-white/70 px-4 mt-3">
@@ -171,6 +164,5 @@ export const CyberMondayBanner = () => {
           </p>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
