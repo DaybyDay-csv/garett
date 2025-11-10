@@ -46,8 +46,8 @@ export const BlackFridayBanner = () => {
   }, []);
 
   const tiers = [
-    { name: "SUPER EARLY", discount: "50%", uses: 150, icon: Flame, color: "from-promo-bf-start to-promo-bf-mid" },
-    { name: "EARLY BIRD", discount: "35%", uses: 450, icon: Zap, color: "from-promo-bf-mid to-promo-bf-start" },
+    { name: "SUPER EARLY", discount: "50%", uses: 10, icon: Flame, color: "from-promo-bf-start to-promo-bf-mid" },
+    { name: "EARLY BIRD", discount: "35%", uses: 25, icon: Zap, color: "from-promo-bf-mid to-promo-bf-start" },
     { name: "BLACK FRIDAY", discount: "25%", uses: "∞", icon: Gift, color: "from-promo-bf-start to-promo-bf-end" },
   ];
 
