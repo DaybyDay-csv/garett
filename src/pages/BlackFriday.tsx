@@ -403,7 +403,7 @@ const BlackFriday = () => {
       {/* Discount Codes Section */}
       <section className="container py-12 -mt-8">
         <div className="bg-background rounded-2xl shadow-xl p-8 border border-border">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <div>
               <h2 className="text-3xl font-bold mb-2">Calendario de Promociones</h2>
               <p className="text-muted-foreground">
@@ -418,9 +418,63 @@ const BlackFriday = () => {
             )}
           </div>
 
-          {/* Timeline of stages */}
-          <div className="space-y-6">
-            {promotionalStages.map((stage, index) => {
+          {/* Progress Bar */}
+          <div className="mb-10">
+            <div className="relative">
+              {/* Progress bar track */}
+              <div className="h-2 bg-muted rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-blue-500 via-slate-500 via-red-500 to-purple-500 transition-all duration-1000 relative"
+                  style={{
+                    width: (() => {
+                      const now = new Date();
+                      const start = promotionalStages[0].startDate;
+                      const end = promotionalStages[promotionalStages.length - 1].endDate;
+                      const total = end.getTime() - start.getTime();
+                      const elapsed = now.getTime() - start.getTime();
+                      const progress = Math.min(Math.max((elapsed / total) * 100, 0), 100);
+                      return `${progress}%`;
+                    })()
+                  }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+                </div>
+              </div>
+              
+              {/* Stage markers */}
+              <div className="flex justify-between mt-3">
+                {promotionalStages.map((stage, index) => {
+                  const Icon = stage.icon;
+                  const status = getStageStatus(stage);
+                  const isActive = status === 'active';
+                  const isEnded = status === 'ended';
+
+                  return (
+                    <div key={stage.name} className="flex flex-col items-center" style={{ width: `${100 / promotionalStages.length}%` }}>
+                      <div 
+                        className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 mb-2 ${
+                          isActive 
+                            ? `bg-gradient-to-br ${stage.color} shadow-lg scale-110 animate-pulse` 
+                            : isEnded
+                            ? 'bg-primary/80'
+                            : 'bg-muted border-2 border-border'
+                        }`}
+                      >
+                        <Icon className={`w-5 h-5 ${isActive || isEnded ? 'text-white' : 'text-muted-foreground'}`} />
+                      </div>
+                      <span className={`text-xs font-medium text-center ${isActive ? 'text-foreground font-bold' : 'text-muted-foreground'}`}>
+                        {stage.name}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Stage Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {promotionalStages.map((stage) => {
               const Icon = stage.icon;
               const status = getStageStatus(stage);
               const isActive = status === 'active';
@@ -432,72 +486,72 @@ const BlackFriday = () => {
                   key={stage.name}
                   className={`relative overflow-hidden rounded-xl border-2 transition-all duration-300 ${
                     isActive 
-                      ? `border-${stage.color.split('-')[1]}-500 shadow-2xl scale-105` 
+                      ? 'border-primary shadow-2xl scale-[1.02]' 
                       : isEnded
-                      ? 'border-muted opacity-60'
-                      : 'border-border hover:border-primary/50'
+                      ? 'border-border/50 opacity-75'
+                      : 'border-border hover:border-primary/30 hover:shadow-lg'
                   }`}
                 >
-                  {/* Stage status indicator */}
-                  <div className="absolute top-3 right-3 z-10">
+                  {/* Background gradient */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${stage.color} ${isActive ? 'opacity-10' : 'opacity-5'}`} />
+                  
+                  {/* Status badge */}
+                  <div className="absolute top-4 right-4 z-10">
                     {isActive && (
-                      <Badge className={`bg-gradient-to-r ${stage.color} text-white border-0 animate-pulse`}>
+                      <Badge className={`bg-gradient-to-r ${stage.color} text-white border-0 animate-pulse shadow-lg`}>
                         <Clock className="w-3 h-3 mr-1" />
-                        ACTIVO AHORA
+                        EN CURSO
                       </Badge>
                     )}
                     {isUpcoming && (
-                      <Badge variant="secondary">
+                      <Badge variant="secondary" className="shadow-sm">
                         PRÓXIMAMENTE
                       </Badge>
                     )}
                     {isEnded && (
-                      <Badge variant="outline" className="opacity-50">
+                      <Badge variant="outline" className="opacity-60">
                         FINALIZADO
                       </Badge>
                     )}
                   </div>
 
-                  {/* Animated gradient background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${stage.color} ${isActive ? 'opacity-10' : 'opacity-5'} transition-opacity`} />
-                  
                   <div className="relative p-6">
-                    {/* Stage header */}
+                    {/* Header */}
                     <div className="flex items-start gap-4 mb-4">
-                      {/* Icon */}
-                      <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${stage.color} flex items-center justify-center flex-shrink-0 ${isActive ? 'animate-pulse' : ''}`}>
+                      <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${stage.color} flex items-center justify-center flex-shrink-0 shadow-lg ${isActive ? 'animate-pulse' : ''}`}>
                         <Icon className="w-7 h-7 text-white" />
                       </div>
-
-                      {/* Stage info */}
+                      
                       <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-2xl font-bold">{stage.name}</h3>
-                          <Badge variant="outline" className="text-xs">
-                            {stage.dates}
-                          </Badge>
-                        </div>
-                        <div className={`text-3xl font-bold bg-gradient-to-br ${stage.color} bg-clip-text text-transparent mb-2`}>
-                          {stage.discount}
-                        </div>
-                        <p className="text-sm text-muted-foreground">
-                          {stage.description}
-                        </p>
+                        <h3 className="text-xl font-bold mb-1">{stage.name}</h3>
+                        <Badge variant="outline" className="text-xs font-normal">
+                          {stage.dates}
+                        </Badge>
                       </div>
                     </div>
 
-                    {/* Stage details */}
-                    <div className="bg-muted/50 rounded-lg p-4 mb-4">
-                      <p className="text-sm font-medium">{stage.details}</p>
+                    {/* Discount */}
+                    <div className={`text-3xl font-bold bg-gradient-to-br ${stage.color} bg-clip-text text-transparent mb-3`}>
+                      {stage.discount}
                     </div>
 
-                    {/* Codes section */}
+                    {/* Description */}
+                    <div className="bg-muted/30 rounded-lg p-3 mb-4">
+                      <p className="text-sm font-medium text-muted-foreground">
+                        {stage.details}
+                      </p>
+                    </div>
+
+                    {/* Codes */}
                     <div className="space-y-3">
                       {/* Single code */}
                       {stage.code && !('codes' in stage) && (
-                        <div className="flex items-center gap-3">
-                          <div className="flex-1 bg-background rounded-lg px-4 py-3 font-mono text-sm font-bold border border-border flex items-center justify-between">
-                            <span>Código: {stage.code}</span>
+                        <div className="bg-background/50 rounded-lg px-4 py-3 border border-border">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <p className="text-xs text-muted-foreground mb-1">Código de descuento:</p>
+                              <span className="font-mono font-bold text-lg">{stage.code}</span>
+                            </div>
                             <Button
                               size="sm"
                               variant="ghost"
@@ -516,16 +570,17 @@ const BlackFriday = () => {
 
                       {/* Multiple codes (Black Friday) */}
                       {'codes' in stage && stage.codes && (
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div className="space-y-2">
+                          <p className="text-xs font-medium text-muted-foreground">Códigos por nivel:</p>
                           {stage.codes.map((codeObj: any) => (
                             <div
                               key={codeObj.code}
-                              className={`border-2 rounded-lg p-3 ${
+                              className={`bg-background/50 border-2 rounded-lg p-3 ${
                                 codeObj.urgency === 'high'
-                                  ? 'border-red-500/50'
+                                  ? 'border-red-500/30'
                                   : codeObj.urgency === 'medium'
-                                  ? 'border-orange-500/50'
-                                  : 'border-primary/50'
+                                  ? 'border-orange-500/30'
+                                  : 'border-primary/30'
                               }`}
                             >
                               <div className="flex items-center justify-between mb-2">
@@ -538,13 +593,13 @@ const BlackFriday = () => {
                                 <span className="text-xs text-muted-foreground">{codeObj.limit}</span>
                               </div>
                               <div className="flex items-center gap-2">
-                                <div className="flex-1 bg-muted/50 rounded px-2 py-1 font-mono text-xs font-bold text-center">
+                                <span className="flex-1 font-mono text-sm font-bold">
                                   {codeObj.code}
-                                </div>
+                                </span>
                                 <Button
                                   size="icon"
                                   variant="ghost"
-                                  className="h-7 w-7"
+                                  className="h-8 w-8"
                                   onClick={() => copyCode(codeObj.code)}
                                 >
                                   {copiedCode === codeObj.code ? (
@@ -561,25 +616,28 @@ const BlackFriday = () => {
 
                       {/* GWP code */}
                       {stage.gwp && 'gwpCode' in stage && stage.gwpCode && (
-                        <div className="flex items-center gap-3 pt-2 border-t">
-                          <Gift className="w-5 h-5 text-pink-500" />
-                          <div className="flex-1">
-                            <p className="text-xs text-muted-foreground mb-1">Regalo desde €70:</p>
-                            <div className="flex items-center gap-2">
-                              <div className="bg-pink-500/10 rounded px-3 py-1 font-mono text-sm font-bold text-pink-700 dark:text-pink-300">
-                                {stage.gwpCode}
+                        <div className="bg-pink-500/10 rounded-lg p-3 border border-pink-500/20">
+                          <div className="flex items-start gap-2">
+                            <Gift className="w-5 h-5 text-pink-600 dark:text-pink-400 flex-shrink-0 mt-0.5" />
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-muted-foreground mb-2">Regalo banda de pelo desde €70:</p>
+                              <div className="flex items-center gap-2">
+                                <span className="font-mono text-sm font-bold text-pink-700 dark:text-pink-300">
+                                  {stage.gwpCode}
+                                </span>
+                                <Button
+                                  size="icon"
+                                  variant="ghost"
+                                  className="h-8 w-8"
+                                  onClick={() => copyCode(stage.gwpCode!)}
+                                >
+                                  {copiedCode === stage.gwpCode ? (
+                                    <Check className="w-3 h-3 text-green-500" />
+                                  ) : (
+                                    <Copy className="w-3 h-3" />
+                                  )}
+                                </Button>
                               </div>
-                              <Button
-                                size="sm"
-                                variant="ghost"
-                                onClick={() => copyCode(stage.gwpCode!)}
-                              >
-                                {copiedCode === stage.gwpCode ? (
-                                  <Check className="w-4 h-4 text-green-500" />
-                                ) : (
-                                  <Copy className="w-4 h-4" />
-                                )}
-                              </Button>
                             </div>
                           </div>
                         </div>
@@ -587,20 +645,13 @@ const BlackFriday = () => {
 
                       {/* No code needed */}
                       {!stage.code && !('codes' in stage) && (
-                        <div className="text-center py-2">
-                          <Badge variant="secondary">
-                            ✓ Descuento aplicado automáticamente
+                        <div className="bg-green-500/10 rounded-lg p-3 border border-green-500/20 text-center">
+                          <Badge variant="secondary" className="bg-green-500/20 text-green-700 dark:text-green-300 border-0">
+                            ✓ Descuento automático
                           </Badge>
                         </div>
                       )}
                     </div>
-
-                    {/* Stage progress connector */}
-                    {index < promotionalStages.length - 1 && (
-                      <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 z-10">
-                        <div className={`w-1 h-6 ${isEnded ? 'bg-primary' : 'bg-muted'}`} />
-                      </div>
-                    )}
                   </div>
                 </div>
               );
@@ -608,12 +659,12 @@ const BlackFriday = () => {
           </div>
 
           {/* CTA */}
-          <div className="mt-8 p-6 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl border border-primary/20 text-center">
-            <p className="text-sm font-medium mb-2">
-              💡 <span className="font-bold">Importante:</span> Cada etapa se desbloquea automáticamente en su fecha. ¡Guarda esta página!
+          <div className="mt-8 p-6 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl border border-primary/20">
+            <p className="text-sm font-medium text-center mb-2">
+              💡 <span className="font-bold">Importante:</span> Cada etapa se desbloquea automáticamente en su fecha
             </p>
-            <p className="text-xs text-muted-foreground">
-              Los descuentos Warm-up y White Week se aplican directamente en los productos. Para Black Friday y Cyber Monday, introduce el código en el checkout.
+            <p className="text-xs text-muted-foreground text-center">
+              Los descuentos Warm-up y White Week se aplican directamente en productos. Para Black Friday y Cyber Monday, usa los códigos en checkout.
             </p>
           </div>
         </div>
