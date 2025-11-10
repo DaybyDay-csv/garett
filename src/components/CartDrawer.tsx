@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -17,13 +17,14 @@ import { toast } from "sonner";
 import gwpHeadband from "@/assets/gwp-headband.jpg";
 
 export const CartDrawer = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const { 
     items, 
-    isLoading, 
+    isLoading,
+    isOpen,
     updateQuantity, 
     removeItem, 
-    createCheckout 
+    createCheckout,
+    setIsOpen
   } = useCartStore();
   
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
