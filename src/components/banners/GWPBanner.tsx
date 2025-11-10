@@ -27,7 +27,7 @@ export const GWPBanner = () => {
         }}
       />
       
-      <div className="container mx-auto px-4 h-full flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative z-10 py-8">
+      <div className="container mx-auto px-6 md:px-8 h-full flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 relative z-10 py-12 md:py-16">
         {/* Gift Image */}
         <div className="flex-1 flex items-center justify-center order-2 md:order-1">
           <div className="relative">
@@ -35,10 +35,10 @@ export const GWPBanner = () => {
             <img 
               src={gwpImage} 
               alt={gwpConfig.giftName}
-              className="relative w-48 h-48 md:w-80 md:h-80 lg:w-96 lg:h-96 object-cover rounded-2xl shadow-2xl"
+              className="relative w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 object-cover rounded-2xl shadow-2xl"
             />
-            <div className="absolute -top-3 -right-3 md:-top-4 md:-right-4 animate-bounce">
-              <Badge className="bg-accent text-accent-foreground text-sm md:text-lg px-3 py-1 md:px-4 md:py-2">
+            <div className="absolute -top-2 -right-2 md:-top-3 md:-right-3 animate-bounce">
+              <Badge className="bg-accent text-accent-foreground text-sm md:text-lg px-3 py-1.5 md:px-4 md:py-2">
                 <Gift className="w-4 h-4 md:w-5 md:h-5 mr-2" />
                 GRATIS
               </Badge>
@@ -47,38 +47,38 @@ export const GWPBanner = () => {
         </div>
 
         {/* Content */}
-        <div className="flex-1 text-center md:text-left space-y-4 md:space-y-6 order-1 md:order-2">
+        <div className="flex-1 text-center md:text-left space-y-4 md:space-y-6 order-1 md:order-2 max-w-2xl">
           <Badge variant="outline" className="border-primary text-primary text-xs md:text-sm">
             <Gift className="w-3 h-3 mr-1" />
             REGALO GRATIS
           </Badge>
           
-          <div className="space-y-2 md:space-y-3">
+          <div className="space-y-2 md:space-y-4">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               Regalo<br />
               <span className="text-primary">Especial</span> 🎁
             </h1>
-            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground max-w-xl mx-auto md:mx-0 px-4 md:px-0">
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground leading-relaxed">
               Banda de pelo premium de regalo en compras desde{" "}
               <span className="font-bold text-foreground">€{gwpConfig.threshold}</span>
             </p>
           </div>
 
           {/* Value Indicator */}
-          <div className="bg-primary-light p-3 md:p-4 rounded-lg border border-primary/20 inline-block">
+          <div className="bg-primary-light p-4 md:p-5 rounded-lg border border-primary/20 inline-block">
             <p className="text-xs md:text-sm text-muted-foreground mb-1">Valor del regalo</p>
-            <p className="text-xl md:text-2xl font-bold text-primary">€12.99</p>
+            <p className="text-2xl md:text-3xl font-bold text-primary">€12.99</p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center md:justify-start">
-            <Button asChild size="lg" className="text-sm md:text-base">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+            <Button asChild size="lg" className="text-sm md:text-base h-12 px-8 w-full sm:w-auto">
               <Link to="/productos">
                 Comprar ahora
               </Link>
             </Button>
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline" size="lg" className="text-sm md:text-base">
+                <Button variant="outline" size="lg" className="text-sm md:text-base h-12 px-8 w-full sm:w-auto">
                   <Info className="w-4 h-4 mr-2" />
                   Ver condiciones
                 </Button>

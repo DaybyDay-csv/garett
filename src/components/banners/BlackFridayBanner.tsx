@@ -32,10 +32,10 @@ export const BlackFridayBanner = () => {
       <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-promo-bf-mid/30 blur-3xl animate-pulse" />
       <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-promo-bf-start/30 blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
       
-      <div className="container mx-auto px-4 h-full flex flex-col items-center justify-center text-center relative z-10 space-y-4 md:space-y-8 py-8">
+      <div className="container mx-auto px-6 md:px-8 h-full flex flex-col items-center justify-center text-center relative z-10 space-y-5 md:space-y-8 py-12 md:py-16">
         {/* Live Badge */}
         {isActive && (
-          <Badge className="bg-white text-promo-bf-start animate-pulse text-xs md:text-sm px-3 py-1 md:px-4 md:py-2">
+          <Badge className="bg-white text-promo-bf-start animate-pulse text-xs md:text-sm px-4 py-1.5 md:px-5 md:py-2">
             <span className="relative flex h-2 w-2 mr-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-promo-bf-start opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-promo-bf-start"></span>
@@ -45,38 +45,38 @@ export const BlackFridayBanner = () => {
         )}
         
         {/* Date Badge */}
-        <Badge variant="outline" className="border-white text-white text-xs md:text-sm px-3 py-1 md:px-4 md:py-2">
+        <Badge variant="outline" className="border-white text-white text-xs md:text-sm px-4 py-1.5 md:px-5 md:py-2">
           28 - 30 NOVIEMBRE
         </Badge>
         
         {/* Main Heading */}
-        <div className="space-y-2 md:space-y-4 max-w-4xl">
-          <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-white drop-shadow-2xl">
+        <div className="space-y-3 md:space-y-4 max-w-4xl">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white drop-shadow-2xl leading-tight">
             Black Friday
-            <span className="block text-xl md:text-3xl lg:text-5xl mt-1 md:mt-2">2025</span>
+            <span className="block text-2xl md:text-4xl lg:text-5xl mt-2 md:mt-3">2025</span>
           </h1>
-          <p className="text-xl md:text-2xl lg:text-4xl font-bold text-white drop-shadow-lg">
+          <p className="text-2xl md:text-3xl lg:text-5xl font-bold text-white drop-shadow-lg">
             Hasta <span className="text-4xl md:text-5xl lg:text-6xl">50%</span> OFF
           </p>
-          <p className="text-sm md:text-lg lg:text-xl text-white/90">
+          <p className="text-sm md:text-lg lg:text-xl text-white/90 leading-relaxed">
             + Regalo gratis desde €70
           </p>
         </div>
 
-        {/* Tiered Offers - Mobile Optimized */}
-        <div className="grid grid-cols-3 gap-2 md:gap-4 w-full max-w-4xl px-2">
+        {/* Tiered Offers - Improved Mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 w-full max-w-4xl px-4">
           {tiers.map((tier, index) => {
             const Icon = tier.icon;
             return (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-3 md:p-6 text-white space-y-1 md:space-y-3 hover:bg-white/20 transition-all hover:scale-105"
+                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 md:p-6 text-white space-y-2 md:space-y-3 hover:bg-white/20 transition-all hover:scale-105"
               >
-                <Icon className="w-5 h-5 md:w-8 md:h-8 mx-auto" />
+                <Icon className="w-6 h-6 md:w-8 md:h-8 mx-auto" />
                 <div>
-                  <p className="text-[10px] md:text-sm font-semibold uppercase tracking-wider">{tier.name}</p>
-                  <p className="text-2xl md:text-4xl font-bold my-1 md:my-2">-{tier.discount}</p>
-                  <p className="text-[10px] md:text-xs text-white/70">
+                  <p className="text-xs md:text-sm font-semibold uppercase tracking-wider leading-tight">{tier.name}</p>
+                  <p className="text-3xl md:text-4xl font-bold my-2">-{tier.discount}</p>
+                  <p className="text-xs md:text-sm text-white/70">
                     {typeof tier.uses === 'number' ? `${tier.uses} usos` : 'Ilimitado'}
                   </p>
                 </div>
@@ -86,10 +86,10 @@ export const BlackFridayBanner = () => {
         </div>
 
         {/* CTA */}
-        <div className="space-y-2 md:space-y-4">
-          <Button asChild size="lg" variant="secondary" className="text-base md:text-lg px-6 md:px-8 shadow-2xl hover:scale-105 transition-transform">
+        <div className="space-y-3 md:space-y-4 pb-4 md:pb-0">
+          <Button asChild size="lg" variant="secondary" className="text-base md:text-lg px-8 md:px-10 h-12 md:h-14 shadow-2xl hover:scale-105 transition-transform w-full sm:w-auto max-w-xs">
             <Link to="/black-friday">
-              Ver ofertas Black Friday
+              Ver ofertas
             </Link>
           </Button>
           

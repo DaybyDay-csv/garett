@@ -76,7 +76,7 @@ export const PromotionalBanners = () => {
           <Button
             variant="secondary"
             size="icon"
-            className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 rounded-full opacity-70 md:opacity-0 md:group-hover:opacity-100 hover:opacity-100 transition-opacity shadow-lg z-10 hover:scale-110"
+            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 rounded-full opacity-70 md:opacity-0 md:group-hover:opacity-100 hover:opacity-100 transition-opacity shadow-lg backdrop-blur-sm z-20 hover:scale-110 h-10 w-10 md:h-12 md:w-12"
             onClick={goToPrevious}
             disabled={isTransitioning}
           >
@@ -85,7 +85,7 @@ export const PromotionalBanners = () => {
           <Button
             variant="secondary"
             size="icon"
-            className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 rounded-full opacity-70 md:opacity-0 md:group-hover:opacity-100 hover:opacity-100 transition-opacity shadow-lg z-10 hover:scale-110"
+            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 rounded-full opacity-70 md:opacity-0 md:group-hover:opacity-100 hover:opacity-100 transition-opacity shadow-lg backdrop-blur-sm z-20 hover:scale-110 h-10 w-10 md:h-12 md:w-12"
             onClick={goToNext}
             disabled={isTransitioning}
           >
@@ -93,7 +93,7 @@ export const PromotionalBanners = () => {
           </Button>
 
           {/* Dots Navigation - Improved mobile visibility */}
-          <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2 z-10 bg-background/50 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full">
+          <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2 z-20 bg-background/50 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full">
             {activeBanners.map((_, index) => (
               <button
                 key={index}
@@ -116,7 +116,7 @@ export const PromotionalBanners = () => {
           </div>
 
           {/* Banner Counter - Smaller on mobile */}
-          <div className="absolute top-3 right-3 md:top-4 md:right-4 bg-background/80 backdrop-blur-sm px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-medium z-10">
+          <div className="absolute top-4 right-4 md:top-6 md:right-6 bg-background/80 backdrop-blur-sm px-3 py-1.5 md:px-3 md:py-2 rounded-full text-xs md:text-sm font-medium z-20">
             {currentIndex + 1} / {activeBanners.length}
           </div>
         </>
