@@ -7,11 +7,12 @@ import { Progress } from "@/components/ui/progress";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
-import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, ZoomIn, Maximize2 } from "lucide-react";
+import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, ZoomIn, Maximize2, ChevronDown, Clock, Award, Sparkle } from "lucide-react";
 import { calculatePromotionalPrice, formatPrice, getCurrentPromotionalStage } from "@/lib/promotions";
 import gwpHeadband from "@/assets/gwp-headband.jpg";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const ProductDetail = () => {
   const { handle } = useParams();
@@ -193,7 +194,7 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          {/* Product Info */}
+            {/* Product Info */}
           <div className="space-y-6">
             <div>
               <div className="flex gap-2 mb-3 flex-wrap">
@@ -206,14 +207,29 @@ const ProductDetail = () => {
                 )}
                 {isNew && <Badge>Nuevo</Badge>}
                 {isBestseller && <Badge variant="secondary">Bestseller</Badge>}
-                <Badge variant="outline">Garantía 3 años</Badge>
+                <Badge variant="outline" className="gap-1">
+                  <Shield className="w-3 h-3" />
+                  Garantía 3 años
+                </Badge>
               </div>
               
               <h1 className="text-3xl md:text-4xl font-bold mb-4">{node.title}</h1>
               
-              {node.description && (
-                <p className="text-muted-foreground text-lg">{node.description}</p>
-              )}
+              {/* Quick Benefits - Above the fold */}
+              <div className="flex flex-wrap gap-3 mb-4">
+                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <Clock className="w-4 h-4 text-primary" />
+                  <span>15 min/día</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Resultados en 8-12 semanas</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <Award className="w-4 h-4 text-primary" />
+                  <span>Tecnología profesional</span>
+                </div>
+              </div>
             </div>
 
             {/* Price */}
@@ -358,9 +374,140 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {/* Disclaimer */}
-            <div className="bg-muted/50 p-4 rounded-lg text-sm text-muted-foreground">
-              <p>* Los resultados pueden variar según cada persona. Los dispositivos Garett están certificados CE y cuentan con garantía de 3 años.</p>
+            {/* Product Details Sections - User Focused */}
+            <div className="space-y-3 pt-6 border-t">
+              <h3 className="font-semibold text-lg mb-4">Información del producto</h3>
+              
+              {/* Why It Works */}
+              <Collapsible className="border rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-muted/50 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <Sparkle className="w-5 h-5 text-primary" />
+                    <span className="font-medium text-left">¿Por qué funciona?</span>
+                  </div>
+                  <ChevronDown className="w-5 h-5 text-muted-foreground transition-transform" />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="px-4 pb-4 text-sm text-muted-foreground space-y-2">
+                  <p className="font-medium text-foreground">Tecnología profesional adaptada para casa</p>
+                  <p>Combina radiofrecuencia y EMS (electroestimulación muscular) para trabajar en dos niveles: estimula la producción natural de colágeno en las capas profundas y tonifica los músculos faciales.</p>
+                  <p>No es magia, es ciencia aplicada de forma segura y efectiva.</p>
+                </CollapsibleContent>
+              </Collapsible>
+
+              {/* Expected Results */}
+              <Collapsible className="border rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-muted/50 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <Clock className="w-5 h-5 text-primary" />
+                    <span className="font-medium text-left">Resultados esperados</span>
+                  </div>
+                  <ChevronDown className="w-5 h-5 text-muted-foreground transition-transform" />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="px-4 pb-4 text-sm text-muted-foreground space-y-2">
+                  <div className="space-y-3">
+                    <div>
+                      <p className="font-medium text-foreground">2-4 semanas</p>
+                      <p>Piel más hidratada y luminosa. Textura mejorada.</p>
+                    </div>
+                    <div>
+                      <p className="font-medium text-foreground">8-12 semanas</p>
+                      <p>Mejora visible en firmeza del óvalo facial. Líneas de expresión atenuadas.</p>
+                    </div>
+                    <div>
+                      <p className="font-medium text-foreground">3-6 meses</p>
+                      <p>Resultados óptimos. Piel tonificada con efecto lifting natural.</p>
+                    </div>
+                  </div>
+                  <p className="italic pt-2">Úsalo 15 minutos al día, 3-5 veces por semana. Tan fácil como ver tu serie favorita.</p>
+                </CollapsibleContent>
+              </Collapsible>
+
+              {/* How to Use */}
+              <Collapsible className="border rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-muted/50 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-primary" />
+                    <span className="font-medium text-left">Cómo usar (muy fácil)</span>
+                  </div>
+                  <ChevronDown className="w-5 h-5 text-muted-foreground transition-transform" />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="px-4 pb-4 text-sm text-muted-foreground">
+                  <ol className="space-y-2 list-decimal list-inside">
+                    <li><span className="font-medium text-foreground">Limpia tu rostro</span> - Como siempre haces</li>
+                    <li><span className="font-medium text-foreground">Aplica gel conductor</span> - Incluido con el dispositivo</li>
+                    <li><span className="font-medium text-foreground">Desliza el dispositivo</span> - Movimientos suaves hacia arriba</li>
+                    <li><span className="font-medium text-foreground">15 minutos</span> - Y listo</li>
+                  </ol>
+                  <p className="mt-3 font-medium text-foreground">Incluye manual detallado en español con rutinas específicas por zonas.</p>
+                </CollapsibleContent>
+              </Collapsible>
+
+              {/* What Makes It Different */}
+              <Collapsible className="border rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-muted/50 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <Award className="w-5 h-5 text-primary" />
+                    <span className="font-medium text-left">¿Qué la diferencia?</span>
+                  </div>
+                  <ChevronDown className="w-5 h-5 text-muted-foreground transition-transform" />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="px-4 pb-4 text-sm text-muted-foreground space-y-3">
+                  <div>
+                    <p className="font-medium text-foreground">No es otro dispositivo más</p>
+                    <p>Certificación CE, respaldado por El Corte Inglés y con 3 años de garantía (no los típicos 2).</p>
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground">Tecnología dual profesional</p>
+                    <p>Mientras otros solo hacen masajes o solo aplican calor, Garett combina radiofrecuencia + EMS para resultados reales.</p>
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground">Inversión inteligente</p>
+                    <p>Un tratamiento profesional cuesta 80-150€ por sesión. Con este dispositivo, es tuyo para siempre.</p>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+
+              {/* Safety & Guarantee */}
+              <Collapsible className="border rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-muted/50 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <Shield className="w-5 h-5 text-primary" />
+                    <span className="font-medium text-left">Seguridad y garantía</span>
+                  </div>
+                  <ChevronDown className="w-5 h-5 text-muted-foreground transition-transform" />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="px-4 pb-4 text-sm text-muted-foreground space-y-2">
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="font-medium text-foreground">Certificado CE</p>
+                        <p>Cumple con todos los estándares europeos de seguridad</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="font-medium text-foreground">3 años de garantía</p>
+                        <p>El doble del estándar del mercado</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="font-medium text-foreground">30 días de devolución</p>
+                        <p>Si no estás satisfecha, te devolvemos el dinero</p>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="pt-2 italic">Respaldado por El Corte Inglés. No es una tienda online cualquiera.</p>
+                </CollapsibleContent>
+              </Collapsible>
+            </div>
+
+            {/* Trust Footer */}
+            <div className="bg-muted/30 p-4 rounded-lg text-xs text-muted-foreground border">
+              <p>Los resultados pueden variar. Úsalo con constancia para mejores resultados. Certificado CE. Garantía 3 años.</p>
             </div>
           </div>
         </div>
