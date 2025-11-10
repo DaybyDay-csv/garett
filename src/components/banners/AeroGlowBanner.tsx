@@ -240,10 +240,10 @@ export const AeroGlowBanner = () => {
           </div>
 
           {/* Final CTA */}
-          <div className="text-center mt-8 md:mt-12">
+          <div className="text-center mt-8 md:mt-12 relative z-20">
             <Link 
               to="/producto/253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow"
-              className="inline-flex items-center justify-center group text-base md:text-lg h-14 md:h-16 px-12 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-2xl hover:shadow-3xl transition-all text-white rounded-md font-medium cursor-pointer"
+              className="inline-flex items-center justify-center group text-base md:text-lg h-14 md:h-16 px-12 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-2xl hover:shadow-3xl transition-all text-white rounded-md font-medium cursor-pointer relative z-20"
             >
               Consigue tu AeroGlow Ahora
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" />
