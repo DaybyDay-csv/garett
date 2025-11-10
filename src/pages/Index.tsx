@@ -35,52 +35,84 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Hero Section - Black Friday */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary-glow to-accent py-20 md:py-32">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
-        
-        <div className="container relative">
-          <div className="text-center text-white">
-            <Badge className="mb-4 bg-white/20 text-white border-white/30 backdrop-blur-sm">
-              Black Friday 2025
-            </Badge>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 drop-shadow-lg">
-              Belleza innovadora<br />al mejor precio
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-2xl mx-auto">
-              Dispositivos de última tecnología con hasta 20% de descuento
-            </p>
-            
-            {/* BF Timer Placeholder */}
-            <div className="flex items-center justify-center gap-4 mb-8 flex-wrap">
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                <Timer className="w-6 h-6 mb-1" />
-                <div className="text-sm">Quedan pocas unidades</div>
+      {/* Top Bar */}
+      <div className="bg-primary text-primary-foreground py-2 text-center text-sm">
+        <p>Envío gratuito a partir de 60€ • Garantía extendida 3 años • Soporte técnico en español</p>
+      </div>
+
+      {/* Hero Section - Clean & Professional */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[hsl(210,25%,92%)] to-[hsl(200,20%,95%)] py-16 md:py-24">
+        <div className="container">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="space-y-6">
+              <Badge className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20">
+                Black Friday 2025
+              </Badge>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
+                Tecnología de belleza profesional
+              </h1>
+              <p className="text-xl text-muted-foreground max-w-lg">
+                Dispositivos avanzados con hasta <span className="font-bold text-primary">20% de descuento</span>. 
+                Resultados visibles en 8-12 semanas.
+              </p>
+              
+              {/* Key Features */}
+              <div className="flex flex-wrap gap-4 pt-4">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Timer className="w-4 h-4 text-primary" />
+                  </div>
+                  <span>Envío 24-48h</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Zap className="w-4 h-4 text-primary" />
+                  </div>
+                  <span>Garantía 3 años</span>
+                </div>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                <Zap className="w-6 h-6 mb-1" />
-                <div className="text-sm">Envío en 24-48h</div>
+              
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Button asChild size="lg" className="bg-primary hover:bg-primary-glow text-white shadow-lg">
+                  <Link to="/black-friday">
+                    <ShoppingBag className="mr-2 h-5 w-5" />
+                    Ver Black Friday
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/5">
+                  <Link to="/productos">
+                    Ver productos
+                  </Link>
+                </Button>
               </div>
             </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 shadow-xl">
-                <Link to="/black-friday">
-                  <ShoppingBag className="mr-2 h-5 w-5" />
-                  Ver ofertas Black Friday
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                <Link to="/productos">
-                  Ver todos los productos
-                </Link>
-              </Button>
+
+            {/* Right Content - Featured Product */}
+            <div className="relative">
+              <div className="aspect-square bg-white rounded-2xl shadow-xl overflow-hidden">
+                {bestSellers.length > 0 && bestSellers[0]?.node.images.edges[0] ? (
+                  <img 
+                    src={bestSellers[0].node.images.edges[0].node.url} 
+                    alt={bestSellers[0].node.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-muted">
+                    <Sparkles className="w-24 h-24 text-muted-foreground" />
+                  </div>
+                )}
+              </div>
+              {/* Floating badge */}
+              <div className="absolute -top-4 -right-4 bg-primary text-white px-6 py-3 rounded-full shadow-lg font-bold">
+                -20%
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <div className="container py-12">
+      <div className="container py-16">
         {/* Trust Badges */}
         <TrustBadges />
       </div>
@@ -88,19 +120,18 @@ const Index = () => {
       {/* Testimonials Section */}
       <Testimonials />
 
-      <div className="container py-12">
+      <div className="container py-16">
         {/* New Arrivals */}
         {newProducts.length > 0 && (
-          <section className="py-12">
-            <div className="flex items-center justify-between mb-8">
+          <section className="py-8">
+            <div className="flex items-center justify-between mb-10">
               <div>
-                <h2 className="text-3xl font-bold flex items-center gap-2">
-                  <Sparkles className="w-8 h-8 text-primary" />
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground">
                   Novedades
                 </h2>
-                <p className="text-muted-foreground mt-2">Lo último en tecnología de belleza</p>
+                <p className="text-muted-foreground mt-2 text-lg">Lo último en tecnología de belleza</p>
               </div>
-              <Button asChild variant="outline">
+              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5">
                 <Link to="/novedades">Ver todas</Link>
               </Button>
             </div>
@@ -114,16 +145,15 @@ const Index = () => {
 
         {/* Best Sellers */}
         {bestSellers.length > 0 && (
-          <section className="py-12">
-            <div className="flex items-center justify-between mb-8">
+          <section className="py-8">
+            <div className="flex items-center justify-between mb-10">
               <div>
-                <h2 className="text-3xl font-bold flex items-center gap-2">
-                  <Zap className="w-8 h-8 text-primary" />
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground">
                   Best Sellers
                 </h2>
-                <p className="text-muted-foreground mt-2">Los más vendidos de Garett</p>
+                <p className="text-muted-foreground mt-2 text-lg">Los más vendidos de Garett</p>
               </div>
-              <Button asChild variant="outline">
+              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5">
                 <Link to="/productos?filter=bestseller">Ver todos</Link>
               </Button>
             </div>
