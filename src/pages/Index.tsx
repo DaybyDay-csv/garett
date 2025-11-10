@@ -9,9 +9,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { Sparkles, Zap, Timer, ShoppingBag, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import categorySmartwatch from "@/assets/category-smartwatches.jpg";
-import categoryBeauty from "@/assets/category-beauty.jpg";
-import categoryAccessories from "@/assets/category-accessories.jpg";
+import categoryCuidadoCapilar from "@/assets/category-cuidado-capilar.jpg";
+import categoryMasajeadoresFaciales from "@/assets/category-masajeadores-faciales.jpg";
+import categoryLimpiezaFacial from "@/assets/category-limpieza-facial.jpg";
+import categoryMesoterapia from "@/assets/category-mesoterapia.jpg";
+import categoryCorporales from "@/assets/category-corporales.jpg";
+import categoryDepilacionIPL from "@/assets/category-depilacion-ipl.jpg";
 import garettPattern from "@/assets/garett-pattern-1.png";
 
 const Index = () => {
@@ -139,23 +142,23 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* Smartwatches */}
-            <Link to="/productos?category=smartwatch" className="group">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Cuidado Capilar */}
+            <Link to="/productos?category=capilar" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
                 <div className="aspect-video overflow-hidden">
                   <img 
-                    src={categorySmartwatch} 
-                    alt="Smartwatches Garett"
+                    src={categoryCuidadoCapilar} 
+                    alt="Cuidado capilar"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                    Smartwatches
+                    Cuidado capilar
                   </h3>
                   <p className="text-muted-foreground mb-4">
-                    Tecnología inteligente para tu muñeca
+                    Dispositivos profesionales para el cabello
                   </p>
                   <div className="flex items-center gap-2 text-primary font-medium">
                     <span>Ver productos</span>
@@ -165,22 +168,22 @@ const Index = () => {
               </Card>
             </Link>
 
-            {/* Beauty Devices */}
-            <Link to="/productos?category=beauty" className="group">
+            {/* Masajeadores Faciales */}
+            <Link to="/productos?category=masajeadores-faciales" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
                 <div className="aspect-video overflow-hidden">
                   <img 
-                    src={categoryBeauty} 
-                    alt="Dispositivos de belleza"
+                    src={categoryMasajeadoresFaciales} 
+                    alt="Masajeadores faciales"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                    Beauty Tech
+                    Masajeadores faciales
                   </h3>
                   <p className="text-muted-foreground mb-4">
-                    Cuidado facial profesional en casa
+                    Estimulación facial avanzada
                   </p>
                   <div className="flex items-center gap-2 text-primary font-medium">
                     <span>Ver productos</span>
@@ -190,22 +193,97 @@ const Index = () => {
               </Card>
             </Link>
 
-            {/* Accessories */}
-            <Link to="/productos?category=accessories" className="group">
+            {/* Limpieza Facial */}
+            <Link to="/productos?category=limpieza-facial" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
                 <div className="aspect-video overflow-hidden">
                   <img 
-                    src={categoryAccessories} 
-                    alt="Accesorios"
+                    src={categoryLimpiezaFacial} 
+                    alt="Limpieza facial"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                    Accesorios
+                    Limpieza facial
                   </h3>
                   <p className="text-muted-foreground mb-4">
-                    Correas, cargadores y más
+                    Limpieza profunda profesional
+                  </p>
+                  <div className="flex items-center gap-2 text-primary font-medium">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            {/* Dispositivos de Mesoterapia */}
+            <Link to="/productos?category=mesoterapia" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={categoryMesoterapia} 
+                    alt="Dispositivos de Mesoterapia"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    Dispositivos de Mesoterapia
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Tratamientos de rejuvenecimiento
+                  </p>
+                  <div className="flex items-center gap-2 text-primary font-medium">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            {/* Dispositivos Corporales */}
+            <Link to="/productos?category=corporales" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={categoryCorporales} 
+                    alt="Dispositivos corporales"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    Dispositivos corporales
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Tratamientos para todo el cuerpo
+                  </p>
+                  <div className="flex items-center gap-2 text-primary font-medium">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            {/* Depilación e IPL */}
+            <Link to="/productos?category=ipl" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={categoryDepilacionIPL} 
+                    alt="Depilación e IPL"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    Depilación e IPL
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Depilación láser profesional en casa
                   </p>
                   <div className="flex items-center gap-2 text-primary font-medium">
                     <span>Ver productos</span>

@@ -73,15 +73,12 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "Todos" },
-    { value: "smartwatch", label: "Smartwatches" },
-    { value: "beauty", label: "Beauty Tech" },
-    { value: "accessories", label: "Accesorios" },
+    { value: "capilar", label: "Cuidado capilar" },
     { value: "masajeadores-faciales", label: "Masajeadores faciales" },
     { value: "limpieza-facial", label: "Limpieza facial" },
-    { value: "mesoterapia", label: "Mesoterapia" },
-    { value: "corporales", label: "Corporales" },
-    { value: "capilar", label: "Cuidado capilar" },
-    { value: "ipl", label: "Depilación IPL" },
+    { value: "mesoterapia", label: "Dispositivos de Mesoterapia" },
+    { value: "corporales", label: "Dispositivos corporales" },
+    { value: "ipl", label: "Depilación e IPL" },
   ];
 
   return (
