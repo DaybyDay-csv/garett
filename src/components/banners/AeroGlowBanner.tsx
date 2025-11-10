@@ -242,7 +242,7 @@ export const AeroGlowBanner = () => {
           {/* Final CTA */}
           <div className="text-center mt-8 md:mt-12">
             <Link 
-              to="/producto/253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow"
+              to={`/producto/${product?.node.handle || '253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow'}`}
               className="inline-flex items-center justify-center group text-base md:text-lg h-14 md:h-16 px-12 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-2xl hover:shadow-3xl transition-all text-white rounded-md font-medium cursor-pointer"
             >
               Consigue tu AeroGlow Ahora
