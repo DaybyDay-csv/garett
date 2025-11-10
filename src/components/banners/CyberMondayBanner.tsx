@@ -11,7 +11,6 @@ export const CyberMondayBanner = () => {
     minutes: 0,
     seconds: 0
   });
-  
   useEffect(() => {
     // Cyber Monday 2025 - December 1st (Monday after Black Friday)
     const targetDate = new Date('2025-12-01T00:00:00');
@@ -116,14 +115,7 @@ export const CyberMondayBanner = () => {
         </div>
 
         {/* Automatic Discount Info */}
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 md:p-6 max-w-lg w-full">
-          <p className="text-white text-base md:text-lg font-semibold">
-            ✨ Descuento automático al finalizar compra
-          </p>
-          <p className="text-white/80 text-xs md:text-sm mt-2">
-            No necesitas código - el descuento se aplica automáticamente
-          </p>
-        </div>
+        
 
         {/* Benefits - Grid Layout */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6 text-sm md:text-base text-white w-full max-w-2xl">
