@@ -8,8 +8,10 @@ import { Progress } from "@/components/ui/progress";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
-import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, ZoomIn, Maximize2, ChevronDown, Clock, Award, Sparkle } from "lucide-react";
+import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, ZoomIn, Maximize2, ChevronDown, Clock, Award, Sparkle, Zap, Droplets, Activity, Battery, Package } from "lucide-react";
 import { calculatePromotionalPrice, formatPrice, getCurrentPromotionalStage } from "@/lib/promotions";
+import { getProductContent, detectProductCategory } from "@/lib/productContent";
+import * as LucideIcons from "lucide-react";
 import gwpHeadband from "@/assets/gwp-headband.jpg";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
@@ -78,6 +80,9 @@ const ProductDetail = () => {
   
   // Calculate promotional pricing
   const priceInfo = calculatePromotionalPrice(originalPrice);
+  
+  // Get product-specific content
+  const productContent = getProductContent(node);
 
   const handleAddToCart = () => {
     if (!variant) return;
@@ -218,18 +223,15 @@ const ProductDetail = () => {
               
               {/* Quick Benefits - Above the fold */}
               <div className="flex flex-wrap gap-3 mb-4">
-                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                  <Clock className="w-4 h-4 text-primary" />
-                  <span>15 min/día</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                  <Check className="w-4 h-4 text-green-600" />
-                  <span>Resultados en 8-12 semanas</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                  <Award className="w-4 h-4 text-primary" />
-                  <span>Tecnología profesional</span>
-                </div>
+                {productContent.quickBenefits.map((benefit, idx) => {
+                  const IconComponent = (LucideIcons as any)[benefit.icon] || Clock;
+                  return (
+                    <div key={idx} className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                      <IconComponent className="w-4 h-4 text-primary" />
+                      <span>{benefit.text}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
@@ -384,14 +386,15 @@ const ProductDetail = () => {
                 <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-muted/50 transition-colors">
                   <div className="flex items-center gap-3">
                     <Sparkle className="w-5 h-5 text-primary" />
-                    <span className="font-medium text-left">¿Por qué funciona?</span>
+                    <span className="font-medium text-left">{productContent.dropdowns.howItWorks.title}</span>
                   </div>
                   <ChevronDown className="w-5 h-5 text-muted-foreground transition-transform" />
                 </CollapsibleTrigger>
                 <CollapsibleContent className="px-4 pb-4 text-sm text-muted-foreground space-y-2">
-                  <p className="font-medium text-foreground">Tecnología profesional adaptada para casa</p>
-                  <p>Combina radiofrecuencia y EMS (electroestimulación muscular) para trabajar en dos niveles: estimula la producción natural de colágeno en las capas profundas y tonifica los músculos faciales.</p>
-                  <p>No es magia, es ciencia aplicada de forma segura y efectiva.</p>
+                  <p className="font-medium text-foreground">{productContent.dropdowns.howItWorks.summary}</p>
+                  {productContent.dropdowns.howItWorks.details.map((detail, idx) => (
+                    <p key={idx}>{detail}</p>
+                  ))}
                 </CollapsibleContent>
               </Collapsible>
 
@@ -406,20 +409,14 @@ const ProductDetail = () => {
                 </CollapsibleTrigger>
                 <CollapsibleContent className="px-4 pb-4 text-sm text-muted-foreground space-y-2">
                   <div className="space-y-3">
-                    <div>
-                      <p className="font-medium text-foreground">2-4 semanas</p>
-                      <p>Piel más hidratada y luminosa. Textura mejorada.</p>
-                    </div>
-                    <div>
-                      <p className="font-medium text-foreground">8-12 semanas</p>
-                      <p>Mejora visible en firmeza del óvalo facial. Líneas de expresión atenuadas.</p>
-                    </div>
-                    <div>
-                      <p className="font-medium text-foreground">3-6 meses</p>
-                      <p>Resultados óptimos. Piel tonificada con efecto lifting natural.</p>
-                    </div>
+                    {productContent.dropdowns.expectedResults.phases.map((phase, idx) => (
+                      <div key={idx}>
+                        <p className="font-medium text-foreground">{phase.timeframe}</p>
+                        <p>{phase.description}</p>
+                      </div>
+                    ))}
                   </div>
-                  <p className="italic pt-2">Úsalo 15 minutos al día, 3-5 veces por semana. Tan fácil como ver tu serie favorita.</p>
+                  <p className="italic pt-2">{productContent.dropdowns.expectedResults.usageNote}</p>
                 </CollapsibleContent>
               </Collapsible>
 
@@ -434,12 +431,11 @@ const ProductDetail = () => {
                 </CollapsibleTrigger>
                 <CollapsibleContent className="px-4 pb-4 text-sm text-muted-foreground">
                   <ol className="space-y-2 list-decimal list-inside">
-                    <li><span className="font-medium text-foreground">Limpia tu rostro</span> - Como siempre haces</li>
-                    <li><span className="font-medium text-foreground">Aplica gel conductor</span> - Incluido con el dispositivo</li>
-                    <li><span className="font-medium text-foreground">Desliza el dispositivo</span> - Movimientos suaves hacia arriba</li>
-                    <li><span className="font-medium text-foreground">15 minutos</span> - Y listo</li>
+                    {productContent.dropdowns.howToUse.steps.map((step, idx) => (
+                      <li key={idx}>{step}</li>
+                    ))}
                   </ol>
-                  <p className="mt-3 font-medium text-foreground">Incluye manual detallado en español con rutinas específicas por zonas.</p>
+                  <p className="mt-3 font-medium text-foreground">{productContent.dropdowns.howToUse.additionalNote}</p>
                 </CollapsibleContent>
               </Collapsible>
 
@@ -453,18 +449,12 @@ const ProductDetail = () => {
                   <ChevronDown className="w-5 h-5 text-muted-foreground transition-transform" />
                 </CollapsibleTrigger>
                 <CollapsibleContent className="px-4 pb-4 text-sm text-muted-foreground space-y-3">
-                  <div>
-                    <p className="font-medium text-foreground">No es otro dispositivo más</p>
-                    <p>Certificación CE, respaldado por El Corte Inglés y con 3 años de garantía (no los típicos 2).</p>
-                  </div>
-                  <div>
-                    <p className="font-medium text-foreground">Tecnología dual profesional</p>
-                    <p>Mientras otros solo hacen masajes o solo aplican calor, Garett combina radiofrecuencia + EMS para resultados reales.</p>
-                  </div>
-                  <div>
-                    <p className="font-medium text-foreground">Inversión inteligente</p>
-                    <p>Un tratamiento profesional cuesta 80-150€ por sesión. Con este dispositivo, es tuyo para siempre.</p>
-                  </div>
+                  {productContent.dropdowns.whatMakesDifferent.map((diff, idx) => (
+                    <div key={idx}>
+                      <p className="font-medium text-foreground">{diff.title}</p>
+                      <p>{diff.description}</p>
+                    </div>
+                  ))}
                 </CollapsibleContent>
               </Collapsible>
 
