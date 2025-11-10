@@ -9,7 +9,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import garettLogo from "@/assets/garett-icon-white.png";
+import garettIcon from "@/assets/garett-icon-white.png";
+import garettLogo from "@/assets/garett-logo-white.png";
 
 export const Header = () => {
   const navLinks = [
@@ -24,11 +25,9 @@ export const Header = () => {
       <div className="container flex h-20 items-center justify-between">
         <Link to="/" className="flex items-center gap-3">
           <div className="w-10 h-10 bg-primary rounded-md flex items-center justify-center p-1.5">
-            <img src={garettLogo} alt="Garett" className="w-full h-full object-contain" />
+            <img src={garettIcon} alt="Garett" className="w-full h-full object-contain" />
           </div>
-          <span className="text-3xl font-bold text-primary tracking-tight">
-            GARETT
-          </span>
+          <img src={garettLogo} alt="GARETT" className="h-8 object-contain" />
         </Link>
         
         {/* Desktop Navigation */}
@@ -58,9 +57,9 @@ export const Header = () => {
               <SheetHeader>
                 <SheetTitle className="flex items-center gap-2">
                   <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center p-1">
-                    <img src={garettLogo} alt="Garett" className="w-full h-full object-contain" />
+                    <img src={garettIcon} alt="Garett" className="w-full h-full object-contain" />
                   </div>
-                  <span className="text-primary font-bold text-xl">GARETT</span>
+                  <img src={garettLogo} alt="GARETT" className="h-6 object-contain" />
                 </SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col space-y-4 mt-8">
