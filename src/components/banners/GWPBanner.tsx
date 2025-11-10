@@ -27,7 +27,7 @@ export const GWPBanner = () => {
         }}
       />
       
-      <div className="container mx-auto px-4 h-full flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+      <div className="container mx-auto px-4 h-full flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative z-10 py-8">
         {/* Gift Image */}
         <div className="flex-1 flex items-center justify-center order-2 md:order-1">
           <div className="relative">
@@ -35,11 +35,11 @@ export const GWPBanner = () => {
             <img 
               src={gwpImage} 
               alt={gwpConfig.giftName}
-              className="relative w-64 h-64 md:w-96 md:h-96 object-cover rounded-2xl shadow-2xl"
+              className="relative w-48 h-48 md:w-80 md:h-80 lg:w-96 lg:h-96 object-cover rounded-2xl shadow-2xl"
             />
-            <div className="absolute -top-4 -right-4 animate-bounce">
-              <Badge className="bg-accent text-accent-foreground text-lg px-4 py-2">
-                <Gift className="w-5 h-5 mr-2" />
+            <div className="absolute -top-3 -right-3 md:-top-4 md:-right-4 animate-bounce">
+              <Badge className="bg-accent text-accent-foreground text-sm md:text-lg px-3 py-1 md:px-4 md:py-2">
+                <Gift className="w-4 h-4 md:w-5 md:h-5 mr-2" />
                 GRATIS
               </Badge>
             </div>
@@ -47,38 +47,38 @@ export const GWPBanner = () => {
         </div>
 
         {/* Content */}
-        <div className="flex-1 text-center md:text-left space-y-6 py-12 order-1 md:order-2">
-          <Badge variant="outline" className="border-primary text-primary">
+        <div className="flex-1 text-center md:text-left space-y-4 md:space-y-6 order-1 md:order-2">
+          <Badge variant="outline" className="border-primary text-primary text-xs md:text-sm">
             <Gift className="w-3 h-3 mr-1" />
             REGALO GRATIS
           </Badge>
           
-          <div className="space-y-3">
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground">
+          <div className="space-y-2 md:space-y-3">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               Regalo<br />
               <span className="text-primary">Especial</span> 🎁
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-xl">
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground max-w-xl mx-auto md:mx-0 px-4 md:px-0">
               Banda de pelo premium de regalo en compras desde{" "}
               <span className="font-bold text-foreground">€{gwpConfig.threshold}</span>
             </p>
           </div>
 
           {/* Value Indicator */}
-          <div className="bg-primary-light p-4 rounded-lg border border-primary/20 inline-block">
-            <p className="text-sm text-muted-foreground mb-1">Valor del regalo</p>
-            <p className="text-2xl font-bold text-primary">€12.99</p>
+          <div className="bg-primary-light p-3 md:p-4 rounded-lg border border-primary/20 inline-block">
+            <p className="text-xs md:text-sm text-muted-foreground mb-1">Valor del regalo</p>
+            <p className="text-xl md:text-2xl font-bold text-primary">€12.99</p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <Button asChild size="lg">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center md:justify-start">
+            <Button asChild size="lg" className="text-sm md:text-base">
               <Link to="/productos">
                 Comprar ahora
               </Link>
             </Button>
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="lg" className="text-sm md:text-base">
                   <Info className="w-4 h-4 mr-2" />
                   Ver condiciones
                 </Button>

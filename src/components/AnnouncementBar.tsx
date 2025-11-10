@@ -81,25 +81,25 @@ export const AnnouncementBar = () => {
 
   return (
     <div className={`${message.bg} sticky top-0 z-50 transition-all duration-300`}>
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between py-3 gap-4">
-          <div className="flex-1" />
+      <div className="container mx-auto px-2 md:px-4">
+        <div className="flex items-center justify-between py-2 md:py-3 gap-2 md:gap-4">
+          <div className="flex-1 hidden sm:block" />
           
           <Link 
             to={message.link}
-            className="flex items-center gap-2 text-sm md:text-base font-medium hover:underline text-center"
+            className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm lg:text-base font-medium hover:underline text-center flex-1 sm:flex-initial justify-center"
           >
-            <Icon className="w-4 h-4 flex-shrink-0" />
-            <span>{message.text}</span>
+            <Icon className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+            <span className="line-clamp-2 sm:line-clamp-1">{message.text}</span>
           </Link>
 
           <div className="flex-1 flex justify-end">
             <button
               onClick={handleDismiss}
-              className="hover:opacity-70 transition-opacity p-1"
+              className="hover:opacity-70 transition-opacity p-1 flex-shrink-0"
               aria-label="Cerrar anuncio"
             >
-              <X className="w-4 h-4" />
+              <X className="w-3 h-3 md:w-4 md:h-4" />
             </button>
           </div>
         </div>

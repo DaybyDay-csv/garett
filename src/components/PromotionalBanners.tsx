@@ -61,7 +61,7 @@ export const PromotionalBanners = () => {
 
   return (
     <div 
-      className="relative w-full overflow-hidden bg-background"
+      className="relative w-full overflow-hidden bg-background group"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -70,30 +70,30 @@ export const PromotionalBanners = () => {
         <CurrentBanner />
       </div>
 
-      {/* Navigation Arrows - Only show if multiple banners */}
+      {/* Navigation Arrows - Visible on mobile, enhanced on hover desktop */}
       {activeBanners.length > 1 && (
         <>
           <Button
             variant="secondary"
             size="icon"
-            className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity shadow-lg z-10 hover:scale-110"
+            className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 rounded-full opacity-70 md:opacity-0 md:group-hover:opacity-100 hover:opacity-100 transition-opacity shadow-lg z-10 hover:scale-110"
             onClick={goToPrevious}
             disabled={isTransitioning}
           >
-            <ChevronLeft className="h-6 w-6" />
+            <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
           </Button>
           <Button
             variant="secondary"
             size="icon"
-            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity shadow-lg z-10 hover:scale-110"
+            className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 rounded-full opacity-70 md:opacity-0 md:group-hover:opacity-100 hover:opacity-100 transition-opacity shadow-lg z-10 hover:scale-110"
             onClick={goToNext}
             disabled={isTransitioning}
           >
-            <ChevronRight className="h-6 w-6" />
+            <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
           </Button>
 
-          {/* Dots Navigation */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10 bg-background/50 backdrop-blur-sm px-4 py-2 rounded-full">
+          {/* Dots Navigation - Improved mobile visibility */}
+          <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2 z-10 bg-background/50 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full">
             {activeBanners.map((_, index) => (
               <button
                 key={index}
@@ -105,18 +105,18 @@ export const PromotionalBanners = () => {
                   }, 300);
                 }}
                 disabled={isTransitioning}
-                className={`h-2 rounded-full transition-all ${
+                className={`h-1.5 md:h-2 rounded-full transition-all ${
                   index === currentIndex 
-                    ? "w-8 bg-primary" 
-                    : "w-2 bg-primary/30 hover:bg-primary/50"
+                    ? "w-6 md:w-8 bg-primary" 
+                    : "w-1.5 md:w-2 bg-primary/30 hover:bg-primary/50"
                 }`}
                 aria-label={`Go to banner ${index + 1}`}
               />
             ))}
           </div>
 
-          {/* Banner Counter */}
-          <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium z-10">
+          {/* Banner Counter - Smaller on mobile */}
+          <div className="absolute top-3 right-3 md:top-4 md:right-4 bg-background/80 backdrop-blur-sm px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-medium z-10">
             {currentIndex + 1} / {activeBanners.length}
           </div>
         </>
