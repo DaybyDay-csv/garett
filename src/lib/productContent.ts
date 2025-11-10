@@ -100,17 +100,18 @@ const productContentMap: Record<string, ProductContent> = {
   'masajeadores-faciales': {
     quickBenefits: [
       { icon: 'Clock', text: '10 min al día' },
-      { icon: 'Sparkles', text: 'Efecto lifting inmediato' },
-      { icon: 'Zap', text: 'RF + EMS dual' }
+      { icon: 'Sparkles', text: 'Firmeza natural' },
+      { icon: 'Zap', text: 'Vibración + EMS + LED' }
     ],
     dropdowns: {
       howItWorks: {
         title: '¿Por qué funciona?',
-        summary: 'Tecnología dual que trabaja en capas profundas y músculos',
+        summary: 'Tecnología múltiple que trabaja en capas profundas y músculos',
         details: [
-          'Radiofrecuencia que calienta las capas profundas de tu piel (45-50°C) estimulando la producción natural de colágeno. Es como decirle a tu piel que vuelva a fabricar su propia estructura de soporte.',
-          'EMS (electroestimulación) que tonifica los músculos faciales como si entrenasen en el gym. Los 43 músculos de tu cara también necesitan ejercicio.',
-          'El resultado: piel más firme desde dentro + contornos faciales más definidos. No es tensión temporal, es reactivación real.'
+          'Vibración sónica de alta frecuencia que estimula la circulación, ayuda a drenar toxinas y mejora la absorción de tus productos. Es como un masaje profesional profundo.',
+          'Pulsos EMS (electroestimulación) que tonifican los 43 músculos faciales. Como hacer ejercicio para tu rostro—fortalecen y reafirman naturalmente.',
+          'Terapia LED de 3 colores: luz roja estimula colágeno, luz azul calma y reduce imperfecciones, adaptándose a tus necesidades.',
+          'El resultado: piel más firme, contornos definidos y luminosidad que se nota desde las primeras semanas. No es tensión temporal, es reactivación real.'
         ]
       },
       expectedResults: {
@@ -143,20 +144,20 @@ const productContentMap: Record<string, ProductContent> = {
       },
       whatMakesDifferent: [
         {
-          title: 'Tecnología dual RF + EMS',
-          description: 'Mientras otros dispositivos solo hacen una cosa, este trabaja en dos niveles simultáneamente. Doble tecnología = doble efectividad.'
+          title: 'Tecnología 4-en-1',
+          description: 'Vibración sónica + EMS + terapia LED + calor terapéutico. Mientras otros dispositivos solo hacen una cosa, este trabaja en múltiples niveles simultáneamente.'
         },
         {
           title: 'Resultados profesionales en casa',
-          description: 'Una sesión de RF en clínica cuesta 80-120€. Con 3 usos ya has recuperado la inversión. Y puedes usarlo años.'
+          description: 'Una sesión de tratamiento facial en clínica cuesta 80-120€. Con pocos usos ya has recuperado la inversión. Y puedes usarlo años.'
         },
         {
-          title: 'Calor controlado y seguro',
-          description: 'La temperatura se mantiene en el rango terapéutico óptimo (45-50°C). Efectivo pero totalmente seguro para uso doméstico.'
+          title: '3 modos adaptables',
+          description: 'Masaje suave y relajante, estimulación intensa, o modo alternativo. Adaptas el tratamiento a lo que tu piel necesita cada día.'
         },
         {
           title: 'Compatible con tus productos favoritos',
-          description: 'Potencia la absorción de sérums y cremas. Ese producto caro que tienes ahora funciona 3 veces mejor.'
+          description: 'Potencia la absorción de sérums y cremas. Ese producto caro que tienes ahora penetra mejor y funciona de verdad.'
         }
       ]
     }
@@ -363,18 +364,19 @@ const productContentMap: Record<string, ProductContent> = {
   // Cuidado Capilar (AeroGlow plancha)
   'cuidado-capilar': {
     quickBenefits: [
-      { icon: 'Zap', text: 'Secado rápido' },
-      { icon: 'Sparkles', text: 'Brillo de salón' },
-      { icon: 'Shield', text: 'Sin daño térmico' }
+      { icon: 'Wind', text: 'Motor 110.000 rpm' },
+      { icon: 'Sparkles', text: 'Iones negativos' },
+      { icon: 'Thermometer', text: '5 niveles temperatura' }
     ],
     dropdowns: {
       howItWorks: {
         title: '¿Por qué funciona?',
-        summary: 'Tecnología infrarroja que cuida mientras alisa',
+        summary: 'Motor de alta velocidad + iones negativos para secado inteligente',
         details: [
-          'Tecnología infrarroja que calienta tu cabello desde el interior de la fibra capilar, sellando la cutícula y creando ese brillo espejo natural.',
-          'Mientras las planchas tradicionales queman la superficie del pelo (por eso se pone áspero), esta trabaja con calor inteligente que respeta la estructura.',
-          'Placas de cerámica de turmalina que distribuyen el calor uniformemente. No hay puntos calientes que quemen zonas. Todo tu pelo recibe el mismo tratamiento de salón.'
+          'Motor BLDC de 110.000 rpm que genera un flujo de aire potente (11.2 m/s) pero controlado. Seca rápido sin necesidad de calor extremo que daña.',
+          'Iones negativos que neutralizan la electricidad estática del cabello y sellan la cutícula, dejándolo liso, brillante y sin frizz.',
+          '5 niveles de temperatura (80°-150°C) con control inteligente. Eliges la temperatura exacta para tu tipo de pelo: fino, normal, grueso.',
+          'El resultado: brillo de salón profesional con secado rápido, usando menos calor = menos daño a largo plazo.'
         ]
       },
       expectedResults: {
@@ -407,20 +409,20 @@ const productContentMap: Record<string, ProductContent> = {
       },
       whatMakesDifferent: [
         {
-          title: 'Infrarrojo vs calor directo tradicional',
-          description: 'Es como cocinar a baja temperatura vs freír. El resultado final es igual de bueno, pero el proceso es mucho más respetuoso.'
+          title: 'Motor profesional de 110.000 rpm',
+          description: 'Secado en minutos, no en media hora. Potencia de salón en casa. Cuanto menos tiempo de calor, menos daño.'
         },
         {
-          title: 'Placas de cerámica premium',
-          description: 'Deslizamiento perfecto sin enganches ni tirones. Tu pelo se desliza como la seda, no se arrastra.'
+          title: 'Tecnología de iones negativos',
+          description: 'Elimina el frizz desde la raíz. El brillo no es artificial, es la cutícula del pelo perfectamente sellada.'
         },
         {
-          title: 'Calentamiento rápido y temperatura estable',
-          description: 'Lista en 30 segundos. La temperatura no fluctúa durante el uso. Cada pasada es igual de efectiva que la primera.'
+          title: '5 temperaturas + modo inteligente',
+          description: 'Pelo húmedo y seco reconocidos automáticamente. No más quemar zonas porque olvidaste ajustar la temperatura.'
         },
         {
-          title: 'Larga duración del resultado',
-          description: 'El alisado aguanta hasta el próximo lavado, incluso con humedad. No se abre al cabo de 2 horas.'
+          title: 'Apagado automático y seguridad',
+          description: 'Si te olvidas de apagarlo, él solo se cuida. Cable giratorio 360° de 2.5m para movimiento total sin enredos.'
         }
       ]
     }
@@ -429,64 +431,69 @@ const productContentMap: Record<string, ProductContent> = {
   // Smartwatches (GRC Activity, Men, Women, Kids)
   'smartwatches': {
     quickBenefits: [
-      { icon: 'Battery', text: 'Batería 7 días' },
-      { icon: 'Activity', text: 'Monitoreo 24/7' },
-      { icon: 'Shield', text: 'Resistente al agua IP68' }
+      { icon: 'Battery', text: 'Hasta 20 días batería' },
+      { icon: 'Activity', text: 'Monitoreo salud 24/7' },
+      { icon: 'Droplets', text: 'Resistente IP68' }
     ],
     dropdowns: {
       howItWorks: {
-        title: '¿Por qué funciona?',
-        summary: 'Sensores avanzados que monitorizan tu salud en tiempo real',
+        title: '¿Cómo funciona?',
+        summary: 'Sensores médicos que registran tu salud en tiempo real',
         details: [
-          'Sensores ópticos avanzados que registran tu frecuencia cardíaca, oxígeno en sangre, pasos, calorías y calidad de sueño las 24 horas del día.',
-          'Toda esta información se sincroniza automáticamente con tu móvil, donde una app intuitiva te muestra patrones, tendencias y recomendaciones personalizadas.',
-          'Es como tener un entrenador personal y un médico en tu muñeca. Los datos te ayudan a tomar mejores decisiones sobre tu salud cada día.'
+          'Sensores ópticos de grado médico que miden frecuencia cardíaca continua, saturación de oxígeno (SpO2), presión arterial y calidad del sueño con precisión.',
+          'Acelerómetro y giroscopio que registran pasos, distancia, calorías quemadas y reconocen automáticamente más de 100 modos deportivos.',
+          'Pantalla AMOLED de 1.43" con resolución 466x466px. Always-On Display, colores vibrantes, legible bajo el sol directo.',
+          'Batería de 370 mAh con autonomía de hasta 20 días en modo normal. Bluetooth 5.2 para conexión estable con tu móvil.',
+          'El resultado: un coach de salud en tu muñeca 24/7 con datos precisos para mejorar tu bienestar día a día.'
         ]
       },
       expectedResults: {
         phases: [
           {
-            timeframe: 'Inmediato',
-            description: 'Conoces tus patrones reales de sueño, actividad y frecuencia cardíaca. Los números no mienten.'
+            timeframe: 'Desde el día 1',
+            description: 'Conoces tu frecuencia cardíaca en tiempo real, calidad de sueño, pasos exactos y calorías quemadas'
           },
           {
-            timeframe: '2-4 semanas',
-            description: 'Empiezas a mejorar tus hábitos de forma consciente. Más pasos, mejor sueño, más actividad física.'
+            timeframe: '1-2 semanas',
+            description: 'Identificas patrones: a qué hora duermes peor, cuándo eres más activo, cómo responde tu cuerpo al esfuerzo'
+          },
+          {
+            timeframe: '1 mes',
+            description: 'Cambias hábitos basados en datos reales. Duermes mejor, te mueves más, comes más consciente'
           },
           {
             timeframe: '3 meses',
-            description: 'Objetivos fitness alcanzados gracias a datos reales. Has creado hábitos saludables sostenibles.'
+            description: 'Objetivos fitness alcanzados. El reloj es tu compañero para mantener el ritmo y seguir mejorando'
           }
         ],
         usageNote: 'Llévalo puesto día y noche para datos completos. Sincroniza con la app cada mañana para ver tu evolución.'
       },
       howToUse: {
         steps: [
-          'Carga el reloj completamente (tarda 2h)',
-          'Descarga la app GRC Smartwatch (iOS/Android)',
-          'Conecta por Bluetooth siguiendo las instrucciones',
-          'Ajusta correa para que quede cómoda pero firme',
-          'Personaliza notificaciones y objetivos',
-          'Vive tu día normalmente, él hace el resto'
+          'Carga el reloj completamente (primera carga 2 horas)',
+          'Descarga Garett Smart app gratis (Android 8.0+ / iOS 13.0+)',
+          'Vincula por Bluetooth 5.2 y personaliza tu esfera favorita de cientos disponibles',
+          'Llévalo 24/7—es resistente al agua IP68 (puedes ducharte, nadar sin problemas)',
+          'Revisa tu progreso en la pantalla AMOLED o en la app. Ajusta objetivos según tus datos reales'
         ],
-        additionalNote: 'Limpia el sensor en la parte trasera cada semana para lecturas precisas. Resistente al agua pero no presiones botones bajo el agua.'
+        additionalNote: 'Con llamadas Bluetooth, notificaciones de apps, control de música, asistente de voz y más de 100 modos deportivos.'
       },
       whatMakesDifferent: [
         {
-          title: 'Batería de 7 días reales',
-          description: 'No como otros smartwatches que mueren en 1 día y medio. Una carga a la semana y olvídate. Vive sin ansiedad de batería.'
+          title: 'Batería real de hasta 20 días',
+          description: 'Hasta 20 días de autonomía en uso normal, modo ahorro aún más. No como otros smartwatches que cargas cada noche.'
         },
         {
-          title: 'Tracking de salud completo',
-          description: 'Frecuencia cardíaca, oxígeno en sangre, calidad de sueño, pasos, calorías, 12 modos deportivos. Todo lo que necesitas para cuidarte.'
+          title: 'Pantalla AMOLED premium 1.43"',
+          description: 'Resolución 466x466px con Always-On Display. Colores vibrantes, legible bajo el sol. Como smartphones de gama alta.'
         },
         {
-          title: 'Notificaciones inteligentes',
-          description: 'Llamadas, mensajes, redes sociales. Ve lo importante sin sacar el móvil del bolsillo. Filtras mejor tu atención.'
+          title: 'Monitoreo médico completo',
+          description: 'SpO2, frecuencia cardíaca continua, presión arterial, análisis de sueño avanzado, entrenamiento respiratorio. Como un chequeo médico diario.'
         },
         {
-          title: 'Precio honesto y sin trampas',
-          description: 'Calidad premium sin pagar la marca. Las mismas funciones que relojes de 300€, pero con precio justo. No estás pagando publicidad.'
+          title: 'Precio sin marca premium',
+          description: 'Mismo nivel de funciones que smartwatches de 200-300€. Sin pagar el logo de marca. Relación calidad-precio imbatible.'
         }
       ]
     }
