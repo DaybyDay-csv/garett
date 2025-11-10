@@ -467,31 +467,24 @@ const BlackFriday = () => {
                     </div>
 
                     {/* Description */}
-                    <div className="bg-muted/30 rounded-lg p-3 mb-4">
-                      <p className="text-sm font-medium text-muted-foreground">
-                        {stage.details}
-                      </p>
-                    </div>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      {stage.details}
+                    </p>
 
-                    {/* Codes */}
+                    {/* Codes - Only show for Black Friday tiers */}
                     <div className="space-y-3">
-                      {/* Single code */}
-                      {stage.code && !stage.codes?.length && <div className="bg-background/50 rounded-lg px-4 py-3 border border-border">
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <p className="text-xs text-muted-foreground mb-1">Código de descuento:</p>
-                              <span className="font-mono font-bold text-lg">{stage.code}</span>
-                            </div>
-                            <Button size="sm" variant="ghost" onClick={() => copyCode(stage.code)} className="hover-scale">
-                              {copiedCode === stage.code ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
-                            </Button>
-                          </div>
-                        </div>}
-
-                      {/* Multiple codes (Black Friday) */}
-                      {stage.codes && stage.codes.length > 0 && <div className="space-y-2">
-                          <p className="text-xs font-medium text-muted-foreground">Códigos por nivel:</p>
-                          {stage.codes.map(codeObj => <div key={codeObj.code} className={`bg-background/50 border-2 rounded-lg p-3 ${codeObj.urgency === 'high' ? 'border-red-500/30' : codeObj.urgency === 'medium' ? 'border-orange-500/30' : 'border-primary/30'}`}>
+                      {stage.codes && stage.codes.length > 0 ? (
+                        <div className="space-y-2">
+                          <p className="text-xs font-semibold text-muted-foreground">Códigos por nivel:</p>
+                          {stage.codes.map(codeObj => (
+                            <div 
+                              key={codeObj.code} 
+                              className={`bg-background/50 border-2 rounded-lg p-3 ${
+                                codeObj.urgency === 'high' ? 'border-red-500/30' : 
+                                codeObj.urgency === 'medium' ? 'border-orange-500/30' : 
+                                'border-primary/30'
+                              }`}
+                            >
                               <div className="flex items-center justify-between mb-2">
                                 <Badge variant={codeObj.urgency === 'high' ? 'destructive' : 'secondary'} className="text-xs">
                                   {codeObj.discount}
@@ -506,33 +499,33 @@ const BlackFriday = () => {
                                   {copiedCode === codeObj.code ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
                                 </Button>
                               </div>
-                            </div>)}
-                        </div>}
-
-                      {/* GWP code */}
-                      {stage.gwp && 'gwpCode' in stage && stage.gwpCode && <div className="bg-pink-500/10 rounded-lg p-3 border border-pink-500/20">
-                          <div className="flex items-start gap-2">
-                            <Gift className="w-5 h-5 text-pink-600 dark:text-pink-400 flex-shrink-0 mt-0.5" />
-                            <div className="flex-1 min-w-0">
-                              <p className="text-xs text-muted-foreground mb-2">Regalo banda de pelo desde €70:</p>
-                              <div className="flex items-center gap-2">
-                                <span className="font-mono text-sm font-bold text-pink-700 dark:text-pink-300">
-                                  {stage.gwpCode}
-                                </span>
-                                <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => copyCode(stage.gwpCode!)}>
-                                  {copiedCode === stage.gwpCode ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
-                                </Button>
-                              </div>
                             </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="bg-green-500/10 rounded-lg p-4 border border-green-500/20">
+                          <div className="flex items-center justify-center gap-2">
+                            <Badge variant="secondary" className="bg-green-500/20 text-green-700 dark:text-green-300 border-0">
+                              ✓ Descuento automático
+                            </Badge>
                           </div>
-                        </div>}
-
-                      {/* No code needed */}
-                      {!stage.code && !('codes' in stage) && <div className="bg-green-500/10 rounded-lg p-3 border border-green-500/20 text-center">
-                          <Badge variant="secondary" className="bg-green-500/20 text-green-700 dark:text-green-300 border-0">
-                            ✓ Descuento automático
-                          </Badge>
-                        </div>}
+                          <p className="text-xs text-center text-muted-foreground mt-2">
+                            Se aplica directamente en productos
+                          </p>
+                        </div>
+                      )}
+                      
+                      {/* GWP info without code */}
+                      {stage.gwp && (
+                        <div className="bg-pink-500/10 rounded-lg p-3 border border-pink-500/20 text-center">
+                          <div className="flex items-center justify-center gap-2">
+                            <Gift className="w-4 h-4 text-pink-600 dark:text-pink-400" />
+                            <span className="text-xs font-medium text-pink-700 dark:text-pink-300">
+                              Regalo gratis desde €70
+                            </span>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>;
@@ -542,10 +535,10 @@ const BlackFriday = () => {
           {/* CTA */}
           <div className="mt-8 p-6 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl border border-primary/20">
             <p className="text-sm font-medium text-center mb-2">
-              💡 <span className="font-bold">Importante:</span> Cada etapa se desbloquea automáticamente en su fecha
+              💡 <span className="font-bold">Descuentos automáticos</span>
             </p>
             <p className="text-xs text-muted-foreground text-center">
-              Los descuentos Warm-up y White Week se aplican directamente en productos. Para Black Friday y Cyber Monday, usa los códigos en checkout.
+              Los descuentos se aplican directamente. Solo en Black Friday necesitas códigos para los descuentos tier adicionales.
             </p>
           </div>
         </div>
