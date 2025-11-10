@@ -1,6 +1,7 @@
 import { Star, CheckCircle2, Clock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import garettPattern from "@/assets/garett-pattern-2.png";
 
 const testimonials = [
   {
@@ -51,8 +52,18 @@ const testimonials = [
 
 export const Testimonials = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-background to-muted/20">
-      <div className="container">
+    <section className="py-16 bg-gradient-to-b from-background to-muted/20 relative overflow-hidden">
+      {/* Subtle Pattern Background */}
+      <div 
+        className="absolute inset-0 opacity-[0.015]" 
+        style={{
+          backgroundImage: `url(${garettPattern})`,
+          backgroundSize: '150px',
+          backgroundRepeat: 'repeat'
+        }}
+      />
+      
+      <div className="container relative">
         <div className="text-center mb-12">
           <Badge className="mb-4">Opiniones verificadas</Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">

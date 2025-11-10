@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import categorySmartwatch from "@/assets/category-smartwatches.jpg";
 import categoryBeauty from "@/assets/category-beauty.jpg";
 import categoryAccessories from "@/assets/category-accessories.jpg";
+import garettPattern from "@/assets/garett-pattern-1.png";
 
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -46,7 +47,17 @@ const Index = () => {
 
       {/* Hero Section - Clean & Professional */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[hsl(210,25%,92%)] to-[hsl(200,20%,95%)] py-16 md:py-24">
-        <div className="container">
+        {/* Decorative Pattern Background */}
+        <div 
+          className="absolute inset-0 opacity-[0.03]" 
+          style={{
+            backgroundImage: `url(${garettPattern})`,
+            backgroundSize: '200px',
+            backgroundRepeat: 'repeat'
+          }}
+        />
+        
+        <div className="container relative">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="space-y-6">
