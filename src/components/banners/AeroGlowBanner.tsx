@@ -53,7 +53,7 @@ export const AeroGlowBanner = () => {
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-2">
             <Button asChild size="lg" className="group text-sm md:text-base h-12 px-8 w-full sm:w-auto">
-              <Link to="/producto/plancha-aeroglow">
+              <Link to="/producto/253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow">
                 Descubre AeroGlow
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
