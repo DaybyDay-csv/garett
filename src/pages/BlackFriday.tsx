@@ -15,6 +15,18 @@ interface TimeLeft {
   isExpired: boolean;
 }
 
+interface Stage {
+  name: string;
+  code: string;
+  discount: string;
+  startDate: Date;
+  endDate: Date;
+  remaining: number;
+  total: number;
+  color: string;
+  icon: any;
+}
+
 const CountdownTimer = () => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
@@ -23,32 +35,87 @@ const CountdownTimer = () => {
     seconds: 0,
     isExpired: false
   });
+  const [currentStage, setCurrentStage] = useState<Stage | null>(null);
+  const [nextStage, setNextStage] = useState<Stage | null>(null);
+
+  // Define Black Friday stages
+  const stages: Stage[] = [
+    {
+      name: "SUPER EARLY BIRD",
+      code: "EARLYBIRD50",
+      discount: "50% OFF",
+      startDate: new Date('2025-11-28T00:00:00'),
+      endDate: new Date('2025-11-28T12:00:00'), // Primeras 12 horas
+      remaining: 150,
+      total: 150,
+      color: "from-red-500 to-orange-500",
+      icon: Flame
+    },
+    {
+      name: "EARLY BIRD",
+      code: "EARLYBIRD35",
+      discount: "35% OFF",
+      startDate: new Date('2025-11-28T12:00:01'),
+      endDate: new Date('2025-11-29T12:00:00'), // Siguiente día y medio
+      remaining: 450,
+      total: 450,
+      color: "from-orange-500 to-yellow-500",
+      icon: Zap
+    },
+    {
+      name: "BLACK FRIDAY",
+      code: "BF25",
+      discount: "25% OFF",
+      startDate: new Date('2025-11-29T12:00:01'),
+      endDate: new Date('2025-11-30T23:59:59'), // Hasta el final
+      remaining: 0,
+      total: 0,
+      color: "from-primary to-primary-glow",
+      icon: Timer
+    }
+  ];
 
   useEffect(() => {
-    const calculateTimeLeft = (): TimeLeft => {
-      const targetDate = new Date('2025-11-30T23:59:59');
+    const calculateTimeAndStage = () => {
       const now = new Date();
+      
+      // Find current stage
+      const active = stages.find(stage => 
+        now >= stage.startDate && now <= stage.endDate
+      );
+
+      // Find next stage
+      const upcoming = stages.find(stage => 
+        now < stage.startDate
+      );
+
+      setCurrentStage(active || null);
+      setNextStage(upcoming || null);
+
+      // Calculate time left for current stage or end of BF
+      const targetDate = active ? active.endDate : new Date('2025-11-30T23:59:59');
       const difference = targetDate.getTime() - now.getTime();
 
       if (difference <= 0) {
-        return { days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true };
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true });
+        return;
       }
 
-      return {
+      setTimeLeft({
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((difference / 1000 / 60) % 60),
         seconds: Math.floor((difference / 1000) % 60),
         isExpired: false
-      };
+      });
     };
 
     // Initial calculation
-    setTimeLeft(calculateTimeLeft());
+    calculateTimeAndStage();
 
     // Update every second
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+      calculateTimeAndStage();
     }, 1000);
 
     return () => clearInterval(timer);
@@ -56,9 +123,9 @@ const CountdownTimer = () => {
 
   if (timeLeft.isExpired) {
     return (
-      <div className="text-center py-8">
+      <div className="text-center py-8 bg-white/10 backdrop-blur-md rounded-2xl border border-white/30 p-8">
         <p className="text-2xl font-bold text-white">¡Black Friday ha terminado!</p>
-        <p className="text-white/80 mt-2">Gracias por participar</p>
+        <p className="text-white/80 mt-2">Gracias por participar. Vuelve el próximo año.</p>
       </div>
     );
   }
@@ -71,42 +138,101 @@ const CountdownTimer = () => {
   ];
 
   return (
-    <div className="mt-8">
-      <div className="flex items-center justify-center gap-2 mb-4">
-        <Clock className="w-5 h-5 text-white" />
-        <p className="text-white/90 font-medium">La oferta termina en:</p>
-      </div>
-      
-      <div className="flex justify-center gap-3 md:gap-4">
-        {timeUnits.map((unit, index) => (
-          <div key={unit.label} className="flex flex-col items-center">
-            <div className="relative">
-              {/* Animated background */}
-              <div className="absolute inset-0 bg-white/20 rounded-lg blur-sm animate-pulse" />
-              
-              {/* Time box */}
-              <div className="relative bg-white/10 backdrop-blur-md border border-white/30 rounded-lg p-3 md:p-4 min-w-[60px] md:min-w-[80px] hover:scale-110 transition-transform duration-300">
-                <div className="text-3xl md:text-5xl font-bold text-white text-center tabular-nums animate-scale-in">
-                  {String(unit.value).padStart(2, '0')}
-                </div>
-              </div>
+    <div className="mt-8 space-y-6">
+      {/* Current Stage Banner */}
+      {currentStage && (
+        <div className="bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-6">
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${currentStage.color} flex items-center justify-center animate-pulse`}>
+              <currentStage.icon className="w-5 h-5 text-white" />
             </div>
-            
-            {/* Label */}
-            <div className="mt-2 text-xs md:text-sm text-white/80 font-medium uppercase tracking-wider">
-              {unit.label}
+            <div className="text-center">
+              <div className="text-sm text-white/80 font-medium">ETAPA ACTIVA</div>
+              <div className="text-2xl font-bold text-white">{currentStage.name}</div>
             </div>
           </div>
-        ))}
+          
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            <Badge className={`bg-gradient-to-r ${currentStage.color} text-white border-0 text-lg px-4 py-1`}>
+              {currentStage.discount}
+            </Badge>
+            <div className="bg-white/20 rounded-lg px-4 py-2">
+              <span className="text-white font-mono font-bold">{currentStage.code}</span>
+            </div>
+            {currentStage.remaining > 0 && (
+              <Badge variant="destructive" className="animate-pulse">
+                Solo {currentStage.remaining} usos disponibles
+              </Badge>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Countdown */}
+      <div>
+        <div className="flex items-center justify-center gap-2 mb-4">
+          <Clock className="w-5 h-5 text-white animate-pulse" />
+          <p className="text-white/90 font-medium">
+            {currentStage ? 'Esta etapa termina en:' : 'Black Friday termina en:'}
+          </p>
+        </div>
+        
+        <div className="flex justify-center gap-3 md:gap-4">
+          {timeUnits.map((unit) => (
+            <div key={unit.label} className="flex flex-col items-center">
+              <div className="relative">
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-white/20 rounded-lg blur-sm animate-pulse" />
+                
+                {/* Time box */}
+                <div className="relative bg-white/10 backdrop-blur-md border border-white/30 rounded-lg p-3 md:p-4 min-w-[60px] md:min-w-[80px] hover:scale-110 transition-transform duration-300">
+                  <div className="text-3xl md:text-5xl font-bold text-white text-center tabular-nums">
+                    {String(unit.value).padStart(2, '0')}
+                  </div>
+                </div>
+              </div>
+              
+              {/* Label */}
+              <div className="mt-2 text-xs md:text-sm text-white/80 font-medium uppercase tracking-wider">
+                {unit.label}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
+      {/* Next Stage Preview */}
+      {nextStage && (
+        <div className="bg-white/5 backdrop-blur-md border border-white/20 rounded-xl p-5">
+          <div className="text-center">
+            <div className="text-xs text-white/70 uppercase tracking-wider mb-2">
+              SIGUIENTE ETAPA
+            </div>
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${nextStage.color} flex items-center justify-center opacity-60`}>
+                <nextStage.icon className="w-4 h-4 text-white" />
+              </div>
+              <div>
+                <div className="font-bold text-white text-lg">{nextStage.name}</div>
+                <div className="text-sm text-white/70">Código: {nextStage.code}</div>
+              </div>
+            </div>
+            <Badge className={`bg-gradient-to-r ${nextStage.color} text-white border-0`}>
+              {nextStage.discount}
+            </Badge>
+          </div>
+        </div>
+      )}
+
       {/* Urgency message */}
-      <div className="mt-6 text-center">
-        <Badge variant="destructive" className="animate-pulse">
-          <Flame className="w-3 h-3 mr-1" />
-          ¡Solo quedan {timeLeft.days} días!
-        </Badge>
-      </div>
+      {currentStage && timeLeft.days === 0 && timeLeft.hours < 6 && (
+        <div className="text-center">
+          <Badge variant="destructive" className="animate-pulse text-base px-4 py-2">
+            <Flame className="w-4 h-4 mr-2" />
+            ¡ÚLTIMA OPORTUNIDAD! Quedan menos de {timeLeft.hours}h
+          </Badge>
+        </div>
+      )}
     </div>
   );
 };
