@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
 import { TrustBadges } from "@/components/TrustBadges";
+import { Testimonials } from "@/components/Testimonials";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
@@ -82,7 +83,12 @@ const Index = () => {
       <div className="container py-12">
         {/* Trust Badges */}
         <TrustBadges />
+      </div>
 
+      {/* Testimonials Section */}
+      <Testimonials />
+
+      <div className="container py-12">
         {/* New Arrivals */}
         {newProducts.length > 0 && (
           <section className="py-12">
