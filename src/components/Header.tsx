@@ -21,10 +21,10 @@ export const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/90 shadow-sm">
+    <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-[#1a1f3a]/95 backdrop-blur supports-[backdrop-filter]:bg-[#1a1f3a]/90 shadow-sm">
       <div className="container flex h-20 items-center justify-between">
         <Link to="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-[#1a1f3a] rounded-md flex items-center justify-center p-1.5">
+          <div className="w-10 h-10 bg-white/10 rounded-md flex items-center justify-center p-1.5">
             <img src={garettIcon} alt="Garett" className="w-full h-full object-contain" />
           </div>
           <img src={garettLogo} alt="GARETT" className="h-8 object-contain" />
@@ -36,7 +36,7 @@ export const Header = () => {
             <Link
               key={link.to}
               to={link.to}
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+              className="text-sm font-medium text-white hover:text-white/80 transition-colors"
             >
               {link.label}
             </Link>
@@ -49,7 +49,7 @@ export const Header = () => {
           {/* Mobile Menu */}
           <Sheet>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="text-white hover:text-white/80 hover:bg-white/10">
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
