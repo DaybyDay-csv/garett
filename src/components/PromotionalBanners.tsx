@@ -76,24 +76,24 @@ export const PromotionalBanners = () => {
           <Button
             variant="secondary"
             size="icon"
-            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 rounded-full opacity-70 md:opacity-0 md:group-hover:opacity-100 hover:opacity-100 transition-opacity shadow-lg backdrop-blur-sm z-20 hover:scale-110 h-10 w-10 md:h-12 md:w-12"
+            className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 rounded-full opacity-80 md:opacity-0 md:group-hover:opacity-100 hover:opacity-100 transition-opacity shadow-xl backdrop-blur-md z-20 hover:scale-110 h-8 w-8 md:h-12 md:w-12 border border-white/20"
             onClick={goToPrevious}
             disabled={isTransitioning}
           >
-            <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
+            <ChevronLeft className="h-4 w-4 md:h-6 md:w-6" />
           </Button>
           <Button
             variant="secondary"
             size="icon"
-            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 rounded-full opacity-70 md:opacity-0 md:group-hover:opacity-100 hover:opacity-100 transition-opacity shadow-lg backdrop-blur-sm z-20 hover:scale-110 h-10 w-10 md:h-12 md:w-12"
+            className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 rounded-full opacity-80 md:opacity-0 md:group-hover:opacity-100 hover:opacity-100 transition-opacity shadow-xl backdrop-blur-md z-20 hover:scale-110 h-8 w-8 md:h-12 md:w-12 border border-white/20"
             onClick={goToNext}
             disabled={isTransitioning}
           >
-            <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
+            <ChevronRight className="h-4 w-4 md:h-6 md:w-6" />
           </Button>
 
           {/* Dots Navigation - Improved mobile visibility */}
-          <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2 z-20 bg-background/50 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full">
+          <div className="absolute bottom-3 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2 z-20 bg-background/70 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full shadow-md">
             {activeBanners.map((_, index) => (
               <button
                 key={index}
@@ -115,8 +115,8 @@ export const PromotionalBanners = () => {
             ))}
           </div>
 
-          {/* Banner Counter - Smaller on mobile */}
-          <div className="absolute top-4 right-4 md:top-6 md:right-6 bg-background/80 backdrop-blur-sm px-3 py-1.5 md:px-3 md:py-2 rounded-full text-xs md:text-sm font-medium z-20">
+          {/* Banner Counter - Smaller on mobile, hidden on very small screens */}
+          <div className="absolute top-2 right-2 md:top-6 md:right-6 bg-background/60 backdrop-blur-sm px-2 py-1 md:px-3 md:py-2 rounded-full text-[10px] md:text-sm font-medium z-20 hidden xs:block">
             {currentIndex + 1} / {activeBanners.length}
           </div>
         </>

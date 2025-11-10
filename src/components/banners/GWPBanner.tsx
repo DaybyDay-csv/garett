@@ -16,7 +16,7 @@ import { gwpConfig } from "@/lib/bannerConfig";
 
 export const GWPBanner = () => {
   return (
-    <div className="relative w-full h-[400px] md:h-[500px] bg-gradient-to-br from-promo-gwp via-background to-promo-gwp overflow-hidden">
+    <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-gwp via-background to-promo-gwp overflow-hidden">
       {/* Pattern overlay */}
       <div 
         className="absolute inset-0 opacity-[0.03]"
@@ -27,7 +27,7 @@ export const GWPBanner = () => {
         }}
       />
       
-      <div className="container mx-auto px-6 md:px-8 h-full flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 relative z-10 py-12 md:py-16">
+      <div className="container mx-auto px-6 md:px-8 min-h-full flex flex-col md:flex-row items-center justify-between gap-6 md:gap-12 relative z-10 py-16 md:py-20 pb-20 md:pb-20">
         {/* Gift Image */}
         <div className="flex-1 flex items-center justify-center order-2 md:order-1">
           <div className="relative">
@@ -35,11 +35,11 @@ export const GWPBanner = () => {
             <img 
               src={gwpImage} 
               alt={gwpConfig.giftName}
-              className="relative w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 object-cover rounded-2xl shadow-2xl"
+              className="relative w-40 h-40 md:w-72 md:h-72 lg:w-80 lg:h-80 object-cover rounded-2xl shadow-2xl"
             />
-            <div className="absolute -top-2 -right-2 md:-top-3 md:-right-3 animate-bounce">
-              <Badge className="bg-accent text-accent-foreground text-sm md:text-lg px-3 py-1.5 md:px-4 md:py-2">
-                <Gift className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+            <div className="absolute -top-2 -right-2 animate-bounce">
+              <Badge className="bg-accent text-accent-foreground text-xs md:text-lg px-2 py-1 md:px-4 md:py-2">
+                <Gift className="w-3 h-3 md:w-5 md:h-5 mr-1 md:mr-2" />
                 GRATIS
               </Badge>
             </div>
@@ -47,13 +47,13 @@ export const GWPBanner = () => {
         </div>
 
         {/* Content */}
-        <div className="flex-1 text-center md:text-left space-y-4 md:space-y-6 order-1 md:order-2 max-w-2xl">
-          <Badge variant="outline" className="border-primary text-primary text-xs md:text-sm">
+        <div className="flex-1 text-center md:text-left space-y-3 md:space-y-6 order-1 md:order-2 max-w-lg mx-auto md:mx-0">
+          <Badge variant="outline" className="border-primary text-primary text-xs md:text-sm px-3 py-1 md:px-4 md:py-2">
             <Gift className="w-3 h-3 mr-1" />
             REGALO GRATIS
           </Badge>
           
-          <div className="space-y-2 md:space-y-4">
+          <div className="space-y-2 md:space-y-3">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               Regalo<br />
               <span className="text-primary">Especial</span> 🎁
@@ -65,12 +65,12 @@ export const GWPBanner = () => {
           </div>
 
           {/* Value Indicator */}
-          <div className="bg-primary-light p-4 md:p-5 rounded-lg border border-primary/20 inline-block">
+          <div className="bg-primary-light p-3 md:p-5 rounded-lg border border-primary/20 inline-block">
             <p className="text-xs md:text-sm text-muted-foreground mb-1">Valor del regalo</p>
-            <p className="text-2xl md:text-3xl font-bold text-primary">€12.99</p>
+            <p className="text-xl md:text-3xl font-bold text-primary">€12.99</p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-2">
             <Button asChild size="lg" className="text-sm md:text-base h-12 px-8 w-full sm:w-auto">
               <Link to="/productos">
                 Comprar ahora

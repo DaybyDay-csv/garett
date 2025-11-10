@@ -6,7 +6,7 @@ import patternImage from "@/assets/garett-pattern-1.png";
 
 export const AeroGlowBanner = () => {
   return (
-    <div className="relative w-full h-[400px] md:h-[500px] bg-gradient-to-br from-promo-aeroglow via-background to-promo-aeroglow overflow-hidden">
+    <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-aeroglow via-background to-promo-aeroglow overflow-hidden">
       {/* Pattern overlay */}
       <div 
         className="absolute inset-0 opacity-5"
@@ -17,20 +17,20 @@ export const AeroGlowBanner = () => {
         }}
       />
       
-      <div className="container mx-auto px-6 md:px-8 h-full flex flex-col md:flex-row items-center justify-between relative z-10">
+      <div className="container mx-auto px-6 md:px-8 min-h-full flex flex-col md:flex-row items-center justify-between relative z-10">
         {/* Content */}
-        <div className="flex-1 text-center md:text-left space-y-4 md:space-y-6 py-12 md:py-16 max-w-2xl">
+        <div className="flex-1 text-center md:text-left space-y-4 md:space-y-6 py-16 md:py-20 pb-20 md:pb-20 max-w-2xl">
           <Badge className="bg-primary text-primary-foreground animate-pulse text-xs md:text-sm">
             <Sparkles className="w-3 h-3 mr-1" />
             EXCLUSIVO LANZAMIENTO
           </Badge>
           
-          <div className="space-y-2 md:space-y-4">
+          <div className="space-y-2 md:space-y-3">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               Presentamos<br />
               <span className="text-primary">AeroGlow</span>
             </h1>
-            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground leading-relaxed">
+            <p className="text-sm md:text-base lg:text-xl text-muted-foreground leading-relaxed">
               Nueva generación de limpieza facial profesional con tecnología avanzada
             </p>
           </div>
@@ -51,7 +51,7 @@ export const AeroGlowBanner = () => {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-2">
             <Button asChild size="lg" className="group text-sm md:text-base h-12 px-8 w-full sm:w-auto">
               <Link to="/productos">
                 Descubre AeroGlow
