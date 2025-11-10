@@ -5,26 +5,21 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import patternImage from "@/assets/garett-pattern-1.png";
 import { getCurrentPromotionalStage } from "@/lib/promotions";
-
 export const BlackFridayBanner = () => {
   const currentStage = getCurrentPromotionalStage();
   const isActive = currentStage?.name === 'Black Friday';
-
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0
   });
-
   useEffect(() => {
     // Black Friday 2025 - November 28th
     const targetDate = new Date('2025-11-28T00:00:00');
-    
     const interval = setInterval(() => {
       const now = new Date();
       const difference = targetDate.getTime() - now.getTime();
-      
       if (difference > 0) {
         setTimeLeft({
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -41,44 +36,51 @@ export const BlackFridayBanner = () => {
         });
       }
     }, 1000);
-
     return () => clearInterval(interval);
   }, []);
-
-  const tiers = [
-    { name: "SUPER EARLY", discount: "50%", uses: 10, icon: Flame, color: "from-promo-bf-start to-promo-bf-mid" },
-    { name: "EARLY BIRD", discount: "35%", uses: 25, icon: Zap, color: "from-promo-bf-mid to-promo-bf-start" },
-    { name: "BLACK FRIDAY", discount: "25%", uses: "∞", icon: Gift, color: "from-promo-bf-start to-promo-bf-end" },
-  ];
-
-  return (
-    <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-bf-start via-promo-bf-mid to-promo-bf-end overflow-hidden">
+  const tiers = [{
+    name: "SUPER EARLY",
+    discount: "50%",
+    uses: 10,
+    icon: Flame,
+    color: "from-promo-bf-start to-promo-bf-mid"
+  }, {
+    name: "EARLY BIRD",
+    discount: "35%",
+    uses: 25,
+    icon: Zap,
+    color: "from-promo-bf-mid to-promo-bf-start"
+  }, {
+    name: "BLACK FRIDAY",
+    discount: "25%",
+    uses: "∞",
+    icon: Gift,
+    color: "from-promo-bf-start to-promo-bf-end"
+  }];
+  return <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-bf-start via-promo-bf-mid to-promo-bf-end overflow-hidden">
       {/* Pattern overlay */}
-      <div 
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `url(${patternImage})`,
-          backgroundSize: '400px',
-          backgroundRepeat: 'repeat',
-          filter: 'brightness(0) invert(1)'
-        }}
-      />
+      <div className="absolute inset-0 opacity-10" style={{
+      backgroundImage: `url(${patternImage})`,
+      backgroundSize: '400px',
+      backgroundRepeat: 'repeat',
+      filter: 'brightness(0) invert(1)'
+    }} />
       
       {/* Animated glow effects */}
       <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-promo-bf-mid/30 blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-promo-bf-start/30 blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-promo-bf-start/30 blur-3xl animate-pulse" style={{
+      animationDelay: '1s'
+    }} />
       
       <div className="container mx-auto px-6 md:px-8 min-h-full flex flex-col items-center justify-center text-center relative z-10 space-y-3 md:space-y-8 py-16 md:py-20 pb-20 md:pb-20">
         {/* Live Badge */}
-        {isActive && (
-          <Badge className="bg-white text-promo-bf-start animate-pulse text-xs md:text-sm px-4 py-1.5 md:px-5 md:py-2">
+        {isActive && <Badge className="bg-white text-promo-bf-start animate-pulse text-xs md:text-sm px-4 py-1.5 md:px-5 md:py-2">
             <span className="relative flex h-2 w-2 mr-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-promo-bf-start opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-promo-bf-start"></span>
             </span>
             EN VIVO AHORA
-          </Badge>
-        )}
+          </Badge>}
         
         {/* Date Badge */}
         <Badge variant="outline" className="border-white text-white text-xs md:text-sm px-4 py-1.5 md:px-5 md:py-2">
@@ -87,9 +89,7 @@ export const BlackFridayBanner = () => {
         
         {/* Main Heading */}
         <div className="space-y-2 md:space-y-4 max-w-4xl">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-2xl leading-tight">
-            Black Friday
-            <span className="block text-xl md:text-3xl lg:text-4xl mt-2 md:mt-3">2025</span>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-2xl leading-tight">Black Friday 2025
           </h1>
           <p className="text-xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg">
             Hasta <span className="text-3xl md:text-4xl lg:text-5xl">50%</span> OFF
@@ -106,31 +106,32 @@ export const BlackFridayBanner = () => {
             Comienza en
           </p>
           <div className="flex gap-2 md:gap-3 justify-center">
-            {[
-              { label: 'Días', value: timeLeft.days },
-              { label: 'Horas', value: timeLeft.hours },
-              { label: 'Min', value: timeLeft.minutes },
-              { label: 'Seg', value: timeLeft.seconds }
-            ].map((item, index) => (
-              <div key={index} className="flex flex-col">
+            {[{
+            label: 'Días',
+            value: timeLeft.days
+          }, {
+            label: 'Horas',
+            value: timeLeft.hours
+          }, {
+            label: 'Min',
+            value: timeLeft.minutes
+          }, {
+            label: 'Seg',
+            value: timeLeft.seconds
+          }].map((item, index) => <div key={index} className="flex flex-col">
                 <div className="bg-white text-promo-bf-start text-lg md:text-3xl font-bold rounded px-2 py-2 md:px-3 md:py-3 min-w-[45px] md:min-w-[65px]">
                   {String(item.value).padStart(2, '0')}
                 </div>
                 <p className="text-white/70 text-[10px] md:text-xs mt-1">{item.label}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
 
         {/* Tiered Offers - Improved Mobile */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 w-full max-w-2xl px-4">
           {tiers.map((tier, index) => {
-            const Icon = tier.icon;
-            return (
-              <div
-                key={index}
-                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-3 md:p-4 text-white space-y-1 md:space-y-2 hover:bg-white/20 transition-all hover:scale-105"
-              >
+          const Icon = tier.icon;
+          return <div key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-3 md:p-4 text-white space-y-1 md:space-y-2 hover:bg-white/20 transition-all hover:scale-105">
                 <Icon className="w-4 h-4 md:w-6 md:h-6 mx-auto" />
                 <div>
                   <p className="text-[10px] md:text-xs font-semibold uppercase tracking-wider leading-tight">{tier.name}</p>
@@ -139,9 +140,8 @@ export const BlackFridayBanner = () => {
                     {typeof tier.uses === 'number' ? `${tier.uses} usos` : 'Ilimitado'}
                   </p>
                 </div>
-              </div>
-            );
-          })}
+              </div>;
+        })}
         </div>
 
         {/* CTA */}
@@ -152,13 +152,10 @@ export const BlackFridayBanner = () => {
             </Link>
           </Button>
           
-          {isActive && (
-            <p className="text-xs md:text-sm text-white/80">
+          {isActive && <p className="text-xs md:text-sm text-white/80">
               ⚡ Las mejores ofertas se agotan rápido
-            </p>
-          )}
+            </p>}
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
