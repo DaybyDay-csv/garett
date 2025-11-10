@@ -9,6 +9,7 @@ import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles } from "lucide-react";
 import { calculatePromotionalPrice, formatPrice, getCurrentPromotionalStage } from "@/lib/promotions";
+import gwpHeadband from "@/assets/gwp-headband.jpg";
 
 const ProductDetail = () => {
   const { handle } = useParams();
@@ -206,11 +207,25 @@ const ProductDetail = () => {
             {/* GWP Progress Incentive */}
             {hasGWPActive && (
               <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-4 border border-purple-200 dark:border-purple-800">
-                <div className="flex items-center gap-2 mb-3">
-                  <Gift className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-                  <span className="font-semibold text-sm text-purple-900 dark:text-purple-100">
-                    ¡Obtén un regalo gratis!
-                  </span>
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="w-16 h-16 rounded-lg overflow-hidden bg-white flex-shrink-0 border-2 border-purple-200">
+                    <img 
+                      src={gwpHeadband} 
+                      alt="Banda de pelo gratis" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Gift className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                      <span className="font-semibold text-sm text-purple-900 dark:text-purple-100">
+                        ¡Obtén un regalo gratis!
+                      </span>
+                    </div>
+                    <p className="text-xs text-purple-700 dark:text-purple-300">
+                      Banda de pelo deportiva
+                    </p>
+                  </div>
                 </div>
                 
                 {willUnlockGWP ? (
@@ -238,7 +253,7 @@ const ProductDetail = () => {
                     <Progress value={progressPercentage} className="h-2 mb-2" />
                     <p className="text-xs text-purple-800 dark:text-purple-200">
                       {remainingForGWP > 0 ? (
-                        <>Añade <span className="font-bold">€{remainingForGWP.toFixed(2)}</span> más para obtener una <span className="font-bold">banda de pelo gratis</span></>
+                        <>Añade <span className="font-bold">€{remainingForGWP.toFixed(2)}</span> más para obtener tu <span className="font-bold">banda de pelo gratis</span></>
                       ) : (
                         <span className="font-bold">¡Banda de pelo gratis desbloqueada!</span>
                       )}
