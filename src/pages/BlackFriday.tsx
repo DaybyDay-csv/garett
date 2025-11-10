@@ -299,7 +299,7 @@ const BlackFriday = () => {
     ...stage,
     discount: stage.discountLabel,
     description: stage.name === "Warm-up" ? "Descuento aplicado directamente en productos" : stage.name === "White Week" ? "20% OFF (10% + 10% extra) + Regalo" : stage.name === "Black Friday" ? "Descuentos por etapas + Regalo" : "15% OFF + Regalo",
-    details: stage.name === "Warm-up" ? "10% de descuento en toda la tienda" : stage.name === "White Week" ? "Descuento aplicado en productos + Banda de pelo gratis desde €70" : stage.name === "Black Friday" ? "20% base + códigos tier (-50%/-35%/-25%) + Banda de pelo gratis desde €70" : "Descuento aplicado en productos + Banda de pelo gratis desde €70",
+    details: stage.name === "Warm-up" ? "10% de descuento en toda la tienda" : stage.name === "White Week" ? "Descuento aplicado en productos + Banda de pelo gratis desde €70" : stage.name === "Black Friday" ? "25% base + códigos tier (-50%/-35%/-25%) + Banda de pelo gratis desde €70" : "Descuento aplicado en productos + Banda de pelo gratis desde €70",
     code: stage.name === "White Week" ? "WHITEWEEK20" : stage.name === "Cyber Monday" ? "CYBERMONDAY15" : null,
     codes: stage.name === "Black Friday" ? [{
       code: "EARLYBIRD50",

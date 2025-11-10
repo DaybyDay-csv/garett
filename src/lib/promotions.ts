@@ -49,9 +49,9 @@ export const promotionalStages: PromotionalStage[] = [
     dates: "28-30 Noviembre",
     startDate: new Date('2025-11-28T00:00:00'),
     endDate: new Date('2025-11-30T23:59:59'),
-    baseDiscount: 20, // Base discount only, tiers are manual codes
-    discount: "-20% + códigos",
-    discountLabel: "-20% + códigos",
+    baseDiscount: 25, // Base discount only, tiers are manual codes
+    discount: "-25% + códigos",
+    discountLabel: "-25% + códigos",
     badge: "BLACK FRIDAY",
     code: null, // Codes are tiered for Black Friday
     icon: Flame,
