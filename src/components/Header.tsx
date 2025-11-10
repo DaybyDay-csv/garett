@@ -2,45 +2,35 @@ import { Link } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import garettIcon from "@/assets/garett-icon-white.png";
 import garettLogo from "@/assets/garett-logo-white.png";
-
 export const Header = () => {
-  const navLinks = [
-    { label: 'Inicio', to: '/' },
-    { label: 'Productos', to: '/productos' },
-    { label: 'Black Friday', to: '/black-friday' },
-    { label: 'Novedades', to: '/novedades' },
-  ];
-
-  return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-[#1a1f3a]/95 backdrop-blur supports-[backdrop-filter]:bg-[#1a1f3a]/90 shadow-sm">
+  const navLinks = [{
+    label: 'Inicio',
+    to: '/'
+  }, {
+    label: 'Productos',
+    to: '/productos'
+  }, {
+    label: 'Black Friday',
+    to: '/black-friday'
+  }, {
+    label: 'Novedades',
+    to: '/novedades'
+  }];
+  return <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-[#1a1f3a]/95 backdrop-blur supports-[backdrop-filter]:bg-[#1a1f3a]/90 shadow-sm">
       <div className="container flex h-20 items-center justify-between">
         <Link to="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-white/10 rounded-md flex items-center justify-center p-1.5">
-            <img src={garettIcon} alt="Garett" className="w-full h-full object-contain" />
-          </div>
+          
           <img src={garettLogo} alt="GARETT" className="h-8 object-contain" />
         </Link>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className="text-sm font-medium text-white hover:text-white/80 transition-colors"
-            >
+          {navLinks.map(link => <Link key={link.to} to={link.to} className="text-sm font-medium text-white hover:text-white/80 transition-colors">
               {link.label}
-            </Link>
-          ))}
+            </Link>)}
         </nav>
         
         <div className="flex items-center gap-3">
@@ -63,20 +53,13 @@ export const Header = () => {
                 </SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col space-y-4 mt-8">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    className="text-base font-medium transition-colors hover:text-primary py-2 border-b border-border/50"
-                  >
+                {navLinks.map(link => <Link key={link.to} to={link.to} className="text-base font-medium transition-colors hover:text-primary py-2 border-b border-border/50">
                     {link.label}
-                  </Link>
-                ))}
+                  </Link>)}
               </nav>
             </SheetContent>
           </Sheet>
         </div>
       </div>
-    </header>
-  );
+    </header>;
 };
