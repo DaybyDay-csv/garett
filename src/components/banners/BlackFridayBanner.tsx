@@ -1,13 +1,49 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Flame, Gift, Zap } from "lucide-react";
+import { Flame, Gift, Zap, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import patternImage from "@/assets/garett-pattern-1.png";
 import { getCurrentPromotionalStage } from "@/lib/promotions";
 
 export const BlackFridayBanner = () => {
   const currentStage = getCurrentPromotionalStage();
   const isActive = currentStage?.name === 'Black Friday';
+
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+
+  useEffect(() => {
+    // Black Friday 2025 - November 28th
+    const targetDate = new Date('2025-11-28T00:00:00');
+    
+    const interval = setInterval(() => {
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
+      
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor(difference / (1000 * 60 * 60) % 24),
+          minutes: Math.floor(difference / 1000 / 60 % 60),
+          seconds: Math.floor(difference / 1000 % 60)
+        });
+      } else {
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        });
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const tiers = [
     { name: "SUPER EARLY", discount: "50%", uses: 150, icon: Flame, color: "from-promo-bf-start to-promo-bf-mid" },
@@ -61,6 +97,29 @@ export const BlackFridayBanner = () => {
           <p className="text-sm md:text-lg lg:text-xl text-white/90 leading-relaxed">
             + Regalo gratis desde €70
           </p>
+        </div>
+
+        {/* Countdown Timer */}
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 md:p-6 max-w-2xl w-full">
+          <p className="text-white/80 text-xs md:text-sm mb-2 md:mb-4 flex items-center justify-center gap-2">
+            <Clock className="w-4 h-4 md:w-5 md:h-5" />
+            Comienza en
+          </p>
+          <div className="flex gap-2 md:gap-3 justify-center">
+            {[
+              { label: 'Días', value: timeLeft.days },
+              { label: 'Horas', value: timeLeft.hours },
+              { label: 'Min', value: timeLeft.minutes },
+              { label: 'Seg', value: timeLeft.seconds }
+            ].map((item, index) => (
+              <div key={index} className="flex flex-col">
+                <div className="bg-white text-promo-bf-start text-lg md:text-3xl font-bold rounded px-2 py-2 md:px-3 md:py-3 min-w-[45px] md:min-w-[65px]">
+                  {String(item.value).padStart(2, '0')}
+                </div>
+                <p className="text-white/70 text-[10px] md:text-xs mt-1">{item.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Tiered Offers - Improved Mobile */}
