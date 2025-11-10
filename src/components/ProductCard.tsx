@@ -72,35 +72,38 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           />
         )}
         
-        <div className="absolute top-2 left-2 flex flex-wrap gap-1">
-          {/* Promotional Stage Badge - Highest priority */}
-          {priceInfo.hasDiscount && priceInfo.stage && (
-            <Badge className={`bg-gradient-to-r ${priceInfo.stage.color} text-white border-0 animate-pulse`}>
-              <Flame className="w-3 h-3 mr-1" />
-              {priceInfo.stage.badge}
+        <div className="absolute top-2 left-2 right-2 flex justify-between items-start gap-2">
+          {/* Left side badges - Priority: Promotional > Launch > Bestseller > New (max 2) */}
+          <div className="flex flex-col gap-1 max-w-[60%]">
+            {priceInfo.hasDiscount && priceInfo.stage && (
+              <Badge className={`bg-gradient-to-r ${priceInfo.stage.color} text-white border-0 animate-pulse`}>
+                <Flame className="w-3 h-3 mr-1" />
+                {priceInfo.stage.badge}
+              </Badge>
+            )}
+            {!priceInfo.hasDiscount && isLaunch && (
+              <Badge variant="destructive">
+                Lanzamiento
+              </Badge>
+            )}
+            {!priceInfo.hasDiscount && !isLaunch && isBestseller && (
+              <Badge variant="secondary">
+                Bestseller
+              </Badge>
+            )}
+            {!priceInfo.hasDiscount && !isLaunch && !isBestseller && isNew && (
+              <Badge variant="default" className="bg-primary text-primary-foreground">
+                Nuevo
+              </Badge>
+            )}
+          </div>
+          
+          {/* Right side badge - Only show if no promotional badge */}
+          {!priceInfo.hasDiscount && (
+            <Badge variant="outline" className="bg-background/80 backdrop-blur-sm text-xs">
+              Garantía 3 años
             </Badge>
           )}
-          {isNew && (
-            <Badge variant="default" className="bg-primary text-primary-foreground">
-              Nuevo
-            </Badge>
-          )}
-          {isBestseller && (
-            <Badge variant="secondary">
-              Bestseller
-            </Badge>
-          )}
-          {isLaunch && (
-            <Badge variant="destructive">
-              Lanzamiento
-            </Badge>
-          )}
-        </div>
-        
-        <div className="absolute top-2 right-2">
-          <Badge variant="outline" className="bg-background/80 backdrop-blur-sm">
-            Garantía 3 años
-          </Badge>
         </div>
       </div>
       
