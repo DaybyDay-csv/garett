@@ -1,23 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Zap, Copy, Check, Gift, Clock } from "lucide-react";
+import { Zap, Gift, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import patternImage from "@/assets/garett-pattern-2.png";
 export const CyberMondayBanner = () => {
-  const [copied, setCopied] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0
   });
-  const discountCode = "CYBERMONDAY15";
-  const copyCode = () => {
-    navigator.clipboard.writeText(discountCode);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  
   useEffect(() => {
     // Cyber Monday 2025 - December 1st (Monday after Black Friday)
     const targetDate = new Date('2025-12-01T00:00:00');
@@ -121,20 +115,14 @@ export const CyberMondayBanner = () => {
           </div>
         </div>
 
-        {/* Discount Code - Improved Mobile */}
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 md:p-6 max-w-lg w-full space-y-2 md:space-y-4">
-          <p className="text-white/80 text-xs md:text-sm">Código de descuento</p>
-          <div className="flex items-center gap-3">
-            <code className="flex-1 bg-white text-promo-cm-start text-lg md:text-2xl font-mono font-bold px-3 md:px-4 py-2 md:py-3 rounded whitespace-nowrap overflow-x-auto">
-              {discountCode}
-            </code>
-            <Button size="icon" variant="secondary" onClick={copyCode} className="h-12 w-12 flex-shrink-0">
-              {copied ? <Check className="w-5 h-5 text-green-600" /> : <Copy className="w-5 h-5" />}
-            </Button>
-          </div>
-          {copied && <p className="text-xs md:text-sm text-white animate-in fade-in">
-              ✓ Código copiado
-            </p>}
+        {/* Automatic Discount Info */}
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 md:p-6 max-w-lg w-full">
+          <p className="text-white text-base md:text-lg font-semibold">
+            ✨ Descuento automático al finalizar compra
+          </p>
+          <p className="text-white/80 text-xs md:text-sm mt-2">
+            No necesitas código - el descuento se aplica automáticamente
+          </p>
         </div>
 
         {/* Benefits - Grid Layout */}
@@ -156,7 +144,7 @@ export const CyberMondayBanner = () => {
         {/* CTA */}
         <div className="pt-2">
           <Button asChild size="lg" variant="secondary" className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 shadow-2xl hover:scale-105 transition-transform w-full sm:w-auto max-w-xs">
-            
+            <Link to="/black-friday">Ver ofertas Cyber Monday</Link>
           </Button>
 
           <p className="text-xs md:text-sm text-white/70 px-4 mt-3">
