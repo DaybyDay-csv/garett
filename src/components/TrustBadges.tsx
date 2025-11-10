@@ -11,7 +11,7 @@ export const TrustBadges = () => {
       
       <div className="flex flex-col items-center text-center p-4 md:p-6 rounded-lg border bg-card">
         <Award className="w-10 h-10 md:w-12 md:h-12 text-primary mb-3 md:mb-4" />
-        <h3 className="font-semibold text-base md:text-lg mb-1 md:mb-2">Científicamente Testado y por Estilsitas</h3>
+        <h3 className="font-semibold text-base md:text-lg mb-1 md:mb-2">Científicamente Testado</h3>
         <p className="text-xs md:text-sm text-muted-foreground">Todos nuestros productos son científicamente testados . </p>
       </div>
       
