@@ -118,8 +118,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           </p>
         )}
         
-        <div className="flex items-center justify-between mt-auto">
-          <div className="flex flex-col">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-auto">
+          <div className="flex flex-col flex-1 min-w-0">
             {priceInfo.hasDiscount ? (
               <>
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
@@ -145,6 +145,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             onClick={handleAddToCart}
             disabled={!firstVariant?.availableForSale}
             size="sm"
+            className="w-full sm:w-auto"
           >
             {firstVariant?.availableForSale ? 'Añadir' : 'Agotado'}
           </Button>
