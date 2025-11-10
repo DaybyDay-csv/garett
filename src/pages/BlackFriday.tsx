@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Zap, Timer, Gift, Copy, Check, Flame, AlertCircle, Clock } from "lucide-react";
 import { toast } from "sonner";
 import { promotionalStages, getCurrentPromotionalStage } from "@/lib/promotions";
-
 interface TimeLeft {
   days: number;
   hours: number;
@@ -16,7 +15,6 @@ interface TimeLeft {
   seconds: number;
   isExpired: boolean;
 }
-
 interface PromotionalStage {
   name: string;
   dates: string;
@@ -26,14 +24,18 @@ interface PromotionalStage {
   description: string;
   details: string;
   code?: string | null;
-  codes?: Array<{ code: string; discount: string; limit: string; urgency: string }>;
+  codes?: Array<{
+    code: string;
+    discount: string;
+    limit: string;
+    urgency: string;
+  }>;
   gwp?: boolean;
   gwpCode?: string;
   icon: any;
   color: string;
   badge: string;
 }
-
 interface BlackFridayTier {
   name: string;
   code: string;
@@ -44,7 +46,6 @@ interface BlackFridayTier {
   color: string;
   icon: any;
 }
-
 interface CountdownTimerProps {
   promotionalStages: Array<{
     name: string;
@@ -58,8 +59,9 @@ interface CountdownTimerProps {
     badge: string;
   }>;
 }
-
-const CountdownTimer = ({ promotionalStages }: CountdownTimerProps) => {
+const CountdownTimer = ({
+  promotionalStages
+}: CountdownTimerProps) => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
     hours: 0,
@@ -72,76 +74,71 @@ const CountdownTimer = ({ promotionalStages }: CountdownTimerProps) => {
   const [currentBFTier, setCurrentBFTier] = useState<BlackFridayTier | null>(null);
 
   // Black Friday tiers (only active during BF period)
-  const blackFridayTiers: BlackFridayTier[] = [
-    {
-      name: "SUPER EARLY BIRD",
-      code: "EARLYBIRD50",
-      discount: "50% OFF",
-      startDate: new Date('2024-01-01T00:00:00'), // Demo: Active now
-      endDate: new Date('2024-12-31T12:00:00'),
-      remaining: 150,
-      color: "from-red-500 to-orange-500",
-      icon: Flame
-    },
-    {
-      name: "EARLY BIRD",
-      code: "EARLYBIRD35",
-      discount: "35% OFF",
-      startDate: new Date('2024-01-01T00:00:00'), // Demo: Active now
-      endDate: new Date('2024-12-31T12:00:00'),
-      remaining: 450,
-      color: "from-orange-500 to-yellow-500",
-      icon: Zap
-    },
-    {
-      name: "BLACK FRIDAY",
-      code: "BF25",
-      discount: "25% OFF",
-      startDate: new Date('2024-01-01T00:00:00'), // Demo: Active now
-      endDate: new Date('2026-12-31T23:59:59'),
-      remaining: 0,
-      color: "from-primary to-primary-glow",
-      icon: Timer
-    }
-  ];
-
+  const blackFridayTiers: BlackFridayTier[] = [{
+    name: "SUPER EARLY BIRD",
+    code: "EARLYBIRD50",
+    discount: "50% OFF",
+    startDate: new Date('2024-01-01T00:00:00'),
+    // Demo: Active now
+    endDate: new Date('2024-12-31T12:00:00'),
+    remaining: 150,
+    color: "from-red-500 to-orange-500",
+    icon: Flame
+  }, {
+    name: "EARLY BIRD",
+    code: "EARLYBIRD35",
+    discount: "35% OFF",
+    startDate: new Date('2024-01-01T00:00:00'),
+    // Demo: Active now
+    endDate: new Date('2024-12-31T12:00:00'),
+    remaining: 450,
+    color: "from-orange-500 to-yellow-500",
+    icon: Zap
+  }, {
+    name: "BLACK FRIDAY",
+    code: "BF25",
+    discount: "25% OFF",
+    startDate: new Date('2024-01-01T00:00:00'),
+    // Demo: Active now
+    endDate: new Date('2026-12-31T23:59:59'),
+    remaining: 0,
+    color: "from-primary to-primary-glow",
+    icon: Timer
+  }];
   useEffect(() => {
     const calculateTimeAndStage = () => {
       const now = new Date();
-      
+
       // Find current promotional stage
-      const activePromo = promotionalStages.find(stage => 
-        now >= stage.startDate && now <= stage.endDate
-      );
+      const activePromo = promotionalStages.find(stage => now >= stage.startDate && now <= stage.endDate);
 
       // Find next promotional stage
-      const upcomingPromo = promotionalStages.find(stage => 
-        now < stage.startDate
-      );
-
+      const upcomingPromo = promotionalStages.find(stage => now < stage.startDate);
       setCurrentPromoStage(activePromo || null);
       setNextPromoStage(upcomingPromo || null);
 
       // If in Black Friday period, also check for active tier
-      const activeBFTier = blackFridayTiers.find(tier =>
-        now >= tier.startDate && now <= tier.endDate
-      );
+      const activeBFTier = blackFridayTiers.find(tier => now >= tier.startDate && now <= tier.endDate);
       setCurrentBFTier(activeBFTier || null);
 
       // Calculate time left for current promotional stage
       const targetDate = activePromo ? activePromo.endDate : promotionalStages[promotionalStages.length - 1].endDate;
       const difference = targetDate.getTime() - now.getTime();
-
       if (difference <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true });
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+          isExpired: true
+        });
         return;
       }
-
       setTimeLeft({
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
+        hours: Math.floor(difference / (1000 * 60 * 60) % 24),
+        minutes: Math.floor(difference / 1000 / 60 % 60),
+        seconds: Math.floor(difference / 1000 % 60),
         isExpired: false
       });
     };
@@ -153,70 +150,34 @@ const CountdownTimer = ({ promotionalStages }: CountdownTimerProps) => {
     const timer = setInterval(() => {
       calculateTimeAndStage();
     }, 1000);
-
     return () => clearInterval(timer);
   }, []);
-
   if (timeLeft.isExpired) {
-    return (
-      <div className="text-center py-8 bg-white/10 backdrop-blur-md rounded-2xl border border-white/30 p-8">
+    return <div className="text-center py-8 bg-white/10 backdrop-blur-md rounded-2xl border border-white/30 p-8">
         <p className="text-2xl font-bold text-white">¡Black Friday ha terminado!</p>
         <p className="text-white/80 mt-2">Gracias por participar. Vuelve el próximo año.</p>
-      </div>
-    );
+      </div>;
   }
-
-  const timeUnits = [
-    { value: timeLeft.days, label: 'Días' },
-    { value: timeLeft.hours, label: 'Horas' },
-    { value: timeLeft.minutes, label: 'Minutos' },
-    { value: timeLeft.seconds, label: 'Segundos' }
-  ];
+  const timeUnits = [{
+    value: timeLeft.days,
+    label: 'Días'
+  }, {
+    value: timeLeft.hours,
+    label: 'Horas'
+  }, {
+    value: timeLeft.minutes,
+    label: 'Minutos'
+  }, {
+    value: timeLeft.seconds,
+    label: 'Segundos'
+  }];
 
   // Display the active tier or stage
   const displayStage = currentBFTier || currentPromoStage;
   const StageIcon = displayStage?.icon;
-
-  return (
-    <div className="mt-8 space-y-6">
+  return <div className="mt-8 space-y-6">
       {/* Current Stage Banner */}
-      {displayStage && (
-        <div className="bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-6">
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${displayStage.color} flex items-center justify-center animate-pulse`}>
-              {StageIcon && <StageIcon className="w-5 h-5 text-white" />}
-            </div>
-            <div className="text-center">
-              <div className="text-sm text-white/80 font-medium">
-                {currentBFTier ? 'TIER ACTIVO BLACK FRIDAY' : 'ETAPA ACTIVA'}
-              </div>
-              <div className="text-2xl font-bold text-white">{displayStage.name}</div>
-            </div>
-          </div>
-          
-          <div className="flex items-center justify-center gap-4 flex-wrap">
-            <Badge className={`bg-gradient-to-r ${displayStage.color} text-white border-0 text-lg px-4 py-1`}>
-              {displayStage.discount}
-            </Badge>
-            {currentBFTier ? (
-              <>
-                <div className="bg-white/20 rounded-lg px-4 py-2">
-                  <span className="text-white font-mono font-bold">{currentBFTier.code}</span>
-                </div>
-                {currentBFTier.remaining > 0 && (
-                  <Badge variant="destructive" className="animate-pulse">
-                    Solo {currentBFTier.remaining} usos disponibles
-                  </Badge>
-                )}
-              </>
-            ) : currentPromoStage?.code && (
-              <div className="bg-white/20 rounded-lg px-4 py-2">
-                <span className="text-white font-mono font-bold">{currentPromoStage.code}</span>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      {displayStage}
 
       {/* Countdown */}
       <div>
@@ -228,8 +189,7 @@ const CountdownTimer = ({ promotionalStages }: CountdownTimerProps) => {
         </div>
         
         <div className="flex justify-center gap-3 md:gap-4">
-          {timeUnits.map((unit) => (
-            <div key={unit.label} className="flex flex-col items-center">
+          {timeUnits.map(unit => <div key={unit.label} className="flex flex-col items-center">
               <div className="relative">
                 {/* Animated background */}
                 <div className="absolute inset-0 bg-white/20 rounded-lg blur-sm animate-pulse" />
@@ -246,14 +206,12 @@ const CountdownTimer = ({ promotionalStages }: CountdownTimerProps) => {
               <div className="mt-2 text-xs md:text-sm text-white/80 font-medium uppercase tracking-wider">
                 {unit.label}
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
       </div>
 
       {/* Next Stage Preview */}
-      {nextPromoStage && (
-        <div className="bg-white/5 backdrop-blur-md border border-white/20 rounded-xl p-5">
+      {nextPromoStage && <div className="bg-white/5 backdrop-blur-md border border-white/20 rounded-xl p-5">
           <div className="text-center">
             <div className="text-xs text-white/70 uppercase tracking-wider mb-2">
               SIGUIENTE ETAPA
@@ -265,36 +223,28 @@ const CountdownTimer = ({ promotionalStages }: CountdownTimerProps) => {
               <div>
                 <div className="font-bold text-white text-lg">{nextPromoStage.name}</div>
                 <div className="text-sm text-white/70">{nextPromoStage.dates}</div>
-                {nextPromoStage.code && (
-                  <div className="text-xs text-white/60 mt-1">Código: {nextPromoStage.code}</div>
-                )}
+                {nextPromoStage.code && <div className="text-xs text-white/60 mt-1">Código: {nextPromoStage.code}</div>}
               </div>
             </div>
             <Badge className={`bg-gradient-to-r ${nextPromoStage.color} text-white border-0`}>
               {nextPromoStage.discount}
             </Badge>
           </div>
-        </div>
-      )}
+        </div>}
 
       {/* Urgency message */}
-      {currentPromoStage && timeLeft.days === 0 && timeLeft.hours < 6 && (
-        <div className="text-center">
+      {currentPromoStage && timeLeft.days === 0 && timeLeft.hours < 6 && <div className="text-center">
           <Badge variant="destructive" className="animate-pulse text-base px-4 py-2">
             <Flame className="w-4 h-4 mr-2" />
             ¡ÚLTIMA OPORTUNIDAD! Quedan menos de {timeLeft.hours}h
           </Badge>
-        </div>
-      )}
-    </div>
-  );
+        </div>}
+    </div>;
 };
-
 const BlackFriday = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
-
   useEffect(() => {
     const loadProducts = async () => {
       try {
@@ -308,16 +258,14 @@ const BlackFriday = () => {
         setLoading(false);
       }
     };
-
     loadProducts();
   }, []);
-
   const copyCode = async (code: string) => {
     try {
       await navigator.clipboard.writeText(code);
       setCopiedCode(code);
       toast.success("¡Código copiado!", {
-        description: `${code} copiado al portapapeles`,
+        description: `${code} copiado al portapapeles`
       });
       setTimeout(() => setCopiedCode(null), 2000);
     } catch (error) {
@@ -329,41 +277,44 @@ const BlackFriday = () => {
   const extendedPromotionalStages = promotionalStages.map(stage => ({
     ...stage,
     discount: stage.discountLabel,
-    description: stage.name === "Warm-up" ? "Descuento aplicado directamente en productos" :
-                 stage.name === "White Week" ? "20% OFF (10% + 10% extra) + Regalo" :
-                 stage.name === "Black Friday" ? "Descuentos por etapas + Regalo" :
-                 "15% OFF + Regalo",
-    details: stage.name === "Warm-up" ? "10% de descuento en toda la tienda" :
-             stage.name === "White Week" ? "Descuento aplicado en productos + Banda de pelo gratis desde €70" :
-             stage.name === "Black Friday" ? "20% base + códigos tier (-50%/-35%/-25%) + Banda de pelo gratis desde €70" :
-             "Descuento aplicado en productos + Banda de pelo gratis desde €70",
-    code: stage.name === "White Week" ? "WHITEWEEK20" : 
-          stage.name === "Cyber Monday" ? "CYBERMONDAY15" : null,
-    codes: stage.name === "Black Friday" ? [
-      { code: "EARLYBIRD50", discount: "50% OFF", limit: "150 usos", urgency: "high" },
-      { code: "EARLYBIRD35", discount: "35% OFF", limit: "450 usos", urgency: "medium" },
-      { code: "BF25", discount: "25% OFF", limit: "Ilimitado", urgency: "low" }
-    ] : [] as Array<{ code: string; discount: string; limit: string; urgency: string }>,
+    description: stage.name === "Warm-up" ? "Descuento aplicado directamente en productos" : stage.name === "White Week" ? "20% OFF (10% + 10% extra) + Regalo" : stage.name === "Black Friday" ? "Descuentos por etapas + Regalo" : "15% OFF + Regalo",
+    details: stage.name === "Warm-up" ? "10% de descuento en toda la tienda" : stage.name === "White Week" ? "Descuento aplicado en productos + Banda de pelo gratis desde €70" : stage.name === "Black Friday" ? "20% base + códigos tier (-50%/-35%/-25%) + Banda de pelo gratis desde €70" : "Descuento aplicado en productos + Banda de pelo gratis desde €70",
+    code: stage.name === "White Week" ? "WHITEWEEK20" : stage.name === "Cyber Monday" ? "CYBERMONDAY15" : null,
+    codes: stage.name === "Black Friday" ? [{
+      code: "EARLYBIRD50",
+      discount: "50% OFF",
+      limit: "150 usos",
+      urgency: "high"
+    }, {
+      code: "EARLYBIRD35",
+      discount: "35% OFF",
+      limit: "450 usos",
+      urgency: "medium"
+    }, {
+      code: "BF25",
+      discount: "25% OFF",
+      limit: "Ilimitado",
+      urgency: "low"
+    }] : [] as Array<{
+      code: string;
+      discount: string;
+      limit: string;
+      urgency: string;
+    }>,
     gwp: stage.name !== "Warm-up",
-    gwpCode: stage.name === "White Week" ? "REGALOWW70" :
-             stage.name === "Black Friday" ? "REGALOBF70" :
-             stage.name === "Cyber Monday" ? "REGALOCM70" : undefined
+    gwpCode: stage.name === "White Week" ? "REGALOWW70" : stage.name === "Black Friday" ? "REGALOBF70" : stage.name === "Cyber Monday" ? "REGALOCM70" : undefined
   }));
 
   // Determine current stage
   const currentStageData = getCurrentPromotionalStage();
-
   const getStageStatus = (stage: typeof extendedPromotionalStages[0]) => {
     const now = new Date();
     if (now < stage.startDate) return 'upcoming';
     if (now > stage.endDate) return 'ended';
     return 'active';
   };
-
   const currentStage = currentStageData ? extendedPromotionalStages.find(s => s.name === currentStageData.name) : null;
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
       
       {/* Hero */}
@@ -386,23 +337,7 @@ const BlackFriday = () => {
           <CountdownTimer promotionalStages={promotionalStages} />
 
           {/* Tier Info */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mt-8">
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-              <Flame className="w-8 h-8 mb-3 text-white" />
-              <h3 className="font-bold text-lg mb-1 text-white">Super Early -50%</h3>
-              <p className="text-sm text-white/80">150 usos limitados</p>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-              <Zap className="w-8 h-8 mb-3 text-white" />
-              <h3 className="font-bold text-lg mb-1 text-white">Early Bird -35%</h3>
-              <p className="text-sm text-white/80">450 usos limitados</p>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-              <Gift className="w-8 h-8 mb-3 text-white" />
-              <h3 className="font-bold text-lg mb-1 text-white">Black Friday -25%</h3>
-              <p className="text-sm text-white/80">Usos ilimitados</p>
-            </div>
-          </div>
+          
         </div>
       </section>
 
@@ -416,12 +351,10 @@ const BlackFriday = () => {
                 Descuentos progresivos desbloqueándose por etapas
               </p>
             </div>
-            {currentStage && (
-              <Badge variant="default" className={`bg-gradient-to-r ${currentStage.color} text-white border-0 animate-pulse`}>
+            {currentStage && <Badge variant="default" className={`bg-gradient-to-r ${currentStage.color} text-white border-0 animate-pulse`}>
                 <AlertCircle className="w-3 h-3 mr-1" />
                 {currentStage.badge} ACTIVO
-              </Badge>
-            )}
+              </Badge>}
           </div>
 
           {/* Progress Bar */}
@@ -429,20 +362,17 @@ const BlackFriday = () => {
             <div className="relative">
               {/* Progress bar track */}
               <div className="h-2 bg-muted rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-gradient-to-r from-blue-500 via-slate-500 via-red-500 to-purple-500 transition-all duration-1000 relative"
-                    style={{
-                      width: (() => {
-                        const now = new Date();
-                        const start = extendedPromotionalStages[0].startDate;
-                        const end = extendedPromotionalStages[extendedPromotionalStages.length - 1].endDate;
-                        const total = end.getTime() - start.getTime();
-                        const elapsed = now.getTime() - start.getTime();
-                        const progress = Math.min(Math.max((elapsed / total) * 100, 0), 100);
-                        return `${progress}%`;
-                      })()
-                    }}
-                >
+                <div className="h-full bg-gradient-to-r from-blue-500 via-slate-500 via-red-500 to-purple-500 transition-all duration-1000 relative" style={{
+                width: (() => {
+                  const now = new Date();
+                  const start = extendedPromotionalStages[0].startDate;
+                  const end = extendedPromotionalStages[extendedPromotionalStages.length - 1].endDate;
+                  const total = end.getTime() - start.getTime();
+                  const elapsed = now.getTime() - start.getTime();
+                  const progress = Math.min(Math.max(elapsed / total * 100, 0), 100);
+                  return `${progress}%`;
+                })()
+              }}>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
                 </div>
               </div>
@@ -450,75 +380,49 @@ const BlackFriday = () => {
               {/* Stage markers */}
               <div className="flex justify-between mt-3">
                 {extendedPromotionalStages.map((stage, index) => {
-                  const Icon = stage.icon;
-                  const status = getStageStatus(stage);
-                  const isActive = status === 'active';
-                  const isEnded = status === 'ended';
-
-                  return (
-                    <div key={stage.name} className="flex flex-col items-center" style={{ width: `${100 / extendedPromotionalStages.length}%` }}>
-                      <div
-                        className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 mb-2 ${
-                          isActive 
-                            ? `bg-gradient-to-br ${stage.color} shadow-lg scale-110 animate-pulse` 
-                            : isEnded
-                            ? 'bg-primary/80'
-                            : 'bg-muted border-2 border-border'
-                        }`}
-                      >
+                const Icon = stage.icon;
+                const status = getStageStatus(stage);
+                const isActive = status === 'active';
+                const isEnded = status === 'ended';
+                return <div key={stage.name} className="flex flex-col items-center" style={{
+                  width: `${100 / extendedPromotionalStages.length}%`
+                }}>
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 mb-2 ${isActive ? `bg-gradient-to-br ${stage.color} shadow-lg scale-110 animate-pulse` : isEnded ? 'bg-primary/80' : 'bg-muted border-2 border-border'}`}>
                         <Icon className={`w-5 h-5 ${isActive || isEnded ? 'text-white' : 'text-muted-foreground'}`} />
                       </div>
                       <span className={`text-xs font-medium text-center ${isActive ? 'text-foreground font-bold' : 'text-muted-foreground'}`}>
                         {stage.name}
                       </span>
-                    </div>
-                  );
-                })}
+                    </div>;
+              })}
               </div>
             </div>
           </div>
 
           {/* Stage Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {extendedPromotionalStages.map((stage) => {
-              const Icon = stage.icon;
-              const status = getStageStatus(stage);
-              const isActive = status === 'active';
-              const isUpcoming = status === 'upcoming';
-              const isEnded = status === 'ended';
-
-              return (
-                <div
-                  key={stage.name}
-                  className={`relative overflow-hidden rounded-xl border-2 transition-all duration-300 ${
-                    isActive 
-                      ? 'border-primary shadow-2xl scale-[1.02]' 
-                      : isEnded
-                      ? 'border-border/50 opacity-75'
-                      : 'border-border hover:border-primary/30 hover:shadow-lg'
-                  }`}
-                >
+            {extendedPromotionalStages.map(stage => {
+            const Icon = stage.icon;
+            const status = getStageStatus(stage);
+            const isActive = status === 'active';
+            const isUpcoming = status === 'upcoming';
+            const isEnded = status === 'ended';
+            return <div key={stage.name} className={`relative overflow-hidden rounded-xl border-2 transition-all duration-300 ${isActive ? 'border-primary shadow-2xl scale-[1.02]' : isEnded ? 'border-border/50 opacity-75' : 'border-border hover:border-primary/30 hover:shadow-lg'}`}>
                   {/* Background gradient */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${stage.color} ${isActive ? 'opacity-10' : 'opacity-5'}`} />
                   
                   {/* Status badge */}
                   <div className="absolute top-4 right-4 z-10">
-                    {isActive && (
-                      <Badge className={`bg-gradient-to-r ${stage.color} text-white border-0 animate-pulse shadow-lg`}>
+                    {isActive && <Badge className={`bg-gradient-to-r ${stage.color} text-white border-0 animate-pulse shadow-lg`}>
                         <Clock className="w-3 h-3 mr-1" />
                         EN CURSO
-                      </Badge>
-                    )}
-                    {isUpcoming && (
-                      <Badge variant="secondary" className="shadow-sm">
+                      </Badge>}
+                    {isUpcoming && <Badge variant="secondary" className="shadow-sm">
                         PRÓXIMAMENTE
-                      </Badge>
-                    )}
-                    {isEnded && (
-                      <Badge variant="outline" className="opacity-60">
+                      </Badge>}
+                    {isEnded && <Badge variant="outline" className="opacity-60">
                         FINALIZADO
-                      </Badge>
-                    )}
+                      </Badge>}
                   </div>
 
                   <div className="relative p-6">
@@ -551,49 +455,24 @@ const BlackFriday = () => {
                     {/* Codes */}
                     <div className="space-y-3">
                       {/* Single code */}
-                      {stage.code && !stage.codes?.length && (
-                        <div className="bg-background/50 rounded-lg px-4 py-3 border border-border">
+                      {stage.code && !stage.codes?.length && <div className="bg-background/50 rounded-lg px-4 py-3 border border-border">
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="text-xs text-muted-foreground mb-1">Código de descuento:</p>
                               <span className="font-mono font-bold text-lg">{stage.code}</span>
                             </div>
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              onClick={() => copyCode(stage.code)}
-                              className="hover-scale"
-                            >
-                              {copiedCode === stage.code ? (
-                                <Check className="w-4 h-4 text-green-500" />
-                              ) : (
-                                <Copy className="w-4 h-4" />
-                              )}
+                            <Button size="sm" variant="ghost" onClick={() => copyCode(stage.code)} className="hover-scale">
+                              {copiedCode === stage.code ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
                             </Button>
                           </div>
-                        </div>
-                      )}
+                        </div>}
 
                       {/* Multiple codes (Black Friday) */}
-                      {stage.codes && stage.codes.length > 0 && (
-                        <div className="space-y-2">
+                      {stage.codes && stage.codes.length > 0 && <div className="space-y-2">
                           <p className="text-xs font-medium text-muted-foreground">Códigos por nivel:</p>
-                          {stage.codes.map((codeObj) => (
-                            <div
-                              key={codeObj.code}
-                              className={`bg-background/50 border-2 rounded-lg p-3 ${
-                                codeObj.urgency === 'high'
-                                  ? 'border-red-500/30'
-                                  : codeObj.urgency === 'medium'
-                                  ? 'border-orange-500/30'
-                                  : 'border-primary/30'
-                              }`}
-                            >
+                          {stage.codes.map(codeObj => <div key={codeObj.code} className={`bg-background/50 border-2 rounded-lg p-3 ${codeObj.urgency === 'high' ? 'border-red-500/30' : codeObj.urgency === 'medium' ? 'border-orange-500/30' : 'border-primary/30'}`}>
                               <div className="flex items-center justify-between mb-2">
-                                <Badge 
-                                  variant={codeObj.urgency === 'high' ? 'destructive' : 'secondary'}
-                                  className="text-xs"
-                                >
+                                <Badge variant={codeObj.urgency === 'high' ? 'destructive' : 'secondary'} className="text-xs">
                                   {codeObj.discount}
                                 </Badge>
                                 <span className="text-xs text-muted-foreground">{codeObj.limit}</span>
@@ -602,27 +481,15 @@ const BlackFriday = () => {
                                 <span className="flex-1 font-mono text-sm font-bold">
                                   {codeObj.code}
                                 </span>
-                                <Button
-                                  size="icon"
-                                  variant="ghost"
-                                  className="h-8 w-8"
-                                  onClick={() => copyCode(codeObj.code)}
-                                >
-                                  {copiedCode === codeObj.code ? (
-                                    <Check className="w-3 h-3 text-green-500" />
-                                  ) : (
-                                    <Copy className="w-3 h-3" />
-                                  )}
+                                <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => copyCode(codeObj.code)}>
+                                  {copiedCode === codeObj.code ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
                                 </Button>
                               </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
+                            </div>)}
+                        </div>}
 
                       {/* GWP code */}
-                      {stage.gwp && 'gwpCode' in stage && stage.gwpCode && (
-                        <div className="bg-pink-500/10 rounded-lg p-3 border border-pink-500/20">
+                      {stage.gwp && 'gwpCode' in stage && stage.gwpCode && <div className="bg-pink-500/10 rounded-lg p-3 border border-pink-500/20">
                           <div className="flex items-start gap-2">
                             <Gift className="w-5 h-5 text-pink-600 dark:text-pink-400 flex-shrink-0 mt-0.5" />
                             <div className="flex-1 min-w-0">
@@ -631,37 +498,24 @@ const BlackFriday = () => {
                                 <span className="font-mono text-sm font-bold text-pink-700 dark:text-pink-300">
                                   {stage.gwpCode}
                                 </span>
-                                <Button
-                                  size="icon"
-                                  variant="ghost"
-                                  className="h-8 w-8"
-                                  onClick={() => copyCode(stage.gwpCode!)}
-                                >
-                                  {copiedCode === stage.gwpCode ? (
-                                    <Check className="w-3 h-3 text-green-500" />
-                                  ) : (
-                                    <Copy className="w-3 h-3" />
-                                  )}
+                                <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => copyCode(stage.gwpCode!)}>
+                                  {copiedCode === stage.gwpCode ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
                                 </Button>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      )}
+                        </div>}
 
                       {/* No code needed */}
-                      {!stage.code && !('codes' in stage) && (
-                        <div className="bg-green-500/10 rounded-lg p-3 border border-green-500/20 text-center">
+                      {!stage.code && !('codes' in stage) && <div className="bg-green-500/10 rounded-lg p-3 border border-green-500/20 text-center">
                           <Badge variant="secondary" className="bg-green-500/20 text-green-700 dark:text-green-300 border-0">
                             ✓ Descuento automático
                           </Badge>
-                        </div>
-                      )}
+                        </div>}
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                </div>;
+          })}
           </div>
 
           {/* CTA */}
@@ -685,24 +539,16 @@ const BlackFriday = () => {
           </p>
         </div>
 
-        {loading ? (
-          <div className="py-20 text-center">
+        {loading ? <div className="py-20 text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
             <p className="mt-4 text-muted-foreground">Cargando ofertas...</p>
-          </div>
-        ) : products.length === 0 ? (
-          <div className="py-20 text-center">
+          </div> : products.length === 0 ? <div className="py-20 text-center">
             <p className="text-muted-foreground">
               Las ofertas de Black Friday estarán disponibles pronto
             </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {products.map((product) => (
-              <ProductCard key={product.node.id} product={product} />
-            ))}
-          </div>
-        )}
+          </div> : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {products.map(product => <ProductCard key={product.node.id} product={product} />)}
+          </div>}
 
         {/* T&C */}
         <div className="mt-12 p-6 bg-muted/50 rounded-lg">
@@ -723,8 +569,6 @@ const BlackFriday = () => {
       </div>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default BlackFriday;
