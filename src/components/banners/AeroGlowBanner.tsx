@@ -52,18 +52,11 @@ export const AeroGlowBanner = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-2">
-            <Button 
-              size="lg" 
-              className="group text-sm md:text-base h-12 px-8 w-full sm:w-auto"
-              onClick={() => {
-                const element = document.getElementById('superventas');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              }}
-            >
-              Descubre AeroGlow
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            <Button asChild size="lg" className="group text-sm md:text-base h-12 px-8 w-full sm:w-auto">
+              <Link to="/producto/plancha-aeroglow">
+                Descubre AeroGlow
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm md:text-base h-12 px-8 w-full sm:w-auto">
               <Link to="/productos">
