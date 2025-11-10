@@ -324,7 +324,7 @@ const BlackFriday = () => {
       limit: string;
       urgency: string;
     }>,
-    gwp: stage.name !== "Warm-up",
+    gwp: true, // GWP active for all stages
     gwpCode: stage.name === "White Week" ? "REGALOWW70" : stage.name === "Black Friday" ? "REGALOBF70" : stage.name === "Cyber Monday" ? "REGALOCM70" : undefined
   }));
 
@@ -519,27 +519,26 @@ const BlackFriday = () => {
                       
                       {/* GWP - Gift With Purchase Block */}
                       {stage.gwp && (
-                        <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-lg p-4 border-2 border-pink-500/30">
-                          <div className="flex items-center gap-3">
-                            <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border-2 border-white/50 shadow-md">
+                        <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-lg p-2.5 border border-pink-500/30">
+                          <div className="flex items-center gap-2">
+                            <div className="relative w-10 h-10 rounded overflow-hidden flex-shrink-0 border border-white/40 shadow-sm">
                               <img 
                                 src={gwpImage} 
                                 alt={gwpConfig.giftName}
                                 className="w-full h-full object-cover"
                               />
-                              <div className="absolute inset-0 bg-gradient-to-t from-pink-500/20 to-transparent" />
                             </div>
-                            <div className="flex-1">
-                              <div className="flex items-center gap-1 mb-1">
-                                <Gift className="w-4 h-4 text-pink-600 dark:text-pink-400" />
-                                <span className="text-xs font-bold text-pink-700 dark:text-pink-300 uppercase tracking-wide">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-1 mb-0.5">
+                                <Gift className="w-3 h-3 text-pink-600 dark:text-pink-400 flex-shrink-0" />
+                                <span className="text-[10px] font-bold text-pink-700 dark:text-pink-300 uppercase tracking-wide">
                                   Regalo Gratis
                                 </span>
                               </div>
-                              <p className="text-sm font-semibold text-foreground mb-1">
+                              <p className="text-xs font-medium text-foreground truncate">
                                 {gwpConfig.giftName}
                               </p>
-                              <p className="text-xs text-muted-foreground">
+                              <p className="text-[10px] text-muted-foreground">
                                 {gwpConfig.conditions}
                               </p>
                             </div>
