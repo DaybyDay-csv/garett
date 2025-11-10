@@ -23,7 +23,7 @@ export const AnnouncementBar = () => {
 
   // Check if dismissed in localStorage
   useEffect(() => {
-    const dismissed = localStorage.getItem('announcement-bar-dismissed');
+    const dismissed = localStorage.getItem("announcement-bar-dismissed");
     if (dismissed) {
       const dismissedDate = new Date(dismissed);
       const now = new Date();
@@ -36,7 +36,7 @@ export const AnnouncementBar = () => {
 
   const handleDismiss = () => {
     setIsVisible(false);
-    localStorage.setItem('announcement-bar-dismissed', new Date().toISOString());
+    localStorage.setItem("announcement-bar-dismissed", new Date().toISOString());
   };
 
   if (!isVisible || activeBanners.length === 0) {
@@ -45,27 +45,28 @@ export const AnnouncementBar = () => {
 
   const messages: Record<string, { text: string; link: string; icon: any; bg: string }> = {
     gwp: {
-      text: "🎁 Regalo gratis en compras desde €70 - Banda de pelo premium",
+      text: "Regalo gratis en compras desde €70 - Banda de pelo premium",
       link: "/productos",
       icon: Gift,
       bg: "bg-primary text-primary-foreground",
     },
     whiteWeek: {
-      text: "✨ White Week: 20% de descuento en toda la tienda con WHITEWEEK20",
+      text: "White Week: 10% de descuento en toda la tienda",
       link: "/productos",
       icon: Percent,
       bg: "bg-accent text-accent-foreground",
     },
     blackFriday: {
-      text: currentStage?.name === 'Black Friday' 
-        ? `🔥 BLACK FRIDAY EN VIVO: Hasta ${currentStage.baseDiscount}% de descuento + Regalo gratis`
-        : "🔥 Black Friday: Hasta 50% de descuento + Regalo gratis (28-30 Nov)",
+      text:
+        currentStage?.name === "Black Friday"
+          ? `🔥 BLACK FRIDAY EN VIVO: Hasta ${currentStage.baseDiscount}% de descuento + Regalo gratis`
+          : "Black Friday: HASTA 50% de DESCUENTO + Regalo gratis (28-30 Nov)",
       link: "/black-friday",
       icon: Flame,
       bg: "bg-destructive text-destructive-foreground",
     },
     cyberMonday: {
-      text: "⚡ ÚLTIMA OPORTUNIDAD: Cyber Monday 15% con CYBERMONDAY15 - Solo 24h",
+      text: "Cyber Monday 20% - Solo 24h",
       link: "/productos",
       icon: Percent,
       bg: "bg-promo-cm-start text-white",
@@ -84,8 +85,8 @@ export const AnnouncementBar = () => {
       <div className="container mx-auto px-2 md:px-4">
         <div className="flex items-center justify-between py-2 md:py-3 gap-2 md:gap-4">
           <div className="flex-1 hidden sm:block" />
-          
-          <Link 
+
+          <Link
             to={message.link}
             className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm lg:text-base font-medium hover:underline text-center flex-1 sm:flex-initial justify-center"
           >
