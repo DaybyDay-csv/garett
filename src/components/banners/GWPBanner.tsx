@@ -16,7 +16,7 @@ import { gwpConfig } from "@/lib/bannerConfig";
 
 export const GWPBanner = () => {
   return (
-    <div className="relative w-full h-[500px] md:h-[600px] bg-gradient-to-br from-promo-gwp via-background to-promo-gwp overflow-hidden">
+    <div className="relative w-full h-[400px] md:h-[500px] bg-gradient-to-br from-promo-gwp via-background to-promo-gwp overflow-hidden">
       {/* Pattern overlay */}
       <div 
         className="absolute inset-0 opacity-[0.03]"

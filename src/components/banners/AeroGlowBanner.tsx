@@ -6,7 +6,7 @@ import patternImage from "@/assets/garett-pattern-1.png";
 
 export const AeroGlowBanner = () => {
   return (
-    <div className="relative w-full h-[500px] md:h-[600px] bg-gradient-to-br from-promo-aeroglow via-background to-promo-aeroglow overflow-hidden">
+    <div className="relative w-full h-[400px] md:h-[500px] bg-gradient-to-br from-promo-aeroglow via-background to-promo-aeroglow overflow-hidden">
       {/* Pattern overlay */}
       <div 
         className="absolute inset-0 opacity-5"

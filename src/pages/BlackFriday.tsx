@@ -77,8 +77,8 @@ const CountdownTimer = ({ promotionalStages }: CountdownTimerProps) => {
       name: "SUPER EARLY BIRD",
       code: "EARLYBIRD50",
       discount: "50% OFF",
-      startDate: new Date('2025-11-28T00:00:00'),
-      endDate: new Date('2025-11-28T12:00:00'),
+      startDate: new Date('2024-01-01T00:00:00'), // Demo: Active now
+      endDate: new Date('2024-12-31T12:00:00'),
       remaining: 150,
       color: "from-red-500 to-orange-500",
       icon: Flame
@@ -87,8 +87,8 @@ const CountdownTimer = ({ promotionalStages }: CountdownTimerProps) => {
       name: "EARLY BIRD",
       code: "EARLYBIRD35",
       discount: "35% OFF",
-      startDate: new Date('2025-11-28T12:00:01'),
-      endDate: new Date('2025-11-29T12:00:00'),
+      startDate: new Date('2024-01-01T00:00:00'), // Demo: Active now
+      endDate: new Date('2024-12-31T12:00:00'),
       remaining: 450,
       color: "from-orange-500 to-yellow-500",
       icon: Zap
@@ -97,8 +97,8 @@ const CountdownTimer = ({ promotionalStages }: CountdownTimerProps) => {
       name: "BLACK FRIDAY",
       code: "BF25",
       discount: "25% OFF",
-      startDate: new Date('2025-11-29T12:00:01'),
-      endDate: new Date('2025-11-30T23:59:59'),
+      startDate: new Date('2024-01-01T00:00:00'), // Demo: Active now
+      endDate: new Date('2026-12-31T23:59:59'),
       remaining: 0,
       color: "from-primary to-primary-glow",
       icon: Timer
@@ -388,19 +388,19 @@ const BlackFriday = () => {
           {/* Tier Info */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mt-8">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-              <Zap className="w-8 h-8 mb-3" />
-              <h3 className="font-bold text-lg mb-1">Early Bird -50%</h3>
-              <p className="text-sm text-white/80">Primeras 5 unidades</p>
+              <Flame className="w-8 h-8 mb-3 text-white" />
+              <h3 className="font-bold text-lg mb-1 text-white">Super Early -50%</h3>
+              <p className="text-sm text-white/80">150 usos limitados</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-              <Timer className="w-8 h-8 mb-3" />
-              <h3 className="font-bold text-lg mb-1">Early Bird -35%</h3>
-              <p className="text-sm text-white/80">Siguientes 15 unidades</p>
+              <Zap className="w-8 h-8 mb-3 text-white" />
+              <h3 className="font-bold text-lg mb-1 text-white">Early Bird -35%</h3>
+              <p className="text-sm text-white/80">450 usos limitados</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-              <Gift className="w-8 h-8 mb-3" />
-              <h3 className="font-bold text-lg mb-1">Regalo gratis</h3>
-              <p className="text-sm text-white/80">Desde 70€ - Banda de pelo</p>
+              <Gift className="w-8 h-8 mb-3 text-white" />
+              <h3 className="font-bold text-lg mb-1 text-white">Black Friday -25%</h3>
+              <p className="text-sm text-white/80">Usos ilimitados</p>
             </div>
           </div>
         </div>
