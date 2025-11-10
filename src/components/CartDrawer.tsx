@@ -36,7 +36,7 @@ export const CartDrawer = () => {
   
   // Check if current stage has GWP
   const currentStage = getCurrentPromotionalStage();
-  const hasGWPActive = currentStage && !['Warm-up'].includes(currentStage.name);
+  const hasGWPActive = currentStage?.hasGWP ?? false;
 
   const handleCheckout = async () => {
     try {

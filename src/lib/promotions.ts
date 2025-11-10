@@ -12,6 +12,7 @@ export interface PromotionalStage {
   code?: string | null; // Optional discount code for the stage
   icon: any;
   color: string;
+  hasGWP?: boolean; // Whether this stage includes Gift With Purchase
 }
 
 export const promotionalStages: PromotionalStage[] = [
@@ -26,7 +27,8 @@ export const promotionalStages: PromotionalStage[] = [
     badge: "WARM-UP",
     code: null,
     icon: Timer,
-    color: "from-blue-500 to-cyan-500"
+    color: "from-blue-500 to-cyan-500",
+    hasGWP: true // Enable GWP during Warm-up
   },
   {
     name: "White Week",
@@ -39,7 +41,8 @@ export const promotionalStages: PromotionalStage[] = [
     badge: "WHITE WEEK",
     code: "WHITEWEEK20",
     icon: Zap,
-    color: "from-slate-400 to-slate-600"
+    color: "from-slate-400 to-slate-600",
+    hasGWP: true
   },
   {
     name: "Black Friday",
@@ -52,7 +55,8 @@ export const promotionalStages: PromotionalStage[] = [
     badge: "BLACK FRIDAY",
     code: null, // Codes are tiered for Black Friday
     icon: Flame,
-    color: "from-red-500 to-orange-500"
+    color: "from-red-500 to-orange-500",
+    hasGWP: true
   },
   {
     name: "Cyber Monday",
@@ -65,7 +69,8 @@ export const promotionalStages: PromotionalStage[] = [
     badge: "CYBER MONDAY",
     code: "CYBERMONDAY15",
     icon: Zap,
-    color: "from-indigo-500 to-purple-500"
+    color: "from-indigo-500 to-purple-500",
+    hasGWP: true
   }
 ];
 

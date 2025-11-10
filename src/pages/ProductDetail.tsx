@@ -22,7 +22,7 @@ const ProductDetail = () => {
   const cartTotal = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
   const GWP_THRESHOLD = 70;
   const currentStage = getCurrentPromotionalStage();
-  const hasGWPActive = currentStage && !['Warm-up'].includes(currentStage.name);
+  const hasGWPActive = currentStage?.hasGWP ?? false;
 
   useEffect(() => {
     const loadProduct = async () => {

@@ -101,7 +101,7 @@ export const FloatingCountdown = () => {
         {/* Discount badge */}
         <Badge className="bg-white/30 text-white border-0 mb-3">
           {currentStage.discount}
-          {currentStage.code && ` · Code: ${currentStage.code}`}
+          {currentStage.code && ` · ${currentStage.code}`}
         </Badge>
 
         {/* Countdown */}
