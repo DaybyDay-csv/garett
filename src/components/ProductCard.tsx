@@ -122,11 +122,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <div className="flex flex-col">
             {priceInfo.hasDiscount ? (
               <>
-                <div className="flex items-baseline gap-2">
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
                   <span className="text-2xl font-bold text-primary">
                     €{priceInfo.discountedPrice.toFixed(2)}
                   </span>
-                  <Badge variant="destructive" className="text-xs">
+                  <Badge variant="destructive" className="text-xs w-fit">
                     {priceInfo.discountLabel}
                   </Badge>
                 </div>
