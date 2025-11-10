@@ -6,7 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
-import { ArrowLeft, Check, Shield, Truck, RotateCcw } from "lucide-react";
+import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame } from "lucide-react";
+import { calculatePromotionalPrice, formatPrice } from "@/lib/promotions";
 
 const ProductDetail = () => {
   const { handle } = useParams();
@@ -59,7 +60,10 @@ const ProductDetail = () => {
 
   const { node } = product;
   const variant = node.variants.edges[selectedVariant]?.node;
-  const price = variant ? parseFloat(variant.price.amount) : 0;
+  const originalPrice = variant ? variant.price.amount : "0";
+  
+  // Calculate promotional pricing
+  const priceInfo = calculatePromotionalPrice(originalPrice);
 
   const handleAddToCart = () => {
     if (!variant) return;
@@ -68,14 +72,23 @@ const ProductDetail = () => {
       product,
       variantId: variant.id,
       variantTitle: variant.title,
-      price: variant.price,
+      price: {
+        ...variant.price,
+        // Store the discounted price in cart
+        amount: priceInfo.discountedPrice.toString()
+      },
       quantity: 1,
       selectedOptions: variant.selectedOptions || []
     };
     
     addItem(cartItem);
+    
+    const discountText = priceInfo.hasDiscount 
+      ? ` (${priceInfo.discountLabel} aplicado)` 
+      : '';
+    
     toast.success('Añadido al carrito', {
-      description: node.title,
+      description: `${node.title}${discountText}`,
       position: 'top-center',
     });
   };
@@ -126,7 +139,14 @@ const ProductDetail = () => {
           {/* Product Info */}
           <div className="space-y-6">
             <div>
-              <div className="flex gap-2 mb-3">
+              <div className="flex gap-2 mb-3 flex-wrap">
+                {/* Promotional Stage Badge - Highest priority */}
+                {priceInfo.hasDiscount && priceInfo.stage && (
+                  <Badge className={`bg-gradient-to-r ${priceInfo.stage.color} text-white border-0 animate-pulse`}>
+                    <Flame className="w-3 h-3 mr-1" />
+                    {priceInfo.stage.badge} {priceInfo.discountLabel}
+                  </Badge>
+                )}
                 {isNew && <Badge>Nuevo</Badge>}
                 {isBestseller && <Badge variant="secondary">Bestseller</Badge>}
                 <Badge variant="outline">Garantía 3 años</Badge>
@@ -141,8 +161,32 @@ const ProductDetail = () => {
 
             {/* Price */}
             <div className="border-t border-b py-6">
-              <div className="text-4xl font-bold">€{price.toFixed(2)}</div>
-              <p className="text-sm text-muted-foreground mt-1">IVA incluido</p>
+              {priceInfo.hasDiscount ? (
+                <div className="space-y-2">
+                  <div className="flex items-baseline gap-3">
+                    <div className="text-4xl font-bold text-primary">
+                      €{priceInfo.discountedPrice.toFixed(2)}
+                    </div>
+                    <Badge variant="destructive" className="text-base px-3 py-1">
+                      {priceInfo.discountLabel}
+                    </Badge>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl text-muted-foreground line-through">
+                      €{priceInfo.originalPrice.toFixed(2)}
+                    </span>
+                    <span className="text-sm text-muted-foreground">
+                      Ahorras €{(priceInfo.originalPrice - priceInfo.discountedPrice).toFixed(2)}
+                    </span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">IVA incluido</p>
+                </div>
+              ) : (
+                <div>
+                  <div className="text-4xl font-bold">€{priceInfo.originalPrice.toFixed(2)}</div>
+                  <p className="text-sm text-muted-foreground mt-1">IVA incluido</p>
+                </div>
+              )}
             </div>
 
             {/* Variants */}
