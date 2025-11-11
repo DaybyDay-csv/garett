@@ -32,10 +32,7 @@ export const GWPBanner = () => {
 
         {/* Content - Enhanced Visual */}
         <div className="flex-1 text-center md:text-left space-y-3 md:space-y-6 order-1 md:order-2 max-w-lg mx-auto md:mx-0">
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/20 to-accent/20 px-4 py-2 rounded-full border-2 border-primary/30">
-            <Gift className="w-4 h-4 text-primary animate-bounce" />
-            <span className="text-xs md:text-sm font-bold text-primary">REGALO GRATIS</span>
-          </div>
+          
           
           <div className="space-y-2 md:space-y-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
@@ -58,28 +55,18 @@ export const GWPBanner = () => {
           </div>
 
           {/* Visual Benefits */}
-          <div className="grid grid-cols-2 gap-2 md:gap-3">
-            <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-3 rounded-xl border border-primary/20">
-              <div className="text-2xl mb-1">✨</div>
-              <p className="text-xs font-semibold">Calidad Premium</p>
-            </div>
-            <div className="bg-gradient-to-br from-accent/5 to-primary/5 p-3 rounded-xl border border-accent/20">
-              <div className="text-2xl mb-1">🎁</div>
-              <p className="text-xs font-semibold">Automático</p>
-            </div>
-          </div>
+          
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-2">
-            <Button 
-              size="lg" 
-              className="text-sm md:text-base h-12 px-8 w-full sm:w-auto"
-              onClick={() => {
-                const element = document.getElementById('superventas');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              }}
-            >
+            <Button size="lg" className="text-sm md:text-base h-12 px-8 w-full sm:w-auto" onClick={() => {
+            const element = document.getElementById('superventas');
+            if (element) {
+              element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          }}>
               Comprar ahora
             </Button>
             <Dialog>
