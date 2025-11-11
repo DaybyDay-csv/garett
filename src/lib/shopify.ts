@@ -196,7 +196,7 @@ export async function fetchGWPProduct(): Promise<ShopifyProduct | null> {
   try {
     const data = await storefrontApiRequest(STOREFRONT_PRODUCTS_QUERY, { 
       first: 1, 
-      query: 'tag:gwp:true' 
+      query: 'title:"Banda de Pelo Premium Garett - Special BF"' 
     });
     return data.data.products.edges[0] || null;
   } catch (error) {
