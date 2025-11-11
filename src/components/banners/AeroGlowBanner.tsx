@@ -79,7 +79,7 @@ export const AeroGlowBanner = () => {
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-[#D4AF37] text-[#D4AF37]" />
                 ))}
-                <span className="text-sm font-semibold text-muted-foreground ml-1">+2,500 valoraciones</span>
+                <span className="text-sm font-semibold text-muted-foreground ml-1">Resultados Instantáneos</span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight">
                 <span className="block text-muted-foreground text-xl md:text-2xl lg:text-3xl font-medium mb-2">Presentamos</span>
