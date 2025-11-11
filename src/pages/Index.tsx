@@ -3,7 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { TrustBadges } from "@/components/TrustBadges";
-import { Testimonials } from "@/components/Testimonials";
+import { TrustpilotWidget } from "@/components/TrustpilotWidget";
 import { UGCSection } from "@/components/UGCSection";
 import { PromotionalBanners } from "@/components/PromotionalBanners";
 import { Button } from "@/components/ui/button";
@@ -246,8 +246,8 @@ const Index = () => {
       {/* UGC Section - Real User Stories */}
       <UGCSection />
       
-      {/* Testimonials Section */}
-      <Testimonials />
+      {/* Trustpilot Reviews */}
+      <TrustpilotWidget />
 
       <div className="container py-16">
         {/* New Arrivals */}
