@@ -135,7 +135,17 @@ export const CartDrawer = () => {
               </div>
             </div>
             
-            {!hasUnlockedGWP && (
+            {hasUnlockedGWP ? (
+              <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg p-3 animate-pulse">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-5 h-5" />
+                  <div className="flex-1">
+                    <p className="font-bold text-sm">¡Regalo incluido gratis!</p>
+                    <p className="text-xs opacity-90">Se añadirá automáticamente en el checkout</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
               <>
                 <Progress value={progressPercentage} className="h-2 mb-2" />
                 <p className="text-xs text-purple-800 dark:text-purple-200">
@@ -165,13 +175,18 @@ export const CartDrawer = () => {
                         item.isGWP ? 'bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-800' : ''
                       }`}
                     >
-                      <div className="w-16 h-16 bg-secondary/20 rounded-md overflow-hidden flex-shrink-0">
+                      <div className="w-16 h-16 bg-secondary/20 rounded-md overflow-hidden flex-shrink-0 relative">
                         {item.product.node.images?.edges?.[0]?.node && (
                           <img
                             src={item.product.node.images.edges[0].node.url}
                             alt={item.product.node.title}
                             className="w-full h-full object-cover"
                           />
+                        )}
+                        {item.isGWP && (
+                          <div className="absolute top-0 right-0 bg-gradient-to-br from-purple-500 to-pink-500 text-white text-[8px] font-bold px-1 py-0.5 rounded-bl">
+                            GRATIS
+                          </div>
                         )}
                       </div>
                       
@@ -271,6 +286,17 @@ export const CartDrawer = () => {
                     </div>
                   )}
                   
+                  {/* Gift With Purchase */}
+                  {hasGWPActive && hasUnlockedGWP && (
+                    <div className="flex justify-between text-purple-600 dark:text-purple-400">
+                      <span className="flex items-center gap-2">
+                        <Gift className="w-4 h-4" />
+                        Regalo: Banda de pelo
+                      </span>
+                      <span className="font-semibold">GRATIS</span>
+                    </div>
+                  )}
+                  
                   <div className="h-px bg-border my-2"></div>
                   
                   {/* Total */}
@@ -285,6 +311,11 @@ export const CartDrawer = () => {
                       <p className="text-sm font-bold text-green-700 dark:text-green-300">
                         🎉 ¡Ahorras €{totalSavings.toFixed(2)} en esta compra!
                       </p>
+                      {hasUnlockedGWP && (
+                        <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+                          Incluye banda de pelo gratis (€{gwpValue.toFixed(2)})
+                        </p>
+                      )}
                     </div>
                   )}
                 </div>
