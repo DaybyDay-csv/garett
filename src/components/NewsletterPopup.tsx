@@ -81,21 +81,38 @@ export const NewsletterPopup = () => {
         body: { email, acceptsMarketing }
       });
 
-      if (error) throw error;
+      // Handle HTTP errors (400, 500, etc)
+      if (error) {
+        // Try to parse the error context for duplicate detection
+        const errorContext = (error as any)?.context;
+        if (errorContext?.isDuplicate) {
+          toast({
+            title: "Ya estás suscrito",
+            description: "Este email ya está registrado en nuestra newsletter",
+          });
+          localStorage.setItem("newsletter-popup-interacted", "true");
+          setIsOpen(false);
+          return;
+        }
+        throw error;
+      }
 
-      if (data.error) {
+      // Handle application-level errors in response data
+      if (data?.error) {
         if (data.isDuplicate) {
           toast({
             title: "Ya estás suscrito",
             description: "Este email ya está registrado en nuestra newsletter",
           });
+          localStorage.setItem("newsletter-popup-interacted", "true");
+          setIsOpen(false);
         } else {
           throw new Error(data.error);
         }
-      } else {
+      } else if (data?.success) {
         toast({
           title: "¡Suscripción exitosa!",
-          description: "Gracias por suscribirte. Recibirás nuestras ofertas exclusivas.",
+          description: "Gracias por suscribirte. Recibirás notificaciones de cada etapa.",
         });
         localStorage.setItem("newsletter-popup-interacted", "true");
         setIsOpen(false);

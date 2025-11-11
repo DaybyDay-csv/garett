@@ -114,10 +114,11 @@ serve(async (req) => {
       if (isDuplicate) {
         return new Response(
           JSON.stringify({ 
+            success: false,
             error: 'Este email ya está registrado',
             isDuplicate: true 
           }),
-          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
 
