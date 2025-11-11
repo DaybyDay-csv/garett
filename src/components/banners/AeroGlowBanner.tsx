@@ -223,7 +223,7 @@ export const AeroGlowBanner = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 md:gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
             {/* Before */}
             <div className="group relative">
               <div className="absolute -inset-1 bg-gradient-to-br from-gray-400 to-gray-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition" />
