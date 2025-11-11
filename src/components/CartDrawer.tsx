@@ -175,18 +175,13 @@ export const CartDrawer = () => {
                         item.isGWP ? 'bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-800' : ''
                       }`}
                     >
-                      <div className="w-16 h-16 bg-secondary/20 rounded-md overflow-hidden flex-shrink-0 relative">
+                      <div className="w-16 h-16 bg-secondary/20 rounded-md overflow-hidden flex-shrink-0">
                         {item.product.node.images?.edges?.[0]?.node && (
                           <img
                             src={item.product.node.images.edges[0].node.url}
                             alt={item.product.node.title}
                             className="w-full h-full object-cover"
                           />
-                        )}
-                        {item.isGWP && (
-                          <div className="absolute top-0 right-0 bg-gradient-to-br from-purple-500 to-pink-500 text-white text-[8px] font-bold px-1 py-0.5 rounded-bl">
-                            GRATIS
-                          </div>
                         )}
                       </div>
                       
