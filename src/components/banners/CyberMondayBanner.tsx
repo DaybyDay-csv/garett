@@ -10,7 +10,7 @@ export const CyberMondayBanner = () => {
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0,
+    seconds: 0
   });
   useEffect(() => {
     // Cyber Monday 2025 - December 1st (Monday after Black Friday)
@@ -21,54 +21,43 @@ export const CyberMondayBanner = () => {
       if (difference > 0) {
         setTimeLeft({
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
+          hours: Math.floor(difference / (1000 * 60 * 60) % 24),
+          minutes: Math.floor(difference / 1000 / 60 % 60),
+          seconds: Math.floor(difference / 1000 % 60)
         });
       } else {
         setTimeLeft({
           days: 0,
           hours: 0,
           minutes: 0,
-          seconds: 0,
+          seconds: 0
         });
       }
     }, 1000);
     return () => clearInterval(interval);
   }, []);
-  return (
-    <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-cm-start via-promo-cm-mid to-promo-cm-end overflow-hidden">
+  return <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-cm-start via-promo-cm-mid to-promo-cm-end overflow-hidden">
       {/* Pattern overlay */}
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `url(${patternImage})`,
-          backgroundSize: "400px",
-          backgroundRepeat: "repeat",
-          filter: "brightness(0) invert(1)",
-        }}
-      />
+      <div className="absolute inset-0 opacity-10" style={{
+      backgroundImage: `url(${patternImage})`,
+      backgroundSize: "400px",
+      backgroundRepeat: "repeat",
+      filter: "brightness(0) invert(1)"
+    }} />
 
       {/* Circuit pattern effect */}
       <div className="absolute inset-0 opacity-5">
-        <div
-          className="absolute top-0 left-0 w-full h-full"
-          style={{
-            backgroundImage:
-              "linear-gradient(white 2px, transparent 2px), linear-gradient(90deg, white 2px, transparent 2px)",
-            backgroundSize: "50px 50px",
-          }}
-        />
+        <div className="absolute top-0 left-0 w-full h-full" style={{
+        backgroundImage: "linear-gradient(white 2px, transparent 2px), linear-gradient(90deg, white 2px, transparent 2px)",
+        backgroundSize: "50px 50px"
+      }} />
       </div>
 
       {/* Glowing orbs */}
       <div className="absolute top-20 right-20 w-64 h-64 rounded-full bg-promo-cm-mid/40 blur-3xl animate-pulse" />
-      <div
-        className="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-promo-cm-end/40 blur-3xl animate-pulse"
-        style={{
-          animationDelay: "1s",
-        }}
-      />
+      <div className="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-promo-cm-end/40 blur-3xl animate-pulse" style={{
+      animationDelay: "1s"
+    }} />
 
       <div className="container mx-auto px-6 md:px-8 min-h-full flex flex-col items-center justify-center text-center relative z-10 space-y-4 md:space-y-8 py-16 md:py-20 pb-20 md:pb-20">
         {/* Date Badge */}
@@ -98,31 +87,24 @@ export const CyberMondayBanner = () => {
             Comienza en
           </p>
           <div className="flex gap-2 md:gap-3 justify-center">
-            {[
-              {
-                label: "Días",
-                value: timeLeft.days,
-              },
-              {
-                label: "Horas",
-                value: timeLeft.hours,
-              },
-              {
-                label: "Min",
-                value: timeLeft.minutes,
-              },
-              {
-                label: "Seg",
-                value: timeLeft.seconds,
-              },
-            ].map((item, index) => (
-              <div key={index} className="flex flex-col">
+            {[{
+            label: "Días",
+            value: timeLeft.days
+          }, {
+            label: "Horas",
+            value: timeLeft.hours
+          }, {
+            label: "Min",
+            value: timeLeft.minutes
+          }, {
+            label: "Seg",
+            value: timeLeft.seconds
+          }].map((item, index) => <div key={index} className="flex flex-col">
                 <div className="bg-white text-promo-cm-start text-lg md:text-3xl font-bold rounded px-2 py-2 md:px-3 md:py-3 min-w-[45px] md:min-w-[65px]">
                   {String(item.value).padStart(2, "0")}
                 </div>
                 <p className="text-white/70 text-[10px] md:text-xs mt-1">{item.label}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
 
@@ -146,24 +128,14 @@ export const CyberMondayBanner = () => {
 
         {/* CTA */}
         <div className="pt-2 space-y-2">
-          <Button
-            asChild
-            size="lg"
-            variant="secondary"
-            className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 shadow-2xl hover:scale-105 transition-transform w-full sm:w-auto max-w-xs"
-          >
+          <Button asChild size="lg" variant="secondary" className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 shadow-2xl hover:scale-105 transition-transform w-full sm:w-auto max-w-xs">
             <Link to="/black-friday">Ver ofertas Cyber Monday</Link>
           </Button>
 
-          <NewsletterCTA
-            variant="inline"
-            text="No te pierdas las próximas ofertas"
-            className="text-white/70 hover:text-white text-xs md:text-sm block"
-          />
+          <NewsletterCTA variant="inline" text="No te pierdas las próximas ofertas" className="text-white/70 hover:text-white text-xs md:text-sm block" />
 
-          <p className="text-xs md:text-sm text-white/70 px-4 mt-3">La última oferta del año - No te la pierdas</p>
+          
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };

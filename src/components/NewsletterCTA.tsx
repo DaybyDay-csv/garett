@@ -2,43 +2,27 @@ import { Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNewsletterStore } from "@/stores/newsletterStore";
 import { cn } from "@/lib/utils";
-
 interface NewsletterCTAProps {
   variant?: "default" | "inline" | "card";
   size?: "sm" | "default" | "lg";
   text?: string;
   className?: string;
 }
-
-export const NewsletterCTA = ({ 
-  variant = "inline", 
+export const NewsletterCTA = ({
+  variant = "inline",
   size = "sm",
   text = "Recibe alertas de ofertas",
-  className 
+  className
 }: NewsletterCTAProps) => {
-  const openNewsletter = useNewsletterStore((state) => state.openNewsletter);
-
+  const openNewsletter = useNewsletterStore(state => state.openNewsletter);
   if (variant === "inline") {
-    return (
-      <button
-        onClick={openNewsletter}
-        className={cn(
-          "inline-flex items-center gap-1.5 text-xs hover:opacity-80 transition-opacity",
-          className
-        )}
-      >
-        <Bell className="w-3 h-3" />
+    return <button onClick={openNewsletter} className={cn("inline-flex items-center gap-1.5 text-xs hover:opacity-80 transition-opacity", className)}>
+        
         <span>{text}</span>
-      </button>
-    );
+      </button>;
   }
-
   if (variant === "card") {
-    return (
-      <div className={cn(
-        "bg-gradient-to-br from-primary/5 to-accent/5 rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all",
-        className
-      )}>
+    return <div className={cn("bg-gradient-to-br from-primary/5 to-accent/5 rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all", className)}>
         <div className="flex items-start gap-4">
           <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
             <Bell className="w-6 h-6 text-primary" />
@@ -53,19 +37,10 @@ export const NewsletterCTA = ({
             </Button>
           </div>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <Button 
-      onClick={openNewsletter} 
-      variant="outline" 
-      size={size}
-      className={cn("gap-2", className)}
-    >
+  return <Button onClick={openNewsletter} variant="outline" size={size} className={cn("gap-2", className)}>
       <Bell className="w-4 h-4" />
       {text}
-    </Button>
-  );
+    </Button>;
 };
