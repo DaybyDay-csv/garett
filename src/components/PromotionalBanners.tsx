@@ -40,7 +40,7 @@ export const PromotionalBanners = () => {
     <div className="relative w-full overflow-hidden bg-background group">
       <Carousel
         setApi={setApi}
-        className="w-full transition-all duration-500 ease-in-out"
+        className="w-full"
         opts={{
           loop: true,
           duration: 30,
@@ -54,7 +54,7 @@ export const PromotionalBanners = () => {
           }),
         ]}
       >
-        <CarouselContent className="items-stretch transition-all duration-500 ease-in-out">
+        <CarouselContent className="items-stretch">
           {activeBanners.map((bannerId) => {
             const BannerComponent = bannerComponents[bannerId as keyof typeof bannerComponents];
             return (
