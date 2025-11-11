@@ -161,7 +161,7 @@ export const CyberMondayBanner = () => {
             className="text-white/70 hover:text-white text-xs md:text-sm block"
           />
 
-          <p className="text-xs md:text-sm text-white/70 px-4 mt-3">
+          <p className="text-xs md:text-sm text-white/70 px-4 mt-3">La última oferta del año - No te la pierdas</p>
         </div>
       </div>
     </div>
