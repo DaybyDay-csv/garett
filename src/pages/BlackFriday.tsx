@@ -410,7 +410,7 @@ const BlackFriday = () => {
           </div>
 
            {/* Stage Cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-3 lg:gap-6">
             {extendedPromotionalStages.map(stage => {
             const Icon = stage.icon;
             const status = getStageStatus(stage);
