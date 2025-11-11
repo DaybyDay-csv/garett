@@ -153,7 +153,11 @@ export const UGCSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
             Historias reales de personas reales
           </h2>
-          <p className="text-muted-foreground text-lg mb-8 leading-relaxed">Garett trae la tecnología profesional de los salones de belleza directamente a tu hogar. Resultados visibles, rutinas flexibles que se adaptan a tu vida, y la confianza de invertir en ti misma sin comprometer tiempo ni calidad.</p>
+          <p className="text-muted-foreground text-lg mb-8 leading-relaxed">Nacimos de una pregunta sencilla: ¿por qué el cuidado que te hace sentir bien tiene que ser caro, lejano y con cita previa? En Garett Beauty acercamos la tecnología de clínica a tu casa para que tu rutina sea más eficaz, sencilla y bonita. Hablamos de mesoterapia sin agujas, limpieza sónica o masajes tensores en 10 minutos —bienestar inteligente que transforma lo cotidiano.
+
+Creemos en el lujo accesible: dispositivos con diseño cuidado, resultados visibles y un precio honesto. Y, sobre todo, confianza: certificación CE, 3 años de garantía y el respaldo de grandes retailers como El Corte Inglés.
+
+Somos esa mezcla de tecnología y belleza en estado puro que te ayuda a verte (y sentirte) mejor cada día, sin complicaciones.</p>
           <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
             
           </Button>
