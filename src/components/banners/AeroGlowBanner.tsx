@@ -41,8 +41,8 @@ export const AeroGlowBanner = () => {
   const basePrice = 299;
   // Apply 10% discount
   const discountAmount = 29.90;
-  const finalPrice = basePrice - discountAmount; // $269.10
-  const currencyCode = product?.node.priceRange.minVariantPrice.currencyCode || 'USD';
+  const finalPrice = basePrice - discountAmount; // €269.10
+  const currencyCode = product?.node.priceRange.minVariantPrice.currencyCode || 'EUR';
 
   return (
     <div className="relative w-full bg-gradient-to-br from-[#5D4037]/5 via-background to-[#8B6F47]/5 overflow-hidden">
