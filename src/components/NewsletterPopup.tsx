@@ -14,12 +14,36 @@ export const NewsletterPopup = () => {
   const [email, setEmail] = useState("");
   const [acceptsMarketing, setAcceptsMarketing] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0 });
   const { toast } = useToast();
 
   const stagesWithStatus = getAllStagesWithStatus();
   const progress = getPromotionalProgress();
   const currentStage = getCurrentPromotionalStage();
   const nextStage = getNextPromotionalStage();
+
+  // Live countdown update
+  useEffect(() => {
+    const updateCountdown = () => {
+      const targetStage = currentStage || nextStage;
+      if (!targetStage) return;
+
+      const now = new Date();
+      const targetDate = currentStage ? targetStage.endDate : targetStage.startDate;
+      const diff = targetDate.getTime() - now.getTime();
+
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        setCountdown({ days, hours, minutes });
+      }
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 60000); // Update every minute
+    return () => clearInterval(interval);
+  }, [currentStage, nextStage]);
 
   useEffect(() => {
     const hasInteracted = localStorage.getItem("newsletter-popup-interacted");
@@ -88,182 +112,125 @@ export const NewsletterPopup = () => {
     }
   };
 
+  const targetStage = currentStage || nextStage;
+  const isActiveStage = !!currentStage;
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto p-0 border-2 border-primary/20">
+      <DialogContent className="sm:max-w-[480px] p-0 border border-border/50">
         <div className="relative">
-          {/* Premium Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-primary/10 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/20 pointer-events-none" />
           
-          {/* Close Button */}
           <button
             onClick={handleClose}
-            className="absolute right-4 top-4 z-10 rounded-full p-2 opacity-70 hover:opacity-100 hover:bg-background/80 transition-all focus:outline-none focus:ring-2 focus:ring-ring"
+            className="absolute right-3 top-3 z-10 rounded-sm p-1.5 opacity-60 hover:opacity-100 transition-opacity"
+            aria-label="Cerrar"
           >
             <X className="h-4 w-4" />
           </button>
 
-          <div className="relative p-6 sm:p-8">
-            {/* Icon Badge */}
-            <div className="flex justify-center mb-4">
-              <div className="relative">
-                <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full animate-pulse" />
-                <div className="relative bg-primary/10 p-4 rounded-full border border-primary/20">
-                  <Bell className="h-8 w-8 text-primary" />
-                </div>
-              </div>
-            </div>
-
-            <DialogHeader className="text-center space-y-3 mb-6">
-              <DialogTitle className="text-2xl sm:text-3xl font-bold tracking-tight">
-                🔔 No Te Pierdas Ninguna Oferta
+          <div className="relative p-6 space-y-6">
+            {/* Header */}
+            <DialogHeader className="space-y-2">
+              <DialogTitle className="text-xl font-semibold tracking-tight text-center">
+                Calendario de Ofertas Progresivas
               </DialogTitle>
-              <DialogDescription className="text-base leading-relaxed">
-                Recibe alertas exclusivas cuando comience cada nueva etapa promocional
+              <DialogDescription className="text-sm text-center text-muted-foreground">
+                Recibe notificaciones al inicio de cada etapa
               </DialogDescription>
             </DialogHeader>
 
-            {/* Progress Bar Section */}
-            <div className="mb-6 space-y-3">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">Calendario Promocional</span>
-                <span className="font-semibold text-primary">
-                  Etapa {progress.currentStageIndex + 1} de {progress.totalStages}
-                </span>
-              </div>
-              <Progress value={progress.progressPercentage} className="h-2" />
-              
-              {/* Current Status */}
-              {currentStage ? (
-                <div className="flex items-center justify-center gap-2 text-sm">
-                  <div className="flex items-center gap-1.5 bg-primary/10 px-3 py-1.5 rounded-full">
-                    <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                    <span className="font-medium text-primary">¡{currentStage.name} ACTIVA AHORA!</span>
-                  </div>
-                </div>
-              ) : nextStage ? (
-                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                  <Clock className="w-4 h-4" />
-                  <span>Próxima etapa: <strong>{nextStage.name}</strong></span>
-                </div>
-              ) : null}
-            </div>
-
-            {/* Timeline of Stages */}
-            <div className="space-y-3 mb-6">
-              <h3 className="text-sm font-semibold text-center mb-4">
-                📅 Calendario de Ofertas Progresivas
-              </h3>
-              {stagesWithStatus.map((stage, index) => {
-                const Icon = stage.icon;
-                const isActive = stage.status === 'active';
-                const isCompleted = stage.status === 'completed';
-                const isUpcoming = stage.status === 'upcoming';
-                
-                return (
-                  <div
-                    key={stage.name}
-                    className={`
-                      relative p-4 rounded-lg border-2 transition-all
-                      ${isActive ? 'border-primary bg-primary/5 shadow-lg' : ''}
-                      ${isCompleted ? 'border-border/50 bg-muted/30 opacity-60' : ''}
-                      ${isUpcoming ? 'border-border bg-background' : ''}
-                    `}
-                  >
-                    {/* Stage Number Badge */}
-                    <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-background border-2 border-border flex items-center justify-center text-xs font-bold">
-                      {index + 1}
-                    </div>
-
-                    <div className="flex items-start gap-3">
-                      {/* Icon */}
-                      <div className={`
-                        p-2 rounded-lg shrink-0
-                        ${isActive ? 'bg-primary/20 animate-pulse' : 'bg-muted'}
-                      `}>
-                        <Icon className={`w-5 h-5 ${isActive ? 'text-primary' : 'text-muted-foreground'}`} />
-                      </div>
-
-                      {/* Content */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-2 mb-1">
-                          <h4 className={`font-bold text-sm ${isActive ? 'text-primary' : ''}`}>
-                            {stage.name}
-                          </h4>
-                          {isActive && (
-                            <span className="text-xs bg-primary text-primary-foreground px-2 py-0.5 rounded-full font-semibold shrink-0">
-                              ACTIVA
-                            </span>
-                          )}
-                          {isCompleted && (
-                            <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full shrink-0">
-                              Finalizada
-                            </span>
-                          )}
-                        </div>
-                        
-                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground mb-2">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="w-3 h-3" />
-                            <span>{stage.dates}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Tag className="w-3 h-3" />
-                            <span className="font-semibold text-foreground">{stage.discount}</span>
-                          </div>
-                          {stage.code && (
-                            <span className="bg-muted px-2 py-0.5 rounded font-mono text-[10px]">
-                              {stage.code}
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Days Remaining */}
-                        {stage.daysRemaining !== undefined && (
-                          <div className={`
-                            text-xs font-medium
-                            ${isActive ? 'text-primary' : 'text-muted-foreground'}
-                          `}>
-                            {isActive ? (
-                              <>⏰ Termina en {stage.daysRemaining} {stage.daysRemaining === 1 ? 'día' : 'días'}</>
-                            ) : (
-                              <>🔔 Comienza en {stage.daysRemaining} {stage.daysRemaining === 1 ? 'día' : 'días'}</>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Value Proposition */}
-            <div className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
-              <p className="text-sm text-center leading-relaxed">
-                <strong className="text-primary">Los suscriptores VIP reciben alertas 24h antes</strong>
-                <br />
-                <span className="text-muted-foreground">
-                  No te pierdas ofertas de hasta -25% + códigos exclusivos
-                </span>
-              </p>
-            </div>
-
-            {/* Subscription Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Progress Timeline */}
+            <div className="space-y-4">
+              {/* Progress Bar with Stages */}
               <div className="relative">
-                <Input
-                  type="email"
-                  placeholder="Tu email para recibir alertas VIP"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="h-12 pl-4 pr-4 text-base border-2 focus:border-primary transition-colors"
-                  required
-                  disabled={isLoading}
-                />
+                <Progress value={progress.progressPercentage} className="h-1.5" />
+                <div className="flex justify-between mt-3">
+                  {stagesWithStatus.map((stage, idx) => {
+                    const Icon = stage.icon;
+                    const isActive = stage.status === 'active';
+                    const isCompleted = stage.status === 'completed';
+                    
+                    return (
+                      <div key={stage.name} className="flex flex-col items-center gap-1.5 flex-1">
+                        <div className={`
+                          w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all
+                          ${isActive ? 'border-primary bg-primary/10 scale-110' : ''}
+                          ${isCompleted ? 'border-primary/30 bg-muted' : ''}
+                          ${stage.status === 'upcoming' ? 'border-border bg-background' : ''}
+                        `}>
+                          <Icon className={`w-4 h-4 ${isActive ? 'text-primary' : 'text-muted-foreground'}`} />
+                        </div>
+                        <span className={`text-[10px] font-medium text-center leading-tight ${isActive ? 'text-foreground' : 'text-muted-foreground'}`}>
+                          {stage.name}
+                        </span>
+                        <span className={`text-[10px] font-semibold ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
+                          {stage.discount}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
 
-              <div className="flex items-start space-x-3 bg-muted/30 p-3 rounded-lg">
+              {/* Live Countdown */}
+              {targetStage && (
+                <div className="bg-muted/50 rounded-lg p-4 space-y-2">
+                  <div className="text-center">
+                    <p className="text-xs text-muted-foreground mb-2">
+                      {isActiveStage ? 'Termina en' : 'Comienza en'}
+                    </p>
+                    <div className="flex items-center justify-center gap-3">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold tabular-nums">{countdown.days}</div>
+                        <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Días</div>
+                      </div>
+                      <div className="text-2xl font-light text-muted-foreground">:</div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold tabular-nums">{countdown.hours}</div>
+                        <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Horas</div>
+                      </div>
+                      <div className="text-2xl font-light text-muted-foreground">:</div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold tabular-nums">{countdown.minutes}</div>
+                        <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Min</div>
+                      </div>
+                    </div>
+                    <p className="text-xs font-medium mt-2">
+                      {isActiveStage ? (
+                        <>{targetStage.name} <span className="text-primary">{targetStage.discount}</span></>
+                      ) : (
+                        <>Próxima etapa: <span className="text-primary">{targetStage.name}</span></>
+                      )}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Stage Details */}
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                {stagesWithStatus.map(stage => (
+                  <div key={stage.name} className="flex items-center justify-between p-2 bg-muted/30 rounded">
+                    <span className="text-muted-foreground">{stage.dates}</span>
+                    <span className="font-semibold">{stage.discount}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="space-y-3">
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="h-11 text-sm"
+                required
+                disabled={isLoading}
+              />
+
+              <div className="flex items-start space-x-2">
                 <Checkbox
                   id="marketing"
                   checked={acceptsMarketing}
@@ -271,46 +238,34 @@ export const NewsletterPopup = () => {
                   className="mt-0.5"
                   disabled={isLoading}
                 />
-                <label
-                  htmlFor="marketing"
-                  className="text-sm leading-snug cursor-pointer select-none"
-                >
-                  Sí, quiero recibir notificación al inicio de cada etapa promocional. Puedo cancelar cuando quiera.
+                <label htmlFor="marketing" className="text-xs leading-relaxed text-muted-foreground cursor-pointer">
+                  Acepto recibir notificaciones de nuevas etapas. Cancelable en cualquier momento.
                 </label>
               </div>
 
-              <div className="space-y-2">
-                <Button
-                  type="submit"
-                  className="w-full h-12 text-base font-semibold shadow-lg hover:shadow-xl transition-all"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Activando...
-                    </>
-                  ) : (
-                    <>
-                      <Bell className="w-4 h-4 mr-2" />
-                      Activar Mis Alertas VIP
-                    </>
-                  )}
-                </Button>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  className="w-full text-sm text-muted-foreground hover:text-foreground"
-                  onClick={handleClose}
-                  disabled={isLoading}
-                >
-                  No gracias, prefiero perder las mejores ofertas
-                </Button>
-              </div>
+              <Button
+                type="submit"
+                className="w-full h-11 text-sm font-semibold"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Procesando
+                  </>
+                ) : (
+                  'Activar Notificaciones'
+                )}
+              </Button>
 
-              <p className="text-xs text-center text-muted-foreground">
-                🔒 100% seguro. Sin spam. Cancela cuando quieras.
-              </p>
+              <button
+                type="button"
+                onClick={handleClose}
+                className="w-full text-xs text-muted-foreground hover:text-foreground transition-colors"
+                disabled={isLoading}
+              >
+                Continuar sin notificaciones
+              </button>
             </form>
           </div>
         </div>
