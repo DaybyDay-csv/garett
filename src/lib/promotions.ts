@@ -18,7 +18,7 @@ export interface PromotionalStage {
 export const promotionalStages: PromotionalStage[] = [
   {
     name: "Warm-up",
-    dates: "10-16 Noviembre",
+    dates: "10-16 Nov",
     startDate: new Date('2025-11-10T00:00:00'),
     endDate: new Date('2025-11-16T23:59:59'),
     baseDiscount: 10,
@@ -32,7 +32,7 @@ export const promotionalStages: PromotionalStage[] = [
   },
   {
     name: "White Week",
-    dates: "17-27 Noviembre",
+    dates: "17-27 Nov",
     startDate: new Date('2025-11-17T00:00:00'),
     endDate: new Date('2025-11-27T23:59:59'),
     baseDiscount: 20,
@@ -46,7 +46,7 @@ export const promotionalStages: PromotionalStage[] = [
   },
   {
     name: "Black Friday",
-    dates: "28-30 Noviembre",
+    dates: "28-30 Nov",
     startDate: new Date('2025-11-28T00:00:00'),
     endDate: new Date('2025-11-30T23:59:59'),
     baseDiscount: 25, // Base discount only, tiers are manual codes
@@ -60,7 +60,7 @@ export const promotionalStages: PromotionalStage[] = [
   },
   {
     name: "Cyber Monday",
-    dates: "1 Diciembre",
+    dates: "1 Dic",
     startDate: new Date('2025-12-01T00:00:00'),
     endDate: new Date('2025-12-01T23:59:59'),
     baseDiscount: 15,
