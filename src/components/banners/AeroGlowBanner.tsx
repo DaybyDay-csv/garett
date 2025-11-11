@@ -194,7 +194,7 @@ export const AeroGlowBanner = () => {
                   <div className="relative">
                     <div className="absolute inset-0 bg-red-500 rounded-full blur-xl opacity-50 animate-pulse" />
                     <div className="relative bg-gradient-to-br from-red-500 to-red-600 text-white rounded-full w-24 h-24 md:w-28 md:h-28 flex flex-col items-center justify-center shadow-2xl border-4 border-white dark:border-background font-bold animate-bounce">
-                      <span className="text-2xl md:text-3xl">-{discountPercentage}%</span>
+                      <span className="text-2xl md:text-3xl">-10%</span>
                       <span className="text-xs">OFF</span>
                     </div>
                   </div>
