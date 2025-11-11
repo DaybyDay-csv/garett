@@ -432,11 +432,11 @@ const BlackFriday = () => {
                       </Badge>}
                   </div>
 
-                  <div className={`relative overflow-hidden rounded-lg lg:rounded-xl border-2 transition-all duration-300 ${isActive ? 'border-primary shadow-2xl scale-[1.02]' : isEnded ? 'border-border/50 opacity-75' : 'border-border hover:border-primary/30 hover:shadow-lg'}`}>
+                  <div className={`relative overflow-visible rounded-lg lg:rounded-xl border-2 transition-all duration-300 min-h-[540px] lg:min-h-0 ${isActive ? 'border-primary shadow-2xl scale-[1.02]' : isEnded ? 'border-border/50 opacity-75' : 'border-border hover:border-primary/30 hover:shadow-lg'}`}>
                   {/* Background gradient */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${stage.color} ${isActive ? 'opacity-10' : 'opacity-5'}`} />
 
-                  <div className="relative p-4 lg:p-6 pt-6 lg:pt-10">
+                  <div className="relative p-5 lg:p-6 pt-6 lg:pt-10">
                     {/* Header */}
                     <div className="flex items-start gap-2 lg:gap-4 mb-3 lg:mb-4">
                       <div className={`w-10 h-10 lg:w-14 lg:h-14 rounded-lg lg:rounded-xl bg-gradient-to-br ${stage.color} flex items-center justify-center flex-shrink-0 shadow-lg ${isActive ? 'animate-pulse' : ''}`}>
@@ -462,8 +462,8 @@ const BlackFriday = () => {
                     </p>
 
                      {/* Codes - Only show for Black Friday tiers */}
-                    <div className="space-y-2 lg:space-y-3">
-                      {stage.codes && stage.codes.length > 0 ? <div className="space-y-2 lg:space-y-2.5">
+                    <div className="space-y-3 lg:space-y-3">
+                      {stage.codes && stage.codes.length > 0 ? <div className="space-y-3 lg:space-y-2.5">
                           <p className="text-xs lg:text-sm font-semibold text-muted-foreground">Códigos:</p>
                           {stage.codes.map(codeObj => <div key={codeObj.code} className={`bg-background/50 border-2 rounded-md lg:rounded-lg p-2.5 lg:p-3 ${codeObj.urgency === 'high' ? 'border-red-500/30' : codeObj.urgency === 'medium' ? 'border-orange-500/30' : 'border-primary/30'}`}>
                               <div className="flex items-center justify-between mb-1.5 lg:mb-2 gap-2">
@@ -476,8 +476,8 @@ const BlackFriday = () => {
                                 <span className="flex-1 font-mono text-xs lg:text-sm font-bold min-w-0">
                                   {codeObj.code}
                                 </span>
-                                <Button size="icon" variant="ghost" className="h-7 w-7 lg:h-8 lg:w-8 p-0 shrink-0" onClick={() => copyCode(codeObj.code)}>
-                                  {copiedCode === codeObj.code ? <Check className="w-3 h-3 lg:w-4 lg:h-4 text-green-500" /> : <Copy className="w-3 h-3 lg:w-4 lg:h-4" />}
+                                <Button size="icon" variant="ghost" className="h-8 w-8 lg:h-8 lg:w-8 p-0 shrink-0" onClick={() => copyCode(codeObj.code)}>
+                                  {copiedCode === codeObj.code ? <Check className="w-4 h-4 lg:w-4 lg:h-4 text-green-500" /> : <Copy className="w-4 h-4 lg:w-4 lg:h-4" />}
                                 </Button>
                               </div>
                             </div>)}
@@ -493,9 +493,9 @@ const BlackFriday = () => {
                         </div>}
                       
                       {/* GWP - Gift With Purchase Block */}
-                      {stage.gwp && <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-md lg:rounded-lg p-2.5 lg:p-3 border border-pink-500/30">
+                      {stage.gwp && <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-md lg:rounded-lg p-3 lg:p-3 border border-pink-500/30 min-h-[100px] lg:min-h-0">
                           <div className="flex items-start gap-2 lg:gap-3">
-                            <div className="relative w-10 h-10 lg:w-12 lg:h-12 rounded overflow-hidden flex-shrink-0 border border-white/40 shadow-sm">
+                            <div className="relative w-12 h-12 lg:w-12 lg:h-12 rounded overflow-hidden flex-shrink-0 border border-white/40 shadow-sm">
                               <img src={gwpImage} alt={gwpConfig.giftName} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0">
@@ -505,10 +505,10 @@ const BlackFriday = () => {
                                   Regalo
                                 </span>
                               </div>
-                              <p className="text-xs lg:text-sm font-medium text-foreground leading-snug">
+                              <p className="text-[13px] lg:text-sm font-medium text-foreground leading-tight">
                                 {gwpConfig.giftName}
                               </p>
-                              <p className="text-xs lg:text-sm text-muted-foreground mt-0.5">
+                              <p className="text-xs lg:text-sm text-muted-foreground mt-1 leading-relaxed">
                                 {gwpConfig.conditions}
                               </p>
                             </div>
