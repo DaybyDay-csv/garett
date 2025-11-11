@@ -199,7 +199,7 @@ export const Footer = () => {
                 <div>
                   <a 
                     href="mailto:info@garett.es" 
-                    className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                    className="text-xs text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
                     info@garett.es
                   </a>
