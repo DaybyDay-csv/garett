@@ -3,15 +3,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import garettPattern from "@/assets/garett-pattern-2.png";
 const testimonials = [{
-  name: "María L.",
-  age: 51,
+  name: "Sofía R.",
+  age: 29,
   location: "Madrid",
   rating: 5,
-  timeline: "10 semanas",
+  timeline: "6 semanas",
   verified: true,
-  image: "ML",
-  review: "Al principio era escéptica, pero después de 10 semanas el óvalo facial está mucho más definido. Lo uso mientras veo la tele, 15 minutos 4 veces por semana. Mis amigas me preguntan si he ido al dermatólogo.",
-  result: "Óvalo facial más firme"
+  image: "SR",
+  review: "Como creadora de contenido necesito verme bien siempre, pero las citas en clínica no encajan con mi agenda. Uso mi Garett antes de grabar y la diferencia en mi piel es increíble. Lo mejor es que lo hago mientras respondo emails.",
+  result: "Piel radiante para cámara"
 }, {
   name: "Ana R.",
   age: 48,
@@ -23,15 +23,15 @@ const testimonials = [{
   review: "Trabajo muchas horas y no tengo tiempo para tratamientos en clínica. Este dispositivo me ha cambiado la vida. En 2 meses, las líneas de expresión están mucho menos marcadas. La inversión ha valido totalmente la pena.",
   result: "Líneas de expresión reducidas"
 }, {
-  name: "Carmen S.",
-  age: 53,
+  name: "Laura M.",
+  age: 32,
   location: "Valencia",
   rating: 5,
-  timeline: "12 semanas",
+  timeline: "7 semanas",
   verified: true,
-  image: "CS",
-  review: "Tenía dudas porque hay muchos aparatos que no funcionan. Pero la garantía de 3 años y el respaldo de El Corte Inglés me dieron confianza. Tras 3 meses, noto mi piel más firme y luminosa. No necesito tanto maquillaje.",
-  result: "Piel más firme y luminosa"
+  image: "LM",
+  review: "Entre el trabajo y el gimnasio apenas tengo tiempo. Quería prevenir sin gastar fortunas en tratamientos mensuales. En menos de 2 meses ya veo mi piel más luminosa y uniforme. Lo uso mientras veo Netflix, súper práctico.",
+  result: "Prevención antiedad efectiva"
 }, {
   name: "Isabel M.",
   age: 55,
@@ -78,8 +78,7 @@ export const Testimonials = () => {
                         <p className="font-semibold">{testimonial.name}</p>
                         {testimonial.verified && <CheckCircle2 className="w-4 h-4 text-green-600" />}
                       </div>
-                      <p className="text-xs text-muted-foreground">27 años • Sevilla{testimonial.age} años • {testimonial.location}
-                      </p>
+                      <p className="text-xs text-muted-foreground">{testimonial.age} años • {testimonial.location}</p>
                     </div>
                   </div>
                   
