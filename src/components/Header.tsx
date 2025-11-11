@@ -36,7 +36,14 @@ export const Header = () => {
             </Link>)}
         </nav>
         
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          {/* Mobile Black Friday Button */}
+          <Link to="/black-friday" className="md:hidden">
+            <Button variant="ghost" size="sm" className="text-white hover:text-white/80 hover:bg-white/10 text-xs font-semibold px-3">
+              Black Friday
+            </Button>
+          </Link>
+          
           <CartDrawer />
           
           {/* Mobile Menu */}
