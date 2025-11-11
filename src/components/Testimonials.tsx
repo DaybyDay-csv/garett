@@ -1,7 +1,7 @@
 import { Star, CheckCircle2, Clock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import garettPattern from "@/assets/garett-pattern-2.png";
 const testimonials = [{
@@ -70,7 +70,7 @@ export const Testimonials = () => {
           }}
           plugins={[
             Autoplay({
-              delay: 4000,
+              delay: 2000,
               stopOnInteraction: false,
               stopOnMouseEnter: true,
             }),
@@ -78,7 +78,7 @@ export const Testimonials = () => {
           className="w-full mb-8"
         >
           <CarouselContent className="-ml-2 md:-ml-4">
-          {testimonials.map((testimonial, index) => <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2">
+          {testimonials.map((testimonial, index) => <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
             <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border/50 h-full">
               <CardContent className="pt-6">
                 {/* Header */}
@@ -124,6 +124,8 @@ export const Testimonials = () => {
             </Card>
             </CarouselItem>)}
           </CarouselContent>
+          <CarouselPrevious className="hidden md:flex" />
+          <CarouselNext className="hidden md:flex" />
         </Carousel>
 
         {/* Trust Footer */}
