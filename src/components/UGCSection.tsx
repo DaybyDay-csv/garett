@@ -217,9 +217,9 @@ export const UGCSection = () => {
             Historias reales de personas reales
           </h2>
           <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-            Cada foto, cada video, cada sonrisa es auténtica. Nuestra comunidad comparte sus experiencias 
-            reales con los dispositivos Garett, mostrando resultados genuinos sin filtros. 
-            Descubre cómo la tecnología de belleza profesional puede transformar tu rutina de cuidado personal.
+            Garett revoluciona el cuidado personal con tecnología de belleza profesional al alcance de todos. 
+            Nuestra misión es ofrecerte dispositivos innovadores que transformen tu rutina diaria, 
+            combinando diseño elegante con resultados profesionales desde la comodidad de tu hogar.
           </p>
           <Button 
             asChild 
