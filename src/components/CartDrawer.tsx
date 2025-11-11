@@ -43,12 +43,14 @@ export const CartDrawer = () => {
   // Exclude GWP items from count
   const totalItems = items.filter(item => !item.isGWP).reduce((sum, item) => sum + item.quantity, 0);
   
-  // Calculate original prices (without discounts)
-  const subtotalOriginal = items.reduce((sum, item) => {
-    // Get original price from the product
-    const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-    return sum + (originalPrice * item.quantity);
-  }, 0);
+  // Calculate original prices (without discounts) - exclude GWP items
+  const subtotalOriginal = items
+    .filter(item => !item.isGWP)
+    .reduce((sum, item) => {
+      // Get original price from the product
+      const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
+      return sum + (originalPrice * item.quantity);
+    }, 0);
   
   // Current stage and discount
   const currentStage = getCurrentPromotionalStage();
