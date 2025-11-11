@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import patternImage from "@/assets/garett-pattern-1.png";
 import { getCurrentPromotionalStage } from "@/lib/promotions";
+import { NewsletterCTA } from "@/components/NewsletterCTA";
 export const BlackFridayBanner = () => {
   const currentStage = getCurrentPromotionalStage();
   const isActive = currentStage?.name === 'Black Friday';
@@ -151,6 +152,12 @@ export const BlackFridayBanner = () => {
               Ver ofertas
             </Link>
           </Button>
+          
+          <NewsletterCTA 
+            variant="inline"
+            text="🔔 Recibe alertas de cada etapa"
+            className="text-white/70 hover:text-white text-xs md:text-sm block"
+          />
           
           {isActive && <p className="text-xs md:text-sm text-white/80">
               ⚡ Las mejores ofertas se agotan rápido

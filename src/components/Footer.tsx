@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 import garettLogo from "@/assets/garett-logo-white.png";
 import garettPattern from "@/assets/garett-pattern-2.png";
+import { NewsletterCTA } from "@/components/NewsletterCTA";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -19,7 +20,7 @@ export const Footer = () => {
       />
 
       <div className="container relative py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
@@ -225,6 +226,29 @@ export const Footer = () => {
                 </div>
               </li>
             </ul>
+          </div>
+
+          {/* Newsletter Section */}
+          <div>
+            <h3 className="font-bold text-lg mb-4">Mantente informado</h3>
+            <p className="text-primary-foreground/80 text-sm mb-4 leading-relaxed">
+              Recibe alertas de cada etapa de ofertas y descuentos exclusivos
+            </p>
+            <NewsletterCTA 
+              variant="default" 
+              size="sm"
+              text="Notificarme"
+              className="bg-white/10 hover:bg-white/20 border-white/20 text-white w-full"
+            />
+            <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-primary-foreground/60">
+              <span className="flex items-center gap-1">
+                🔔 Alertas
+              </span>
+              <span>•</span>
+              <span className="flex items-center gap-1">
+                🎁 Ofertas exclusivas
+              </span>
+            </div>
           </div>
         </div>
 

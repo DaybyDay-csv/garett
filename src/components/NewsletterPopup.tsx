@@ -8,9 +8,11 @@ import { Bell, X, Loader2, Calendar, Tag, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { getAllStagesWithStatus, getPromotionalProgress, getCurrentPromotionalStage, getNextPromotionalStage } from "@/lib/promotions";
+import { useNewsletterStore } from "@/stores/newsletterStore";
 
 export const NewsletterPopup = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const isOpen = useNewsletterStore((state) => state.isOpen);
+  const closeNewsletter = useNewsletterStore((state) => state.closeNewsletter);
   const [email, setEmail] = useState("");
   const [acceptsMarketing, setAcceptsMarketing] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -50,7 +52,7 @@ export const NewsletterPopup = () => {
     
     if (!hasInteracted) {
       const timer = setTimeout(() => {
-        setIsOpen(true);
+        useNewsletterStore.getState().openNewsletter();
       }, 5000);
 
       return () => clearTimeout(timer);
@@ -58,7 +60,7 @@ export const NewsletterPopup = () => {
   }, []);
 
   const handleClose = () => {
-    setIsOpen(false);
+    closeNewsletter();
     localStorage.setItem("newsletter-popup-interacted", "true");
   };
 
@@ -88,10 +90,10 @@ export const NewsletterPopup = () => {
         if (errorContext?.isDuplicate) {
           toast({
             title: "Ya estás suscrito",
-            description: "Este email ya está registrado en nuestra newsletter",
+          description: "Este email ya está registrado en nuestra newsletter",
           });
           localStorage.setItem("newsletter-popup-interacted", "true");
-          setIsOpen(false);
+          closeNewsletter();
           return;
         }
         throw error;
@@ -102,10 +104,10 @@ export const NewsletterPopup = () => {
         if (data.isDuplicate) {
           toast({
             title: "Ya estás suscrito",
-            description: "Este email ya está registrado en nuestra newsletter",
+          description: "Este email ya está registrado en nuestra newsletter",
           });
           localStorage.setItem("newsletter-popup-interacted", "true");
-          setIsOpen(false);
+          closeNewsletter();
         } else {
           throw new Error(data.error);
         }
@@ -115,7 +117,7 @@ export const NewsletterPopup = () => {
           description: "Gracias por suscribirte. Recibirás notificaciones de cada etapa.",
         });
         localStorage.setItem("newsletter-popup-interacted", "true");
-        setIsOpen(false);
+        closeNewsletter();
       }
     } catch (error: any) {
       console.error('Newsletter signup error:', error);
@@ -133,7 +135,7 @@ export const NewsletterPopup = () => {
   const isActiveStage = !!currentStage;
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={closeNewsletter}>
       <DialogContent className="sm:max-w-[480px] p-0 border border-border/50">
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/20 pointer-events-none" />

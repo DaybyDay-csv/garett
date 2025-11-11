@@ -4,6 +4,7 @@ import { Zap, Gift, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import patternImage from "@/assets/garett-pattern-2.png";
+import { NewsletterCTA } from "@/components/NewsletterCTA";
 export const CyberMondayBanner = () => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -134,10 +135,16 @@ export const CyberMondayBanner = () => {
         </div>
 
         {/* CTA */}
-        <div className="pt-2">
+        <div className="pt-2 space-y-2">
           <Button asChild size="lg" variant="secondary" className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 shadow-2xl hover:scale-105 transition-transform w-full sm:w-auto max-w-xs">
             <Link to="/black-friday">Ver ofertas Cyber Monday</Link>
           </Button>
+
+          <NewsletterCTA 
+            variant="inline"
+            text="🔔 No te pierdas las próximas ofertas"
+            className="text-white/70 hover:text-white text-xs md:text-sm block"
+          />
 
           <p className="text-xs md:text-sm text-white/70 px-4 mt-3">
             ⚡ La última oferta del año - No te la pierdas

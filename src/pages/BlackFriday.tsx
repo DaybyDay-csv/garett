@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { promotionalStages, getCurrentPromotionalStage } from "@/lib/promotions";
 import { gwpConfig } from "@/lib/bannerConfig";
 import gwpImage from "@/assets/gwp-headband.jpg";
+import { NewsletterCTA } from "@/components/NewsletterCTA";
 interface TimeLeft {
   days: number;
   hours: number;
@@ -336,6 +337,15 @@ const BlackFriday = () => {
           {/* Countdown Timer */}
           <CountdownTimer promotionalStages={promotionalStages} />
 
+          {/* Newsletter CTA after countdown */}
+          <div className="flex justify-center">
+            <NewsletterCTA 
+              variant="inline"
+              text="Recibe alertas automáticas de cada etapa"
+              className="text-white/70 hover:text-white text-sm bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors"
+            />
+          </div>
+
           {/* Tier Info */}
           
         </div>
@@ -521,6 +531,11 @@ const BlackFriday = () => {
         </div>
       </section>
 
+      {/* Intermediate CTA */}
+      <section className="container py-12">
+        <NewsletterCTA variant="card" className="max-w-2xl mx-auto" />
+      </section>
+
       {/* Products */}
       <div className="container py-12">
         <div className="mb-8">
@@ -556,6 +571,11 @@ const BlackFriday = () => {
             <li>• Garantía de 3 años en todos los productos</li>
             <li>• Devoluciones gratuitas durante 30 días</li>
           </ul>
+        </div>
+
+        {/* Final Newsletter CTA */}
+        <div className="mt-12">
+          <NewsletterCTA variant="card" className="max-w-3xl mx-auto" />
         </div>
       </div>
 

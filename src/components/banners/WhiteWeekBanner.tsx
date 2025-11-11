@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import patternImage from "@/assets/garett-pattern-2.png";
 import { getCurrentPromotionalStage } from "@/lib/promotions";
+import { NewsletterCTA } from "@/components/NewsletterCTA";
 export const WhiteWeekBanner = () => {
   const [copied, setCopied] = useState(false);
   const currentStage = getCurrentPromotionalStage();
@@ -67,7 +68,7 @@ export const WhiteWeekBanner = () => {
         </div>
 
         {/* CTA */}
-        <div className="pt-2">
+        <div className="pt-2 space-y-2">
           <Button size="lg" className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 w-full sm:w-auto max-w-xs" onClick={() => {
           const element = document.getElementById('superventas');
           if (element) {
@@ -79,6 +80,12 @@ export const WhiteWeekBanner = () => {
         }}>
             Comprar ahora
           </Button>
+
+          <NewsletterCTA 
+            variant="inline"
+            text="🔔 Recibe notificaciones de nuevas etapas"
+            className="text-muted-foreground hover:text-foreground text-xs md:text-sm block"
+          />
 
           {/* Countdown if active */}
           {currentStage?.name === 'White Week' && <p className="text-xs md:text-sm text-muted-foreground mt-3">

@@ -9,6 +9,7 @@ import aeroglowDual from "@/assets/aeroglow-dual.png";
 import hairBefore from "@/assets/hair-before.png";
 import hairAfter from "@/assets/hair-after.jpg";
 import patternImage from "@/assets/garett-pattern-1.png";
+import { NewsletterCTA } from "@/components/NewsletterCTA";
 
 export const AeroGlowBanner = () => {
   const [product, setProduct] = useState<ShopifyProduct | null>(null);
@@ -130,6 +131,12 @@ export const AeroGlowBanner = () => {
               </Link>
             </div>
 
+            <NewsletterCTA 
+              variant="inline"
+              text="🔔 Notifícame de ofertas exclusivas"
+              className="text-muted-foreground hover:text-foreground text-xs md:text-sm text-center lg:text-left"
+            />
+
             {/* Trust Indicators */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 pt-4 text-xs md:text-sm">
               <div className="flex items-center gap-2 text-muted-foreground">
@@ -240,7 +247,7 @@ export const AeroGlowBanner = () => {
           </div>
 
           {/* Final CTA */}
-          <div className="text-center mt-8 md:mt-12 relative z-20">
+          <div className="text-center mt-8 md:mt-12 relative z-20 space-y-3">
             <Link 
               to="/producto/253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow"
               className="inline-flex items-center justify-center group text-base md:text-lg h-14 md:h-16 px-12 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-2xl hover:shadow-3xl transition-all text-white rounded-md font-medium cursor-pointer relative z-20"
@@ -248,6 +255,13 @@ export const AeroGlowBanner = () => {
               Consigue tu AeroGlow Ahora
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" />
             </Link>
+            
+            <NewsletterCTA 
+              variant="inline"
+              text="🔔 Quiero ofertas exclusivas"
+              className="text-muted-foreground hover:text-foreground text-xs md:text-sm block"
+            />
+            
             <p className="text-xs md:text-sm text-muted-foreground mt-4">
               ⚡ Últimas unidades disponibles • Envío gratis en 24-48h
             </p>
