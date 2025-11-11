@@ -217,9 +217,10 @@ export const UGCSection = () => {
             Historias reales de personas reales
           </h2>
           <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-            Garett revoluciona el cuidado personal con tecnología de belleza profesional al alcance de todos. 
-            Nuestra misión es ofrecerte dispositivos innovadores que transformen tu rutina diaria, 
-            combinando diseño elegante con resultados profesionales desde la comodidad de tu hogar.
+            ¿Cansada de gastar en tratamientos caros que no caben en tu agenda? 
+            Garett trae la tecnología profesional de los salones de belleza directamente a tu hogar. 
+            Resultados visibles, rutinas flexibles que se adaptan a tu vida, y la confianza de invertir 
+            en ti misma sin comprometer tiempo ni calidad.
           </p>
           <Button 
             asChild 
