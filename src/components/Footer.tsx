@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
-import garettLogo from "@/assets/garett-logo-white.png";
+import garettLogo from "@/assets/garett-logo-footer.png";
 import garettPattern from "@/assets/garett-pattern-2.png";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 
