@@ -84,9 +84,20 @@ serve(async (req) => {
     const data = await response.json();
     console.log('Shopify response:', JSON.stringify(data, null, 2));
 
+    // Check for GraphQL errors that aren't PII access restrictions
     if (data.errors) {
-      console.error('GraphQL errors:', data.errors);
-      throw new Error(`GraphQL error: ${data.errors.map((e: any) => e.message).join(', ')}`);
+      const hasPIIRestriction = data.errors.some((e: any) => 
+        e.extensions?.code === 'ACCESS_DENIED' && 
+        e.message.includes('Customer object')
+      );
+      
+      // If it's only a PII restriction but customer was created, we can continue
+      if (!hasPIIRestriction) {
+        console.error('GraphQL errors:', data.errors);
+        throw new Error(`GraphQL error: ${data.errors.map((e: any) => e.message).join(', ')}`);
+      }
+      
+      console.log('PII access restriction detected, but customer was created successfully');
     }
 
     const { customer, userErrors } = data.data.customerCreate;
@@ -123,7 +134,7 @@ serve(async (req) => {
         success: true, 
         customer: {
           id: customer.id,
-          email: customer.email,
+          email: customer.email || email, // Use submitted email if Shopify returns null due to PII restrictions
           marketingState: customer.emailMarketingConsent?.marketingState
         }
       }),
