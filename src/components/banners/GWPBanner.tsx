@@ -15,7 +15,11 @@ export const GWPBanner = () => {
       backgroundRepeat: 'repeat'
     }} />
       
-      <div className="container mx-auto px-6 md:px-8 min-h-full flex flex-col md:flex-row items-center justify-between gap-6 md:gap-12 relative z-10 py-16 md:py-20 pb-20 md:pb-20">
+      {/* Decorative circles */}
+      <div className="absolute top-20 right-20 w-64 h-64 rounded-full bg-primary/5 blur-3xl" />
+      <div className="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-accent/5 blur-3xl" />
+      
+      <div className="container mx-auto px-6 md:px-8 min-h-[500px] flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 relative z-10 py-16 md:py-20 pb-20 md:pb-20">
         {/* Gift Image */}
         <div className="flex-1 flex items-center justify-center order-2 md:order-1">
           <div className="relative">
@@ -31,7 +35,7 @@ export const GWPBanner = () => {
         </div>
 
         {/* Content - Enhanced Visual */}
-        <div className="flex-1 text-center md:text-left space-y-3 md:space-y-6 order-1 md:order-2 max-w-lg mx-auto md:mx-0">
+        <div className="flex-1 text-center md:text-left space-y-4 md:space-y-6 order-1 md:order-2 max-w-lg mx-auto md:mx-0">
           
           
           <div className="space-y-2 md:space-y-4">
