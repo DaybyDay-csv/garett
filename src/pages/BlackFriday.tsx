@@ -460,22 +460,22 @@ const BlackFriday = () => {
                       {stage.details}
                     </p>
 
-                    {/* Codes - Only show for Black Friday tiers */}
+                     {/* Codes - Only show for Black Friday tiers */}
                     <div className="space-y-1.5 lg:space-y-3">
                       {stage.codes && stage.codes.length > 0 ? <div className="space-y-1 lg:space-y-2">
                           <p className="text-[10px] lg:text-xs font-semibold text-muted-foreground">Códigos:</p>
                           {stage.codes.map(codeObj => <div key={codeObj.code} className={`bg-background/50 border-2 rounded-md lg:rounded-lg p-2 lg:p-3 ${codeObj.urgency === 'high' ? 'border-red-500/30' : codeObj.urgency === 'medium' ? 'border-orange-500/30' : 'border-primary/30'}`}>
-                              <div className="flex items-center justify-between mb-1 lg:mb-2 gap-1">
-                                <Badge variant={codeObj.urgency === 'high' ? 'destructive' : 'secondary'} className="text-[10px] lg:text-xs px-1 lg:px-2 py-0 lg:py-0.5">
+                              <div className="flex items-center justify-between mb-1 lg:mb-2 gap-2">
+                                <Badge variant={codeObj.urgency === 'high' ? 'destructive' : 'secondary'} className="text-[10px] lg:text-xs px-1.5 lg:px-2 py-0.5 lg:py-1 shrink-0">
                                   {codeObj.discount}
                                 </Badge>
                                 <span className="text-[9px] lg:text-xs text-muted-foreground truncate">{codeObj.limit}</span>
                               </div>
-                              <div className="flex items-center gap-1 lg:gap-2">
-                                <span className="flex-1 font-mono text-[10px] lg:text-sm font-bold truncate">
+                              <div className="flex items-center gap-2">
+                                <span className="flex-1 font-mono text-[10px] lg:text-sm font-bold truncate min-w-0">
                                   {codeObj.code}
                                 </span>
-                                <Button size="icon" variant="ghost" className="h-6 w-6 lg:h-8 lg:w-8 p-0" onClick={() => copyCode(codeObj.code)}>
+                                <Button size="icon" variant="ghost" className="h-6 w-6 lg:h-8 lg:w-8 p-0 shrink-0" onClick={() => copyCode(codeObj.code)}>
                                   {copiedCode === codeObj.code ? <Check className="w-2.5 h-2.5 lg:w-3 lg:h-3 text-green-500" /> : <Copy className="w-2.5 h-2.5 lg:w-3 lg:h-3" />}
                                 </Button>
                               </div>
