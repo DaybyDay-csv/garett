@@ -18,9 +18,15 @@ export const AeroGlowBanner = () => {
   useEffect(() => {
     const loadProduct = async () => {
       try {
-        const products = await fetchProducts(1, 'handle:253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow');
+        // Search for AeroGlow or hair straightener products
+        const products = await fetchProducts(50, 'product_type:Plancha OR title:AeroGlow OR title:plancha');
         if (products && products.length > 0) {
-          setProduct(products[0]);
+          // Find the AeroGlow product specifically
+          const aeroglow = products.find(p => 
+            p.node.title.toLowerCase().includes('aeroglow') || 
+            p.node.handle.includes('aeroglow')
+          );
+          setProduct(aeroglow || products[0]);
         }
       } catch (error) {
         console.error('Error loading AeroGlow product:', error);
@@ -31,7 +37,10 @@ export const AeroGlowBanner = () => {
     loadProduct();
   }, []);
 
+  // Use actual Shopify price without calculation
   const price = product?.node.priceRange.minVariantPrice.amount;
+  const currencyCode = product?.node.priceRange.minVariantPrice.currencyCode || 'EUR';
+  // Calculate original price assuming current price is after 10% discount
   const originalPrice = price ? parseFloat(price) / 0.9 : null;
 
   return (
@@ -84,13 +93,17 @@ export const AeroGlowBanner = () => {
             {price && (
               <div className="flex items-center justify-center lg:justify-start gap-4 flex-wrap">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl md:text-5xl font-bold text-foreground">€{parseFloat(price).toFixed(2)}</span>
+                  <span className="text-4xl md:text-5xl font-bold text-foreground">
+                    {currencyCode === 'USD' ? '$' : '€'}{parseFloat(price).toFixed(2)}
+                  </span>
                   {originalPrice && (
-                    <span className="text-xl md:text-2xl text-muted-foreground line-through">€{originalPrice.toFixed(2)}</span>
+                    <span className="text-xl md:text-2xl text-muted-foreground line-through">
+                      {currencyCode === 'USD' ? '$' : '€'}{originalPrice.toFixed(2)}
+                    </span>
                   )}
                 </div>
                 <Badge className="bg-red-500 text-white text-sm px-3 py-1 animate-pulse">
-                  AHORRA €{originalPrice ? (originalPrice - parseFloat(price)).toFixed(2) : '12.00'}
+                  AHORRA {currencyCode === 'USD' ? '$' : '€'}{originalPrice ? (originalPrice - parseFloat(price)).toFixed(2) : '12.00'}
                 </Badge>
               </div>
             )}
@@ -117,14 +130,14 @@ export const AeroGlowBanner = () => {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2 relative z-20">
               <Link 
-                to="/producto/253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow"
+                to={product ? `/producto/${product.node.handle}` : "#"}
                 className="inline-flex items-center justify-center group text-sm md:text-base h-14 px-10 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-xl hover:shadow-2xl transition-all text-white border-0 rounded-md font-medium cursor-pointer"
               >
                 Comprar Ahora
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
-                to="/producto/253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow"
+                to={product ? `/producto/${product.node.handle}` : "#"}
                 className="inline-flex items-center justify-center text-sm md:text-base h-14 px-10 border-2 border-[#8B6F47] text-[#5D4037] dark:text-[#D7B896] hover:bg-[#8B6F47]/10 rounded-md font-medium transition-colors cursor-pointer bg-background"
               >
                 Ver Detalles
@@ -249,7 +262,7 @@ export const AeroGlowBanner = () => {
           {/* Final CTA */}
           <div className="text-center mt-8 md:mt-12 relative z-20 space-y-3">
             <Link 
-              to="/producto/253-garett-beauty-plancha-de-pelo-aerea-marron-aeroglow"
+              to={product ? `/producto/${product.node.handle}` : "#"}
               className="inline-flex items-center justify-center group text-base md:text-lg h-14 md:h-16 px-12 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-2xl hover:shadow-3xl transition-all text-white rounded-md font-medium cursor-pointer relative z-20"
             >
               Consigue tu AeroGlow Ahora
