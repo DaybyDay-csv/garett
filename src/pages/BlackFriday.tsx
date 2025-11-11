@@ -410,7 +410,7 @@ const BlackFriday = () => {
           </div>
 
            {/* Stage Cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-3 lg:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-3 lg:gap-x-6 lg:gap-y-6">
             {extendedPromotionalStages.map(stage => {
             const Icon = stage.icon;
             const status = getStageStatus(stage);
@@ -418,16 +418,16 @@ const BlackFriday = () => {
             const isUpcoming = status === 'upcoming';
             const isEnded = status === 'ended';
             return <div key={stage.name} className="relative">
-                  {/* Status badge - Outside on mobile, inside on desktop */}
-                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 lg:top-4 lg:right-4 lg:left-auto lg:translate-x-0 z-20">
+                  {/* Status badge - Outside on mobile, inside with proper spacing on desktop */}
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 lg:top-2 lg:right-2 lg:left-auto lg:translate-x-0 z-20">
                     {isActive && <Badge className={`bg-gradient-to-r ${stage.color} text-white border-0 animate-pulse shadow-lg text-[10px] lg:text-xs px-1.5 lg:px-2.5 py-0.5 lg:py-1`}>
                         <Clock className="w-2.5 h-2.5 lg:w-3 lg:h-3 mr-0.5 lg:mr-1" />
                         EN CURSO
                       </Badge>}
-                    {isUpcoming && <Badge variant="secondary" className="shadow-sm text-[10px] lg:text-xs px-1.5 lg:px-2.5 py-0.5 lg:py-1">
+                    {isUpcoming && <Badge variant="secondary" className="shadow-sm text-[10px] lg:text-xs px-1.5 lg:px-2.5 py-0.5 lg:py-1 bg-secondary/80 backdrop-blur-sm">
                         PRÓXIMO
                       </Badge>}
-                    {isEnded && <Badge variant="outline" className="opacity-60 text-[10px] lg:text-xs px-1.5 lg:px-2.5 py-0.5 lg:py-1">
+                    {isEnded && <Badge variant="outline" className="opacity-60 text-[10px] lg:text-xs px-1.5 lg:px-2.5 py-0.5 lg:py-1 bg-background/80 backdrop-blur-sm">
                         FINALIZADO
                       </Badge>}
                   </div>
@@ -436,7 +436,7 @@ const BlackFriday = () => {
                   {/* Background gradient */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${stage.color} ${isActive ? 'opacity-10' : 'opacity-5'}`} />
 
-                  <div className="relative p-3 lg:p-6">
+                  <div className="relative p-3 lg:p-6 pt-5 lg:pt-10">
                     {/* Header */}
                     <div className="flex items-start gap-2 lg:gap-4 mb-2 lg:mb-4">
                       <div className={`w-9 h-9 lg:w-14 lg:h-14 rounded-lg lg:rounded-xl bg-gradient-to-br ${stage.color} flex items-center justify-center flex-shrink-0 shadow-lg ${isActive ? 'animate-pulse' : ''}`}>
