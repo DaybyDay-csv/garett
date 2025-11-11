@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import garettIcon from "@/assets/garett-icon-white.png";
-import garettLogo from "@/assets/garett-logo-new.png";
+import garettLogo from "@/assets/garett-logo-white.png";
 import garettIsotipo from "@/assets/garett-isotipo-white.png";
 export const Header = () => {
   const navLinks = [{
