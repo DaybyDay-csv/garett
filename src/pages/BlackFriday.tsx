@@ -179,8 +179,7 @@ const CountdownTimer = ({
   const StageIcon = displayStage?.icon;
   return <div className="mt-8 space-y-6">
       {/* Current Stage Banner */}
-      {displayStage && (
-        <div className="bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-6">
+      {displayStage && <div className="bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-6">
           <div className="text-center">
             <div className="text-xs text-white/70 uppercase tracking-wider mb-2">
               ETAPA ACTUAL
@@ -191,16 +190,13 @@ const CountdownTimer = ({
               </div>
               <div>
                 <div className="font-bold text-white text-xl">{displayStage.name}</div>
-                {'discount' in displayStage && displayStage.discount && (
-                  <Badge className={`bg-gradient-to-r ${displayStage.color} text-white border-0 mt-2`}>
+                {'discount' in displayStage && displayStage.discount && <Badge className={`bg-gradient-to-r ${displayStage.color} text-white border-0 mt-2`}>
                     {displayStage.discount}
-                  </Badge>
-                )}
+                  </Badge>}
               </div>
             </div>
           </div>
-        </div>
-      )}
+        </div>}
 
       {/* Countdown */}
       <div>
@@ -324,7 +320,8 @@ const BlackFriday = () => {
       limit: string;
       urgency: string;
     }>,
-    gwp: true, // GWP active for all stages
+    gwp: true,
+    // GWP active for all stages
     gwpCode: stage.name === "White Week" ? "REGALOWW70" : stage.name === "Black Friday" ? "REGALOBF70" : stage.name === "Cyber Monday" ? "REGALOCM70" : undefined
   }));
 
@@ -346,15 +343,9 @@ const BlackFriday = () => {
           <Badge className="mb-4 bg-white/20 text-white border-white/30 backdrop-blur-sm">
             Promociones Noviembre-Diciembre 2025
           </Badge>
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Calendario de Ofertas
-          </h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-4 max-w-2xl">
-            Warm-up · White Week · Black Friday · Cyber Monday
-          </p>
-          <p className="text-lg text-white/80 mb-4 max-w-2xl">
-            Hasta 50% de descuento + regalo gratis desde €70
-          </p>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">Calendario de Ofertas BlackFriday</h1>
+          <p className="text-xl md:text-2xl text-white/90 mb-4 max-w-2xl">Warm-up · White Week · Black Friday · Cyber Monday</p>
+          <p className="text-lg text-white/80 mb-4 max-w-2xl">Hasta 50% de descuento + Regalo gratis desde €70 en TODOS los pedidos.</p>
 
           {/* Countdown Timer */}
           <CountdownTimer promotionalStages={promotionalStages} />
@@ -475,18 +466,9 @@ const BlackFriday = () => {
 
                     {/* Codes - Only show for Black Friday tiers */}
                     <div className="space-y-3">
-                      {stage.codes && stage.codes.length > 0 ? (
-                        <div className="space-y-2">
+                      {stage.codes && stage.codes.length > 0 ? <div className="space-y-2">
                           <p className="text-xs font-semibold text-muted-foreground">Códigos por nivel:</p>
-                          {stage.codes.map(codeObj => (
-                            <div 
-                              key={codeObj.code} 
-                              className={`bg-background/50 border-2 rounded-lg p-3 ${
-                                codeObj.urgency === 'high' ? 'border-red-500/30' : 
-                                codeObj.urgency === 'medium' ? 'border-orange-500/30' : 
-                                'border-primary/30'
-                              }`}
-                            >
+                          {stage.codes.map(codeObj => <div key={codeObj.code} className={`bg-background/50 border-2 rounded-lg p-3 ${codeObj.urgency === 'high' ? 'border-red-500/30' : codeObj.urgency === 'medium' ? 'border-orange-500/30' : 'border-primary/30'}`}>
                               <div className="flex items-center justify-between mb-2">
                                 <Badge variant={codeObj.urgency === 'high' ? 'destructive' : 'secondary'} className="text-xs">
                                   {codeObj.discount}
@@ -501,11 +483,8 @@ const BlackFriday = () => {
                                   {copiedCode === codeObj.code ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
                                 </Button>
                               </div>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="bg-green-500/10 rounded-lg p-4 border border-green-500/20">
+                            </div>)}
+                        </div> : <div className="bg-green-500/10 rounded-lg p-4 border border-green-500/20">
                           <div className="flex items-center justify-center gap-2">
                             <Badge variant="secondary" className="bg-green-500/20 text-green-700 dark:text-green-300 border-0">
                               ✓ Descuento automático
@@ -514,19 +493,13 @@ const BlackFriday = () => {
                           <p className="text-xs text-center text-muted-foreground mt-2">
                             Se aplica directamente en productos
                           </p>
-                        </div>
-                      )}
+                        </div>}
                       
                       {/* GWP - Gift With Purchase Block */}
-                      {stage.gwp && (
-                        <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-lg p-2.5 border border-pink-500/30">
+                      {stage.gwp && <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-lg p-2.5 border border-pink-500/30">
                           <div className="flex items-center gap-2">
                             <div className="relative w-10 h-10 rounded overflow-hidden flex-shrink-0 border border-white/40 shadow-sm">
-                              <img 
-                                src={gwpImage} 
-                                alt={gwpConfig.giftName}
-                                className="w-full h-full object-cover"
-                              />
+                              <img src={gwpImage} alt={gwpConfig.giftName} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-1 mb-0.5">
@@ -543,8 +516,7 @@ const BlackFriday = () => {
                               </p>
                             </div>
                           </div>
-                        </div>
-                      )}
+                        </div>}
                     </div>
                   </div>
                 </div>;
