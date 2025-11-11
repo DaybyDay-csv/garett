@@ -7,7 +7,7 @@ import gwpImage from "@/assets/gwp-headband.png";
 import patternImage from "@/assets/garett-pattern-2.png";
 import { gwpConfig } from "@/lib/bannerConfig";
 export const GWPBanner = () => {
-  return <div className="relative w-full bg-gradient-to-br from-promo-gwp via-background to-promo-gwp overflow-hidden">
+  return <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-gwp via-background to-promo-gwp overflow-hidden">
       {/* Pattern overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
       backgroundImage: `url(${patternImage})`,
@@ -15,7 +15,7 @@ export const GWPBanner = () => {
       backgroundRepeat: 'repeat'
     }} />
       
-      <div className="container mx-auto px-6 md:px-8 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-12 relative z-10 py-8 md:py-12 pb-12 md:pb-12">
+      <div className="container mx-auto px-6 md:px-8 min-h-full flex flex-col md:flex-row items-center justify-between gap-6 md:gap-12 relative z-10 py-16 md:py-20 pb-20 md:pb-20">
         {/* Gift Image */}
         <div className="flex-1 flex items-center justify-center order-2 md:order-1">
           <div className="relative">
@@ -31,7 +31,7 @@ export const GWPBanner = () => {
         </div>
 
         {/* Content - Enhanced Visual */}
-        <div className="flex-1 text-center md:text-left space-y-2 md:space-y-6 order-1 md:order-2 max-w-lg mx-auto md:mx-0">
+        <div className="flex-1 text-center md:text-left space-y-3 md:space-y-6 order-1 md:order-2 max-w-lg mx-auto md:mx-0">
           
           
           <div className="space-y-2 md:space-y-4">

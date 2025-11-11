@@ -36,7 +36,7 @@ export const CyberMondayBanner = () => {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
-  return <div className="relative w-full bg-gradient-to-br from-promo-cm-start via-promo-cm-mid to-promo-cm-end overflow-hidden">
+  return <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-cm-start via-promo-cm-mid to-promo-cm-end overflow-hidden">
       {/* Pattern overlay */}
       <div className="absolute inset-0 opacity-10" style={{
       backgroundImage: `url(${patternImage})`,
@@ -59,7 +59,7 @@ export const CyberMondayBanner = () => {
       animationDelay: "1s"
     }} />
 
-      <div className="container mx-auto px-6 md:px-8 flex flex-col items-center justify-center text-center relative z-10 space-y-3 md:space-y-6 py-8 md:py-12 pb-12 md:pb-16">
+      <div className="container mx-auto px-6 md:px-8 min-h-full flex flex-col items-center justify-center text-center relative z-10 space-y-4 md:space-y-8 py-16 md:py-20 pb-20 md:pb-20">
         {/* Date Badge */}
         <Badge variant="outline" className="border-white text-white text-xs md:text-sm px-4 py-1.5 md:px-5 md:py-2">
           <Zap className="w-3 h-3 mr-1" />1 DICIEMBRE
