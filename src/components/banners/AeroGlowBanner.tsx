@@ -108,27 +108,27 @@ export const AeroGlowBanner = () => {
             )}
 
             {/* Key Benefits - Enhanced Visual */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div className="group relative p-4 rounded-xl bg-gradient-to-br from-[#D4AF37]/10 to-[#8B6F47]/5 backdrop-blur border-2 border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all hover:shadow-xl overflow-hidden">
+            <div className="grid grid-cols-3 gap-2 md:gap-3">
+              <div className="group relative p-2 md:p-4 rounded-lg md:rounded-xl bg-gradient-to-br from-[#D4AF37]/10 to-[#8B6F47]/5 backdrop-blur border-2 border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all hover:shadow-xl overflow-hidden">
                 <div className="absolute top-0 right-0 w-20 h-20 bg-[#D4AF37]/10 rounded-full blur-2xl" />
-                <Zap className="w-6 h-6 text-[#D4AF37] mb-2 group-hover:scale-125 transition-transform relative z-10 drop-shadow-lg" />
-                <div className="font-bold text-sm relative z-10">Calor Uniforme</div>
-                <div className="text-xs text-muted-foreground relative z-10">Tecnología avanzada</div>
-                <Badge className="mt-2 bg-[#D4AF37]/20 text-[#5D4037] text-[10px] px-2 py-0.5">Premium</Badge>
+                <Zap className="w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] mb-1 md:mb-2 group-hover:scale-125 transition-transform relative z-10 drop-shadow-lg" />
+                <div className="font-bold text-[10px] md:text-sm relative z-10">Calor Uniforme</div>
+                <div className="text-[8px] md:text-xs text-muted-foreground relative z-10 hidden sm:block">Tecnología avanzada</div>
+                <Badge className="mt-1 md:mt-2 bg-[#D4AF37]/20 text-[#5D4037] text-[8px] md:text-[10px] px-1.5 md:px-2 py-0.5">Premium</Badge>
               </div>
-              <div className="group relative p-4 rounded-xl bg-gradient-to-br from-[#8B6F47]/10 to-[#5D4037]/5 backdrop-blur border-2 border-[#8B6F47]/30 hover:border-[#8B6F47] transition-all hover:shadow-xl overflow-hidden">
+              <div className="group relative p-2 md:p-4 rounded-lg md:rounded-xl bg-gradient-to-br from-[#8B6F47]/10 to-[#5D4037]/5 backdrop-blur border-2 border-[#8B6F47]/30 hover:border-[#8B6F47] transition-all hover:shadow-xl overflow-hidden">
                 <div className="absolute top-0 right-0 w-20 h-20 bg-[#8B6F47]/10 rounded-full blur-2xl" />
-                <Shield className="w-6 h-6 text-[#8B6F47] mb-2 group-hover:scale-125 transition-transform relative z-10 drop-shadow-lg" />
-                <div className="font-bold text-sm relative z-10">Protección Total</div>
-                <div className="text-xs text-muted-foreground relative z-10">Iones negativos</div>
-                <Badge className="mt-2 bg-[#8B6F47]/20 text-[#5D4037] text-[10px] px-2 py-0.5">Seguro</Badge>
+                <Shield className="w-4 h-4 md:w-6 md:h-6 text-[#8B6F47] mb-1 md:mb-2 group-hover:scale-125 transition-transform relative z-10 drop-shadow-lg" />
+                <div className="font-bold text-[10px] md:text-sm relative z-10">Protección Total</div>
+                <div className="text-[8px] md:text-xs text-muted-foreground relative z-10 hidden sm:block">Iones negativos</div>
+                <Badge className="mt-1 md:mt-2 bg-[#8B6F47]/20 text-[#5D4037] text-[8px] md:text-[10px] px-1.5 md:px-2 py-0.5">Seguro</Badge>
               </div>
-              <div className="group relative p-4 rounded-xl bg-gradient-to-br from-[#5D4037]/10 to-[#D4AF37]/5 backdrop-blur border-2 border-[#5D4037]/30 hover:border-[#5D4037] transition-all hover:shadow-xl overflow-hidden">
+              <div className="group relative p-2 md:p-4 rounded-lg md:rounded-xl bg-gradient-to-br from-[#5D4037]/10 to-[#D4AF37]/5 backdrop-blur border-2 border-[#5D4037]/30 hover:border-[#5D4037] transition-all hover:shadow-xl overflow-hidden">
                 <div className="absolute top-0 right-0 w-20 h-20 bg-[#5D4037]/10 rounded-full blur-2xl" />
-                <Award className="w-6 h-6 text-[#5D4037] mb-2 group-hover:scale-125 transition-transform relative z-10 drop-shadow-lg" />
-                <div className="font-bold text-sm relative z-10">Made in Poland</div>
-                <div className="text-xs text-muted-foreground relative z-10">Calidad premium</div>
-                <Badge className="mt-2 bg-[#5D4037]/20 text-[#5D4037] text-[10px] px-2 py-0.5">Europa</Badge>
+                <Award className="w-4 h-4 md:w-6 md:h-6 text-[#5D4037] mb-1 md:mb-2 group-hover:scale-125 transition-transform relative z-10 drop-shadow-lg" />
+                <div className="font-bold text-[10px] md:text-sm relative z-10">Made in Poland</div>
+                <div className="text-[8px] md:text-xs text-muted-foreground relative z-10 hidden sm:block">Calidad premium</div>
+                <Badge className="mt-1 md:mt-2 bg-[#5D4037]/20 text-[#5D4037] text-[8px] md:text-[10px] px-1.5 md:px-2 py-0.5">Europa</Badge>
               </div>
             </div>
 
