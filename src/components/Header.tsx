@@ -20,7 +20,7 @@ export const Header = () => {
     label: 'Novedades',
     to: '/novedades'
   }];
-  return <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-[#1a1f3a]/95 backdrop-blur supports-[backdrop-filter]:bg-[#1a1f3a]/90 shadow-sm">
+  return <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-[#0f1629]/95 backdrop-blur supports-[backdrop-filter]:bg-[#0f1629]/90 shadow-sm">
       <div className="container flex h-20 items-center justify-between">
         <Link to="/" className="flex items-center gap-3">
           {/* Mobile: isotipo (icon only) */}
