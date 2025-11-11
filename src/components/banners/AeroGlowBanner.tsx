@@ -37,11 +37,13 @@ export const AeroGlowBanner = () => {
     loadProduct();
   }, []);
 
-  // Use actual Shopify price without calculation
+  // Base price is always 299
+  const basePrice = 299;
+  // Current Shopify price is the discounted price
   const price = product?.node.priceRange.minVariantPrice.amount;
   const currencyCode = product?.node.priceRange.minVariantPrice.currencyCode || 'EUR';
-  // Calculate original price assuming current price is after 10% discount
-  const originalPrice = price ? parseFloat(price) / 0.9 : null;
+  // Calculate discount percentage
+  const discountPercentage = price ? Math.round(((basePrice - parseFloat(price)) / basePrice) * 100) : 10;
 
   return (
     <div className="relative w-full bg-gradient-to-br from-[#5D4037]/5 via-background to-[#8B6F47]/5 overflow-hidden">
@@ -96,14 +98,12 @@ export const AeroGlowBanner = () => {
                   <span className="text-4xl md:text-5xl font-bold text-foreground">
                     {currencyCode === 'USD' ? '$' : '€'}{parseFloat(price).toFixed(2)}
                   </span>
-                  {originalPrice && (
-                    <span className="text-xl md:text-2xl text-muted-foreground line-through">
-                      {currencyCode === 'USD' ? '$' : '€'}{originalPrice.toFixed(2)}
-                    </span>
-                  )}
+                  <span className="text-xl md:text-2xl text-muted-foreground line-through">
+                    {currencyCode === 'USD' ? '$' : '€'}{basePrice.toFixed(2)}
+                  </span>
                 </div>
                 <Badge className="bg-red-500 text-white text-sm px-3 py-1 animate-pulse">
-                  AHORRA {currencyCode === 'USD' ? '$' : '€'}{originalPrice ? (originalPrice - parseFloat(price)).toFixed(2) : '12.00'}
+                  AHORRA {currencyCode === 'USD' ? '$' : '€'}{(basePrice - parseFloat(price)).toFixed(2)}
                 </Badge>
               </div>
             )}
@@ -194,7 +194,7 @@ export const AeroGlowBanner = () => {
                   <div className="relative">
                     <div className="absolute inset-0 bg-red-500 rounded-full blur-xl opacity-50 animate-pulse" />
                     <div className="relative bg-gradient-to-br from-red-500 to-red-600 text-white rounded-full w-24 h-24 md:w-28 md:h-28 flex flex-col items-center justify-center shadow-2xl border-4 border-white dark:border-background font-bold animate-bounce">
-                      <span className="text-2xl md:text-3xl">-10%</span>
+                      <span className="text-2xl md:text-3xl">-{discountPercentage}%</span>
                       <span className="text-xs">OFF</span>
                     </div>
                   </div>
