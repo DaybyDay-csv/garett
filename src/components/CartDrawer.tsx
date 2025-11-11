@@ -47,8 +47,8 @@ export const CartDrawer = () => {
   const subtotalOriginal = items
     .filter(item => !item.isGWP)
     .reduce((sum, item) => {
-      // Get original price from the product
-      const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
+      // Use the actual variant price, not the minimum price
+      const originalPrice = parseFloat(item.price.amount);
       return sum + (originalPrice * item.quantity);
     }, 0);
   
