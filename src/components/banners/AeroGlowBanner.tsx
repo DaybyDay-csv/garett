@@ -95,14 +95,14 @@ export const AeroGlowBanner = () => {
               <div className="flex items-center justify-center lg:justify-start gap-4 flex-wrap">
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl md:text-5xl font-bold text-foreground">
-                    {currencyCode === 'USD' ? '$' : '€'}{finalPrice.toFixed(2)}
+                    €{finalPrice.toFixed(2)}
                   </span>
                   <span className="text-xl md:text-2xl text-muted-foreground line-through">
-                    {currencyCode === 'USD' ? '$' : '€'}{basePrice.toFixed(2)}
+                    €{basePrice.toFixed(2)}
                   </span>
                 </div>
                 <Badge className="bg-red-500 text-white text-sm px-3 py-1 animate-pulse">
-                  AHORRA {currencyCode === 'USD' ? '$' : '€'}{discountAmount.toFixed(2)}
+                  AHORRA €{discountAmount.toFixed(2)}
                 </Badge>
               </div>
             )}
