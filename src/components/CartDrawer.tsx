@@ -40,7 +40,8 @@ export const CartDrawer = () => {
     checkAndAddGWP();
   }, [items.length, checkAndAddGWP]);
   
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+  // Exclude GWP items from count
+  const totalItems = items.filter(item => !item.isGWP).reduce((sum, item) => sum + item.quantity, 0);
   
   // Calculate original prices (without discounts)
   const subtotalOriginal = items.reduce((sum, item) => {
@@ -168,7 +169,7 @@ export const CartDrawer = () => {
             <>
               <div className="flex-1 overflow-y-auto pr-2 min-h-0">
                 <div className="space-y-4">
-                  {items.map((item) => (
+                  {items.filter(item => !item.isGWP).map((item) => (
                     <div 
                       key={item.variantId} 
                       className={`flex gap-4 p-2 border rounded-lg ${
