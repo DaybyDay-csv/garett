@@ -147,12 +147,8 @@ export const UGCSection = () => {
 
         {/* Brand Story */}
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">
-            Quiénes somos
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-            Historias reales de personas reales
-          </h2>
+          <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">QUIÉNES SOMOS, NUESTRA HIS</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">Garett Beauty: tu spa inteligente en casa</h2>
           <p className="text-muted-foreground text-lg mb-8 leading-relaxed">Nacimos de una pregunta sencilla: ¿por qué el cuidado que te hace sentir bien tiene que ser caro, lejano y con cita previa? En Garett Beauty acercamos la tecnología de clínica a tu casa para que tu rutina sea más eficaz, sencilla y bonita. Hablamos de mesoterapia sin agujas, limpieza sónica o masajes tensores en 10 minutos —bienestar inteligente que transforma lo cotidiano.
 
 Creemos en el lujo accesible: dispositivos con diseño cuidado, resultados visibles y un precio honesto. Y, sobre todo, confianza: certificación CE, 3 años de garantía y el respaldo de grandes retailers como El Corte Inglés.
