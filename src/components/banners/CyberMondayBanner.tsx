@@ -109,7 +109,7 @@ export const CyberMondayBanner = () => {
         </div>
 
         {/* Benefits - Enhanced Visual Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 text-sm md:text-base text-white w-full max-w-2xl">
+        <div className="grid grid-cols-3 gap-2 md:gap-4 text-sm md:text-base text-white w-full max-w-2xl">
           <div className="group relative bg-white/15 backdrop-blur-md border-2 border-white/30 rounded-xl p-3 md:p-4 hover:bg-white/25 hover:border-white/50 transition-all hover:scale-105 overflow-hidden">
             <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full blur-2xl" />
             <div className="relative z-10 flex flex-col items-center gap-2">
