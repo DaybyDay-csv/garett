@@ -417,12 +417,9 @@ const BlackFriday = () => {
             const isActive = status === 'active';
             const isUpcoming = status === 'upcoming';
             const isEnded = status === 'ended';
-            return <div key={stage.name} className={`relative overflow-hidden rounded-lg lg:rounded-xl border-2 transition-all duration-300 ${isActive ? 'border-primary shadow-2xl scale-[1.02]' : isEnded ? 'border-border/50 opacity-75' : 'border-border hover:border-primary/30 hover:shadow-lg'}`}>
-                  {/* Background gradient */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${stage.color} ${isActive ? 'opacity-10' : 'opacity-5'}`} />
-                  
-                  {/* Status badge */}
-                  <div className="absolute top-2 right-2 lg:top-4 lg:right-4 z-10">
+            return <div key={stage.name} className="relative">
+                  {/* Status badge - Outside on mobile, inside on desktop */}
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 lg:top-4 lg:right-4 lg:left-auto lg:translate-x-0 z-20">
                     {isActive && <Badge className={`bg-gradient-to-r ${stage.color} text-white border-0 animate-pulse shadow-lg text-[10px] lg:text-xs px-1.5 lg:px-2.5 py-0.5 lg:py-1`}>
                         <Clock className="w-2.5 h-2.5 lg:w-3 lg:h-3 mr-0.5 lg:mr-1" />
                         EN CURSO
@@ -434,6 +431,10 @@ const BlackFriday = () => {
                         FINALIZADO
                       </Badge>}
                   </div>
+
+                  <div className={`relative overflow-hidden rounded-lg lg:rounded-xl border-2 transition-all duration-300 ${isActive ? 'border-primary shadow-2xl scale-[1.02]' : isEnded ? 'border-border/50 opacity-75' : 'border-border hover:border-primary/30 hover:shadow-lg'}`}>
+                  {/* Background gradient */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${stage.color} ${isActive ? 'opacity-10' : 'opacity-5'}`} />
 
                   <div className="relative p-3 lg:p-6">
                     {/* Header */}
@@ -515,7 +516,8 @@ const BlackFriday = () => {
                         </div>}
                     </div>
                   </div>
-                </div>;
+                </div>
+              </div>;
           })}
           </div>
 
