@@ -445,7 +445,7 @@ const BlackFriday = () => {
                       
                       <div className="flex-1 min-w-0">
                         <h3 className="text-xs lg:text-xl font-bold mb-0.5 lg:mb-1 leading-tight">{stage.name}</h3>
-                        <Badge variant="outline" className="text-[10px] lg:text-xs font-normal px-1 lg:px-2 py-0 lg:py-0.5">
+                        <Badge variant="outline" className="text-xs lg:text-sm font-normal px-1.5 lg:px-2.5 py-0.5 lg:py-1">
                           {stage.dates}
                         </Badge>
                       </div>
