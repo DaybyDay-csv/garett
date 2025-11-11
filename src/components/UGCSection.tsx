@@ -1,44 +1,95 @@
-import { Instagram, Facebook, Youtube } from "lucide-react";
+import { Instagram, Facebook, Youtube, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import ugc1 from "@/assets/ugc/ugc-1.jpg";
+import ugc2 from "@/assets/ugc/ugc-2.jpg";
+import ugc3 from "@/assets/ugc/ugc-3.jpg";
+import ugc4 from "@/assets/ugc/ugc-4.jpg";
+import ugc5 from "@/assets/ugc/ugc-5.jpg";
 
-const ugcContent = [
+interface UGCItem {
+  id: number;
+  type: "image" | "video";
+  src: string;
+  name: string;
+  handle: string;
+  caption?: string;
+}
+
+const ugcContent: UGCItem[] = [
   {
     id: 1,
-    name: "María García",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
-    instagramHandle: "@maria.beauty"
+    type: "image",
+    src: ugc1,
+    name: "Laura M.",
+    handle: "@laura.beauty",
+    caption: "Mi masajeador favorito 💆‍♀️"
   },
   {
     id: 2,
-    name: "Laura Martínez",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
-    instagramHandle: "@laura_skincare"
+    type: "video",
+    src: "/videos/ugc-video-1.mov",
+    name: "Ana S.",
+    handle: "@ana.skincare",
+    caption: "Rutina diaria ✨"
   },
   {
     id: 3,
-    name: "Carmen López",
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop",
-    instagramHandle: "@carmen.glow"
+    type: "image",
+    src: ugc3,
+    name: "Carmen R.",
+    handle: "@carmen.glow",
+    caption: "LED therapy en casa 💚"
   },
   {
     id: 4,
-    name: "Ana Rodríguez",
-    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=400&fit=crop",
-    instagramHandle: "@ana.beautytech"
+    type: "video",
+    src: "/videos/ugc-video-2.mp4",
+    name: "Sofia H.",
+    handle: "@sofia.beautytech",
+    caption: "Resultados increíbles"
   },
   {
     id: 5,
-    name: "Sofia Hernández",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop",
-    instagramHandle: "@sofia.selfcare"
+    type: "image",
+    src: ugc4,
+    name: "María G.",
+    handle: "@maria.haircare",
+    caption: "Pelo perfecto cada día"
+  },
+  {
+    id: 6,
+    type: "image",
+    src: ugc5,
+    name: "Paula L.",
+    handle: "@paula.wellness",
+    caption: "Mi momento de relax 🌅"
+  },
+  {
+    id: 7,
+    type: "video",
+    src: "/videos/ugc-video-3.mov",
+    name: "Elena V.",
+    handle: "@elena.selfcare",
+    caption: "Tutorial rápido"
+  },
+  {
+    id: 8,
+    type: "image",
+    src: ugc2,
+    name: "Rosa M.",
+    handle: "@rosa.beauty",
+    caption: "Mis esenciales 💕"
   }
 ];
 
 export const UGCSection = () => {
+  const [playingVideo, setPlayingVideo] = useState<number | null>(null);
+
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-background to-muted/20">
+    <section className="py-16 md:py-24 bg-gradient-to-b from-background to-muted/20 overflow-hidden">
       <div className="container">
-        {/* Social Connect */}
+        {/* Social Connect Header */}
         <div className="text-center mb-12">
           <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">
             Conecta con nosotros
@@ -74,29 +125,69 @@ export const UGCSection = () => {
           </div>
         </div>
 
-        {/* UGC Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
-          {ugcContent.map((user) => (
+        {/* UGC Grid with Photos and Videos */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 mb-12">
+          {ugcContent.map((item) => (
             <div 
-              key={user.id}
-              className="group relative overflow-hidden rounded-lg aspect-square cursor-pointer"
+              key={item.id}
+              className="group relative overflow-hidden rounded-xl aspect-square bg-muted cursor-pointer"
+              onClick={() => {
+                if (item.type === "video") {
+                  setPlayingVideo(playingVideo === item.id ? null : item.id);
+                }
+              }}
             >
-              <img
-                src={user.image}
-                alt={user.name}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {item.type === "image" ? (
+                <img
+                  src={item.src}
+                  alt={item.caption || item.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                />
+              ) : (
+                <div className="relative w-full h-full">
+                  <video
+                    src={item.src}
+                    className="w-full h-full object-cover"
+                    loop
+                    muted
+                    playsInline
+                    ref={(el) => {
+                      if (el) {
+                        if (playingVideo === item.id) {
+                          el.play();
+                        } else {
+                          el.pause();
+                          el.currentTime = 0;
+                        }
+                      }
+                    }}
+                  />
+                  {playingVideo !== item.id && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                      <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center">
+                        <Play className="w-5 h-5 text-primary ml-1" fill="currentColor" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+              
+              {/* Hover overlay with user info */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-white font-medium text-sm mb-1">{user.name}</p>
-                  <p className="text-white/80 text-xs">{user.instagramHandle}</p>
+                  <p className="text-white font-medium text-sm mb-1">{item.name}</p>
+                  <p className="text-white/80 text-xs mb-2">{item.handle}</p>
+                  {item.caption && (
+                    <p className="text-white/90 text-xs">{item.caption}</p>
+                  )}
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Story Section */}
+        {/* Brand Story */}
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">
             Quiénes somos
@@ -105,9 +196,9 @@ export const UGCSection = () => {
             Historias reales de personas reales
           </h2>
           <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-            Detrás de cada producto hay una historia. Nuestros clientes comparten sus experiencias 
-            auténticas con los dispositivos Garett, mostrando resultados reales sin filtros ni ediciones. 
-            Únete a nuestra comunidad y descubre cómo la tecnología de belleza puede transformar tu rutina.
+            Cada foto, cada video, cada sonrisa es auténtica. Nuestra comunidad comparte sus experiencias 
+            reales con los dispositivos Garett, mostrando resultados genuinos sin filtros. 
+            Descubre cómo la tecnología de belleza profesional puede transformar tu rutina de cuidado personal.
           </p>
           <Button 
             asChild 
