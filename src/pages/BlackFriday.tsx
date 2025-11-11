@@ -409,105 +409,105 @@ const BlackFriday = () => {
             </div>
           </div>
 
-          {/* Stage Cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+           {/* Stage Cards */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6">
             {extendedPromotionalStages.map(stage => {
             const Icon = stage.icon;
             const status = getStageStatus(stage);
             const isActive = status === 'active';
             const isUpcoming = status === 'upcoming';
             const isEnded = status === 'ended';
-            return <div key={stage.name} className={`relative overflow-hidden rounded-xl border-2 transition-all duration-300 ${isActive ? 'border-primary shadow-2xl scale-[1.02]' : isEnded ? 'border-border/50 opacity-75' : 'border-border hover:border-primary/30 hover:shadow-lg'}`}>
+            return <div key={stage.name} className={`relative overflow-hidden rounded-lg lg:rounded-xl border-2 transition-all duration-300 ${isActive ? 'border-primary shadow-2xl scale-[1.02]' : isEnded ? 'border-border/50 opacity-75' : 'border-border hover:border-primary/30 hover:shadow-lg'}`}>
                   {/* Background gradient */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${stage.color} ${isActive ? 'opacity-10' : 'opacity-5'}`} />
                   
                   {/* Status badge */}
-                  <div className="absolute top-4 right-4 z-10">
-                    {isActive && <Badge className={`bg-gradient-to-r ${stage.color} text-white border-0 animate-pulse shadow-lg`}>
-                        <Clock className="w-3 h-3 mr-1" />
+                  <div className="absolute top-2 right-2 lg:top-4 lg:right-4 z-10">
+                    {isActive && <Badge className={`bg-gradient-to-r ${stage.color} text-white border-0 animate-pulse shadow-lg text-[10px] lg:text-xs px-1.5 lg:px-2.5 py-0.5 lg:py-1`}>
+                        <Clock className="w-2.5 h-2.5 lg:w-3 lg:h-3 mr-0.5 lg:mr-1" />
                         EN CURSO
                       </Badge>}
-                    {isUpcoming && <Badge variant="secondary" className="shadow-sm">
-                        PRÓXIMAMENTE
+                    {isUpcoming && <Badge variant="secondary" className="shadow-sm text-[10px] lg:text-xs px-1.5 lg:px-2.5 py-0.5 lg:py-1">
+                        PRÓXIMO
                       </Badge>}
-                    {isEnded && <Badge variant="outline" className="opacity-60">
+                    {isEnded && <Badge variant="outline" className="opacity-60 text-[10px] lg:text-xs px-1.5 lg:px-2.5 py-0.5 lg:py-1">
                         FINALIZADO
                       </Badge>}
                   </div>
 
-                  <div className="relative p-6">
+                  <div className="relative p-3 lg:p-6">
                     {/* Header */}
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${stage.color} flex items-center justify-center flex-shrink-0 shadow-lg ${isActive ? 'animate-pulse' : ''}`}>
-                        <Icon className="w-7 h-7 text-white" />
+                    <div className="flex items-start gap-2 lg:gap-4 mb-2 lg:mb-4">
+                      <div className={`w-9 h-9 lg:w-14 lg:h-14 rounded-lg lg:rounded-xl bg-gradient-to-br ${stage.color} flex items-center justify-center flex-shrink-0 shadow-lg ${isActive ? 'animate-pulse' : ''}`}>
+                        <Icon className="w-4 h-4 lg:w-7 lg:h-7 text-white" />
                       </div>
                       
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold mb-1">{stage.name}</h3>
-                        <Badge variant="outline" className="text-xs font-normal">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-xs lg:text-xl font-bold mb-0.5 lg:mb-1 leading-tight">{stage.name}</h3>
+                        <Badge variant="outline" className="text-[10px] lg:text-xs font-normal px-1 lg:px-2 py-0 lg:py-0.5">
                           {stage.dates}
                         </Badge>
                       </div>
                     </div>
 
                     {/* Discount */}
-                    <div className={`text-3xl font-bold bg-gradient-to-br ${stage.color} bg-clip-text text-transparent mb-3`}>
+                    <div className={`text-xl lg:text-3xl font-bold bg-gradient-to-br ${stage.color} bg-clip-text text-transparent mb-1.5 lg:mb-3`}>
                       {stage.discount}
                     </div>
 
                     {/* Description */}
-                    <p className="text-sm text-muted-foreground mb-4">
+                    <p className="text-[10px] lg:text-sm text-muted-foreground mb-2 lg:mb-4 line-clamp-2">
                       {stage.details}
                     </p>
 
                     {/* Codes - Only show for Black Friday tiers */}
-                    <div className="space-y-3">
-                      {stage.codes && stage.codes.length > 0 ? <div className="space-y-2">
-                          <p className="text-xs font-semibold text-muted-foreground">Códigos por nivel:</p>
-                          {stage.codes.map(codeObj => <div key={codeObj.code} className={`bg-background/50 border-2 rounded-lg p-3 ${codeObj.urgency === 'high' ? 'border-red-500/30' : codeObj.urgency === 'medium' ? 'border-orange-500/30' : 'border-primary/30'}`}>
-                              <div className="flex items-center justify-between mb-2">
-                                <Badge variant={codeObj.urgency === 'high' ? 'destructive' : 'secondary'} className="text-xs">
+                    <div className="space-y-1.5 lg:space-y-3">
+                      {stage.codes && stage.codes.length > 0 ? <div className="space-y-1 lg:space-y-2">
+                          <p className="text-[10px] lg:text-xs font-semibold text-muted-foreground">Códigos:</p>
+                          {stage.codes.map(codeObj => <div key={codeObj.code} className={`bg-background/50 border-2 rounded-md lg:rounded-lg p-2 lg:p-3 ${codeObj.urgency === 'high' ? 'border-red-500/30' : codeObj.urgency === 'medium' ? 'border-orange-500/30' : 'border-primary/30'}`}>
+                              <div className="flex items-center justify-between mb-1 lg:mb-2 gap-1">
+                                <Badge variant={codeObj.urgency === 'high' ? 'destructive' : 'secondary'} className="text-[10px] lg:text-xs px-1 lg:px-2 py-0 lg:py-0.5">
                                   {codeObj.discount}
                                 </Badge>
-                                <span className="text-xs text-muted-foreground">{codeObj.limit}</span>
+                                <span className="text-[9px] lg:text-xs text-muted-foreground truncate">{codeObj.limit}</span>
                               </div>
-                              <div className="flex items-center gap-2">
-                                <span className="flex-1 font-mono text-sm font-bold">
+                              <div className="flex items-center gap-1 lg:gap-2">
+                                <span className="flex-1 font-mono text-[10px] lg:text-sm font-bold truncate">
                                   {codeObj.code}
                                 </span>
-                                <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => copyCode(codeObj.code)}>
-                                  {copiedCode === codeObj.code ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+                                <Button size="icon" variant="ghost" className="h-6 w-6 lg:h-8 lg:w-8 p-0" onClick={() => copyCode(codeObj.code)}>
+                                  {copiedCode === codeObj.code ? <Check className="w-2.5 h-2.5 lg:w-3 lg:h-3 text-green-500" /> : <Copy className="w-2.5 h-2.5 lg:w-3 lg:h-3" />}
                                 </Button>
                               </div>
                             </div>)}
-                        </div> : <div className="bg-green-500/10 rounded-lg p-4 border border-green-500/20">
-                          <div className="flex items-center justify-center gap-2">
-                            <Badge variant="secondary" className="bg-green-500/20 text-green-700 dark:text-green-300 border-0">
-                              ✓ Descuento automático
+                        </div> : <div className="bg-green-500/10 rounded-lg p-2 lg:p-4 border border-green-500/20">
+                          <div className="flex items-center justify-center gap-1 lg:gap-2">
+                            <Badge variant="secondary" className="bg-green-500/20 text-green-700 dark:text-green-300 border-0 text-[10px] lg:text-xs px-1.5 lg:px-2.5 py-0.5 lg:py-1">
+                              ✓ Auto
                             </Badge>
                           </div>
-                          <p className="text-xs text-center text-muted-foreground mt-2">
-                            Se aplica directamente en productos
+                          <p className="text-[9px] lg:text-xs text-center text-muted-foreground mt-1 lg:mt-2 line-clamp-1 lg:line-clamp-none">
+                            Aplicado en productos
                           </p>
                         </div>}
                       
                       {/* GWP - Gift With Purchase Block */}
-                      {stage.gwp && <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-lg p-2.5 border border-pink-500/30">
-                          <div className="flex items-center gap-2">
-                            <div className="relative w-10 h-10 rounded overflow-hidden flex-shrink-0 border border-white/40 shadow-sm">
+                      {stage.gwp && <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-md lg:rounded-lg p-1.5 lg:p-2.5 border border-pink-500/30">
+                          <div className="flex items-center gap-1.5 lg:gap-2">
+                            <div className="relative w-7 h-7 lg:w-10 lg:h-10 rounded overflow-hidden flex-shrink-0 border border-white/40 shadow-sm">
                               <img src={gwpImage} alt={gwpConfig.giftName} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-1 mb-0.5">
-                                <Gift className="w-3 h-3 text-pink-600 dark:text-pink-400 flex-shrink-0" />
-                                <span className="text-[10px] font-bold text-pink-700 dark:text-pink-300 uppercase tracking-wide">
-                                  Regalo Gratis
+                              <div className="flex items-center gap-0.5 lg:gap-1 mb-0.5">
+                                <Gift className="w-2.5 h-2.5 lg:w-3 lg:h-3 text-pink-600 dark:text-pink-400 flex-shrink-0" />
+                                <span className="text-[9px] lg:text-[10px] font-bold text-pink-700 dark:text-pink-300 uppercase tracking-wide">
+                                  Regalo
                                 </span>
                               </div>
-                              <p className="text-xs font-medium text-foreground truncate">
+                              <p className="text-[10px] lg:text-xs font-medium text-foreground truncate">
                                 {gwpConfig.giftName}
                               </p>
-                              <p className="text-[10px] text-muted-foreground">
+                              <p className="text-[9px] lg:text-[10px] text-muted-foreground line-clamp-1">
                                 {gwpConfig.conditions}
                               </p>
                             </div>
