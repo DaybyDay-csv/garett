@@ -46,7 +46,7 @@ const testimonials = [{
   result: "Textura mejorada visiblemente"
 }];
 export const Testimonials = () => {
-  return <section className="py-16 bg-gradient-to-b from-background to-muted/20 relative overflow-hidden">
+  return <section className="py-12 md:py-16 lg:py-20 px-4 bg-muted/30 relative overflow-hidden">
       {/* Subtle Pattern Background */}
       <div className="absolute inset-0 opacity-[0.015]" style={{
       backgroundImage: `url(${garettPattern})`,
@@ -54,13 +54,39 @@ export const Testimonials = () => {
       backgroundRepeat: 'repeat'
     }} />
       
-      <div className="container relative">
-        <div className="text-center mb-12">
-          <Badge className="mb-4">Opiniones verificadas</Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Resultados reales de clientas como tú
+      <div className="container mx-auto max-w-6xl relative">
+        {/* Trustpilot-style Header */}
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
+            Lo que dicen nuestros clientes
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Personas que buscaban una solución profesional sin salir de casa</p>
+          <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto mb-6">
+            Miles de clientes satisfechos confían en Garett
+          </p>
+          
+          {/* Trustpilot Rating Summary */}
+          <div className="flex flex-col items-center gap-4 mb-6">
+            <div className="flex items-center gap-3">
+              <div className="flex gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-7 h-7 md:w-8 md:h-8 fill-[#00b67a] text-[#00b67a]" />
+                ))}
+              </div>
+              <span className="text-2xl md:text-3xl font-bold">5.0</span>
+            </div>
+            <p className="text-sm text-muted-foreground">Basado en opiniones verificadas</p>
+          </div>
+          
+          {/* Trustpilot Button */}
+          <a
+            href="https://es.trustpilot.com/review/garett.es"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-[#00b67a] hover:bg-[#00a870] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+          >
+            <Star className="w-5 h-5 fill-white" />
+            Ver todas las reseñas en Trustpilot
+          </a>
         </div>
 
         <Carousel
@@ -104,9 +130,9 @@ export const Testimonials = () => {
                   </Badge>
                 </div>
 
-                {/* Rating */}
+                {/* Rating - Trustpilot Green */}
                 <div className="flex gap-1 mb-3">
-                  {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="w-4 h-4 fill-primary text-primary" />)}
+                  {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="w-4 h-4 fill-[#00b67a] text-[#00b67a]" />)}
                 </div>
 
                 {/* Review */}
