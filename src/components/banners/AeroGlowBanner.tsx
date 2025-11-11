@@ -39,11 +39,10 @@ export const AeroGlowBanner = () => {
 
   // Base price is always 299
   const basePrice = 299;
-  // Current Shopify price is the discounted price
-  const price = product?.node.priceRange.minVariantPrice.amount;
-  const currencyCode = product?.node.priceRange.minVariantPrice.currencyCode || 'EUR';
-  // Calculate discount percentage
-  const discountPercentage = price ? Math.round(((basePrice - parseFloat(price)) / basePrice) * 100) : 10;
+  // Apply 10% discount
+  const discountAmount = 29.90;
+  const finalPrice = basePrice - discountAmount; // $269.10
+  const currencyCode = product?.node.priceRange.minVariantPrice.currencyCode || 'USD';
 
   return (
     <div className="relative w-full bg-gradient-to-br from-[#5D4037]/5 via-background to-[#8B6F47]/5 overflow-hidden">
@@ -92,18 +91,18 @@ export const AeroGlowBanner = () => {
             </div>
 
             {/* Pricing */}
-            {price && (
+            {!loading && (
               <div className="flex items-center justify-center lg:justify-start gap-4 flex-wrap">
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl md:text-5xl font-bold text-foreground">
-                    {currencyCode === 'USD' ? '$' : '€'}{parseFloat(price).toFixed(2)}
+                    {currencyCode === 'USD' ? '$' : '€'}{finalPrice.toFixed(2)}
                   </span>
                   <span className="text-xl md:text-2xl text-muted-foreground line-through">
                     {currencyCode === 'USD' ? '$' : '€'}{basePrice.toFixed(2)}
                   </span>
                 </div>
                 <Badge className="bg-red-500 text-white text-sm px-3 py-1 animate-pulse">
-                  AHORRA {currencyCode === 'USD' ? '$' : '€'}{(basePrice - parseFloat(price)).toFixed(2)}
+                  AHORRA {currencyCode === 'USD' ? '$' : '€'}{discountAmount.toFixed(2)}
                 </Badge>
               </div>
             )}
