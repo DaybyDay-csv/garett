@@ -63,7 +63,7 @@ export const BlackFridayBanner = () => {
     },
   ];
   return (
-    <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-bf-start via-promo-bf-mid to-promo-bf-end overflow-hidden">
+    <div className="relative w-full bg-gradient-to-br from-promo-bf-start via-promo-bf-mid to-promo-bf-end overflow-hidden">
       {/* Pattern overlay */}
       <div
         className="absolute inset-0 opacity-10"

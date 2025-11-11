@@ -15,7 +15,7 @@ export const WhiteWeekBanner = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-  return <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-white via-background to-promo-white overflow-hidden">
+  return <div className="relative w-full bg-gradient-to-br from-promo-white via-background to-promo-white overflow-hidden">
       {/* Pattern overlay */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
       backgroundImage: `url(${patternImage})`,

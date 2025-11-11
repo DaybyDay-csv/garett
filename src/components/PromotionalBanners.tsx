@@ -44,6 +44,7 @@ export const PromotionalBanners = () => {
         opts={{
           loop: true,
           duration: 30,
+          align: "start",
         }}
         plugins={[
           Autoplay({
@@ -53,12 +54,14 @@ export const PromotionalBanners = () => {
           }),
         ]}
       >
-        <CarouselContent>
+        <CarouselContent className="items-stretch">
           {activeBanners.map((bannerId) => {
             const BannerComponent = bannerComponents[bannerId as keyof typeof bannerComponents];
             return (
-              <CarouselItem key={bannerId}>
-                <BannerComponent />
+              <CarouselItem key={bannerId} className="flex">
+                <div className="w-full">
+                  <BannerComponent />
+                </div>
               </CarouselItem>
             );
           })}

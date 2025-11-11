@@ -7,7 +7,7 @@ import gwpImage from "@/assets/gwp-headband.png";
 import patternImage from "@/assets/garett-pattern-2.png";
 import { gwpConfig } from "@/lib/bannerConfig";
 export const GWPBanner = () => {
-  return <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-gwp via-background to-promo-gwp overflow-hidden">
+  return <div className="relative w-full bg-gradient-to-br from-promo-gwp via-background to-promo-gwp overflow-hidden">
       {/* Pattern overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
       backgroundImage: `url(${patternImage})`,
