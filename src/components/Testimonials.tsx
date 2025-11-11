@@ -44,6 +44,86 @@ const testimonials = [{
   image: "IM",
   review: "Solo llevo 6 semanas y ya noto cambios. La textura de la piel ha mejorado muchísimo. Es superfácil de usar, no requiere técnica especial. Por fin una solución que se adapta a mi ritmo de vida.",
   result: "Textura mejorada visiblemente"
+}, {
+  name: "Carmen L.",
+  age: 42,
+  location: "Málaga",
+  rating: 5,
+  timeline: "5 semanas",
+  verified: true,
+  image: "CL",
+  review: "Después de mi segundo hijo, mi piel perdió firmeza. Probé cremas caras sin resultados. Con Garett noto la piel más firme y los poros menos visibles. Mi marido dice que luzco más descansada.",
+  result: "Firmeza recuperada"
+}, {
+  name: "Patricia G.",
+  age: 35,
+  location: "Bilbao",
+  rating: 4,
+  timeline: "4 semanas",
+  verified: true,
+  image: "PG",
+  review: "Llevo un mes usándolo y aunque todavía no veo cambios dramáticos, mi piel se siente mejor hidratada y más suave. Es cómodo de usar mientras trabajo desde casa. Espero ver más resultados pronto.",
+  result: "Mejora progresiva"
+}, {
+  name: "Elena S.",
+  age: 51,
+  location: "Zaragoza",
+  rating: 5,
+  timeline: "10 semanas",
+  verified: true,
+  image: "ES",
+  review: "Llevo más de 2 meses y los resultados superan mis expectativas. Las manchas solares han aclarado notablemente. Mis amigas me preguntan qué me he hecho. Vale cada euro invertido.",
+  result: "Manchas reducidas visiblemente"
+}, {
+  name: "Marta F.",
+  age: 27,
+  location: "Granada",
+  rating: 5,
+  timeline: "5 semanas",
+  verified: true,
+  image: "MF",
+  review: "Trabajo en una tienda y paso muchas horas de pie. Este dispositivo lo uso por las noches mientras descanso. Mi piel luce más despierta y fresca. El mejor regalo que me he hecho.",
+  result: "Piel más luminosa"
+}, {
+  name: "Rosa P.",
+  age: 60,
+  location: "Murcia",
+  rating: 5,
+  timeline: "9 semanas",
+  verified: true,
+  image: "RP",
+  review: "A mi edad ya no esperaba grandes cambios, pero este aparato me ha sorprendido. Las arrugas profundas no se han ido, pero sí se notan más suaves. Mi piel está más hidratada y tersa.",
+  result: "Arrugas suavizadas"
+}, {
+  name: "Beatriz N.",
+  age: 38,
+  location: "Alicante",
+  rating: 4,
+  timeline: "6 semanas",
+  verified: true,
+  image: "BN",
+  review: "Buenos resultados hasta ahora. La textura de mi piel ha mejorado y las líneas alrededor de los ojos son menos notorias. Uso constante es clave. Me hubiera gustado que viniera con más accesorios.",
+  result: "Contorno de ojos mejorado"
+}, {
+  name: "Lucía V.",
+  age: 44,
+  location: "Santander",
+  rating: 5,
+  timeline: "7 semanas",
+  verified: true,
+  image: "LV",
+  review: "Soy enfermera y los turnos me dejan agotada. Usar mi Garett es mi momento de autocuidado. En casi 2 meses, mi piel se ve más joven y revitalizada. Totalmente recomendable.",
+  result: "Piel revitalizada"
+}, {
+  name: "Cristina M.",
+  age: 31,
+  location: "Pamplona",
+  rating: 5,
+  timeline: "5 semanas",
+  verified: true,
+  image: "CM",
+  review: "Quería algo efectivo para prevenir el envejecimiento sin gastar en clínicas. Este dispositivo cumple perfectamente. Mi piel se siente más elástica y el tono es más uniforme. Muy satisfecha.",
+  result: "Tono uniforme conseguido"
 }];
 export const Testimonials = () => {
   return <section className="py-12 md:py-16 lg:py-20 px-4 bg-muted/30 relative overflow-hidden">
