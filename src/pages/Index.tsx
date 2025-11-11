@@ -89,7 +89,7 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
             {/* Cuidado Capilar */}
             <Link to="/productos?category=capilar" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
@@ -100,16 +100,16 @@ const Index = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                <CardContent className="p-3 md:p-6">
+                  <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
                     Cuidado capilar
                   </h3>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">
                     Dispositivos profesionales para el cabello
                   </p>
-                  <div className="flex items-center gap-2 text-primary font-medium">
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
                     <span>Ver productos</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </CardContent>
               </Card>
@@ -125,16 +125,16 @@ const Index = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                <CardContent className="p-3 md:p-6">
+                  <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
                     Masajeadores faciales
                   </h3>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">
                     Estimulación facial avanzada
                   </p>
-                  <div className="flex items-center gap-2 text-primary font-medium">
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
                     <span>Ver productos</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </CardContent>
               </Card>
@@ -150,16 +150,16 @@ const Index = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                <CardContent className="p-3 md:p-6">
+                  <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
                     Limpieza facial
                   </h3>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">
                     Limpieza profunda profesional
                   </p>
-                  <div className="flex items-center gap-2 text-primary font-medium">
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
                     <span>Ver productos</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </CardContent>
               </Card>
@@ -175,16 +175,16 @@ const Index = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                <CardContent className="p-3 md:p-6">
+                  <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
                     Dispositivos de Mesoterapia
                   </h3>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">
                     Tratamientos de rejuvenecimiento
                   </p>
-                  <div className="flex items-center gap-2 text-primary font-medium">
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
                     <span>Ver productos</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </CardContent>
               </Card>
@@ -200,16 +200,16 @@ const Index = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                <CardContent className="p-3 md:p-6">
+                  <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
                     Dispositivos corporales
                   </h3>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">
                     Tratamientos para todo el cuerpo
                   </p>
-                  <div className="flex items-center gap-2 text-primary font-medium">
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
                     <span>Ver productos</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </CardContent>
               </Card>
@@ -225,16 +225,16 @@ const Index = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                <CardContent className="p-3 md:p-6">
+                  <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
                     Depilación e IPL
                   </h3>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">
                     Depilación láser profesional en casa
                   </p>
-                  <div className="flex items-center gap-2 text-primary font-medium">
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
                     <span>Ver productos</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </CardContent>
               </Card>
