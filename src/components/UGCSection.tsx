@@ -1,6 +1,8 @@
 import { Instagram, Facebook, Youtube, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import ugc1 from "@/assets/ugc/ugc-1.jpg";
 import ugc2 from "@/assets/ugc/ugc-2.jpg";
 import ugc3 from "@/assets/ugc/ugc-3.jpg";
@@ -125,66 +127,85 @@ export const UGCSection = () => {
           </div>
         </div>
 
-        {/* UGC Grid with Photos and Videos */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 mb-12">
-          {ugcContent.map((item) => (
-            <div 
-              key={item.id}
-              className="group relative overflow-hidden rounded-xl aspect-square bg-muted cursor-pointer"
-              onClick={() => {
-                if (item.type === "video") {
-                  setPlayingVideo(playingVideo === item.id ? null : item.id);
-                }
-              }}
-            >
-              {item.type === "image" ? (
-                <img
-                  src={item.src}
-                  alt={item.caption || item.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                />
-              ) : (
-                <div className="relative w-full h-full">
-                  <video
-                    src={item.src}
-                    className="w-full h-full object-cover"
-                    loop
-                    muted
-                    playsInline
-                    ref={(el) => {
-                      if (el) {
-                        if (playingVideo === item.id) {
-                          el.play();
-                        } else {
-                          el.pause();
-                          el.currentTime = 0;
-                        }
+        {/* UGC Carousel */}
+        <div className="relative mb-16 px-12">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            plugins={[
+              Autoplay({
+                delay: 3000,
+                stopOnInteraction: true,
+              }),
+            ]}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-4">
+              {ugcContent.map((item) => (
+                <CarouselItem key={item.id} className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                  <div 
+                    className="group relative overflow-hidden rounded-xl aspect-square bg-muted cursor-pointer shadow-lg hover:shadow-xl transition-shadow"
+                    onClick={() => {
+                      if (item.type === "video") {
+                        setPlayingVideo(playingVideo === item.id ? null : item.id);
                       }
                     }}
-                  />
-                  {playingVideo !== item.id && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                      <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center">
-                        <Play className="w-5 h-5 text-primary ml-1" fill="currentColor" />
+                  >
+                    {item.type === "image" ? (
+                      <img
+                        src={item.src}
+                        alt={item.caption || item.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="relative w-full h-full">
+                        <video
+                          src={item.src}
+                          className="w-full h-full object-cover"
+                          loop
+                          muted
+                          playsInline
+                          ref={(el) => {
+                            if (el) {
+                              if (playingVideo === item.id) {
+                                el.play();
+                              } else {
+                                el.pause();
+                                el.currentTime = 0;
+                              }
+                            }
+                          }}
+                        />
+                        {playingVideo !== item.id && (
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                            <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                              <Play className="w-7 h-7 text-primary ml-1" fill="currentColor" />
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    
+                    {/* Hover overlay with user info */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-0 left-0 right-0 p-5">
+                        <p className="text-white font-semibold text-base mb-1">{item.name}</p>
+                        <p className="text-white/90 text-sm mb-2">{item.handle}</p>
+                        {item.caption && (
+                          <p className="text-white/80 text-sm">{item.caption}</p>
+                        )}
                       </div>
                     </div>
-                  )}
-                </div>
-              )}
-              
-              {/* Hover overlay with user info */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-white font-medium text-sm mb-1">{item.name}</p>
-                  <p className="text-white/80 text-xs mb-2">{item.handle}</p>
-                  {item.caption && (
-                    <p className="text-white/90 text-xs">{item.caption}</p>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-0 -translate-x-1/2 bg-background/95 hover:bg-background border-2" />
+            <CarouselNext className="right-0 translate-x-1/2 bg-background/95 hover:bg-background border-2" />
+          </Carousel>
         </div>
 
         {/* Brand Story */}
