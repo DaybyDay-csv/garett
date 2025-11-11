@@ -47,11 +47,11 @@ export const GWPBanner = () => {
               <p className="text-base md:text-xl lg:text-2xl font-semibold text-foreground">
                 Banda de pelo premium
               </p>
-              <div className="flex items-center justify-center md:justify-start gap-2">
-                <Badge className="bg-primary/10 text-primary text-xs md:text-sm px-3 py-1">
+              <div className="flex items-center justify-center md:justify-start gap-2 md:gap-3">
+                <Badge className="bg-primary/10 text-primary text-xs md:text-sm px-3 py-1 md:px-4 md:py-1.5 border border-primary/20">
                   Compras €{gwpConfig.threshold}+
                 </Badge>
-                <Badge className="bg-accent/10 text-accent-foreground text-xs md:text-sm px-3 py-1">
+                <Badge className="bg-gradient-to-r from-accent to-accent/80 text-white text-xs md:text-sm px-3 py-1 md:px-4 md:py-1.5 shadow-lg border-2 border-white/20 font-bold">
                   Valor €20
                 </Badge>
               </div>
