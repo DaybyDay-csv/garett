@@ -108,7 +108,7 @@ export const AeroGlowBanner = () => {
             )}
 
             {/* Key Benefits - Enhanced Visual */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-3 gap-2 md:gap-3">
               <div className="group relative p-4 rounded-xl bg-gradient-to-br from-[#D4AF37]/10 to-[#8B6F47]/5 backdrop-blur border-2 border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all hover:shadow-xl overflow-hidden">
                 <div className="absolute top-0 right-0 w-20 h-20 bg-[#D4AF37]/10 rounded-full blur-2xl" />
                 <Zap className="w-6 h-6 text-[#D4AF37] mb-2 group-hover:scale-125 transition-transform relative z-10 drop-shadow-lg" />
