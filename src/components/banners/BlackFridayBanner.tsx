@@ -84,7 +84,7 @@ export const BlackFridayBanner = () => {
         }}
       />
 
-      <div className="container mx-auto px-6 md:px-8 min-h-full flex flex-col items-center justify-center text-center relative z-10 space-y-3 md:space-y-8 py-16 md:py-20 pb-20 md:pb-20">
+      <div className="container mx-auto px-6 md:px-8 flex flex-col items-center justify-center text-center relative z-10 space-y-3 md:space-y-6 py-8 md:py-12 pb-12 md:pb-16">
         {/* Live Badge */}
         {isActive && (
           <Badge className="bg-white text-promo-bf-start animate-pulse text-xs md:text-sm px-4 py-1.5 md:px-5 md:py-2">

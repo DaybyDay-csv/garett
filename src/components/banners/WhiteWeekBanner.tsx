@@ -27,7 +27,7 @@ export const WhiteWeekBanner = () => {
       <div className="absolute top-20 right-20 w-64 h-64 rounded-full bg-primary/5 blur-3xl" />
       <div className="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-accent/5 blur-3xl" />
       
-      <div className="container mx-auto px-6 md:px-8 min-h-full flex flex-col items-center justify-center text-center relative z-10 space-y-4 md:space-y-8 py-16 md:py-20 pb-20 md:pb-20 max-w-5xl">
+      <div className="container mx-auto px-6 md:px-8 flex flex-col items-center justify-center text-center relative z-10 space-y-3 md:space-y-6 py-8 md:py-12 pb-12 md:pb-16 max-w-5xl">
         {/* Date Badge */}
         <Badge variant="outline" className="border-primary text-primary text-xs md:text-sm px-4 py-1.5 md:px-5 md:py-2">
           17 - 27 NOVIEMBRE
