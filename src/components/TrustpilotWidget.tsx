@@ -1,13 +1,26 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const TrustpilotWidget = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Load Trustpilot widget after component mounts
-    if (window.Trustpilot) {
-      window.Trustpilot.loadFromElement(ref.current, true);
-    }
+    // Wait for Trustpilot script to load
+    const loadWidget = () => {
+      if (window.Trustpilot && ref.current) {
+        console.log("Loading Trustpilot widget...");
+        window.Trustpilot.loadFromElement(ref.current, true);
+        setIsLoading(false);
+      } else {
+        // Retry after a short delay if script not loaded yet
+        setTimeout(loadWidget, 100);
+      }
+    };
+
+    // Start loading after a small delay to ensure script is loaded
+    const timeoutId = setTimeout(loadWidget, 500);
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   return (
@@ -22,6 +35,13 @@ export const TrustpilotWidget = () => {
           </p>
         </div>
 
+        {isLoading && (
+          <div className="text-center py-8">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Cargando reseñas...</p>
+          </div>
+        )}
+        
         <div
           ref={ref}
           className="trustpilot-widget"
