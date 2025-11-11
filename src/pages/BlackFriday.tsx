@@ -180,10 +180,16 @@ const CountdownTimer = ({
   return <div className="mt-8 space-y-6">
       {/* Countdown */}
       <div>
+        {currentPromoStage && (
+          <div className="text-center mb-2">
+            <span className="text-xs text-white/70 uppercase tracking-wider">Etapa actual:</span>
+            <span className="text-sm text-white font-semibold ml-2">{currentPromoStage.name}</span>
+          </div>
+        )}
         <div className="flex items-center justify-center gap-2 mb-4">
           <Clock className="w-5 h-5 text-white animate-pulse" />
           <p className="text-white/90 font-medium">
-            {currentPromoStage ? `${currentPromoStage.name} termina en:` : 'Promociones terminan en:'}
+            {currentPromoStage ? 'Termina en:' : 'Promociones terminan en:'}
           </p>
         </div>
         
