@@ -23,12 +23,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
           {/* Brand Section */}
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-white rounded-md flex items-center justify-center p-2">
-                <img src={garettLogo} alt="Garett" className="w-full h-full object-contain" />
-              </div>
-              <span className="text-2xl font-bold">GARETT</span>
-            </div>
+            <img src={garettLogo} alt="GARETT" className="h-8 object-contain" />
             <p className="text-primary-foreground/80 text-sm leading-relaxed">
               Tecnología de belleza profesional para resultados visibles. Innovación y calidad certificada.
             </p>
