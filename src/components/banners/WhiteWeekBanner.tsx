@@ -51,19 +51,31 @@ export const WhiteWeekBanner = () => {
         {/* Discount Code - Improved Mobile */}
         
 
-        {/* Benefits - Grid Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6 text-sm md:text-base w-full max-w-2xl">
-          <div className="flex items-center justify-center gap-2">
-            <Percent className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
-            <span className="font-medium">20% en todo</span>
+        {/* Benefits - Enhanced Visual Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 text-sm md:text-base w-full max-w-2xl">
+          <div className="group relative bg-gradient-to-br from-primary/5 to-accent/5 backdrop-blur-sm border-2 border-primary/20 rounded-xl p-3 md:p-4 hover:border-primary/50 hover:shadow-lg transition-all overflow-hidden">
+            <div className="absolute top-0 right-0 w-16 h-16 bg-primary/10 rounded-full blur-2xl" />
+            <div className="relative z-10 flex flex-col items-center gap-2">
+              <Percent className="w-5 h-5 md:w-7 md:h-7 text-primary drop-shadow-lg group-hover:scale-110 transition-transform" />
+              <span className="font-bold text-xs md:text-sm">20% en todo</span>
+              <Badge className="bg-primary/20 text-primary text-[9px] px-2 py-0.5">Automático</Badge>
+            </div>
           </div>
-          <div className="flex items-center justify-center gap-2">
-            <Gift className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
-            <span className="font-medium">Regalo desde €70</span>
+          <div className="group relative bg-gradient-to-br from-accent/5 to-primary/5 backdrop-blur-sm border-2 border-accent/20 rounded-xl p-3 md:p-4 hover:border-accent/50 hover:shadow-lg transition-all overflow-hidden">
+            <div className="absolute top-0 right-0 w-16 h-16 bg-accent/10 rounded-full blur-2xl" />
+            <div className="relative z-10 flex flex-col items-center gap-2">
+              <Gift className="w-5 h-5 md:w-7 md:h-7 text-accent-foreground drop-shadow-lg group-hover:scale-110 transition-transform" />
+              <span className="font-bold text-xs md:text-sm">Regalo gratis</span>
+              <Badge className="bg-accent/20 text-accent-foreground text-[9px] px-2 py-0.5">€70+</Badge>
+            </div>
           </div>
-          <div className="flex items-center justify-center gap-2">
-            <div className="w-4 h-4 md:w-5 md:h-5 flex items-center justify-center text-primary font-bold">✓</div>
-            <span className="font-medium">Envío 24/48hrs</span>
+          <div className="group relative bg-gradient-to-br from-primary/5 to-accent/5 backdrop-blur-sm border-2 border-border/20 rounded-xl p-3 md:p-4 hover:border-primary/30 hover:shadow-lg transition-all overflow-hidden">
+            <div className="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-full blur-2xl" />
+            <div className="relative z-10 flex flex-col items-center gap-2">
+              <div className="w-5 h-5 md:w-7 md:h-7 flex items-center justify-center text-primary font-bold text-xl drop-shadow-lg group-hover:scale-110 transition-transform">✓</div>
+              <span className="font-bold text-xs md:text-sm">Envío rápido</span>
+              <Badge className="bg-primary/10 text-primary text-[9px] px-2 py-0.5">24-48h</Badge>
+            </div>
           </div>
         </div>
 

@@ -30,28 +30,43 @@ export const GWPBanner = () => {
           </div>
         </div>
 
-        {/* Content */}
+        {/* Content - Enhanced Visual */}
         <div className="flex-1 text-center md:text-left space-y-3 md:space-y-6 order-1 md:order-2 max-w-lg mx-auto md:mx-0">
-          <Badge variant="outline" className="border-primary text-primary text-xs md:text-sm px-3 py-1 md:px-4 md:py-2">
-            <Gift className="w-3 h-3 mr-1" />
-            REGALO GRATIS
-          </Badge>
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/20 to-accent/20 px-4 py-2 rounded-full border-2 border-primary/30">
+            <Gift className="w-4 h-4 text-primary animate-bounce" />
+            <span className="text-xs md:text-sm font-bold text-primary">REGALO GRATIS</span>
+          </div>
           
-          <div className="space-y-2 md:space-y-3">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+          <div className="space-y-2 md:space-y-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               Regalo<br />
-              <span className="text-primary">Especial</span> 🎁
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Especial</span> 🎁
             </h1>
-            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground leading-relaxed">
-              Banda de pelo premium de regalo en compras desde{" "}
-              <span className="font-bold text-foreground">€{gwpConfig.threshold}</span>
-            </p>
+            <div className="space-y-2">
+              <p className="text-base md:text-xl lg:text-2xl font-semibold text-foreground">
+                Banda de pelo premium
+              </p>
+              <div className="flex items-center justify-center md:justify-start gap-2">
+                <Badge className="bg-primary/10 text-primary text-xs md:text-sm px-3 py-1">
+                  Compras €{gwpConfig.threshold}+
+                </Badge>
+                <Badge className="bg-accent/10 text-accent-foreground text-xs md:text-sm px-3 py-1">
+                  Valor €20
+                </Badge>
+              </div>
+            </div>
           </div>
 
-          {/* Value Indicator */}
-          <div className="bg-primary-light p-3 md:p-5 rounded-lg border border-primary/20 inline-block">
-            <p className="text-xs md:text-sm text-muted-foreground mb-1">Valor del regalo</p>
-            <p className="text-xl md:text-3xl font-bold text-primary">€20.00</p>
+          {/* Visual Benefits */}
+          <div className="grid grid-cols-2 gap-2 md:gap-3">
+            <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-3 rounded-xl border border-primary/20">
+              <div className="text-2xl mb-1">✨</div>
+              <p className="text-xs font-semibold">Calidad Premium</p>
+            </div>
+            <div className="bg-gradient-to-br from-accent/5 to-primary/5 p-3 rounded-xl border border-accent/20">
+              <div className="text-2xl mb-1">🎁</div>
+              <p className="text-xs font-semibold">Automático</p>
+            </div>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-2">

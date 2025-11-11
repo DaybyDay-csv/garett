@@ -147,24 +147,35 @@ export const BlackFridayBanner = () => {
           </div>
         </div>
 
-        {/* Tiered Offers - Improved Mobile */}
+        {/* Tiered Offers - Enhanced Visual */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 w-full max-w-2xl px-4">
           {tiers.map((tier, index) => {
             const Icon = tier.icon;
             return (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-3 md:p-4 text-white space-y-1 md:space-y-2 hover:bg-white/20 transition-all hover:scale-105"
+                className="relative bg-white/15 backdrop-blur-md border-2 border-white/30 rounded-xl p-3 md:p-5 text-white space-y-1 md:space-y-2 hover:bg-white/25 hover:border-white/50 transition-all hover:scale-105 hover:shadow-2xl overflow-hidden group"
               >
-                <Icon className="w-4 h-4 md:w-6 md:h-6 mx-auto" />
-                <div>
-                  <p className="text-[10px] md:text-xs font-semibold uppercase tracking-wider leading-tight">
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                {/* Icon with glow */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-white/20 blur-xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Icon className="w-5 h-5 md:w-8 md:h-8 mx-auto relative z-10 drop-shadow-lg" />
+                </div>
+                
+                <div className="relative z-10">
+                  <Badge className="bg-white/20 text-white text-[9px] md:text-[10px] px-2 py-0.5 mb-1 md:mb-2">
                     {tier.name}
-                  </p>
-                  <p className="text-xl md:text-3xl font-bold my-1">-{tier.discount}</p>
-                  <p className="text-[10px] md:text-xs text-white/70">
-                    {typeof tier.uses === "number" ? `${tier.uses} usos` : "Ilimitado"}
-                  </p>
+                  </Badge>
+                  <p className="text-2xl md:text-4xl font-black my-1 drop-shadow-lg">-{tier.discount}</p>
+                  <div className="flex items-center justify-center gap-1">
+                    <Zap className="w-3 h-3 md:w-4 md:h-4" />
+                    <p className="text-[10px] md:text-xs text-white/90 font-medium">
+                      {typeof tier.uses === "number" ? `${tier.uses} usos` : "Ilimitado"}
+                    </p>
+                  </div>
                 </div>
               </div>
             );

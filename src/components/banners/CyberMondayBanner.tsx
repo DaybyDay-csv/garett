@@ -108,21 +108,31 @@ export const CyberMondayBanner = () => {
           </div>
         </div>
 
-        {/* Automatic Discount Info */}
-
-        {/* Benefits - Grid Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6 text-sm md:text-base text-white w-full max-w-2xl">
-          <div className="flex items-center justify-center gap-2">
-            <Zap className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
-            <span className="font-medium">15% en todo</span>
+        {/* Benefits - Enhanced Visual Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 text-sm md:text-base text-white w-full max-w-2xl">
+          <div className="group relative bg-white/15 backdrop-blur-md border-2 border-white/30 rounded-xl p-3 md:p-4 hover:bg-white/25 hover:border-white/50 transition-all hover:scale-105 overflow-hidden">
+            <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full blur-2xl" />
+            <div className="relative z-10 flex flex-col items-center gap-2">
+              <Zap className="w-5 h-5 md:w-7 md:h-7 drop-shadow-lg group-hover:scale-110 transition-transform" />
+              <span className="font-bold text-xs md:text-sm">15% en todo</span>
+              <Badge className="bg-white/20 text-white text-[9px] px-2 py-0.5">Automático</Badge>
+            </div>
           </div>
-          <div className="flex items-center justify-center gap-2">
-            <Gift className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
-            <span className="font-medium">Regalo gratis</span>
+          <div className="group relative bg-white/15 backdrop-blur-md border-2 border-white/30 rounded-xl p-3 md:p-4 hover:bg-white/25 hover:border-white/50 transition-all hover:scale-105 overflow-hidden">
+            <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full blur-2xl" />
+            <div className="relative z-10 flex flex-col items-center gap-2">
+              <Gift className="w-5 h-5 md:w-7 md:h-7 drop-shadow-lg group-hover:scale-110 transition-transform" />
+              <span className="font-bold text-xs md:text-sm">Regalo gratis</span>
+              <Badge className="bg-white/20 text-white text-[9px] px-2 py-0.5">€70+</Badge>
+            </div>
           </div>
-          <div className="flex items-center justify-center gap-2">
-            <Clock className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
-            <span className="font-medium">Solo 24 horas</span>
+          <div className="group relative bg-white/15 backdrop-blur-md border-2 border-white/30 rounded-xl p-3 md:p-4 hover:bg-white/25 hover:border-white/50 transition-all hover:scale-105 overflow-hidden">
+            <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full blur-2xl" />
+            <div className="relative z-10 flex flex-col items-center gap-2">
+              <Clock className="w-5 h-5 md:w-7 md:h-7 drop-shadow-lg group-hover:scale-110 transition-transform" />
+              <span className="font-bold text-xs md:text-sm">Solo 24 horas</span>
+              <Badge className="bg-red-500/90 text-white text-[9px] px-2 py-0.5 animate-pulse">Limitado</Badge>
+            </div>
           </div>
         </div>
 
