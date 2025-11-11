@@ -181,12 +181,10 @@ const CountdownTimer = ({
   return <div className="mt-8 space-y-6">
       {/* Countdown */}
       <div>
-        {currentPromoStage && (
-          <div className="text-center mb-2">
+        {currentPromoStage && <div className="text-center mb-2">
             <span className="text-xs text-white/70 uppercase tracking-wider">Etapa actual:</span>
             <span className="text-sm text-white font-semibold ml-2">{currentPromoStage.name}</span>
-          </div>
-        )}
+          </div>}
         <div className="flex items-center justify-center gap-2 mb-4">
           <Clock className="w-5 h-5 text-white animate-pulse" />
           <p className="text-white/90 font-medium">
@@ -339,11 +337,7 @@ const BlackFriday = () => {
 
           {/* Newsletter CTA after countdown */}
           <div className="flex justify-center">
-            <NewsletterCTA 
-              variant="inline"
-              text="Recibe alertas automáticas de cada etapa"
-              className="text-white/70 hover:text-white text-sm bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors"
-            />
+            <NewsletterCTA variant="inline" text="Recibe alertas automáticas de cada etapa" className="text-white/70 hover:text-white text-sm bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors" />
           </div>
 
           {/* Tier Info */}
@@ -554,13 +548,13 @@ const BlackFriday = () => {
           <h3 className="font-bold mb-3">Calendario y condiciones de las promociones</h3>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li>• <span className="font-semibold text-foreground">Warm-up (10-16 Nov):</span> 10% de descuento aplicado directamente en productos</li>
-            <li>• <span className="font-semibold text-foreground">White Week (17-27 Nov):</span> 20% OFF (10% + 10% extra) aplicado en productos + Código REGALOWW70 para banda de pelo gratis desde €70</li>
-            <li>• <span className="font-semibold text-foreground">Black Friday (28-30 Nov):</span> 20% base + códigos tier (EARLYBIRD50: 50% OFF limitado, EARLYBIRD35: 35% OFF limitado, BF25: 25% OFF) + Código REGALOBF70 para regalo desde €70</li>
-            <li>• <span className="font-semibold text-foreground">Cyber Monday (1 Dic):</span> 15% OFF aplicado en productos + Código REGALOCM70 para regalo desde €70</li>
-            <li>• Los descuentos Warm-up y White Week se aplican automáticamente en los precios de productos</li>
-            <li>• Para Black Friday y Cyber Monday, introduce los códigos en el checkout</li>
-            <li>• Los códigos EARLYBIRD tienen límite de usos (150 y 450 respectivamente, 1 por cliente)</li>
-            <li>• El regalo (banda de pelo premium) se añade con el código específico de cada etapa</li>
+            <li>• White Week (17-27 Nov): 20% OFF (10% + 10% extra) aplicado en productos +  Banda de pelo gratis desde €70<span className="font-semibold text-foreground">White Week (17-27 Nov):</span> 20% OFF (10% + 10% extra) aplicado en productos + Código REGALOWW70 para banda de pelo gratis desde €70</li>
+            <li>• Black Friday (28-30 Nov): 25% base + códigos tier (EARLYBIRD50: 50% OFF limitado, EARLYBIRD35: 35% OFF limitado, BF25: 25% OFF) + Banda de pelo gratis desde €70<span className="font-semibold text-foreground">Black Friday (28-30 Nov):</span> 20% base + códigos tier (EARLYBIRD50: 50% OFF limitado, EARLYBIRD35: 35% OFF limitado, BF25: 25% OFF) + Código REGALOBF70 para regalo desde €70</li>
+            <li>• Cyber Monday (1 Dic): 15% OFF aplicado en productos +Banda de pelo gratis desde €70<span className="font-semibold text-foreground">Cyber Monday (1 Dic):</span> 15% OFF aplicado en productos + Código REGALOCM70 para regalo desde €70</li>
+            <li>• Los descuentos Warm-up, White Week, Black Friday y Ciber Monday generales a la web se aplican automáticamente en los precios de productos</li>
+            <li>• Para Black Friday EXTRA 50-45-35% introduce los códigos a hacer checkout</li>
+            <li>• Los códigos EARLYBIRD tienen límite de usos (50 y 35 respectivamente, 1 por cliente)</li>
+            <li>• El regalo (banda de pelo premium) se añade automáticamente a tu carrito al superar 70€</li>
             <li>• Garantía de 3 años en todos los productos</li>
             <li>• Devoluciones gratuitas durante 30 días</li>
           </ul>
