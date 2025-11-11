@@ -179,7 +179,17 @@ const CountdownTimer = ({
   const StageIcon = displayStage?.icon;
   return <div className="mt-8 space-y-6">
       {/* Current Stage Banner */}
-      {displayStage && StageIcon}
+      {displayStage && StageIcon && (
+        <div className={`bg-gradient-to-r ${displayStage.color} rounded-xl p-6 text-white text-center shadow-xl`}>
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <StageIcon className="w-6 h-6" />
+            <h3 className="text-2xl font-bold">{displayStage.name}</h3>
+          </div>
+          <Badge className="bg-white/20 text-white border-white/30 text-lg px-4 py-1">
+            {displayStage.discount}
+          </Badge>
+        </div>
+      )}
 
       {/* Countdown */}
       <div>
