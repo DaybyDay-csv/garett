@@ -162,8 +162,8 @@ export const NewsletterPopup = () => {
             {/* Progress Timeline */}
             <div className="space-y-4">
               {/* Progress Bar with Stages */}
-              <div className="relative">
-                <Progress value={progress.progressPercentage} className="h-1.5" />
+              <div className="relative p-4 bg-muted/40 rounded-lg border border-border/60">
+                <Progress value={progress.progressPercentage} className="h-2" />
                 <div className="flex justify-between mt-3">
                   {stagesWithStatus.map((stage, idx) => {
                     const Icon = stage.icon;
@@ -174,9 +174,9 @@ export const NewsletterPopup = () => {
                       <div key={stage.name} className="flex flex-col items-center gap-1.5 flex-1">
                         <div className={`
                           w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all
-                          ${isActive ? 'border-primary bg-primary/10 scale-110' : ''}
-                          ${isCompleted ? 'border-primary/30 bg-muted' : ''}
-                          ${stage.status === 'upcoming' ? 'border-border bg-background' : ''}
+                          ${isActive ? 'border-primary bg-primary/20 scale-110 shadow-lg shadow-primary/20' : ''}
+                          ${isCompleted ? 'border-primary/40 bg-muted/80' : ''}
+                          ${stage.status === 'upcoming' ? 'border-border/80 bg-muted/30' : ''}
                         `}>
                           <Icon className={`w-4 h-4 ${isActive ? 'text-primary' : 'text-muted-foreground'}`} />
                         </div>
@@ -194,32 +194,32 @@ export const NewsletterPopup = () => {
 
               {/* Live Countdown */}
               {targetStage && (
-                <div className="bg-muted/50 rounded-lg p-4 space-y-2">
+                <div className="bg-muted/80 rounded-lg p-4 space-y-2 border border-border/60">
                   <div className="text-center">
-                    <p className="text-xs text-muted-foreground mb-2">
+                    <p className="text-xs text-foreground/70 mb-2 font-medium">
                       {isActiveStage ? 'Termina en' : 'Comienza en'}
                     </p>
                     <div className="flex items-center justify-center gap-3">
                       <div className="text-center">
-                        <div className="text-2xl font-bold tabular-nums">{countdown.days}</div>
+                        <div className="text-2xl font-bold tabular-nums text-foreground">{countdown.days}</div>
                         <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Días</div>
                       </div>
                       <div className="text-2xl font-light text-muted-foreground">:</div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold tabular-nums">{countdown.hours}</div>
+                        <div className="text-2xl font-bold tabular-nums text-foreground">{countdown.hours}</div>
                         <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Horas</div>
                       </div>
                       <div className="text-2xl font-light text-muted-foreground">:</div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold tabular-nums">{countdown.minutes}</div>
+                        <div className="text-2xl font-bold tabular-nums text-foreground">{countdown.minutes}</div>
                         <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Min</div>
                       </div>
                     </div>
-                    <p className="text-xs font-medium mt-2">
+                    <p className="text-xs font-medium mt-2 text-foreground">
                       {isActiveStage ? (
-                        <>{targetStage.name} <span className="text-primary">{targetStage.discount}</span></>
+                        <>{targetStage.name} <span className="text-primary font-semibold">{targetStage.discount}</span></>
                       ) : (
-                        <>Próxima etapa: <span className="text-primary">{targetStage.name}</span></>
+                        <>Próxima etapa: <span className="text-primary font-semibold">{targetStage.name}</span></>
                       )}
                     </p>
                   </div>
@@ -229,9 +229,9 @@ export const NewsletterPopup = () => {
               {/* Stage Details */}
               <div className="grid grid-cols-2 gap-2 text-xs">
                 {stagesWithStatus.map(stage => (
-                  <div key={stage.name} className="flex items-center justify-between p-2 bg-muted/30 rounded">
-                    <span className="text-muted-foreground">{stage.dates}</span>
-                    <span className="font-semibold">{stage.discount}</span>
+                  <div key={stage.name} className="flex items-center justify-between p-2 bg-muted/60 rounded border border-border/50">
+                    <span className="text-foreground/70">{stage.dates}</span>
+                    <span className="font-semibold text-foreground">{stage.discount}</span>
                   </div>
                 ))}
               </div>
