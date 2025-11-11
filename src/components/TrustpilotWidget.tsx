@@ -50,14 +50,13 @@ export const TrustpilotWidget = () => {
         
         <div
           ref={ref}
-          className="trustpilot-widget min-h-[200px]"
+          className="trustpilot-widget min-h-[120px] flex justify-center"
           data-locale="es-ES"
-          data-template-id="539ad0ffdec7e10e686debd7"
+          data-template-id="5419b6a8b0d04a076446a9ad"
           data-businessunit-id="691312abf046acf4291c3e32"
-          data-style-height="500px"
+          data-style-height="150px"
           data-style-width="100%"
           data-theme="light"
-          data-stars="4,5"
           data-schema-type="Organization"
         >
           <a
