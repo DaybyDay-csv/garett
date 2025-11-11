@@ -2,24 +2,30 @@ import { useEffect, useRef, useState } from "react";
 
 export const TrustpilotWidget = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
 
   useEffect(() => {
-    // Wait for Trustpilot script to load
-    const loadWidget = () => {
-      if (window.Trustpilot && ref.current) {
-        console.log("Loading Trustpilot widget...");
-        window.Trustpilot.loadFromElement(ref.current, true);
-        setIsLoading(false);
+    // Check if script is already loaded
+    const checkScript = () => {
+      if (window.Trustpilot) {
+        setScriptLoaded(true);
+        console.log("Trustpilot script detected");
+        
+        if (ref.current) {
+          console.log("Initializing Trustpilot widget");
+          try {
+            window.Trustpilot.loadFromElement(ref.current, true);
+          } catch (error) {
+            console.error("Error loading Trustpilot:", error);
+          }
+        }
       } else {
-        // Retry after a short delay if script not loaded yet
-        setTimeout(loadWidget, 100);
+        console.log("Trustpilot script not yet loaded, retrying...");
+        setTimeout(checkScript, 200);
       }
     };
 
-    // Start loading after a small delay to ensure script is loaded
-    const timeoutId = setTimeout(loadWidget, 500);
-
+    const timeoutId = setTimeout(checkScript, 1000);
     return () => clearTimeout(timeoutId);
   }, []);
 
@@ -35,32 +41,32 @@ export const TrustpilotWidget = () => {
           </p>
         </div>
 
-        {isLoading && (
+        {!scriptLoaded && (
           <div className="text-center py-8">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Cargando reseñas...</p>
+            <p className="text-muted-foreground">Cargando reseñas de Trustpilot...</p>
           </div>
         )}
         
         <div
           ref={ref}
-          className="trustpilot-widget"
+          className="trustpilot-widget min-h-[200px]"
           data-locale="es-ES"
-          data-template-id="53aa8912dec7e10d38f59f36"
+          data-template-id="539ad0ffdec7e10e686debd7"
           data-businessunit-id="691312abf046acf4291c3e32"
-          data-style-height="140px"
+          data-style-height="500px"
           data-style-width="100%"
           data-theme="light"
-          data-stars="1,2,3,4,5"
-          data-review-languages="es"
+          data-stars="4,5"
+          data-schema-type="Organization"
         >
           <a
             href="https://es.trustpilot.com/review/garett.es"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary hover:underline"
+            className="text-primary hover:underline text-lg"
           >
-            Trustpilot
+            Ver reseñas en Trustpilot
           </a>
         </div>
       </div>
