@@ -113,7 +113,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </h3>
         
         {node.description && (
-          <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+          <p className="hidden md:block text-sm text-muted-foreground line-clamp-2 mb-3">
             {node.description}
           </p>
         )}
@@ -145,7 +145,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             onClick={handleAddToCart}
             disabled={!firstVariant?.availableForSale}
             size="sm"
-            className="w-full sm:w-auto"
+            className="hidden md:inline-flex w-full sm:w-auto"
           >
             {firstVariant?.availableForSale ? 'Añadir' : 'Agotado'}
           </Button>
