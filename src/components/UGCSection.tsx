@@ -155,10 +155,7 @@ export const UGCSection = () => {
           </h2>
           <p className="text-muted-foreground text-lg mb-8 leading-relaxed">Garett trae la tecnología profesional de los salones de belleza directamente a tu hogar. Resultados visibles, rutinas flexibles que se adaptan a tu vida, y la confianza de invertir en ti misma sin comprometer tiempo ni calidad.</p>
           <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-            <a href="https://instagram.com/garettbeauty" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
-              <Instagram className="w-5 h-5" />
-              Comparte tu historia
-            </a>
+            
           </Button>
         </div>
       </div>
