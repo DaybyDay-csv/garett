@@ -10,11 +10,9 @@ import hairBefore from "@/assets/hair-before.png";
 import hairAfter from "@/assets/hair-after.jpg";
 import patternImage from "@/assets/garett-pattern-1.png";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
-
 export const AeroGlowBanner = () => {
   const [product, setProduct] = useState<ShopifyProduct | null>(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const loadProduct = async () => {
       try {
@@ -22,10 +20,7 @@ export const AeroGlowBanner = () => {
         const products = await fetchProducts(50, 'product_type:Plancha OR title:AeroGlow OR title:plancha');
         if (products && products.length > 0) {
           // Find the AeroGlow product specifically
-          const aeroglow = products.find(p => 
-            p.node.title.toLowerCase().includes('aeroglow') || 
-            p.node.handle.includes('aeroglow')
-          );
+          const aeroglow = products.find(p => p.node.title.toLowerCase().includes('aeroglow') || p.node.handle.includes('aeroglow'));
           setProduct(aeroglow || products[0]);
         }
       } catch (error) {
@@ -43,19 +38,14 @@ export const AeroGlowBanner = () => {
   const discountAmount = 29.90;
   const finalPrice = basePrice - discountAmount; // €269.10
   const currencyCode = product?.node.priceRange.minVariantPrice.currencyCode || 'EUR';
-
-  return (
-    <div className="relative w-full bg-gradient-to-br from-[#5D4037]/5 via-background to-[#8B6F47]/5 overflow-hidden">
+  return <div className="relative w-full bg-gradient-to-br from-[#5D4037]/5 via-background to-[#8B6F47]/5 overflow-hidden">
       {/* Elegant pattern overlay */}
       <div className="absolute inset-0 opacity-[0.02]">
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url(${patternImage})`,
-            backgroundSize: '250px',
-            backgroundRepeat: 'repeat'
-          }}
-        />
+        <div className="absolute inset-0" style={{
+        backgroundImage: `url(${patternImage})`,
+        backgroundSize: '250px',
+        backgroundRepeat: 'repeat'
+      }} />
       </div>
 
       {/* Gradient orbs for depth */}
@@ -76,9 +66,7 @@ export const AeroGlowBanner = () => {
             {/* Headline */}
             <div className="space-y-3 px-2">
               <div className="flex items-center justify-center lg:justify-start gap-2">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 md:w-5 md:h-5 fill-[#D4AF37] text-[#D4AF37]" />
-                ))}
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 md:w-5 md:h-5 fill-[#D4AF37] text-[#D4AF37]" />)}
                 <span className="text-sm md:text-base font-semibold text-muted-foreground ml-1">Resultados Instantáneos</span>
               </div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.15] tracking-tight">
@@ -91,8 +79,7 @@ export const AeroGlowBanner = () => {
             </div>
 
             {/* Pricing */}
-            {!loading && (
-              <div className="flex items-center justify-center lg:justify-start gap-3 flex-wrap px-2">
+            {!loading && <div className="flex items-center justify-center lg:justify-start gap-3 flex-wrap px-2">
                 <div className="flex items-baseline gap-2.5">
                   <span className="text-4xl md:text-5xl font-bold text-foreground">
                     €{finalPrice.toFixed(2)}
@@ -104,8 +91,7 @@ export const AeroGlowBanner = () => {
                 <Badge className="bg-red-500 text-white text-sm md:text-base px-3 py-1 animate-pulse">
                   AHORRA €{discountAmount.toFixed(2)}
                 </Badge>
-              </div>
-            )}
+              </div>}
 
             {/* Key Benefits - Enhanced Visual */}
             <div className="grid grid-cols-3 gap-2 md:gap-3 px-2">
@@ -128,26 +114,16 @@ export const AeroGlowBanner = () => {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start pt-2 relative z-20 px-2">
-              <Link 
-                to={product ? `/producto/${product.node.handle}` : "#"}
-                className="inline-flex items-center justify-center group text-sm md:text-base h-12 md:h-14 px-8 md:px-10 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-xl hover:shadow-2xl transition-all text-white border-0 rounded-lg font-semibold cursor-pointer"
-              >
+              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-sm md:text-base h-12 md:h-14 px-8 md:px-10 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-xl hover:shadow-2xl transition-all text-white border-0 rounded-lg font-semibold cursor-pointer">
                 Comprar Ahora
                 <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link 
-                to={product ? `/producto/${product.node.handle}` : "#"}
-                className="inline-flex items-center justify-center text-sm md:text-base h-12 md:h-14 px-8 md:px-10 border-2 border-[#8B6F47] text-[#5D4037] dark:text-[#D7B896] hover:bg-[#8B6F47]/10 rounded-lg font-semibold transition-colors cursor-pointer bg-background"
-              >
+              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center text-sm md:text-base h-12 md:h-14 px-8 md:px-10 border-2 border-[#8B6F47] text-[#5D4037] dark:text-[#D7B896] hover:bg-[#8B6F47]/10 rounded-lg font-semibold transition-colors cursor-pointer bg-background">
                 Ver Detalles
               </Link>
             </div>
 
-            <NewsletterCTA 
-              variant="inline"
-              text="🔔 Notifícame de ofertas exclusivas"
-              className="text-muted-foreground hover:text-foreground text-sm md:text-base text-center lg:text-left px-2"
-            />
+            <NewsletterCTA variant="inline" text="🔔 Notifícame de ofertas exclusivas" className="text-muted-foreground hover:text-foreground text-sm md:text-base text-center lg:text-left px-2" />
 
             {/* Trust Indicators */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 md:gap-6 pt-3 text-xs md:text-sm px-2">
@@ -175,17 +151,9 @@ export const AeroGlowBanner = () => {
               <div className="relative z-10">
                 <div className="absolute -inset-4 md:-inset-6 bg-gradient-to-br from-[#D4AF37]/20 via-[#8B6F47]/20 to-[#5D4037]/20 rounded-full blur-2xl" />
                 <div className="relative bg-gradient-to-br from-white/90 to-white/60 dark:from-background/90 dark:to-background/60 backdrop-blur-xl rounded-2xl p-4 md:p-8 shadow-xl border border-white/30 dark:border-border/30">
-                  {loading ? (
-                    <div className="aspect-square flex items-center justify-center">
+                  {loading ? <div className="aspect-square flex items-center justify-center">
                       <Sparkles className="w-20 h-20 text-[#8B6F47] animate-pulse" />
-                    </div>
-                  ) : (
-                    <img 
-                      src={aeroglowHero}
-                      alt="AeroGlow Hair Straightener"
-                      className="w-full h-full object-contain drop-shadow-2xl animate-fade-in hover:scale-105 transition-transform duration-700"
-                    />
-                  )}
+                    </div> : <img src={aeroglowHero} alt="AeroGlow Hair Straightener" className="w-full h-full object-contain drop-shadow-2xl animate-fade-in hover:scale-105 transition-transform duration-700" />}
                 </div>
                 
                 {/* Floating Discount Badge */}
@@ -225,11 +193,7 @@ export const AeroGlowBanner = () => {
                 <div className="absolute top-2 left-2 md:top-3 md:left-3 z-10">
                   <Badge className="bg-gray-500 text-white text-xs md:text-sm px-2 py-1">ANTES</Badge>
                 </div>
-                <img 
-                  src={hairBefore}
-                  alt="Cabello antes de usar AeroGlow"
-                  className="w-full h-[180px] md:h-[300px] object-cover"
-                />
+                <img src={hairBefore} alt="Cabello antes de usar AeroGlow" className="w-full h-[180px] md:h-[300px] object-cover" />
                 <div className="p-2.5 md:p-4 bg-gradient-to-t from-background to-transparent">
                   <p className="text-xs md:text-sm text-muted-foreground font-medium">Cabello sin tratar</p>
                 </div>
@@ -243,11 +207,7 @@ export const AeroGlowBanner = () => {
                 <div className="absolute top-2 left-2 md:top-3 md:left-3 z-10">
                   <Badge className="bg-gradient-to-r from-[#D4AF37] to-[#8B6F47] text-white text-xs md:text-sm px-2 py-1">DESPUÉS</Badge>
                 </div>
-                <img 
-                  src={hairAfter}
-                  alt="Cabello después de usar AeroGlow"
-                  className="w-full h-[180px] md:h-[300px] object-cover"
-                />
+                <img src={hairAfter} alt="Cabello después de usar AeroGlow" className="w-full h-[180px] md:h-[300px] object-cover" />
                 <div className="p-2.5 md:p-4 bg-gradient-to-t from-background to-transparent">
                   <div className="flex items-center gap-1.5 md:gap-2">
                     <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#D4AF37]" />
@@ -260,19 +220,10 @@ export const AeroGlowBanner = () => {
 
           {/* Final CTA */}
           <div className="text-center mt-6 md:mt-10 relative z-20 space-y-3 px-4">
-            <Link 
-              to={product ? `/producto/${product.node.handle}` : "#"}
-              className="inline-flex items-center justify-center group text-base md:text-lg h-12 md:h-14 px-10 md:px-12 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-xl hover:shadow-2xl transition-all text-white rounded-lg font-semibold cursor-pointer relative z-20"
-            >
-              Consigue tu AeroGlow Ahora
-              <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-2 transition-transform" />
+            <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-base md:text-lg h-12 md:h-14 px-10 md:px-12 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-xl hover:shadow-2xl transition-all text-white rounded-lg font-semibold cursor-pointer relative z-20">Consigue tu AeroGlow<ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-2 transition-transform" />
             </Link>
             
-            <NewsletterCTA 
-              variant="inline"
-              text="🔔 Quiero ofertas exclusivas"
-              className="text-muted-foreground hover:text-foreground text-sm md:text-base block"
-            />
+            <NewsletterCTA variant="inline" text="🔔 Quiero ofertas exclusivas" className="text-muted-foreground hover:text-foreground text-sm md:text-base block" />
             
             <p className="text-xs md:text-sm text-muted-foreground mt-3">
               ⚡ Últimas unidades disponibles • Envío gratis en 24-48h
@@ -280,6 +231,5 @@ export const AeroGlowBanner = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
