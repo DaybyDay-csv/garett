@@ -121,3 +121,91 @@ export const calculatePromotionalPrice = (originalPrice: string) => {
 export const formatPrice = (amount: number, currencyCode: string = 'EUR'): string => {
   return `${amount.toFixed(2)} ${currencyCode}`;
 };
+
+/**
+ * Get the next upcoming promotional stage
+ */
+export const getNextPromotionalStage = (): PromotionalStage | null => {
+  const now = new Date();
+  return promotionalStages.find(stage => now < stage.startDate) || null;
+};
+
+/**
+ * Calculate days until a specific stage starts
+ */
+export const getDaysUntilStage = (stage: PromotionalStage): number => {
+  const now = new Date();
+  const diffTime = stage.startDate.getTime() - now.getTime();
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+};
+
+/**
+ * Get promotional progress (which stage is active/next)
+ */
+export const getPromotionalProgress = (): {
+  currentStageIndex: number;
+  totalStages: number;
+  progressPercentage: number;
+} => {
+  const now = new Date();
+  const currentStage = getCurrentPromotionalStage();
+  
+  if (currentStage) {
+    const index = promotionalStages.findIndex(s => s.name === currentStage.name);
+    return {
+      currentStageIndex: index,
+      totalStages: promotionalStages.length,
+      progressPercentage: ((index + 1) / promotionalStages.length) * 100
+    };
+  }
+  
+  const nextStage = getNextPromotionalStage();
+  if (nextStage) {
+    const index = promotionalStages.findIndex(s => s.name === nextStage.name);
+    return {
+      currentStageIndex: index > 0 ? index - 1 : 0,
+      totalStages: promotionalStages.length,
+      progressPercentage: (index / promotionalStages.length) * 100
+    };
+  }
+  
+  return {
+    currentStageIndex: promotionalStages.length - 1,
+    totalStages: promotionalStages.length,
+    progressPercentage: 100
+  };
+};
+
+/**
+ * Get all stages with their current status
+ */
+export const getAllStagesWithStatus = (): Array<PromotionalStage & { 
+  status: 'completed' | 'active' | 'upcoming';
+  daysRemaining?: number;
+}> => {
+  const now = new Date();
+  const currentStage = getCurrentPromotionalStage();
+  
+  return promotionalStages.map(stage => {
+    let status: 'completed' | 'active' | 'upcoming';
+    let daysRemaining: number | undefined;
+    
+    if (now > stage.endDate) {
+      status = 'completed';
+    } else if (currentStage && currentStage.name === stage.name) {
+      status = 'active';
+      daysRemaining = Math.ceil((stage.endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+    } else if (now < stage.startDate) {
+      status = 'upcoming';
+      daysRemaining = getDaysUntilStage(stage);
+    } else {
+      status = 'completed';
+    }
+    
+    return {
+      ...stage,
+      status,
+      daysRemaining
+    };
+  });
+};
