@@ -52,7 +52,7 @@ export const WhiteWeekBanner = () => {
         
 
         {/* Benefits - Enhanced Visual Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 text-sm md:text-base w-full max-w-2xl">
+        <div className="grid grid-cols-3 gap-2 md:gap-4 text-sm md:text-base w-full max-w-2xl">
           <div className="group relative bg-gradient-to-br from-primary/5 to-accent/5 backdrop-blur-sm border-2 border-primary/20 rounded-xl p-3 md:p-4 hover:border-primary/50 hover:shadow-lg transition-all overflow-hidden">
             <div className="absolute top-0 right-0 w-16 h-16 bg-primary/10 rounded-full blur-2xl" />
             <div className="relative z-10 flex flex-col items-center gap-2">
