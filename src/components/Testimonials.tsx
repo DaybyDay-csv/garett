@@ -148,9 +148,7 @@ export const Testimonials = () => {
           <div className="flex flex-col items-center gap-4 mb-6">
             <div className="flex items-center gap-3">
               <div className="flex gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-7 h-7 md:w-8 md:h-8 fill-[#00b67a] text-[#00b67a]" />
-                ))}
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-7 h-7 md:w-8 md:h-8 fill-[#00b67a] text-[#00b67a]" />)}
               </div>
               <span className="text-2xl md:text-3xl font-bold">5.0</span>
             </div>
@@ -158,31 +156,19 @@ export const Testimonials = () => {
           </div>
           
           {/* Trustpilot Button */}
-          <a
-            href="https://es.trustpilot.com/review/garett.es"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#00b67a] hover:bg-[#00a870] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
-          >
-            <Star className="w-5 h-5 fill-white" />
+          <a href="https://es.trustpilot.com/review/garett.es" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#00b67a] hover:bg-[#00a870] text-white font-semibold px-6 py-3 rounded-lg transition-colors">Deja tu reseña en Trustpilot<Star className="w-5 h-5 fill-white" />
             Ver todas las reseñas en Trustpilot
           </a>
         </div>
 
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          plugins={[
-            Autoplay({
-              delay: 2000,
-              stopOnInteraction: false,
-              stopOnMouseEnter: true,
-            }),
-          ]}
-          className="w-full mb-8"
-        >
+        <Carousel opts={{
+        align: "start",
+        loop: true
+      }} plugins={[Autoplay({
+        delay: 2000,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true
+      })]} className="w-full mb-8">
           <CarouselContent className="-ml-2 md:-ml-4">
           {testimonials.map((testimonial, index) => <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
             <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border/50 h-full">
