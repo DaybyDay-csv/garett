@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { TrustBadges } from "@/components/TrustBadges";
 import { Testimonials } from "@/components/Testimonials";
+import { UGCSection } from "@/components/UGCSection";
 import { PromotionalBanners } from "@/components/PromotionalBanners";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -242,6 +243,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* UGC Section - Real User Stories */}
+      <UGCSection />
+      
       {/* Testimonials Section */}
       <Testimonials />
 
