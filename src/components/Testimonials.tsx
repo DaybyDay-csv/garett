@@ -1,6 +1,8 @@
 import { Star, CheckCircle2, Clock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import garettPattern from "@/assets/garett-pattern-2.png";
 const testimonials = [{
   name: "Sofía R.",
@@ -61,8 +63,23 @@ export const Testimonials = () => {
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Personas que buscaban una solución profesional sin salir de casa</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {testimonials.map((testimonial, index) => <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border/50">
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          plugins={[
+            Autoplay({
+              delay: 4000,
+              stopOnInteraction: false,
+              stopOnMouseEnter: true,
+            }),
+          ]}
+          className="w-full mb-8"
+        >
+          <CarouselContent className="-ml-2 md:-ml-4">
+          {testimonials.map((testimonial, index) => <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2">
+            <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border/50 h-full">
               <CardContent className="pt-6">
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
@@ -104,8 +121,10 @@ export const Testimonials = () => {
                   </p>
                 </div>
               </CardContent>
-            </Card>)}
-        </div>
+            </Card>
+            </CarouselItem>)}
+          </CarouselContent>
+        </Carousel>
 
         {/* Trust Footer */}
         <div className="bg-muted/30 rounded-lg p-6 border border-border/50 text-center max-w-3xl mx-auto">

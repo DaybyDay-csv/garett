@@ -9,11 +9,9 @@ import { PromotionalBanners } from "@/components/PromotionalBanners";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { Sparkles, Zap, Timer, ShoppingBag, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import Autoplay from "embla-carousel-autoplay";
 import categoryCuidadoCapilar from "@/assets/category-cuidado-capilar.jpg";
 import categoryMasajeadoresFaciales from "@/assets/category-masajeadores-faciales.jpg";
 import categoryLimpiezaFacial from "@/assets/category-limpieza-facial.jpg";
@@ -80,7 +78,7 @@ const Index = () => {
       )}
 
       {/* Categories Section */}
-      <section className="py-12 md:py-20 bg-white overflow-hidden">
+      <section className="py-12 md:py-20 bg-white">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -91,24 +89,9 @@ const Index = () => {
             </p>
           </div>
           
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            plugins={[
-              Autoplay({
-                delay: 3000,
-                stopOnInteraction: false,
-                stopOnMouseEnter: true,
-              }),
-            ]}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
             {/* Cuidado Capilar */}
-            <CarouselItem className="pl-2 md:pl-4 basis-[85%] md:basis-1/2 lg:basis-1/3">
-              <Link to="/productos?category=capilar" className="group block h-full">
+            <Link to="/productos?category=capilar" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
                 <div className="aspect-video overflow-hidden">
                   <img 
@@ -130,12 +113,10 @@ const Index = () => {
                   </div>
                 </CardContent>
               </Card>
-              </Link>
-            </CarouselItem>
+            </Link>
 
             {/* Masajeadores Faciales */}
-            <CarouselItem className="pl-2 md:pl-4 basis-[85%] md:basis-1/2 lg:basis-1/3">
-              <Link to="/productos?category=masajeadores-faciales" className="group block h-full">
+            <Link to="/productos?category=masajeadores-faciales" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
                 <div className="aspect-video overflow-hidden">
                   <img 
@@ -157,12 +138,10 @@ const Index = () => {
                   </div>
                 </CardContent>
               </Card>
-              </Link>
-            </CarouselItem>
+            </Link>
 
             {/* Limpieza Facial */}
-            <CarouselItem className="pl-2 md:pl-4 basis-[85%] md:basis-1/2 lg:basis-1/3">
-              <Link to="/productos?category=limpieza-facial" className="group block h-full">
+            <Link to="/productos?category=limpieza-facial" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
                 <div className="aspect-video overflow-hidden">
                   <img 
@@ -184,12 +163,10 @@ const Index = () => {
                   </div>
                 </CardContent>
               </Card>
-              </Link>
-            </CarouselItem>
+            </Link>
 
             {/* Dispositivos de Mesoterapia */}
-            <CarouselItem className="pl-2 md:pl-4 basis-[85%] md:basis-1/2 lg:basis-1/3">
-              <Link to="/productos?category=mesoterapia" className="group block h-full">
+            <Link to="/productos?category=mesoterapia" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
                 <div className="aspect-video overflow-hidden">
                   <img 
@@ -211,12 +188,10 @@ const Index = () => {
                   </div>
                 </CardContent>
               </Card>
-              </Link>
-            </CarouselItem>
+            </Link>
 
             {/* Dispositivos Corporales */}
-            <CarouselItem className="pl-2 md:pl-4 basis-[85%] md:basis-1/2 lg:basis-1/3">
-              <Link to="/productos?category=corporales" className="group block h-full">
+            <Link to="/productos?category=corporales" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
                 <div className="aspect-video overflow-hidden">
                   <img 
@@ -238,12 +213,10 @@ const Index = () => {
                   </div>
                 </CardContent>
               </Card>
-              </Link>
-            </CarouselItem>
+            </Link>
 
             {/* Depilación e IPL */}
-            <CarouselItem className="pl-2 md:pl-4 basis-[85%] md:basis-1/2 lg:basis-1/3">
-              <Link to="/productos?category=ipl" className="group block h-full">
+            <Link to="/productos?category=ipl" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
                 <div className="aspect-video overflow-hidden">
                   <img 
@@ -265,10 +238,8 @@ const Index = () => {
                   </div>
                 </CardContent>
               </Card>
-              </Link>
-            </CarouselItem>
-            </CarouselContent>
-          </Carousel>
+            </Link>
+          </div>
         </div>
       </section>
 
