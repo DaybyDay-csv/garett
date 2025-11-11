@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FloatingCountdown } from "@/components/FloatingCountdown";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
+import { NewsletterPopup } from "@/components/NewsletterPopup";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
@@ -23,6 +24,7 @@ const App = () => (
       <BrowserRouter>
         <AnnouncementBar />
         <FloatingCountdown />
+        <NewsletterPopup />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/productos" element={<Products />} />
