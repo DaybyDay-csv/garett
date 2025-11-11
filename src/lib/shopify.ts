@@ -190,6 +190,12 @@ export const CART_CREATE_MUTATION = `
 export const GWP_PRODUCT_ID = 'gid://shopify/Product/14828986794347';
 export const GWP_VARIANT_ID = 'gid://shopify/ProductVariant/52558159380843';
 export const GWP_THRESHOLD = 70; // €70 threshold
+export const GWP_PRODUCT_TITLE = 'Banda de Pelo Premium Garett - Special BF';
+
+// Helper to check if product is GWP (should be hidden from frontend)
+export const isGWPProduct = (product: ShopifyProduct): boolean => {
+  return product.node.title === GWP_PRODUCT_TITLE || product.node.id === GWP_PRODUCT_ID;
+};
 
 // Fetch GWP Product
 export async function fetchGWPProduct(): Promise<ShopifyProduct | null> {

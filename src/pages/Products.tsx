@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
-import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
+import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { Filter, ShoppingBag } from "lucide-react";
 import {
   Select,
@@ -34,8 +34,10 @@ const Products = () => {
     const loadProducts = async () => {
       try {
         const data = await fetchProducts(50);
-        setProducts(data);
-        setFilteredProducts(data);
+        // Filter out GWP product from display
+        const filteredData = data.filter(p => !isGWPProduct(p));
+        setProducts(filteredData);
+        setFilteredProducts(filteredData);
       } catch (error) {
         console.error('Error loading products:', error);
       } finally {

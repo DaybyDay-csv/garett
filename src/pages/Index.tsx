@@ -8,7 +8,7 @@ import { PromotionalBanners } from "@/components/PromotionalBanners";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
+import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { Sparkles, Zap, Timer, ShoppingBag, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import categoryCuidadoCapilar from "@/assets/category-cuidado-capilar.jpg";
@@ -26,7 +26,9 @@ const Index = () => {
     const loadProducts = async () => {
       try {
         const data = await fetchProducts(50);
-        setProducts(data);
+        // Filter out GWP product from display
+        const filteredData = data.filter(p => !isGWPProduct(p));
+        setProducts(filteredData);
       } catch (error) {
         console.error('Error loading products:', error);
       } finally {

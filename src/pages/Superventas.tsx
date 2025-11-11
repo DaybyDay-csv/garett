@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
-import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
+import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { Trophy } from "lucide-react";
 
 const Superventas = () => {
@@ -13,7 +13,8 @@ const Superventas = () => {
     const loadProducts = async () => {
       try {
         const data = await fetchProducts(50);
-        const bestSellers = data.filter(p => p.node.tags.includes('bestseller:true'));
+        // Filter out GWP product and get only bestsellers
+        const bestSellers = data.filter(p => !isGWPProduct(p) && p.node.tags.includes('bestseller:true'));
         setProducts(bestSellers);
       } catch (error) {
         console.error('Error loading products:', error);
