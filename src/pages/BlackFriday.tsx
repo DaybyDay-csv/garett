@@ -284,7 +284,7 @@ const BlackFriday = () => {
     ...stage,
     discount: stage.discountLabel,
     description: stage.name === "Warm-up" ? "Descuento aplicado directamente en productos" : stage.name === "White Week" ? "20% OFF (10% + 10% extra) + Regalo" : stage.name === "Black Friday" ? "Descuentos por etapas + Regalo" : "15% OFF + Regalo",
-    details: stage.name === "Warm-up" ? "10% de descuento en toda la tienda" : stage.name === "White Week" ? "Descuento aplicado en productos + Banda de pelo gratis desde €70" : stage.name === "Black Friday" ? "25% base + códigos tier (-50%/-35%/-25%) + Banda de pelo gratis desde €70" : "Descuento aplicado en productos + Banda de pelo gratis desde €70",
+    details: stage.name === "Warm-up" ? "10% descuento automático" : stage.name === "White Week" ? "20% descuento + Regalo gratis €70+" : stage.name === "Black Friday" ? "Hasta 50% con códigos + Regalo €70+" : "15% descuento + Regalo gratis €70+",
     code: stage.name === "White Week" ? "WHITEWEEK20" : stage.name === "Cyber Monday" ? "CYBERMONDAY15" : null,
     codes: stage.name === "Black Friday" ? [{
       code: "EARLYBIRD50",
@@ -420,14 +420,14 @@ const BlackFriday = () => {
             return <div key={stage.name} className="relative">
                   {/* Status badge - Outside on mobile, inside with proper spacing on desktop */}
                   <div className="absolute -top-2 left-1/2 -translate-x-1/2 lg:top-2 lg:right-2 lg:left-auto lg:translate-x-0 z-20">
-                    {isActive && <Badge className={`bg-gradient-to-r ${stage.color} text-white border-0 animate-pulse shadow-lg text-[10px] lg:text-xs px-1.5 lg:px-2.5 py-0.5 lg:py-1`}>
-                        <Clock className="w-2.5 h-2.5 lg:w-3 lg:h-3 mr-0.5 lg:mr-1" />
+                  {isActive && <Badge className={`bg-gradient-to-r ${stage.color} text-white border-0 animate-pulse shadow-lg text-xs lg:text-sm px-2 lg:px-3 py-0.5 lg:py-1`}>
+                        <Clock className="w-3 h-3 lg:w-4 lg:h-4 mr-1 lg:mr-1.5" />
                         EN CURSO
                       </Badge>}
-                    {isUpcoming && <Badge variant="secondary" className="shadow-sm text-[10px] lg:text-xs px-1.5 lg:px-2.5 py-0.5 lg:py-1 bg-secondary/80 backdrop-blur-sm">
+                    {isUpcoming && <Badge variant="secondary" className="shadow-sm text-xs lg:text-sm px-2 lg:px-3 py-0.5 lg:py-1 bg-secondary/80 backdrop-blur-sm">
                         PRÓXIMO
                       </Badge>}
-                    {isEnded && <Badge variant="outline" className="opacity-60 text-[10px] lg:text-xs px-1.5 lg:px-2.5 py-0.5 lg:py-1 bg-background/80 backdrop-blur-sm">
+                    {isEnded && <Badge variant="outline" className="opacity-60 text-xs lg:text-sm px-2 lg:px-3 py-0.5 lg:py-1 bg-background/80 backdrop-blur-sm">
                         FINALIZADO
                       </Badge>}
                   </div>
@@ -436,79 +436,79 @@ const BlackFriday = () => {
                   {/* Background gradient */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${stage.color} ${isActive ? 'opacity-10' : 'opacity-5'}`} />
 
-                  <div className="relative p-3 lg:p-6 pt-5 lg:pt-10">
+                  <div className="relative p-4 lg:p-6 pt-6 lg:pt-10">
                     {/* Header */}
-                    <div className="flex items-start gap-2 lg:gap-4 mb-2 lg:mb-4">
-                      <div className={`w-9 h-9 lg:w-14 lg:h-14 rounded-lg lg:rounded-xl bg-gradient-to-br ${stage.color} flex items-center justify-center flex-shrink-0 shadow-lg ${isActive ? 'animate-pulse' : ''}`}>
-                        <Icon className="w-4 h-4 lg:w-7 lg:h-7 text-white" />
+                    <div className="flex items-start gap-2 lg:gap-4 mb-3 lg:mb-4">
+                      <div className={`w-10 h-10 lg:w-14 lg:h-14 rounded-lg lg:rounded-xl bg-gradient-to-br ${stage.color} flex items-center justify-center flex-shrink-0 shadow-lg ${isActive ? 'animate-pulse' : ''}`}>
+                        <Icon className="w-5 h-5 lg:w-7 lg:h-7 text-white" />
                       </div>
                       
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-xs lg:text-xl font-bold mb-0.5 lg:mb-1 leading-tight">{stage.name}</h3>
-                        <Badge variant="outline" className="text-[11px] lg:text-sm font-normal px-1 lg:px-2.5 py-0.5 lg:py-1 whitespace-nowrap">
+                        <h3 className="text-sm lg:text-xl font-bold mb-1 lg:mb-1.5 leading-tight">{stage.name}</h3>
+                        <Badge variant="outline" className="text-xs lg:text-sm font-normal px-2 lg:px-2.5 py-0.5 lg:py-1 whitespace-nowrap">
                           {stage.dates}
                         </Badge>
                       </div>
                     </div>
 
                     {/* Discount */}
-                    <div className={`text-xl lg:text-3xl font-bold bg-gradient-to-br ${stage.color} bg-clip-text text-transparent mb-1.5 lg:mb-3`}>
+                    <div className={`text-2xl lg:text-3xl font-bold bg-gradient-to-br ${stage.color} bg-clip-text text-transparent mb-2 lg:mb-3`}>
                       {stage.discount}
                     </div>
 
                     {/* Description */}
-                    <p className="text-[10px] lg:text-sm text-muted-foreground mb-2 lg:mb-4 line-clamp-2">
+                    <p className="text-xs lg:text-sm text-muted-foreground mb-3 lg:mb-4 leading-relaxed">
                       {stage.details}
                     </p>
 
                      {/* Codes - Only show for Black Friday tiers */}
-                    <div className="space-y-1.5 lg:space-y-3">
-                      {stage.codes && stage.codes.length > 0 ? <div className="space-y-1 lg:space-y-2">
-                          <p className="text-[10px] lg:text-xs font-semibold text-muted-foreground">Códigos:</p>
-                          {stage.codes.map(codeObj => <div key={codeObj.code} className={`bg-background/50 border-2 rounded-md lg:rounded-lg p-2 lg:p-3 ${codeObj.urgency === 'high' ? 'border-red-500/30' : codeObj.urgency === 'medium' ? 'border-orange-500/30' : 'border-primary/30'}`}>
-                              <div className="flex items-center justify-between mb-1 lg:mb-2 gap-2">
-                                <Badge variant={codeObj.urgency === 'high' ? 'destructive' : 'secondary'} className="text-[10px] lg:text-xs px-1.5 lg:px-2 py-0.5 lg:py-1 shrink-0">
+                    <div className="space-y-2 lg:space-y-3">
+                      {stage.codes && stage.codes.length > 0 ? <div className="space-y-2 lg:space-y-2.5">
+                          <p className="text-xs lg:text-sm font-semibold text-muted-foreground">Códigos:</p>
+                          {stage.codes.map(codeObj => <div key={codeObj.code} className={`bg-background/50 border-2 rounded-md lg:rounded-lg p-2.5 lg:p-3 ${codeObj.urgency === 'high' ? 'border-red-500/30' : codeObj.urgency === 'medium' ? 'border-orange-500/30' : 'border-primary/30'}`}>
+                              <div className="flex items-center justify-between mb-1.5 lg:mb-2 gap-2">
+                                <Badge variant={codeObj.urgency === 'high' ? 'destructive' : 'secondary'} className="text-xs lg:text-sm px-2 lg:px-2.5 py-0.5 lg:py-1 shrink-0">
                                   {codeObj.discount}
                                 </Badge>
-                                <span className="text-[9px] lg:text-xs text-muted-foreground truncate">{codeObj.limit}</span>
+                                <span className="text-xs lg:text-sm text-muted-foreground">{codeObj.limit}</span>
                               </div>
                               <div className="flex items-center gap-2">
-                                <span className="flex-1 font-mono text-[10px] lg:text-sm font-bold truncate min-w-0">
+                                <span className="flex-1 font-mono text-xs lg:text-sm font-bold min-w-0">
                                   {codeObj.code}
                                 </span>
-                                <Button size="icon" variant="ghost" className="h-6 w-6 lg:h-8 lg:w-8 p-0 shrink-0" onClick={() => copyCode(codeObj.code)}>
-                                  {copiedCode === codeObj.code ? <Check className="w-2.5 h-2.5 lg:w-3 lg:h-3 text-green-500" /> : <Copy className="w-2.5 h-2.5 lg:w-3 lg:h-3" />}
+                                <Button size="icon" variant="ghost" className="h-7 w-7 lg:h-8 lg:w-8 p-0 shrink-0" onClick={() => copyCode(codeObj.code)}>
+                                  {copiedCode === codeObj.code ? <Check className="w-3 h-3 lg:w-4 lg:h-4 text-green-500" /> : <Copy className="w-3 h-3 lg:w-4 lg:h-4" />}
                                 </Button>
                               </div>
                             </div>)}
-                        </div> : <div className="bg-green-500/10 rounded-lg p-2 lg:p-4 border border-green-500/20">
-                          <div className="flex items-center justify-center gap-1 lg:gap-2">
-                            <Badge variant="secondary" className="bg-green-500/20 text-green-700 dark:text-green-300 border-0 text-[10px] lg:text-xs px-1.5 lg:px-2.5 py-0.5 lg:py-1">
+                        </div> : <div className="bg-green-500/10 rounded-lg p-3 lg:p-4 border border-green-500/20">
+                          <div className="flex items-center justify-center gap-1.5 lg:gap-2">
+                            <Badge variant="secondary" className="bg-green-500/20 text-green-700 dark:text-green-300 border-0 text-xs lg:text-sm px-2 lg:px-3 py-0.5 lg:py-1">
                               ✓ Auto
                             </Badge>
                           </div>
-                          <p className="text-[9px] lg:text-xs text-center text-muted-foreground mt-1 lg:mt-2 line-clamp-1 lg:line-clamp-none">
+                          <p className="text-xs lg:text-sm text-center text-muted-foreground mt-1.5 lg:mt-2">
                             Aplicado en productos
                           </p>
                         </div>}
                       
                       {/* GWP - Gift With Purchase Block */}
-                      {stage.gwp && <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-md lg:rounded-lg p-1.5 lg:p-2.5 border border-pink-500/30">
-                          <div className="flex items-center gap-1.5 lg:gap-2">
-                            <div className="relative w-7 h-7 lg:w-10 lg:h-10 rounded overflow-hidden flex-shrink-0 border border-white/40 shadow-sm">
+                      {stage.gwp && <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-md lg:rounded-lg p-2.5 lg:p-3 border border-pink-500/30">
+                          <div className="flex items-start gap-2 lg:gap-3">
+                            <div className="relative w-10 h-10 lg:w-12 lg:h-12 rounded overflow-hidden flex-shrink-0 border border-white/40 shadow-sm">
                               <img src={gwpImage} alt={gwpConfig.giftName} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-0.5 lg:gap-1 mb-0.5">
-                                <Gift className="w-2.5 h-2.5 lg:w-3 lg:h-3 text-pink-600 dark:text-pink-400 flex-shrink-0" />
-                                <span className="text-[9px] lg:text-[10px] font-bold text-pink-700 dark:text-pink-300 uppercase tracking-wide">
+                              <div className="flex items-center gap-1 lg:gap-1.5 mb-1">
+                                <Gift className="w-3 h-3 lg:w-4 lg:h-4 text-pink-600 dark:text-pink-400 flex-shrink-0" />
+                                <span className="text-xs lg:text-sm font-bold text-pink-700 dark:text-pink-300 uppercase tracking-wide">
                                   Regalo
                                 </span>
                               </div>
-                              <p className="text-[10px] lg:text-xs font-medium text-foreground truncate">
+                              <p className="text-xs lg:text-sm font-medium text-foreground leading-snug">
                                 {gwpConfig.giftName}
                               </p>
-                              <p className="text-[9px] lg:text-[10px] text-muted-foreground line-clamp-1">
+                              <p className="text-xs lg:text-sm text-muted-foreground mt-0.5">
                                 {gwpConfig.conditions}
                               </p>
                             </div>
