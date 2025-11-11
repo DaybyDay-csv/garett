@@ -165,7 +165,7 @@ export const NewsletterPopup = () => {
                           {stage.name}
                         </span>
                         <span className={`text-[10px] font-semibold ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
-                          {stage.discount}
+                          {stage.name === 'Black Friday' ? 'HASTA 50%' : stage.discount}
                         </span>
                       </div>
                     );
