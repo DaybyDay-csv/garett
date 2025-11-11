@@ -432,79 +432,76 @@ const BlackFriday = () => {
                       </Badge>}
                   </div>
 
-                  <div className={`relative overflow-visible rounded-lg lg:rounded-xl border-2 transition-all duration-300 min-h-[540px] lg:min-h-0 ${isActive ? 'border-primary shadow-2xl scale-[1.02]' : isEnded ? 'border-border/50 opacity-75' : 'border-border hover:border-primary/30 hover:shadow-lg'}`}>
+                  <div className={`relative overflow-visible rounded-lg lg:rounded-xl border-2 transition-all duration-300 ${isActive ? 'border-primary shadow-2xl scale-[1.02]' : isEnded ? 'border-border/50 opacity-75' : 'border-border hover:border-primary/30 hover:shadow-lg'}`}>
                   {/* Background gradient */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${stage.color} ${isActive ? 'opacity-10' : 'opacity-5'}`} />
 
-                  <div className="relative p-5 lg:p-6 pt-6 lg:pt-10">
+                  <div className="relative p-3 md:p-4 lg:p-6 pt-5 md:pt-6 lg:pt-10">
                     {/* Header */}
-                    <div className="flex items-center gap-3 lg:gap-4 mb-3 lg:mb-4">
-                      <div className={`w-12 h-12 lg:w-14 lg:h-14 rounded-lg lg:rounded-xl bg-gradient-to-br ${stage.color} flex items-center justify-center flex-shrink-0 shadow-lg ${isActive ? 'animate-pulse' : ''}`}>
-                        <Icon className="w-6 h-6 lg:w-7 lg:h-7 text-white" />
+                    <div className="flex items-center gap-2 md:gap-2.5 lg:gap-4 mb-2 md:mb-2.5 lg:mb-4">
+                      <div className={`w-10 h-10 md:w-11 md:h-11 lg:w-14 lg:h-14 rounded-lg lg:rounded-xl bg-gradient-to-br ${stage.color} flex items-center justify-center flex-shrink-0 shadow-lg ${isActive ? 'animate-pulse' : ''}`}>
+                        <Icon className="w-5 h-5 md:w-5.5 md:h-5.5 lg:w-7 lg:h-7 text-white" />
                       </div>
                       
                       <div className="flex-1">
-                        <h3 className="text-base lg:text-xl font-bold mb-1 leading-tight">{stage.name}</h3>
-                        <p className="text-xs lg:text-sm text-muted-foreground">{stage.dates}</p>
+                        <h3 className="text-sm md:text-base lg:text-xl font-bold mb-0.5 md:mb-1 leading-tight">{stage.name}</h3>
+                        <p className="text-[10px] md:text-xs lg:text-sm text-muted-foreground">{stage.dates}</p>
                       </div>
                     </div>
 
                     {/* Discount - Prominent */}
-                    <div className="text-center mb-3 lg:mb-4">
-                      <div className={`text-4xl lg:text-3xl font-bold bg-gradient-to-br ${stage.color} bg-clip-text text-transparent`}>
+                    <div className="text-center mb-2 md:mb-2.5 lg:mb-4">
+                      <div className={`text-3xl md:text-3xl lg:text-3xl font-bold bg-gradient-to-br ${stage.color} bg-clip-text text-transparent`}>
                         {stage.discount}
                       </div>
                     </div>
 
                      {/* Codes - Only show for Black Friday tiers */}
-                    <div className="space-y-2 lg:space-y-3">
-                      {stage.codes && stage.codes.length > 0 ? <div className="space-y-2 lg:space-y-2.5">
-                          <div className="flex items-center gap-1.5 mb-1">
-                            <Badge variant="outline" className="text-[10px] lg:text-xs px-1.5 lg:px-2 py-0.5">
+                    <div className="space-y-1.5 md:space-y-2 lg:space-y-3">
+                      {stage.codes && stage.codes.length > 0 ? <div className="space-y-1.5 md:space-y-2 lg:space-y-2.5">
+                          <div className="flex items-center gap-1 mb-0.5">
+                            <Badge variant="outline" className="text-[9px] md:text-[10px] lg:text-xs px-1 md:px-1.5 lg:px-2 py-0.5">
                               Códigos
                             </Badge>
                           </div>
-                          {stage.codes.map(codeObj => <div key={codeObj.code} className={`bg-background/50 border-2 rounded-lg p-2 lg:p-3 ${codeObj.urgency === 'high' ? 'border-red-500/30' : codeObj.urgency === 'medium' ? 'border-orange-500/30' : 'border-primary/30'}`}>
-                              <div className="flex items-center gap-2 mb-1.5">
-                                <Badge variant={codeObj.urgency === 'high' ? 'destructive' : 'secondary'} className="text-[10px] lg:text-sm px-1.5 lg:px-2.5 py-0.5 lg:py-1">
+                          {stage.codes.map(codeObj => <div key={codeObj.code} className={`bg-background/50 border-2 rounded-md md:rounded-lg p-1.5 md:p-2 lg:p-3 ${codeObj.urgency === 'high' ? 'border-red-500/30' : codeObj.urgency === 'medium' ? 'border-orange-500/30' : 'border-primary/30'}`}>
+                              <div className="flex items-center gap-1.5 md:gap-2 mb-1 md:mb-1.5">
+                                <Badge variant={codeObj.urgency === 'high' ? 'destructive' : 'secondary'} className="text-[9px] md:text-[10px] lg:text-sm px-1 md:px-1.5 lg:px-2.5 py-0.5 lg:py-1">
                                   {codeObj.discount}
                                 </Badge>
-                                <span className="text-[10px] lg:text-sm text-muted-foreground">{codeObj.limit}</span>
+                                <span className="text-[9px] md:text-[10px] lg:text-sm text-muted-foreground">{codeObj.limit}</span>
                               </div>
-                              <div className="flex items-center gap-2">
-                                <span className="flex-1 font-mono text-xs lg:text-sm font-bold">
+                              <div className="flex items-center gap-1.5 md:gap-2">
+                                <span className="flex-1 font-mono text-[10px] md:text-xs lg:text-sm font-bold">
                                   {codeObj.code}
                                 </span>
-                                <Button size="icon" variant="ghost" className="h-7 w-7 lg:h-8 lg:w-8 p-0 shrink-0" onClick={() => copyCode(codeObj.code)}>
-                                  {copiedCode === codeObj.code ? <Check className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-green-500" /> : <Copy className="w-3.5 h-3.5 lg:w-4 lg:h-4" />}
+                                <Button size="icon" variant="ghost" className="h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 p-0 shrink-0" onClick={() => copyCode(codeObj.code)}>
+                                  {copiedCode === codeObj.code ? <Check className="w-3 h-3 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 text-green-500" /> : <Copy className="w-3 h-3 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4" />}
                                 </Button>
                               </div>
                             </div>)}
-                        </div> : <div className="bg-green-500/10 rounded-lg p-2.5 lg:p-4 border border-green-500/20">
-                          <div className="flex items-center justify-center gap-1.5">
-                            <Check className="w-4 h-4 lg:w-4 lg:h-4 text-green-600 dark:text-green-400" />
-                            <span className="text-xs lg:text-sm font-semibold text-green-700 dark:text-green-300">
+                        </div> : <div className="bg-green-500/10 rounded-md md:rounded-lg p-2 md:p-2.5 lg:p-4 border border-green-500/20">
+                          <div className="flex items-center justify-center gap-1 md:gap-1.5">
+                            <Check className="w-3.5 h-3.5 md:w-4 md:h-4 lg:w-4 lg:h-4 text-green-600 dark:text-green-400" />
+                            <span className="text-[11px] md:text-xs lg:text-sm font-semibold text-green-700 dark:text-green-300">
                               Auto
                             </span>
                           </div>
                         </div>}
                       
                       {/* GWP - Gift With Purchase Block */}
-                      {stage.gwp && <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-lg p-2.5 lg:p-3 border border-pink-500/30">
-                          <div className="flex items-center gap-2.5 lg:gap-3">
-                            <div className="relative w-14 h-14 lg:w-12 lg:h-12 rounded-lg overflow-hidden flex-shrink-0 border-2 border-pink-200/50 dark:border-pink-500/30 shadow-sm">
+                      {stage.gwp && <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-md md:rounded-lg p-2 md:p-2.5 lg:p-3 border border-pink-500/30">
+                          <div className="flex items-center gap-2 md:gap-2.5 lg:gap-3">
+                            <div className="relative w-10 h-10 md:w-12 md:h-12 lg:w-12 lg:h-12 rounded-md md:rounded-lg overflow-hidden flex-shrink-0 border border-pink-200/50 dark:border-pink-500/30 shadow-sm">
                               <img src={gwpImage} alt={gwpConfig.giftName} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-1 mb-0.5">
-                                <Gift className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-pink-600 dark:text-pink-400" />
-                                <span className="text-xs lg:text-sm font-bold text-pink-700 dark:text-pink-300">
+                              <div className="flex items-center gap-0.5 md:gap-1">
+                                <Gift className="w-3 h-3 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 text-pink-600 dark:text-pink-400" />
+                                <span className="text-[10px] md:text-xs lg:text-sm font-bold text-pink-700 dark:text-pink-300">
                                   Regalo €70+
                                 </span>
                               </div>
-                              <p className="text-[11px] lg:text-sm text-muted-foreground leading-tight">
-                                Banda de pelo premium
-                              </p>
                             </div>
                           </div>
                         </div>}
