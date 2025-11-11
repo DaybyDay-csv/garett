@@ -70,6 +70,6 @@ export const getActiveBanners = (forCarousel = true): string[] => {
 export const gwpConfig = {
   threshold: 70,
   giftName: "Banda de pelo premium",
-  giftImage: "/src/assets/gwp-headband.jpg",
+  giftImage: "/src/assets/gwp-headband.png",
   conditions: "En compras desde €70",
 };

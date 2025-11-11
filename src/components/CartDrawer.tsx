@@ -14,7 +14,7 @@ import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Gift, Sparkle
 import { useCartStore } from "@/stores/cartStore";
 import { getCurrentPromotionalStage } from "@/lib/promotions";
 import { toast } from "sonner";
-import gwpHeadband from "@/assets/gwp-headband.jpg";
+import gwpHeadband from "@/assets/gwp-headband.png";
 
 export const CartDrawer = () => {
   const { 

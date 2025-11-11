@@ -9,7 +9,7 @@ import { Zap, Timer, Gift, Copy, Check, Flame, AlertCircle, Clock } from "lucide
 import { toast } from "sonner";
 import { promotionalStages, getCurrentPromotionalStage } from "@/lib/promotions";
 import { gwpConfig } from "@/lib/bannerConfig";
-import gwpImage from "@/assets/gwp-headband.jpg";
+import gwpImage from "@/assets/gwp-headband.png";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 interface TimeLeft {
   days: number;

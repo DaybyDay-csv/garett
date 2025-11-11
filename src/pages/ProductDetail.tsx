@@ -12,7 +12,7 @@ import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, Zoom
 import { calculatePromotionalPrice, formatPrice, getCurrentPromotionalStage } from "@/lib/promotions";
 import { getProductContent, detectProductCategory } from "@/lib/productContent";
 import * as LucideIcons from "lucide-react";
-import gwpHeadband from "@/assets/gwp-headband.jpg";
+import gwpHeadband from "@/assets/gwp-headband.png";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
