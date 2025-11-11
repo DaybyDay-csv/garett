@@ -5,6 +5,7 @@ import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import garettIcon from "@/assets/garett-icon-white.png";
 import garettLogo from "@/assets/garett-logo-white.png";
+import garettIsotipo from "@/assets/garett-isotipo-white.png";
 export const Header = () => {
   const navLinks = [{
     label: 'Inicio',
@@ -22,8 +23,10 @@ export const Header = () => {
   return <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-[#1a1f3a]/95 backdrop-blur supports-[backdrop-filter]:bg-[#1a1f3a]/90 shadow-sm">
       <div className="container flex h-20 items-center justify-between">
         <Link to="/" className="flex items-center gap-3">
-          
-          <img src={garettLogo} alt="GARETT" className="h-8 object-contain" />
+          {/* Mobile: isotipo (icon only) */}
+          <img src={garettIsotipo} alt="GARETT" className="h-8 object-contain md:hidden" />
+          {/* Desktop: full logo */}
+          <img src={garettLogo} alt="GARETT" className="hidden md:block h-8 object-contain" />
         </Link>
         
         {/* Desktop Navigation */}
