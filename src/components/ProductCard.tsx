@@ -112,8 +112,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           {node.title}
         </h3>
         
+        {/* Description hidden on all screens */}
         {node.description && (
-          <p className="hidden md:block text-sm text-muted-foreground line-clamp-2 mb-3">
+          <p className="hidden text-sm text-muted-foreground line-clamp-2 mb-3">
             {node.description}
           </p>
         )}
