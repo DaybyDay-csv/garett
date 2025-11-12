@@ -76,10 +76,7 @@ export const GWPBanner = () => {
             </Button>
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline" size="lg" className="text-sm md:text-base h-12 px-8 w-full sm:w-auto max-w-xs">
-                  <Info className="w-4 h-4 mr-2" />
-                  Ver condiciones
-                </Button>
+                
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
