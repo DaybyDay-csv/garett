@@ -237,11 +237,11 @@ export const Footer = () => {
             />
             <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-primary-foreground/60">
               <span className="flex items-center gap-1">
-                🔔 Alertas
+                Alertas
               </span>
               <span>•</span>
               <span className="flex items-center gap-1">
-                🎁 Ofertas exclusivas
+                Ofertas exclusivas
               </span>
             </div>
           </div>

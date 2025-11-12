@@ -59,7 +59,7 @@ export const AnnouncementBar = () => {
     blackFriday: {
       text:
         currentStage?.name === "Black Friday"
-          ? `🔥 BLACK FRIDAY EN VIVO: Hasta ${currentStage.baseDiscount}% de descuento + Regalo gratis`
+          ? `BLACK FRIDAY EN VIVO: Hasta ${currentStage.baseDiscount}% de descuento + Regalo gratis`
           : "Black Friday: HASTA 50% de DESCUENTO + Regalo gratis (28-30 Nov)",
       link: "/black-friday",
       icon: Flame,
