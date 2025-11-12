@@ -95,8 +95,7 @@ export const WhiteWeekBanner = () => {
 
           <NewsletterCTA 
             variant="inline"
-            text="🔔 Recibe notificaciones de nuevas etapas"
-            className="text-muted-foreground hover:text-foreground text-xs md:text-sm block"
+            text="Recibe las ofertas"
           />
 
           {/* Countdown if active */}

@@ -195,8 +195,7 @@ export const BlackFridayBanner = () => {
 
           <NewsletterCTA
             variant="inline"
-            text="Recibe alertas de cada etapa"
-            className="text-white/70 hover:text-white text-xs md:text-sm block"
+            text="Recibe las ofertas"
           />
 
           {isActive && <p className="text-xs md:text-sm text-white/80"></p>}
