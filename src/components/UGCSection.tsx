@@ -23,7 +23,7 @@ const ugcContent: UGCItem[] = [
     src: ugc1,
     name: "Laura M.",
     handle: "@laura.beauty",
-    caption: "Mi masajeador favorito 💆‍♀️",
+    caption: "Mi masajeador favorito",
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const ugcContent: UGCItem[] = [
     src: "/videos/ugc-video-1.mov",
     name: "Ana S.",
     handle: "@ana.skincare",
-    caption: "Rutina diaria ✨",
+    caption: "Rutina diaria",
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const ugcContent: UGCItem[] = [
     src: ugc3,
     name: "Carmen R.",
     handle: "@carmen.glow",
-    caption: "LED therapy en casa 💚",
+    caption: "LED therapy en casa",
   },
   {
     id: 4,
@@ -63,7 +63,7 @@ const ugcContent: UGCItem[] = [
     src: ugc5,
     name: "Paula L.",
     handle: "@paula.wellness",
-    caption: "Mi momento de relax 🌅",
+    caption: "Mi momento de relax",
   },
   {
     id: 7,
@@ -79,7 +79,7 @@ const ugcContent: UGCItem[] = [
     src: ugc2,
     name: "Rosa M.",
     handle: "@rosa.beauty",
-    caption: "Mis esenciales 💕",
+    caption: "Mis esenciales",
   },
 ];
 export const UGCSection = () => {

@@ -276,7 +276,7 @@ export const CartDrawer = () => {
                   {currentStage?.code && (
                     <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-lg p-3">
                       <p className="text-xs text-green-800 dark:text-green-200 font-semibold mb-1">
-                        💎 Código de descuento activo
+                        Código de descuento activo
                       </p>
                       <div className="flex items-center justify-between gap-2">
                         <code className="text-sm font-bold text-green-900 dark:text-green-100 bg-white dark:bg-green-950 px-3 py-1 rounded border border-green-300 dark:border-green-700">
@@ -312,7 +312,7 @@ export const CartDrawer = () => {
                   {totalSavings > 0 && (
                     <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200 dark:border-green-800 rounded-lg p-3 text-center">
                       <p className="text-sm font-bold text-green-700 dark:text-green-300">
-                        🎉 ¡Ahorras €{totalSavings.toFixed(2)} en esta compra!
+                        ¡Ahorras €{totalSavings.toFixed(2)} en esta compra!
                       </p>
                       {hasUnlockedGWP && (
                         <p className="text-xs text-green-600 dark:text-green-400 mt-1">
@@ -343,8 +343,8 @@ export const CartDrawer = () => {
                 </Button>
                 
                 <div className="text-xs text-muted-foreground text-center space-y-1">
-                  <p>✓ Devoluciones 30 días</p>
-                  <p>✓ Garantía 3 años</p>
+                  <p>Devoluciones 30 días</p>
+                  <p>Garantía 3 años</p>
                 </div>
               </div>
             </>
