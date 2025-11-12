@@ -123,7 +123,9 @@ export const AeroGlowBanner = () => {
               </Link>
             </div>
 
-            <NewsletterCTA variant="inline" text="🔔 Notifícame de ofertas exclusivas" className="text-muted-foreground hover:text-foreground text-sm md:text-base text-center lg:text-left px-2" />
+            <div className="flex justify-center lg:justify-start px-2">
+              <NewsletterCTA variant="inline" text="Recibe las ofertas" />
+            </div>
 
             {/* Trust Indicators */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 md:gap-6 pt-3 text-xs md:text-sm px-2">
@@ -223,7 +225,7 @@ export const AeroGlowBanner = () => {
             <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-base md:text-lg h-12 md:h-14 px-10 md:px-12 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-xl hover:shadow-2xl transition-all text-white rounded-lg font-semibold cursor-pointer relative z-20">Consigue tu AeroGlow<ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-2 transition-transform" />
             </Link>
             
-            <NewsletterCTA variant="inline" text="🔔 Quiero ofertas exclusivas" className="text-muted-foreground hover:text-foreground text-sm md:text-base block" />
+            <NewsletterCTA variant="inline" text="Recibe las ofertas" />
             
             <p className="text-xs md:text-sm text-muted-foreground mt-3">
               ⚡ Últimas unidades disponibles • Envío gratis en 24-48h
