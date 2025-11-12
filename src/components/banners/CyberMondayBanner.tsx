@@ -137,14 +137,12 @@ export const CyberMondayBanner = () => {
         </div>
 
         {/* CTA */}
-        <div className="pt-2 space-y-2">
+        <div className="pt-2 space-y-3 flex flex-col items-center">
           <Button asChild size="lg" variant="secondary" className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 shadow-2xl hover:scale-105 transition-transform w-full sm:w-auto max-w-xs">
             <Link to="/black-friday">Ver ofertas Cyber Monday</Link>
           </Button>
 
           <NewsletterCTA variant="inline" text="Recibe las ofertas" />
-
-          
         </div>
       </div>
     </div>;
