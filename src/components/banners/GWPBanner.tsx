@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import gwpImage from "@/assets/gwp-headband.png";
 import patternImage from "@/assets/garett-pattern-2.png";
 import { gwpConfig } from "@/lib/bannerConfig";
+import { NewsletterCTA } from "@/components/NewsletterCTA";
 export const GWPBanner = () => {
   return <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-gwp via-background to-promo-gwp overflow-hidden">
       {/* Pattern overlay */}
@@ -61,8 +62,8 @@ export const GWPBanner = () => {
           {/* Visual Benefits */}
           
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-2">
-            <Button size="lg" className="text-sm md:text-base h-12 px-8 w-full sm:w-auto" onClick={() => {
+          <div className="flex flex-col gap-3 items-center pt-2">
+            <Button size="lg" className="text-sm md:text-base h-12 px-8 w-full sm:w-auto max-w-xs" onClick={() => {
             const element = document.getElementById('superventas');
             if (element) {
               element.scrollIntoView({
@@ -75,7 +76,7 @@ export const GWPBanner = () => {
             </Button>
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline" size="lg" className="text-sm md:text-base h-12 px-8 w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="text-sm md:text-base h-12 px-8 w-full sm:w-auto max-w-xs">
                   <Info className="w-4 h-4 mr-2" />
                   Ver condiciones
                 </Button>
@@ -100,6 +101,7 @@ export const GWPBanner = () => {
                 </DialogHeader>
               </DialogContent>
             </Dialog>
+            <NewsletterCTA variant="inline" text="Recibe las ofertas" />
           </div>
         </div>
       </div>

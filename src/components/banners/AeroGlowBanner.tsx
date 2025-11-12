@@ -113,17 +113,14 @@ export const AeroGlowBanner = () => {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start pt-2 relative z-20 px-2">
-              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-sm md:text-base h-12 md:h-14 px-8 md:px-10 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-xl hover:shadow-2xl transition-all text-white border-0 rounded-lg font-semibold cursor-pointer">
+            <div className="flex flex-col gap-3 md:gap-4 items-center lg:items-start pt-2 relative z-20 px-2">
+              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-sm md:text-base h-12 md:h-14 px-8 md:px-10 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-xl hover:shadow-2xl transition-all text-white border-0 rounded-lg font-semibold cursor-pointer w-full sm:w-auto max-w-xs">
                 Comprar Ahora
                 <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center text-sm md:text-base h-12 md:h-14 px-8 md:px-10 border-2 border-[#8B6F47] text-[#5D4037] dark:text-[#D7B896] hover:bg-[#8B6F47]/10 rounded-lg font-semibold transition-colors cursor-pointer bg-background">
+              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center text-sm md:text-base h-12 md:h-14 px-8 md:px-10 border-2 border-[#8B6F47] text-[#5D4037] dark:text-[#D7B896] hover:bg-[#8B6F47]/10 rounded-lg font-semibold transition-colors cursor-pointer bg-background w-full sm:w-auto max-w-xs">
                 Ver Detalles
               </Link>
-            </div>
-
-            <div className="flex justify-center lg:justify-start px-2">
               <NewsletterCTA variant="inline" text="Recibe las ofertas" />
             </div>
 
@@ -221,8 +218,8 @@ export const AeroGlowBanner = () => {
           </div>
 
           {/* Final CTA */}
-          <div className="text-center mt-6 md:mt-10 relative z-20 space-y-3 px-4">
-            <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-base md:text-lg h-12 md:h-14 px-10 md:px-12 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-xl hover:shadow-2xl transition-all text-white rounded-lg font-semibold cursor-pointer relative z-20">Consigue tu AeroGlow<ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-2 transition-transform" />
+          <div className="text-center mt-6 md:mt-10 relative z-20 space-y-3 px-4 flex flex-col items-center">
+            <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-base md:text-lg h-12 md:h-14 px-10 md:px-12 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-xl hover:shadow-2xl transition-all text-white rounded-lg font-semibold cursor-pointer relative z-20 w-full sm:w-auto max-w-xs">Consigue tu AeroGlow<ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-2 transition-transform" />
             </Link>
             
             <NewsletterCTA variant="inline" text="Recibe las ofertas" />

@@ -80,7 +80,7 @@ export const WhiteWeekBanner = () => {
         </div>
 
         {/* CTA */}
-        <div className="pt-2 space-y-2">
+        <div className="pt-2 space-y-3 flex flex-col items-center">
           <Button size="lg" className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 w-full sm:w-auto max-w-xs" onClick={() => {
           const element = document.getElementById('superventas');
           if (element) {

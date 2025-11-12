@@ -183,7 +183,7 @@ export const BlackFridayBanner = () => {
         </div>
 
         {/* CTA */}
-        <div className="space-y-2 md:space-y-3 pt-2">
+        <div className="space-y-3 flex flex-col items-center pt-2">
           <Button
             asChild
             size="lg"
