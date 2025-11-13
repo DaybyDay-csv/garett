@@ -51,13 +51,6 @@ const Products = () => {
   useEffect(() => {
     let filtered = [...products];
 
-    // Category filter
-    if (categoryFilter !== "all") {
-      filtered = filtered.filter(p => 
-        p.node.tags.some(tag => tag.includes(`category:${categoryFilter}`))
-      );
-    }
-
     // Sorting
     if (sortBy === "price-asc") {
       filtered.sort((a, b) => 
@@ -72,10 +65,9 @@ const Products = () => {
     }
 
     setFilteredProducts(filtered);
-  }, [categoryFilter, sortBy, products]);
+  }, [sortBy, products]);
 
   const categories = [
-    { value: "all", label: "Todos" },
     { value: "capilar", label: "Cuidado capilar" },
     { value: "masajeadores-faciales", label: "Masajeadores faciales" },
     { value: "limpieza-facial", label: "Limpieza facial" },
@@ -83,6 +75,14 @@ const Products = () => {
     { value: "corporales", label: "Dispositivos corporales" },
     { value: "ipl", label: "Depilación e IPL" },
   ];
+
+  // Group products by category
+  const productsByCategory = categories.map(category => ({
+    ...category,
+    products: filteredProducts.filter(p => 
+      p.node.tags.some(tag => tag.includes(`category:${category.value}`))
+    )
+  })).filter(cat => cat.products.length > 0);
 
   return (
     <div className="min-h-screen bg-background">
@@ -96,24 +96,8 @@ const Products = () => {
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8 p-4 bg-card rounded-lg border">
-          <div className="flex items-center gap-2 flex-1">
-            <Filter className="w-5 h-5 text-muted-foreground" />
-            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger className="w-full sm:w-[250px]">
-                <SelectValue placeholder="Categoría" />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((cat) => (
-                  <SelectItem key={cat.value} value={cat.value}>
-                    {cat.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
+        {/* Sorting */}
+        <div className="flex justify-end mb-8">
           <Select value={sortBy} onValueChange={setSortBy}>
             <SelectTrigger className="w-full sm:w-[200px]">
               <SelectValue placeholder="Ordenar por" />
@@ -124,18 +108,6 @@ const Products = () => {
               <SelectItem value="price-desc">Precio: Mayor a menor</SelectItem>
             </SelectContent>
           </Select>
-
-          {(categoryFilter !== "all" || sortBy !== "default") && (
-            <Button
-              variant="outline"
-              onClick={() => {
-                setCategoryFilter("all");
-                setSortBy("default");
-              }}
-            >
-              Limpiar filtros
-            </Button>
-          )}
         </div>
 
         {/* Products Grid */}
@@ -148,23 +120,21 @@ const Products = () => {
           <div className="py-20 text-center">
             <ShoppingBag className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-2xl font-bold mb-2">No hay productos</h3>
-            <p className="text-muted-foreground">
-              {categoryFilter !== "all" 
-                ? "No se encontraron productos en esta categoría" 
-                : "Estamos preparando nuestro catálogo"}
-            </p>
+            <p className="text-muted-foreground">Estamos preparando nuestro catálogo</p>
           </div>
         ) : (
-          <>
-            <p className="text-sm text-muted-foreground mb-4">
-              Mostrando {filteredProducts.length} producto{filteredProducts.length !== 1 ? 's' : ''}
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-              {filteredProducts.map((product) => (
-                <ProductCard key={product.node.id} product={product} />
-              ))}
-            </div>
-          </>
+          <div className="space-y-12">
+            {productsByCategory.map((category) => (
+              <div key={category.value}>
+                <h2 className="text-2xl font-bold mb-6 pb-2 border-b">{category.label}</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                  {category.products.map((product) => (
+                    <ProductCard key={product.node.id} product={product} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         )}
       </div>
 
