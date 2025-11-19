@@ -8,7 +8,8 @@ import { Progress } from "@/components/ui/progress";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
-import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, ZoomIn, Maximize2, ChevronDown, Clock, Award, Sparkle, Zap, Droplets, Activity, Battery, Package, Lock, Calendar } from "lucide-react";
+import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, ZoomIn, Maximize2, ChevronDown, Clock, Award, Sparkle, Zap, Droplets, Activity, Battery, Package, Lock, Calendar, AlertTriangle } from "lucide-react";
+import { CountdownTimer } from "@/components/CountdownTimer";
 import { calculatePromotionalPrice, formatPrice, getCurrentPromotionalStage } from "@/lib/promotions";
 import { getProductContent, detectProductCategory } from "@/lib/productContent";
 import * as LucideIcons from "lucide-react";
@@ -80,6 +81,9 @@ const ProductDetail = () => {
   
   // Check if this is the AeroGlow product (Black Friday event)
   const isAeroGlow = node.handle.includes('aeroglow') || node.title.toLowerCase().includes('aeroglow');
+  
+  // Black Friday unlock date
+  const unlockDate = new Date('2025-11-28T00:00:00');
   
   // Special Black Friday pricing for AeroGlow
   let priceInfo;
@@ -361,18 +365,38 @@ const ProductDetail = () => {
 
             {/* Add to Cart */}
             {isAeroGlow ? (
-              <div className="space-y-3">
+              <div className="space-y-4">
                 <Button
                   size="lg"
-                  className="w-full bg-gradient-to-r from-gray-700 to-gray-800 text-gray-400 cursor-not-allowed border border-red-900/30"
+                  className="w-full bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 text-gray-500 cursor-not-allowed border-2 border-red-600/30 hover:border-red-600/50 transition-all relative overflow-hidden group"
                   disabled
                 >
-                  <Lock className="w-5 h-5 mr-2" />
-                  Producto Bloqueado
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-950/0 via-red-950/20 to-red-950/0 animate-pulse" />
+                  <Lock className="w-5 h-5 mr-2 relative z-10 group-hover:scale-110 transition-transform" />
+                  <span className="relative z-10 font-bold">PRODUCTO BLOQUEADO</span>
                 </Button>
-                <div className="text-center bg-red-950/30 border border-red-600/30 rounded-lg p-4">
-                  <p className="text-white font-semibold mb-1">🔥 Se desbloquea en Black Friday</p>
-                  <p className="text-gray-400 text-sm">28 de Noviembre - 50% OFF exclusivo</p>
+                
+                <div className="relative bg-gradient-to-br from-red-950/40 via-red-900/30 to-pink-950/40 border-2 border-red-600/40 rounded-xl p-6 overflow-hidden backdrop-blur-sm">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(239,68,68,0.1),transparent_70%)]" />
+                  <div className="relative space-y-4">
+                    <div className="flex items-center justify-center gap-2 mb-2">
+                      <Zap className="w-6 h-6 text-red-500 animate-pulse" />
+                      <p className="text-white font-bold text-lg">SE DESBLOQUEA EN BLACK FRIDAY</p>
+                      <Zap className="w-6 h-6 text-red-500 animate-pulse" />
+                    </div>
+                    
+                    <div className="flex items-center justify-center gap-2 text-gray-300">
+                      <Calendar className="w-4 h-4 text-red-500" />
+                      <p className="text-sm">28 de Noviembre 2025</p>
+                    </div>
+                    
+                    <CountdownTimer targetDate={unlockDate} />
+                    
+                    <div className="text-center pt-2 border-t border-red-600/30">
+                      <p className="text-red-400 font-bold text-xl animate-pulse">50% OFF EXCLUSIVO</p>
+                      <p className="text-gray-400 text-xs mt-1">Stock limitado - primer llegado, primer servido</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             ) : (
