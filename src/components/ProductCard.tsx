@@ -101,7 +101,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           {/* Right side badge - Only show if no promotional badge */}
           {!priceInfo.hasDiscount && (
             <Badge variant="outline" className="bg-background/80 backdrop-blur-sm text-xs">
-              Garantía 3 años
+              Garantía 24 meses
             </Badge>
           )}
         </div>

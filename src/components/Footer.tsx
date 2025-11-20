@@ -167,12 +167,12 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a 
-                  href="#" 
+                <Link 
+                  to="/garantia" 
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                 >
-                  Política de devoluciones
-                </a>
+                  Garantía y devoluciones
+                </Link>
               </li>
               <li>
                 <a 
@@ -256,7 +256,7 @@ export const Footer = () => {
             <div className="flex items-center gap-4">
               <span className="text-xs">Certificado CE</span>
               <span className="text-xs">•</span>
-              <span className="text-xs">Garantía 3 años</span>
+              <span className="text-xs">Garantía 24 meses</span>
               <span className="text-xs">•</span>
               <span className="text-xs">Pago seguro SSL</span>
             </div>

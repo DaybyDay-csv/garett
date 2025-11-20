@@ -12,6 +12,7 @@ import ProductDetail from "./pages/ProductDetail";
 import BlackFriday from "./pages/BlackFriday";
 import NewArrivals from "./pages/NewArrivals";
 import Superventas from "./pages/Superventas";
+import WarrantyPolicy from "./pages/WarrantyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/black-friday" element={<BlackFriday />} />
           <Route path="/novedades" element={<NewArrivals />} />
           <Route path="/superventas" element={<Superventas />} />
+          <Route path="/garantia" element={<WarrantyPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

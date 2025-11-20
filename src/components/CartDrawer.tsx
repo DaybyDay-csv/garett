@@ -343,8 +343,8 @@ export const CartDrawer = () => {
                 </Button>
                 
                 <div className="text-xs text-muted-foreground text-center space-y-1">
-                  <p>Devoluciones 30 días</p>
-                  <p>Garantía 3 años</p>
+                  <p>Garantía 24 meses</p>
+                  <p>Certificado CE</p>
                 </div>
               </div>
             </>

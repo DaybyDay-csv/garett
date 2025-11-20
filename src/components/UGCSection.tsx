@@ -212,7 +212,7 @@ export const UGCSection = () => {
             que tu rutina sea más eficaz, sencilla y bonita. Hablamos de mesoterapia sin agujas, limpieza sónica o
             masajes tensores en 10 minutos —bienestar inteligente que transforma lo cotidiano. Creemos en el lujo
             accesible: dispositivos con diseño cuidado, resultados visibles y un precio honesto. Y, sobre todo,
-            confianza: certificación CE, 3 años de garantía y el respaldo de grandes retailers como El Corte Inglés.
+            confianza: certificación CE, garantía comercial de 24 meses y el respaldo de grandes retailers como El Corte Inglés.
             Somos esa mezcla de tecnología y belleza en estado puro que te ayuda a verte (y sentirte) mejor cada día,
             sin complicaciones.
           </p>

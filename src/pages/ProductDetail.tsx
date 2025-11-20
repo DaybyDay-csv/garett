@@ -313,7 +313,7 @@ const ProductDetail = () => {
                 {!isAeroGlow && isBestseller && <Badge variant="secondary">Bestseller</Badge>}
                 <Badge variant="outline" className={`gap-1 ${isAeroGlow ? 'border-red-600/30 text-gray-300' : ''}`}>
                   <Shield className="w-3 h-3" />
-                  Garantía 3 años
+                  Garantía 24 meses
                 </Badge>
               </div>
               
@@ -492,8 +492,8 @@ const ProductDetail = () => {
               <div className="flex items-start gap-3">
                 <Shield className={`w-5 h-5 mt-0.5 ${isAeroGlow ? 'text-red-400' : 'text-primary'}`} />
                 <div>
-                  <p className={`font-medium ${isAeroGlow ? 'text-white' : ''}`}>Garantía 3 años</p>
-                  <p className={`text-sm ${isAeroGlow ? 'text-gray-300' : 'text-muted-foreground'}`}>Cobertura completa</p>
+                  <p className={`font-medium ${isAeroGlow ? 'text-white' : ''}`}>Garantía 24 meses</p>
+                  <p className={`text-sm ${isAeroGlow ? 'text-gray-300' : 'text-muted-foreground'}`}>Contra defectos de fabricación</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -506,8 +506,10 @@ const ProductDetail = () => {
               <div className="flex items-start gap-3">
                 <RotateCcw className={`w-5 h-5 mt-0.5 ${isAeroGlow ? 'text-red-400' : 'text-primary'}`} />
                 <div>
-                  <p className={`font-medium ${isAeroGlow ? 'text-white' : ''}`}>Devoluciones 30 días</p>
-                  <p className={`text-sm ${isAeroGlow ? 'text-gray-300' : 'text-muted-foreground'}`}>Sin preguntas</p>
+                  <p className={`font-medium ${isAeroGlow ? 'text-white' : ''}`}>Producto higiénico-sanitario</p>
+                  <Link to="/garantia" className={`text-sm underline ${isAeroGlow ? 'text-gray-300 hover:text-white' : 'text-muted-foreground hover:text-foreground'}`}>
+                    Ver política de devoluciones
+                  </Link>
                 </div>
               </div>
             </div>
@@ -614,15 +616,17 @@ const ProductDetail = () => {
                     <div className="flex items-start gap-2">
                       <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${isAeroGlow ? 'text-green-400' : 'text-green-600'}`} />
                       <div>
-                        <p className={`font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>3 años de garantía</p>
-                        <p>El doble del estándar del mercado</p>
+                        <p className={`font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>24 meses de garantía comercial</p>
+                        <p>Contra defectos de fabricación</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
                       <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${isAeroGlow ? 'text-green-400' : 'text-green-600'}`} />
                       <div>
-                        <p className={`font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>30 días de devolución</p>
-                        <p>Si no estás satisfecha, te devolvemos el dinero</p>
+                        <p className={`font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>Devolución por defecto técnico</p>
+                        <Link to="/garantia" className="text-sm underline hover:text-primary">
+                          Consulta condiciones en política de garantía
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -633,7 +637,7 @@ const ProductDetail = () => {
 
             {/* Trust Footer */}
             <div className={`p-4 rounded-lg text-xs border ${isAeroGlow ? 'bg-red-950/20 border-red-900/30 text-gray-300' : 'bg-muted/30 border text-muted-foreground'}`}>
-              <p>Los resultados pueden variar. Úsalo con constancia para mejores resultados. Certificado CE. Garantía 3 años.</p>
+              <p>Los resultados pueden variar. Úsalo con constancia para mejores resultados. Certificado CE. Garantía comercial 24 meses. Producto higiénico-sanitario: no admite devolución una vez desprecintado salvo defecto técnico verificado.</p>
             </div>
           </div>
         </div>
