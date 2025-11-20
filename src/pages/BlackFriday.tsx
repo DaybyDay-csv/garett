@@ -555,8 +555,8 @@ const BlackFriday = () => {
             <li>• Para Black Friday EXTRA 50-45-35% introduce los códigos a hacer checkout</li>
             <li>• Los códigos EARLYBIRD tienen límite de usos (25 y 10 respectivamente, 1 por cliente)</li>
             <li>• El regalo (banda de pelo premium) se añade automáticamente a tu carrito al superar 70€</li>
-            <li>• Garantía de 3 años en todos los productos</li>
-            <li>• Devoluciones gratuitas durante 30 días</li>
+            <li>• Garantía comercial de 24 meses contra defectos de fabricación</li>
+            <li>• Consulta condiciones de devolución en política de garantía</li>
           </ul>
         </div>
 

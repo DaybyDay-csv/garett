@@ -142,7 +142,7 @@ export const AeroGlowBanner = () => {
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Shield className="w-4 h-4 md:w-5 md:h-5 text-[#8B6F47]" />
-                <span>Garantía 3 años</span>
+                <span>Garantía 24 meses</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Zap className="w-4 h-4 md:w-5 md:h-5 text-[#8B6F47]" />
