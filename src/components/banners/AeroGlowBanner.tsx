@@ -10,6 +10,7 @@ import hairBefore from "@/assets/hair-before.png";
 import hairAfter from "@/assets/hair-after.jpg";
 import patternImage from "@/assets/garett-pattern-1.png";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
+import { VideoPlayer } from "@/components/VideoPlayer";
 export const AeroGlowBanner = () => {
   const [product, setProduct] = useState<ShopifyProduct | null>(null);
   const [loading, setLoading] = useState(true);
@@ -150,16 +151,33 @@ export const AeroGlowBanner = () => {
             </div>
           </div>
 
-          {/* Right - Product Showcase */}
+          {/* Right - Product Showcase with Video */}
           <div className="order-1 lg:order-2 relative">
               <div className="relative max-w-xl mx-auto">
-                {/* Main Product Image */}
+                {/* Main Product Video */}
                 <div className="relative z-10">
                   <div className="absolute -inset-4 md:-inset-6 bg-gradient-to-br from-red-600/20 via-pink-600/20 to-red-500/20 rounded-full blur-2xl" />
-                  <div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl rounded-2xl p-4 md:p-8 shadow-xl border border-red-600/30">
+                  <div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl rounded-2xl p-4 md:p-8 shadow-xl border border-red-600/30 overflow-hidden">
                   {loading ? <div className="aspect-square flex items-center justify-center">
                       <Zap className="w-20 h-20 text-red-500 animate-pulse" />
-                    </div> : <img src={aeroglowHero} alt="AeroGlow Hair Straightener" className="w-full h-full object-contain drop-shadow-2xl animate-fade-in hover:scale-105 transition-transform duration-700" />}
+                    </div> : 
+                    <VideoPlayer
+                      src="/videos/aeroglow-product.mp4"
+                      poster={aeroglowHero}
+                      autoplay={true}
+                      muted={true}
+                      loop={true}
+                      controls={false}
+                      className="drop-shadow-2xl animate-fade-in"
+                      fallback={
+                        <img 
+                          src={aeroglowHero} 
+                          alt="AeroGlow Hair Straightener" 
+                          className="w-full h-full object-contain drop-shadow-2xl animate-fade-in hover:scale-105 transition-transform duration-700" 
+                        />
+                      }
+                    />
+                  }
                 </div>
                 
                 {/* Floating Discount Badge */}

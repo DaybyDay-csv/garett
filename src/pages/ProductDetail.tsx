@@ -17,6 +17,8 @@ import gwpHeadband from "@/assets/gwp-headband.png";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { VideoPlayer } from "@/components/VideoPlayer";
+import { Play } from "lucide-react";
 
 const ProductDetail = () => {
   const { handle } = useParams();
@@ -24,6 +26,7 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedMediaType, setSelectedMediaType] = useState<'image' | 'video'>('image');
   const addItem = useCartStore(state => state.addItem);
   const items = useCartStore(state => state.items);
   
@@ -38,7 +41,16 @@ const ProductDetail = () => {
       try {
         const data = await fetchProducts(100);
         const found = data.find(p => p.node.handle === handle);
-        setProduct(found || null);
+        if (found) {
+          setProduct(found);
+          // For AeroGlow, default to video
+          const isAeroGlowProduct = found.node.handle.toLowerCase().includes('aeroglow');
+          if (isAeroGlowProduct) {
+            setSelectedMediaType('video');
+          }
+        } else {
+          setProduct(null);
+        }
       } catch (error) {
         console.error('Error loading product:', error);
       } finally {
@@ -155,25 +167,50 @@ const ProductDetail = () => {
         </Button>
 
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-          {/* Images - Interactive Gallery */}
+          {/* Images/Video - Interactive Gallery */}
           <div className="space-y-4">
-            {/* Main Image with Zoom */}
+            {/* Main Media Display with Video/Zoom */}
             <div className={`relative aspect-square rounded-lg overflow-hidden group ${isAeroGlow ? 'bg-gray-900/50 ring-2 ring-red-600/30 shadow-2xl shadow-red-950/50' : 'bg-secondary/20'}`}>
-              {node.images.edges[selectedImage]?.node && (
-                <Zoom>
-                  <img
-                    src={node.images.edges[selectedImage].node.url}
-                    alt={node.images.edges[selectedImage].node.altText || node.title}
-                    className="w-full h-full object-cover cursor-zoom-in transition-transform duration-300"
-                  />
-                </Zoom>
+              {/* Display Video or Image based on selection */}
+              {selectedMediaType === 'video' && isAeroGlow ? (
+                <VideoPlayer
+                  src="/videos/aeroglow-product.mp4"
+                  poster={node.images.edges[0]?.node.url}
+                  autoplay={false}
+                  muted={true}
+                  loop={true}
+                  controls={true}
+                  showPlayButton={true}
+                  className="w-full h-full"
+                  fallback={
+                    node.images.edges[selectedImage]?.node && (
+                      <img
+                        src={node.images.edges[selectedImage].node.url}
+                        alt={node.images.edges[selectedImage].node.altText || node.title}
+                        className="w-full h-full object-cover"
+                      />
+                    )
+                  }
+                />
+              ) : (
+                node.images.edges[selectedImage]?.node && (
+                  <Zoom>
+                    <img
+                      src={node.images.edges[selectedImage].node.url}
+                      alt={node.images.edges[selectedImage].node.altText || node.title}
+                      className="w-full h-full object-cover cursor-zoom-in transition-transform duration-300"
+                    />
+                  </Zoom>
+                )
               )}
               
-              {/* Zoom Indicator */}
-              <div className="absolute top-4 right-4 bg-black/60 text-white px-3 py-2 rounded-lg flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ZoomIn className="w-4 h-4" />
-                <span className="text-xs font-medium">Click para ampliar</span>
-              </div>
+              {/* Zoom/Video Indicator */}
+              {selectedMediaType === 'image' && (
+                <div className="absolute top-4 right-4 bg-black/60 text-white px-3 py-2 rounded-lg flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ZoomIn className="w-4 h-4" />
+                  <span className="text-xs font-medium">Click para ampliar</span>
+                </div>
+              )}
               
               {/* Locked overlay for AeroGlow */}
               {isAeroGlow && (
@@ -198,28 +235,55 @@ const ProductDetail = () => {
               )}
             </div>
             
-            {/* Thumbnail Gallery */}
-            {node.images.edges.length > 1 && (
-              <div className="grid grid-cols-5 gap-3">
-                {node.images.edges.map((image, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setSelectedImage(idx)}
-                    className={`aspect-square bg-secondary/20 rounded-lg overflow-hidden border-2 transition-all hover:scale-105 ${
-                      selectedImage === idx 
-                        ? 'border-primary shadow-lg scale-105' 
+            {/* Thumbnail Gallery with Video */}
+            <div className="grid grid-cols-5 gap-3">
+              {/* Video thumbnail for AeroGlow */}
+              {isAeroGlow && (
+                <button
+                  onClick={() => setSelectedMediaType('video')}
+                  className={`relative aspect-square bg-gray-900/50 rounded-lg overflow-hidden border-2 transition-all hover:scale-105 ${
+                    selectedMediaType === 'video'
+                      ? 'border-red-500 shadow-lg shadow-red-500/30 scale-105'
+                      : 'border-red-800/50 opacity-60 hover:opacity-100'
+                  }`}
+                >
+                  <img
+                    src={node.images.edges[0]?.node.url}
+                    alt="Product Video"
+                    className="w-full h-full object-cover opacity-50"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                    <Play className="w-6 h-6 text-white fill-white drop-shadow-lg" />
+                  </div>
+                </button>
+              )}
+              
+              {/* Image thumbnails */}
+              {node.images.edges.map((image, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    setSelectedImage(idx);
+                    setSelectedMediaType('image');
+                  }}
+                  className={`aspect-square bg-secondary/20 rounded-lg overflow-hidden border-2 transition-all hover:scale-105 ${
+                    selectedMediaType === 'image' && selectedImage === idx 
+                      ? isAeroGlow 
+                        ? 'border-red-500 shadow-lg shadow-red-500/30 scale-105'
+                        : 'border-primary shadow-lg scale-105' 
+                      : isAeroGlow
+                        ? 'border-red-800/50 opacity-60 hover:opacity-100'
                         : 'border-transparent hover:border-primary/50'
-                    }`}
-                  >
-                    <img
-                      src={image.node.url}
-                      alt={image.node.altText || `${node.title} ${idx + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
-            )}
+                  } ${isAeroGlow ? 'bg-gray-900/30' : ''}`}
+                >
+                  <img
+                    src={image.node.url}
+                    alt={image.node.altText || `${node.title} - ${idx + 1}`}
+                    className={`w-full h-full object-cover ${isAeroGlow ? 'opacity-70' : ''}`}
+                  />
+                </button>
+              ))}
+            </div>
             
             {/* Trust Indicators Below Images */}
             <div className="bg-muted/30 rounded-lg p-4 space-y-2">
