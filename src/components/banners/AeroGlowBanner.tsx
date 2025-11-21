@@ -155,34 +155,12 @@ export const AeroGlowBanner = () => {
                   <div className="relative bg-gray-900/90 rounded-2xl p-4 md:p-8 border border-red-600/30 overflow-hidden">
                   {loading ? <div className="aspect-square flex items-center justify-center">
                       <Zap className="w-20 h-20 text-red-500 animate-pulse" />
-                    </div> : 
-                      <VideoPlayer
-                      src="/videos/aeroglow-product.mp4"
-                      poster={aeroglowHero}
-                      autoplay={true}
-                      muted={true}
-                      loop={true}
-                      controls={false}
-                      className="animate-fade-in"
-                      fallback={
-                        <img 
-                          src={aeroglowHero} 
-                          alt="AeroGlow Hair Straightener" 
-                          className="w-full h-full object-contain animate-fade-in"
-                        />
-                      }
-                    />
-                  }
+                    </div> : <VideoPlayer src="/videos/aeroglow-product.mp4" poster={aeroglowHero} autoplay={true} muted={true} loop={true} controls={false} className="animate-fade-in" fallback={<img src={aeroglowHero} alt="AeroGlow Hair Straightener" className="w-full h-full object-contain animate-fade-in" />} />}
                 </div>
                 
                 {/* Floating Discount Badge */}
                 <div className="absolute -top-4 -right-4 md:-top-5 md:-right-5 z-20">
-                  <div className="relative">
-                    <div className="relative bg-red-500 text-white rounded-full w-16 h-16 md:w-20 md:h-20 flex flex-col items-center justify-center border-2 md:border-3 border-white dark:border-gray-900 font-bold animate-bounce">
-                      <span className="text-lg md:text-2xl">-50%</span>
-                      <span className="text-[10px]">OFF</span>
-                    </div>
-                  </div>
+                  
                 </div>
               </div>
             </div>
