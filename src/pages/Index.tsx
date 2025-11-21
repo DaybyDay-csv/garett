@@ -6,6 +6,7 @@ import { TrustBadges } from "@/components/TrustBadges";
 import { Testimonials } from "@/components/Testimonials";
 import { UGCSection } from "@/components/UGCSection";
 import { PromotionalBanners } from "@/components/PromotionalBanners";
+import { OptimizedImage } from "@/components/OptimizedImage";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -92,11 +93,11 @@ const Index = () => {
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
             {/* Cuidado Capilar */}
             <Link to="/productos?category=capilar" className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <img 
+                  <OptimizedImage
                     src={categoryCuidadoCapilar} 
-                    alt="Cuidado capilar"
+                    alt="Cuidado capilar - Dispositivos profesionales para el cabello"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -117,11 +118,11 @@ const Index = () => {
 
             {/* Masajeadores Faciales */}
             <Link to="/productos?category=masajeadores-faciales" className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <img 
+                  <OptimizedImage
                     src={categoryMasajeadoresFaciales} 
-                    alt="Masajeadores faciales"
+                    alt="Masajeadores faciales - Estimulación facial avanzada"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -142,11 +143,11 @@ const Index = () => {
 
             {/* Limpieza Facial */}
             <Link to="/productos?category=limpieza-facial" className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <img 
+                  <OptimizedImage
                     src={categoryLimpiezaFacial} 
-                    alt="Limpieza facial"
+                    alt="Limpieza facial - Limpieza profunda profesional"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -167,11 +168,11 @@ const Index = () => {
 
             {/* Dispositivos de Mesoterapia */}
             <Link to="/productos?category=mesoterapia" className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <img 
+                  <OptimizedImage
                     src={categoryMesoterapia} 
-                    alt="Dispositivos de Mesoterapia"
+                    alt="Dispositivos de Mesoterapia - Tratamientos de rejuvenecimiento"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -192,11 +193,11 @@ const Index = () => {
 
             {/* Dispositivos Corporales */}
             <Link to="/productos?category=corporales" className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <img 
+                  <OptimizedImage
                     src={categoryCorporales} 
-                    alt="Dispositivos corporales"
+                    alt="Dispositivos corporales - Tratamientos para todo el cuerpo"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -217,11 +218,11 @@ const Index = () => {
 
             {/* Depilación e IPL */}
             <Link to="/productos?category=ipl" className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-xl">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <img 
+                  <OptimizedImage
                     src={categoryDepilacionIPL} 
-                    alt="Depilación e IPL"
+                    alt="Depilación e IPL - Depilación permanente profesional"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
