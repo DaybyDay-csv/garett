@@ -36,7 +36,7 @@ export const CyberMondayBanner = () => {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
-  return <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-cm-start via-promo-cm-mid to-promo-cm-end overflow-hidden">
+  return <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-promo-cm-start overflow-hidden">
       {/* Pattern overlay */}
       <div className="absolute inset-0 opacity-10" style={{
       backgroundImage: `url(${patternImage})`,
@@ -53,11 +53,6 @@ export const CyberMondayBanner = () => {
       }} />
       </div>
 
-      {/* Glowing orbs */}
-      <div className="absolute top-20 right-20 w-64 h-64 rounded-full bg-promo-cm-mid/40 blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-promo-cm-end/40 blur-3xl animate-pulse" style={{
-      animationDelay: "1s"
-    }} />
 
       <div className="container mx-auto px-6 md:px-8 min-h-full flex flex-col items-center justify-center text-center relative z-10 space-y-4 md:space-y-8 py-16 md:py-20 pb-20 md:pb-20">
         {/* Date Badge */}
@@ -69,13 +64,13 @@ export const CyberMondayBanner = () => {
         <div className="space-y-2 md:space-y-4 max-w-4xl">
           <div className="flex items-center justify-center gap-2 md:gap-4">
             <Zap className="w-6 h-6 md:w-12 md:h-12 text-white animate-pulse" />
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-2xl leading-tight">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
               Cyber Monday
             </h1>
             <Zap className="w-6 h-6 md:w-12 md:h-12 text-white animate-pulse" />
           </div>
 
-          <p className="text-lg md:text-2xl lg:text-3xl font-bold text-white drop-shadow-lg">Última oportunidad</p>
+          <p className="text-lg md:text-2xl lg:text-3xl font-bold text-white">Última oportunidad</p>
           <p className="text-xl md:text-3xl lg:text-4xl font-bold text-white">15% de descuento</p>
           <p className="text-sm md:text-lg lg:text-xl text-white/90 leading-relaxed">+ Regalo gratis desde €70</p>
         </div>
@@ -110,26 +105,23 @@ export const CyberMondayBanner = () => {
 
         {/* Benefits - Enhanced Visual Cards */}
         <div className="grid grid-cols-3 gap-2 md:gap-4 text-sm md:text-base text-white w-full max-w-2xl">
-          <div className="group relative bg-white/15 backdrop-blur-md border-2 border-white/30 rounded-xl p-3 md:p-4 hover:bg-white/25 hover:border-white/50 transition-all hover:scale-105 overflow-hidden">
-            <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full blur-2xl" />
-            <div className="relative z-10 flex flex-col items-center gap-2">
-              <Zap className="w-5 h-5 md:w-7 md:h-7 drop-shadow-lg group-hover:scale-110 transition-transform" />
+          <div className="bg-white/15 border-2 border-white/30 rounded-xl p-3 md:p-4 hover:bg-white/25 transition-all">
+            <div className="flex flex-col items-center gap-2">
+              <Zap className="w-5 h-5 md:w-7 md:h-7" />
               <span className="font-bold text-xs md:text-sm">15% en todo</span>
               <Badge className="bg-white/20 text-white text-[9px] px-2 py-0.5">Automático</Badge>
             </div>
           </div>
-          <div className="group relative bg-white/15 backdrop-blur-md border-2 border-white/30 rounded-xl p-3 md:p-4 hover:bg-white/25 hover:border-white/50 transition-all hover:scale-105 overflow-hidden">
-            <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full blur-2xl" />
-            <div className="relative z-10 flex flex-col items-center gap-2">
-              <Gift className="w-5 h-5 md:w-7 md:h-7 drop-shadow-lg group-hover:scale-110 transition-transform" />
+          <div className="bg-white/15 border-2 border-white/30 rounded-xl p-3 md:p-4 hover:bg-white/25 transition-all">
+            <div className="flex flex-col items-center gap-2">
+              <Gift className="w-5 h-5 md:w-7 md:h-7" />
               <span className="font-bold text-xs md:text-sm">Regalo gratis</span>
               <Badge className="bg-white/20 text-white text-[9px] px-2 py-0.5">€70+</Badge>
             </div>
           </div>
-          <div className="group relative bg-white/15 backdrop-blur-md border-2 border-white/30 rounded-xl p-3 md:p-4 hover:bg-white/25 hover:border-white/50 transition-all hover:scale-105 overflow-hidden">
-            <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full blur-2xl" />
-            <div className="relative z-10 flex flex-col items-center gap-2">
-              <Clock className="w-5 h-5 md:w-7 md:h-7 drop-shadow-lg group-hover:scale-110 transition-transform" />
+          <div className="bg-white/15 border-2 border-white/30 rounded-xl p-3 md:p-4 hover:bg-white/25 transition-all">
+            <div className="flex flex-col items-center gap-2">
+              <Clock className="w-5 h-5 md:w-7 md:h-7" />
               <span className="font-bold text-xs md:text-sm">Solo 24 horas</span>
               <Badge className="bg-red-500/90 text-white text-[9px] px-2 py-0.5 animate-pulse">Limitado</Badge>
             </div>
@@ -138,7 +130,7 @@ export const CyberMondayBanner = () => {
 
         {/* CTA */}
         <div className="pt-2 space-y-3 flex flex-col items-center">
-          <Button asChild size="lg" variant="secondary" className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 shadow-2xl hover:scale-105 transition-transform w-full sm:w-auto max-w-xs">
+          <Button asChild size="lg" variant="secondary" className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 w-full sm:w-auto max-w-xs">
             <Link to="/black-friday">Ver ofertas Cyber Monday</Link>
           </Button>
 

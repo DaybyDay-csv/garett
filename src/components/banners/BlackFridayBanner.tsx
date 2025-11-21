@@ -63,7 +63,7 @@ export const BlackFridayBanner = () => {
     },
   ];
   return (
-    <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-bf-start via-promo-bf-mid to-promo-bf-end overflow-hidden">
+    <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-promo-bf-start overflow-hidden">
       {/* Pattern overlay */}
       <div
         className="absolute inset-0 opacity-10"
@@ -75,14 +75,6 @@ export const BlackFridayBanner = () => {
         }}
       />
 
-      {/* Animated glow effects */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-promo-bf-mid/30 blur-3xl animate-pulse" />
-      <div
-        className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-promo-bf-start/30 blur-3xl animate-pulse"
-        style={{
-          animationDelay: "1s",
-        }}
-      />
 
       <div className="container mx-auto px-6 md:px-8 min-h-full flex flex-col items-center justify-center text-center relative z-10 space-y-3 md:space-y-8 py-16 md:py-20 pb-20 md:pb-20">
         {/* Live Badge */}
@@ -103,10 +95,10 @@ export const BlackFridayBanner = () => {
 
         {/* Main Heading */}
         <div className="space-y-2 md:space-y-4 max-w-4xl">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-2xl leading-tight">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
             Black Friday 2025
           </h1>
-          <p className="text-xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg">
+          <p className="text-xl md:text-3xl lg:text-4xl font-bold text-white">
             Hasta <span className="text-3xl md:text-4xl lg:text-5xl">50%</span> OFF
           </p>
           <p className="text-sm md:text-lg lg:text-xl text-white/90 leading-relaxed">+ Regalo gratis desde €70</p>
@@ -154,22 +146,17 @@ export const BlackFridayBanner = () => {
             return (
               <div
                 key={index}
-                className="relative bg-white/15 backdrop-blur-md border-2 border-white/30 rounded-xl p-3 md:p-5 text-white space-y-1 md:space-y-2 hover:bg-white/25 hover:border-white/50 transition-all hover:scale-105 hover:shadow-2xl overflow-hidden group"
+                className="bg-white/15 border-2 border-white/30 rounded-xl p-3 md:p-5 text-white space-y-1 md:space-y-2 hover:bg-white/25 transition-all"
               >
-                {/* Glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                
-                {/* Icon with glow */}
-                <div className="relative">
-                  <div className="absolute inset-0 bg-white/20 blur-xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <Icon className="w-5 h-5 md:w-8 md:h-8 mx-auto relative z-10 drop-shadow-lg" />
+                <div>
+                  <Icon className="w-5 h-5 md:w-8 md:h-8 mx-auto" />
                 </div>
                 
-                <div className="relative z-10">
+                <div>
                   <Badge className="bg-white/20 text-white text-[9px] md:text-[10px] px-2 py-0.5 mb-1 md:mb-2">
                     {tier.name}
                   </Badge>
-                  <p className="text-2xl md:text-4xl font-black my-1 drop-shadow-lg">-{tier.discount}</p>
+                  <p className="text-2xl md:text-4xl font-black my-1">-{tier.discount}</p>
                   <div className="flex items-center justify-center gap-1">
                     <Zap className="w-3 h-3 md:w-4 md:h-4" />
                     <p className="text-[10px] md:text-xs text-white/90 font-medium">
@@ -188,7 +175,7 @@ export const BlackFridayBanner = () => {
             asChild
             size="lg"
             variant="secondary"
-            className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 shadow-2xl hover:scale-105 transition-transform w-full sm:w-auto max-w-xs"
+            className="text-sm md:text-lg px-8 md:px-10 h-12 md:h-14 w-full sm:w-auto max-w-xs"
           >
             <Link to="/black-friday">Ver ofertas</Link>
           </Button>

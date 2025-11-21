@@ -39,7 +39,7 @@ export const AeroGlowBanner = () => {
   const finalPrice = basePrice * (1 - discountPercent / 100); // €224.50
   const discountAmount = basePrice - finalPrice;
   const currencyCode = product?.node.priceRange.minVariantPrice.currencyCode || 'EUR';
-  return <div className="relative w-full bg-gradient-to-br from-black via-gray-950 to-black overflow-hidden">
+  return <div className="relative w-full bg-black overflow-hidden">
       {/* Dark pattern overlay */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute inset-0" style={{
@@ -49,10 +49,6 @@ export const AeroGlowBanner = () => {
       }} />
       </div>
 
-      {/* Red glow orbs for Black Friday atmosphere */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-600/20 rounded-full blur-3xl opacity-40" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-pink-600/20 rounded-full blur-3xl opacity-40" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-red-500/10 rounded-full blur-3xl opacity-30" />
       
       <div className="container mx-auto px-4 md:px-8 lg:px-12">
         {/* Main Hero Section */}
@@ -60,7 +56,7 @@ export const AeroGlowBanner = () => {
           {/* Left Content */}
           <div className="text-center lg:text-left space-y-3 md:space-y-6 order-2 lg:order-1">
             {/* Black Friday Event Badge */}
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600/30 to-pink-600/30 text-red-400 px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-bold border border-red-500/50 backdrop-blur-sm shadow-lg shadow-red-500/20 animate-pulse">
+            <div className="inline-flex items-center gap-2 bg-red-600/30 text-red-400 px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-bold border border-red-500/50 animate-pulse">
               <Zap className="w-4 h-4 md:w-5 md:h-5" />
               AEROGLOW DROP • BLACK FRIDAY
             </div>
@@ -79,7 +75,7 @@ export const AeroGlowBanner = () => {
               </div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.15] tracking-tight">
                 <span className="block text-gray-400 text-lg md:text-xl lg:text-2xl font-medium mb-1.5">Presentamos</span>
-                <span className="bg-gradient-to-r from-red-400 via-pink-400 to-red-300 bg-clip-text text-transparent">AeroGlow</span>
+                <span className="text-red-400">AeroGlow</span>
               </h1>
               <p className="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
                 Transforma tu cabello con tecnología iónica profesional. <span className="font-semibold text-foreground">Resultados visibles desde el primer uso.</span>
@@ -103,26 +99,26 @@ export const AeroGlowBanner = () => {
 
             {/* Key Benefits - Enhanced Visual */}
             <div className="grid grid-cols-3 gap-2 md:gap-3 px-2">
-              <div className="group relative p-3 md:p-4 rounded-xl bg-gradient-to-br from-[#D4AF37]/10 to-[#8B6F47]/5 backdrop-blur border border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all overflow-hidden">
-                <Zap className="w-5 h-5 md:w-6 md:h-6 text-[#D4AF37] mb-1.5 group-hover:scale-125 transition-transform relative z-10" />
-                <div className="font-bold text-xs md:text-sm relative z-10">Calor Uniforme</div>
-                <div className="text-[11px] md:text-xs text-muted-foreground relative z-10">Tecnología avanzada</div>
+              <div className="p-3 md:p-4 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all">
+                <Zap className="w-5 h-5 md:w-6 md:h-6 text-[#D4AF37] mb-1.5" />
+                <div className="font-bold text-xs md:text-sm">Calor Uniforme</div>
+                <div className="text-[11px] md:text-xs text-muted-foreground">Tecnología avanzada</div>
               </div>
-              <div className="group relative p-3 md:p-4 rounded-xl bg-gradient-to-br from-[#8B6F47]/10 to-[#5D4037]/5 backdrop-blur border border-[#8B6F47]/30 hover:border-[#8B6F47] transition-all overflow-hidden">
-                <Shield className="w-5 h-5 md:w-6 md:h-6 text-[#8B6F47] mb-1.5 group-hover:scale-125 transition-transform relative z-10" />
-                <div className="font-bold text-xs md:text-sm relative z-10">Protección Total</div>
-                <div className="text-[11px] md:text-xs text-muted-foreground relative z-10">Iones negativos</div>
+              <div className="p-3 md:p-4 rounded-xl bg-[#8B6F47]/10 border border-[#8B6F47]/30 hover:border-[#8B6F47] transition-all">
+                <Shield className="w-5 h-5 md:w-6 md:h-6 text-[#8B6F47] mb-1.5" />
+                <div className="font-bold text-xs md:text-sm">Protección Total</div>
+                <div className="text-[11px] md:text-xs text-muted-foreground">Iones negativos</div>
               </div>
-              <div className="group relative p-3 md:p-4 rounded-xl bg-gradient-to-br from-[#5D4037]/10 to-[#D4AF37]/5 backdrop-blur border border-[#5D4037]/30 hover:border-[#5D4037] transition-all overflow-hidden">
-                <Award className="w-5 h-5 md:w-6 md:h-6 text-[#5D4037] mb-1.5 group-hover:scale-125 transition-transform relative z-10" />
-                <div className="font-bold text-xs md:text-sm relative z-10">Made in Poland</div>
-                <div className="text-[11px] md:text-xs text-muted-foreground relative z-10">Calidad premium</div>
+              <div className="p-3 md:p-4 rounded-xl bg-[#5D4037]/10 border border-[#5D4037]/30 hover:border-[#5D4037] transition-all">
+                <Award className="w-5 h-5 md:w-6 md:h-6 text-[#5D4037] mb-1.5" />
+                <div className="font-bold text-xs md:text-sm">Made in Poland</div>
+                <div className="text-[11px] md:text-xs text-muted-foreground">Calidad premium</div>
               </div>
             </div>
 
             {/* CTAs */}
             <div className="flex flex-col gap-3 md:gap-4 items-center lg:items-start pt-2 relative z-20 px-2">
-              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-sm md:text-base h-12 md:h-14 px-8 md:px-10 bg-gradient-to-r from-[#5D4037] to-[#8B6F47] hover:from-[#4A322B] hover:to-[#6E5738] shadow-xl hover:shadow-2xl transition-all text-white border-0 rounded-lg font-semibold cursor-pointer w-full sm:w-auto max-w-xs">
+              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-sm md:text-base h-12 md:h-14 px-8 md:px-10 bg-[#5D4037] hover:bg-[#4A322B] transition-all text-white border-0 rounded-lg font-semibold cursor-pointer w-full sm:w-auto max-w-xs">
                 Comprar Ahora
                 <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
@@ -156,24 +152,23 @@ export const AeroGlowBanner = () => {
               <div className="relative max-w-xl mx-auto">
                 {/* Main Product Video */}
                 <div className="relative z-10">
-                  <div className="absolute -inset-4 md:-inset-6 bg-gradient-to-br from-red-600/20 via-pink-600/20 to-red-500/20 rounded-full blur-2xl" />
-                  <div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl rounded-2xl p-4 md:p-8 shadow-xl border border-red-600/30 overflow-hidden">
+                  <div className="relative bg-gray-900/90 rounded-2xl p-4 md:p-8 border border-red-600/30 overflow-hidden">
                   {loading ? <div className="aspect-square flex items-center justify-center">
                       <Zap className="w-20 h-20 text-red-500 animate-pulse" />
                     </div> : 
-                    <VideoPlayer
+                      <VideoPlayer
                       src="/videos/aeroglow-product.mp4"
                       poster={aeroglowHero}
                       autoplay={true}
                       muted={true}
                       loop={true}
                       controls={false}
-                      className="drop-shadow-2xl animate-fade-in"
+                      className="animate-fade-in"
                       fallback={
                         <img 
                           src={aeroglowHero} 
                           alt="AeroGlow Hair Straightener" 
-                          className="w-full h-full object-contain drop-shadow-2xl animate-fade-in hover:scale-105 transition-transform duration-700" 
+                          className="w-full h-full object-contain animate-fade-in"
                         />
                       }
                     />
@@ -183,8 +178,7 @@ export const AeroGlowBanner = () => {
                 {/* Floating Discount Badge */}
                 <div className="absolute -top-4 -right-4 md:-top-5 md:-right-5 z-20">
                   <div className="relative">
-                    <div className="absolute inset-0 bg-red-500 rounded-full blur-lg opacity-50 animate-pulse" />
-                    <div className="relative bg-gradient-to-br from-red-500 to-red-600 text-white rounded-full w-16 h-16 md:w-20 md:h-20 flex flex-col items-center justify-center shadow-xl border-2 md:border-3 border-white dark:border-gray-900 font-bold animate-bounce">
+                    <div className="relative bg-red-500 text-white rounded-full w-16 h-16 md:w-20 md:h-20 flex flex-col items-center justify-center border-2 md:border-3 border-white dark:border-gray-900 font-bold animate-bounce">
                       <span className="text-lg md:text-2xl">-50%</span>
                       <span className="text-[10px]">OFF</span>
                     </div>
@@ -211,28 +205,26 @@ export const AeroGlowBanner = () => {
 
           <div className="grid grid-cols-2 gap-3 md:gap-6 max-w-4xl mx-auto px-4">
             {/* Before */}
-            <div className="group relative">
-              <div className="absolute -inset-0.5 bg-gradient-to-br from-gray-400 to-gray-600 rounded-xl md:rounded-2xl blur opacity-25 group-hover:opacity-40 transition" />
-              <div className="relative bg-background rounded-xl md:rounded-2xl overflow-hidden shadow-lg border border-border">
+            <div className="relative">
+              <div className="bg-background rounded-xl md:rounded-2xl overflow-hidden border border-border">
                 <div className="absolute top-2 left-2 md:top-3 md:left-3 z-10">
                   <Badge className="bg-gray-500 text-white text-xs md:text-sm px-2 py-1">ANTES</Badge>
                 </div>
                 <img src={hairBefore} alt="Cabello antes de usar AeroGlow" className="w-full h-[180px] md:h-[300px] object-cover" />
-                <div className="p-2.5 md:p-4 bg-gradient-to-t from-background to-transparent">
+                <div className="p-2.5 md:p-4 bg-background">
                   <p className="text-xs md:text-sm text-muted-foreground font-medium">Cabello sin tratar</p>
                 </div>
               </div>
             </div>
 
             {/* After */}
-            <div className="group relative">
-              <div className="absolute -inset-0.5 bg-gradient-to-br from-red-500 to-pink-500 rounded-xl md:rounded-2xl blur opacity-50 group-hover:opacity-75 transition animate-pulse" />
-              <div className="relative bg-background rounded-xl md:rounded-2xl overflow-hidden shadow-lg border-2 border-red-500">
+            <div className="relative">
+              <div className="bg-background rounded-xl md:rounded-2xl overflow-hidden border-2 border-red-500">
                 <div className="absolute top-2 left-2 md:top-3 md:left-3 z-10">
-                  <Badge className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs md:text-sm px-2 py-1">DESPUÉS</Badge>
+                  <Badge className="bg-red-500 text-white text-xs md:text-sm px-2 py-1">DESPUÉS</Badge>
                 </div>
                 <img src={hairAfter} alt="Cabello después de usar AeroGlow" className="w-full h-[180px] md:h-[300px] object-cover" />
-                <div className="p-2.5 md:p-4 bg-gradient-to-t from-background to-transparent">
+                <div className="p-2.5 md:p-4 bg-background">
                   <div className="flex items-center gap-1.5 md:gap-2">
                     <Zap className="w-3.5 h-3.5 md:w-4 md:h-4 text-red-500" />
                     <p className="text-xs md:text-sm font-semibold">Liso perfecto</p>
@@ -244,7 +236,7 @@ export const AeroGlowBanner = () => {
 
           {/* Final CTA */}
           <div className="text-center mt-6 md:mt-10 relative z-20 space-y-3 px-4 flex flex-col items-center">
-            <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-base md:text-lg h-12 md:h-14 px-10 md:px-12 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 shadow-xl shadow-red-600/50 hover:shadow-2xl transition-all text-white rounded-lg font-bold cursor-pointer relative z-20 w-full sm:w-auto max-w-xs">Desbloquear Black Friday<ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-2 transition-transform" />
+            <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-base md:text-lg h-12 md:h-14 px-10 md:px-12 bg-red-600 hover:bg-red-700 transition-all text-white rounded-lg font-bold cursor-pointer relative z-20 w-full sm:w-auto max-w-xs">Desbloquear Black Friday<ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-2 transition-transform" />
             </Link>
             
             <NewsletterCTA variant="inline" text="Recibe las ofertas" className="bg-red-950/50 hover:bg-red-950/70 border-red-600/30 text-red-300" />

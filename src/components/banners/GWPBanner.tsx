@@ -8,7 +8,7 @@ import patternImage from "@/assets/garett-pattern-2.png";
 import { gwpConfig } from "@/lib/bannerConfig";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 export const GWPBanner = () => {
-  return <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-gradient-to-br from-promo-gwp via-background to-promo-gwp overflow-hidden">
+  return <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-promo-gwp overflow-hidden">
       {/* Pattern overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
       backgroundImage: `url(${patternImage})`,
@@ -16,16 +16,12 @@ export const GWPBanner = () => {
       backgroundRepeat: 'repeat'
     }} />
       
-      {/* Decorative circles */}
-      <div className="absolute top-20 right-20 w-64 h-64 rounded-full bg-primary/5 blur-3xl" />
-      <div className="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-accent/5 blur-3xl" />
       
       <div className="container mx-auto px-6 md:px-8 min-h-[500px] flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 relative z-10 py-16 md:py-20 pb-20 md:pb-20">
         {/* Gift Image */}
         <div className="flex-1 flex items-center justify-center order-2 md:order-1">
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl" />
-            <img src={gwpImage} alt={gwpConfig.giftName} className="relative w-40 h-40 md:w-72 md:h-72 lg:w-80 lg:h-80 object-cover rounded-2xl shadow-2xl" />
+            <img src={gwpImage} alt={gwpConfig.giftName} className="w-40 h-40 md:w-72 md:h-72 lg:w-80 lg:h-80 object-cover rounded-2xl" />
             <div className="absolute -top-2 -right-2 animate-bounce">
               <Badge className="bg-accent text-accent-foreground text-xs md:text-lg px-2 py-1 md:px-4 md:py-2">
                 <Gift className="w-3 h-3 md:w-5 md:h-5 mr-1 md:mr-2" />
@@ -42,7 +38,7 @@ export const GWPBanner = () => {
           <div className="space-y-2 md:space-y-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               Regalo<br />
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Especial</span>
+              <span className="text-primary">Especial</span>
             </h1>
             <div className="space-y-2">
               <p className="text-base md:text-xl lg:text-2xl font-semibold text-foreground">
@@ -52,7 +48,7 @@ export const GWPBanner = () => {
                 <Badge className="bg-primary/10 text-primary text-xs md:text-sm px-3 py-1 md:px-4 md:py-1.5 border border-primary/20">
                   Compras €{gwpConfig.threshold}+
                 </Badge>
-                <Badge className="bg-gradient-to-r from-accent to-accent/80 text-white text-xs md:text-sm px-3 py-1 md:px-4 md:py-1.5 shadow-lg border-2 border-white/20 font-bold">
+                <Badge className="bg-accent text-white text-xs md:text-sm px-3 py-1 md:px-4 md:py-1.5 border-2 border-white/20 font-bold">
                   Valor €20
                 </Badge>
               </div>
