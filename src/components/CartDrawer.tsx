@@ -200,7 +200,7 @@ export const CartDrawer = () => {
                   {currentStage && discountPercentage > 0 && <div className="flex justify-between text-green-600 dark:text-green-400">
                       <span className="flex items-center gap-2">
                         <Sparkles className="w-4 h-4" />
-                        Descuento {currentStage.badge} ({discountPercentage}%)
+                        Descuento ({discountPercentage}%)
                       </span>
                       <span>-€{discountAmount.toFixed(2)}</span>
                     </div>}
