@@ -22,14 +22,14 @@ export const HeroSection = () => {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button asChild size="lg" className="text-base group">
-                <Link to="/productos?category=masajeadores-faciales">
+                <Link to="/novedades">
                   Ver dispositivos para rostro
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               
               <Button asChild variant="outline" size="lg" className="text-base border-primary text-primary hover:bg-primary/5">
-                <Link to="/productos?category=corporales">
+                <Link to="/superventas">
                   Ver dispositivos para cuerpo
                 </Link>
               </Button>
