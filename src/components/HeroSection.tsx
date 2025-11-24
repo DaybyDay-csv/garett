@@ -28,7 +28,7 @@ export const HeroSection = () => {
             </div>
             
             <h1 className="text-3xl md:text-6xl lg:text-7xl font-bold leading-tight text-header animate-fade-in [animation-delay:100ms]">
-              TU SPA DE<br />
+              TU SPA DE<br className="hidden md:block" />{" "}
               LUJO<br />
               EN CASA
             </h1>
