@@ -205,9 +205,6 @@ export const CartDrawer = () => {
                       <span>-€{discountAmount.toFixed(2)}</span>
                     </div>}
                   
-                  {/* Discount Code Info */}
-                  {currentStage?.code}
-                  
                   {/* Gift With Purchase */}
                   {hasGWPActive && hasUnlockedGWP && <div className="flex justify-between text-purple-600 dark:text-purple-400">
                       <span className="flex items-center gap-2">
