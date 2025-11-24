@@ -106,27 +106,27 @@ export const CartDrawer = () => {
         </SheetHeader>
         
         {/* GWP Progress Bar */}
-        {hasGWPActive && items.length > 0 && <div className="flex-shrink-0 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-4 border border-purple-200 dark:border-purple-800 mt-4">
-            <div className="flex items-start gap-3 mb-3">
-              <div className="w-16 h-16 rounded-lg overflow-hidden bg-white flex-shrink-0 border-2 border-purple-200">
+        {hasGWPActive && items.length > 0 && <div className="flex-shrink-0 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-2.5 border border-purple-200 dark:border-purple-800 mt-4">
+            <div className="flex items-start gap-2 mb-2">
+              <div className="w-12 h-12 rounded-md overflow-hidden bg-white flex-shrink-0 border border-purple-200">
                 {gwpProduct?.node.images?.edges?.[0]?.node ? <img src={gwpProduct.node.images.edges[0].node.url} alt="Banda de pelo gratis" className="w-full h-full object-cover" /> : <img src={gwpHeadband} alt="Banda de pelo gratis" className="w-full h-full object-cover" />}
               </div>
               <div className="flex-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <Gift className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                  <span className="font-semibold text-sm text-purple-900 dark:text-purple-100">
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <Gift className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
+                  <span className="font-semibold text-xs text-purple-900 dark:text-purple-100">
                     {hasUnlockedGWP ? '¡Regalo desbloqueado!' : 'Casi consigues tu regalo gratis'}
                   </span>
                 </div>
-                <p className="text-xs text-purple-700 dark:text-purple-300">
+                <p className="text-[11px] text-purple-700 dark:text-purple-300">
                   Banda de pelo Garett Routine  
                 </p>
               </div>
             </div>
             
             {!hasUnlockedGWP && <>
-                <Progress value={progressPercentage} className="h-2 mb-2" />
-                <p className="text-xs text-purple-800 dark:text-purple-200">
+                <Progress value={progressPercentage} className="h-1.5 mb-1.5" />
+                <p className="text-[11px] text-purple-800 dark:text-purple-200">
                   Añade <span className="font-bold">€{remainingForGWP.toFixed(2)}</span> más para obtener tu <span className="font-bold">banda de pelo gratis</span>
                 </p>
               </>}
