@@ -25,9 +25,7 @@ export const Footer = () => {
               <a href="https://www.instagram.com/garettbeauty.spain/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Instagram">
                 <Instagram className="w-4 h-4" />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Twitter">
-                <Twitter className="w-4 h-4" />
-              </a>
+              
               <a href="https://www.youtube.com/@GARETTpl" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="YouTube">
                 <Youtube className="w-4 h-4" />
               </a>
