@@ -123,7 +123,7 @@ Resultados visibles desde el primer uso.</span>
                 <span className="font-medium">En Stock</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
-                <Shield className="w-4 h-4 md:w-5 md:h-5 text-[#8B6F47]" />
+                
                 
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
