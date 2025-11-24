@@ -98,18 +98,18 @@ export const AeroGlowBanner = () => {
             <div className="grid grid-cols-3 gap-2 px-2">
               <div className="p-2 md:p-3 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all">
                 <Zap className="w-4 h-4 md:w-5 md:h-5 text-[#D4AF37] mb-1" />
-                <div className="font-bold text-[11px] md:text-xs">Calor Uniforme</div>
-                <div className="text-[10px] md:text-[11px] text-muted-foreground">Tecnología avanzada</div>
+                <div className="font-bold text-xs md:text-sm">Calor Uniforme</div>
+                <div className="text-[11px] md:text-xs text-muted-foreground">Tecnología avanzada</div>
               </div>
               <div className="p-2 md:p-3 rounded-xl bg-[#8B6F47]/10 border border-[#8B6F47]/30 hover:border-[#8B6F47] transition-all">
                 <Shield className="w-4 h-4 md:w-5 md:h-5 text-[#8B6F47] mb-1" />
-                <div className="font-bold text-[11px] md:text-xs">Protección Total</div>
-                <div className="text-[10px] md:text-[11px] text-muted-foreground">Iones negativos</div>
+                <div className="font-bold text-xs md:text-sm">Protección Total</div>
+                <div className="text-[11px] md:text-xs text-muted-foreground">Iones negativos</div>
               </div>
               <div className="p-2 md:p-3 rounded-xl bg-[#5D4037]/10 border border-[#5D4037]/30 hover:border-[#5D4037] transition-all">
                 <Award className="w-4 h-4 md:w-5 md:h-5 text-[#5D4037] mb-1" />
-                <div className="font-bold text-[11px] md:text-xs">Made in Poland</div>
-                <div className="text-[10px] md:text-[11px] text-muted-foreground">Calidad premium</div>
+                <div className="font-bold text-xs md:text-sm">Made in Poland</div>
+                <div className="text-[11px] md:text-xs text-muted-foreground">Calidad premium</div>
               </div>
             </div>
 
