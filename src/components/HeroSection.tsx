@@ -2,15 +2,22 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Sparkles, ArrowRight } from "lucide-react";
 import heroBackground from "@/assets/hero-background.png";
+import heroMobile from "@/assets/hero-mobile.png";
+
 export const HeroSection = () => {
   return <section className="relative overflow-hidden min-h-[600px] md:min-h-[700px]">
-      {/* Background Image */}
-      <div className="absolute inset-0 bg-cover bg-right md:bg-center bg-no-repeat" style={{
+      {/* Background Image - Mobile */}
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden" style={{
+      backgroundImage: `url(${heroMobile})`
+    }} />
+      
+      {/* Background Image - Desktop */}
+      <div className="absolute inset-0 bg-cover bg-right bg-no-repeat hidden md:block" style={{
       backgroundImage: `url(${heroBackground})`
     }} />
       
       {/* Mobile gradient overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-transparent md:bg-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-transparent md:bg-gradient-to-r md:from-background/95 md:via-background/80 md:to-transparent md:bg-none" />
       
       <div className="container relative py-12 md:py-20 h-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
