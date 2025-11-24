@@ -1,4 +1,4 @@
-import { Instagram, Facebook, Youtube, Play } from "lucide-react";
+import { Instagram, Youtube, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -93,7 +93,7 @@ export const UGCSection = () => {
           <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">Conecta con nosotros</p>
           <div className="flex items-center justify-center gap-6 mb-8">
             <a
-              href="https://instagram.com/garettbeauty"
+              href="https://www.instagram.com/garettbeauty.spain/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground/60 hover:text-primary transition-colors"
@@ -102,16 +102,7 @@ export const UGCSection = () => {
               <Instagram className="w-6 h-6" />
             </a>
             <a
-              href="https://facebook.com/garettbeauty"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground/60 hover:text-primary transition-colors"
-              aria-label="Facebook"
-            >
-              <Facebook className="w-6 h-6" />
-            </a>
-            <a
-              href="https://youtube.com/garettbeauty"
+              href="https://www.youtube.com/@GARETTpl"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground/60 hover:text-primary transition-colors"
