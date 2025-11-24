@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { TrustBadges } from "@/components/TrustBadges";
+import { HeroSection } from "@/components/HeroSection";
 import { Testimonials } from "@/components/Testimonials";
 import { UGCSection } from "@/components/UGCSection";
 import { PromotionalBanners } from "@/components/PromotionalBanners";
@@ -47,6 +48,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      
+      {/* Hero Section with UVP */}
+      <HeroSection />
       
       {/* Promotional Banners Carousel */}
       <PromotionalBanners />

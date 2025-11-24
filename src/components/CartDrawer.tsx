@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { TrustBadges } from "@/components/TrustBadges";
 import {
   Sheet,
   SheetContent,
@@ -342,9 +343,9 @@ export const CartDrawer = () => {
                   )}
                 </Button>
                 
-                <div className="text-xs text-muted-foreground text-center space-y-1">
-                  <p>Garantía 24 meses</p>
-                  <p>Certificado CE</p>
+                {/* Trust Badges in Cart */}
+                <div className="border-t pt-4 mt-4">
+                  <TrustBadges variant="compact" />
                 </div>
               </div>
             </>
