@@ -24,7 +24,7 @@ export const HeroSection = () => {
             
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
-            <Button asChild size="lg" className="text-base group bg-[#0f1629] hover:bg-[#0f1629]/90 text-white">
+            <Button asChild size="lg" className="text-base group bg-header hover:bg-header/90 text-header-foreground">
               <Link to="/novedades">
                 Ver Novedades
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

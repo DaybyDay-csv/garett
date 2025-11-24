@@ -43,6 +43,10 @@ All colors MUST be HSL.
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
+    /* Header color */
+    --header: 217 44% 11%;
+    --header-foreground: 0 0% 100%;
+    
     /* Promotional colors */
     --promo-aeroglow: 200 80% 90%;
     --promo-aeroglow-dark: 200 60% 70%;
