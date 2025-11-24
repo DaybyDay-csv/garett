@@ -295,7 +295,7 @@ const BlackFriday = () => {
       limit: "25 usos",
       urgency: "medium"
     }, {
-      code: "BF25",
+      code: "auto",
       discount: "25% OFF",
       limit: "Ilimitado",
       urgency: "low"
