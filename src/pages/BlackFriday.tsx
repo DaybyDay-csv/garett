@@ -329,8 +329,8 @@ const BlackFriday = () => {
             Promociones Noviembre-Diciembre 2025
           </Badge>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Calendario de Ofertas BlackFriday</h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-4 max-w-2xl">Warm-up · White Week · Black Friday · Cyber Monday</p>
-          <p className="text-lg text-white/80 mb-4 max-w-2xl">Hasta 50% de descuento + Regalo gratis desde €70 en TODOS los pedidos.</p>
+          
+          <p className="text-lg text-white/80 mb-4 max-w-2xl">Hasta 50% + Regalo gratis a partir de €70 en TODOS los pedidos             </p>
 
           {/* Countdown Timer */}
           <CountdownTimer promotionalStages={promotionalStages} />
