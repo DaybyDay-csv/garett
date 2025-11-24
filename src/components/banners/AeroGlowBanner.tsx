@@ -116,11 +116,11 @@ Resultados visibles desde el primer uso.</span>
 
             {/* CTAs */}
             <div className="flex flex-col gap-2 md:gap-3 items-center lg:items-start pt-2 relative z-20 px-2">
-              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-sm md:text-base h-10 md:h-12 px-6 md:px-8 bg-[#5D4037] hover:bg-[#4A322B] transition-all text-white border-0 rounded-lg font-semibold cursor-pointer w-full sm:w-auto max-w-xs">
+              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-sm md:text-base h-10 md:h-12 px-6 md:px-8 bg-white hover:bg-white/90 transition-all text-black border-0 rounded-lg font-semibold cursor-pointer w-full sm:w-auto max-w-xs">
                 Comprar Ahora
                 <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center text-sm md:text-base h-10 md:h-12 px-6 md:px-8 border-2 border-[#8B6F47] text-[#5D4037] dark:text-[#D7B896] hover:bg-[#8B6F47]/10 rounded-lg font-semibold transition-colors cursor-pointer bg-background w-full sm:w-auto max-w-xs">
+              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center text-sm md:text-base h-10 md:h-12 px-6 md:px-8 border-2 border-white text-white hover:bg-white/10 rounded-lg font-semibold transition-colors cursor-pointer bg-transparent w-full sm:w-auto max-w-xs">
                 Ver Detalles
               </Link>
               <NewsletterCTA variant="inline" text="Recibe las ofertas" />
@@ -212,7 +212,7 @@ Resultados visibles desde el primer uso.</span>
 
           {/* Final CTA */}
           <div className="text-center mt-4 md:mt-6 relative z-20 space-y-2 px-4 flex flex-col items-center">
-            <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-sm md:text-base h-10 md:h-12 px-8 md:px-10 bg-red-600 hover:bg-red-700 transition-all text-white rounded-lg font-bold cursor-pointer relative z-20 w-full sm:w-auto max-w-xs">Desbloquear Black Friday<ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
+            <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-sm md:text-base h-10 md:h-12 px-8 md:px-10 bg-white hover:bg-white/90 transition-all text-black rounded-lg font-bold cursor-pointer relative z-20 w-full sm:w-auto max-w-xs">Desbloquear Black Friday<ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
             </Link>
             
             <NewsletterCTA variant="inline" text="Recibe las ofertas" className="bg-red-950/50 hover:bg-red-950/70 border-red-600/30 text-red-300" />
