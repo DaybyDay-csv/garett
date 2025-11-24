@@ -12,7 +12,7 @@ export const TrustBadges = ({ variant = 'default' }: TrustBadgesProps) => {
     <div className={`grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 ${isCompact ? 'py-4' : 'py-6 md:py-12'}`}>
       <div className={`flex flex-col items-center text-center ${isCompact ? 'p-3' : 'p-4 md:p-6'} rounded-lg border bg-card`}>
         <Shield className={`text-primary mb-2 md:mb-3 ${isCompact ? 'w-8 h-8 md:w-10 md:h-10' : 'w-10 h-10 md:w-12 md:h-12'}`} />
-        <h3 className={`font-semibold mb-1 ${isCompact ? 'text-sm md:text-base' : 'text-base md:text-lg'}`}>Garantía 24 meses</h3>
+        <h3 className={`font-semibold mb-1 ${isCompact ? 'text-sm md:text-base' : 'text-base md:text-lg'}`}>Garantía 2 años</h3>
         <p className="text-xs text-muted-foreground">
           Contra defectos de fabricación
         </p>
@@ -20,7 +20,7 @@ export const TrustBadges = ({ variant = 'default' }: TrustBadgesProps) => {
       
       <div className={`flex flex-col items-center text-center ${isCompact ? 'p-3' : 'p-4 md:p-6'} rounded-lg border bg-card`}>
         <Truck className={`text-primary mb-2 md:mb-3 ${isCompact ? 'w-8 h-8 md:w-10 md:h-10' : 'w-10 h-10 md:w-12 md:h-12'}`} />
-        <h3 className={`font-semibold mb-1 ${isCompact ? 'text-sm md:text-base' : 'text-base md:text-lg'}`}>Envío gratis desde 60€</h3>
+        <h3 className={`font-semibold mb-1 ${isCompact ? 'text-sm md:text-base' : 'text-base md:text-lg'}`}>Envío gratis desde 150€</h3>
         <p className="text-xs text-muted-foreground">
           Entrega 24-48h en península
         </p>

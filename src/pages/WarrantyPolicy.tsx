@@ -24,7 +24,7 @@ export default function WarrantyPolicy() {
               <span className="text-primary">1.</span> Duración y Ámbito
             </h2>
             <ul className="space-y-2 text-muted-foreground ml-6">
-              <li><strong className="text-foreground">Duración:</strong> 24 meses desde la fecha de compra indicada en el justificante.</li>
+              <li><strong className="text-foreground">Duración:</strong> 2 años desde la fecha de compra indicada en el justificante.</li>
               <li><strong className="text-foreground">Ámbito:</strong> España. Garantía comercial del fabricante, adicional e independiente de la garantía legal del vendedor (3 años).</li>
             </ul>
           </section>
