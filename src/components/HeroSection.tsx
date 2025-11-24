@@ -1,26 +1,32 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Sparkles, ArrowRight } from "lucide-react";
-import aeroglowHero from "@/assets/aeroglow-hero.png";
+import heroBackground from "@/assets/hero-background.png";
+
 export const HeroSection = () => {
-  return <section className="relative bg-gradient-to-br from-background via-secondary/5 to-primary/5 overflow-hidden">
-      <div className="container py-12 md:py-20">
-        <div className="flex flex-col items-center justify-center">
-          {/* Text Content */}
-          <div className="space-y-6 text-center max-w-4xl">
+  return (
+    <section className="relative overflow-hidden min-h-[600px] md:min-h-[700px]">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+      />
+      
+      <div className="container relative py-12 md:py-20 h-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
+          {/* Text Content - Left Side */}
+          <div className="space-y-6 text-left max-w-xl">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold">
               <Sparkles className="w-4 h-4" />
               Tecnología polaca de última generación
             </div>
             
-            <h1 className="md:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-6xl text-center px-0 mx-0 my-[20px] py-[16px] pb-0">
-              ​TU SPA DE LUJO EN CASA       
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
+              TU SPA DE LUJO EN CASA
             </h1>
             
-            
-            
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="text-base group">
                 <Link to="/novedades">
                   Ver Novedades
@@ -35,8 +41,8 @@ export const HeroSection = () => {
               </Button>
             </div>
             
-            {/* Trust Indicators Mini */}
-            <div className="flex flex-wrap gap-4 justify-center text-sm text-muted-foreground pt-4">
+            {/* Trust Indicators */}
+            <div className="flex flex-col gap-3 text-sm text-foreground pt-4">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span>Garantía 2 años</span>
@@ -51,7 +57,11 @@ export const HeroSection = () => {
               </div>
             </div>
           </div>
+          
+          {/* Right Side - Free space for model */}
+          <div className="hidden lg:block" />
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
