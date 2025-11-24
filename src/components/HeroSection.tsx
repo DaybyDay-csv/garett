@@ -18,7 +18,7 @@ export const HeroSection = () => {
       <div className="container relative h-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
           {/* Text Content - Bottom on mobile, Left on desktop */}
-          <div className="flex items-end md:items-center pb-8 md:pb-0 pt-20 md:pt-0">
+          <div className="flex items-end md:items-center pb-8 md:pb-0">
             <div className="space-y-3 md:space-y-6 text-left max-w-xl w-full">
               <div className="inline-flex items-center gap-1.5 md:gap-2 bg-white/20 backdrop-blur-sm text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold">
                 <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
