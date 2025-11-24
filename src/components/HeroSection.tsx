@@ -28,7 +28,8 @@ export const HeroSection = () => {
             </div>
             
             <h1 className="text-3xl md:text-6xl lg:text-7xl font-bold leading-tight text-header animate-fade-in [animation-delay:100ms]">
-              TU SPA DE LUJO EN CASA
+              TU SPA DE LUJO<br />
+              EN CASA
             </h1>
             
             {/* CTAs */}
