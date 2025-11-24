@@ -117,7 +117,7 @@ export const CartDrawer = () => {
                     {hasUnlockedGWP ? '¡Regalo desbloqueado!' : 'Casi consigues tu regalo gratis'}
                   </span>
                 </div>
-                <p className="leading-tight text-purple-700 dark:text-purple-300 text-sm">
+                <p className="leading-tight text-purple-700 dark:text-purple-300 mx-[27px] text-xs">
                   Banda de pelo Garett Routine  
                 </p>
               </div>
