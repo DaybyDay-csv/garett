@@ -22,9 +22,10 @@ import { Play } from "lucide-react";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
-
 const ProductDetail = () => {
-  const { handle } = useParams();
+  const {
+    handle
+  } = useParams();
   const [product, setProduct] = useState<ShopifyProduct | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedVariant, setSelectedVariant] = useState(0);
@@ -34,13 +35,12 @@ const ProductDetail = () => {
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
   const addItem = useCartStore(state => state.addItem);
   const items = useCartStore(state => state.items);
-  
+
   // Calculate cart total for GWP
-  const cartTotal = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
+  const cartTotal = items.reduce((sum, item) => sum + parseFloat(item.price.amount) * item.quantity, 0);
   const GWP_THRESHOLD = 70;
   const currentStage = getCurrentPromotionalStage();
   const hasGWPActive = currentStage?.hasGWP ?? false;
-
   useEffect(() => {
     const loadProduct = async () => {
       try {
@@ -62,25 +62,19 @@ const ProductDetail = () => {
         setLoading(false);
       }
     };
-
     loadProduct();
   }, [handle]);
-
   if (loading) {
-    return (
-      <div className="min-h-screen bg-background">
+    return <div className="min-h-screen bg-background">
         <Header />
         <div className="container py-20 text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-muted-foreground">Cargando producto...</p>
         </div>
-      </div>
-    );
+      </div>;
   }
-
   if (!product) {
-    return (
-      <div className="min-h-screen bg-background">
+    return <div className="min-h-screen bg-background">
         <Header />
         <div className="container py-20 text-center">
           <h2 className="text-2xl font-bold mb-4">Producto no encontrado</h2>
@@ -88,20 +82,20 @@ const ProductDetail = () => {
             <Link to="/productos">Ver todos los productos</Link>
           </Button>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  const { node } = product;
+  const {
+    node
+  } = product;
   const variant = node.variants.edges[selectedVariant]?.node;
   const originalPrice = variant ? variant.price.amount : "0";
-  
+
   // Check if this is the AeroGlow product (Black Friday event)
   const isAeroGlow = node.handle.includes('aeroglow') || node.title.toLowerCase().includes('aeroglow');
-  
+
   // Black Friday unlock date
   const unlockDate = new Date('2025-11-28T00:00:00');
-  
+
   // Special Black Friday pricing for AeroGlow
   let priceInfo;
   if (isAeroGlow) {
@@ -118,13 +112,11 @@ const ProductDetail = () => {
   } else {
     priceInfo = calculatePromotionalPrice(originalPrice);
   }
-  
+
   // Get product-specific content
   const productContent = getProductContent(node);
-
   const handleAddToCart = () => {
     if (!variant) return;
-    
     const cartItem = {
       product,
       variantId: variant.id,
@@ -137,40 +129,32 @@ const ProductDetail = () => {
       quantity: 1,
       selectedOptions: variant.selectedOptions || []
     };
-    
     addItem(cartItem);
-    
-    const discountText = priceInfo.hasDiscount 
-      ? ` (${priceInfo.discountLabel} aplicado)` 
-      : '';
-    
+    const discountText = priceInfo.hasDiscount ? ` (${priceInfo.discountLabel} aplicado)` : '';
     toast.success('Añadido al carrito', {
       description: `${node.title}${discountText}`,
-      position: 'top-center',
+      position: 'top-center'
     });
   };
-
   const isNew = node.tags.includes('new:true');
   const isBestseller = node.tags.includes('bestseller:true');
-  
   const handleNotifySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!notifyEmail || !notifyEmail.includes('@')) {
       toast.error('Por favor ingresa un email válido');
       return;
     }
-    
     setIsSubmittingEmail(true);
-    
     try {
-      const { data, error } = await supabase.functions.invoke('newsletter-signup', {
+      const {
+        data,
+        error
+      } = await supabase.functions.invoke('newsletter-signup', {
         body: {
           email: notifyEmail,
           acceptsMarketing: true
         }
       });
-
       if (error) {
         const errorContext = (error as any)?.context;
         if (errorContext?.isDuplicate) {
@@ -180,7 +164,6 @@ const ProductDetail = () => {
         }
         throw error;
       }
-
       if (data?.error) {
         if (data.isDuplicate) {
           toast.success('Ya estás en la lista de notificaciones');
@@ -201,15 +184,13 @@ const ProductDetail = () => {
       setIsSubmittingEmail(false);
     }
   };
-  
+
   // Calculate GWP progress with this product
   const potentialTotal = cartTotal + priceInfo.discountedPrice;
-  const progressPercentage = Math.min((potentialTotal / GWP_THRESHOLD) * 100, 100);
+  const progressPercentage = Math.min(potentialTotal / GWP_THRESHOLD * 100, 100);
   const remainingForGWP = Math.max(GWP_THRESHOLD - potentialTotal, 0);
   const willUnlockGWP = potentialTotal >= GWP_THRESHOLD && cartTotal < GWP_THRESHOLD;
-
-  return (
-    <div className={`min-h-screen ${isAeroGlow ? 'bg-gradient-to-br from-gray-950 via-gray-900 to-red-950' : 'bg-background'}`}>
+  return <div className={`min-h-screen ${isAeroGlow ? 'bg-gradient-to-br from-gray-950 via-gray-900 to-red-950' : 'bg-background'}`}>
       <Header />
       
       <div className="container py-8">
@@ -226,49 +207,18 @@ const ProductDetail = () => {
             {/* Main Media Display with Video/Zoom */}
             <div className={`relative aspect-square rounded-lg overflow-hidden group ${isAeroGlow ? 'bg-gray-900/50 ring-2 ring-red-600/30 shadow-2xl shadow-red-950/50' : 'bg-secondary/20'}`}>
               {/* Display Video or Image based on selection */}
-              {selectedMediaType === 'video' && isAeroGlow ? (
-                <VideoPlayer
-                  src="/videos/aeroglow-product.mp4"
-                  poster={node.images.edges[0]?.node.url}
-                  autoplay={false}
-                  muted={true}
-                  loop={true}
-                  controls={true}
-                  showPlayButton={true}
-                  className="w-full h-full"
-                  fallback={
-                    node.images.edges[selectedImage]?.node && (
-                      <img
-                        src={node.images.edges[selectedImage].node.url}
-                        alt={node.images.edges[selectedImage].node.altText || node.title}
-                        className="w-full h-full object-cover"
-                      />
-                    )
-                  }
-                />
-              ) : (
-                node.images.edges[selectedImage]?.node && (
-                  <Zoom>
-                    <img
-                      src={node.images.edges[selectedImage].node.url}
-                      alt={node.images.edges[selectedImage].node.altText || node.title}
-                      className="w-full h-full object-cover cursor-zoom-in transition-transform duration-300"
-                    />
-                  </Zoom>
-                )
-              )}
+              {selectedMediaType === 'video' && isAeroGlow ? <VideoPlayer src="/videos/aeroglow-product.mp4" poster={node.images.edges[0]?.node.url} autoplay={false} muted={true} loop={true} controls={true} showPlayButton={true} className="w-full h-full" fallback={node.images.edges[selectedImage]?.node && <img src={node.images.edges[selectedImage].node.url} alt={node.images.edges[selectedImage].node.altText || node.title} className="w-full h-full object-cover" />} /> : node.images.edges[selectedImage]?.node && <Zoom>
+                    <img src={node.images.edges[selectedImage].node.url} alt={node.images.edges[selectedImage].node.altText || node.title} className="w-full h-full object-cover cursor-zoom-in transition-transform duration-300" />
+                  </Zoom>}
               
               {/* Zoom/Video Indicator */}
-              {selectedMediaType === 'image' && (
-                <div className="absolute top-4 right-4 bg-black/60 text-white px-3 py-2 rounded-lg flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              {selectedMediaType === 'image' && <div className="absolute top-4 right-4 bg-black/60 text-white px-3 py-2 rounded-lg flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <ZoomIn className="w-4 h-4" />
                   <span className="text-xs font-medium">Click para ampliar</span>
-                </div>
-              )}
+                </div>}
               
               {/* Locked overlay for AeroGlow */}
-              {isAeroGlow && (
-                <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-red-950/70 to-black/90 flex items-center justify-center backdrop-blur-sm">
+              {isAeroGlow && <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-red-950/70 to-black/90 flex items-center justify-center backdrop-blur-sm">
                   <div className="text-center space-y-4">
                     <Lock className="w-20 h-20 text-red-500 mx-auto animate-pulse drop-shadow-[0_0_20px_rgba(239,68,68,1)]" />
                     <div className="space-y-2">
@@ -276,67 +226,33 @@ const ProductDetail = () => {
                       <p className="text-red-400 text-sm font-semibold">SE DESBLOQUEA EL 28 DE NOVIEMBRE</p>
                     </div>
                   </div>
-                </div>
-              )}
+                </div>}
               
               {/* Image Counter */}
-              {node.images.edges.length > 1 && (
-                <div className="absolute bottom-4 left-4 bg-black/60 text-white px-3 py-1.5 rounded-lg">
+              {node.images.edges.length > 1 && <div className="absolute bottom-4 left-4 bg-black/60 text-white px-3 py-1.5 rounded-lg">
                   <span className="text-xs font-medium">
                     {selectedImage + 1} / {node.images.edges.length}
                   </span>
-                </div>
-              )}
+                </div>}
             </div>
             
             {/* Thumbnail Gallery with Video */}
             <div className="grid grid-cols-5 gap-3">
               {/* Video thumbnail for AeroGlow */}
-              {isAeroGlow && (
-                <button
-                  onClick={() => setSelectedMediaType('video')}
-                  className={`relative aspect-square bg-gray-900/50 rounded-lg overflow-hidden border-2 transition-all hover:scale-105 ${
-                    selectedMediaType === 'video'
-                      ? 'border-red-500 shadow-lg shadow-red-500/30 scale-105'
-                      : 'border-red-800/50 opacity-60 hover:opacity-100'
-                  }`}
-                >
-                  <img
-                    src={node.images.edges[0]?.node.url}
-                    alt="Product Video"
-                    className="w-full h-full object-cover opacity-50"
-                  />
+              {isAeroGlow && <button onClick={() => setSelectedMediaType('video')} className={`relative aspect-square bg-gray-900/50 rounded-lg overflow-hidden border-2 transition-all hover:scale-105 ${selectedMediaType === 'video' ? 'border-red-500 shadow-lg shadow-red-500/30 scale-105' : 'border-red-800/50 opacity-60 hover:opacity-100'}`}>
+                  <img src={node.images.edges[0]?.node.url} alt="Product Video" className="w-full h-full object-cover opacity-50" />
                   <div className="absolute inset-0 flex items-center justify-center bg-black/40">
                     <Play className="w-6 h-6 text-white fill-white drop-shadow-lg" />
                   </div>
-                </button>
-              )}
+                </button>}
               
               {/* Image thumbnails */}
-              {node.images.edges.map((image, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    setSelectedImage(idx);
-                    setSelectedMediaType('image');
-                  }}
-                  className={`aspect-square bg-secondary/20 rounded-lg overflow-hidden border-2 transition-all hover:scale-105 ${
-                    selectedMediaType === 'image' && selectedImage === idx 
-                      ? isAeroGlow 
-                        ? 'border-red-500 shadow-lg shadow-red-500/30 scale-105'
-                        : 'border-primary shadow-lg scale-105' 
-                      : isAeroGlow
-                        ? 'border-red-800/50 opacity-60 hover:opacity-100'
-                        : 'border-transparent hover:border-primary/50'
-                  } ${isAeroGlow ? 'bg-gray-900/30' : ''}`}
-                >
-                  <img
-                    src={image.node.url}
-                    alt={image.node.altText || `${node.title} - ${idx + 1}`}
-                    className={`w-full h-full object-cover ${isAeroGlow ? 'opacity-70' : ''}`}
-                  />
-                </button>
-              ))}
+              {node.images.edges.map((image, idx) => <button key={idx} onClick={() => {
+              setSelectedImage(idx);
+              setSelectedMediaType('image');
+            }} className={`aspect-square bg-secondary/20 rounded-lg overflow-hidden border-2 transition-all hover:scale-105 ${selectedMediaType === 'image' && selectedImage === idx ? isAeroGlow ? 'border-red-500 shadow-lg shadow-red-500/30 scale-105' : 'border-primary shadow-lg scale-105' : isAeroGlow ? 'border-red-800/50 opacity-60 hover:opacity-100' : 'border-transparent hover:border-primary/50'} ${isAeroGlow ? 'bg-gray-900/30' : ''}`}>
+                  <img src={image.node.url} alt={image.node.altText || `${node.title} - ${idx + 1}`} className={`w-full h-full object-cover ${isAeroGlow ? 'opacity-70' : ''}`} />
+                </button>)}
             </div>
             
             {/* Trust Indicators Below Images */}
@@ -357,12 +273,10 @@ const ProductDetail = () => {
             <div>
               <div className="flex gap-2 mb-3 flex-wrap">
                 {/* Promotional Stage Badge - Highest priority */}
-                {priceInfo.hasDiscount && priceInfo.stage && (
-                  <Badge className={`bg-gradient-to-r ${priceInfo.stage.color} text-white border-0 ${isAeroGlow ? 'animate-pulse text-lg px-4 py-2' : ''}`}>
+                {priceInfo.hasDiscount && priceInfo.stage && <Badge className={`bg-gradient-to-r ${priceInfo.stage.color} text-white border-0 ${isAeroGlow ? 'animate-pulse text-lg px-4 py-2' : ''}`}>
                     <Zap className={`mr-1 ${isAeroGlow ? 'w-5 h-5' : 'w-3 h-3'}`} />
                     {priceInfo.stage.badge} {priceInfo.discountLabel}
-                  </Badge>
-                )}
+                  </Badge>}
                 {!isAeroGlow && isNew && <Badge>Nuevo</Badge>}
                 {!isAeroGlow && isBestseller && <Badge variant="secondary">Bestseller</Badge>}
                 <Badge variant="outline" className={`gap-1 ${isAeroGlow ? 'border-red-600/30 text-gray-300' : ''}`}>
@@ -376,21 +290,18 @@ const ProductDetail = () => {
               {/* Quick Benefits - Above the fold */}
               <div className="flex flex-wrap gap-3 mb-4">
                 {productContent.quickBenefits.map((benefit, idx) => {
-                  const IconComponent = (LucideIcons as any)[benefit.icon] || Clock;
-                  return (
-                    <div key={idx} className={`flex items-center gap-1.5 text-sm ${isAeroGlow ? 'text-gray-200' : 'text-muted-foreground'}`}>
+                const IconComponent = (LucideIcons as any)[benefit.icon] || Clock;
+                return <div key={idx} className={`flex items-center gap-1.5 text-sm ${isAeroGlow ? 'text-gray-200' : 'text-muted-foreground'}`}>
                       <IconComponent className={`w-4 h-4 ${isAeroGlow ? 'text-red-400' : 'text-primary'}`} />
                       <span>{benefit.text}</span>
-                    </div>
-                  );
-                })}
+                    </div>;
+              })}
               </div>
             </div>
 
             {/* Price */}
             <div className={`border-t border-b py-6 ${isAeroGlow ? 'border-red-900/30 bg-gradient-to-r from-red-950/20 to-pink-950/20 rounded-lg px-4' : ''}`}>
-              {priceInfo.hasDiscount ? (
-                <div className="space-y-2">
+              {priceInfo.hasDiscount ? <div className="space-y-2">
                   <div className="flex items-baseline gap-3">
                     <div className={`text-4xl font-bold ${isAeroGlow ? 'text-red-500 text-5xl' : 'text-primary'}`}>
                       €{priceInfo.discountedPrice.toFixed(2)}
@@ -408,61 +319,34 @@ const ProductDetail = () => {
                     </span>
                   </div>
                   <p className={`text-sm ${isAeroGlow ? 'text-gray-400' : 'text-muted-foreground'}`}>IVA incluido</p>
-                </div>
-              ) : (
-                <div>
+                </div> : <div>
                   <div className={`text-4xl font-bold ${isAeroGlow ? 'text-white' : ''}`}>€{priceInfo.originalPrice.toFixed(2)}</div>
                   <p className={`text-sm mt-1 ${isAeroGlow ? 'text-gray-400' : 'text-muted-foreground'}`}>IVA incluido</p>
-                </div>
-              )}
+                </div>}
             </div>
 
             {/* Black Friday Email Notification - Only for AeroGlow */}
-            {isAeroGlow && (
-              <form onSubmit={handleNotifySubmit} className="bg-gradient-to-br from-red-950/40 via-red-900/30 to-pink-950/40 border-2 border-red-600/40 rounded-xl p-4 backdrop-blur-sm">
+            {isAeroGlow && <form onSubmit={handleNotifySubmit} className="bg-gradient-to-br from-red-950/40 via-red-900/30 to-pink-950/40 border-2 border-red-600/40 rounded-xl p-4 backdrop-blur-sm">
                 <div className="flex items-start gap-3 mb-3">
                   <Bell className="w-5 h-5 text-red-400 mt-1 flex-shrink-0" />
                   <div className="flex-1">
                     <h3 className="text-white font-bold text-sm mb-1">Notifícame en Black Friday</h3>
                     <p className="text-gray-300 text-xs mb-3">Recibe un email cuando esté disponible con 50% OFF</p>
                     <div className="flex gap-2">
-                      <Input
-                        type="email"
-                        placeholder="tu@email.com"
-                        value={notifyEmail}
-                        onChange={(e) => setNotifyEmail(e.target.value)}
-                        className="h-9 bg-gray-900/50 border-red-600/30 text-white placeholder:text-gray-500 focus:border-red-500"
-                        disabled={isSubmittingEmail}
-                        required
-                      />
-                      <Button 
-                        type="submit" 
-                        size="sm"
-                        disabled={isSubmittingEmail}
-                        className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white"
-                      >
-                        {isSubmittingEmail ? (
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                        ) : (
-                          'Notificar'
-                        )}
+                      <Input type="email" placeholder="tu@email.com" value={notifyEmail} onChange={e => setNotifyEmail(e.target.value)} className="h-9 bg-gray-900/50 border-red-600/30 text-white placeholder:text-gray-500 focus:border-red-500" disabled={isSubmittingEmail} required />
+                      <Button type="submit" size="sm" disabled={isSubmittingEmail} className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white">
+                        {isSubmittingEmail ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Notificar'}
                       </Button>
                     </div>
                   </div>
                 </div>
-              </form>
-            )}
+              </form>}
 
             {/* GWP Progress Incentive */}
-            {hasGWPActive && (
-              <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-4 border border-purple-200 dark:border-purple-800">
+            {hasGWPActive && <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-4 border border-purple-200 dark:border-purple-800">
                 <div className="flex items-start gap-3 mb-3">
                   <div className="w-16 h-16 rounded-lg overflow-hidden bg-white flex-shrink-0 border-2 border-purple-200">
-                    <img 
-                      src={gwpHeadband} 
-                      alt="Banda de pelo gratis" 
-                      className="w-full h-full object-cover"
-                    />
+                    <img src={gwpHeadband} alt="Banda de pelo gratis" className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
@@ -477,8 +361,7 @@ const ProductDetail = () => {
                   </div>
                 </div>
                 
-                {willUnlockGWP ? (
-                  <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg p-3">
+                {willUnlockGWP ? <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg p-3">
                     <div className="flex items-center gap-2">
                       <Sparkles className="w-5 h-5" />
                       <div className="flex-1">
@@ -486,9 +369,7 @@ const ProductDetail = () => {
                         <p className="text-xs opacity-90">Banda de pelo gratis incluida</p>
                       </div>
                     </div>
-                  </div>
-                ) : potentialTotal >= GWP_THRESHOLD ? (
-                  <div className="bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded-lg p-3">
+                  </div> : potentialTotal >= GWP_THRESHOLD ? <div className="bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded-lg p-3">
                     <div className="flex items-center gap-2">
                       <Check className="w-5 h-5 text-green-600 dark:text-green-400" />
                       <div className="flex-1">
@@ -496,48 +377,27 @@ const ProductDetail = () => {
                         <p className="text-xs text-green-700 dark:text-green-300">Banda de pelo gratis con tu compra</p>
                       </div>
                     </div>
-                  </div>
-                ) : (
-                  <>
+                  </div> : <>
                     <Progress value={progressPercentage} className="h-2 mb-2" />
                     <p className="text-xs text-purple-800 dark:text-purple-200">
-                      {remainingForGWP > 0 ? (
-                        <>Añade <span className="font-bold">€{remainingForGWP.toFixed(2)}</span> más para obtener tu <span className="font-bold">banda de pelo gratis</span></>
-                      ) : (
-                        <span className="font-bold">¡Banda de pelo gratis desbloqueada!</span>
-                      )}
+                      {remainingForGWP > 0 ? <>Añade <span className="font-bold">€{remainingForGWP.toFixed(2)}</span> más para obtener tu <span className="font-bold">banda de pelo gratis</span></> : <span className="font-bold">¡Banda de pelo gratis desbloqueada!</span>}
                     </p>
-                  </>
-                )}
-              </div>
-            )}
+                  </>}
+              </div>}
 
             {/* Variants */}
-            {node.variants.edges.length > 1 && (
-              <div>
+            {node.variants.edges.length > 1 && <div>
                 <label className="text-sm font-medium mb-2 block">Variante</label>
                 <div className="flex flex-wrap gap-2">
-                  {node.variants.edges.map((v, idx) => (
-                    <Button
-                      key={v.node.id}
-                      variant={selectedVariant === idx ? "default" : "outline"}
-                      onClick={() => setSelectedVariant(idx)}
-                    >
+                  {node.variants.edges.map((v, idx) => <Button key={v.node.id} variant={selectedVariant === idx ? "default" : "outline"} onClick={() => setSelectedVariant(idx)}>
                       {v.node.title}
-                    </Button>
-                  ))}
+                    </Button>)}
                 </div>
-              </div>
-            )}
+              </div>}
 
             {/* Add to Cart */}
-            {isAeroGlow ? (
-              <div className="space-y-4">
-                <Button
-                  size="lg"
-                  className="w-full bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 text-gray-500 cursor-not-allowed border-2 border-red-600/30 hover:border-red-600/50 transition-all relative overflow-hidden group"
-                  disabled
-                >
+            {isAeroGlow ? <div className="space-y-4">
+                <Button size="lg" className="w-full bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 text-gray-500 cursor-not-allowed border-2 border-red-600/30 hover:border-red-600/50 transition-all relative overflow-hidden group" disabled>
                   <div className="absolute inset-0 bg-gradient-to-r from-red-950/0 via-red-950/20 to-red-950/0 animate-pulse" />
                   <Lock className="w-5 h-5 mr-2 relative z-10 group-hover:scale-110 transition-transform" />
                   <span className="relative z-10 font-bold">PRODUCTO BLOQUEADO</span>
@@ -566,22 +426,10 @@ const ProductDetail = () => {
                   </div>
                 </div>
                 
-                <NewsletterCTA 
-                  variant="card" 
-                  text="Notificarme cuando esté disponible"
-                  className="bg-gradient-to-br from-red-950/40 via-red-900/30 to-pink-950/40 border-2 border-red-600/40"
-                />
-              </div>
-            ) : (
-              <Button
-                size="lg"
-                className="w-full"
-                onClick={handleAddToCart}
-                disabled={!variant?.availableForSale}
-              >
+                
+              </div> : <Button size="lg" className="w-full" onClick={handleAddToCart} disabled={!variant?.availableForSale}>
                 {variant?.availableForSale ? 'Añadir al carrito' : 'Agotado'}
-              </Button>
-            )}
+              </Button>}
 
             {/* Features */}
             <div className={`space-y-3 pt-6 border-t ${isAeroGlow ? 'border-red-900/30' : ''}`}>
@@ -625,9 +473,7 @@ const ProductDetail = () => {
                 </CollapsibleTrigger>
                 <CollapsibleContent className={`px-4 pb-4 text-sm space-y-2 ${isAeroGlow ? 'text-gray-200' : 'text-muted-foreground'}`}>
                   <p className={`font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>{productContent.dropdowns.howItWorks.summary}</p>
-                  {productContent.dropdowns.howItWorks.details.map((detail, idx) => (
-                    <p key={idx}>{detail}</p>
-                  ))}
+                  {productContent.dropdowns.howItWorks.details.map((detail, idx) => <p key={idx}>{detail}</p>)}
                 </CollapsibleContent>
               </Collapsible>
 
@@ -642,12 +488,10 @@ const ProductDetail = () => {
                 </CollapsibleTrigger>
                 <CollapsibleContent className={`px-4 pb-4 text-sm space-y-2 ${isAeroGlow ? 'text-gray-200' : 'text-muted-foreground'}`}>
                   <div className="space-y-3">
-                    {productContent.dropdowns.expectedResults.phases.map((phase, idx) => (
-                      <div key={idx}>
+                    {productContent.dropdowns.expectedResults.phases.map((phase, idx) => <div key={idx}>
                         <p className={`font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>{phase.timeframe}</p>
                         <p>{phase.description}</p>
-                      </div>
-                    ))}
+                      </div>)}
                   </div>
                   <p className="italic pt-2">{productContent.dropdowns.expectedResults.usageNote}</p>
                 </CollapsibleContent>
@@ -664,9 +508,7 @@ const ProductDetail = () => {
                 </CollapsibleTrigger>
                 <CollapsibleContent className={`px-4 pb-4 text-sm ${isAeroGlow ? 'text-gray-200' : 'text-muted-foreground'}`}>
                   <ol className="space-y-2 list-decimal list-inside">
-                    {productContent.dropdowns.howToUse.steps.map((step, idx) => (
-                      <li key={idx}>{step}</li>
-                    ))}
+                    {productContent.dropdowns.howToUse.steps.map((step, idx) => <li key={idx}>{step}</li>)}
                   </ol>
                   <p className={`mt-3 font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>{productContent.dropdowns.howToUse.additionalNote}</p>
                 </CollapsibleContent>
@@ -682,12 +524,10 @@ const ProductDetail = () => {
                   <ChevronDown className={`w-5 h-5 transition-transform ${isAeroGlow ? 'text-gray-300' : 'text-muted-foreground'}`} />
                 </CollapsibleTrigger>
                 <CollapsibleContent className={`px-4 pb-4 text-sm space-y-3 ${isAeroGlow ? 'text-gray-200' : 'text-muted-foreground'}`}>
-                  {productContent.dropdowns.whatMakesDifferent.map((diff, idx) => (
-                    <div key={idx}>
+                  {productContent.dropdowns.whatMakesDifferent.map((diff, idx) => <div key={idx}>
                       <p className={`font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>{diff.title}</p>
                       <p>{diff.description}</p>
-                    </div>
-                  ))}
+                    </div>)}
                 </CollapsibleContent>
               </Collapsible>
 
@@ -740,8 +580,6 @@ const ProductDetail = () => {
       </div>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default ProductDetail;
