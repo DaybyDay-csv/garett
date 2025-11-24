@@ -115,6 +115,14 @@ export const NewsletterPopup = () => {
           throw new Error(data.error);
         }
       } else if (data?.success) {
+        // Track Lead event for newsletter signup
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+          (window as any).fbq('track', 'Lead', {
+            content_name: 'Newsletter Signup',
+            content_category: 'Newsletter'
+          });
+        }
+        
         toast({
           title: "¡Suscripción exitosa!",
           description: "Gracias por suscribirte. Recibirás notificaciones de cada etapa."

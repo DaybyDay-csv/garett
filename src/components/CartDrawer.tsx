@@ -72,6 +72,20 @@ export const CartDrawer = () => {
 
   const handleCheckout = async () => {
     try {
+      // Track InitiateCheckout event
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'InitiateCheckout', {
+          content_ids: items.filter(item => !item.isGWP).map(item => item.variantId),
+          contents: items.filter(item => !item.isGWP).map(item => ({
+            id: item.variantId,
+            quantity: item.quantity
+          })),
+          value: subtotalWithDiscount,
+          currency: 'EUR',
+          num_items: totalItems
+        });
+      }
+      
       await createCheckout();
       const checkoutUrl = useCartStore.getState().checkoutUrl;
       if (checkoutUrl) {
