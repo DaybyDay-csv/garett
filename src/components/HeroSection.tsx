@@ -2,15 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Sparkles, ArrowRight } from "lucide-react";
 import heroBackground from "@/assets/hero-background.png";
-
 export const HeroSection = () => {
-  return (
-    <section className="relative overflow-hidden min-h-[600px] md:min-h-[700px]">
+  return <section className="relative overflow-hidden min-h-[600px] md:min-h-[700px]">
       {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      />
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: `url(${heroBackground})`
+    }} />
       
       <div className="container relative py-12 md:py-20 h-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
@@ -21,7 +18,7 @@ export const HeroSection = () => {
               Tecnología polaca de última generación
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-[#2e3342]">
               TU SPA DE LUJO EN CASA
             </h1>
             
@@ -62,6 +59,5 @@ export const HeroSection = () => {
           <div className="hidden lg:block" />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
