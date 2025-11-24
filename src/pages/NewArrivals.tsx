@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ProductCard } from "@/components/ProductCard";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { Sparkles } from "lucide-react";
+import { InfiniteScrollCarousel } from "@/components/InfiniteScrollCarousel";
 
 const NewArrivals = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -13,9 +13,9 @@ const NewArrivals = () => {
     const loadProducts = async () => {
       try {
         const data = await fetchProducts(50);
-        // Filter out GWP product and get only new products
-        const newProducts = data.filter(p => !isGWPProduct(p) && p.node.tags.includes('new:true'));
-        setProducts(newProducts);
+        // Filter out GWP product - show all products
+        const filteredProducts = data.filter(p => !isGWPProduct(p));
+        setProducts(filteredProducts);
       } catch (error) {
         console.error('Error loading products:', error);
       } finally {
@@ -25,6 +25,23 @@ const NewArrivals = () => {
 
     loadProducts();
   }, []);
+
+  const categories = [
+    { value: "capilar", label: "Cuidado capilar", icon: "💇" },
+    { value: "masajeadores-faciales", label: "Masajeadores faciales", icon: "✨" },
+    { value: "limpieza-facial", label: "Limpieza facial", icon: "🧼" },
+    { value: "mesoterapia", label: "Mesoterapia", icon: "💉" },
+    { value: "corporales", label: "Dispositivos corporales", icon: "🏋️" },
+    { value: "ipl", label: "Depilación e IPL", icon: "💡" },
+  ];
+
+  // Group products by category
+  const productsByCategory = categories.map(category => ({
+    ...category,
+    products: products.filter(p => 
+      p.node.tags.some(tag => tag.includes(`category:${category.value}`))
+    )
+  })).filter(cat => cat.products.length > 0);
 
   return (
     <div className="min-h-screen bg-background">
@@ -54,16 +71,22 @@ const NewArrivals = () => {
             </p>
           </div>
         ) : (
-          <>
-            <p className="text-sm text-muted-foreground mb-4">
-              {products.length} producto{products.length !== 1 ? 's' : ''} nuevo{products.length !== 1 ? 's' : ''}
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-              {products.map((product) => (
-                <ProductCard key={product.node.id} product={product} />
-              ))}
-            </div>
-          </>
+          <div className="space-y-16">
+            {productsByCategory.map((category) => (
+              <div key={category.value} className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl">{category.icon}</span>
+                  <div>
+                    <h2 className="text-2xl sm:text-3xl font-bold">{category.label}</h2>
+                    <p className="text-sm text-muted-foreground">
+                      {category.products.length} producto{category.products.length !== 1 ? 's' : ''}
+                    </p>
+                  </div>
+                </div>
+                <InfiniteScrollCarousel products={category.products} />
+              </div>
+            ))}
+          </div>
         )}
       </div>
 
