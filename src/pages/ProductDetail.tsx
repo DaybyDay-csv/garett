@@ -19,6 +19,7 @@ import "react-medium-image-zoom/dist/styles.css";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { Play } from "lucide-react";
+import { NewsletterCTA } from "@/components/NewsletterCTA";
 
 const ProductDetail = () => {
   const { handle } = useParams();
@@ -475,6 +476,12 @@ const ProductDetail = () => {
                     </div>
                   </div>
                 </div>
+                
+                <NewsletterCTA 
+                  variant="card" 
+                  text="Notificarme cuando esté disponible"
+                  className="bg-gradient-to-br from-red-950/40 via-red-900/30 to-pink-950/40 border-2 border-red-600/40"
+                />
               </div>
             ) : (
               <Button
