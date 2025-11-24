@@ -58,15 +58,15 @@ const ugcContent: UGCItem[] = [{
   id: 6,
   type: "image",
   src: ugc5,
-  name: "Paula L.",
+  name: "Natalia",
   handle: "@nataliadiaazn",
   caption: "Mi momento de relax"
 }, {
   id: 8,
   type: "image",
   src: ugc2,
-  name: "Rosa M.",
-  handle: "@rosa.beauty",
+  name: "Trini",
+  handle: "@trini_s_s",
   caption: "Mis esenciales"
 }];
 export const UGCSection = () => {
