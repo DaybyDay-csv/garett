@@ -33,15 +33,15 @@ export const HeroSection = () => {
             </h1>
             
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-fade-in [animation-delay:200ms]">
-              <Button asChild size="lg" className="text-sm md:text-base group bg-header hover:bg-header/90 text-header-foreground h-12 md:h-11">
+            <div className="flex flex-col gap-3 md:gap-4 max-w-xs md:max-w-none animate-fade-in [animation-delay:200ms]">
+              <Button asChild size="lg" className="text-sm md:text-base group bg-header hover:bg-header/90 text-header-foreground h-11 md:h-11 px-6">
                 <Link to="/novedades">
                   Ver Novedades
                   <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               
-              <Button asChild variant="outline" size="lg" className="text-sm md:text-base border-header text-header hover:bg-header/5 h-12 md:h-11">
+              <Button asChild variant="outline" size="lg" className="text-sm md:text-base border-header text-header hover:bg-header/5 h-11 md:h-11 px-6">
                 <Link to="/superventas">
                   Ver Superventas
                 </Link>
@@ -51,15 +51,15 @@ export const HeroSection = () => {
             {/* Trust Indicators */}
             <div className="flex flex-col gap-2 md:gap-3 text-xs md:text-sm text-header pt-2 md:pt-4 animate-fade-in [animation-delay:300ms]">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
                 <span className="font-medium">Garantía 2 años</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
                 <span className="font-medium">Envío gratis desde 150€</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
                 <span className="font-medium">En El Corte Inglés</span>
               </div>
             </div>
