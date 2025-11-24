@@ -13,12 +13,12 @@ export const HeroSection = () => {
               Tecnología polaca de última generación
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-              Tu spa de lujo en casa con tecnología clínica
+            <h1 className="md:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-6xl text-center px-0 my-0 mx-0 py-[16px]">
+              ​TU SPA DE LUJO EN CASA       
             </h1>
             
-            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0">
-              Dispositivos profesionales con garantía de 3 años. Resultados visibles desde la primera semana.
+            <p className="md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 text-base font-extralight">
+              Dispositivos profesionales con garantía de 2 años. Resultados visibles desde la primera semana.
             </p>
             
             {/* CTAs */}
