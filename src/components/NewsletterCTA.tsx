@@ -16,15 +16,7 @@ export const NewsletterCTA = ({
 }: NewsletterCTAProps) => {
   const openNewsletter = useNewsletterStore(state => state.openNewsletter);
   if (variant === "inline") {
-    return <Button 
-      onClick={openNewsletter} 
-      variant="outline" 
-      size="sm"
-      className={cn("gap-2", className)}
-    >
-      <Bell className="w-4 h-4" />
-      {text}
-    </Button>;
+    return;
   }
   if (variant === "card") {
     return <div className={cn("bg-gradient-to-br from-primary/5 to-accent/5 rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all", className)}>
