@@ -8,7 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
-import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, ZoomIn, Maximize2, ChevronDown, Clock, Award, Sparkle, Zap, Droplets, Activity, Battery, Package, Lock, Calendar, AlertTriangle } from "lucide-react";
+import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, ZoomIn, Maximize2, ChevronDown, Clock, Award, Sparkle, Zap, Droplets, Activity, Battery, Package, Lock, Calendar, AlertTriangle, Bell, Loader2 } from "lucide-react";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { calculatePromotionalPrice, formatPrice, getCurrentPromotionalStage } from "@/lib/promotions";
 import { getProductContent, detectProductCategory } from "@/lib/productContent";
@@ -20,6 +20,8 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { Play } from "lucide-react";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
+import { Input } from "@/components/ui/input";
+import { supabase } from "@/integrations/supabase/client";
 
 const ProductDetail = () => {
   const { handle } = useParams();
@@ -28,6 +30,8 @@ const ProductDetail = () => {
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedMediaType, setSelectedMediaType] = useState<'image' | 'video'>('image');
+  const [notifyEmail, setNotifyEmail] = useState("");
+  const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
   const addItem = useCartStore(state => state.addItem);
   const items = useCartStore(state => state.items);
   
@@ -148,6 +152,55 @@ const ProductDetail = () => {
 
   const isNew = node.tags.includes('new:true');
   const isBestseller = node.tags.includes('bestseller:true');
+  
+  const handleNotifySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!notifyEmail || !notifyEmail.includes('@')) {
+      toast.error('Por favor ingresa un email válido');
+      return;
+    }
+    
+    setIsSubmittingEmail(true);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('newsletter-signup', {
+        body: {
+          email: notifyEmail,
+          acceptsMarketing: true
+        }
+      });
+
+      if (error) {
+        const errorContext = (error as any)?.context;
+        if (errorContext?.isDuplicate) {
+          toast.success('Ya estás en la lista de notificaciones');
+          setNotifyEmail("");
+          return;
+        }
+        throw error;
+      }
+
+      if (data?.error) {
+        if (data.isDuplicate) {
+          toast.success('Ya estás en la lista de notificaciones');
+          setNotifyEmail("");
+        } else {
+          throw new Error(data.error);
+        }
+      } else if (data?.success) {
+        toast.success('¡Perfecto! Te notificaremos en Black Friday', {
+          description: 'Recibirás un email cuando el producto esté disponible'
+        });
+        setNotifyEmail("");
+      }
+    } catch (error: any) {
+      console.error('Newsletter signup error:', error);
+      toast.error('Error al registrar email. Intenta nuevamente.');
+    } finally {
+      setIsSubmittingEmail(false);
+    }
+  };
   
   // Calculate GWP progress with this product
   const potentialTotal = cartTotal + priceInfo.discountedPrice;
@@ -333,6 +386,42 @@ const ProductDetail = () => {
                 })}
               </div>
             </div>
+
+            {/* Black Friday Email Notification - Only for AeroGlow */}
+            {isAeroGlow && (
+              <form onSubmit={handleNotifySubmit} className="bg-gradient-to-br from-red-950/40 via-red-900/30 to-pink-950/40 border-2 border-red-600/40 rounded-xl p-4 backdrop-blur-sm">
+                <div className="flex items-start gap-3 mb-3">
+                  <Bell className="w-5 h-5 text-red-400 mt-1 flex-shrink-0" />
+                  <div className="flex-1">
+                    <h3 className="text-white font-bold text-sm mb-1">Notifícame en Black Friday</h3>
+                    <p className="text-gray-300 text-xs mb-3">Recibe un email cuando esté disponible con 50% OFF</p>
+                    <div className="flex gap-2">
+                      <Input
+                        type="email"
+                        placeholder="tu@email.com"
+                        value={notifyEmail}
+                        onChange={(e) => setNotifyEmail(e.target.value)}
+                        className="h-9 bg-gray-900/50 border-red-600/30 text-white placeholder:text-gray-500 focus:border-red-500"
+                        disabled={isSubmittingEmail}
+                        required
+                      />
+                      <Button 
+                        type="submit" 
+                        size="sm"
+                        disabled={isSubmittingEmail}
+                        className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white"
+                      >
+                        {isSubmittingEmail ? (
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                        ) : (
+                          'Notificar'
+                        )}
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            )}
 
             {/* Price */}
             <div className={`border-t border-b py-6 ${isAeroGlow ? 'border-red-900/30 bg-gradient-to-r from-red-950/20 to-pink-950/20 rounded-lg px-4' : ''}`}>
