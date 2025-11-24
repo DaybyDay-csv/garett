@@ -1,4 +1,4 @@
-import { Shield, Award, Globe } from "lucide-react";
+import { Shield, Award, Sparkles } from "lucide-react";
 import elCorteInglesLogo from "@/assets/el-corte-ingles-logo.png";
 export const TrustBadges = () => {
   return <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 py-6 md:py-12">
@@ -25,7 +25,7 @@ export const TrustBadges = () => {
       </div>
       
       <div className="flex flex-col items-center text-center p-4 md:p-6 rounded-lg border bg-card">
-        <Globe className="w-10 h-10 md:w-12 md:h-12 text-primary mb-3 md:mb-4" />
+        <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-primary mb-3 md:mb-4" />
         <h3 className="font-semibold text-base md:text-lg mb-1 md:mb-2">Novedad: Tecnología Polaca</h3>
         <p className="text-xs md:text-sm text-muted-foreground">
           Innovación europea de alta calidad recién llegada a España
