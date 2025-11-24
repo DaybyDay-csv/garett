@@ -144,11 +144,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           
           <Button 
             onClick={handleAddToCart}
-            disabled={!firstVariant?.availableForSale}
+            disabled={!firstVariant?.availableForSale || isLaunch}
             size="sm"
-            className="hidden md:inline-flex w-full sm:w-auto"
+            className="hidden md:inline-flex w-full sm:w-auto backdrop-blur-sm disabled:opacity-60"
           >
-            {firstVariant?.availableForSale ? 'Añadir' : 'Agotado'}
+            {isLaunch ? 'Próximamente' : (firstVariant?.availableForSale ? 'Añadir' : 'Agotado')}
           </Button>
         </div>
       </div>
