@@ -48,6 +48,17 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     
     addItem(cartItem);
     
+    // Track AddToCart event
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'AddToCart', {
+        content_name: node.title,
+        content_ids: [firstVariant.id],
+        content_type: 'product',
+        value: priceInfo.discountedPrice,
+        currency: 'EUR'
+      });
+    }
+    
     const discountText = priceInfo.hasDiscount 
       ? ` (${priceInfo.discountLabel} aplicado)` 
       : '';

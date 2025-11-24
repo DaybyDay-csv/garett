@@ -56,6 +56,18 @@ const ProductDetail = () => {
           if (isAeroGlowProduct) {
             setSelectedMediaType('video');
           }
+          
+          // Track ViewContent event when product loads
+          const variant = found.node.variants.edges[0]?.node;
+          if (variant && typeof window !== 'undefined' && (window as any).fbq) {
+            (window as any).fbq('track', 'ViewContent', {
+              content_name: found.node.title,
+              content_ids: [variant.id],
+              content_type: 'product',
+              value: parseFloat(variant.price.amount),
+              currency: 'EUR'
+            });
+          }
         } else {
           setProduct(null);
         }
@@ -133,6 +145,18 @@ const ProductDetail = () => {
       selectedOptions: variant.selectedOptions || []
     };
     addItem(cartItem);
+    
+    // Track AddToCart event
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'AddToCart', {
+        content_name: node.title,
+        content_ids: [variant.id],
+        content_type: 'product',
+        value: priceInfo.discountedPrice,
+        currency: 'EUR'
+      });
+    }
+    
     const discountText = priceInfo.hasDiscount ? ` (${priceInfo.discountLabel} aplicado)` : '';
     toast.success('Añadido al carrito', {
       description: `${node.title}${discountText}`,
@@ -175,6 +199,14 @@ const ProductDetail = () => {
           throw new Error(data.error);
         }
       } else if (data?.success) {
+        // Track Lead event for product notification signup
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+          (window as any).fbq('track', 'Lead', {
+            content_name: 'Product Notification',
+            content_category: 'Black Friday Alert'
+          });
+        }
+        
         toast.success('¡Perfecto! Te notificaremos en Black Friday', {
           description: 'Recibirás un email cuando el producto esté disponible'
         });
