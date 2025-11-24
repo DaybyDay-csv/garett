@@ -89,57 +89,38 @@ export const UGCSection = () => {
         {/* UGC Grid - 2 Rows */}
         <div className="relative mb-16">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-            {ugcContent.map(item => (
-              <div key={item.id} className="group relative overflow-hidden rounded-xl aspect-[9/16] bg-muted cursor-pointer transition-shadow hover:shadow-xl" onClick={() => {
-                if (item.type === "video") {
-                  setPlayingVideo(playingVideo === item.id ? null : item.id);
+            {ugcContent.map(item => <div key={item.id} className="group relative overflow-hidden rounded-xl aspect-[9/16] bg-muted cursor-pointer transition-shadow hover:shadow-xl" onClick={() => {
+            if (item.type === "video") {
+              setPlayingVideo(playingVideo === item.id ? null : item.id);
+            }
+          }}>
+                {item.type === "image" ? <OptimizedImage src={item.src} alt={`${item.caption || item.name} - Contenido de usuario Garett Beauty`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" /> : <div className="relative w-full h-full">
+                    <video src={item.src} className="w-full h-full object-cover" loop muted playsInline ref={el => {
+                if (el) {
+                  if (playingVideo === item.id) {
+                    el.play();
+                  } else {
+                    el.pause();
+                    el.currentTime = 0;
+                  }
                 }
-              }}>
-                {item.type === "image" ? (
-                  <OptimizedImage 
-                    src={item.src} 
-                    alt={`${item.caption || item.name} - Contenido de usuario Garett Beauty`} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                  />
-                ) : (
-                  <div className="relative w-full h-full">
-                    <video 
-                      src={item.src} 
-                      className="w-full h-full object-cover" 
-                      loop 
-                      muted 
-                      playsInline
-                      ref={el => {
-                        if (el) {
-                          if (playingVideo === item.id) {
-                            el.play();
-                          } else {
-                            el.pause();
-                            el.currentTime = 0;
-                          }
-                        }
-                      }}
-                    />
-                    {playingVideo !== item.id && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+              }} />
+                    {playingVideo !== item.id && <div className="absolute inset-0 flex items-center justify-center bg-black/20">
                         <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
                           <Play className="w-7 h-7 text-primary ml-1" fill="currentColor" />
                         </div>
-                      </div>
-                    )}
-                  </div>
-                )}
+                      </div>}
+                  </div>}
 
                 {/* Hover overlay with user info */}
                 <div className="absolute inset-0 bg-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <p className="text-white font-semibold text-base mb-1">{item.name}</p>
+                    
                     <p className="text-white/90 text-sm mb-2">{item.handle}</p>
                     {item.caption && <p className="text-white/80 text-sm">{item.caption}</p>}
                   </div>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
 
