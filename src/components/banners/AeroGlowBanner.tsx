@@ -54,7 +54,7 @@ export const AeroGlowBanner = () => {
         {/* Main Hero Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 items-center py-4 md:py-6 lg:py-8">
           {/* Left Content */}
-          <div className="text-center lg:text-left space-y-2 md:space-y-4 order-2 lg:order-1">
+          <div className="text-center space-y-2 md:space-y-4 order-2 lg:order-1">
             {/* Black Friday Event Badge */}
             <div className="inline-flex items-center gap-2 bg-red-600/30 text-red-400 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold border border-red-500/50 animate-pulse">
               <Zap className="w-4 h-4 md:w-5 md:h-5" />
@@ -66,7 +66,7 @@ export const AeroGlowBanner = () => {
             
             {/* Headline */}
             <div className="space-y-2 px-2">
-              <div className="flex items-center justify-center lg:justify-start gap-2">
+              <div className="flex items-center justify-center gap-2">
                 {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 md:w-4 md:h-4 fill-red-500 text-red-500" />)}
                 <span className="text-xs md:text-sm font-semibold text-gray-300 ml-1">Resultados Instantáneos</span>
               </div>
@@ -81,7 +81,7 @@ Resultados visibles desde el primer uso.</span>
             </div>
 
             {/* Pricing */}
-            {!loading && <div className="flex items-center justify-center lg:justify-start gap-2 flex-wrap px-2">
+            {!loading && <div className="flex items-center justify-center gap-2 flex-wrap px-2">
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl md:text-4xl font-bold text-foreground">
                     €{finalPrice.toFixed(2)}
@@ -115,7 +115,7 @@ Resultados visibles desde el primer uso.</span>
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col gap-2 md:gap-3 items-center lg:items-start pt-2 relative z-20 px-2">
+            <div className="flex flex-col gap-2 md:gap-3 items-center pt-2 relative z-20 px-2">
               <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-sm md:text-base h-10 md:h-12 px-6 md:px-8 bg-white hover:bg-white/90 transition-all text-black border-0 rounded-lg font-semibold cursor-pointer w-full sm:w-auto max-w-xs">
                 Comprar Ahora
                 <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -127,7 +127,7 @@ Resultados visibles desde el primer uso.</span>
             </div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 md:gap-4 pt-2 text-xs px-2">
+            <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 pt-2 text-xs px-2">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-green-500/20 flex items-center justify-center">
                   <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-green-500 animate-pulse" />
