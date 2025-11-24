@@ -57,13 +57,6 @@ const ugcContent: UGCItem[] = [{
 }, {
   id: 6,
   type: "image",
-  src: ugcMaria,
-  name: "María G.",
-  handle: "@maria.haircare",
-  caption: "Pelo perfecto cada día"
-}, {
-  id: 7,
-  type: "image",
   src: ugc5,
   name: "Paula L.",
   handle: "@paula.wellness",
