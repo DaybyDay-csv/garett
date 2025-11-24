@@ -62,10 +62,7 @@ export const AeroGlowBanner = () => {
             </div>
             
             {/* Unlock Date */}
-            <div className="inline-flex items-center gap-2 bg-red-950/50 text-red-300 px-3 py-1.5 rounded-lg text-xs md:text-sm font-semibold border border-red-600/30 backdrop-blur-sm">
-              <Lock className="w-4 h-4" />
-              SE DESBLOQUEA 28 de Noviembre
-            </div>
+            
             
             {/* Headline */}
             <div className="space-y-2 px-2">
