@@ -101,8 +101,8 @@ export const InfiniteScrollCarousel = ({ products }: InfiniteScrollCarouselProps
       </Button>
       
       {/* Gradient overlays */}
-      <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-background to-transparent pointer-events-none" />
-      <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-background to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-0 w-8 sm:w-12 h-full bg-gradient-to-r from-background/80 to-transparent pointer-events-none" />
+      <div className="absolute top-0 right-0 w-8 sm:w-12 h-full bg-gradient-to-l from-background/80 to-transparent pointer-events-none" />
     </div>
   );
 };
