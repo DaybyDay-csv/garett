@@ -63,7 +63,7 @@ export const BlackFridayBanner = () => {
     },
   ];
   return (
-    <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-promo-bf-start overflow-hidden">
+    <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-header overflow-hidden">
       {/* Pattern overlay */}
       <div
         className="absolute inset-0 opacity-10"
