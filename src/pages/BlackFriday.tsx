@@ -544,21 +544,7 @@ const BlackFriday = () => {
           </div>}
 
         {/* T&C */}
-        <div className="mt-12 p-6 bg-muted/50 rounded-lg">
-          <h3 className="font-bold mb-3">Calendario y condiciones de las promociones</h3>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>• <span className="font-semibold text-foreground">Warm-up (10-16 Nov):</span> 10% de descuento aplicado directamente en productos</li>
-            <li>• White Week (17-27 Nov): 20% OFF (10% + 10% extra) aplicado en productos +  Banda de pelo gratis desde 70€</li>
-            <li>• Black Friday (28-30 Nov): 25% base + códigos tier (EARLYBIRD50: 50% OFF limitado, EARLYBIRD35: 35% OFF limitado, BF25: 25% OFF) + Banda de pelo gratis desde €70</li> 
-            <li>• Cyber Monday (1 Dic): 15% OFF aplicado en productos +Banda de pelo gratis desde €70</li>
-            <li>• Los descuentos Warm-up, White Week, Black Friday y Ciber Monday generales a la web se aplican automáticamente en los precios de productos</li>
-            <li>• Para Black Friday EXTRA 50-45-35% introduce los códigos a hacer checkout</li>
-            <li>• Los códigos EARLYBIRD tienen límite de usos (25 y 10 respectivamente, 1 por cliente)</li>
-            <li>• El regalo (banda de pelo premium) se añade automáticamente a tu carrito al superar 70€</li>
-            <li>• Garantía comercial de 24 meses contra defectos de fabricación</li>
-            <li>• Consulta condiciones de devolución en política de garantía</li>
-          </ul>
-        </div>
+        
 
         {/* Final Newsletter CTA */}
         <div className="mt-12">
