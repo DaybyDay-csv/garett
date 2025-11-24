@@ -18,7 +18,7 @@ export const HeroSection = () => {
               Tecnología polaca de última generación
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-[#2e3342]">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-header">
               TU SPA DE LUJO EN CASA
             </h1>
             
@@ -39,18 +39,18 @@ export const HeroSection = () => {
             </div>
             
             {/* Trust Indicators */}
-            <div className="flex flex-col gap-3 text-sm text-foreground pt-4">
+            <div className="flex flex-col gap-3 text-sm text-header pt-4">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span>Garantía 2 años</span>
+                <span className="font-medium">Garantía 2 años</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span>Envío gratis desde 150€</span>
+                <span className="font-medium">Envío gratis desde 150€</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span>En El Corte Inglés</span>
+                <span className="font-medium">En El Corte Inglés</span>
               </div>
             </div>
           </div>
