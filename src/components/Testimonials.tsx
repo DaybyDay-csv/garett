@@ -6,148 +6,59 @@ import Autoplay from "embla-carousel-autoplay";
 import garettPattern from "@/assets/garett-pattern-2.png";
 const testimonials = [
   {
-    name: "Sofía R.",
-    age: 29,
-    location: "Madrid",
+    name: "Aroa",
+    location: "España",
     rating: 5,
-    timeline: "6 semanas",
-    verified: true,
-    image: "SR",
-    review:
-      "Como creadora de contenido necesito verme bien siempre, pero las citas en clínica no encajan con mi agenda. Uso mi Garett antes de grabar y la diferencia en mi piel es increíble. Lo mejor es que lo hago mientras respondo emails.",
-    result: "Piel radiante para cámara",
-  },
-  {
-    name: "Ana R.",
-    age: 48,
-    location: "Barcelona",
-    rating: 5,
-    timeline: "8 semanas",
+    date: "14 nov 2025",
     verified: true,
     image: "AR",
     review:
-      "Trabajo muchas horas y no tengo tiempo para tratamientos en clínica. Este dispositivo me ha cambiado la vida. En 2 meses, las líneas de expresión están mucho menos marcadas. La inversión ha valido totalmente la pena.",
-    result: "Líneas de expresión reducidas",
+      "Estoy encantada con los productos de Garett. Desde que los uso he notado una gran diferencia en mi piel. Gran relación calidad-precio y una atención al cliente impecable. Una marca en la que confío plenamente!",
+    result: "Gran diferencia en la piel",
   },
   {
-    name: "Laura M.",
-    age: 32,
-    location: "Valencia",
+    name: "María Trinidad",
+    location: "España",
     rating: 5,
-    timeline: "7 semanas",
+    date: "12 nov 2025",
     verified: true,
-    image: "LM",
+    image: "MT",
     review:
-      "Entre el trabajo y el gimnasio apenas tengo tiempo. Quería prevenir sin gastar fortunas en tratamientos mensuales. En menos de 2 meses ya veo mi piel más luminosa y uniforme. Lo uso mientras veo Netflix, súper práctico.",
-    result: "Prevención antiedad efectiva",
+      "Mi piel está jugosa y con mucha luminosidad. De momento solamente he utilizado de manera habitual el FRESH SKIN PRO pero ampliaré próximamente de cara a Navidad.",
+    result: "Piel jugosa y luminosa",
   },
   {
-    name: "Isabel M.",
-    age: 55,
-    location: "Sevilla",
+    name: "Trini",
+    location: "España",
     rating: 5,
-    timeline: "6 semanas",
+    date: "11 nov 2025",
     verified: true,
-    image: "IM",
+    image: "TR",
     review:
-      "Solo llevo 6 semanas y ya noto cambios. La textura de la piel ha mejorado muchísimo. Es superfácil de usar, no requiere técnica especial. Por fin una solución que se adapta a mi ritmo de vida.",
-    result: "Textura mejorada visiblemente",
+      "Buscaba algo fácil de mantener y estos dos productos encajan perfecto: Serum Skin + Multi Clean se incorporan a la rutina sin complicaciones. En pocos días noté la piel más uniforme, suave y con un brillo saludable. Lo mejor: su equipo de atención en Instagram. Les consulté varias dudas y me contestaron enseguida con indicaciones prácticas.",
+    result: "Piel uniforme y brillante",
   },
   {
-    name: "Carmen L.",
-    age: 42,
-    location: "Málaga",
+    name: "Laura Hernández",
+    location: "España",
     rating: 5,
-    timeline: "5 semanas",
+    date: "11 nov 2025",
     verified: true,
-    image: "CL",
+    image: "LH",
     review:
-      "Después de mi segundo hijo, mi piel perdió firmeza. Probé cremas caras sin resultados. Con Garett noto la piel más firme y los poros menos visibles. Mi marido dice que luzco más descansada.",
-    result: "Firmeza recuperada",
+      "Descubrir los dispositivos de belleza de Garett ha sido todo un hallazgo. Empecé con Pretty Face… ¡y ahora ya tengo cuatro! Son una auténtica adicción. Estoy encantada con los resultados, porque desde el primer día se notan los cambios, y además me regalan un momento de relax cada día, potenciando el efecto de todas mis cremas.",
+    result: "Cambios desde el primer día",
   },
   {
-    name: "Patricia G.",
-    age: 35,
-    location: "Bilbao",
-    rating: 4,
-    timeline: "4 semanas",
-    verified: true,
-    image: "PG",
-    review:
-      "Llevo un mes usándolo y aunque todavía no veo cambios dramáticos, mi piel se siente mejor hidratada y más suave. Es cómodo de usar mientras trabajo desde casa. Espero ver más resultados pronto.",
-    result: "Mejora progresiva",
-  },
-  {
-    name: "Elena S.",
-    age: 51,
-    location: "Zaragoza",
+    name: "Cliente verificado",
+    location: "España",
     rating: 5,
-    timeline: "10 semanas",
+    date: "11 nov 2025",
     verified: true,
-    image: "ES",
+    image: "CV",
     review:
-      "Llevo más de 2 meses y los resultados superan mis expectativas. Las manchas solares han aclarado notablemente. Mis amigas me preguntan qué me he hecho. Vale cada euro invertido.",
-    result: "Manchas reducidas visiblemente",
-  },
-  {
-    name: "Marta F.",
-    age: 27,
-    location: "Granada",
-    rating: 5,
-    timeline: "5 semanas",
-    verified: true,
-    image: "MF",
-    review:
-      "Trabajo en una tienda y paso muchas horas de pie. Este dispositivo lo uso por las noches mientras descanso. Mi piel luce más despierta y fresca. El mejor regalo que me he hecho.",
-    result: "Piel más luminosa",
-  },
-  {
-    name: "Rosa P.",
-    age: 60,
-    location: "Murcia",
-    rating: 5,
-    timeline: "9 semanas",
-    verified: true,
-    image: "RP",
-    review:
-      "A mi edad ya no esperaba grandes cambios, pero este aparato me ha sorprendido. Las arrugas profundas no se han ido, pero sí se notan más suaves. Mi piel está más hidratada y tersa.",
-    result: "Arrugas suavizadas",
-  },
-  {
-    name: "Beatriz N.",
-    age: 38,
-    location: "Alicante",
-    rating: 4,
-    timeline: "6 semanas",
-    verified: true,
-    image: "BN",
-    review:
-      "Buenos resultados hasta ahora. La textura de mi piel ha mejorado y las líneas alrededor de los ojos son menos notorias. Uso constante es clave. Me hubiera gustado que viniera con más accesorios.",
-    result: "Contorno de ojos mejorado",
-  },
-  {
-    name: "Lucía V.",
-    age: 44,
-    location: "Santander",
-    rating: 5,
-    timeline: "7 semanas",
-    verified: true,
-    image: "LV",
-    review:
-      "Soy enfermera y los turnos me dejan agotada. Usar mi Garett es mi momento de autocuidado. En casi 2 meses, mi piel se ve más joven y revitalizada. Totalmente recomendable.",
-    result: "Piel revitalizada",
-  },
-  {
-    name: "Cristina M.",
-    age: 31,
-    location: "Pamplona",
-    rating: 5,
-    timeline: "5 semanas",
-    verified: true,
-    image: "CM",
-    review:
-      "Quería algo efectivo para prevenir el envejecimiento sin gastar en clínicas. Este dispositivo cumple perfectamente. Mi piel se siente más elástica y el tono es más uniforme. Muy satisfecha.",
-    result: "Tono uniforme conseguido",
+      "Compré a través de El Corte Inglés un Multi Clean Blanco para mi hija y lo recibió a los 2 días, en perfecto estado y está encantada con el aparato. Muy satisfecho con el servicio de El Corte Inglés y con la calidad del producto.",
+    result: "Entrega rápida y calidad excelente",
   },
 ];
 export const Testimonials = () => {
@@ -228,15 +139,15 @@ export const Testimonials = () => {
                             {testimonial.verified && <CheckCircle2 className="w-4 h-4 text-green-600" />}
                           </div>
                           <p className="text-xs text-muted-foreground">
-                            {testimonial.age} años • {testimonial.location}
+                            {testimonial.location}
                           </p>
                         </div>
                       </div>
 
-                      {/* Timeline Badge */}
+                      {/* Date Badge */}
                       <Badge variant="secondary" className="gap-1">
                         <Clock className="w-3 h-3" />
-                        {testimonial.timeline}
+                        {testimonial.date}
                       </Badge>
                     </div>
 
