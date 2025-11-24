@@ -38,9 +38,9 @@ export const CyberMondayBanner = () => {
   }, []);
   return <div className="relative w-full min-h-[500px] md:min-h-[500px] bg-promo-cm-start overflow-hidden">
       {/* Pattern overlay */}
-      <div className="absolute inset-0 opacity-10" style={{
+      <div className="absolute inset-0 opacity-[0.03]" style={{
       backgroundImage: `url(${patternImage})`,
-      backgroundSize: "400px",
+      backgroundSize: "300px",
       backgroundRepeat: "repeat",
       filter: "brightness(0) invert(1)"
     }} />

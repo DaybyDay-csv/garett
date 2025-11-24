@@ -44,7 +44,7 @@ export const AeroGlowBanner = () => {
       <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute inset-0" style={{
         backgroundImage: `url(${patternImage})`,
-        backgroundSize: '250px',
+        backgroundSize: '300px',
         backgroundRepeat: 'repeat'
       }} />
       </div>
