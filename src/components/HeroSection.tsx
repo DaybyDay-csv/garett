@@ -17,10 +17,7 @@ export const HeroSection = () => {
               ​TU SPA DE LUJO EN CASA       
             </h1>
             
-            <p className="md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 font-extralight py-0 text-sm">
-              Dispositivos profesionales con garantía de 2 años.  
-Resultados visibles desde la primera semana.
-            </p>
+            
             
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
