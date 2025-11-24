@@ -323,7 +323,7 @@ const BlackFriday = () => {
       <Header />
       
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary-glow to-accent py-16 md:py-24">
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary-glow to-accent md:py-24 py-[26px]">
         <div className="container relative text-white">
           <Badge className="mb-4 bg-white/20 text-white border-white/30 backdrop-blur-sm">
             Promociones Noviembre-Diciembre 2025
