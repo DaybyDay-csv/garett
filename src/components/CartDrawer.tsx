@@ -113,7 +113,7 @@ export const CartDrawer = () => {
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-0.5">
                   <Gift className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-                  <span className="font-semibold leading-tight text-purple-900 dark:text-purple-100 text-base">
+                  <span className="font-semibold leading-tight text-base text-purple-800">
                     {hasUnlockedGWP ? '¡Regalo desbloqueado!' : 'Casi consigues tu regalo gratis'}
                   </span>
                 </div>
