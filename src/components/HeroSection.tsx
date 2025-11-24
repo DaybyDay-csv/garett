@@ -33,15 +33,15 @@ export const HeroSection = () => {
             </h1>
             
             {/* CTAs */}
-            <div className="flex flex-col gap-3 md:gap-4 max-w-xs md:max-w-none animate-fade-in [animation-delay:200ms]">
-              <Button asChild size="lg" className="text-sm md:text-base group bg-header hover:bg-header/90 text-header-foreground h-11 md:h-11 px-6">
+            <div className="flex flex-col gap-3 md:gap-4 w-64 md:max-w-none animate-fade-in [animation-delay:200ms]">
+              <Button asChild size="lg" className="text-sm md:text-base group bg-header hover:bg-header/90 text-header-foreground h-11 md:h-11 px-6 w-full">
                 <Link to="/novedades">
                   Ver Novedades
                   <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               
-              <Button asChild variant="outline" size="lg" className="text-sm md:text-base border-header text-header hover:bg-header/5 h-11 md:h-11 px-6">
+              <Button asChild variant="outline" size="lg" className="text-sm md:text-base border-header text-header hover:bg-header/5 h-11 md:h-11 px-6 w-full">
                 <Link to="/superventas">
                   Ver Superventas
                 </Link>
