@@ -59,7 +59,7 @@ const ugcContent: UGCItem[] = [{
   type: "image",
   src: ugc5,
   name: "Paula L.",
-  handle: "@paula.wellness",
+  handle: "@nataliadiaazn",
   caption: "Mi momento de relax"
 }, {
   id: 8,
