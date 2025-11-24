@@ -21,29 +21,29 @@ const ugcContent: UGCItem[] = [{
   id: 1,
   type: "image",
   src: ugc1,
-  name: "Laura M.",
-  handle: "@laura.beauty",
+  name: "Lucía",
+  handle: "@luciadecolp",
   caption: "Mi masajeador favorito"
 }, {
   id: 2,
   type: "video",
   src: "/videos/ugc-video-1.mov",
-  name: "Ana S.",
-  handle: "@ana.skincare",
+  name: "Natalia",
+  handle: "@nataliadiaazn",
   caption: "Rutina diaria"
 }, {
   id: 3,
   type: "image",
   src: ugc3,
-  name: "Carmen R.",
-  handle: "@carmen.glow",
+  name: "Ainus",
+  handle: "@bs_ainus",
   caption: "LED therapy en casa"
 }, {
   id: 4,
   type: "video",
   src: "/videos/ugc-video-2.mp4",
-  name: "Sofia H.",
-  handle: "@sofia.beautytech",
+  name: "Trini",
+  handle: "@trini_s_s",
   caption: "Resultados increíbles"
 }, {
   id: 5,
