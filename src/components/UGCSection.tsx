@@ -147,21 +147,31 @@ export const UGCSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
             Garett Beauty: tu spa inteligente en casa
           </h2>
-          <p className="text-muted-foreground mb-8 leading-relaxed font-extralight text-sm">
-            Nacimos en Polonia tras hacernos de una pregunta sencilla:   
-
-¿por qué el cuidado que te hace sentir bien tiene que ser caro, lejano y con cita previa? 
-
-En Garett Beauty acercamos la tecnología de clínica a tu casa para que tu rutina sea más eficaz, sencilla y bonita. 
-
-Hablamos de mesoterapia sin agujas, limpieza sónica o masajes tensores en 10 minutos —bienestar inteligente que transforma lo cotidiano. 
-
-Creemos en el lujo accesible: dispositivos con diseño cuidado, resultados visibles y un precio honesto. 
-
-Y, sobre todo, confianza: certificación CE, garantía comercial de 24 meses y el respaldo de grandes retailers como El Corte Inglés.  
-
-Somos esa mezcla de tecnología y belleza en estado puro que te ayuda a verte (y sentirte) mejor cada día, sin complicaciones.
-          </p>
+          <div className="space-y-4">
+            <p className="text-muted-foreground leading-relaxed font-extralight text-sm">
+              Nacimos en Polonia tras hacernos de una pregunta sencilla: ¿por qué el cuidado que te hace sentir bien tiene que ser caro, lejano y con cita previa?
+            </p>
+            
+            <p className="text-muted-foreground leading-relaxed font-extralight text-sm">
+              En Garett Beauty acercamos la tecnología de clínica a tu casa para que tu rutina sea más eficaz, sencilla y bonita.
+            </p>
+            
+            <p className="text-muted-foreground leading-relaxed font-extralight text-sm">
+              Hablamos de mesoterapia sin agujas, limpieza sónica o masajes tensores en 10 minutos —bienestar inteligente que transforma lo cotidiano.
+            </p>
+            
+            <p className="text-muted-foreground leading-relaxed font-extralight text-sm">
+              Creemos en el lujo accesible: dispositivos con diseño cuidado, resultados visibles y un precio honesto.
+            </p>
+            
+            <p className="text-muted-foreground leading-relaxed font-extralight text-sm">
+              Y, sobre todo, confianza: certificación CE, garantía comercial de 24 meses y el respaldo de grandes retailers como El Corte Inglés.
+            </p>
+            
+            <p className="text-muted-foreground leading-relaxed font-extralight text-sm">
+              Somos esa mezcla de tecnología y belleza en estado puro que te ayuda a verte (y sentirte) mejor cada día, sin complicaciones.
+            </p>
+          </div>
           <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground"></Button>
         </div>
       </div>
