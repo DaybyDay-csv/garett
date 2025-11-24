@@ -12,7 +12,7 @@ export const GWPBanner = () => {
       {/* Pattern overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
       backgroundImage: `url(${patternImage})`,
-      backgroundSize: '400px',
+      backgroundSize: '300px',
       backgroundRepeat: 'repeat'
     }} />
       
