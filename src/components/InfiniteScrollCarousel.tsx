@@ -17,13 +17,48 @@ export const InfiniteScrollCarousel = ({ products }: InfiniteScrollCarouselProps
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
     
-    const scrollAmount = 300;
-    const targetScroll = scrollContainer.scrollLeft + (direction === 'right' ? scrollAmount : -scrollAmount);
+    // Stop auto-scrolling temporarily
+    setIsAutoScrolling(false);
     
-    scrollContainer.scrollTo({
-      left: targetScroll,
-      behavior: 'smooth'
-    });
+    // Calculate scroll amount based on container width
+    const cardWidth = 280; // approximate card width + gap
+    const scrollAmount = cardWidth * 2; // scroll 2 cards at a time
+    
+    const currentScroll = scrollContainer.scrollLeft;
+    const maxScroll = scrollContainer.scrollWidth / 2; // Half because we duplicate
+    
+    let targetScroll = currentScroll + (direction === 'right' ? scrollAmount : -scrollAmount);
+    
+    // Handle infinite loop
+    if (targetScroll >= maxScroll) {
+      targetScroll = targetScroll - maxScroll;
+      scrollContainer.scrollLeft = 0;
+      setTimeout(() => {
+        scrollContainer.scrollTo({
+          left: targetScroll,
+          behavior: 'smooth'
+        });
+      }, 0);
+    } else if (targetScroll < 0) {
+      scrollContainer.scrollLeft = maxScroll;
+      targetScroll = maxScroll + targetScroll;
+      setTimeout(() => {
+        scrollContainer.scrollTo({
+          left: targetScroll,
+          behavior: 'smooth'
+        });
+      }, 0);
+    } else {
+      scrollContainer.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
+    }
+    
+    // Resume auto-scrolling after a delay
+    setTimeout(() => {
+      setIsAutoScrolling(true);
+    }, 3000);
   };
 
   useEffect(() => {
