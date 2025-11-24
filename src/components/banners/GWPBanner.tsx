@@ -42,7 +42,7 @@ export const GWPBanner = () => {
             </h1>
             <div className="space-y-2">
               <p className="text-base md:text-xl lg:text-2xl font-semibold text-foreground">
-                Banda de pelo premium
+                Banda de pelo Garett Routine            
               </p>
               <div className="flex items-center justify-center md:justify-start gap-2 md:gap-3">
                 <Badge className="bg-primary/10 text-primary text-xs md:text-sm px-3 py-1 md:px-4 md:py-1.5 border border-primary/20">
