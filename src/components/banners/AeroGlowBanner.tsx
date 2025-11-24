@@ -166,7 +166,7 @@ Resultados visibles desde el primer uso.</span>
         </div>
 
         {/* Before/After Transformation Section */}
-        <div className="pb-4 md:pb-8 lg:pb-10 border-t border-red-600/20 pt-4 md:pt-8">
+        <div className="pb-4 md:pb-8 lg:pb-10 border-t border-red-600/20 pt-4 md:pt-8 py-[54px]">
           <div className="text-center mb-3 md:mb-6 px-4">
             
             <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 text-white">
