@@ -81,19 +81,7 @@ Resultados visibles desde el primer uso.</span>
             </div>
 
             {/* Pricing */}
-            {!loading && <div className="flex items-center justify-center gap-2 flex-wrap px-2">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-3xl md:text-4xl font-bold text-neutral-50">
-                    €{finalPrice.toFixed(2)}
-                  </span>
-                  <span className="text-lg md:text-xl line-through text-red-200">
-                    €{basePrice.toFixed(2)}
-                  </span>
-                </div>
-                <Badge className="bg-red-500 text-white text-xs md:text-sm px-2 py-0.5 animate-pulse">
-                  AHORRA €{discountAmount.toFixed(2)}
-                </Badge>
-              </div>}
+            {!loading}
 
             {/* Key Benefits - Enhanced Visual */}
             <div className="grid grid-cols-3 gap-2 px-2">
@@ -136,7 +124,7 @@ Resultados visibles desde el primer uso.</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Shield className="w-4 h-4 md:w-5 md:h-5 text-[#8B6F47]" />
-                <span>Garantía 24 meses</span>
+                
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Zap className="w-4 h-4 md:w-5 md:h-5 text-[#8B6F47]" />
