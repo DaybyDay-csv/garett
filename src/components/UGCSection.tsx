@@ -10,6 +10,7 @@ import ugc3 from "@/assets/ugc/ugc-3.jpg";
 import ugc4 from "@/assets/ugc/ugc-4.jpg";
 import ugc5 from "@/assets/ugc/ugc-5.jpg";
 import ugcAina from "@/assets/ugc/ugc-aina.png";
+import ugcMaria from "@/assets/ugc/ugc-maria.png";
 interface UGCItem {
   id: number;
   type: "image" | "video";
@@ -56,7 +57,7 @@ const ugcContent: UGCItem[] = [{
 }, {
   id: 6,
   type: "image",
-  src: ugc4,
+  src: ugcMaria,
   name: "María G.",
   handle: "@maria.haircare",
   caption: "Pelo perfecto cada día"
