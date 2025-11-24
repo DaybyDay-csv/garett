@@ -387,6 +387,36 @@ const ProductDetail = () => {
               </div>
             </div>
 
+            {/* Price */}
+            <div className={`border-t border-b py-6 ${isAeroGlow ? 'border-red-900/30 bg-gradient-to-r from-red-950/20 to-pink-950/20 rounded-lg px-4' : ''}`}>
+              {priceInfo.hasDiscount ? (
+                <div className="space-y-2">
+                  <div className="flex items-baseline gap-3">
+                    <div className={`text-4xl font-bold ${isAeroGlow ? 'text-red-500 text-5xl' : 'text-primary'}`}>
+                      €{priceInfo.discountedPrice.toFixed(2)}
+                    </div>
+                    <Badge variant="destructive" className={`text-base px-3 py-1 ${isAeroGlow ? 'bg-gradient-to-r from-red-600 to-pink-600 text-lg px-4 py-2' : ''}`}>
+                      {priceInfo.discountLabel}
+                    </Badge>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className={`text-xl line-through ${isAeroGlow ? 'text-gray-500' : 'text-muted-foreground'}`}>
+                      €{priceInfo.originalPrice.toFixed(2)}
+                    </span>
+                    <span className={`text-sm ${isAeroGlow ? 'text-gray-400 font-semibold' : 'text-muted-foreground'}`}>
+                      Ahorras €{(priceInfo.originalPrice - priceInfo.discountedPrice).toFixed(2)}
+                    </span>
+                  </div>
+                  <p className={`text-sm ${isAeroGlow ? 'text-gray-400' : 'text-muted-foreground'}`}>IVA incluido</p>
+                </div>
+              ) : (
+                <div>
+                  <div className={`text-4xl font-bold ${isAeroGlow ? 'text-white' : ''}`}>€{priceInfo.originalPrice.toFixed(2)}</div>
+                  <p className={`text-sm mt-1 ${isAeroGlow ? 'text-gray-400' : 'text-muted-foreground'}`}>IVA incluido</p>
+                </div>
+              )}
+            </div>
+
             {/* Black Friday Email Notification - Only for AeroGlow */}
             {isAeroGlow && (
               <form onSubmit={handleNotifySubmit} className="bg-gradient-to-br from-red-950/40 via-red-900/30 to-pink-950/40 border-2 border-red-600/40 rounded-xl p-4 backdrop-blur-sm">
@@ -422,36 +452,6 @@ const ProductDetail = () => {
                 </div>
               </form>
             )}
-
-            {/* Price */}
-            <div className={`border-t border-b py-6 ${isAeroGlow ? 'border-red-900/30 bg-gradient-to-r from-red-950/20 to-pink-950/20 rounded-lg px-4' : ''}`}>
-              {priceInfo.hasDiscount ? (
-                <div className="space-y-2">
-                  <div className="flex items-baseline gap-3">
-                    <div className={`text-4xl font-bold ${isAeroGlow ? 'text-red-500 text-5xl' : 'text-primary'}`}>
-                      €{priceInfo.discountedPrice.toFixed(2)}
-                    </div>
-                    <Badge variant="destructive" className={`text-base px-3 py-1 ${isAeroGlow ? 'bg-gradient-to-r from-red-600 to-pink-600 text-lg px-4 py-2' : ''}`}>
-                      {priceInfo.discountLabel}
-                    </Badge>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className={`text-xl line-through ${isAeroGlow ? 'text-gray-500' : 'text-muted-foreground'}`}>
-                      €{priceInfo.originalPrice.toFixed(2)}
-                    </span>
-                    <span className={`text-sm ${isAeroGlow ? 'text-gray-400 font-semibold' : 'text-muted-foreground'}`}>
-                      Ahorras €{(priceInfo.originalPrice - priceInfo.discountedPrice).toFixed(2)}
-                    </span>
-                  </div>
-                  <p className={`text-sm ${isAeroGlow ? 'text-gray-400' : 'text-muted-foreground'}`}>IVA incluido</p>
-                </div>
-              ) : (
-                <div>
-                  <div className={`text-4xl font-bold ${isAeroGlow ? 'text-white' : ''}`}>€{priceInfo.originalPrice.toFixed(2)}</div>
-                  <p className={`text-sm mt-1 ${isAeroGlow ? 'text-gray-400' : 'text-muted-foreground'}`}>IVA incluido</p>
-                </div>
-              )}
-            </div>
 
             {/* GWP Progress Incentive */}
             {hasGWPActive && (
