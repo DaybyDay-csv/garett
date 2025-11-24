@@ -113,11 +113,11 @@ export const CartDrawer = () => {
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-0.5">
                   <Gift className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-                  <span className="font-semibold text-xs leading-tight text-purple-900 dark:text-purple-100">
+                  <span className="font-semibold leading-tight text-purple-900 dark:text-purple-100 text-base">
                     {hasUnlockedGWP ? '¡Regalo desbloqueado!' : 'Casi consigues tu regalo gratis'}
                   </span>
                 </div>
-                <p className="text-[11px] leading-tight text-purple-700 dark:text-purple-300">
+                <p className="leading-tight text-purple-700 dark:text-purple-300 text-sm">
                   Banda de pelo Garett Routine  
                 </p>
               </div>
