@@ -41,7 +41,7 @@ export const HeroSection = () => {
                 </Link>
               </Button>
               
-              <Button asChild variant="outline" size="lg" className="text-sm md:text-base border-header text-header hover:bg-header/5 h-10 md:h-11 px-6 w-full">
+              <Button asChild variant="outline" size="lg" className="text-sm md:text-base border-header text-header hover:bg-header/5 h-10 md:h-11 px-4 w-auto">
                 <Link to="/superventas">
                   Ver Superventas
                 </Link>
