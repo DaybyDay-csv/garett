@@ -9,6 +9,7 @@ import ugc2 from "@/assets/ugc/ugc-2.jpg";
 import ugc3 from "@/assets/ugc/ugc-3.jpg";
 import ugc4 from "@/assets/ugc/ugc-4.jpg";
 import ugc5 from "@/assets/ugc/ugc-5.jpg";
+import ugcAina from "@/assets/ugc/ugc-aina.png";
 interface UGCItem {
   id: number;
   type: "image" | "video";
@@ -34,38 +35,38 @@ const ugcContent: UGCItem[] = [{
 }, {
   id: 3,
   type: "image",
-  src: ugc3,
+  src: ugcAina,
   name: "Ainus",
   handle: "@bs_ainus",
   caption: "LED therapy en casa"
 }, {
   id: 4,
   type: "video",
-  src: "/videos/ugc-video-2.mp4",
-  name: "Trini",
-  handle: "@trini_s_s",
+  src: "/videos/ugc-aina.mp4",
+  name: "Ainus",
+  handle: "@bs_ainus",
   caption: "Resultados increíbles"
 }, {
   id: 5,
+  type: "video",
+  src: "/videos/ugc-video-2.mp4",
+  name: "Trini",
+  handle: "@trini_s_s",
+  caption: "Rutina de belleza"
+}, {
+  id: 6,
   type: "image",
   src: ugc4,
   name: "María G.",
   handle: "@maria.haircare",
   caption: "Pelo perfecto cada día"
 }, {
-  id: 6,
+  id: 7,
   type: "image",
   src: ugc5,
   name: "Paula L.",
   handle: "@paula.wellness",
   caption: "Mi momento de relax"
-}, {
-  id: 7,
-  type: "video",
-  src: "/videos/ugc-video-3.mov",
-  name: "Elena V.",
-  handle: "@elena.selfcare",
-  caption: "Tutorial rápido"
 }, {
   id: 8,
   type: "image",
