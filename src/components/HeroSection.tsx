@@ -16,9 +16,6 @@ export const HeroSection = () => {
       backgroundImage: `url(${heroBackground})`
     }} />
       
-      {/* Mobile gradient overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/20 to-transparent md:bg-gradient-to-r md:from-background/95 md:via-background/80 md:to-transparent md:bg-none" />
-      
       <div className="container relative py-6 md:py-20 h-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start md:items-center h-full">
           {/* Text Content - Left Side */}
