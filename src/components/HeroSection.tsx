@@ -18,7 +18,7 @@ export const HeroSection = () => {
       <div className="container relative py-6 md:py-20 h-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start md:items-center h-full">
           {/* Text Content - Left Side */}
-          <div className="space-y-3 md:space-y-6 text-left max-w-[280px] md:max-w-xl relative">
+          <div className="space-y-3 md:space-y-6 text-left max-w-[280px] md:max-w-xl lg:ml-12 relative">
             {/* Soft gradient behind text for readability */}
             <div className="absolute inset-0 -inset-x-4 -inset-y-2 bg-gradient-to-r from-background/60 to-transparent rounded-lg blur-md -z-10" />
             
