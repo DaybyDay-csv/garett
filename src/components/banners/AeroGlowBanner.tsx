@@ -74,7 +74,7 @@ export const AeroGlowBanner = () => {
                 <span className="block text-gray-400 text-base md:text-lg lg:text-xl font-medium mb-1">Presentamos</span>
                 <span className="text-red-400">AeroGlow</span>
               </h1>
-              <p className="text-sm md:text-base lg:text-lg text-gray-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-sm md:text-base lg:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 text-zinc-50">
                 Transforma tu cabello con tecnología iónica profesional. <span className="font-semibold text-foreground">Resultados visibles desde el primer uso.</span>
               </p>
             </div>
