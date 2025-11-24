@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { TrustBadges } from "@/components/TrustBadges";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
@@ -35,6 +37,7 @@ const ProductDetail = () => {
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
   const addItem = useCartStore(state => state.addItem);
   const items = useCartStore(state => state.items);
+  const isMobile = useIsMobile();
 
   // Calculate cart total for GWP
   const cartTotal = items.reduce((sum, item) => sum + parseFloat(item.price.amount) * item.quantity, 0);
@@ -431,31 +434,9 @@ const ProductDetail = () => {
                 {variant?.availableForSale ? 'Añadir al carrito' : 'Agotado'}
               </Button>}
 
-            {/* Features */}
-            <div className={`space-y-3 pt-6 border-t ${isAeroGlow ? 'border-red-900/30' : ''}`}>
-              <div className="flex items-start gap-3">
-                <Shield className={`w-5 h-5 mt-0.5 ${isAeroGlow ? 'text-red-400' : 'text-primary'}`} />
-                <div>
-                  <p className={`font-medium ${isAeroGlow ? 'text-white' : ''}`}>Garantía 24 meses</p>
-                  <p className={`text-sm ${isAeroGlow ? 'text-gray-300' : 'text-muted-foreground'}`}>Contra defectos de fabricación</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Truck className={`w-5 h-5 mt-0.5 ${isAeroGlow ? 'text-red-400' : 'text-primary'}`} />
-                <div>
-                  <p className={`font-medium ${isAeroGlow ? 'text-white' : ''}`}>Envío en 24-48h</p>
-                  <p className={`text-sm ${isAeroGlow ? 'text-gray-300' : 'text-muted-foreground'}`}>Envío gratuito desde 60€</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <RotateCcw className={`w-5 h-5 mt-0.5 ${isAeroGlow ? 'text-red-400' : 'text-primary'}`} />
-                <div>
-                  <p className={`font-medium ${isAeroGlow ? 'text-white' : ''}`}>Producto higiénico-sanitario</p>
-                  <Link to="/garantia" className={`text-sm underline ${isAeroGlow ? 'text-gray-300 hover:text-white' : 'text-muted-foreground hover:text-foreground'}`}>
-                    Ver política de devoluciones
-                  </Link>
-                </div>
-              </div>
+            {/* Trust Badges - Compact Version */}
+            <div className="pt-6 border-t">
+              <TrustBadges variant="compact" />
             </div>
 
             {/* Product Details Sections - User Focused */}
@@ -578,6 +559,39 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+
+      {/* Sticky Buy Box - Mobile Only */}
+      {isMobile && !isAeroGlow && (
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border p-4 shadow-lg">
+          <div className="container flex items-center gap-3">
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold truncate">{node.title}</p>
+              <div className="flex items-center gap-2">
+                <span className="text-lg font-bold text-primary">
+                  €{priceInfo.discountedPrice.toFixed(2)}
+                </span>
+                {priceInfo.hasDiscount && (
+                  <span className="text-xs line-through text-muted-foreground">
+                    €{priceInfo.originalPrice.toFixed(2)}
+                  </span>
+                )}
+              </div>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Shield className="w-3 h-3" />
+                <span>Garantía 24 meses</span>
+              </div>
+            </div>
+            <Button 
+              size="lg" 
+              className="flex-shrink-0"
+              onClick={handleAddToCart}
+              disabled={!variant?.availableForSale}
+            >
+              {variant?.availableForSale ? 'Añadir' : 'Agotado'}
+            </Button>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>;
