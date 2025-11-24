@@ -37,8 +37,8 @@ export const GWPBanner = () => {
           
           <div className="space-y-2 md:space-y-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-              Regalo<br />
-              <span className="text-primary">Especial</span>
+              Regalo Especial<br />
+              <span className="text-primary">Regalo Especial</span>
             </h1>
             <div className="space-y-2">
               <p className="text-base md:text-xl lg:text-2xl font-semibold text-foreground">
