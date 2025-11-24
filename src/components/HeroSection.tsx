@@ -31,11 +31,11 @@ export const HeroSection = () => {
               </Link>
             </Button>
               
-              <Button asChild variant="outline" size="lg" className="text-base border-primary text-primary hover:bg-primary/5">
-                <Link to="/superventas">
-                  Ver Superventas
-                </Link>
-              </Button>
+            <Button asChild variant="outline" size="lg" className="text-base border-header text-header hover:bg-header/5">
+              <Link to="/superventas">
+                Ver Superventas
+              </Link>
+            </Button>
             </div>
             
             {/* Trust Indicators */}
