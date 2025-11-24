@@ -11,6 +11,7 @@ import ugc4 from "@/assets/ugc/ugc-4.jpg";
 import ugc5 from "@/assets/ugc/ugc-5.jpg";
 import ugcAina from "@/assets/ugc/ugc-aina.png";
 import ugcMaria from "@/assets/ugc/ugc-maria.png";
+import ugcTriniSierra from "@/assets/ugc/ugc-trini-sierra.jpg";
 interface UGCItem {
   id: number;
   type: "image" | "video";
@@ -68,6 +69,13 @@ const ugcContent: UGCItem[] = [{
   name: "Trini",
   handle: "@trini_s_s",
   caption: "Mis esenciales"
+}, {
+  id: 9,
+  type: "image",
+  src: ugcTriniSierra,
+  name: "Trini Sierra",
+  handle: "@trini_s_s",
+  caption: "LED therapy en casa"
 }];
 export const UGCSection = () => {
   const [playingVideo, setPlayingVideo] = useState<number | null>(null);
