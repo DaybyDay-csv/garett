@@ -57,7 +57,7 @@ export const CartDrawer = () => {
   const hasUnlockedGWP = subtotalWithDiscount >= GWP_THRESHOLD;
 
   // Calculate GWP value for total savings
-  const gwpValue = gwpProduct ? parseFloat(gwpProduct.node.priceRange.minVariantPrice.amount) : 0;
+  const gwpValue = gwpProduct ? 20 : 0;
   const totalSavings = discountAmount + (hasUnlockedGWP ? gwpValue : 0);
   const handleCheckout = async () => {
     try {
