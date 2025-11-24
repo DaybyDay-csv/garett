@@ -143,7 +143,7 @@ export const UGCSection = () => {
 
         {/* Brand Story */}
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">QUIÉNES SOMOS, NUESTRA HIS</p>
+          <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">QUIÉNES SOMOS, NUESTRA HISTORIA</p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
             Garett Beauty: tu spa inteligente en casa
           </h2>
