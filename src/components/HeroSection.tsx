@@ -16,33 +16,33 @@ export const HeroSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
           {/* Text Content - Left Side */}
           <div className="space-y-6 text-left max-w-xl">
-            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold animate-fade-in">
               <Sparkles className="w-4 h-4" />
               Tecnología polaca de última generación
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-header">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-header animate-fade-in [animation-delay:100ms]">
               TU SPA DE LUJO EN CASA
             </h1>
             
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4">
-            <Button asChild size="lg" className="text-base group bg-header hover:bg-header/90 text-header-foreground">
-              <Link to="/novedades">
-                Ver Novedades
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in [animation-delay:200ms]">
+              <Button asChild size="lg" className="text-base group bg-header hover:bg-header/90 text-header-foreground">
+                <Link to="/novedades">
+                  Ver Novedades
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
               
-            <Button asChild variant="outline" size="lg" className="text-base border-header text-header hover:bg-header/5">
-              <Link to="/superventas">
-                Ver Superventas
-              </Link>
-            </Button>
+              <Button asChild variant="outline" size="lg" className="text-base border-header text-header hover:bg-header/5">
+                <Link to="/superventas">
+                  Ver Superventas
+                </Link>
+              </Button>
             </div>
             
             {/* Trust Indicators */}
-            <div className="flex flex-col gap-3 text-sm text-header pt-4">
+            <div className="flex flex-col gap-3 text-sm text-header pt-4 animate-fade-in [animation-delay:300ms]">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span className="font-medium">Garantía 2 años</span>
