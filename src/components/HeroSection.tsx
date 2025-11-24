@@ -2,10 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Sparkles, ArrowRight } from "lucide-react";
 import aeroglowHero from "@/assets/aeroglow-hero.png";
-
 export const HeroSection = () => {
-  return (
-    <section className="relative bg-gradient-to-br from-background via-secondary/5 to-primary/5 overflow-hidden">
+  return <section className="relative bg-gradient-to-br from-background via-secondary/5 to-primary/5 overflow-hidden">
       <div className="container py-12 md:py-20">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Text Content */}
@@ -25,23 +23,14 @@ export const HeroSection = () => {
             
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button 
-                asChild 
-                size="lg" 
-                className="text-base group"
-              >
+              <Button asChild size="lg" className="text-base group">
                 <Link to="/productos?category=masajeadores-faciales">
                   Ver dispositivos para rostro
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               
-              <Button 
-                asChild 
-                variant="outline" 
-                size="lg"
-                className="text-base border-primary text-primary hover:bg-primary/5"
-              >
+              <Button asChild variant="outline" size="lg" className="text-base border-primary text-primary hover:bg-primary/5">
                 <Link to="/productos?category=corporales">
                   Ver dispositivos para cuerpo
                 </Link>
@@ -68,11 +57,7 @@ export const HeroSection = () => {
           {/* Right Column - Hero Image */}
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img 
-                src={aeroglowHero} 
-                alt="Dispositivos de belleza Garett - Tecnología profesional para el hogar" 
-                className="w-full h-auto object-cover"
-              />
+              
               
               {/* Floating Badge */}
               <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-lg px-4 py-3 shadow-lg">
@@ -86,6 +71,5 @@ export const HeroSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
