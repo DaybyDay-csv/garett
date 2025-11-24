@@ -119,7 +119,7 @@ export const CartDrawer = () => {
                   </span>
                 </div>
                 <p className="text-xs text-purple-700 dark:text-purple-300">
-                  Banda de pelo deportiva
+                  Banda de pelo Garett Routine  
                 </p>
               </div>
             </div>
