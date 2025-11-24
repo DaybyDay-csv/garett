@@ -17,7 +17,7 @@ export const HeroSection = () => {
     }} />
       
       {/* Mobile gradient overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-transparent md:bg-gradient-to-r md:from-background/95 md:via-background/80 md:to-transparent md:bg-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-transparent md:bg-gradient-to-r md:from-background/95 md:via-background/80 md:to-transparent md:bg-none" />
       
       <div className="container relative py-8 md:py-20 h-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
