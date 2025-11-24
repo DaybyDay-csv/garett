@@ -197,7 +197,7 @@ Resultados visibles desde el primer uso.</span>
           </div>
 
           {/* Final CTA */}
-          <div className="text-center mt-4 md:mt-6 relative z-20 space-y-2 px-4 flex flex-col items-center">
+          <div className="text-center mt-4 md:mt-6 relative z-20 space-y-2 px-4 flex flex-col items-center my-[43px]">
             
             
             <NewsletterCTA variant="inline" text="Recibe las ofertas" className="bg-red-950/50 hover:bg-red-950/70 border-red-600/30 text-red-300" />
