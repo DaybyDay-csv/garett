@@ -39,7 +39,7 @@ export const AeroGlowBanner = () => {
   const finalPrice = basePrice * (1 - discountPercent / 100); // €224.50
   const discountAmount = basePrice - finalPrice;
   const currencyCode = product?.node.priceRange.minVariantPrice.currencyCode || 'EUR';
-  return <div className="relative w-full bg-black overflow-hidden">
+  return <div className="relative w-full bg-header overflow-hidden">
       {/* Dark pattern overlay */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute inset-0" style={{
