@@ -19,7 +19,10 @@ export const HeroSection = () => {
       <div className="container relative py-6 md:py-20 h-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start md:items-center h-full">
           {/* Text Content - Left Side */}
-          <div className="space-y-3 md:space-y-6 text-left max-w-[280px] md:max-w-xl">
+          <div className="space-y-3 md:space-y-6 text-left max-w-[280px] md:max-w-xl relative">
+            {/* Soft gradient behind text for readability */}
+            <div className="absolute inset-0 -inset-x-4 -inset-y-2 bg-gradient-to-r from-background/80 to-background/40 rounded-lg blur-sm -z-10" />
+            
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold animate-fade-in">
               <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
               Tecnología polaca de última generación
