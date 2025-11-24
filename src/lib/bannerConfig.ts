@@ -29,8 +29,8 @@ export const bannerConfig: Record<string, BannerConfig> = {
   },
   whiteWeek: {
     id: 'whiteWeek',
-    active: true,
-    startDate: new Date('2024-01-01'), // Active now for demo
+    active: false,
+    startDate: new Date('2024-01-01'),
     endDate: new Date('2026-12-31'),
     priority: 4,
     showInCarousel: true,
