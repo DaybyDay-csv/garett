@@ -52,84 +52,84 @@ export const AeroGlowBanner = () => {
       
       <div className="container mx-auto px-4 md:px-8 lg:px-12">
         {/* Main Hero Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12 items-center py-6 md:py-12 lg:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 items-center py-4 md:py-6 lg:py-8">
           {/* Left Content */}
-          <div className="text-center lg:text-left space-y-3 md:space-y-6 order-2 lg:order-1">
+          <div className="text-center lg:text-left space-y-2 md:space-y-4 order-2 lg:order-1">
             {/* Black Friday Event Badge */}
-            <div className="inline-flex items-center gap-2 bg-red-600/30 text-red-400 px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-bold border border-red-500/50 animate-pulse">
+            <div className="inline-flex items-center gap-2 bg-red-600/30 text-red-400 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold border border-red-500/50 animate-pulse">
               <Zap className="w-4 h-4 md:w-5 md:h-5" />
               AEROGLOW DROP • BLACK FRIDAY
             </div>
             
             {/* Unlock Date */}
-            <div className="inline-flex items-center gap-2 bg-red-950/50 text-red-300 px-4 py-2 rounded-lg text-sm md:text-base font-semibold border border-red-600/30 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 bg-red-950/50 text-red-300 px-3 py-1.5 rounded-lg text-xs md:text-sm font-semibold border border-red-600/30 backdrop-blur-sm">
               <Lock className="w-4 h-4" />
               SE DESBLOQUEA 28 de Noviembre
             </div>
             
             {/* Headline */}
-            <div className="space-y-3 px-2">
+            <div className="space-y-2 px-2">
               <div className="flex items-center justify-center lg:justify-start gap-2">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 md:w-5 md:h-5 fill-red-500 text-red-500" />)}
-                <span className="text-sm md:text-base font-semibold text-gray-300 ml-1">Resultados Instantáneos</span>
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 md:w-4 md:h-4 fill-red-500 text-red-500" />)}
+                <span className="text-xs md:text-sm font-semibold text-gray-300 ml-1">Resultados Instantáneos</span>
               </div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.15] tracking-tight">
-                <span className="block text-gray-400 text-lg md:text-xl lg:text-2xl font-medium mb-1.5">Presentamos</span>
+              <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-[1.15] tracking-tight">
+                <span className="block text-gray-400 text-base md:text-lg lg:text-xl font-medium mb-1">Presentamos</span>
                 <span className="text-red-400">AeroGlow</span>
               </h1>
-              <p className="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-sm md:text-base lg:text-lg text-gray-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
                 Transforma tu cabello con tecnología iónica profesional. <span className="font-semibold text-foreground">Resultados visibles desde el primer uso.</span>
               </p>
             </div>
 
             {/* Pricing */}
-            {!loading && <div className="flex items-center justify-center lg:justify-start gap-3 flex-wrap px-2">
-                <div className="flex items-baseline gap-2.5">
-                  <span className="text-4xl md:text-5xl font-bold text-foreground">
+            {!loading && <div className="flex items-center justify-center lg:justify-start gap-2 flex-wrap px-2">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-3xl md:text-4xl font-bold text-foreground">
                     €{finalPrice.toFixed(2)}
                   </span>
-                  <span className="text-xl md:text-2xl text-muted-foreground line-through">
+                  <span className="text-lg md:text-xl text-muted-foreground line-through">
                     €{basePrice.toFixed(2)}
                   </span>
                 </div>
-                <Badge className="bg-red-500 text-white text-sm md:text-base px-3 py-1 animate-pulse">
+                <Badge className="bg-red-500 text-white text-xs md:text-sm px-2 py-0.5 animate-pulse">
                   AHORRA €{discountAmount.toFixed(2)}
                 </Badge>
               </div>}
 
             {/* Key Benefits - Enhanced Visual */}
-            <div className="grid grid-cols-3 gap-2 md:gap-3 px-2">
-              <div className="p-3 md:p-4 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all">
-                <Zap className="w-5 h-5 md:w-6 md:h-6 text-[#D4AF37] mb-1.5" />
-                <div className="font-bold text-xs md:text-sm">Calor Uniforme</div>
-                <div className="text-[11px] md:text-xs text-muted-foreground">Tecnología avanzada</div>
+            <div className="grid grid-cols-3 gap-2 px-2">
+              <div className="p-2 md:p-3 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all">
+                <Zap className="w-4 h-4 md:w-5 md:h-5 text-[#D4AF37] mb-1" />
+                <div className="font-bold text-[11px] md:text-xs">Calor Uniforme</div>
+                <div className="text-[10px] md:text-[11px] text-muted-foreground">Tecnología avanzada</div>
               </div>
-              <div className="p-3 md:p-4 rounded-xl bg-[#8B6F47]/10 border border-[#8B6F47]/30 hover:border-[#8B6F47] transition-all">
-                <Shield className="w-5 h-5 md:w-6 md:h-6 text-[#8B6F47] mb-1.5" />
-                <div className="font-bold text-xs md:text-sm">Protección Total</div>
-                <div className="text-[11px] md:text-xs text-muted-foreground">Iones negativos</div>
+              <div className="p-2 md:p-3 rounded-xl bg-[#8B6F47]/10 border border-[#8B6F47]/30 hover:border-[#8B6F47] transition-all">
+                <Shield className="w-4 h-4 md:w-5 md:h-5 text-[#8B6F47] mb-1" />
+                <div className="font-bold text-[11px] md:text-xs">Protección Total</div>
+                <div className="text-[10px] md:text-[11px] text-muted-foreground">Iones negativos</div>
               </div>
-              <div className="p-3 md:p-4 rounded-xl bg-[#5D4037]/10 border border-[#5D4037]/30 hover:border-[#5D4037] transition-all">
-                <Award className="w-5 h-5 md:w-6 md:h-6 text-[#5D4037] mb-1.5" />
-                <div className="font-bold text-xs md:text-sm">Made in Poland</div>
-                <div className="text-[11px] md:text-xs text-muted-foreground">Calidad premium</div>
+              <div className="p-2 md:p-3 rounded-xl bg-[#5D4037]/10 border border-[#5D4037]/30 hover:border-[#5D4037] transition-all">
+                <Award className="w-4 h-4 md:w-5 md:h-5 text-[#5D4037] mb-1" />
+                <div className="font-bold text-[11px] md:text-xs">Made in Poland</div>
+                <div className="text-[10px] md:text-[11px] text-muted-foreground">Calidad premium</div>
               </div>
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col gap-3 md:gap-4 items-center lg:items-start pt-2 relative z-20 px-2">
-              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-sm md:text-base h-12 md:h-14 px-8 md:px-10 bg-[#5D4037] hover:bg-[#4A322B] transition-all text-white border-0 rounded-lg font-semibold cursor-pointer w-full sm:w-auto max-w-xs">
+            <div className="flex flex-col gap-2 md:gap-3 items-center lg:items-start pt-2 relative z-20 px-2">
+              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-sm md:text-base h-10 md:h-12 px-6 md:px-8 bg-[#5D4037] hover:bg-[#4A322B] transition-all text-white border-0 rounded-lg font-semibold cursor-pointer w-full sm:w-auto max-w-xs">
                 Comprar Ahora
                 <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center text-sm md:text-base h-12 md:h-14 px-8 md:px-10 border-2 border-[#8B6F47] text-[#5D4037] dark:text-[#D7B896] hover:bg-[#8B6F47]/10 rounded-lg font-semibold transition-colors cursor-pointer bg-background w-full sm:w-auto max-w-xs">
+              <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center text-sm md:text-base h-10 md:h-12 px-6 md:px-8 border-2 border-[#8B6F47] text-[#5D4037] dark:text-[#D7B896] hover:bg-[#8B6F47]/10 rounded-lg font-semibold transition-colors cursor-pointer bg-background w-full sm:w-auto max-w-xs">
                 Ver Detalles
               </Link>
               <NewsletterCTA variant="inline" text="Recibe las ofertas" />
             </div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 md:gap-6 pt-3 text-xs md:text-sm px-2">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 md:gap-4 pt-2 text-xs px-2">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-green-500/20 flex items-center justify-center">
                   <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-green-500 animate-pulse" />
@@ -152,7 +152,7 @@ export const AeroGlowBanner = () => {
               <div className="relative max-w-xl mx-auto">
                 {/* Main Product Video */}
                 <div className="relative z-10">
-                  <div className="relative bg-gray-900/90 rounded-2xl p-4 md:p-8 border border-red-600/30 overflow-hidden">
+                  <div className="relative bg-gray-900/90 rounded-2xl p-3 md:p-6 border border-red-600/30 overflow-hidden">
                   {loading ? <div className="aspect-square flex items-center justify-center">
                       <Zap className="w-20 h-20 text-red-500 animate-pulse" />
                     </div> : <VideoPlayer src="/videos/aeroglow-product.mp4" poster={aeroglowHero} autoplay={true} muted={true} loop={true} controls={false} className="animate-fade-in" fallback={<img src={aeroglowHero} alt="AeroGlow Hair Straightener" className="w-full h-full object-contain animate-fade-in" />} />}
@@ -168,44 +168,44 @@ export const AeroGlowBanner = () => {
         </div>
 
         {/* Before/After Transformation Section */}
-        <div className="pb-6 md:pb-12 lg:pb-16 border-t border-red-600/20 pt-6 md:pt-12">
-          <div className="text-center mb-4 md:mb-8 px-4">
-            <Badge className="mb-3 bg-red-950/50 text-red-400 border border-red-600/30 text-xs md:text-sm px-3 py-1">
+        <div className="pb-4 md:pb-8 lg:pb-10 border-t border-red-600/20 pt-4 md:pt-8">
+          <div className="text-center mb-3 md:mb-6 px-4">
+            <Badge className="mb-2 bg-red-950/50 text-red-400 border border-red-600/30 text-xs px-2 py-0.5">
               RESULTADOS REALES
             </Badge>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 text-white">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 text-white">
               Transformación <span className="text-red-400">Profesional</span>
             </h2>
-            <p className="text-sm md:text-base text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xs md:text-sm text-gray-300 max-w-2xl mx-auto leading-relaxed">
               De cabello rebelde a liso perfecto en minutos. Tecnología iónica que protege mientras alisa.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 md:gap-6 max-w-4xl mx-auto px-4">
+          <div className="grid grid-cols-2 gap-2 md:gap-4 max-w-4xl mx-auto px-4">
             {/* Before */}
             <div className="relative">
-              <div className="bg-background rounded-xl md:rounded-2xl overflow-hidden border border-border">
-                <div className="absolute top-2 left-2 md:top-3 md:left-3 z-10">
-                  <Badge className="bg-gray-500 text-white text-xs md:text-sm px-2 py-1">ANTES</Badge>
+              <div className="bg-background rounded-lg md:rounded-xl overflow-hidden border border-border">
+                <div className="absolute top-1.5 left-1.5 md:top-2 md:left-2 z-10">
+                  <Badge className="bg-gray-500 text-white text-[10px] md:text-xs px-1.5 py-0.5">ANTES</Badge>
                 </div>
-                <img src={hairBefore} alt="Cabello antes de usar AeroGlow" className="w-full h-[180px] md:h-[300px] object-cover" />
-                <div className="p-2.5 md:p-4 bg-background">
-                  <p className="text-xs md:text-sm text-muted-foreground font-medium">Cabello sin tratar</p>
+                <img src={hairBefore} alt="Cabello antes de usar AeroGlow" className="w-full h-[150px] md:h-[250px] object-cover" />
+                <div className="p-2 md:p-3 bg-background">
+                  <p className="text-[10px] md:text-xs text-muted-foreground font-medium">Cabello sin tratar</p>
                 </div>
               </div>
             </div>
 
             {/* After */}
             <div className="relative">
-              <div className="bg-background rounded-xl md:rounded-2xl overflow-hidden border-2 border-red-500">
-                <div className="absolute top-2 left-2 md:top-3 md:left-3 z-10">
-                  <Badge className="bg-red-500 text-white text-xs md:text-sm px-2 py-1">DESPUÉS</Badge>
+              <div className="bg-background rounded-lg md:rounded-xl overflow-hidden border-2 border-red-500">
+                <div className="absolute top-1.5 left-1.5 md:top-2 md:left-2 z-10">
+                  <Badge className="bg-red-500 text-white text-[10px] md:text-xs px-1.5 py-0.5">DESPUÉS</Badge>
                 </div>
-                <img src={hairAfter} alt="Cabello después de usar AeroGlow" className="w-full h-[180px] md:h-[300px] object-cover" />
-                <div className="p-2.5 md:p-4 bg-background">
-                  <div className="flex items-center gap-1.5 md:gap-2">
-                    <Zap className="w-3.5 h-3.5 md:w-4 md:h-4 text-red-500" />
-                    <p className="text-xs md:text-sm font-semibold">Liso perfecto</p>
+                <img src={hairAfter} alt="Cabello después de usar AeroGlow" className="w-full h-[150px] md:h-[250px] object-cover" />
+                <div className="p-2 md:p-3 bg-background">
+                  <div className="flex items-center gap-1 md:gap-1.5">
+                    <Zap className="w-3 h-3 md:w-3.5 md:h-3.5 text-red-500" />
+                    <p className="text-[10px] md:text-xs font-semibold">Liso perfecto</p>
                   </div>
                 </div>
               </div>
@@ -213,13 +213,13 @@ export const AeroGlowBanner = () => {
           </div>
 
           {/* Final CTA */}
-          <div className="text-center mt-6 md:mt-10 relative z-20 space-y-3 px-4 flex flex-col items-center">
-            <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-base md:text-lg h-12 md:h-14 px-10 md:px-12 bg-red-600 hover:bg-red-700 transition-all text-white rounded-lg font-bold cursor-pointer relative z-20 w-full sm:w-auto max-w-xs">Desbloquear Black Friday<ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-2 transition-transform" />
+          <div className="text-center mt-4 md:mt-6 relative z-20 space-y-2 px-4 flex flex-col items-center">
+            <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-sm md:text-base h-10 md:h-12 px-8 md:px-10 bg-red-600 hover:bg-red-700 transition-all text-white rounded-lg font-bold cursor-pointer relative z-20 w-full sm:w-auto max-w-xs">Desbloquear Black Friday<ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
             </Link>
             
             <NewsletterCTA variant="inline" text="Recibe las ofertas" className="bg-red-950/50 hover:bg-red-950/70 border-red-600/30 text-red-300" />
             
-            <p className="text-xs md:text-sm text-gray-400 mt-3">
+            <p className="text-[10px] md:text-xs text-gray-400 mt-2">
               ⚡ Oferta limitada - 28 de Noviembre • Solo Black Friday
             </p>
           </div>
