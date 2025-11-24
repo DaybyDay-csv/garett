@@ -13,6 +13,10 @@ import BlackFriday from "./pages/BlackFriday";
 import NewArrivals from "./pages/NewArrivals";
 import Superventas from "./pages/Superventas";
 import WarrantyPolicy from "./pages/WarrantyPolicy";
+import TerminosCondiciones from "./pages/TerminosCondiciones";
+import AvisoLegal from "./pages/AvisoLegal";
+import PoliticaCookies from "./pages/PoliticaCookies";
+import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +38,10 @@ const App = () => (
           <Route path="/novedades" element={<NewArrivals />} />
           <Route path="/superventas" element={<Superventas />} />
           <Route path="/garantia" element={<WarrantyPolicy />} />
+          <Route path="/terminos-condiciones" element={<TerminosCondiciones />} />
+          <Route path="/aviso-legal" element={<AvisoLegal />} />
+          <Route path="/politica-cookies" element={<PoliticaCookies />} />
+          <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
