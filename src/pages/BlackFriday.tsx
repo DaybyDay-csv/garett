@@ -349,9 +349,7 @@ const BlackFriday = () => {
       <div className="container py-12 -mt-8">
         <div className="mb-8">
           <h2 className="text-3xl font-bold mb-2">Productos en promoción</h2>
-          <p className="text-muted-foreground">
-            Descuentos especiales durante todo noviembre y principios de diciembre
-          </p>
+          
         </div>
 
         {loading ? <div className="py-20 text-center">
