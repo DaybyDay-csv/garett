@@ -83,7 +83,7 @@ Resultados visibles desde el primer uso.</span>
             {/* Pricing */}
             {!loading && <div className="flex items-center justify-center gap-2 flex-wrap px-2">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl md:text-4xl font-bold text-foreground">
+                  <span className="text-3xl md:text-4xl font-bold text-neutral-50">
                     €{finalPrice.toFixed(2)}
                   </span>
                   <span className="text-lg md:text-xl line-through text-red-200">
