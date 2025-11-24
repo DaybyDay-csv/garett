@@ -336,7 +336,7 @@ const BlackFriday = () => {
           <CountdownTimer promotionalStages={promotionalStages} />
 
           {/* Newsletter CTA after countdown */}
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-8">
             <NewsletterCTA variant="inline" text="Recibe alertas automáticas de cada etapa" className="text-white/70 hover:text-white text-sm bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors" />
           </div>
 
