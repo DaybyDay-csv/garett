@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Sparkles, ArrowRight } from "lucide-react";
 import heroBackground from "@/assets/hero-background.png";
 import heroMobile from "@/assets/hero-mobile.png";
-
 export const HeroSection = () => {
   return <section className="relative overflow-hidden min-h-[550px] md:min-h-[700px]">
       {/* Background Image - Mobile */}
@@ -29,7 +28,8 @@ export const HeroSection = () => {
             </div>
             
             <h1 className="text-3xl md:text-6xl lg:text-7xl font-bold leading-tight text-header animate-fade-in [animation-delay:100ms]">
-              TU SPA DE LUJO EN CASA
+              TU SPA DE 
+LUJO EN CASA
             </h1>
             
             {/* CTAs */}
