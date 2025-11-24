@@ -27,12 +27,12 @@ const NewArrivals = () => {
   }, []);
 
   const categories = [
-    { value: "capilar", label: "Cuidado capilar", icon: "💇" },
-    { value: "masajeadores-faciales", label: "Masajeadores faciales", icon: "✨" },
-    { value: "limpieza-facial", label: "Limpieza facial", icon: "🧼" },
-    { value: "mesoterapia", label: "Mesoterapia", icon: "💉" },
-    { value: "corporales", label: "Dispositivos corporales", icon: "🏋️" },
-    { value: "ipl", label: "Depilación e IPL", icon: "💡" },
+    { value: "capilar", label: "Cuidado capilar" },
+    { value: "masajeadores-faciales", label: "Masajeadores faciales" },
+    { value: "limpieza-facial", label: "Limpieza facial" },
+    { value: "mesoterapia", label: "Mesoterapia" },
+    { value: "corporales", label: "Dispositivos corporales" },
+    { value: "ipl", label: "Depilación e IPL" },
   ];
 
   // Group products by category
@@ -74,14 +74,11 @@ const NewArrivals = () => {
           <div className="space-y-16">
             {productsByCategory.map((category) => (
               <div key={category.value} className="space-y-6">
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl">{category.icon}</span>
-                  <div>
-                    <h2 className="text-2xl sm:text-3xl font-bold">{category.label}</h2>
-                    <p className="text-sm text-muted-foreground">
-                      {category.products.length} producto{category.products.length !== 1 ? 's' : ''}
-                    </p>
-                  </div>
+                <div>
+                  <h2 className="text-2xl sm:text-3xl font-bold">{category.label}</h2>
+                  <p className="text-sm text-muted-foreground">
+                    {category.products.length} producto{category.products.length !== 1 ? 's' : ''}
+                  </p>
                 </div>
                 <InfiniteScrollCarousel products={category.products} />
               </div>
