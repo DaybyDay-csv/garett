@@ -86,7 +86,7 @@ Resultados visibles desde el primer uso.</span>
                   <span className="text-3xl md:text-4xl font-bold text-foreground">
                     €{finalPrice.toFixed(2)}
                   </span>
-                  <span className="text-lg md:text-xl text-muted-foreground line-through">
+                  <span className="text-lg md:text-xl line-through text-red-200">
                     €{basePrice.toFixed(2)}
                   </span>
                 </div>
