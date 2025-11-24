@@ -345,8 +345,37 @@ const BlackFriday = () => {
         </div>
       </section>
 
+      {/* Products */}
+      <div className="container py-12 -mt-8">
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold mb-2">Productos en promoción</h2>
+          <p className="text-muted-foreground">
+            Descuentos especiales durante todo noviembre y principios de diciembre
+          </p>
+        </div>
+
+        {loading ? <div className="py-20 text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+            <p className="mt-4 text-muted-foreground">Cargando ofertas...</p>
+          </div> : products.length === 0 ? <div className="py-20 text-center">
+            <p className="text-muted-foreground">
+              Las ofertas de Black Friday estarán disponibles pronto
+            </p>
+          </div> : <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            {products.map(product => <ProductCard key={product.node.id} product={product} />)}
+          </div>}
+
+        {/* T&C */}
+        
+
+        {/* Newsletter CTA */}
+        <div className="mt-12">
+          <NewsletterCTA variant="card" className="max-w-3xl mx-auto" />
+        </div>
+      </div>
+
       {/* Discount Codes Section */}
-      <section className="container py-12 -mt-8">
+      <section className="container py-12">
         <div className="bg-background rounded-2xl shadow-xl p-8 border border-border">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <div>
@@ -518,39 +547,10 @@ const BlackFriday = () => {
         </div>
       </section>
 
-      {/* Intermediate CTA */}
+      {/* Final Newsletter CTA */}
       <section className="container py-12">
         <NewsletterCTA variant="card" className="max-w-2xl mx-auto" />
       </section>
-
-      {/* Products */}
-      <div className="container py-12">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold mb-2">Productos en promoción</h2>
-          <p className="text-muted-foreground">
-            Descuentos especiales durante todo noviembre y principios de diciembre
-          </p>
-        </div>
-
-        {loading ? <div className="py-20 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-4 text-muted-foreground">Cargando ofertas...</p>
-          </div> : products.length === 0 ? <div className="py-20 text-center">
-            <p className="text-muted-foreground">
-              Las ofertas de Black Friday estarán disponibles pronto
-            </p>
-          </div> : <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-            {products.map(product => <ProductCard key={product.node.id} product={product} />)}
-          </div>}
-
-        {/* T&C */}
-        
-
-        {/* Final Newsletter CTA */}
-        <div className="mt-12">
-          <NewsletterCTA variant="card" className="max-w-3xl mx-auto" />
-        </div>
-      </div>
 
       <Footer />
     </div>;
