@@ -18,7 +18,7 @@ export const HeroSection = () => {
             </h1>
             
             <p className="md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 font-extralight py-0 text-sm">
-              Dispositivos profesionales con garantía de 2 años. 
+              Dispositivos profesionales con garantía de 2 años.  
 Resultados visibles desde la primera semana.
             </p>
             
