@@ -124,9 +124,7 @@ export const CartDrawer = () => {
               </div>
             </div>
             
-            {hasUnlockedGWP ? <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg p-3 animate-pulse">
-                
-              </div> : <>
+            {!hasUnlockedGWP && <>
                 <Progress value={progressPercentage} className="h-2 mb-2" />
                 <p className="text-xs text-purple-800 dark:text-purple-200">
                   Añade <span className="font-bold">€{remainingForGWP.toFixed(2)}</span> más para obtener tu <span className="font-bold">banda de pelo gratis</span>
