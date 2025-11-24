@@ -94,14 +94,24 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link to="/politica-privacidad" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                   Política de privacidad
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link to="/terminos-condiciones" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                   Términos y condiciones
-                </a>
+                </Link>
+              </li>
+              <li>
+                <Link to="/politica-cookies" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                  Política de cookies
+                </Link>
+              </li>
+              <li>
+                <Link to="/aviso-legal" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                  Aviso legal
+                </Link>
               </li>
               <li>
                 <Link to="/garantia" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
