@@ -168,9 +168,7 @@ Resultados visibles desde el primer uso.</span>
         {/* Before/After Transformation Section */}
         <div className="pb-4 md:pb-8 lg:pb-10 border-t border-red-600/20 pt-4 md:pt-8">
           <div className="text-center mb-3 md:mb-6 px-4">
-            <Badge className="mb-2 bg-red-950/50 text-red-400 border border-red-600/30 text-xs px-2 py-0.5">
-              RESULTADOS REALES
-            </Badge>
+            
             <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 text-white">
               Transformación <span className="text-red-400">Profesional</span>
             </h2>
@@ -212,8 +210,7 @@ Resultados visibles desde el primer uso.</span>
 
           {/* Final CTA */}
           <div className="text-center mt-4 md:mt-6 relative z-20 space-y-2 px-4 flex flex-col items-center">
-            <Link to={product ? `/producto/${product.node.handle}` : "#"} className="inline-flex items-center justify-center group text-sm md:text-base h-10 md:h-12 px-8 md:px-10 bg-white hover:bg-white/90 transition-all text-black rounded-lg font-bold cursor-pointer relative z-20 w-full sm:w-auto max-w-xs">Desbloquear Black Friday<ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
-            </Link>
+            
             
             <NewsletterCTA variant="inline" text="Recibe las ofertas" className="bg-red-950/50 hover:bg-red-950/70 border-red-600/30 text-red-300" />
             
