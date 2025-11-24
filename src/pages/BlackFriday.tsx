@@ -292,7 +292,7 @@ const BlackFriday = () => {
     }, {
       code: "EARLYBIRD35",
       discount: "35% OFF",
-      limit: "450 usos",
+      limit: "25 usos",
       urgency: "medium"
     }, {
       code: "BF25",
