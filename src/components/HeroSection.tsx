@@ -24,12 +24,12 @@ export const HeroSection = () => {
             
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="text-base group">
-                <Link to="/novedades">
-                  Ver Novedades
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
+            <Button asChild size="lg" className="text-base group bg-[#0f1629] hover:bg-[#0f1629]/90 text-white">
+              <Link to="/novedades">
+                Ver Novedades
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
               
               <Button asChild variant="outline" size="lg" className="text-base border-primary text-primary hover:bg-primary/5">
                 <Link to="/superventas">
