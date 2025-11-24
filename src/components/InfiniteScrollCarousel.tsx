@@ -83,21 +83,21 @@ export const InfiniteScrollCarousel = ({ products }: InfiniteScrollCarouselProps
       
       {/* Navigation arrows */}
       <Button
-        variant="outline"
+        variant="ghost"
         size="icon"
-        className="absolute left-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 backdrop-blur-sm hover:bg-background z-10"
+        className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-background/60 hover:bg-background/80 border border-border/50 z-10 transition-all"
         onClick={() => scroll('left')}
       >
-        <ChevronLeft className="h-4 w-4" />
+        <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
       </Button>
       
       <Button
-        variant="outline"
+        variant="ghost"
         size="icon"
-        className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 backdrop-blur-sm hover:bg-background z-10"
+        className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-background/60 hover:bg-background/80 border border-border/50 z-10 transition-all"
         onClick={() => scroll('right')}
       >
-        <ChevronRight className="h-4 w-4" />
+        <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
       </Button>
       
       {/* Gradient overlays */}
