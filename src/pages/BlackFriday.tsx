@@ -330,7 +330,7 @@ const BlackFriday = () => {
           </Badge>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Calendario de Ofertas BlackFriday</h1>
           
-          <p className="text-lg text-white/80 mb-4 max-w-2xl">Hasta 50% + Regalo gratis a partir de €70 en TODOS los pedidos             </p>
+          <p className="text-white/80 mb-4 max-w-2xl text-base">Hasta 50% + Regalo gratis a partir de €70 en TODOS los pedidos             </p>
 
           {/* Countdown Timer */}
           <CountdownTimer promotionalStages={promotionalStages} />
