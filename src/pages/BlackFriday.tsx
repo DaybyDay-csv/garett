@@ -287,7 +287,7 @@ const BlackFriday = () => {
     codes: stage.name === "Black Friday" ? [{
       code: "EARLYBIRD50",
       discount: "50% OFF",
-      limit: "150 usos",
+      limit: "10 usos",
       urgency: "high"
     }, {
       code: "EARLYBIRD35",
