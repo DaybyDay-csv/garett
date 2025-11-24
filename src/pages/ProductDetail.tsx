@@ -284,7 +284,7 @@ const ProductDetail = () => {
                 {!isAeroGlow && isBestseller && <Badge variant="secondary">Bestseller</Badge>}
                 <Badge variant="outline" className={`gap-1 ${isAeroGlow ? 'border-red-600/30 text-gray-300' : ''}`}>
                   <Shield className="w-3 h-3" />
-                  Garantía 24 meses
+                  Garantía 2 años
                 </Badge>
               </div>
               
@@ -554,7 +554,7 @@ const ProductDetail = () => {
 
             {/* Trust Footer */}
             <div className={`p-4 rounded-lg text-xs border ${isAeroGlow ? 'bg-red-950/20 border-red-900/30 text-gray-300' : 'bg-muted/30 border text-muted-foreground'}`}>
-              <p>Los resultados pueden variar. Úsalo con constancia para mejores resultados. Certificado CE. Garantía comercial 24 meses. Producto higiénico-sanitario: no admite devolución una vez desprecintado salvo defecto técnico verificado.</p>
+              <p>Los resultados pueden variar. Úsalo con constancia para mejores resultados. Certificado CE. Garantía comercial 2 años. Producto higiénico-sanitario: no admite devolución una vez desprecintado salvo defecto técnico verificado.</p>
             </div>
           </div>
         </div>
@@ -578,7 +578,7 @@ const ProductDetail = () => {
               </div>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Shield className="w-3 h-3" />
-                <span>Garantía 24 meses</span>
+                <span>Garantía 2 años</span>
               </div>
             </div>
             <Button 

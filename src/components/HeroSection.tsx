@@ -41,11 +41,11 @@ export const HeroSection = () => {
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start text-sm text-muted-foreground pt-4">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span>Garantía 3 años</span>
+                <span>Garantía 2 años</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span>Envío gratis desde 60€</span>
+                <span>Envío gratis desde 150€</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
