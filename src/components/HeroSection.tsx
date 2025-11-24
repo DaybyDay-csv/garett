@@ -23,7 +23,7 @@ export const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="text-base group">
                 <Link to="/novedades">
-                  Ver dispositivos para rostro
+                  Ver Novedades
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
