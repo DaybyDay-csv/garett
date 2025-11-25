@@ -80,8 +80,8 @@ const Products = () => {
       <div className="container py-8">
         <div className="mb-8">
           <h1 className="mb-2 text-lg font-bold">Todos los productos</h1>
-          <p className="text-muted-foreground text-lg text-left font-bold">
-            Reafirmación inmediata, limpieza profunda, cuidado integral.        
+          <p className="text-left font-bold text-2xl text-[#27303d]">
+            Reafirmación inmediata, cuidado integral,  limpieza profunda.        
           </p>
         </div>
 
