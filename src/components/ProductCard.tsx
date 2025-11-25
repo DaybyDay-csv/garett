@@ -84,37 +84,35 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         )}
         
         <div className="absolute top-2 left-2 right-2 flex justify-between items-start gap-2">
-          {/* Left side badges - Priority: Promotional > Launch > Bestseller > New (max 2) */}
+          {/* Left side badges */}
           <div className="flex flex-col gap-1 max-w-[60%]">
-            {priceInfo.hasDiscount && priceInfo.stage && (
-              <Badge className={`bg-gradient-to-r ${priceInfo.stage.color} text-white border-0 animate-pulse`}>
+            {isBestseller && (
+              <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0">
                 <Flame className="w-3 h-3 mr-1" />
-                {priceInfo.stage.badge}
+                Superventa
               </Badge>
             )}
-            {!priceInfo.hasDiscount && isLaunch && (
-              <Badge variant="destructive">
-                Lanzamiento
-              </Badge>
-            )}
-            {!priceInfo.hasDiscount && !isLaunch && isBestseller && (
-              <Badge variant="secondary">
-                Bestseller
-              </Badge>
-            )}
-            {!priceInfo.hasDiscount && !isLaunch && !isBestseller && isNew && (
+            {isNew && (
               <Badge variant="default" className="bg-primary text-primary-foreground">
                 Nuevo
               </Badge>
             )}
+            {priceInfo.hasDiscount && (
+              <Badge variant="destructive" className="animate-pulse">
+                Ahorra {priceInfo.discountLabel}
+              </Badge>
+            )}
+            {isLaunch && (
+              <Badge variant="destructive">
+                Lanzamiento
+              </Badge>
+            )}
           </div>
           
-          {/* Right side badge - Only show if no promotional badge */}
-          {!priceInfo.hasDiscount && (
-            <Badge variant="outline" className="bg-background/80 backdrop-blur-sm text-xs">
-              Garantía 24 meses
-            </Badge>
-          )}
+          {/* Right side badge */}
+          <Badge variant="outline" className="bg-background/80 backdrop-blur-sm text-xs">
+            Garantía 24 meses
+          </Badge>
         </div>
       </div>
       
