@@ -73,10 +73,10 @@ const Index = () => {
           </div>
           <div className="relative">
             <div className="overflow-x-auto scrollbar-hide px-4 md:px-8">
-              <div className="flex gap-4 md:gap-6 pb-4">
-                {bestSellers.map((product) => (
-                  <div key={product.node.id} className="flex-none w-[280px] md:w-[320px]">
-                    <ProductCard product={product} />
+              <div className="flex gap-3 md:gap-6 pb-4">
+                {bestSellers.map((product, index) => (
+                  <div key={product.node.id} className="flex-none w-[220px] md:w-[320px]">
+                    <ProductCard product={product} tagIndex={index} />
                   </div>
                 ))}
               </div>
