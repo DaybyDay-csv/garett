@@ -8,24 +8,12 @@ export const HeroSection = () => {
   return <section className="relative overflow-hidden min-h-[550px] md:min-h-[700px]">
       {/* Background Image - Mobile */}
       <div className="absolute inset-0 md:hidden">
-        <OptimizedImage
-          src={heroMobile}
-          alt="Hero mobile background"
-          className="w-full h-full object-cover object-center"
-          loading="eager"
-          fetchPriority="high"
-        />
+        <OptimizedImage src={heroMobile} alt="Hero mobile background" className="w-full h-full object-cover object-center" loading="eager" fetchPriority="high" />
       </div>
       
       {/* Background Image - Desktop */}
       <div className="absolute inset-0 hidden md:block">
-        <OptimizedImage
-          src={heroBackground}
-          alt="Hero desktop background"
-          className="w-full h-full object-cover object-right"
-          loading="eager"
-          fetchPriority="high"
-        />
+        <OptimizedImage src={heroBackground} alt="Hero desktop background" className="w-full h-full object-cover object-right" loading="eager" fetchPriority="high" />
       </div>
       
       <div className="container relative py-6 md:py-20 h-full">
@@ -57,8 +45,8 @@ export const HeroSection = () => {
               </Button>
               
               <Button asChild variant="outline" size="lg" className="text-sm md:text-base border-header/30 bg-header/5 text-header hover:bg-header/10 hover:text-header h-10 md:h-11 px-3 max-w-[180px] md:max-w-none">
-                <Link to="/superventas">
-                  Ver Superventas
+                <Link to="/superventas" className="font-light text-sm">
+                  Superventas 
                 </Link>
               </Button>
             </div>
