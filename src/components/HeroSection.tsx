@@ -36,8 +36,8 @@ export const HeroSection = () => {
             {/* CTAs */}
             <div className="flex flex-col gap-2.5 md:gap-4 w-64 md:max-w-none animate-fade-in [animation-delay:200ms]">
               <Button asChild size="lg" className="text-sm md:text-base group bg-header hover:bg-header/90 text-header-foreground h-10 md:h-11 px-3 max-w-[180px] md:max-w-none">
-                <Link to="/novedades">
-                  Ver Novedades
+                <Link to="/productos">
+                  Ver Productos
                   <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
