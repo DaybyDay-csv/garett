@@ -20,11 +20,9 @@ import categoryLimpiezaFacial from "@/assets/category-limpieza-facial.jpg";
 import categoryMesoterapia from "@/assets/category-mesoterapia.jpg";
 import categoryCorporales from "@/assets/category-corporales.jpg";
 import categoryDepilacionIPL from "@/assets/category-depilacion-ipl.jpg";
-
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const loadProducts = async () => {
       try {
@@ -38,15 +36,11 @@ const Index = () => {
         setLoading(false);
       }
     };
-
     loadProducts();
   }, []);
-
   const newProducts = products.filter(p => p.node.tags.includes('new:true'));
   const bestSellers = products.filter(p => p.node.tags.includes('bestseller:true'));
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
       
       {/* Hero Section with UVP */}
@@ -56,15 +50,14 @@ const Index = () => {
       <PromotionalBanners />
 
       {/* Superventas - Horizontal Scroll */}
-      {bestSellers.length > 0 && (
-        <section id="superventas" className="py-8 md:py-12 bg-gradient-to-b from-background to-secondary/10">
+      {bestSellers.length > 0 && <section id="superventas" className="py-8 md:py-12 bg-gradient-to-b from-background to-secondary/10">
           <div className="container">
             <div className="flex items-center justify-between mb-6 md:mb-8">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                <h2 className="text-3xl md:text-4xl text-foreground font-thin">
                   Superventas
                 </h2>
-                <p className="text-muted-foreground mt-2 text-lg">Los más vendidos de Garett</p>
+                <p className="text-muted-foreground mt-2 text-sm">Los más vendidos de Garett</p>
               </div>
               <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5">
                 <Link to="/superventas">Ver todos</Link>
@@ -74,16 +67,13 @@ const Index = () => {
           <div className="relative">
             <div className="overflow-x-auto scrollbar-hide px-4 md:px-8">
               <div className="flex gap-3 md:gap-6 pb-4">
-                {bestSellers.map((product, index) => (
-                  <div key={product.node.id} className="flex-none w-[220px] md:w-[320px]">
+                {bestSellers.map((product, index) => <div key={product.node.id} className="flex-none w-[220px] md:w-[320px]">
                     <ProductCard product={product} tagIndex={index} />
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
           </div>
-        </section>
-      )}
+        </section>}
 
       <div className="container py-8 md:py-12">
         {/* Trust Badges */}
@@ -107,11 +97,7 @@ const Index = () => {
             <Link to="/productos?category=capilar" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage
-                    src={categoryCuidadoCapilar} 
-                    alt="Cuidado capilar - Dispositivos profesionales para el cabello"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                  <OptimizedImage src={categoryCuidadoCapilar} alt="Cuidado capilar - Dispositivos profesionales para el cabello" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <CardContent className="p-3 md:p-6">
                   <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
@@ -132,11 +118,7 @@ const Index = () => {
             <Link to="/productos?category=masajeadores-faciales" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage
-                    src={categoryMasajeadoresFaciales} 
-                    alt="Masajeadores faciales - Estimulación facial avanzada"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                  <OptimizedImage src={categoryMasajeadoresFaciales} alt="Masajeadores faciales - Estimulación facial avanzada" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <CardContent className="p-3 md:p-6">
                   <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
@@ -157,11 +139,7 @@ const Index = () => {
             <Link to="/productos?category=limpieza-facial" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage
-                    src={categoryLimpiezaFacial} 
-                    alt="Limpieza facial - Limpieza profunda profesional"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                  <OptimizedImage src={categoryLimpiezaFacial} alt="Limpieza facial - Limpieza profunda profesional" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <CardContent className="p-3 md:p-6">
                   <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
@@ -182,11 +160,7 @@ const Index = () => {
             <Link to="/productos?category=mesoterapia" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage
-                    src={categoryMesoterapia} 
-                    alt="Dispositivos de Mesoterapia - Tratamientos de rejuvenecimiento"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                  <OptimizedImage src={categoryMesoterapia} alt="Dispositivos de Mesoterapia - Tratamientos de rejuvenecimiento" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <CardContent className="p-3 md:p-6">
                   <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
@@ -207,11 +181,7 @@ const Index = () => {
             <Link to="/productos?category=corporales" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage
-                    src={categoryCorporales} 
-                    alt="Dispositivos corporales - Tratamientos para todo el cuerpo"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                  <OptimizedImage src={categoryCorporales} alt="Dispositivos corporales - Tratamientos para todo el cuerpo" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <CardContent className="p-3 md:p-6">
                   <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
@@ -232,11 +202,7 @@ const Index = () => {
             <Link to="/productos?category=ipl" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage
-                    src={categoryDepilacionIPL} 
-                    alt="Depilación e IPL - Depilación permanente profesional"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                  <OptimizedImage src={categoryDepilacionIPL} alt="Depilación e IPL - Depilación permanente profesional" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <CardContent className="p-3 md:p-6">
                   <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
@@ -264,8 +230,7 @@ const Index = () => {
 
       <div className="container py-16">
         {/* New Arrivals */}
-        {newProducts.length > 0 && (
-          <section className="py-8">
+        {newProducts.length > 0 && <section className="py-8">
             <div className="flex items-center justify-between mb-10">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground">
@@ -278,35 +243,26 @@ const Index = () => {
               </Button>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-              {newProducts.slice(0, 4).map((product) => (
-                <ProductCard key={product.node.id} product={product} />
-              ))}
+              {newProducts.slice(0, 4).map(product => <ProductCard key={product.node.id} product={product} />)}
             </div>
-          </section>
-        )}
+          </section>}
 
         {/* All Products or Empty State */}
-        {products.length === 0 && !loading && (
-          <section className="py-20 text-center">
+        {products.length === 0 && !loading && <section className="py-20 text-center">
             <ShoppingBag className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-2xl font-bold mb-2">No hay productos aún</h3>
             <p className="text-muted-foreground mb-6">
               Estamos preparando nuestro catálogo. ¡Vuelve pronto!
             </p>
-          </section>
-        )}
+          </section>}
 
-        {loading && (
-          <section className="py-20 text-center">
+        {loading && <section className="py-20 text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
             <p className="mt-4 text-muted-foreground">Cargando productos...</p>
-          </section>
-        )}
+          </section>}
       </div>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
