@@ -1,19 +1,32 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Sparkles, ArrowRight } from "lucide-react";
+import { OptimizedImage } from "@/components/OptimizedImage";
 import heroBackground from "@/assets/hero-background.png";
 import heroMobile from "@/assets/hero-mobile.png";
 export const HeroSection = () => {
   return <section className="relative overflow-hidden min-h-[550px] md:min-h-[700px]">
       {/* Background Image - Mobile */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden" style={{
-      backgroundImage: `url(${heroMobile})`
-    }} />
+      <div className="absolute inset-0 md:hidden">
+        <OptimizedImage
+          src={heroMobile}
+          alt="Hero mobile background"
+          className="w-full h-full object-cover object-center"
+          loading="eager"
+          fetchPriority="high"
+        />
+      </div>
       
       {/* Background Image - Desktop */}
-      <div className="absolute inset-0 bg-cover bg-right bg-no-repeat hidden md:block" style={{
-      backgroundImage: `url(${heroBackground})`
-    }} />
+      <div className="absolute inset-0 hidden md:block">
+        <OptimizedImage
+          src={heroBackground}
+          alt="Hero desktop background"
+          className="w-full h-full object-cover object-right"
+          loading="eager"
+          fetchPriority="high"
+        />
+      </div>
       
       <div className="container relative py-6 md:py-20 h-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start md:items-center h-full">
