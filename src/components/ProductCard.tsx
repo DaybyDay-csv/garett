@@ -73,7 +73,7 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
   return (
     <Link 
       to={`/producto/${node.handle}`}
-      className="group block bg-card rounded-lg overflow-hidden border hover:shadow-lg transition-all"
+      className="group block bg-card rounded-none overflow-hidden border hover:shadow-lg transition-all"
     >
       <div className="aspect-square bg-secondary/20 overflow-hidden relative">
         {image && (
@@ -84,70 +84,42 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
           />
         )}
         
-        <div className="absolute top-2 left-2 right-2 flex justify-between items-start gap-2">
-          {/* Single tag based on position */}
-          <div className="flex flex-col gap-1">
-            {tagIndex !== undefined ? (
-              <>
-                {tagIndex === 0 && isBestseller && (
-                  <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0">
-                    <Flame className="w-3 h-3 mr-1" />
-                    Superventa
-                  </Badge>
-                )}
-                {tagIndex === 1 && isNew && (
-                  <Badge variant="default" className="bg-primary text-primary-foreground">
-                    Nuevo
-                  </Badge>
-                )}
-                {tagIndex === 2 && priceInfo.hasDiscount && (
-                  <Badge variant="destructive">
-                    Ahorra {priceInfo.discountLabel}
-                  </Badge>
-                )}
-                {tagIndex > 2 && (isBestseller || isNew || priceInfo.hasDiscount) && (
-                  <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0">
-                    <Flame className="w-3 h-3 mr-1" />
-                    Superventa
-                  </Badge>
-                )}
-              </>
-            ) : (
-              <>
-                {isBestseller && (
-                  <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0">
-                    <Flame className="w-3 h-3 mr-1" />
-                    Superventa
-                  </Badge>
-                )}
-                {isNew && (
-                  <Badge variant="default" className="bg-primary text-primary-foreground">
-                    Nuevo
-                  </Badge>
-                )}
-                {priceInfo.hasDiscount && (
-                  <Badge variant="destructive">
-                    Ahorra {priceInfo.discountLabel}
-                  </Badge>
-                )}
-                {isLaunch && (
-                  <Badge variant="destructive">
-                    Lanzamiento
-                  </Badge>
-                )}
-              </>
-            )}
-          </div>
-          
-          {/* Right side badge */}
-          <Badge variant="outline" className="bg-background/80 backdrop-blur-sm text-xs">
-            Garantía 24 meses
-          </Badge>
+        {/* Max 2 tags at bottom-left - Priority: Lanzamiento > Superventa > Nuevo > Ahorra X% */}
+        <div className="absolute bottom-2 left-2 flex gap-1.5">
+          {isLaunch ? (
+            <Badge variant="destructive" className="text-xs">
+              Lanzamiento
+            </Badge>
+          ) : (
+            <>
+              {isBestseller && (
+                <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0 text-xs">
+                  <Flame className="w-3 h-3 mr-1" />
+                  Superventa
+                </Badge>
+              )}
+              {!isBestseller && isNew && (
+                <Badge variant="default" className="bg-primary text-primary-foreground text-xs">
+                  Nuevo
+                </Badge>
+              )}
+              {!isBestseller && !isNew && priceInfo.hasDiscount && (
+                <Badge variant="destructive" className="text-xs">
+                  Ahorra {priceInfo.discountLabel}
+                </Badge>
+              )}
+              {isBestseller && priceInfo.hasDiscount && (
+                <Badge variant="destructive" className="text-xs">
+                  Ahorra {priceInfo.discountLabel}
+                </Badge>
+              )}
+            </>
+          )}
         </div>
       </div>
       
       <div className="p-4">
-        <h3 className="font-semibold text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+        <h3 className="font-medium text-sm mb-2 line-clamp-2 group-hover:text-primary transition-colors">
           {node.title}
         </h3>
         
@@ -162,14 +134,9 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
           <div className="flex flex-col flex-1 min-w-0">
             {priceInfo.hasDiscount ? (
               <>
-                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
-                  <span className="text-2xl font-bold text-primary">
-                    €{priceInfo.discountedPrice.toFixed(2)}
-                  </span>
-                  <Badge variant="destructive" className="text-xs w-fit">
-                    {priceInfo.discountLabel}
-                  </Badge>
-                </div>
+                <span className="text-2xl font-bold text-primary">
+                  €{priceInfo.discountedPrice.toFixed(2)}
+                </span>
                 <span className="text-sm text-muted-foreground line-through">
                   €{priceInfo.originalPrice.toFixed(2)}
                 </span>
