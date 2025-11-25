@@ -9,9 +9,10 @@ import { Flame } from "lucide-react";
 
 interface ProductCardProps {
   product: ShopifyProduct;
+  tagIndex?: number;
 }
 
-export const ProductCard = ({ product }: ProductCardProps) => {
+export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
   const addItem = useCartStore(state => state.addItem);
   const { node } = product;
   
@@ -84,28 +85,57 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         )}
         
         <div className="absolute top-2 left-2 right-2 flex justify-between items-start gap-2">
-          {/* Left side badges */}
-          <div className="flex flex-col gap-1 max-w-[60%]">
-            {isBestseller && (
-              <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0">
-                <Flame className="w-3 h-3 mr-1" />
-                Superventa
-              </Badge>
-            )}
-            {isNew && (
-              <Badge variant="default" className="bg-primary text-primary-foreground">
-                Nuevo
-              </Badge>
-            )}
-            {priceInfo.hasDiscount && (
-              <Badge variant="destructive" className="animate-pulse">
-                Ahorra {priceInfo.discountLabel}
-              </Badge>
-            )}
-            {isLaunch && (
-              <Badge variant="destructive">
-                Lanzamiento
-              </Badge>
+          {/* Single tag based on position */}
+          <div className="flex flex-col gap-1">
+            {tagIndex !== undefined ? (
+              <>
+                {tagIndex === 0 && isBestseller && (
+                  <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0">
+                    <Flame className="w-3 h-3 mr-1" />
+                    Superventa
+                  </Badge>
+                )}
+                {tagIndex === 1 && isNew && (
+                  <Badge variant="default" className="bg-primary text-primary-foreground">
+                    Nuevo
+                  </Badge>
+                )}
+                {tagIndex === 2 && priceInfo.hasDiscount && (
+                  <Badge variant="destructive">
+                    Ahorra {priceInfo.discountLabel}
+                  </Badge>
+                )}
+                {tagIndex > 2 && (isBestseller || isNew || priceInfo.hasDiscount) && (
+                  <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0">
+                    <Flame className="w-3 h-3 mr-1" />
+                    Superventa
+                  </Badge>
+                )}
+              </>
+            ) : (
+              <>
+                {isBestseller && (
+                  <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0">
+                    <Flame className="w-3 h-3 mr-1" />
+                    Superventa
+                  </Badge>
+                )}
+                {isNew && (
+                  <Badge variant="default" className="bg-primary text-primary-foreground">
+                    Nuevo
+                  </Badge>
+                )}
+                {priceInfo.hasDiscount && (
+                  <Badge variant="destructive">
+                    Ahorra {priceInfo.discountLabel}
+                  </Badge>
+                )}
+                {isLaunch && (
+                  <Badge variant="destructive">
+                    Lanzamiento
+                  </Badge>
+                )}
+              </>
             )}
           </div>
           
