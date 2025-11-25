@@ -84,7 +84,7 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
           />
         )}
         
-        {/* Max 2 tags at bottom-left - Priority: Lanzamiento > Superventa > Nuevo > Ahorra X% */}
+        {/* Max 2 tags at bottom-left - Priority: Lanzamiento > Superventa > Nuevo > X% OFF */}
         <div className="absolute bottom-2 left-2 flex gap-1.5">
           {isLaunch ? (
             <Badge variant="destructive" className="text-xs">
@@ -93,7 +93,7 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
           ) : (
             <>
               {isBestseller && (
-                <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0 text-xs">
+                <Badge className="bg-rose-400 text-white border-0 text-xs">
                   <Flame className="w-3 h-3 mr-1" />
                   Superventa
                 </Badge>
@@ -104,13 +104,13 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
                 </Badge>
               )}
               {!isBestseller && !isNew && priceInfo.hasDiscount && (
-                <Badge variant="destructive" className="text-xs">
-                  Ahorra {priceInfo.discountLabel}
+                <Badge className="bg-red-700 text-white border-0 text-xs">
+                  {priceInfo.discountLabel} OFF
                 </Badge>
               )}
               {isBestseller && priceInfo.hasDiscount && (
-                <Badge variant="destructive" className="text-xs">
-                  Ahorra {priceInfo.discountLabel}
+                <Badge className="bg-red-700 text-white border-0 text-xs">
+                  {priceInfo.discountLabel} OFF
                 </Badge>
               )}
             </>
