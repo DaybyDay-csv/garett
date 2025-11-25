@@ -328,9 +328,9 @@ const BlackFriday = () => {
           <Badge className="mb-4 bg-white/20 text-white border-white/30 backdrop-blur-sm">
             Promociones Noviembre-Diciembre 2025
           </Badge>
-          <h1 className="text-4xl md:text-6xl mb-4 font-extrabold">BLACK FRIDAY </h1>
+          <h1 className="text-4xl md:text-6xl mb-4 font-extrabold text-center">BLACK FRIDAY </h1>
           
-          <p className="text-white/80 mb-4 max-w-2xl text-base">Hasta 50% + Regalo gratis a partir de €70 en TODOS los pedidos             </p>
+          <p className="text-white/80 mb-4 max-w-2xl text-base text-center">Hasta 50% + Regalo gratis a partir de €70 en TODOS los pedidos             </p>
 
           {/* Countdown Timer */}
           <CountdownTimer promotionalStages={promotionalStages} />
