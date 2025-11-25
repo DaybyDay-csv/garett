@@ -5,15 +5,8 @@ import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { Filter, ShoppingBag } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-
 const Products = () => {
   const [searchParams] = useSearchParams();
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -29,7 +22,6 @@ const Products = () => {
       setCategoryFilter(categoryParam);
     }
   }, [searchParams]);
-
   useEffect(() => {
     const loadProducts = async () => {
       try {
@@ -44,55 +36,52 @@ const Products = () => {
         setLoading(false);
       }
     };
-
     loadProducts();
   }, []);
-
   useEffect(() => {
     let filtered = [...products];
 
     // Sorting
     if (sortBy === "price-asc") {
-      filtered.sort((a, b) => 
-        parseFloat(a.node.priceRange.minVariantPrice.amount) - 
-        parseFloat(b.node.priceRange.minVariantPrice.amount)
-      );
+      filtered.sort((a, b) => parseFloat(a.node.priceRange.minVariantPrice.amount) - parseFloat(b.node.priceRange.minVariantPrice.amount));
     } else if (sortBy === "price-desc") {
-      filtered.sort((a, b) => 
-        parseFloat(b.node.priceRange.minVariantPrice.amount) - 
-        parseFloat(a.node.priceRange.minVariantPrice.amount)
-      );
+      filtered.sort((a, b) => parseFloat(b.node.priceRange.minVariantPrice.amount) - parseFloat(a.node.priceRange.minVariantPrice.amount));
     }
-
     setFilteredProducts(filtered);
   }, [sortBy, products]);
-
-  const categories = [
-    { value: "capilar", label: "Cuidado capilar" },
-    { value: "masajeadores-faciales", label: "Masajeadores faciales" },
-    { value: "limpieza-facial", label: "Limpieza facial" },
-    { value: "mesoterapia", label: "Dispositivos de Mesoterapia" },
-    { value: "corporales", label: "Dispositivos corporales" },
-    { value: "ipl", label: "Depilación e IPL" },
-  ];
+  const categories = [{
+    value: "capilar",
+    label: "Cuidado capilar"
+  }, {
+    value: "masajeadores-faciales",
+    label: "Masajeadores faciales"
+  }, {
+    value: "limpieza-facial",
+    label: "Limpieza facial"
+  }, {
+    value: "mesoterapia",
+    label: "Dispositivos de Mesoterapia"
+  }, {
+    value: "corporales",
+    label: "Dispositivos corporales"
+  }, {
+    value: "ipl",
+    label: "Depilación e IPL"
+  }];
 
   // Group products by category
   const productsByCategory = categories.map(category => ({
     ...category,
-    products: filteredProducts.filter(p => 
-      p.node.tags.some(tag => tag.includes(`category:${category.value}`))
-    )
+    products: filteredProducts.filter(p => p.node.tags.some(tag => tag.includes(`category:${category.value}`)))
   })).filter(cat => cat.products.length > 0);
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
       
       <div className="container py-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Todos los productos</h1>
-          <p className="text-muted-foreground">
-            Descubre nuestra gama completa de dispositivos de belleza
+          <h1 className="text-4xl mb-2 font-thin">Todos los productos</h1>
+          <p className="text-muted-foreground text-lg text-left font-bold">
+            Reafirmación inmediata, limpieza profunda, cuidado integral.        
           </p>
         </div>
 
@@ -111,36 +100,24 @@ const Products = () => {
         </div>
 
         {/* Products Grid */}
-        {loading ? (
-          <div className="py-20 text-center">
+        {loading ? <div className="py-20 text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
             <p className="mt-4 text-muted-foreground">Cargando productos...</p>
-          </div>
-        ) : filteredProducts.length === 0 ? (
-          <div className="py-20 text-center">
+          </div> : filteredProducts.length === 0 ? <div className="py-20 text-center">
             <ShoppingBag className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-2xl font-bold mb-2">No hay productos</h3>
             <p className="text-muted-foreground">Estamos preparando nuestro catálogo</p>
-          </div>
-        ) : (
-          <div className="space-y-12">
-            {productsByCategory.map((category) => (
-              <div key={category.value}>
+          </div> : <div className="space-y-12">
+            {productsByCategory.map(category => <div key={category.value}>
                 <h2 className="text-2xl font-bold mb-6 pb-2 border-b">{category.label}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                  {category.products.map((product) => (
-                    <ProductCard key={product.node.id} product={product} />
-                  ))}
+                  {category.products.map(product => <ProductCard key={product.node.id} product={product} />)}
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              </div>)}
+          </div>}
       </div>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Products;
