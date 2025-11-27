@@ -46,6 +46,11 @@ const Index = () => {
       {/* Hero Section with UVP */}
       <HeroSection />
       
+      {/* Trust Badges */}
+      <div className="container py-8 md:py-12">
+        <TrustBadges />
+      </div>
+
       {/* Promotional Banners Carousel */}
       <PromotionalBanners />
 
@@ -75,10 +80,6 @@ const Index = () => {
           </div>
         </section>}
 
-      <div className="container py-8 md:py-12">
-        {/* Trust Badges */}
-        <TrustBadges />
-      </div>
 
       {/* Categories Section */}
       <section className="py-12 md:py-20 bg-white">
