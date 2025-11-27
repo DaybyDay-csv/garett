@@ -2,27 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { OptimizedImage } from "@/components/OptimizedImage";
-import heroBackground1 from "@/assets/hero-background-2.png";
-import heroBackground2 from "@/assets/hero-background.png";
+import heroBackground from "@/assets/hero-background.png";
 import heroMobile from "@/assets/hero-mobile.png";
-import { useState, useEffect } from "react";
-
 export const HeroSection = () => {
-  const [imageIndex, setImageIndex] = useState(0);
-  
-  // Alternar entre imágenes y colores cada 5 segundos
-  const heroImages = [
-    { src: heroBackground2, textColor: "text-white" }, // Imagen nueva con texto blanco
-    { src: heroBackground1, textColor: "text-black" }, // Imagen anterior con texto negro
-  ];
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-    
-    return () => clearInterval(interval);
-  }, []);
   return <section className="relative overflow-hidden min-h-[550px] md:min-h-[700px]">
       {/* Background Image - Mobile */}
       <div className="absolute inset-0 md:hidden">
@@ -38,10 +20,11 @@ export const HeroSection = () => {
       {/* Background Image - Desktop */}
       <div className="absolute inset-0 hidden md:block">
         <OptimizedImage 
-          src={heroImages[imageIndex].src} 
+          src={heroBackground} 
           alt="Hero desktop background" 
-          className="w-full h-full object-cover object-right transition-opacity duration-1000" 
+          className="w-full h-full object-cover object-right" 
           priority 
+          blurPlaceholder
         />
       </div>
       
@@ -57,7 +40,7 @@ export const HeroSection = () => {
               Tecnología polaca de última generación
             </div>
             
-            <h1 className={`text-3xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in [animation-delay:100ms] transition-colors duration-1000 ${heroImages[imageIndex].textColor}`}>
+            <h1 className="text-3xl md:text-6xl lg:text-7xl font-bold leading-tight text-header animate-fade-in [animation-delay:100ms]">
               BLACK FRIDAY<br />
               UP TO 50% OFF<br />
               TU SPA DE<br className="hidden md:block" />{" "}
@@ -81,7 +64,7 @@ export const HeroSection = () => {
             </div>
             
             {/* Trust Indicators */}
-            <div className={`flex flex-col gap-1.5 md:gap-3 text-xs md:text-sm pt-1 md:pt-4 animate-fade-in [animation-delay:300ms] transition-colors duration-1000 ${heroImages[imageIndex].textColor}`}>
+            <div className="flex flex-col gap-1.5 md:gap-3 text-xs md:text-sm text-header pt-1 md:pt-4 animate-fade-in [animation-delay:300ms]">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
                 <span className="font-medium">Garantía 2 años</span>
