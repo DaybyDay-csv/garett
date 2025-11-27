@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { calculatePromotionalPrice, formatPrice } from "@/lib/promotions";
 import { Flame } from "lucide-react";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -77,10 +78,11 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
     >
       <div className="aspect-square bg-secondary/20 overflow-hidden relative">
         {image && (
-          <img
+          <OptimizedImage
             src={image.url}
             alt={image.altText || node.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            blurPlaceholder
           />
         )}
         

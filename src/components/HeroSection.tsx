@@ -8,12 +8,22 @@ export const HeroSection = () => {
   return <section className="relative overflow-hidden min-h-[550px] md:min-h-[700px]">
       {/* Background Image - Mobile */}
       <div className="absolute inset-0 md:hidden">
-        <OptimizedImage src={heroMobile} alt="Hero mobile background" className="w-full h-full object-cover object-center" loading="eager" fetchPriority="high" />
+        <OptimizedImage 
+          src={heroMobile} 
+          alt="Hero mobile background" 
+          className="w-full h-full object-cover object-center" 
+          priority 
+        />
       </div>
       
       {/* Background Image - Desktop */}
       <div className="absolute inset-0 hidden md:block">
-        <OptimizedImage src={heroBackground} alt="Hero desktop background" className="w-full h-full object-cover object-right" loading="eager" fetchPriority="high" />
+        <OptimizedImage 
+          src={heroBackground} 
+          alt="Hero desktop background" 
+          className="w-full h-full object-cover object-right" 
+          priority 
+        />
       </div>
       
       <div className="container relative py-6 md:py-20 h-full">
