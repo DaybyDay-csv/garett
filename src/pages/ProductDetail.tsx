@@ -56,7 +56,7 @@ const ProductDetail = () => {
           if (isAeroGlowProduct) {
             setSelectedMediaType('video');
           }
-          
+
           // Track ViewContent event when product loads
           const variant = found.node.variants.edges[0]?.node;
           if (variant && typeof window !== 'undefined' && (window as any).fbq) {
@@ -145,7 +145,7 @@ const ProductDetail = () => {
       selectedOptions: variant.selectedOptions || []
     };
     addItem(cartItem);
-    
+
     // Track AddToCart event
     if (typeof window !== 'undefined' && (window as any).fbq) {
       (window as any).fbq('track', 'AddToCart', {
@@ -156,7 +156,6 @@ const ProductDetail = () => {
         currency: 'EUR'
       });
     }
-    
     const discountText = priceInfo.hasDiscount ? ` (${priceInfo.discountLabel} aplicado)` : '';
     toast.success('Añadido al carrito', {
       description: `${node.title}${discountText}`,
@@ -206,7 +205,6 @@ const ProductDetail = () => {
             content_category: 'Black Friday Alert'
           });
         }
-        
         toast.success('¡Perfecto! Te notificaremos en Black Friday', {
           description: 'Recibirás un email cuando el producto esté disponible'
         });
@@ -391,7 +389,7 @@ const ProductDetail = () => {
                       </span>
                     </div>
                     <p className="text-xs text-purple-700 dark:text-purple-300">
-                      Banda de pelo deportiva
+                      Banda de pelo Garett Routine 
                     </p>
                   </div>
                 </div>
@@ -593,8 +591,7 @@ const ProductDetail = () => {
       </div>
 
       {/* Sticky Buy Box - Mobile Only */}
-      {isMobile && !isAeroGlow && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border p-4 shadow-lg">
+      {isMobile && !isAeroGlow && <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border p-4 shadow-lg">
           <div className="container flex items-center gap-3">
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold truncate">{node.title}</p>
@@ -602,28 +599,20 @@ const ProductDetail = () => {
                 <span className="text-lg font-bold text-primary">
                   €{priceInfo.discountedPrice.toFixed(2)}
                 </span>
-                {priceInfo.hasDiscount && (
-                  <span className="text-xs line-through text-muted-foreground">
+                {priceInfo.hasDiscount && <span className="text-xs line-through text-muted-foreground">
                     €{priceInfo.originalPrice.toFixed(2)}
-                  </span>
-                )}
+                  </span>}
               </div>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Shield className="w-3 h-3" />
                 <span>Garantía 2 años</span>
               </div>
             </div>
-            <Button 
-              size="lg" 
-              className="flex-shrink-0"
-              onClick={handleAddToCart}
-              disabled={!variant?.availableForSale}
-            >
+            <Button size="lg" className="flex-shrink-0" onClick={handleAddToCart} disabled={!variant?.availableForSale}>
               {variant?.availableForSale ? 'Añadir' : 'Agotado'}
             </Button>
           </div>
-        </div>
-      )}
+        </div>}
 
       <Footer />
     </div>;
