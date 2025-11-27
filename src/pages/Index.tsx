@@ -98,7 +98,12 @@ const Index = () => {
             <Link to="/productos?category=capilar" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage src={categoryCuidadoCapilar} alt="Cuidado capilar - Dispositivos profesionales para el cabello" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <OptimizedImage 
+                    src={categoryCuidadoCapilar} 
+                    alt="Cuidado capilar - Dispositivos profesionales para el cabello" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    blurPlaceholder
+                  />
                 </div>
                 <CardContent className="p-3 md:p-6">
                   <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
@@ -119,7 +124,12 @@ const Index = () => {
             <Link to="/productos?category=masajeadores-faciales" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage src={categoryMasajeadoresFaciales} alt="Masajeadores faciales - Estimulación facial avanzada" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <OptimizedImage 
+                    src={categoryMasajeadoresFaciales} 
+                    alt="Masajeadores faciales - Estimulación facial avanzada" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    blurPlaceholder
+                  />
                 </div>
                 <CardContent className="p-3 md:p-6">
                   <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
@@ -140,7 +150,12 @@ const Index = () => {
             <Link to="/productos?category=limpieza-facial" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage src={categoryLimpiezaFacial} alt="Limpieza facial - Limpieza profunda profesional" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <OptimizedImage 
+                    src={categoryLimpiezaFacial} 
+                    alt="Limpieza facial - Limpieza profunda profesional" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    blurPlaceholder
+                  />
                 </div>
                 <CardContent className="p-3 md:p-6">
                   <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
@@ -161,7 +176,12 @@ const Index = () => {
             <Link to="/productos?category=mesoterapia" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage src={categoryMesoterapia} alt="Dispositivos de Mesoterapia - Tratamientos de rejuvenecimiento" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <OptimizedImage 
+                    src={categoryMesoterapia} 
+                    alt="Dispositivos de Mesoterapia - Tratamientos de rejuvenecimiento" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    blurPlaceholder
+                  />
                 </div>
                 <CardContent className="p-3 md:p-6">
                   <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
@@ -182,7 +202,12 @@ const Index = () => {
             <Link to="/productos?category=corporales" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage src={categoryCorporales} alt="Dispositivos corporales - Tratamientos para todo el cuerpo" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <OptimizedImage 
+                    src={categoryCorporales} 
+                    alt="Dispositivos corporales - Tratamientos para todo el cuerpo" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    blurPlaceholder
+                  />
                 </div>
                 <CardContent className="p-3 md:p-6">
                   <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
@@ -203,7 +228,12 @@ const Index = () => {
             <Link to="/productos?category=ipl" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage src={categoryDepilacionIPL} alt="Depilación e IPL - Depilación permanente profesional" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <OptimizedImage 
+                    src={categoryDepilacionIPL} 
+                    alt="Depilación e IPL - Depilación permanente profesional" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    blurPlaceholder
+                  />
                 </div>
                 <CardContent className="p-3 md:p-6">
                   <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
