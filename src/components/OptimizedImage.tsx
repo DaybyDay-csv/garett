@@ -37,6 +37,9 @@ export const OptimizedImage = ({
   // Generar ruta WebP si la imagen es JPG/PNG
   const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
   
+  // Configurar fetchpriority para imágenes prioritarias
+  const fetchPriorityAttr = priority ? { fetchpriority: "high" as const } : {};
+  
   return (
     <picture>
       {/* Intentar cargar WebP primero para mejor compresión */}
@@ -49,7 +52,7 @@ export const OptimizedImage = ({
         height={height}
         loading={loadingStrategy}
         decoding={decoding}
-        fetchPriority={priority ? "high" : undefined}
+        {...fetchPriorityAttr}
         onLoad={() => setIsLoaded(true)}
         className={`${className} ${
           blurPlaceholder && !isLoaded 
