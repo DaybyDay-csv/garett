@@ -726,9 +726,16 @@ export function detectProductCategory(product: any): string {
     return 'depilacion-ipl';
   }
   
-  // Facial massagers
-  if (handle.includes('lift') || handle.includes('pretty-face') || handle.includes('fresh-eye') ||
-      title.includes('masajeador facial') || title.includes('contorno ojos')) {
+  // Mesotherapy (check BEFORE facial massagers to avoid "pretty-face" confusion)
+  if (handle.includes('calm-skin') || handle.includes('fresh-skin') || handle.includes('serum-skin') ||
+      handle.includes('mesoterapia') || title.includes('mesoterapia') || title.includes('penetración')) {
+    return 'mesoterapia';
+  }
+  
+  // Facial massagers (excluding mesotherapy devices)
+  if ((handle.includes('lift') || handle.includes('pretty-face') || handle.includes('fresh-eye') ||
+      title.includes('masajeador facial') || title.includes('contorno ojos')) &&
+      !handle.includes('mesoterapia') && !title.includes('mesoterapia')) {
     return 'masajeadores-faciales';
   }
   
@@ -736,12 +743,6 @@ export function detectProductCategory(product: any): string {
   if ((handle.includes('clean') || handle.includes('sonic-scrub') || title.includes('limpieza')) &&
       !handle.includes('multi') && !title.includes('multi')) {
     return 'limpieza-facial';
-  }
-  
-  // Mesotherapy
-  if (handle.includes('calm-skin') || handle.includes('fresh-skin') || handle.includes('serum-skin') ||
-      title.includes('mesoterapia') || title.includes('penetración')) {
-    return 'mesoterapia';
   }
   
   // Body
