@@ -96,7 +96,73 @@ const productContentMap: Record<string, ProductContent> = {
     }
   },
 
-  // Masajeadores Faciales (Lift Skin, Pretty Face, Fresh Eye)
+  // Pretty Face - Masajeador facial sin vibración ni LED
+  'pretty-face': {
+    quickBenefits: [
+      { icon: 'Clock', text: '10 min al día' },
+      { icon: 'Sparkles', text: 'Firmeza natural' },
+      { icon: 'Droplets', text: 'Electroporación profunda' }
+    ],
+    dropdowns: {
+      howItWorks: {
+        title: '¿Por qué funciona?',
+        summary: 'Electroporación que potencia la penetración de activos',
+        details: [
+          'Electroporación: impulsos eléctricos suaves que abren microcanales temporales en tu piel, permitiendo que tus sérums penetren hasta las capas profundas de la dermis.',
+          'Masaje facial que estimula la circulación y ayuda a tonificar los músculos faciales de forma natural.',
+          'El resultado: piel más firme, contornos definidos y mejor absorción de tus productos de cuidado facial desde las primeras semanas.'
+        ]
+      },
+      expectedResults: {
+        phases: [
+          {
+            timeframe: '2-4 semanas',
+            description: 'Piel más luminosa e hidratada. Tus productos se absorben mucho mejor y notas la diferencia.'
+          },
+          {
+            timeframe: '8-12 semanas',
+            description: 'Óvalo facial más definido. Líneas finas menos marcadas. Tu piel se ve más descansada y firme.'
+          },
+          {
+            timeframe: '3-6 meses',
+            description: 'Lifting natural visible. Piel firme y tersa. Los resultados mejoran con el uso continuo.'
+          }
+        ],
+        usageNote: 'Úsalo 5-6 días a la semana para resultados óptimos. Es tu ritual de autocuidado que realmente funciona.'
+      },
+      howToUse: {
+        steps: [
+          'Limpia tu rostro a fondo',
+          'Aplica tu sérum favorito generosamente',
+          'Enciende el dispositivo',
+          'Desliza hacia arriba y hacia fuera durante 10 minutos',
+          'Zonas clave: mejillas, mandíbula, frente, cuello',
+          'Finaliza con tu crema hidratante habitual'
+        ],
+        additionalNote: 'No usar sobre heridas activas ni con marcapasos. Combina con sérums de moléculas pequeñas para mejores resultados.'
+      },
+      whatMakesDifferent: [
+        {
+          title: 'Electroporación sin agujas',
+          description: 'Tecnología que permite una penetración profunda de activos sin necesidad de tratamientos invasivos. Tus productos caros finalmente funcionan de verdad.'
+        },
+        {
+          title: 'Resultados profesionales en casa',
+          description: 'Una sesión de tratamiento facial en clínica cuesta 80-120€. Con pocos usos ya has recuperado la inversión. Y puedes usarlo años.'
+        },
+        {
+          title: 'Masaje facial efectivo',
+          description: 'Estimula la circulación y tonifica los músculos faciales de forma natural, sin necesidad de tecnologías agresivas.'
+        },
+        {
+          title: 'Compatible con tus productos favoritos',
+          description: 'Potencia la absorción de sérums y cremas. Ese producto caro que tienes ahora penetra mejor y funciona de verdad.'
+        }
+      ]
+    }
+  },
+
+  // Masajeadores Faciales (Lift Skin, Fresh Eye) - con vibración y LED
   'masajeadores-faciales': {
     quickBenefits: [
       { icon: 'Clock', text: '10 min al día' },
@@ -726,17 +792,21 @@ export function detectProductCategory(product: any): string {
     return 'depilacion-ipl';
   }
   
-  // Mesotherapy (check BEFORE facial massagers to avoid "pretty-face" confusion)
+  // Pretty Face - Specific detection (masajeador facial sin vibración ni LED)
+  if (handle.includes('pretty-face') || handle.includes('dispositivo-mesoterapia-pretty-face')) {
+    return 'pretty-face';
+  }
+  
+  // Facial massagers (otros masajeadores con vibración y LED)
+  if (handle.includes('lift') || handle.includes('fresh-eye') ||
+      title.includes('masajeador facial') || title.includes('contorno ojos')) {
+    return 'masajeadores-faciales';
+  }
+  
+  // Mesotherapy
   if (handle.includes('calm-skin') || handle.includes('fresh-skin') || handle.includes('serum-skin') ||
       handle.includes('mesoterapia') || title.includes('mesoterapia') || title.includes('penetración')) {
     return 'mesoterapia';
-  }
-  
-  // Facial massagers (excluding mesotherapy devices)
-  if ((handle.includes('lift') || handle.includes('pretty-face') || handle.includes('fresh-eye') ||
-      title.includes('masajeador facial') || title.includes('contorno ojos')) &&
-      !handle.includes('mesoterapia') && !title.includes('mesoterapia')) {
-    return 'masajeadores-faciales';
   }
   
   // Cleansing (exclude Multi Care Brush)
