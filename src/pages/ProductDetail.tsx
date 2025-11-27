@@ -240,7 +240,7 @@ const ProductDetail = () => {
             {/* Main Media Display with Video/Zoom */}
             <div className={`relative aspect-square rounded-lg overflow-hidden group ${isAeroGlow ? 'bg-gray-900/50 ring-2 ring-red-600/30 shadow-2xl shadow-red-950/50' : 'bg-secondary/20'}`}>
               {/* Display Video or Image based on selection */}
-              {selectedMediaType === 'video' && isAeroGlow ? <VideoPlayer src="/videos/aeroglow-product.mp4" poster={node.images.edges[0]?.node.url} autoplay={false} muted={true} loop={true} controls={true} showPlayButton={true} className="w-full h-full" fallback={node.images.edges[selectedImage]?.node && <img src={node.images.edges[selectedImage].node.url} alt={node.images.edges[selectedImage].node.altText || node.title} className="w-full h-full object-cover" />} /> : node.images.edges[selectedImage]?.node && <Zoom>
+              {selectedMediaType === 'video' && isAeroGlow ? <VideoPlayer srcWebM="/videos/aeroglow-product.webm" src="/videos/aeroglow-product.mp4" poster={node.images.edges[0]?.node.url} autoplay={false} muted={true} loop={true} controls={true} showPlayButton={true} className="w-full h-full" fallback={node.images.edges[selectedImage]?.node && <img src={node.images.edges[selectedImage].node.url} alt={node.images.edges[selectedImage].node.altText || node.title} className="w-full h-full object-cover" />} /> : node.images.edges[selectedImage]?.node && <Zoom>
                     <img src={node.images.edges[selectedImage].node.url} alt={node.images.edges[selectedImage].node.altText || node.title} className="w-full h-full object-cover cursor-zoom-in transition-transform duration-300" />
                   </Zoom>}
               
