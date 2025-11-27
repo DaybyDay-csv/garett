@@ -101,8 +101,7 @@ const productContentMap: Record<string, ProductContent> = {
     quickBenefits: [
       { icon: 'Zap', text: 'Tecnología EMS Fitness' },
       { icon: 'Heart', text: 'Modo Relajación' },
-      { icon: 'Sparkles', text: 'Máxima absorción de activos' },
-      { icon: 'Shield', text: 'Fortalece sistema inmunitario' }
+      { icon: 'Sparkles', text: 'Máxima absorción de activos' }
     ],
     dropdowns: {
       howItWorks: {
@@ -111,7 +110,7 @@ const productContentMap: Record<string, ProductContent> = {
         details: [
           'Modo Relajación: masaje suave que relaja los músculos faciales, mejora la circulación sanguínea y favorece la absorción de ingredientes activos de cremas, sérums o mascarillas.',
           'Modo EMS Fitness: restaura la firmeza y elasticidad de la piel. Estimula la producción de colágeno y elastina, revitaliza la piel y suaviza las líneas de expresión y arrugas. Restaura el óvalo facial y promueve la absorción de ingredientes activos.',
-          'El masaje abre los poros permitiendo que los cosméticos penetren más profundamente y actúen con mayor eficacia. Un masaje facial con este dispositivo puede ayudarte a fortalecer tus defensas naturales.'
+          'El masaje abre los poros permitiendo que los cosméticos penetren más profundamente y actúen con mayor eficacia.'
         ]
       },
       expectedResults: {
@@ -126,7 +125,7 @@ const productContentMap: Record<string, ProductContent> = {
           },
           {
             timeframe: '3-6 meses',
-            description: 'Piel más sana y radiante. Sistema inmunitario natural fortalecido. Momentos de relajación placentera.'
+            description: 'Piel más sana y radiante. Resultados visibles continuos. Momentos de relajación placentera.'
           }
         ],
         usageNote: 'Usa regularmente para obtener beneficios en la apariencia del rostro, cuello y escote. Una mejor circulación sanguínea ayuda a suministrar más nutrientes a las células de la piel.'
@@ -140,7 +139,7 @@ const productContentMap: Record<string, ProductContent> = {
           'Zonas clave: rostro, cuello y escote',
           'Disfruta de los momentos de relajación placentera que proporciona el dispositivo'
         ],
-        additionalNote: 'No usar sobre heridas activas. El dispositivo contribuye al sistema inmunitario natural de la piel ayudándote a fortalecer tus defensas naturales.'
+        additionalNote: 'No usar sobre heridas activas.'
       },
       whatMakesDifferent: [
         {
@@ -150,10 +149,6 @@ const productContentMap: Record<string, ProductContent> = {
         {
           title: 'Máxima absorción de productos',
           description: 'Los poros se abren permitiendo que tus cosméticos penetren más profundamente. Tus productos caros finalmente funcionan al 100% de su potencial.'
-        },
-        {
-          title: 'Fortalece el sistema inmunitario de la piel',
-          description: 'No solo cuida tus músculos y te ayuda a relajarte, sino que también contribuye al sistema inmunitario natural de la piel, fundamental en la lucha contra los factores ambientales negativos y el envejecimiento cutáneo.'
         },
         {
           title: 'Resultados profesionales en casa',
