@@ -31,36 +31,28 @@ export const OptimizedImage = ({
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   
-  // Determinar estrategia de carga
+  // Carga diferida por defecto
   const loadingStrategy = loading || (priority ? "eager" : "lazy");
-  
-  // Generar ruta WebP si la imagen es JPG/PNG
-  const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
   
   // Configurar fetchpriority para imágenes prioritarias
   const fetchPriorityAttr = priority ? { fetchpriority: "high" as const } : {};
   
   return (
-    <picture>
-      {/* Intentar cargar WebP primero para mejor compresión */}
-      <source srcSet={webpSrc} type="image/webp" />
-      
-      <img
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        loading={loadingStrategy}
-        decoding={decoding}
-        {...fetchPriorityAttr}
-        onLoad={() => setIsLoaded(true)}
-        className={`${className} ${
-          blurPlaceholder && !isLoaded 
-            ? 'blur-sm scale-105 transition-all duration-300' 
-            : 'blur-0 scale-100 transition-all duration-300'
-        }`}
-        {...props}
-      />
-    </picture>
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loadingStrategy}
+      decoding={decoding}
+      {...fetchPriorityAttr}
+      onLoad={() => setIsLoaded(true)}
+      className={`${className} ${
+        blurPlaceholder && !isLoaded 
+          ? 'blur-sm scale-105 transition-all duration-300' 
+          : 'blur-0 scale-100 transition-all duration-300'
+      }`}
+      {...props}
+    />
   );
 };
