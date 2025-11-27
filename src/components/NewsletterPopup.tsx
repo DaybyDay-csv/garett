@@ -144,48 +144,48 @@ export const NewsletterPopup = () => {
   const targetStage = currentStage || nextStage;
   const isActiveStage = !!currentStage;
   return <Dialog open={isOpen} onOpenChange={closeNewsletter}>
-      <DialogContent className="sm:max-w-[480px] p-0 border border-border/50">
+      <DialogContent className="sm:max-w-[420px] max-h-[90vh] overflow-y-auto p-0 border border-border/50">
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/20 pointer-events-none" />
           
-          <button onClick={handleClose} className="absolute right-3 top-3 z-10 rounded-sm p-1.5 opacity-60 hover:opacity-100 transition-opacity" aria-label="Cerrar">
-            
+          <button onClick={handleClose} className="absolute right-2 top-2 z-10 rounded-sm p-1 opacity-60 hover:opacity-100 transition-opacity text-lg" aria-label="Cerrar">
+            ✕
           </button>
 
-          <div className="relative p-6 space-y-6">
+          <div className="relative p-5 space-y-4">
             {/* Header */}
-            <DialogHeader className="space-y-2">
-              <DialogTitle className="text-xl font-semibold tracking-tight text-center">
+            <DialogHeader className="space-y-1.5">
+              <DialogTitle className="text-lg font-semibold tracking-tight text-center">
                 Calendario de Ofertas Progresivas
               </DialogTitle>
-              <DialogDescription className="text-sm text-center text-muted-foreground">
+              <DialogDescription className="text-xs text-center text-muted-foreground">
                 Recibe notificaciones al inicio de cada etapa
               </DialogDescription>
             </DialogHeader>
 
             {/* Progress Timeline */}
-            <div className="space-y-4">
+            <div className="space-y-3">
               {/* Progress Bar with Stages */}
-              <div className="relative p-4 bg-muted/40 rounded-lg border border-border/60">
-                <Progress value={progress.progressPercentage} className="h-2" />
-                <div className="flex justify-between mt-3">
+              <div className="relative p-3 bg-muted/40 rounded-lg border border-border/60">
+                <Progress value={progress.progressPercentage} className="h-1.5" />
+                <div className="flex justify-between mt-2.5">
                   {stagesWithStatus.map((stage, idx) => {
                   const Icon = stage.icon;
                   const isActive = stage.status === 'active';
                   const isCompleted = stage.status === 'completed';
-                  return <div key={stage.name} className="flex flex-col items-center gap-1.5 flex-1">
+                  return <div key={stage.name} className="flex flex-col items-center gap-1 flex-1">
                         <div className={`
-                          w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all
+                          w-7 h-7 rounded-full flex items-center justify-center border-2 transition-all
                           ${isActive ? 'border-primary bg-primary/20 scale-110 shadow-lg shadow-primary/20' : ''}
                           ${isCompleted ? 'border-primary/40 bg-muted/80' : ''}
                           ${stage.status === 'upcoming' ? 'border-border/80 bg-muted/30' : ''}
                         `}>
-                          <Icon className={`w-4 h-4 ${isActive ? 'text-primary' : 'text-muted-foreground'}`} />
+                          <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-primary' : 'text-muted-foreground'}`} />
                         </div>
-                        <span className={`text-[10px] font-medium text-center leading-tight ${isActive ? 'text-foreground' : 'text-muted-foreground'}`}>
+                        <span className={`text-[9px] font-medium text-center leading-tight ${isActive ? 'text-foreground' : 'text-muted-foreground'}`}>
                           {stage.name}
                         </span>
-                        <span className={`text-[10px] font-semibold ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
+                        <span className={`text-[9px] font-semibold ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
                           {stage.name === 'Black Friday' ? 'HASTA 50%' : stage.discount}
                         </span>
                       </div>;
@@ -194,61 +194,61 @@ export const NewsletterPopup = () => {
               </div>
 
               {/* Live Countdown */}
-              {targetStage && <div className="bg-muted/80 rounded-lg p-4 space-y-2 border border-border/60">
+              {targetStage && <div className="bg-muted/80 rounded-lg p-3 space-y-1.5 border border-border/60">
                   <div className="text-center">
-                    <p className="text-xs text-foreground/70 mb-2 font-medium">
+                    <p className="text-[10px] text-foreground/70 mb-1.5 font-medium">
                       {isActiveStage ? 'Termina en' : 'Comienza en'}
                     </p>
-                    <div className="flex items-center justify-center gap-3">
+                    <div className="flex items-center justify-center gap-2">
                       <div className="text-center">
-                        <div className="text-2xl font-bold tabular-nums text-foreground">{countdown.days}</div>
-                        <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Días</div>
+                        <div className="text-xl font-bold tabular-nums text-foreground">{countdown.days}</div>
+                        <div className="text-[9px] text-muted-foreground uppercase tracking-wide">Días</div>
                       </div>
-                      <div className="text-2xl font-light text-muted-foreground">:</div>
+                      <div className="text-xl font-light text-muted-foreground">:</div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold tabular-nums text-foreground">{countdown.hours}</div>
-                        <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Horas</div>
+                        <div className="text-xl font-bold tabular-nums text-foreground">{countdown.hours}</div>
+                        <div className="text-[9px] text-muted-foreground uppercase tracking-wide">Horas</div>
                       </div>
-                      <div className="text-2xl font-light text-muted-foreground">:</div>
+                      <div className="text-xl font-light text-muted-foreground">:</div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold tabular-nums text-foreground">{countdown.minutes}</div>
-                        <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Min</div>
+                        <div className="text-xl font-bold tabular-nums text-foreground">{countdown.minutes}</div>
+                        <div className="text-[9px] text-muted-foreground uppercase tracking-wide">Min</div>
                       </div>
                     </div>
-                    <p className="text-xs font-medium mt-2 text-foreground">
+                    <p className="text-[10px] font-medium mt-1.5 text-foreground">
                       {isActiveStage ? <>{targetStage.name} <span className="text-primary font-semibold">{targetStage.discount}</span></> : <>Próxima etapa: <span className="text-primary font-semibold">{targetStage.name}</span></>}
                     </p>
                   </div>
                 </div>}
 
               {/* Stage Details */}
-              <div className="grid grid-cols-2 gap-2 text-xs">
-                {stagesWithStatus.map(stage => <div key={stage.name} className="flex items-center justify-between p-2 bg-muted/60 rounded border border-border/50">
-                    <span className="text-foreground/70">{stage.dates}</span>
-                    <span className="font-semibold text-foreground">{stage.discount}</span>
+              <div className="grid grid-cols-2 gap-1.5 text-xs">
+                {stagesWithStatus.map(stage => <div key={stage.name} className="flex items-center justify-between p-1.5 bg-muted/60 rounded border border-border/50">
+                    <span className="text-[10px] text-foreground/70">{stage.dates}</span>
+                    <span className="text-[10px] font-semibold text-foreground">{stage.discount}</span>
                   </div>)}
               </div>
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-3">
-              <Input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} className="h-11 text-sm" required disabled={isLoading} />
+            <form onSubmit={handleSubmit} className="space-y-2.5">
+              <Input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} className="h-10 text-sm" required disabled={isLoading} />
 
               <div className="flex items-start space-x-2">
                 <Checkbox id="marketing" checked={acceptsMarketing} onCheckedChange={checked => setAcceptsMarketing(checked as boolean)} className="mt-0.5" disabled={isLoading} />
-                <label htmlFor="marketing" className="text-xs leading-relaxed text-muted-foreground cursor-pointer">
+                <label htmlFor="marketing" className="text-[10px] leading-relaxed text-muted-foreground cursor-pointer">
                   Acepto recibir notificaciones de nuevas etapas. Cancelable en cualquier momento.
                 </label>
               </div>
 
-              <Button type="submit" className="w-full h-11 text-sm font-semibold" disabled={isLoading}>
+              <Button type="submit" className="w-full h-10 text-sm font-semibold" disabled={isLoading}>
                 {isLoading ? <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                     Procesando
                   </> : 'Activar Notificaciones'}
               </Button>
 
-              <button type="button" onClick={handleClose} className="w-full text-xs text-muted-foreground hover:text-foreground transition-colors" disabled={isLoading}>
+              <button type="button" onClick={handleClose} className="w-full text-[10px] text-muted-foreground hover:text-foreground transition-colors" disabled={isLoading}>
                 Continuar sin notificaciones
               </button>
             </form>
