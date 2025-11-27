@@ -13,6 +13,7 @@ interface VideoPlayerProps {
   fallback?: React.ReactNode;
   onLoad?: () => void;
   showPlayButton?: boolean;
+  preload?: 'none' | 'metadata' | 'auto'; // Control de precarga
 }
 
 export const VideoPlayer = ({
@@ -26,6 +27,7 @@ export const VideoPlayer = ({
   fallback,
   onLoad,
   showPlayButton = false,
+  preload = 'none', // Por defecto no precarga nada
 }: VideoPlayerProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -34,17 +36,24 @@ export const VideoPlayer = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Intersection Observer for lazy loading
+  // Intersection Observer for lazy loading - más agresivo
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsInView(true);
+            // Precargar el video cuando esté cerca de la vista
+            if (videoRef.current && preload === 'none') {
+              videoRef.current.load();
+            }
           }
         });
       },
-      { threshold: 0.1 }
+      { 
+        threshold: 0.01, // Carga cuando apenas 1% es visible
+        rootMargin: '200px' // Precarga 200px antes de entrar en vista
+      }
     );
 
     if (containerRef.current) {
@@ -56,7 +65,7 @@ export const VideoPlayer = ({
         observer.unobserve(containerRef.current);
       }
     };
-  }, []);
+  }, [preload]);
 
   // Handle video load
   const handleLoadedData = () => {
@@ -90,6 +99,15 @@ export const VideoPlayer = ({
 
   return (
     <div ref={containerRef} className={cn("relative w-full h-full", className)}>
+      {/* Mostrar poster mientras no esté en vista */}
+      {!isInView && poster && (
+        <img 
+          src={poster} 
+          alt="Video preview" 
+          className="w-full h-full object-cover"
+        />
+      )}
+      
       {isInView && (
         <>
           <video
@@ -101,7 +119,7 @@ export const VideoPlayer = ({
             loop={loop}
             controls={controls}
             playsInline
-            preload="metadata"
+            preload={preload}
             onLoadedData={handleLoadedData}
             onError={handleError}
             className="w-full h-full object-cover"
