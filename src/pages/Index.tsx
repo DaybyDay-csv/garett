@@ -14,12 +14,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { Sparkles, Zap, Timer, ShoppingBag, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import categoryCuidadoCapilar from "@/assets/category-cuidado-capilar.jpg";
-import categoryMasajeadoresFaciales from "@/assets/category-masajeadores-faciales.jpg";
-import categoryLimpiezaFacial from "@/assets/category-limpieza-facial.jpg";
-import categoryMesoterapia from "@/assets/category-mesoterapia.jpg";
-import categoryCorporales from "@/assets/category-corporales.jpg";
-import categoryDepilacionIPL from "@/assets/category-depilacion-ipl.jpg";
+import categoryCuidadoCapilar from "@/assets/category-cuidado-capilar.webp";
+import categoryMasajeadoresFaciales from "@/assets/category-masajeadores-faciales.webp";
+import categoryLimpiezaFacial from "@/assets/category-limpieza-facial.webp";
+import categoryMesoterapia from "@/assets/category-mesoterapia.webp";
+import categoryCorporales from "@/assets/category-corporales.webp";
+import categoryDepilacionIPL from "@/assets/category-depilacion-ipl.webp";
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
