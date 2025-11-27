@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 
 interface VideoPlayerProps {
   src: string;
+  srcWebM?: string; // Versión WebM optimizada (opcional)
   poster?: string;
   autoplay?: boolean;
   muted?: boolean;
@@ -18,6 +19,7 @@ interface VideoPlayerProps {
 
 export const VideoPlayer = ({
   src,
+  srcWebM,
   poster,
   autoplay = false,
   muted = false,
@@ -112,7 +114,6 @@ export const VideoPlayer = ({
         <>
           <video
             ref={videoRef}
-            src={src}
             poster={poster}
             autoPlay={autoplay}
             muted={muted}
@@ -123,7 +124,12 @@ export const VideoPlayer = ({
             onLoadedData={handleLoadedData}
             onError={handleError}
             className="w-full h-full object-cover"
-          />
+          >
+            {/* Prioridad: WebM (mejor compresión) -> MP4 (fallback) */}
+            {srcWebM && <source src={srcWebM} type="video/webm" />}
+            <source src={src} type="video/mp4" />
+            Tu navegador no soporta la reproducción de video.
+          </video>
 
           {/* Play button overlay */}
           {showPlayButton && !controls && (
