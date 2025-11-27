@@ -65,15 +65,41 @@ interface CountdownTimerProps {
 const CountdownTimer = ({
   promotionalStages
 }: CountdownTimerProps) => {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-    isExpired: false
+  // Calculate initial time immediately to avoid showing 00:00:00:00
+  const calculateInitialTime = () => {
+    const now = new Date();
+    const activePromo = promotionalStages.find(stage => now >= stage.startDate && now <= stage.endDate);
+    const targetDate = activePromo ? activePromo.endDate : promotionalStages[promotionalStages.length - 1].endDate;
+    const difference = targetDate.getTime() - now.getTime();
+    
+    if (difference <= 0) {
+      return {
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+        isExpired: true
+      };
+    }
+    
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor(difference / (1000 * 60 * 60) % 24),
+      minutes: Math.floor(difference / 1000 / 60 % 60),
+      seconds: Math.floor(difference / 1000 % 60),
+      isExpired: false
+    };
+  };
+
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateInitialTime);
+  const [currentPromoStage, setCurrentPromoStage] = useState<CountdownTimerProps['promotionalStages'][0] | null>(() => {
+    const now = new Date();
+    return promotionalStages.find(stage => now >= stage.startDate && now <= stage.endDate) || null;
   });
-  const [currentPromoStage, setCurrentPromoStage] = useState<CountdownTimerProps['promotionalStages'][0] | null>(null);
-  const [nextPromoStage, setNextPromoStage] = useState<CountdownTimerProps['promotionalStages'][0] | null>(null);
+  const [nextPromoStage, setNextPromoStage] = useState<CountdownTimerProps['promotionalStages'][0] | null>(() => {
+    const now = new Date();
+    return promotionalStages.find(stage => now < stage.startDate) || null;
+  });
   const [currentBFTier, setCurrentBFTier] = useState<BlackFridayTier | null>(null);
 
   // Black Friday tiers (only active during BF period)
