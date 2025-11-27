@@ -144,7 +144,7 @@ export const NewsletterPopup = () => {
   const targetStage = currentStage || nextStage;
   const isActiveStage = !!currentStage;
   return <Dialog open={isOpen} onOpenChange={closeNewsletter}>
-      <DialogContent className="sm:max-w-[420px] max-h-[90vh] overflow-y-auto p-0 border border-border/50">
+      <DialogContent className="max-w-[340px] sm:max-w-[360px] max-h-[90vh] overflow-y-auto p-0 border border-border/50">
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/20 pointer-events-none" />
           
