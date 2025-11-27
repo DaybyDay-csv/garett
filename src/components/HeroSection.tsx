@@ -13,6 +13,7 @@ export const HeroSection = () => {
           alt="Hero mobile background" 
           className="w-full h-full object-cover object-center" 
           priority 
+          blurPlaceholder
         />
       </div>
       
@@ -23,6 +24,7 @@ export const HeroSection = () => {
           alt="Hero desktop background" 
           className="w-full h-full object-cover object-right" 
           priority 
+          blurPlaceholder
         />
       </div>
       

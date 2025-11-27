@@ -108,6 +108,7 @@ export const UGCSection = () => {
                     src={item.src} 
                     alt={`${item.caption || item.name} - Contenido de usuario Garett Beauty`} 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                    blurPlaceholder
                   />
                 ) : (
                   <div className="relative w-full h-full">
