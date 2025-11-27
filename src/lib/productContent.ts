@@ -96,67 +96,68 @@ const productContentMap: Record<string, ProductContent> = {
     }
   },
 
-  // Pretty Face - Masajeador facial sin vibración ni LED
+  // Pretty Face - Masajeador facial con EMS (sin vibración ni LED)
   'pretty-face': {
     quickBenefits: [
-      { icon: 'Clock', text: '10 min al día' },
-      { icon: 'Sparkles', text: 'Firmeza natural' },
-      { icon: 'Droplets', text: 'Electroporación profunda' }
+      { icon: 'Zap', text: 'Tecnología EMS Fitness' },
+      { icon: 'Heart', text: 'Modo Relajación' },
+      { icon: 'Sparkles', text: 'Máxima absorción de activos' },
+      { icon: 'Shield', text: 'Fortalece sistema inmunitario' }
     ],
     dropdowns: {
       howItWorks: {
         title: '¿Por qué funciona?',
-        summary: 'Electroporación que potencia la penetración de activos',
+        summary: 'Masajeador facial innovador con dos modos para el cuidado de tu piel',
         details: [
-          'Electroporación: impulsos eléctricos suaves que abren microcanales temporales en tu piel, permitiendo que tus sérums penetren hasta las capas profundas de la dermis.',
-          'Masaje facial que estimula la circulación y ayuda a tonificar los músculos faciales de forma natural.',
-          'El resultado: piel más firme, contornos definidos y mejor absorción de tus productos de cuidado facial desde las primeras semanas.'
+          'Modo Relajación: masaje suave que relaja los músculos faciales, mejora la circulación sanguínea y favorece la absorción de ingredientes activos de cremas, sérums o mascarillas.',
+          'Modo EMS Fitness: restaura la firmeza y elasticidad de la piel. Estimula la producción de colágeno y elastina, revitaliza la piel y suaviza las líneas de expresión y arrugas. Restaura el óvalo facial y promueve la absorción de ingredientes activos.',
+          'El masaje abre los poros permitiendo que los cosméticos penetren más profundamente y actúen con mayor eficacia. Un masaje facial con este dispositivo puede ayudarte a fortalecer tus defensas naturales.'
         ]
       },
       expectedResults: {
         phases: [
           {
             timeframe: '2-4 semanas',
-            description: 'Piel más luminosa e hidratada. Tus productos se absorben mucho mejor y notas la diferencia.'
+            description: 'Piel más relajada y descansada. Los productos se absorben mejor. Mejora visible en la circulación sanguínea.'
           },
           {
             timeframe: '8-12 semanas',
-            description: 'Óvalo facial más definido. Líneas finas menos marcadas. Tu piel se ve más descansada y firme.'
+            description: 'Mayor firmeza y elasticidad. Líneas de expresión suavizadas. Óvalo facial más definido y cutis radiante.'
           },
           {
             timeframe: '3-6 meses',
-            description: 'Lifting natural visible. Piel firme y tersa. Los resultados mejoran con el uso continuo.'
+            description: 'Piel más sana y radiante. Sistema inmunitario natural fortalecido. Momentos de relajación placentera.'
           }
         ],
-        usageNote: 'Úsalo 5-6 días a la semana para resultados óptimos. Es tu ritual de autocuidado que realmente funciona.'
+        usageNote: 'Usa regularmente para obtener beneficios en la apariencia del rostro, cuello y escote. Una mejor circulación sanguínea ayuda a suministrar más nutrientes a las células de la piel.'
       },
       howToUse: {
         steps: [
           'Limpia tu rostro a fondo',
-          'Aplica tu sérum favorito generosamente',
-          'Enciende el dispositivo',
-          'Desliza hacia arriba y hacia fuera durante 10 minutos',
-          'Zonas clave: mejillas, mandíbula, frente, cuello',
-          'Finaliza con tu crema hidratante habitual'
+          'Aplica tu crema, sérum o mascarilla favorita generosamente',
+          'Selecciona el modo: Relajación para desconectar o EMS Fitness para tonificar',
+          'Masajea suavemente hacia arriba y hacia fuera',
+          'Zonas clave: rostro, cuello y escote',
+          'Disfruta de los momentos de relajación placentera que proporciona el dispositivo'
         ],
-        additionalNote: 'No usar sobre heridas activas ni con marcapasos. Combina con sérums de moléculas pequeñas para mejores resultados.'
+        additionalNote: 'No usar sobre heridas activas. El dispositivo contribuye al sistema inmunitario natural de la piel ayudándote a fortalecer tus defensas naturales.'
       },
       whatMakesDifferent: [
         {
-          title: 'Electroporación sin agujas',
-          description: 'Tecnología que permite una penetración profunda de activos sin necesidad de tratamientos invasivos. Tus productos caros finalmente funcionan de verdad.'
+          title: 'Dos modos en un solo dispositivo',
+          description: 'Modo Relajación para desconectar tras un largo día y Modo EMS Fitness para tonificar y rejuvenecer. Adaptado a lo que tu piel necesita en cada momento.'
+        },
+        {
+          title: 'Máxima absorción de productos',
+          description: 'Los poros se abren permitiendo que tus cosméticos penetren más profundamente. Tus productos caros finalmente funcionan al 100% de su potencial.'
+        },
+        {
+          title: 'Fortalece el sistema inmunitario de la piel',
+          description: 'No solo cuida tus músculos y te ayuda a relajarte, sino que también contribuye al sistema inmunitario natural de la piel, fundamental en la lucha contra los factores ambientales negativos y el envejecimiento cutáneo.'
         },
         {
           title: 'Resultados profesionales en casa',
-          description: 'Una sesión de tratamiento facial en clínica cuesta 80-120€. Con pocos usos ya has recuperado la inversión. Y puedes usarlo años.'
-        },
-        {
-          title: 'Masaje facial efectivo',
-          description: 'Estimula la circulación y tonifica los músculos faciales de forma natural, sin necesidad de tecnologías agresivas.'
-        },
-        {
-          title: 'Compatible con tus productos favoritos',
-          description: 'Potencia la absorción de sérums y cremas. Ese producto caro que tienes ahora penetra mejor y funciona de verdad.'
+          description: 'Una sesión de masaje facial en clínica cuesta 60-100€. Con pocos usos ya has recuperado la inversión y puedes disfrutar de momentos de relajación cuando quieras.'
         }
       ]
     }
