@@ -763,6 +763,13 @@ export function detectProductCategory(product: any): string {
   
   // ===== HAIR CARE - SPECIFIC PRODUCTS FIRST (before generic tags) =====
   
+  // ===== SPECIFIC PRODUCTS FIRST (highest priority) =====
+  
+  // Pretty Face - Masajeador facial sin vibración ni LED
+  if (handle.includes('pretty-face') || handle.includes('dispositivo-mesoterapia-pretty-face')) {
+    return 'pretty-face';
+  }
+  
   // Multi Care Brush - Specific detection
   if (handle.includes('multi-care') || handle.includes('multicare') || handle.includes('multi_care') ||
       handle.includes('multi care') || title.includes('multi care') || title.includes('multi cuidado') ||
@@ -792,12 +799,8 @@ export function detectProductCategory(product: any): string {
     return 'depilacion-ipl';
   }
   
-  // Pretty Face - Specific detection (masajeador facial sin vibración ni LED)
-  if (handle.includes('pretty-face') || handle.includes('dispositivo-mesoterapia-pretty-face')) {
-    return 'pretty-face';
-  }
-  
   // Facial massagers (otros masajeadores con vibración y LED)
+  // Note: Pretty Face is handled at the top as specific product
   if (handle.includes('lift') || handle.includes('fresh-eye') ||
       title.includes('masajeador facial') || title.includes('contorno ojos')) {
     return 'masajeadores-faciales';
