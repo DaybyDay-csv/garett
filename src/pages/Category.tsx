@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { SEO } from "@/components/SEO";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { CATEGORIES, productBelongsToCategory } from "@/lib/categories";
 import { ShoppingBag } from "lucide-react";
@@ -41,9 +42,14 @@ const Category = () => {
   if (!currentCategory) {
     return (
       <div className="min-h-screen bg-background">
+        <SEO 
+          title="Categoría no encontrada"
+          description="La categoría que buscas no existe en Garett Beauty"
+          canonicalUrl={window.location.pathname}
+        />
         <Header />
         <div className="container py-20 text-center">
-          <h2 className="text-2xl font-bold mb-4">Categoría no encontrada</h2>
+          <h1 className="text-2xl font-bold mb-4">Categoría no encontrada</h1>
           <p className="text-muted-foreground mb-6">La categoría que buscas no existe</p>
         </div>
         <Footer />
@@ -51,8 +57,50 @@ const Category = () => {
     );
   }
 
+  // Schema markup para la categoría
+  const categorySchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: currentCategory.name,
+    description: currentCategory.description,
+    url: `${window.location.origin}/categoria/${category}`,
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: products.length,
+      itemListElement: products.map((product, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'Product',
+          name: product.node.title,
+          description: product.node.description,
+          image: product.node.images.edges[0]?.node.url,
+          url: `${window.location.origin}/producto/${product.node.handle}`,
+          offers: {
+            '@type': 'Offer',
+            price: product.node.priceRange.minVariantPrice.amount,
+            priceCurrency: product.node.priceRange.minVariantPrice.currencyCode,
+            availability: product.node.variants.edges[0]?.node.availableForSale
+              ? 'https://schema.org/InStock'
+              : 'https://schema.org/OutOfStock'
+          },
+          brand: {
+            '@type': 'Brand',
+            name: 'Garett Beauty'
+          }
+        }
+      }))
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title={currentCategory.name}
+        description={`${currentCategory.description}. Descubre nuestra selección de ${currentCategory.name.toLowerCase()} con la mejor tecnología y calidad profesional.`}
+        canonicalUrl={`/categoria/${category}`}
+        schema={categorySchema}
+      />
       <Header />
       
       <div className="container py-8 px-6">
