@@ -432,7 +432,7 @@ const ProductDetail = () => {
 
             {/* Product Video - Below Add to Cart for AeroGlow */}
             {isAeroGlow && (
-              <div className="rounded-lg overflow-hidden border bg-muted/10 mt-4">
+              <div className="rounded-lg overflow-hidden border bg-muted/10 mt-4 aspect-video">
                 <VideoPlayer 
                   srcWebM="/videos/aeroglow-product-demo.webm" 
                   poster={node.images.edges[0]?.node.url} 
@@ -442,7 +442,7 @@ const ProductDetail = () => {
                   controls={true} 
                   showPlayButton={false}
                   preload="metadata"
-                  className="w-full"
+                  className="w-full h-full"
                   fallback={
                     node.images.edges[0]?.node && (
                       <img 
