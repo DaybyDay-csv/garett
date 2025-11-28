@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { Trophy } from "lucide-react";
 const Superventas = () => {
@@ -26,6 +27,13 @@ const Superventas = () => {
       <Header />
       
       <div className="container py-8">
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb 
+          items={[
+            { label: 'Superventas' }
+          ]}
+        />
+        
         <div className="mb-8">
           <h1 className="text-4xl mb-2 flex items-center gap-3 font-thin">
             

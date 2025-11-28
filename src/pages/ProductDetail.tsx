@@ -25,6 +25,7 @@ import { NewsletterCTA } from "@/components/NewsletterCTA";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { RelatedProducts } from "@/components/RelatedProducts";
+import { Breadcrumb } from "@/components/Breadcrumb";
 const ProductDetail = () => {
   const {
     handle
@@ -218,17 +219,46 @@ const ProductDetail = () => {
   const progressPercentage = Math.min(potentialTotal / GWP_THRESHOLD * 100, 100);
   const remainingForGWP = Math.max(GWP_THRESHOLD - potentialTotal, 0);
   const willUnlockGWP = potentialTotal >= GWP_THRESHOLD && cartTotal < GWP_THRESHOLD;
+  
+  // Get category from product tags for breadcrumb
+  const getCategoryInfo = () => {
+    const categoryTag = node.tags.find(tag => tag.startsWith('category:'));
+    if (!categoryTag) return { name: 'Productos', slug: 'productos' };
+    
+    const categorySlug = categoryTag.replace('category:', '');
+    const categoryNames: Record<string, string> = {
+      'depilacion-ipl': 'Depilación IPL',
+      'masajeadores-faciales': 'Masajeadores Faciales',
+      'limpieza-facial': 'Limpieza Facial',
+      'mesoterapia': 'Mesoterapia',
+      'corporales': 'Corporales',
+      'cuidado-capilar': 'Cuidado Capilar',
+      'pretty-face': 'Pretty Face',
+      'smartwatches': 'Smartwatches',
+      'accessories': 'Accesorios'
+    };
+    
+    return {
+      name: categoryNames[categorySlug] || 'Productos',
+      slug: categorySlug
+    };
+  };
+  
+  const categoryInfo = getCategoryInfo();
+  
   return <div className="min-h-screen bg-background">
       <Header />
       
       <div className="container py-8 px-6">
-        <Button variant="ghost" asChild className="mb-6 h-11">
-          <Link to="/productos">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Volver a productos
-          </Link>
-        </Button>
-
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb 
+          items={[
+            { label: 'Productos', href: '/productos' },
+            { label: categoryInfo.name, href: `/productos?category=${categoryInfo.slug}` },
+            { label: node.title }
+          ]}
+        />
+        
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
           {/* Images/Video - Interactive Gallery */}
           <div className="space-y-4">
