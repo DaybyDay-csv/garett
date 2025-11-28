@@ -118,6 +118,28 @@ const Search = () => {
       );
     } else if (sortBy === 'name') {
       filtered.sort((a, b) => a.node.title.localeCompare(b.node.title));
+    } else {
+      // Default sorting by category priority
+      const categoryPriority: Record<string, number> = {
+        'masajeadores-faciales': 1,
+        'limpieza-facial': 2,
+        'cuidado-capilar': 3,
+        'smartwatches': 4,
+        'mesoterapia': 5,
+        'corporales': 6,
+        'depilacion-ipl': 7,
+      };
+      
+      filtered.sort((a, b) => {
+        const getCategoryPriority = (product: ShopifyProduct) => {
+          const categoryTag = product.node.tags.find(tag => tag.startsWith('category:'));
+          if (!categoryTag) return 999;
+          const category = categoryTag.replace('category:', '');
+          return categoryPriority[category] || 999;
+        };
+        
+        return getCategoryPriority(a) - getCategoryPriority(b);
+      });
     }
 
     setFilteredProducts(filtered);
