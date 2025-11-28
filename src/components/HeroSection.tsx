@@ -71,7 +71,7 @@ export const HeroSection = () => {
             
             {/* CTAs */}
             <div className="flex flex-col gap-3 md:gap-4 w-full md:max-w-none animate-fade-in [animation-delay:200ms]">
-              <Button asChild size="lg" className={`text-base md:text-base group h-12 md:h-12 px-6 max-w-[220px] md:max-w-none ${
+              <Button asChild size="lg" className={`text-base md:text-base group h-12 md:h-12 px-6 max-w-[180px] md:max-w-none ${
                 isAlternateHero 
                   ? 'bg-white hover:bg-white/90 text-gray-900' 
                   : 'bg-header hover:bg-header/90 text-header-foreground'
@@ -82,7 +82,7 @@ export const HeroSection = () => {
                 </Link>
               </Button>
               
-              <Button asChild variant="outline" size="lg" className={`text-base md:text-base h-12 md:h-12 px-6 max-w-[220px] md:max-w-none ${
+              <Button asChild variant="outline" size="lg" className={`text-base md:text-base h-12 md:h-12 px-6 max-w-[180px] md:max-w-none ${
                 isAlternateHero 
                   ? 'border-white/50 bg-white/10 text-white hover:bg-white/20 hover:text-white' 
                   : 'border-header/30 bg-header/5 text-header hover:bg-header/10 hover:text-header'
