@@ -141,7 +141,7 @@ export async function fetchProducts(first: number = 50, query?: string): Promise
   return data.data.products.edges;
 }
 
-// Cart Create Mutation
+// Cart Create Mutation with Discount Codes
 export const CART_CREATE_MUTATION = `
   mutation cartCreate($input: CartInput!) {
     cartCreate(input: $input) {
@@ -154,6 +154,14 @@ export const CART_CREATE_MUTATION = `
             amount
             currencyCode
           }
+          subtotalAmount {
+            amount
+            currencyCode
+          }
+        }
+        discountCodes {
+          code
+          applicable
         }
         lines(first: 100) {
           edges {
@@ -186,6 +194,10 @@ export const CART_CREATE_MUTATION = `
   }
 `;
 
+// AeroGlow discount code (must be created in Shopify)
+export const AEROGLOW_DISCOUNT_CODE = 'BLACKFRIDAY50';
+export const AEROGLOW_HANDLE = 'plancha-pelo-aeroglow';
+
 // GWP Product Configuration
 export const GWP_PRODUCT_ID = 'gid://shopify/Product/14828986794347';
 export const GWP_VARIANT_ID = 'gid://shopify/ProductVariant/52558159380843';
@@ -211,15 +223,25 @@ export async function fetchGWPProduct(): Promise<ShopifyProduct | null> {
   }
 }
 
-// Create Checkout
-export async function createStorefrontCheckout(items: Array<{ variantId: string; quantity: number }>): Promise<string> {
+// Create Checkout with optional discount codes
+export async function createStorefrontCheckout(
+  items: Array<{ variantId: string; quantity: number }>,
+  discountCodes?: string[]
+): Promise<string> {
   const lines = items.map(item => ({
     quantity: item.quantity,
     merchandiseId: item.variantId,
   }));
 
+  const input: any = { lines };
+  
+  // Add discount codes if provided
+  if (discountCodes && discountCodes.length > 0) {
+    input.discountCodes = discountCodes;
+  }
+
   const cartData = await storefrontApiRequest(CART_CREATE_MUTATION, {
-    input: { lines },
+    input,
   });
 
   if (cartData.data.cartCreate.userErrors.length > 0) {

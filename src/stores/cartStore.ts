@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { ShopifyProduct, createStorefrontCheckout, fetchGWPProduct, GWP_VARIANT_ID, GWP_THRESHOLD } from '@/lib/shopify';
+import { ShopifyProduct, createStorefrontCheckout, fetchGWPProduct, GWP_VARIANT_ID, GWP_THRESHOLD, AEROGLOW_DISCOUNT_CODE, AEROGLOW_HANDLE } from '@/lib/shopify';
 import { getCurrentPromotionalStage } from '@/lib/promotions';
 
 export interface CartItem {
@@ -163,8 +163,17 @@ export const useCartStore = create<CartStore>()(
 
         setLoading(true);
         try {
+          // Check if cart contains AeroGlow product
+          const hasAeroGlow = items.some(item => 
+            item.product.node.handle === AEROGLOW_HANDLE
+          );
+          
+          // Apply discount code if AeroGlow is in cart
+          const discountCodes = hasAeroGlow ? [AEROGLOW_DISCOUNT_CODE] : undefined;
+          
           const checkoutUrl = await createStorefrontCheckout(
-            items.map(item => ({ variantId: item.variantId, quantity: item.quantity }))
+            items.map(item => ({ variantId: item.variantId, quantity: item.quantity })),
+            discountCodes
           );
           setCheckoutUrl(checkoutUrl);
         } catch (error) {
