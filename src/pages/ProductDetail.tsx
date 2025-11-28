@@ -108,6 +108,9 @@ const ProductDetail = () => {
   // Check if this is the AeroGlow product (Black Friday event)
   const isAeroGlow = node.handle.includes('aeroglow') || node.title.toLowerCase().includes('aeroglow');
 
+  // Check if this is Fresh Eye (out of stock)
+  const isFreshEye = node.handle === 'masajeador-ojos-fresh-eye';
+
   // Black Friday unlock date
   const unlockDate = new Date('2025-11-28T00:00:00');
 
@@ -178,7 +181,8 @@ const ProductDetail = () => {
       } = await supabase.functions.invoke('newsletter-signup', {
         body: {
           email: notifyEmail,
-          acceptsMarketing: true
+          acceptsMarketing: true,
+          source: isFreshEye ? 'fresh-eye-restock' : 'product-notification'
         }
       });
       if (error) {
@@ -201,11 +205,11 @@ const ProductDetail = () => {
         // Track Lead event for product notification signup
         if (typeof window !== 'undefined' && (window as any).fbq) {
           (window as any).fbq('track', 'Lead', {
-            content_name: 'Product Notification',
-            content_category: 'Black Friday Alert'
+            content_name: isFreshEye ? 'Fresh Eye Restock Alert' : 'Product Notification',
+            content_category: isFreshEye ? 'Product Restock' : 'Black Friday Alert'
           });
         }
-        toast.success('¡Perfecto! Te notificaremos en Black Friday', {
+        toast.success(isFreshEye ? '¡Te avisaremos cuando vuelva!' : '¡Perfecto! Te notificaremos en Black Friday', {
           description: 'Recibirás un email cuando el producto esté disponible'
         });
         setNotifyEmail("");
@@ -262,9 +266,11 @@ const ProductDetail = () => {
       '@type': 'Offer',
       price: priceInfo.discountedPrice.toFixed(2),
       priceCurrency: variant?.price.currencyCode || 'EUR',
-      availability: variant?.availableForSale 
-        ? 'https://schema.org/InStock' 
-        : 'https://schema.org/OutOfStock',
+      availability: isFreshEye 
+        ? 'https://schema.org/OutOfStock'
+        : (variant?.availableForSale 
+          ? 'https://schema.org/InStock' 
+          : 'https://schema.org/OutOfStock'),
       url: `${window.location.origin}/producto/${node.handle}`,
       priceValidUntil: '2025-12-31',
       seller: {
@@ -332,7 +338,7 @@ const ProductDetail = () => {
         type="product"
         price={priceInfo.discountedPrice.toFixed(2)}
         currency={variant?.price.currencyCode || 'EUR'}
-        availability={variant?.availableForSale ? 'in stock' : 'out of stock'}
+        availability={isFreshEye ? 'out of stock' : (variant?.availableForSale ? 'in stock' : 'out of stock')}
         brand="Garett Beauty"
         schema={combinedSchema}
         faqs={productFAQs}
@@ -509,15 +515,67 @@ const ProductDetail = () => {
                 </div>
               </div>}
 
-            {/* Add to Cart */}
-            <Button 
-              size="lg" 
-              className="w-full h-12 text-base" 
-              onClick={handleAddToCart} 
-              disabled={!variant?.availableForSale}
-            >
-              {variant?.availableForSale ? 'Añadir al carrito' : 'Agotado'}
-            </Button>
+            {/* Add to Cart or Email Notification for Fresh Eye */}
+            {isFreshEye ? (
+              <div className="space-y-4">
+                <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
+                  <div className="flex items-start gap-3 mb-3">
+                    <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-amber-900 dark:text-amber-100 mb-1">
+                        Producto Agotado
+                      </p>
+                      <p className="text-sm text-amber-700 dark:text-amber-300">
+                        Este producto está temporalmente agotado. Déjanos tu email y te avisaremos cuando vuelva a estar disponible.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <form onSubmit={handleNotifySubmit} className="space-y-3">
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Input
+                      type="email"
+                      placeholder="tu@email.com"
+                      value={notifyEmail}
+                      onChange={(e) => setNotifyEmail(e.target.value)}
+                      required
+                      className="flex-1"
+                      disabled={isSubmittingEmail}
+                    />
+                    <Button 
+                      type="submit" 
+                      className="sm:w-auto"
+                      disabled={isSubmittingEmail}
+                    >
+                      {isSubmittingEmail ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          Enviando...
+                        </>
+                      ) : (
+                        <>
+                          <Bell className="w-4 h-4 mr-2" />
+                          Notificarme
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Te enviaremos un único email cuando el producto esté disponible.
+                  </p>
+                </form>
+              </div>
+            ) : (
+              <Button 
+                size="lg" 
+                className="w-full h-12 text-base" 
+                onClick={handleAddToCart} 
+                disabled={!variant?.availableForSale}
+              >
+                {variant?.availableForSale ? 'Añadir al carrito' : 'Agotado'}
+              </Button>
+            )}
 
             {/* Product Video - Below Add to Cart for AeroGlow */}
             {isAeroGlow && (

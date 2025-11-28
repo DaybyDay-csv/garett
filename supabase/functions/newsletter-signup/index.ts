@@ -13,7 +13,7 @@ serve(async (req) => {
   }
 
   try {
-    const { email, acceptsMarketing = true } = await req.json();
+    const { email, acceptsMarketing = true, source = 'newsletter' } = await req.json();
 
     if (!email || !email.includes('@')) {
       return new Response(
@@ -40,6 +40,7 @@ serve(async (req) => {
           customer {
             id
             email
+            tags
             emailMarketingConsent {
               marketingState
               consentUpdatedAt
@@ -56,6 +57,7 @@ serve(async (req) => {
     const variables = {
       input: {
         email: email,
+        tags: [source], // Add source as a tag for segmentation
         emailMarketingConsent: {
           marketingState: acceptsMarketing ? 'SUBSCRIBED' : 'NOT_SUBSCRIBED',
           marketingOptInLevel: acceptsMarketing ? 'SINGLE_OPT_IN' : 'UNKNOWN',
