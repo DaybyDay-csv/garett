@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { Sparkles } from "lucide-react";
 import { InfiniteScrollCarousel } from "@/components/InfiniteScrollCarousel";
@@ -48,6 +49,13 @@ const NewArrivals = () => {
       <Header />
       
       <div className="container py-8">
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb 
+          items={[
+            { label: 'Novedades' }
+          ]}
+        />
+        
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2 flex items-center gap-3">
             <Sparkles className="w-10 h-10 text-primary" />

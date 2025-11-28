@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -347,6 +348,15 @@ const BlackFriday = () => {
   const currentStage = currentStageData ? extendedPromotionalStages.find(s => s.name === currentStageData.name) : null;
   return <div className="min-h-screen bg-background">
       <Header />
+      
+      {/* Breadcrumb Navigation */}
+      <div className="container pt-8 px-6">
+        <Breadcrumb 
+          items={[
+            { label: 'Black Friday' }
+          ]}
+        />
+      </div>
       
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary-glow to-accent md:py-24 py-[26px]">
