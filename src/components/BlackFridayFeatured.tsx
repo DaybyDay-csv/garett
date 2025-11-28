@@ -5,31 +5,24 @@ import { Badge } from "@/components/ui/badge";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { Zap, Flame, ArrowRight, Timer } from "lucide-react";
 import { Link } from "react-router-dom";
-
 export const BlackFridayFeatured = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const loadProducts = async () => {
       try {
         // Fetch products and filter for Black Friday featured items
         const data = await fetchProducts(50);
-        
+
         // Prioritize AeroGlow and products with launch:bf2025 tag
-        const bfProducts = data.filter(p => 
-          p.node.handle.includes('aeroglow') || 
-          p.node.tags.includes('launch:bf2025') ||
-          p.node.tags.includes('bestseller:true')
-        );
-        
+        const bfProducts = data.filter(p => p.node.handle.includes('aeroglow') || p.node.tags.includes('launch:bf2025') || p.node.tags.includes('bestseller:true'));
+
         // AeroGlow first, then others
         const sorted = bfProducts.sort((a, b) => {
           if (a.node.handle.includes('aeroglow')) return -1;
           if (b.node.handle.includes('aeroglow')) return 1;
           return 0;
         });
-        
         setProducts(sorted.slice(0, 4)); // Show max 4 products
       } catch (error) {
         console.error('Error loading Black Friday products:', error);
@@ -37,16 +30,12 @@ export const BlackFridayFeatured = () => {
         setLoading(false);
       }
     };
-    
     loadProducts();
   }, []);
-
   if (loading || products.length === 0) {
     return null;
   }
-
-  return (
-    <section className="py-16 md:py-20 bg-muted/30">
+  return <section className="py-16 md:py-20 bg-muted/30">
       <div className="container">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16 space-y-4">
@@ -70,23 +59,16 @@ export const BlackFridayFeatured = () => {
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 mb-12">
-          {products.map((product) => (
-            <div key={product.node.id}>
+          {products.map(product => <div key={product.node.id}>
               <ProductCard product={product} />
-            </div>
-          ))}
+            </div>)}
         </div>
 
         {/* CTA */}
         <div className="text-center space-y-4">
-          <Button 
-            asChild 
-            size="lg"
-            variant="default"
-            className="px-8 py-6 text-base"
-          >
+          <Button asChild size="lg" variant="default" className="px-8 py-6 text-base">
             <Link to="/black-friday">
-              Ver todas las ofertas Black Friday
+              Ver las ofertas Black Friday
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </Button>
@@ -96,6 +78,5 @@ export const BlackFridayFeatured = () => {
           </p>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
