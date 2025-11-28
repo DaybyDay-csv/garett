@@ -66,7 +66,7 @@ const BlogPost = () => {
           <article>
             {/* Hero Image */}
             {post.image && (
-              <div className="aspect-[21/9] rounded-2xl overflow-hidden mb-8 shadow-lg">
+              <div className="aspect-[21/9] rounded-3xl overflow-hidden mb-10 shadow-2xl border border-border/50">
                 <img 
                   src={post.image} 
                   alt={post.title}
@@ -76,14 +76,14 @@ const BlogPost = () => {
             )}
 
             {/* Article Header */}
-            <header className="mb-10">
-              <Badge variant="outline" className="mb-4 text-primary border-primary">
+            <header className="mb-12">
+              <Badge variant="outline" className="mb-5 text-primary border-primary/60 px-4 py-1.5 text-sm font-semibold">
                 {post.category}
               </Badge>
-              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight leading-tight">
+              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6 tracking-tight leading-[1.15]">
                 {post.title}
               </h1>
-              <p className="text-xl text-muted-foreground mb-6 leading-relaxed">
+              <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-[1.6] font-light">
                 {post.excerpt}
               </p>
               
@@ -123,18 +123,21 @@ const BlogPost = () => {
             {/* Article Content */}
             <div 
               className="prose prose-lg max-w-none 
-                prose-headings:text-foreground prose-headings:font-bold prose-headings:tracking-tight
-                prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-4
-                prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3
-                prose-h4:text-xl prose-h4:mt-6 prose-h4:mb-2
-                prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-4
-                prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-a:font-medium
-                prose-strong:text-foreground prose-strong:font-semibold
-                prose-ul:text-muted-foreground prose-ul:my-6
-                prose-ol:text-muted-foreground prose-ol:my-6
-                prose-li:my-2
-                prose-table:my-8
-                prose-img:rounded-xl prose-img:shadow-md"
+                prose-headings:font-bold prose-headings:tracking-tight
+                prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:text-foreground prose-h2:border-b prose-h2:border-border/50 prose-h2:pb-3
+                prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-primary prose-h3:font-semibold
+                prose-h4:text-xl prose-h4:mt-8 prose-h4:mb-3 prose-h4:text-foreground/90 prose-h4:font-semibold
+                prose-p:text-muted-foreground prose-p:leading-[1.8] prose-p:mb-5 prose-p:text-[17px]
+                prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-a:font-medium prose-a:transition-colors
+                prose-strong:text-foreground prose-strong:font-bold prose-strong:text-[17px]
+                prose-ul:text-muted-foreground prose-ul:my-6 prose-ul:space-y-3
+                prose-ol:text-muted-foreground prose-ol:my-6 prose-ol:space-y-3
+                prose-li:text-[17px] prose-li:leading-[1.7] prose-li:my-0
+                prose-li:marker:text-primary prose-li:marker:font-bold
+                prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:my-8 prose-blockquote:rounded-r-lg
+                prose-code:text-primary prose-code:bg-primary/10 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                prose-table:my-8 prose-table:border prose-table:border-border
+                prose-img:rounded-2xl prose-img:shadow-lg prose-img:my-8"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </article>

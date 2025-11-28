@@ -51,8 +51,8 @@ const Blog = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post) => (
             <Link key={post.slug} to={`/blog/${post.slug}`} className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 h-full flex flex-col hover:shadow-xl">
-                <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 overflow-hidden relative">
+              <Card className="overflow-hidden border border-border/50 hover:border-primary/50 hover:shadow-2xl transition-all duration-500 h-full flex flex-col bg-card">
+                <div className="aspect-video bg-gradient-to-br from-primary/5 to-secondary/5 overflow-hidden relative">
                   {post.image ? (
                     <img 
                       src={post.image} 
@@ -69,32 +69,32 @@ const Blog = () => {
                       </div>
                     </div>
                   )}
-                  <div className="absolute top-3 right-3">
-                    <Badge className="bg-background/90 backdrop-blur-sm text-foreground border-0">
+                  <div className="absolute top-4 right-4">
+                    <Badge className="bg-primary/95 backdrop-blur-sm text-primary-foreground border-0 shadow-lg font-semibold">
                       {post.category}
                     </Badge>
                   </div>
                 </div>
-                <CardContent className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
-                    <Clock className="w-3 h-3" />
+                <CardContent className="p-7 flex-1 flex flex-col">
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground/80 mb-4 font-medium">
+                    <Clock className="w-3.5 h-3.5" />
                     <span>{post.readTime}</span>
-                    <span>•</span>
+                    <span className="text-muted-foreground/50">•</span>
                     <span>{new Date(post.date).toLocaleDateString('es-ES', { 
                       day: 'numeric', 
                       month: 'long',
                       year: 'numeric'
                     })}</span>
                   </div>
-                  <h2 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2 leading-tight">
+                  <h2 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2 leading-[1.3]">
                     {post.title}
                   </h2>
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-3 flex-1 leading-relaxed">
+                  <p className="text-[15px] text-muted-foreground mb-5 line-clamp-3 flex-1 leading-[1.6]">
                     {post.excerpt}
                   </p>
-                  <div className="flex items-center gap-2 text-primary font-medium text-sm mt-auto">
-                    <span>Leer artículo completo</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <div className="flex items-center gap-2 text-primary font-semibold text-sm mt-auto pt-3 border-t border-border/50">
+                    <span>Leer más</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
                   </div>
                 </CardContent>
               </Card>
