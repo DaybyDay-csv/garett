@@ -18,7 +18,7 @@ export const TrustBadges = ({
       
       <div className={`flex flex-col items-center text-center ${isCompact ? 'p-2' : 'p-4 md:p-6'} rounded-lg border bg-card`}>
         <Truck className={`text-primary mb-1 md:mb-2 ${isCompact ? 'w-6 h-6 md:w-8 md:h-8' : 'w-10 h-10 md:w-12 md:h-12'}`} />
-        <h3 className={`font-semibold mb-0.5 ${isCompact ? 'text-xs md:text-sm' : 'text-base md:text-lg'}`}>Envío gratis desde 150€</h3>
+        <h3 className={`font-semibold mb-0.5 ${isCompact ? 'text-xs md:text-sm' : 'text-base md:text-lg'}`}>Envíos gratis durante 72H!</h3>
         <p className="text-xs text-muted-foreground">
           Entrega 24-48h en península
         </p>
