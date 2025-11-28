@@ -250,16 +250,7 @@ const ProductDetail = () => {
                   <span className="text-xs font-medium">Click para ampliar</span>
                 </div>}
               
-              {/* Locked overlay for AeroGlow */}
-              {isAeroGlow && <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-red-950/70 to-black/90 flex items-center justify-center backdrop-blur-sm">
-                  <div className="text-center space-y-4">
-                    <Lock className="w-20 h-20 text-red-500 mx-auto animate-pulse drop-shadow-[0_0_20px_rgba(239,68,68,1)]" />
-                    <div className="space-y-2">
-                      <p className="text-white font-bold text-2xl drop-shadow-lg">PRODUCTO BLOQUEADO</p>
-                      <p className="text-red-400 text-sm font-semibold">SE DESBLOQUEA EL 28 DE NOVIEMBRE</p>
-                    </div>
-                  </div>
-                </div>}
+              {/* Locked overlay removed - Product is now available */}
               
               {/* Image Counter */}
               {node.images.edges.length > 1 && <div className="absolute bottom-4 left-4 bg-black/60 text-white px-3 py-1.5 rounded-lg">
@@ -358,22 +349,7 @@ const ProductDetail = () => {
                 </div>}
             </div>
 
-            {/* Black Friday Email Notification - Only for AeroGlow */}
-            {isAeroGlow && <form onSubmit={handleNotifySubmit} className="bg-gradient-to-br from-red-950/40 via-red-900/30 to-pink-950/40 border-2 border-red-600/40 rounded-xl p-4 backdrop-blur-sm">
-                <div className="flex items-start gap-3 mb-3">
-                  <Bell className="w-5 h-5 text-red-400 mt-1 flex-shrink-0" />
-                  <div className="flex-1">
-                    <h3 className="text-white font-bold text-sm mb-1">Notifícame en Black Friday</h3>
-                    <p className="text-gray-300 text-xs mb-3">Recibe un email cuando esté disponible con 50% OFF</p>
-                    <div className="flex gap-2">
-                      <Input type="email" placeholder="tu@email.com" value={notifyEmail} onChange={e => setNotifyEmail(e.target.value)} className="h-9 bg-gray-900/50 border-red-600/30 text-white placeholder:text-gray-500 focus:border-red-500" disabled={isSubmittingEmail} required />
-                      <Button type="submit" size="sm" disabled={isSubmittingEmail} className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white">
-                        {isSubmittingEmail ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Notificar'}
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </form>}
+            {/* Black Friday Email Notification removed - Product now available */}
 
             {/* GWP Progress Incentive */}
             {hasGWPActive && <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-4 border border-purple-200 dark:border-purple-800">
@@ -429,40 +405,14 @@ const ProductDetail = () => {
               </div>}
 
             {/* Add to Cart */}
-            {isAeroGlow ? <div className="space-y-4">
-                <Button size="lg" className="w-full bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 text-gray-500 cursor-not-allowed border-2 border-red-600/30 hover:border-red-600/50 transition-all relative overflow-hidden group" disabled>
-                  <div className="absolute inset-0 bg-gradient-to-r from-red-950/0 via-red-950/20 to-red-950/0 animate-pulse" />
-                  <Lock className="w-5 h-5 mr-2 relative z-10 group-hover:scale-110 transition-transform" />
-                  <span className="relative z-10 font-bold">PRODUCTO BLOQUEADO</span>
-                </Button>
-                
-                <div className="relative bg-gradient-to-br from-red-950/40 via-red-900/30 to-pink-950/40 border-2 border-red-600/40 rounded-xl p-6 overflow-hidden backdrop-blur-sm">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(239,68,68,0.1),transparent_70%)]" />
-                  <div className="relative space-y-4">
-                    <div className="flex items-center justify-center gap-2 mb-2">
-                      <Zap className="w-6 h-6 text-red-500 animate-pulse" />
-                      <p className="text-white font-bold text-lg">SE DESBLOQUEA EN BLACK FRIDAY</p>
-                      <Zap className="w-6 h-6 text-red-500 animate-pulse" />
-                    </div>
-                    
-                    <div className="flex items-center justify-center gap-2 text-gray-300">
-                      <Calendar className="w-4 h-4 text-red-500" />
-                      <p className="text-sm">28 de Noviembre 2025</p>
-                    </div>
-                    
-                    <CountdownTimer targetDate={unlockDate} />
-                    
-                    <div className="text-center pt-2 border-t border-red-600/30">
-                      <p className="text-red-400 font-bold text-xl animate-pulse">50% OFF EXCLUSIVO</p>
-                      <p className="text-gray-400 text-xs mt-1">Stock limitado - primer llegado, primer servido</p>
-                    </div>
-                  </div>
-                </div>
-                
-                
-              </div> : <Button size="lg" className="w-full" onClick={handleAddToCart} disabled={!variant?.availableForSale}>
-                {variant?.availableForSale ? 'Añadir al carrito' : 'Agotado'}
-              </Button>}
+            <Button 
+              size="lg" 
+              className="w-full" 
+              onClick={handleAddToCart} 
+              disabled={!variant?.availableForSale}
+            >
+              {variant?.availableForSale ? 'Añadir al carrito' : 'Agotado'}
+            </Button>
 
             {/* Trust Badges - Compact Version */}
             <div className="pt-6 border-t">
