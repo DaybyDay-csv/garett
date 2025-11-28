@@ -42,6 +42,24 @@ const Products = () => {
   useEffect(() => {
     let filtered = [...products];
 
+    // Default category priority (smartwatches last)
+    const categoryPriority: Record<string, number> = {
+      'masajeadores-faciales': 1,
+      'limpieza-facial': 2,
+      'cuidado-capilar': 3,
+      'mesoterapia': 4,
+      'corporales': 5,
+      'depilacion-ipl': 6,
+      'smartwatches': 999, // Always last
+    };
+
+    const getCategoryPriority = (product: ShopifyProduct) => {
+      const categoryTag = product.node.tags.find(tag => tag.startsWith('category:'));
+      if (!categoryTag) return 500;
+      const category = categoryTag.replace('category:', '');
+      return categoryPriority[category] || 500;
+    };
+
     // Category priority sorting
     if (categoryFilter !== "all") {
       filtered.sort((a, b) => {
@@ -50,8 +68,13 @@ const Products = () => {
         
         if (aHasCategory && !bHasCategory) return -1;
         if (!aHasCategory && bHasCategory) return 1;
-        return 0;
+        
+        // Within same filter status, apply default priority
+        return getCategoryPriority(a) - getCategoryPriority(b);
       });
+    } else if (sortBy === "default") {
+      // Default sorting by category priority
+      filtered.sort((a, b) => getCategoryPriority(a) - getCategoryPriority(b));
     }
 
     // Price sorting (applied after category sorting)
