@@ -10,6 +10,7 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
+import Category from "./pages/Category";
 import BlackFriday from "./pages/BlackFriday";
 import NewArrivals from "./pages/NewArrivals";
 import Superventas from "./pages/Superventas";
@@ -35,6 +36,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/productos" element={<Products />} />
+          <Route path="/categoria/:category" element={<Category />} />
           <Route path="/producto/:handle" element={<ProductDetail />} />
           <Route path="/black-friday" element={<BlackFriday />} />
           <Route path="/novedades" element={<NewArrivals />} />
