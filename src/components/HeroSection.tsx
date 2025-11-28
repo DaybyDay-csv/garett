@@ -60,7 +60,7 @@ export const HeroSection = () => {
               Tecnología polaca de última generación
             </div>
             
-            <h1 className={`text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.1] tracking-tight animate-fade-in [animation-delay:100ms] ${
+            <h1 className={`text-4xl md:text-6xl lg:text-7xl font-semibold leading-[0.95] tracking-tight animate-fade-in [animation-delay:100ms] ${
               isAlternateHero ? 'text-white' : 'text-header'
             }`}>
               BLACK FRIDAY<br />
