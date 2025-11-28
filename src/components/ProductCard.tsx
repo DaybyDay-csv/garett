@@ -137,7 +137,7 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
       </div>
       
       <div className="p-5">
-        <h3 className="font-semibold text-base mb-2 line-clamp-2 group-hover:text-primary transition-colors leading-snug">
+        <h3 className="font-semibold text-base mb-3 line-clamp-2 group-hover:text-primary transition-colors leading-snug">
           {node.title}
         </h3>
         
@@ -148,11 +148,11 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
           </p>
         )}
         
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-auto">
+        <div className="flex flex-col gap-3 mt-auto">
           <div className="flex flex-col flex-1 min-w-0">
             {priceInfo.hasDiscount ? (
               <div className="space-y-0.5">
-                <span className="text-2xl font-semibold text-primary tracking-tight">
+                <span className="text-2xl md:text-3xl font-semibold text-primary tracking-tight">
                   €{priceInfo.discountedPrice.toFixed(2)}
                 </span>
                 <span className="block text-sm text-muted-foreground line-through">
@@ -160,7 +160,7 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
                 </span>
               </div>
             ) : (
-              <span className="text-2xl font-semibold tracking-tight">
+              <span className="text-2xl md:text-3xl font-semibold tracking-tight">
                 €{priceInfo.originalPrice.toFixed(2)}
               </span>
             )}
@@ -169,10 +169,10 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
           <Button 
             onClick={handleAddToCart}
             disabled={!firstVariant?.availableForSale || isLaunch}
-            size="sm"
-            className="hidden md:inline-flex w-full sm:w-auto backdrop-blur-sm disabled:opacity-60"
+            size="lg"
+            className="w-full md:inline-flex h-12 text-base backdrop-blur-sm disabled:opacity-60"
           >
-            {isLaunch ? 'Próximamente' : (firstVariant?.availableForSale ? 'Añadir' : 'Agotado')}
+            {isLaunch ? 'Próximamente' : (firstVariant?.availableForSale ? 'Añadir al carrito' : 'Agotado')}
           </Button>
         </div>
       </div>
