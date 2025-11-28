@@ -233,6 +233,7 @@ const ProductDetail = () => {
       'mesoterapia': 'Mesoterapia',
       'corporales': 'Cuidado Corporal',
       'cuidado-capilar': 'Cuidado Capilar',
+      'capilar': 'Cuidado Capilar',
       'pretty-face': 'Pretty Face',
       'smartwatches': 'Smartwatches',
       'accessories': 'Accesorios'
