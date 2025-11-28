@@ -16,7 +16,7 @@ export const HeroSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIsAlternateHero(prev => !prev);
-    }, isAlternateHero ? 45000 : 15000); // 45s para imagen madura, 15s para joven
+    }, 10000); // 10s para cada imagen, rotación cada 10 segundos
     
     return () => clearInterval(interval);
   }, [isAlternateHero]);
