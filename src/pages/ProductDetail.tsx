@@ -440,7 +440,8 @@ const ProductDetail = () => {
                   muted={true} 
                   loop={true} 
                   controls={true} 
-                  showPlayButton={true} 
+                  showPlayButton={false}
+                  preload="metadata"
                   className="w-full"
                   fallback={
                     node.images.edges[0]?.node && (
