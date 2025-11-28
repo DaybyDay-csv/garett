@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
+import { CATEGORIES, productBelongsToCategory } from "@/lib/categories";
 import { Sparkles } from "lucide-react";
 import { InfiniteScrollCarousel } from "@/components/InfiniteScrollCarousel";
 
@@ -27,20 +28,15 @@ const NewArrivals = () => {
     loadProducts();
   }, []);
 
-  const categories = [
-    { value: "capilar", label: "Cuidado capilar" },
-    { value: "masajeadores-faciales", label: "Masajeadores faciales" },
-    { value: "limpieza-facial", label: "Limpieza facial" },
-    { value: "mesoterapia", label: "Mesoterapia" },
-    { value: "corporales", label: "Dispositivos corporales" },
-    { value: "ipl", label: "Depilación e IPL" },
-  ];
+  // Use centralized categories
+  const categoriesArray = Object.values(CATEGORIES);
 
   // Group products by category
-  const productsByCategory = categories.map(category => ({
-    ...category,
+  const productsByCategory = categoriesArray.map(category => ({
+    slug: category.slug,
+    label: category.name,
     products: products.filter(p => 
-      p.node.tags.some(tag => tag.includes(`category:${category.value}`))
+      productBelongsToCategory(p.node.tags, category.slug)
     )
   })).filter(cat => cat.products.length > 0);
 
@@ -81,7 +77,7 @@ const NewArrivals = () => {
         ) : (
           <div className="space-y-16">
             {productsByCategory.map((category) => (
-              <div key={category.value} className="space-y-6">
+              <div key={category.slug} className="space-y-6">
                 <div>
                   <h2 className="text-2xl sm:text-3xl font-bold">{category.label}</h2>
                   <p className="text-sm text-muted-foreground">

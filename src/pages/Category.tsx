@@ -5,49 +5,15 @@ import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
+import { CATEGORIES, productBelongsToCategory } from "@/lib/categories";
 import { ShoppingBag } from "lucide-react";
-
-const categoryInfo: Record<string, { name: string; description: string; icon?: string }> = {
-  'cuidado-capilar': {
-    name: 'Cuidado Capilar',
-    description: 'Dispositivos profesionales para el cuidado y styling del cabello'
-  },
-  'masajeadores-faciales': {
-    name: 'Masajeadores Faciales',
-    description: 'Tecnología avanzada para rejuvenecimiento facial y lifting natural'
-  },
-  'limpieza-facial': {
-    name: 'Limpieza Facial',
-    description: 'Cepillos y dispositivos sónicos para limpieza profunda'
-  },
-  'mesoterapia': {
-    name: 'Mesoterapia',
-    description: 'Dispositivos de electroporación para máxima absorción de activos'
-  },
-  'corporales': {
-    name: 'Cuidado Corporal',
-    description: 'Tratamientos profesionales para celulitis y reafirmación'
-  },
-  'depilacion-ipl': {
-    name: 'Depilación IPL',
-    description: 'Tecnología de luz pulsada para depilación permanente en casa'
-  },
-  'smartwatches': {
-    name: 'Smartwatches',
-    description: 'Relojes inteligentes para seguimiento de actividad y salud'
-  },
-  'accessories': {
-    name: 'Accesorios',
-    description: 'Recambios y accesorios para tus dispositivos'
-  }
-};
 
 const Category = () => {
   const { category } = useParams<{ category: string }>();
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const currentCategory = category ? categoryInfo[category] : null;
+  const currentCategory = category ? CATEGORIES[category] : null;
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -56,10 +22,10 @@ const Category = () => {
       setLoading(true);
       try {
         const data = await fetchProducts(100);
-        // Filter products by category tag
+        // Filter products by category using the centralized function
         const categoryProducts = data.filter(p => 
           !isGWPProduct(p) && 
-          p.node.tags.some(tag => tag === `category:${category}`)
+          productBelongsToCategory(p.node.tags, category)
         );
         setProducts(categoryProducts);
       } catch (error) {

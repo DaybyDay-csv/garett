@@ -39,32 +39,32 @@ export const Footer = () => {
             <h3 className="font-semibold text-base mb-5">Categorías</h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link to="/productos?category=capilar" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link to="/categoria/cuidado-capilar" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Cuidado capilar
                 </Link>
               </li>
               <li>
-                <Link to="/productos?category=masajeadores-faciales" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link to="/categoria/masajeadores-faciales" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Masajeadores faciales
                 </Link>
               </li>
               <li>
-                <Link to="/productos?category=limpieza-facial" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link to="/categoria/limpieza-facial" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Limpieza facial
                 </Link>
               </li>
               <li>
-                <Link to="/productos?category=mesoterapia" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link to="/categoria/mesoterapia" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Dispositivos de Mesoterapia
                 </Link>
               </li>
               <li>
-                <Link to="/productos?category=corporales" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link to="/categoria/corporales" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Dispositivos corporales
                 </Link>
               </li>
               <li>
-                <Link to="/productos?category=ipl" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link to="/categoria/depilacion-ipl" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Depilación e IPL
                 </Link>
               </li>
