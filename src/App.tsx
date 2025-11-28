@@ -11,6 +11,7 @@ import Index from "./pages/Index";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Category from "./pages/Category";
+import Search from "./pages/Search";
 import BlackFriday from "./pages/BlackFriday";
 import NewArrivals from "./pages/NewArrivals";
 import Superventas from "./pages/Superventas";
@@ -36,6 +37,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/productos" element={<Products />} />
+          <Route path="/busqueda" element={<Search />} />
           <Route path="/categoria/:category" element={<Category />} />
           <Route path="/producto/:handle" element={<ProductDetail />} />
           <Route path="/black-friday" element={<BlackFriday />} />

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
 import { Button } from "./ui/button";
-import { Menu, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown, Search } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { 
   DropdownMenu, 
@@ -82,6 +82,13 @@ export const Header = () => {
         </nav>
         
         <div className="flex items-center gap-3">
+          {/* Search Button */}
+          <Link to="/busqueda">
+            <Button variant="ghost" size="icon" className="text-white hover:text-white/80 hover:bg-white/10">
+              <Search className="h-5 w-5" />
+            </Button>
+          </Link>
+          
           {/* Mobile Black Friday Button */}
           <Link to="/black-friday" className="md:hidden">
             <Button variant="ghost" size="sm" className="text-white hover:text-white/80 hover:bg-white/10 text-xs font-medium px-3 py-2">
