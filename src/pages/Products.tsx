@@ -42,39 +42,58 @@ const Products = () => {
   useEffect(() => {
     let filtered = [...products];
 
-    // Sorting
-    if (sortBy === "price-asc") {
-      filtered.sort((a, b) => parseFloat(a.node.priceRange.minVariantPrice.amount) - parseFloat(b.node.priceRange.minVariantPrice.amount));
-    } else if (sortBy === "price-desc") {
-      filtered.sort((a, b) => parseFloat(b.node.priceRange.minVariantPrice.amount) - parseFloat(a.node.priceRange.minVariantPrice.amount));
+    // Category priority sorting
+    if (categoryFilter !== "all") {
+      filtered.sort((a, b) => {
+        const aHasCategory = a.node.tags.some(tag => tag === `category:${categoryFilter}`);
+        const bHasCategory = b.node.tags.some(tag => tag === `category:${categoryFilter}`);
+        
+        if (aHasCategory && !bHasCategory) return -1;
+        if (!aHasCategory && bHasCategory) return 1;
+        return 0;
+      });
     }
-    setFilteredProducts(filtered);
-  }, [sortBy, products]);
-  const categories = [{
-    value: "capilar",
-    label: "Cuidado capilar"
-  }, {
-    value: "masajeadores-faciales",
-    label: "Masajeadores faciales"
-  }, {
-    value: "limpieza-facial",
-    label: "Limpieza facial"
-  }, {
-    value: "mesoterapia",
-    label: "Dispositivos de Mesoterapia"
-  }, {
-    value: "corporales",
-    label: "Dispositivos corporales"
-  }, {
-    value: "ipl",
-    label: "Depilación e IPL"
-  }];
 
-  // Group products by category
-  const productsByCategory = categories.map(category => ({
-    ...category,
-    products: filteredProducts.filter(p => p.node.tags.some(tag => tag.includes(`category:${category.value}`)))
-  })).filter(cat => cat.products.length > 0);
+    // Price sorting (applied after category sorting)
+    if (sortBy === "price-asc") {
+      filtered.sort((a, b) => {
+        // Keep category priority if filter is active
+        if (categoryFilter !== "all") {
+          const aHasCategory = a.node.tags.some(tag => tag === `category:${categoryFilter}`);
+          const bHasCategory = b.node.tags.some(tag => tag === `category:${categoryFilter}`);
+          if (aHasCategory !== bHasCategory) {
+            return aHasCategory ? -1 : 1;
+          }
+        }
+        return parseFloat(a.node.priceRange.minVariantPrice.amount) - parseFloat(b.node.priceRange.minVariantPrice.amount);
+      });
+    } else if (sortBy === "price-desc") {
+      filtered.sort((a, b) => {
+        // Keep category priority if filter is active
+        if (categoryFilter !== "all") {
+          const aHasCategory = a.node.tags.some(tag => tag === `category:${categoryFilter}`);
+          const bHasCategory = b.node.tags.some(tag => tag === `category:${categoryFilter}`);
+          if (aHasCategory !== bHasCategory) {
+            return aHasCategory ? -1 : 1;
+          }
+        }
+        return parseFloat(b.node.priceRange.minVariantPrice.amount) - parseFloat(a.node.priceRange.minVariantPrice.amount);
+      });
+    }
+    
+    setFilteredProducts(filtered);
+  }, [sortBy, categoryFilter, products]);
+  const categories = [
+    { value: "all", label: "Todas las categorías" },
+    { value: "masajeadores-faciales", label: "Masajeadores faciales" },
+    { value: "limpieza-facial", label: "Limpieza facial" },
+    { value: "cuidado-capilar", label: "Cuidado capilar" },
+    { value: "smartwatches", label: "Smartwatches" },
+    { value: "mesoterapia", label: "Dispositivos de Mesoterapia" },
+    { value: "corporales", label: "Dispositivos corporales" },
+    { value: "depilacion-ipl", label: "Depilación e IPL" }
+  ];
+
   return <div className="min-h-screen bg-background">
       <Header />
       
@@ -93,8 +112,21 @@ const Products = () => {
           </p>
         </div>
 
-        {/* Sorting */}
-        <div className="flex justify-end mb-8">
+        {/* Filters and Sorting */}
+        <div className="flex flex-col sm:flex-row gap-4 mb-8">
+          <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+            <SelectTrigger className="w-full sm:w-[240px] h-11">
+              <SelectValue placeholder="Filtrar por categoría" />
+            </SelectTrigger>
+            <SelectContent>
+              {categories.map(cat => (
+                <SelectItem key={cat.value} value={cat.value}>
+                  {cat.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
           <Select value={sortBy} onValueChange={setSortBy}>
             <SelectTrigger className="w-full sm:w-[220px] h-11">
               <SelectValue placeholder="Ordenar por" />
@@ -115,13 +147,8 @@ const Products = () => {
             <ShoppingBag className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-2xl font-bold mb-2">No hay productos</h3>
             <p className="text-muted-foreground">Estamos preparando nuestro catálogo</p>
-          </div> : <div className="space-y-12">
-            {productsByCategory.map(category => <div key={category.value}>
-                <h2 className="text-xl md:text-2xl font-semibold mb-6 pb-3 border-b tracking-tight">{category.label}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-                  {category.products.map(product => <ProductCard key={product.node.id} product={product} />)}
-                </div>
-              </div>)}
+          </div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+            {filteredProducts.map(product => <ProductCard key={product.node.id} product={product} />)}
           </div>}
       </div>
 
