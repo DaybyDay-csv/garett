@@ -21,8 +21,25 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
   const originalPrice = node.priceRange.minVariantPrice;
   const image = node.images.edges[0]?.node;
   
-  // Calculate promotional pricing
-  const priceInfo = calculatePromotionalPrice(originalPrice.amount);
+  // Check if this is the AeroGlow product (Black Friday event)
+  const isAeroGlow = node.handle.includes('aeroglow') || node.title.toLowerCase().includes('aeroglow');
+  
+  // Calculate promotional pricing - special handling for AeroGlow
+  let priceInfo;
+  if (isAeroGlow) {
+    priceInfo = {
+      originalPrice: 449,
+      discountedPrice: 224.50,
+      hasDiscount: true,
+      discountLabel: '-50%',
+      stage: {
+        badge: 'BLACK FRIDAY',
+        color: 'from-red-600 to-pink-600'
+      }
+    };
+  } else {
+    priceInfo = calculatePromotionalPrice(originalPrice.amount);
+  }
   
   // Extract badges from tags
   const isNew = node.tags.includes('new:true');
