@@ -10,10 +10,13 @@ import { UGCSection } from "@/components/UGCSection";
 import { PromotionalBanners } from "@/components/PromotionalBanners";
 import { BlackFridayFeatured } from "@/components/BlackFridayFeatured";
 import { OptimizedImage } from "@/components/OptimizedImage";
+import { FAQ } from "@/components/FAQ";
+import { SEOContent } from "@/components/SEOContent";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
+import { homeFAQs } from "@/lib/faqData";
 import { Sparkles, Zap, Timer, ShoppingBag, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import categoryCuidadoCapilar from "@/assets/category-cuidado-capilar.jpg";
@@ -292,6 +295,16 @@ const Index = () => {
       
       {/* Customer Testimonials */}
       <Testimonials />
+
+      {/* SEO Content Section with Internal Links */}
+      <SEOContent />
+
+      {/* FAQ Section */}
+      <FAQ 
+        items={homeFAQs}
+        title="Preguntas frecuentes"
+        description="Resolvemos tus dudas sobre nuestros dispositivos de belleza profesional"
+      />
 
       <div className="container py-16 px-6">
         {/* New Arrivals */}

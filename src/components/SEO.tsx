@@ -11,6 +11,7 @@ interface SEOProps {
   availability?: 'in stock' | 'out of stock';
   brand?: string;
   schema?: object;
+  faqs?: Array<{ question: string; answer: string }>;
 }
 
 export const SEO = ({
@@ -23,7 +24,8 @@ export const SEO = ({
   currency = 'EUR',
   availability,
   brand = 'Garett Beauty',
-  schema
+  schema,
+  faqs
 }: SEOProps) => {
   const siteUrl = window.location.origin;
   const fullUrl = canonicalUrl ? `${siteUrl}${canonicalUrl}` : window.location.href;
@@ -37,6 +39,20 @@ export const SEO = ({
   const optimizedDescription = description.length > 160 
     ? `${description.substring(0, 157)}...` 
     : description;
+
+  // Generate FAQ Schema if FAQs are provided
+  const faqSchema = faqs && faqs.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer
+      }
+    }))
+  } : null;
 
   return (
     <Helmet>
@@ -80,6 +96,13 @@ export const SEO = ({
       {schema && (
         <script type="application/ld+json">
           {JSON.stringify(schema)}
+        </script>
+      )}
+
+      {/* FAQ Schema */}
+      {faqSchema && (
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
         </script>
       )}
     </Helmet>

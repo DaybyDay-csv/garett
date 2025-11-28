@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { TrustBadges } from "@/components/TrustBadges";
+import { FAQ } from "@/components/FAQ";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +16,7 @@ import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, Zoom
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { calculatePromotionalPrice, formatPrice, getCurrentPromotionalStage } from "@/lib/promotions";
 import { getProductContent, detectProductCategory } from "@/lib/productContent";
+import { productSpecificFAQs } from "@/lib/faqData";
 import { getCategoryFromTags } from "@/lib/categories";
 import * as LucideIcons from "lucide-react";
 import gwpHeadband from "@/assets/gwp-headband.png";
@@ -316,6 +318,10 @@ const ProductDetail = () => {
     '@context': 'https://schema.org',
     '@graph': [productSchema, breadcrumbSchema]
   };
+
+  // Get product FAQs based on category
+  const productCategory = detectProductCategory(node);
+  const productFAQs = productSpecificFAQs[productCategory as keyof typeof productSpecificFAQs] || [];
   
   return <div className="min-h-screen bg-background">
       <SEO 
@@ -329,6 +335,7 @@ const ProductDetail = () => {
         availability={variant?.availableForSale ? 'in stock' : 'out of stock'}
         brand="Garett Beauty"
         schema={combinedSchema}
+        faqs={productFAQs}
       />
       <Header />
       
@@ -688,6 +695,26 @@ const ProductDetail = () => {
             </Button>
           </div>
         </div>}
+
+      {/* FAQ Section - Product Specific */}
+      {(() => {
+        const category = detectProductCategory(node);
+        const faqs = productSpecificFAQs[category as keyof typeof productSpecificFAQs];
+        if (faqs && faqs.length > 0) {
+          return (
+            <div className="bg-gradient-to-b from-background to-secondary/5 py-12">
+              <div className="container px-6">
+                <FAQ 
+                  items={faqs}
+                  title="Preguntas frecuentes"
+                  description={`Respuestas sobre ${node.title}`}
+                />
+              </div>
+            </div>
+          );
+        }
+        return null;
+      })()}
 
       {/* Related Products Section */}
       <div className="container py-8 px-6">
