@@ -24,6 +24,7 @@ import { Play } from "lucide-react";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
+import { RelatedProducts } from "@/components/RelatedProducts";
 const ProductDetail = () => {
   const {
     handle
@@ -572,6 +573,11 @@ const ProductDetail = () => {
             </Button>
           </div>
         </div>}
+
+      {/* Related Products Section */}
+      <div className="container py-8 px-6">
+        <RelatedProducts currentProduct={product} />
+      </div>
 
       <Footer />
     </div>;
