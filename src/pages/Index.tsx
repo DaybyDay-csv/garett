@@ -99,7 +99,7 @@ const Index = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {/* Cuidado Capilar */}
-            <Link to="/productos?category=capilar" className="group">
+            <Link to="/categoria/cuidado-capilar" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
                   <OptimizedImage 
@@ -125,7 +125,7 @@ const Index = () => {
             </Link>
 
             {/* Masajeadores Faciales */}
-            <Link to="/productos?category=masajeadores-faciales" className="group">
+            <Link to="/categoria/masajeadores-faciales" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
                   <OptimizedImage 
@@ -151,7 +151,7 @@ const Index = () => {
             </Link>
 
             {/* Limpieza Facial */}
-            <Link to="/productos?category=limpieza-facial" className="group">
+            <Link to="/categoria/limpieza-facial" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
                   <OptimizedImage 
@@ -177,7 +177,7 @@ const Index = () => {
             </Link>
 
             {/* Dispositivos de Mesoterapia */}
-            <Link to="/productos?category=mesoterapia" className="group">
+            <Link to="/categoria/mesoterapia" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
                   <OptimizedImage 
@@ -203,7 +203,7 @@ const Index = () => {
             </Link>
 
             {/* Dispositivos Corporales */}
-            <Link to="/productos?category=corporales" className="group">
+            <Link to="/categoria/corporales" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
                   <OptimizedImage 
@@ -229,7 +229,7 @@ const Index = () => {
             </Link>
 
             {/* Depilación e IPL */}
-            <Link to="/productos?category=ipl" className="group">
+            <Link to="/categoria/depilacion-ipl" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
                   <OptimizedImage 

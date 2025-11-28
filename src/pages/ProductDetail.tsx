@@ -223,7 +223,7 @@ const ProductDetail = () => {
   // Get category from product tags for breadcrumb
   const getCategoryInfo = () => {
     const categoryTag = node.tags.find(tag => tag.startsWith('category:'));
-    if (!categoryTag) return { name: 'Productos', slug: 'productos' };
+    if (!categoryTag) return { name: 'Productos', slug: 'productos', path: '/productos' };
     
     const categorySlug = categoryTag.replace('category:', '');
     const categoryNames: Record<string, string> = {
@@ -231,7 +231,7 @@ const ProductDetail = () => {
       'masajeadores-faciales': 'Masajeadores Faciales',
       'limpieza-facial': 'Limpieza Facial',
       'mesoterapia': 'Mesoterapia',
-      'corporales': 'Corporales',
+      'corporales': 'Cuidado Corporal',
       'cuidado-capilar': 'Cuidado Capilar',
       'pretty-face': 'Pretty Face',
       'smartwatches': 'Smartwatches',
@@ -240,7 +240,8 @@ const ProductDetail = () => {
     
     return {
       name: categoryNames[categorySlug] || 'Productos',
-      slug: categorySlug
+      slug: categorySlug,
+      path: `/categoria/${categorySlug}`
     };
   };
   
@@ -254,7 +255,7 @@ const ProductDetail = () => {
         <Breadcrumb 
           items={[
             { label: 'Productos', href: '/productos' },
-            { label: categoryInfo.name, href: `/productos?category=${categoryInfo.slug}` },
+            { label: categoryInfo.name, href: categoryInfo.path },
             { label: node.title }
           ]}
         />
