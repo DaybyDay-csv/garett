@@ -124,16 +124,6 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
                     Nuevo
                   </Badge>
                 )}
-                {!isBestseller && !isNew && priceInfo.hasDiscount && (
-                  <Badge variant="outline" className="text-xs bg-background">
-                    {priceInfo.discountLabel} OFF
-                  </Badge>
-                )}
-                {isBestseller && priceInfo.hasDiscount && (
-                  <Badge variant="outline" className="text-xs bg-background">
-                    {priceInfo.discountLabel} OFF
-                  </Badge>
-                )}
               </>
             )}
           </div>
@@ -155,10 +145,15 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
         <div className="flex flex-col gap-3 mt-auto">
           <div className="flex flex-col flex-1 min-w-0">
             {priceInfo.hasDiscount ? (
-              <div className="space-y-0.5">
-                <span className="text-2xl md:text-3xl font-semibold text-primary tracking-tight">
-                  €{priceInfo.discountedPrice.toFixed(2)}
-                </span>
+              <div className="space-y-1">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl md:text-3xl font-semibold text-primary tracking-tight">
+                    €{priceInfo.discountedPrice.toFixed(2)}
+                  </span>
+                  <span className="text-xs font-medium text-destructive/90">
+                    {priceInfo.discountLabel}
+                  </span>
+                </div>
                 <span className="block text-sm text-muted-foreground line-through">
                   €{priceInfo.originalPrice.toFixed(2)}
                 </span>
