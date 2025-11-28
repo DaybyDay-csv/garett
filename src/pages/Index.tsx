@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { ProductCard } from "@/components/ProductCard";
 import { TrustBadges } from "@/components/TrustBadges";
 import { HeroSection } from "@/components/HeroSection";
@@ -41,7 +42,36 @@ const Index = () => {
   }, []);
   const newProducts = products.filter(p => p.node.tags.includes('new:true'));
   const bestSellers = products.filter(p => p.node.tags.includes('bestseller:true'));
+
+  // Home page schema
+  const homeSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Garett Beauty España',
+    url: window.location.origin,
+    description: 'Tecnología de belleza profesional para resultados visibles. Dispositivos de cuidado capilar, facial y corporal con garantía 2 años.',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Garett Beauty',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pESnn9BB6adLJMk8NGIHDpkTO553/uploads/1762822197317-3.png'
+      }
+    },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${window.location.origin}/busqueda?q={search_term_string}`,
+      'query-input': 'required name=search_term_string'
+    }
+  };
+
   return <div className="min-h-screen bg-background">
+      <SEO 
+        title="Garett Beauty España - Tecnología de Belleza Profesional"
+        description="Descubre los mejores dispositivos de belleza profesional. Cuidado capilar, facial y corporal con tecnología avanzada. Envío gratis en 24-48h y garantía 2 años."
+        canonicalUrl="/"
+        schema={homeSchema}
+      />
       <Header />
       
       {/* Hero Section with UVP */}

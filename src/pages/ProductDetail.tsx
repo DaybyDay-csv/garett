@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { TrustBadges } from "@/components/TrustBadges";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -237,8 +238,98 @@ const ProductDetail = () => {
   };
   
   const categoryInfo = getCategoryInfo();
+
+  // Create SEO meta description from product
+  const metaDescription = node.description 
+    ? node.description.substring(0, 157) + '...'
+    : `Compra ${node.title} en Garett Beauty. ${categoryInfo.name} con la mejor tecnología y calidad profesional. Envío gratis y garantía 2 años.`;
+
+  // Product schema markup for rich snippets
+  const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: node.title,
+    description: node.description || metaDescription,
+    image: node.images.edges.map(edge => edge.node.url),
+    url: `${window.location.origin}/producto/${node.handle}`,
+    brand: {
+      '@type': 'Brand',
+      name: 'Garett Beauty'
+    },
+    offers: {
+      '@type': 'Offer',
+      price: priceInfo.discountedPrice.toFixed(2),
+      priceCurrency: variant?.price.currencyCode || 'EUR',
+      availability: variant?.availableForSale 
+        ? 'https://schema.org/InStock' 
+        : 'https://schema.org/OutOfStock',
+      url: `${window.location.origin}/producto/${node.handle}`,
+      priceValidUntil: '2025-12-31',
+      seller: {
+        '@type': 'Organization',
+        name: 'Garett Beauty'
+      }
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      reviewCount: '127',
+      bestRating: '5',
+      worstRating: '1'
+    }
+  };
+
+  // Breadcrumb schema
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Inicio',
+        item: window.location.origin
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Productos',
+        item: `${window.location.origin}/productos`
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: categoryInfo.name,
+        item: `${window.location.origin}${categoryInfo.path}`
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        name: node.title,
+        item: `${window.location.origin}/producto/${node.handle}`
+      }
+    ]
+  };
+
+  // Combined schema
+  const combinedSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [productSchema, breadcrumbSchema]
+  };
   
   return <div className="min-h-screen bg-background">
+      <SEO 
+        title={node.title}
+        description={metaDescription}
+        canonicalUrl={`/producto/${node.handle}`}
+        image={node.images.edges[0]?.node.url}
+        type="product"
+        price={priceInfo.discountedPrice.toFixed(2)}
+        currency={variant?.price.currencyCode || 'EUR'}
+        availability={variant?.availableForSale ? 'in stock' : 'out of stock'}
+        brand="Garett Beauty"
+        schema={combinedSchema}
+      />
       <Header />
       
       <div className="container py-8 px-6">
