@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/ProductCard";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface RelatedProductsProps {
   currentProduct: ShopifyProduct;
@@ -9,6 +11,9 @@ interface RelatedProductsProps {
 export const RelatedProducts = ({ currentProduct }: RelatedProductsProps) => {
   const [relatedProducts, setRelatedProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
   useEffect(() => {
     const loadRelatedProducts = async () => {
@@ -41,6 +46,41 @@ export const RelatedProducts = ({ currentProduct }: RelatedProductsProps) => {
     loadRelatedProducts();
   }, [currentProduct]);
 
+  const checkScrollButtons = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  useEffect(() => {
+    checkScrollButtons();
+    const scrollContainer = scrollRef.current;
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', checkScrollButtons);
+      window.addEventListener('resize', checkScrollButtons);
+      return () => {
+        scrollContainer.removeEventListener('scroll', checkScrollButtons);
+        window.removeEventListener('resize', checkScrollButtons);
+      };
+    }
+  }, [relatedProducts]);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = scrollRef.current.clientWidth * 0.8;
+      const targetScroll = direction === 'left' 
+        ? scrollRef.current.scrollLeft - scrollAmount
+        : scrollRef.current.scrollLeft + scrollAmount;
+      
+      scrollRef.current.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   if (loading) {
     return (
       <div className="py-12">
@@ -65,13 +105,67 @@ export const RelatedProducts = ({ currentProduct }: RelatedProductsProps) => {
       <h2 className="text-2xl md:text-3xl font-semibold mb-8">
         También te puede interesar
       </h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-        {relatedProducts.map((product) => (
-          <ProductCard 
-            key={product.node.id} 
-            product={product}
-          />
-        ))}
+      
+      <div className="relative group">
+        {/* Left Arrow */}
+        <Button
+          variant="outline"
+          size="icon"
+          className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 h-12 w-12 rounded-full bg-background/95 backdrop-blur-sm shadow-lg border-2 transition-all duration-300 ${
+            canScrollLeft 
+              ? 'opacity-0 group-hover:opacity-100 hover:scale-110 hover:bg-primary hover:text-primary-foreground hover:border-primary' 
+              : 'opacity-0 pointer-events-none'
+          }`}
+          onClick={() => scroll('left')}
+          disabled={!canScrollLeft}
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </Button>
+
+        {/* Scrollable Container */}
+        <div 
+          ref={scrollRef}
+          className="flex gap-4 md:gap-6 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory touch-pan-x"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            WebkitOverflowScrolling: 'touch'
+          }}
+        >
+          {relatedProducts.map((product) => (
+            <div 
+              key={product.node.id} 
+              className="flex-shrink-0 w-[280px] md:w-[320px] snap-start"
+            >
+              <ProductCard 
+                product={product}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Right Arrow */}
+        <Button
+          variant="outline"
+          size="icon"
+          className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 h-12 w-12 rounded-full bg-background/95 backdrop-blur-sm shadow-lg border-2 transition-all duration-300 ${
+            canScrollRight 
+              ? 'opacity-0 group-hover:opacity-100 hover:scale-110 hover:bg-primary hover:text-primary-foreground hover:border-primary' 
+              : 'opacity-0 pointer-events-none'
+          }`}
+          onClick={() => scroll('right')}
+          disabled={!canScrollRight}
+        >
+          <ChevronRight className="h-6 w-6" />
+        </Button>
+
+        {/* Gradient Overlays */}
+        <div className={`absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent pointer-events-none transition-opacity duration-300 ${
+          canScrollLeft ? 'opacity-100' : 'opacity-0'
+        }`} />
+        <div className={`absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent pointer-events-none transition-opacity duration-300 ${
+          canScrollRight ? 'opacity-100' : 'opacity-0'
+        }`} />
       </div>
     </div>
   );
