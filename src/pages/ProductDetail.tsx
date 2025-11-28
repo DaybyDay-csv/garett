@@ -430,6 +430,31 @@ const ProductDetail = () => {
               {variant?.availableForSale ? 'Añadir al carrito' : 'Agotado'}
             </Button>
 
+            {/* Product Video - Below Add to Cart for AeroGlow */}
+            {isAeroGlow && (
+              <div className="rounded-lg overflow-hidden border bg-muted/10 mt-4">
+                <VideoPlayer 
+                  srcWebM="/videos/aeroglow-product-demo.webm" 
+                  poster={node.images.edges[0]?.node.url} 
+                  autoplay={false} 
+                  muted={true} 
+                  loop={true} 
+                  controls={true} 
+                  showPlayButton={true} 
+                  className="w-full"
+                  fallback={
+                    node.images.edges[0]?.node && (
+                      <img 
+                        src={node.images.edges[0].node.url} 
+                        alt={node.images.edges[0].node.altText || node.title} 
+                        className="w-full h-full object-cover" 
+                      />
+                    )
+                  }
+                />
+              </div>
+            )}
+
 
             {/* Trust Badges - Compact Version */}
             <div className="pt-6 border-t">
