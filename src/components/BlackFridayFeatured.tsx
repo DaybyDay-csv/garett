@@ -46,19 +46,19 @@ export const BlackFridayFeatured = () => {
   }
 
   return (
-    <section className="py-12 md:py-16 bg-muted/30">
+    <section className="py-16 md:py-20 bg-muted/30">
       <div className="container">
         {/* Header */}
-        <div className="text-center mb-10 md:mb-12">
-          <div className="inline-flex items-center gap-2 bg-foreground/5 text-foreground px-4 py-2 rounded-md text-sm font-medium border border-border mb-4">
+        <div className="text-center mb-12 md:mb-16 space-y-4">
+          <div className="inline-flex items-center gap-2 bg-foreground/5 text-foreground px-4 py-2 rounded-md text-sm font-medium border border-border">
             Black Friday
           </div>
           
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-3">
+          <h2 className="text-4xl md:text-5xl font-semibold text-foreground tracking-tight">
             Ofertas Especiales
           </h2>
           
-          <p className="text-muted-foreground text-lg mb-4">
+          <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
             Descuentos de hasta 50% en productos seleccionados
           </p>
           
@@ -69,7 +69,7 @@ export const BlackFridayFeatured = () => {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 mb-12">
           {products.map((product) => (
             <div key={product.node.id}>
               <ProductCard product={product} />
@@ -78,11 +78,12 @@ export const BlackFridayFeatured = () => {
         </div>
 
         {/* CTA */}
-        <div className="text-center">
+        <div className="text-center space-y-4">
           <Button 
             asChild 
             size="lg"
             variant="default"
+            className="px-8 py-6 text-base"
           >
             <Link to="/black-friday">
               Ver todas las ofertas Black Friday
@@ -90,7 +91,7 @@ export const BlackFridayFeatured = () => {
             </Link>
           </Button>
           
-          <p className="text-muted-foreground text-sm mt-4">
+          <p className="text-muted-foreground text-sm">
             Envío gratis en todos los pedidos - Devoluciones hasta 30 días
           </p>
         </div>

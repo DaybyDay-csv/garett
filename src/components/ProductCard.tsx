@@ -136,8 +136,8 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
         </div>
       </div>
       
-      <div className="p-4">
-        <h3 className="font-medium text-sm mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+      <div className="p-5">
+        <h3 className="font-semibold text-base mb-2 line-clamp-2 group-hover:text-primary transition-colors leading-snug">
           {node.title}
         </h3>
         
@@ -148,19 +148,19 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
           </p>
         )}
         
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-auto">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-auto">
           <div className="flex flex-col flex-1 min-w-0">
             {priceInfo.hasDiscount ? (
-              <>
-                <span className="text-2xl font-bold text-primary">
+              <div className="space-y-0.5">
+                <span className="text-2xl font-semibold text-primary tracking-tight">
                   €{priceInfo.discountedPrice.toFixed(2)}
                 </span>
-                <span className="text-sm text-muted-foreground line-through">
+                <span className="block text-sm text-muted-foreground line-through">
                   €{priceInfo.originalPrice.toFixed(2)}
                 </span>
-              </>
+              </div>
             ) : (
-              <span className="text-2xl font-bold">
+              <span className="text-2xl font-semibold tracking-tight">
                 €{priceInfo.originalPrice.toFixed(2)}
               </span>
             )}

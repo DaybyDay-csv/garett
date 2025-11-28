@@ -21,25 +21,25 @@ export const Header = () => {
     to: '/novedades'
   }];
   return <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-header/95 backdrop-blur supports-[backdrop-filter]:bg-header/90 shadow-sm">
-      <div className="container flex h-20 items-center justify-between">
-        <Link to="/" className="flex items-center gap-3">
+      <div className="container flex h-20 items-center justify-between gap-4">
+        <Link to="/" className="flex items-center gap-3 flex-shrink-0">
           {/* Mobile: isotipo (icon only) */}
-          <img src={garettIsotipo} alt="GARETT" className="h-8 object-contain md:hidden" />
+          <img src={garettIsotipo} alt="GARETT" className="h-9 object-contain md:hidden" />
           {/* Desktop: full logo */}
-          <img src={garettLogo} alt="GARETT" className="hidden md:block h-8 object-contain" />
+          <img src={garettLogo} alt="GARETT" className="hidden md:block h-9 object-contain" />
         </Link>
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {navLinks.map(link => <Link key={link.to} to={link.to} className="text-sm font-medium text-white hover:text-white/80 transition-colors">
+        <nav className="hidden md:flex items-center space-x-10">
+          {navLinks.map(link => <Link key={link.to} to={link.to} className="text-sm font-medium text-white/90 hover:text-white transition-colors tracking-wide">
               {link.label}
             </Link>)}
         </nav>
         
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {/* Mobile Black Friday Button */}
           <Link to="/black-friday" className="md:hidden">
-            <Button variant="ghost" size="sm" className="text-white hover:text-white/80 hover:bg-white/10 text-xs font-semibold px-3">
+            <Button variant="ghost" size="sm" className="text-white hover:text-white/80 hover:bg-white/10 text-xs font-medium px-3 py-2">
               Black Friday
             </Button>
           </Link>
@@ -54,7 +54,7 @@ export const Header = () => {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px]">
-              <SheetHeader>
+              <SheetHeader className="mb-8">
                 <SheetTitle className="flex items-center gap-2">
                   <div className="w-8 h-8 bg-[#1a1f3a] rounded-md flex items-center justify-center p-1">
                     <img src={garettIcon} alt="Garett" className="w-full h-full object-contain" />
@@ -62,8 +62,8 @@ export const Header = () => {
                   <img src={garettLogo} alt="GARETT" className="h-6 object-contain" />
                 </SheetTitle>
               </SheetHeader>
-              <nav className="flex flex-col space-y-4 mt-8">
-                {navLinks.map(link => <Link key={link.to} to={link.to} className="text-base font-medium transition-colors hover:text-primary py-2 border-b border-border/50">
+              <nav className="flex flex-col space-y-2">
+                {navLinks.map(link => <Link key={link.to} to={link.to} className="text-base font-medium transition-colors hover:text-primary py-3 px-2 border-b border-border/30 hover:bg-muted/50 rounded-lg">
                     {link.label}
                   </Link>)}
               </nav>
