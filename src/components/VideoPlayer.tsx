@@ -3,7 +3,7 @@ import { Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface VideoPlayerProps {
-  src: string;
+  src?: string;
   srcWebM?: string; // Versión WebM optimizada (opcional)
   poster?: string;
   autoplay?: boolean;
@@ -127,7 +127,7 @@ export const VideoPlayer = ({
           >
             {/* Prioridad: WebM (mejor compresión) -> MP4 (fallback) */}
             {srcWebM && <source src={srcWebM} type="video/webm" />}
-            <source src={src} type="video/mp4" />
+            {src && <source src={src} type="video/mp4" />}
             Tu navegador no soporta la reproducción de video.
           </video>
 
