@@ -1,4 +1,4 @@
-import blogBeautyTech from "@/assets/blog/beauty-tech.jpg";
+import blogBeautyTech from "@/assets/blog/beauty-tech.webp";
 import blogHairCare from "@/assets/blog/hair-care.jpg";
 import blogFacialMassage from "@/assets/blog/facial-massage.jpg";
 import blogIPL from "@/assets/blog/ipl-hair-removal.jpg";
