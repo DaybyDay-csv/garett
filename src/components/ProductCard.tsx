@@ -11,9 +11,11 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 interface ProductCardProps {
   product: ShopifyProduct;
   tagIndex?: number;
+  hideBadges?: boolean;
+  hideAddToCart?: boolean;
 }
 
-export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
+export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCart = false }: ProductCardProps) => {
   const addItem = useCartStore(state => state.addItem);
   const { node } = product;
   
@@ -103,37 +105,39 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
           />
         )}
         
-        {/* Max 2 tags at bottom-left - Priority: Lanzamiento > Superventa > Nuevo > X% OFF */}
-        <div className="absolute bottom-2 left-2 flex gap-1.5">
-          {isLaunch ? (
-            <Badge variant="default" className="text-xs">
-              Lanzamiento
-            </Badge>
-          ) : (
-            <>
-              {isBestseller && (
-                <Badge variant="secondary" className="text-xs">
-                  Superventa
-                </Badge>
-              )}
-              {!isBestseller && isNew && (
-                <Badge variant="default" className="text-xs">
-                  Nuevo
-                </Badge>
-              )}
-              {!isBestseller && !isNew && priceInfo.hasDiscount && (
-                <Badge variant="outline" className="text-xs bg-background">
-                  {priceInfo.discountLabel} OFF
-                </Badge>
-              )}
-              {isBestseller && priceInfo.hasDiscount && (
-                <Badge variant="outline" className="text-xs bg-background">
-                  {priceInfo.discountLabel} OFF
-                </Badge>
-              )}
-            </>
-          )}
-        </div>
+        {/* Max 2 tags at bottom-left - Only show if not hidden */}
+        {!hideBadges && (
+          <div className="absolute bottom-2 left-2 flex gap-1.5">
+            {isLaunch ? (
+              <Badge variant="default" className="text-xs">
+                Lanzamiento
+              </Badge>
+            ) : (
+              <>
+                {isBestseller && (
+                  <Badge variant="secondary" className="text-xs">
+                    Superventa
+                  </Badge>
+                )}
+                {!isBestseller && isNew && (
+                  <Badge variant="default" className="text-xs">
+                    Nuevo
+                  </Badge>
+                )}
+                {!isBestseller && !isNew && priceInfo.hasDiscount && (
+                  <Badge variant="outline" className="text-xs bg-background">
+                    {priceInfo.discountLabel} OFF
+                  </Badge>
+                )}
+                {isBestseller && priceInfo.hasDiscount && (
+                  <Badge variant="outline" className="text-xs bg-background">
+                    {priceInfo.discountLabel} OFF
+                  </Badge>
+                )}
+              </>
+            )}
+          </div>
+        )}
       </div>
       
       <div className="p-5">
@@ -166,14 +170,17 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
             )}
           </div>
           
-          <Button 
-            onClick={handleAddToCart}
-            disabled={!firstVariant?.availableForSale || isLaunch}
-            size="lg"
-            className="w-full md:inline-flex h-12 text-base backdrop-blur-sm disabled:opacity-60"
-          >
-            {isLaunch ? 'Próximamente' : (firstVariant?.availableForSale ? 'Añadir al carrito' : 'Agotado')}
-          </Button>
+          {/* Only show button if not hidden */}
+          {!hideAddToCart && (
+            <Button 
+              onClick={handleAddToCart}
+              disabled={!firstVariant?.availableForSale || isLaunch}
+              size="lg"
+              className="w-full md:inline-flex h-12 text-base backdrop-blur-sm disabled:opacity-60"
+            >
+              {isLaunch ? 'Próximamente' : (firstVariant?.availableForSale ? 'Añadir al carrito' : 'Agotado')}
+            </Button>
+          )}
         </div>
       </div>
     </Link>
