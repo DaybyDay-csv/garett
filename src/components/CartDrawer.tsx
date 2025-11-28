@@ -104,29 +104,29 @@ export const CartDrawer = () => {
           </SheetDescription>
         </SheetHeader>
         
-        {/* GWP Progress Bar */}
-        {hasGWPActive && items.length > 0 && <div className="flex-shrink-0 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-2 border border-purple-200 dark:border-purple-800 mt-4">
-            <div className="flex items-start gap-2.5 mb-1.5">
-              <div className="w-12 h-10 rounded-md overflow-hidden bg-white flex-shrink-0 border border-purple-200">
+        {/* GWP Progress Bar - Compact */}
+        {hasGWPActive && items.length > 0 && <div className="flex-shrink-0 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-2 border border-purple-200 dark:border-purple-800 mt-3">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-10 h-10 rounded-md overflow-hidden bg-white flex-shrink-0 border border-purple-200">
                 {gwpProduct?.node.images?.edges?.[0]?.node ? <img src={gwpProduct.node.images.edges[0].node.url} alt="Banda de pelo gratis" className="w-full h-full object-cover" /> : <img src={gwpHeadband} alt="Banda de pelo gratis" className="w-full h-full object-cover" />}
               </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-0.5">
-                  <Gift className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-                  <span className="font-semibold leading-tight text-base text-purple-800">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <Gift className="w-3 h-3 text-purple-600 dark:text-purple-400 flex-shrink-0" />
+                  <span className="font-semibold text-sm text-purple-800 leading-tight truncate">
                     {hasUnlockedGWP ? '¡Regalo desbloqueado!' : 'Casi consigues tu regalo gratis'}
                   </span>
                 </div>
-                <p className="leading-tight text-purple-700 dark:text-purple-300 mx-[27px] text-xs">
+                <p className="text-[11px] text-purple-700 dark:text-purple-300 leading-tight mt-0.5">
                   Banda de pelo Garett Routine  
                 </p>
               </div>
             </div>
             
             {!hasUnlockedGWP && <>
-                <Progress value={progressPercentage} className="h-1.5 mb-1" />
+                <Progress value={progressPercentage} className="h-1 mb-1" />
                 <p className="text-[10px] text-purple-800 dark:text-purple-200">
-                  Añade <span className="font-bold">€{remainingForGWP.toFixed(2)}</span> más para obtener tu <span className="font-bold">banda de pelo gratis</span>
+                  Añade <span className="font-bold">€{remainingForGWP.toFixed(2)}</span> más para tu <span className="font-bold">banda gratis</span>
                 </p>
               </>}
           </div>}
@@ -138,10 +138,10 @@ export const CartDrawer = () => {
                 <p className="text-muted-foreground">Tu carrito está vacío</p>
               </div>
             </div> : <>
-              <div className="flex-1 overflow-y-auto pr-2 min-h-0">
-                <div className="space-y-4">
-                  {items.filter(item => !item.isGWP).map(item => <div key={item.variantId} className={`flex gap-4 p-2 border rounded-lg ${item.isGWP ? 'bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-800' : ''}`}>
-                      <div className="w-16 h-16 bg-secondary/20 rounded-md overflow-hidden flex-shrink-0 relative">
+              <div className="flex-1 overflow-y-auto pr-1 min-h-0">
+                <div className="space-y-2.5">
+                  {items.filter(item => !item.isGWP).map(item => <div key={item.variantId} className={`flex gap-2.5 p-2 border rounded-lg ${item.isGWP ? 'bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-800' : ''}`}>
+                      <div className="w-14 h-14 bg-secondary/20 rounded-md overflow-hidden flex-shrink-0 relative">
                         {item.product.node.images?.edges?.[0]?.node && <img src={item.product.node.images.edges[0].node.url} alt={item.product.node.title} className="w-full h-full object-cover" />}
                         {item.isGWP && <div className="absolute top-0 right-0 bg-gradient-to-br from-purple-500 to-pink-500 text-white text-[8px] font-bold px-1 py-0.5 rounded-bl">
                             GRATIS
@@ -149,38 +149,38 @@ export const CartDrawer = () => {
                       </div>
                       
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-start gap-2">
-                          <h4 className="font-medium truncate text-sm flex-1">
+                        <div className="flex items-start gap-1.5">
+                          <h4 className="font-medium text-xs leading-tight flex-1 line-clamp-2">
                             {item.product.node.title}
                           </h4>
-                          {item.isGWP && <Gift className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />}
+                          {item.isGWP && <Gift className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 flex-shrink-0" />}
                         </div>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-[11px] text-muted-foreground mt-0.5">
                           {item.selectedOptions.map(option => option.value).join(' • ')}
                         </p>
-                        <p className={`font-semibold text-sm mt-1 ${item.isGWP ? 'text-purple-600 dark:text-purple-400' : ''}`}>
+                        <p className={`font-semibold text-sm mt-0.5 ${item.isGWP ? 'text-purple-600 dark:text-purple-400' : ''}`}>
                           {item.isGWP ? 'GRATIS' : `€${parseFloat(item.price.amount).toFixed(2)}`}
                         </p>
                       </div>
                       
-                      {!item.isGWP && <div className="flex flex-col items-end gap-2 flex-shrink-0">
-                          <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => removeItem(item.variantId)}>
+                      {!item.isGWP && <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
+                          <Button variant="ghost" size="icon" className="h-5 w-5" onClick={() => removeItem(item.variantId)}>
                             <Trash2 className="h-3 w-3" />
                           </Button>
                           
-                          <div className="flex items-center gap-1">
+                          <div className="flex items-center gap-0.5">
                             <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => updateQuantity(item.variantId, item.quantity - 1)}>
-                              <Minus className="h-3 w-3" />
+                              <Minus className="h-2.5 w-2.5" />
                             </Button>
-                            <span className="w-8 text-center text-sm">{item.quantity}</span>
+                            <span className="w-7 text-center text-xs font-medium">{item.quantity}</span>
                             <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => updateQuantity(item.variantId, item.quantity + 1)}>
-                              <Plus className="h-3 w-3" />
+                              <Plus className="h-2.5 w-2.5" />
                             </Button>
                           </div>
                         </div>}
                       
                       {item.isGWP && <div className="flex items-center text-purple-600 dark:text-purple-400">
-                          <Badge variant="outline" className="border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300">
+                          <Badge variant="outline" className="border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 text-[10px] px-1.5 py-0.5">
                             Regalo automático
                           </Badge>
                         </div>}
@@ -188,52 +188,52 @@ export const CartDrawer = () => {
                 </div>
               </div>
               
-              <div className="flex-shrink-0 space-y-4 pt-4 border-t bg-background mt-4">
+              <div className="flex-shrink-0 space-y-3 pt-3 border-t bg-background mt-3">
                 {/* Price Breakdown */}
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between text-muted-foreground">
+                <div className="space-y-1.5 text-sm">
+                  <div className="flex justify-between text-muted-foreground text-xs">
                     <span>Subtotal</span>
                     <span>€{subtotalOriginal.toFixed(2)}</span>
                   </div>
                   
                   {/* Active Discount */}
-                  {currentStage && discountPercentage > 0 && <div className="flex justify-between text-green-600 dark:text-green-400">
-                      <span className="flex items-center gap-2">
-                        <Sparkles className="w-4 h-4" />
+                  {currentStage && discountPercentage > 0 && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
+                      <span className="flex items-center gap-1.5">
+                        <Sparkles className="w-3 h-3" />
                         Descuento ({discountPercentage}%)
                       </span>
                       <span>-€{discountAmount.toFixed(2)}</span>
                     </div>}
                   
                   {/* Gift With Purchase */}
-                  {hasGWPActive && hasUnlockedGWP && <div className="flex justify-between text-purple-600 dark:text-purple-400">
-                      <span className="flex items-center gap-2">
-                        <Gift className="w-4 h-4" />
+                  {hasGWPActive && hasUnlockedGWP && <div className="flex justify-between text-purple-600 dark:text-purple-400 text-xs">
+                      <span className="flex items-center gap-1.5">
+                        <Gift className="w-3 h-3" />
                         Regalo: Banda de pelo
                       </span>
                       <span className="font-semibold">GRATIS</span>
                     </div>}
                   
-                  <div className="h-px bg-border my-2"></div>
+                  <div className="h-px bg-border my-1.5"></div>
                   
                   {/* Total */}
-                  <div className="flex justify-between items-center text-lg font-bold">
+                  <div className="flex justify-between items-center text-base font-bold">
                     <span>Total</span>
                     <span>€{subtotalWithDiscount.toFixed(2)}</span>
                   </div>
                   
                   {/* Total Savings */}
-                  {totalSavings > 0 && <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200 dark:border-green-800 rounded-lg p-3 text-center">
-                      <p className="text-sm font-bold text-green-700 dark:text-green-300">
+                  {totalSavings > 0 && <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200 dark:border-green-800 rounded-lg p-2 text-center">
+                      <p className="text-xs font-bold text-green-700 dark:text-green-300">
                         ¡Ahorras €{totalSavings.toFixed(2)} en esta compra!
                       </p>
-                      {hasUnlockedGWP && <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+                      {hasUnlockedGWP && <p className="text-[10px] text-green-600 dark:text-green-400 mt-0.5">
                           Incluye banda de pelo gratis
                         </p>}
                     </div>}
                 </div>
                 
-                <Button onClick={handleCheckout} className="w-full" size="lg" disabled={items.length === 0 || isLoading}>
+                <Button onClick={handleCheckout} className="w-full h-11" disabled={items.length === 0 || isLoading}>
                   {isLoading ? <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                       Creando checkout...
@@ -244,8 +244,8 @@ export const CartDrawer = () => {
                 </Button>
                 
                 {/* Trust Badges in Cart */}
-                <div className="border-t pt-4 mt-4">
-                  <TrustBadges variant="compact" />
+                <div className="border-t pt-2.5 mt-2.5">
+                  <TrustBadges variant="cart" />
                 </div>
               </div>
             </>}
