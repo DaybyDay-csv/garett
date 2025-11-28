@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, ArrowRight } from "lucide-react";
+import { Clock, ArrowRight, Sparkles } from "lucide-react";
 import { blogPosts } from "@/lib/blogPosts";
 
 const Blog = () => {
@@ -36,22 +36,41 @@ const Blog = () => {
       
       <main className="container py-12 px-6">
         <div className="max-w-4xl mx-auto mb-12 text-center">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Sparkles className="w-6 h-6 text-primary" />
+            <span className="text-sm font-medium text-primary uppercase tracking-wider">Blog</span>
+          </div>
           <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
-            Blog de Belleza Profesional
+            Guías de Belleza Profesional
           </h1>
-          <p className="text-lg text-muted-foreground">
-            Guías completas y consejos expertos para sacar el máximo partido a tus dispositivos de belleza
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Consejos expertos y tutoriales completos para sacar el máximo partido a tus dispositivos de belleza
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post) => (
             <Link key={post.slug} to={`/blog/${post.slug}`} className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 h-full flex flex-col">
-                <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-                  <div className="text-center p-6">
-                    <div className="text-5xl mb-3">📝</div>
-                    <Badge variant="outline" className="text-xs">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300 h-full flex flex-col hover:shadow-xl">
+                <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 overflow-hidden relative">
+                  {post.image ? (
+                    <img 
+                      src={post.image} 
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="text-center p-6">
+                        <div className="text-5xl mb-3">📝</div>
+                        <Badge variant="outline" className="text-xs">
+                          {post.category}
+                        </Badge>
+                      </div>
+                    </div>
+                  )}
+                  <div className="absolute top-3 right-3">
+                    <Badge className="bg-background/90 backdrop-blur-sm text-foreground border-0">
                       {post.category}
                     </Badge>
                   </div>
@@ -67,10 +86,10 @@ const Blog = () => {
                       year: 'numeric'
                     })}</span>
                   </div>
-                  <h2 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                  <h2 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2 leading-tight">
                     {post.title}
                   </h2>
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-3 flex-1">
+                  <p className="text-sm text-muted-foreground mb-4 line-clamp-3 flex-1 leading-relaxed">
                     {post.excerpt}
                   </p>
                   <div className="flex items-center gap-2 text-primary font-medium text-sm mt-auto">
