@@ -34,8 +34,8 @@ const Blog = () => {
       />
       <Header />
       
-      <main className="container py-12 px-6">
-        <div className="max-w-4xl mx-auto mb-12 text-center">
+      <main className="container py-12 px-6 bg-gradient-to-b from-background to-background/80">
+        <div className="max-w-6xl mx-auto mb-16 text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Sparkles className="w-6 h-6 text-primary" />
             <span className="text-sm font-medium text-primary uppercase tracking-wider">Blog</span>
@@ -48,10 +48,10 @@ const Blog = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post) => (
             <Link key={post.slug} to={`/blog/${post.slug}`} className="group">
-              <Card className="overflow-hidden border border-border/50 hover:border-primary/50 hover:shadow-2xl transition-all duration-500 h-full flex flex-col bg-card">
+              <Card className="overflow-hidden border border-border/50 bg-card hover:border-primary/50 hover:shadow-2xl transition-all duration-500 h-full flex flex-col">
                 <div className="aspect-video bg-gradient-to-br from-primary/5 to-secondary/5 overflow-hidden relative">
                   {post.image ? (
                     <img 
