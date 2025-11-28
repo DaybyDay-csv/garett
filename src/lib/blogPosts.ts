@@ -1,3 +1,10 @@
+import blogBeautyTech from "@/assets/blog/beauty-tech.jpg";
+import blogHairCare from "@/assets/blog/hair-care.jpg";
+import blogFacialMassage from "@/assets/blog/facial-massage.jpg";
+import blogIPL from "@/assets/blog/ipl-hair-removal.jpg";
+import blogCleansing from "@/assets/blog/facial-cleansing.jpg";
+import blogMesotherapy from "@/assets/blog/mesotherapy.jpg";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -6,7 +13,7 @@ export interface BlogPost {
   category: string;
   categorySlug: string;
   readTime: string;
-  image: string;
+  image?: string;
   date: string;
   author: string;
 }
@@ -19,7 +26,7 @@ export const blogPosts: BlogPost[] = [
     category: "Guías",
     categorySlug: "guias",
     readTime: "5 min",
-    image: "/images/blog/beauty-tech.jpg",
+    image: blogBeautyTech,
     date: "2025-11-20",
     author: "Equipo Garett Beauty",
     content: `
@@ -50,7 +57,7 @@ export const blogPosts: BlogPost[] = [
     category: "Cuidado Capilar",
     categorySlug: "cuidado-capilar",
     readTime: "7 min",
-    image: "/images/blog/hair-care.jpg",
+    image: blogHairCare,
     date: "2025-11-18",
     author: "Equipo Garett Beauty",
     content: `
@@ -99,7 +106,7 @@ export const blogPosts: BlogPost[] = [
     category: "Cuidado Facial",
     categorySlug: "masajeadores-faciales",
     readTime: "6 min",
-    image: "/images/blog/facial-massage.jpg",
+    image: blogFacialMassage,
     date: "2025-11-15",
     author: "Equipo Garett Beauty",
     content: `
@@ -152,7 +159,7 @@ export const blogPosts: BlogPost[] = [
     category: "Depilación IPL",
     categorySlug: "depilacion-ipl",
     readTime: "8 min",
-    image: "/images/blog/ipl-hair-removal.jpg",
+    image: blogIPL,
     date: "2025-11-12",
     author: "Equipo Garett Beauty",
     content: `
@@ -230,7 +237,7 @@ export const blogPosts: BlogPost[] = [
     category: "Cuidado Facial",
     categorySlug: "limpieza-facial",
     readTime: "5 min",
-    image: "/images/blog/facial-cleansing.jpg",
+    image: blogCleansing,
     date: "2025-11-10",
     author: "Equipo Garett Beauty",
     content: `
@@ -325,7 +332,7 @@ export const blogPosts: BlogPost[] = [
     category: "Cuidado Facial",
     categorySlug: "mesoterapia",
     readTime: "6 min",
-    image: "/images/blog/mesotherapy.jpg",
+    image: blogMesotherapy,
     date: "2025-11-08",
     author: "Equipo Garett Beauty",
     content: `
