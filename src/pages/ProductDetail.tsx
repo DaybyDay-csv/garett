@@ -220,8 +220,8 @@ const ProductDetail = () => {
   return <div className="min-h-screen bg-background">
       <Header />
       
-      <div className="container py-8">
-        <Button variant="ghost" asChild className="mb-6">
+      <div className="container py-8 px-6">
+        <Button variant="ghost" asChild className="mb-6 h-11">
           <Link to="/productos">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Volver a productos
@@ -279,24 +279,24 @@ const ProductDetail = () => {
             {/* Product Info */}
           <div className="space-y-6">
             <div>
-              <div className="flex gap-2 mb-3 flex-wrap">
+              <div className="flex gap-2 mb-4 flex-wrap">
                 {/* Promotional Stage Badge - Highest priority */}
-                {priceInfo.hasDiscount && priceInfo.stage && <Badge variant="destructive">
-                    <Zap className="mr-1 w-3 h-3" />
+                {priceInfo.hasDiscount && priceInfo.stage && <Badge variant="destructive" className="text-sm md:text-base px-3 py-1">
+                    <Zap className="mr-1 w-4 h-4" />
                     {priceInfo.stage.badge} {priceInfo.discountLabel}
                   </Badge>}
-                {isNew && <Badge>Nuevo</Badge>}
-                {isBestseller && <Badge variant="secondary">Bestseller</Badge>}
-                <Badge variant="outline" className="gap-1">
+                {isNew && <Badge className="text-sm">Nuevo</Badge>}
+                {isBestseller && <Badge variant="secondary" className="text-sm">Bestseller</Badge>}
+                <Badge variant="outline" className="gap-1 text-sm">
                   <Shield className="w-3 h-3" />
                   Garantía 2 años
                 </Badge>
               </div>
               
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">{node.title}</h1>
+              <h1 className="text-3xl md:text-4xl font-semibold mb-5 md:mb-4 tracking-tight leading-tight">{node.title}</h1>
               
               {/* Quick Benefits - Above the fold */}
-              <div className="flex flex-wrap gap-3 mb-4">
+              <div className="flex flex-wrap gap-3 mb-5">
                 {productContent.quickBenefits.map((benefit, idx) => {
                 const IconComponent = (LucideIcons as any)[benefit.icon] || Clock;
                 return <div key={idx} className="flex items-center gap-1.5 text-sm text-muted-foreground">
@@ -308,13 +308,13 @@ const ProductDetail = () => {
             </div>
 
             {/* Price */}
-            <div className="border-t border-b py-6">
+            <div className="border-t border-b py-6 my-6">
               {priceInfo.hasDiscount ? <div className="space-y-2">
                   <div className="flex items-baseline gap-3">
-                    <div className="text-4xl font-bold text-primary">
+                    <div className="text-4xl md:text-5xl font-semibold text-primary tracking-tight">
                       €{priceInfo.discountedPrice.toFixed(2)}
                     </div>
-                    <Badge variant="destructive" className="text-base px-3 py-1">
+                    <Badge variant="destructive" className="text-base md:text-lg px-4 py-1.5">
                       {priceInfo.discountLabel}
                     </Badge>
                   </div>
@@ -328,7 +328,7 @@ const ProductDetail = () => {
                   </div>
                   <p className="text-sm text-muted-foreground">IVA incluido</p>
                 </div> : <div>
-                  <div className="text-4xl font-bold">€{priceInfo.originalPrice.toFixed(2)}</div>
+                  <div className="text-4xl md:text-5xl font-semibold tracking-tight">€{priceInfo.originalPrice.toFixed(2)}</div>
                   <p className="text-sm mt-1 text-muted-foreground">IVA incluido</p>
                 </div>}
             </div>
@@ -379,10 +379,10 @@ const ProductDetail = () => {
               </div>}
 
             {/* Variants */}
-            {node.variants.edges.length > 1 && <div>
-                <label className="text-sm font-medium mb-2 block">Variante</label>
+            {node.variants.edges.length > 1 && <div className="my-6">
+                <label className="text-sm font-medium mb-3 block">Variante</label>
                 <div className="flex flex-wrap gap-2">
-                  {node.variants.edges.map((v, idx) => <Button key={v.node.id} variant={selectedVariant === idx ? "default" : "outline"} onClick={() => setSelectedVariant(idx)}>
+                  {node.variants.edges.map((v, idx) => <Button key={v.node.id} variant={selectedVariant === idx ? "default" : "outline"} onClick={() => setSelectedVariant(idx)} className="h-11">
                       {v.node.title}
                     </Button>)}
                 </div>
@@ -391,7 +391,7 @@ const ProductDetail = () => {
             {/* Add to Cart */}
             <Button 
               size="lg" 
-              className="w-full" 
+              className="w-full h-12 text-base" 
               onClick={handleAddToCart} 
               disabled={!variant?.availableForSale}
             >
@@ -429,19 +429,19 @@ const ProductDetail = () => {
             </div>
 
             {/* Product Details Sections - User Focused */}
-            <div className="space-y-3 pt-6 border-t">
-              <h3 className="font-semibold text-lg mb-4">Información del producto</h3>
+            <div className="space-y-3 pt-8 border-t">
+              <h3 className="font-semibold text-lg md:text-xl mb-5 tracking-tight">Información del producto</h3>
               
               {/* Why It Works */}
               <Collapsible className="border rounded-lg">
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 transition-colors hover:bg-muted/50">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-muted/50">
                   <div className="flex items-center gap-3">
                     <Sparkle className="w-5 h-5 text-primary" />
-                    <span className="font-medium text-left">{productContent.dropdowns.howItWorks.title}</span>
+                    <span className="font-medium text-left text-base">{productContent.dropdowns.howItWorks.title}</span>
                   </div>
                   <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className="px-4 pb-4 text-sm space-y-2 text-muted-foreground">
+                <CollapsibleContent className="px-5 pb-5 text-sm space-y-2 text-muted-foreground leading-relaxed">
                   <p className="font-medium text-foreground">{productContent.dropdowns.howItWorks.summary}</p>
                   {productContent.dropdowns.howItWorks.details.map((detail, idx) => <p key={idx}>{detail}</p>)}
                 </CollapsibleContent>
@@ -449,14 +449,14 @@ const ProductDetail = () => {
 
               {/* Expected Results */}
               <Collapsible className="border rounded-lg">
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 transition-colors hover:bg-muted/50">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-muted/50">
                   <div className="flex items-center gap-3">
                     <Clock className="w-5 h-5 text-primary" />
-                    <span className="font-medium text-left">Resultados esperados</span>
+                    <span className="font-medium text-left text-base">Resultados esperados</span>
                   </div>
                   <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className="px-4 pb-4 text-sm space-y-2 text-muted-foreground">
+                <CollapsibleContent className="px-5 pb-5 text-sm space-y-2 text-muted-foreground leading-relaxed">
                   <div className="space-y-3">
                     {productContent.dropdowns.expectedResults.phases.map((phase, idx) => <div key={idx}>
                         <p className="font-medium text-foreground">{phase.timeframe}</p>
@@ -469,14 +469,14 @@ const ProductDetail = () => {
 
               {/* How to Use */}
               <Collapsible className="border rounded-lg">
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 transition-colors hover:bg-muted/50">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-muted/50">
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary" />
-                    <span className="font-medium text-left">Cómo usar (muy fácil)</span>
+                    <span className="font-medium text-left text-base">Cómo usar (muy fácil)</span>
                   </div>
                   <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className="px-4 pb-4 text-sm text-muted-foreground">
+                <CollapsibleContent className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed">
                   <ol className="space-y-2 list-decimal list-inside">
                     {productContent.dropdowns.howToUse.steps.map((step, idx) => <li key={idx}>{step}</li>)}
                   </ol>
@@ -486,14 +486,14 @@ const ProductDetail = () => {
 
               {/* What Makes It Different */}
               <Collapsible className="border rounded-lg">
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 transition-colors hover:bg-muted/50">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-muted/50">
                   <div className="flex items-center gap-3">
                     <Award className="w-5 h-5 text-primary" />
-                    <span className="font-medium text-left">¿Qué la diferencia?</span>
+                    <span className="font-medium text-left text-base">¿Qué la diferencia?</span>
                   </div>
                   <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className="px-4 pb-4 text-sm space-y-3 text-muted-foreground">
+                <CollapsibleContent className="px-5 pb-5 text-sm space-y-3 text-muted-foreground leading-relaxed">
                   {productContent.dropdowns.whatMakesDifferent.map((diff, idx) => <div key={idx}>
                       <p className="font-medium text-foreground">{diff.title}</p>
                       <p>{diff.description}</p>
@@ -503,14 +503,14 @@ const ProductDetail = () => {
 
               {/* Safety & Guarantee */}
               <Collapsible className="border rounded-lg">
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 transition-colors hover:bg-muted/50">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-muted/50">
                   <div className="flex items-center gap-3">
                     <Shield className="w-5 h-5 text-primary" />
-                    <span className="font-medium text-left">Seguridad y garantía</span>
+                    <span className="font-medium text-left text-base">Seguridad y garantía</span>
                   </div>
                   <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className="px-4 pb-4 text-sm space-y-2 text-muted-foreground">
+                <CollapsibleContent className="px-5 pb-5 text-sm space-y-2 text-muted-foreground leading-relaxed">
                   <div className="space-y-3">
                     <div className="flex items-start gap-2">
                       <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-600" />
@@ -542,7 +542,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Trust Footer */}
-            <div className="p-4 rounded-lg text-xs border bg-muted/30 text-muted-foreground">
+            <div className="p-5 rounded-lg text-xs border bg-muted/30 text-muted-foreground leading-relaxed">
               <p>Los resultados pueden variar. Úsalo con constancia para mejores resultados. Certificado CE. Garantía comercial 2 años. Producto higiénico-sanitario: no admite devolución una vez desprecintado salvo defecto técnico verificado.</p>
             </div>
           </div>
@@ -550,12 +550,12 @@ const ProductDetail = () => {
       </div>
 
       {/* Sticky Buy Box - Mobile Only */}
-      {isMobile && <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border p-4 shadow-lg">
+      {isMobile && <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border p-4 shadow-lg safe-area-inset-bottom">
           <div className="container flex items-center gap-3">
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold truncate">{node.title}</p>
               <div className="flex items-center gap-2">
-                <span className="text-lg font-bold text-primary">
+                <span className="text-lg font-semibold text-primary">
                   €{priceInfo.discountedPrice.toFixed(2)}
                 </span>
                 {priceInfo.hasDiscount && <span className="text-xs line-through text-muted-foreground">
@@ -567,7 +567,7 @@ const ProductDetail = () => {
                 <span>Garantía 2 años</span>
               </div>
             </div>
-            <Button size="lg" className="flex-shrink-0" onClick={handleAddToCart} disabled={!variant?.availableForSale}>
+            <Button size="lg" className="flex-shrink-0 h-12 px-6" onClick={handleAddToCart} disabled={!variant?.availableForSale}>
               {variant?.availableForSale ? 'Añadir' : 'Agotado'}
             </Button>
           </div>

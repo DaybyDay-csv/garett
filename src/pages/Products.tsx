@@ -77,18 +77,18 @@ const Products = () => {
   return <div className="min-h-screen bg-background">
       <Header />
       
-      <div className="container py-8">
-        <div className="mb-8">
-          <h1 className="mb-2 text-lg font-bold">Todos los productos</h1>
-          <p className="text-left font-bold text-2xl text-[#27303d]">
-            Reafirmación inmediata, cuidado integral,  limpieza profunda.        
+      <div className="container py-8 px-6">
+        <div className="mb-8 md:mb-10">
+          <h1 className="mb-3 text-xl md:text-2xl font-semibold tracking-tight">Todos los productos</h1>
+          <p className="text-left font-semibold text-xl md:text-3xl text-foreground leading-tight">
+            Reafirmación inmediata, cuidado integral, limpieza profunda.        
           </p>
         </div>
 
         {/* Sorting */}
         <div className="flex justify-end mb-8">
           <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="w-full sm:w-[200px]">
+            <SelectTrigger className="w-full sm:w-[220px] h-11">
               <SelectValue placeholder="Ordenar por" />
             </SelectTrigger>
             <SelectContent>
@@ -109,8 +109,8 @@ const Products = () => {
             <p className="text-muted-foreground">Estamos preparando nuestro catálogo</p>
           </div> : <div className="space-y-12">
             {productsByCategory.map(category => <div key={category.value}>
-                <h2 className="text-2xl font-bold mb-6 pb-2 border-b">{category.label}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <h2 className="text-xl md:text-2xl font-semibold mb-6 pb-3 border-b tracking-tight">{category.label}</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
                   {category.products.map(product => <ProductCard key={product.node.id} product={product} />)}
                 </div>
               </div>)}

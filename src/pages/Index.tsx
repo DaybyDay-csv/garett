@@ -48,7 +48,7 @@ const Index = () => {
       <HeroSection />
       
       {/* Trust Badges */}
-      <div className="container py-8 md:py-12">
+      <div className="container py-6 md:py-12 px-6">
         <TrustBadges />
       </div>
 
@@ -59,24 +59,24 @@ const Index = () => {
       <PromotionalBanners />
 
       {/* Superventas - Horizontal Scroll */}
-      {bestSellers.length > 0 && <section id="superventas" className="py-8 md:py-12 bg-gradient-to-b from-background to-secondary/10">
-          <div className="container">
+      {bestSellers.length > 0 && <section id="superventas" className="py-10 md:py-12 bg-gradient-to-b from-background to-secondary/10">
+          <div className="container px-6">
             <div className="flex items-center justify-between mb-6 md:mb-8">
               <div>
-                <h2 className="text-3xl md:text-4xl text-foreground font-thin">
+                <h2 className="text-2xl md:text-4xl text-foreground font-semibold tracking-tight">
                   Superventas
                 </h2>
-                <p className="text-muted-foreground mt-2 text-sm">Los más vendidos de Garett</p>
+                <p className="text-muted-foreground mt-2 text-sm md:text-base">Los más vendidos de Garett</p>
               </div>
-              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5">
+              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5 h-11 px-4">
                 <Link to="/superventas">Ver todos</Link>
               </Button>
             </div>
           </div>
           <div className="relative">
-            <div className="overflow-x-auto scrollbar-hide px-4 md:px-8">
-              <div className="flex gap-3 md:gap-6 pb-4">
-                {bestSellers.map((product, index) => <div key={product.node.id} className="flex-none w-[220px] md:w-[320px]">
+            <div className="overflow-x-auto scrollbar-hide pl-6 md:pl-8">
+              <div className="flex gap-4 md:gap-6 pb-4 pr-6 md:pr-8">
+                {bestSellers.map((product, index) => <div key={product.node.id} className="flex-none w-[260px] md:w-[320px]">
                     <ProductCard product={product} tagIndex={index} />
                   </div>)}
               </div>
@@ -87,17 +87,17 @@ const Index = () => {
 
       {/* Categories Section */}
       <section className="py-12 md:py-20 bg-white">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="container px-6">
+          <div className="text-center mb-10 md:mb-12">
+            <h2 className="text-2xl md:text-4xl font-semibold text-foreground mb-3 md:mb-4 tracking-tight">
               Explora por categoría
             </h2>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-muted-foreground text-base md:text-lg">
               Encuentra el dispositivo perfecto para ti
             </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {/* Cuidado Capilar */}
             <Link to="/productos?category=capilar" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
@@ -109,11 +109,11 @@ const Index = () => {
                     blurPlaceholder
                   />
                 </div>
-                <CardContent className="p-3 md:p-6">
-                  <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
                     Cuidado capilar
                   </h3>
-                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
                     Dispositivos profesionales para el cabello
                   </p>
                   <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
@@ -135,11 +135,11 @@ const Index = () => {
                     blurPlaceholder
                   />
                 </div>
-                <CardContent className="p-3 md:p-6">
-                  <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
                     Masajeadores faciales
                   </h3>
-                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
                     Estimulación facial avanzada
                   </p>
                   <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
@@ -161,11 +161,11 @@ const Index = () => {
                     blurPlaceholder
                   />
                 </div>
-                <CardContent className="p-3 md:p-6">
-                  <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
                     Limpieza facial
                   </h3>
-                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
                     Limpieza profunda profesional
                   </p>
                   <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
@@ -187,11 +187,11 @@ const Index = () => {
                     blurPlaceholder
                   />
                 </div>
-                <CardContent className="p-3 md:p-6">
-                  <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
                     Dispositivos de Mesoterapia
                   </h3>
-                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
                     Tratamientos de rejuvenecimiento
                   </p>
                   <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
@@ -213,11 +213,11 @@ const Index = () => {
                     blurPlaceholder
                   />
                 </div>
-                <CardContent className="p-3 md:p-6">
-                  <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
                     Dispositivos corporales
                   </h3>
-                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
                     Tratamientos para todo el cuerpo
                   </p>
                   <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
@@ -239,11 +239,11 @@ const Index = () => {
                     blurPlaceholder
                   />
                 </div>
-                <CardContent className="p-3 md:p-6">
-                  <h3 className="text-base md:text-2xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
                     Depilación e IPL
                   </h3>
-                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4">
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
                     Depilación láser profesional en casa
                   </p>
                   <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
@@ -263,21 +263,21 @@ const Index = () => {
       {/* Customer Testimonials */}
       <Testimonials />
 
-      <div className="container py-16">
+      <div className="container py-16 px-6">
         {/* New Arrivals */}
         {newProducts.length > 0 && <section className="py-8">
-            <div className="flex items-center justify-between mb-10">
+            <div className="flex items-center justify-between mb-8 md:mb-10">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                <h2 className="text-2xl md:text-4xl font-semibold text-foreground tracking-tight">
                   Novedades
                 </h2>
-                <p className="text-muted-foreground mt-2 text-lg">Lo último en tecnología de belleza</p>
+                <p className="text-muted-foreground mt-2 text-sm md:text-lg">Lo último en tecnología de belleza</p>
               </div>
-              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5">
+              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5 h-11 px-4">
                 <Link to="/novedades">Ver todas</Link>
               </Button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
               {newProducts.slice(0, 6).map(product => <ProductCard key={product.node.id} product={product} />)}
             </div>
           </section>}
