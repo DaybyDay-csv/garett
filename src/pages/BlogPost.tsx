@@ -50,10 +50,10 @@ const BlogPost = () => {
       />
       <Header />
       
-      <main className="container py-8 px-6">
+      <main className="container py-6 md:py-8 px-4 md:px-6">
         {/* Breadcrumb Navigation */}
-        <div className="max-w-4xl mx-auto mb-6">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <div className="max-w-5xl mx-auto mb-4 md:mb-6">
+          <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
             <Link to="/" className="hover:text-foreground transition-colors">Inicio</Link>
             <span>/</span>
             <Link to="/blog" className="hover:text-foreground transition-colors">Blog</Link>
@@ -66,7 +66,7 @@ const BlogPost = () => {
           <article>
             {/* Hero Image */}
             {post.image && (
-              <div className="aspect-[21/9] rounded-3xl overflow-hidden mb-12 shadow-2xl">
+              <div className="aspect-[16/9] md:aspect-[21/9] rounded-2xl md:rounded-3xl overflow-hidden mb-6 md:mb-12 shadow-2xl">
                 <img 
                   src={post.image} 
                   alt={post.title}
@@ -76,34 +76,34 @@ const BlogPost = () => {
             )}
 
             {/* Article Header */}
-            <div className="bg-card rounded-3xl shadow-lg border border-border/50 p-8 md:p-12 mb-8">
+            <div className="bg-card rounded-2xl md:rounded-3xl shadow-lg border border-border/50 p-6 md:p-12 mb-6 md:mb-8">
               <header className="mb-0">
-                <Badge variant="outline" className="mb-5 text-primary border-primary/60 px-4 py-1.5 text-sm font-semibold">
+                <Badge variant="outline" className="mb-4 md:mb-5 text-primary border-primary/60 px-3 md:px-4 py-1 md:py-1.5 text-xs md:text-sm font-semibold">
                   {post.category}
                 </Badge>
-                <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6 tracking-tight leading-[1.15]">
+                <h1 className="text-2xl md:text-5xl font-bold text-foreground mb-4 md:mb-6 tracking-tight leading-[1.2] md:leading-[1.15]">
                   {post.title}
                 </h1>
-                <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-[1.6] font-light">
+                <p className="text-base md:text-2xl text-muted-foreground mb-6 md:mb-8 leading-[1.6] md:leading-[1.6] font-light">
                   {post.excerpt}
                 </p>
                 
-                <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-border/50">
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <User className="w-4 h-4" />
+                <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 pt-5 md:pt-6 border-t border-border/50">
+                  <div className="flex flex-wrap items-center gap-3 md:gap-4 text-xs md:text-sm text-muted-foreground">
+                    <div className="flex items-center gap-1.5 md:gap-2">
+                      <User className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       <span>{post.author}</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
+                    <div className="flex items-center gap-1.5 md:gap-2">
+                      <Calendar className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       <span>{new Date(post.date).toLocaleDateString('es-ES', { 
                         day: 'numeric', 
                         month: 'long',
                         year: 'numeric'
                       })}</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
+                    <div className="flex items-center gap-1.5 md:gap-2">
+                      <Clock className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       <span>{post.readTime} de lectura</span>
                     </div>
                   </div>
@@ -123,25 +123,25 @@ const BlogPost = () => {
             </div>
 
             {/* Article Content */}
-            <div className="bg-card rounded-3xl shadow-lg border border-border/50 p-6 md:p-10">
+            <div className="bg-card rounded-2xl md:rounded-3xl shadow-lg border border-border/50 p-5 md:p-10">
               <div 
                 className="prose prose-base md:prose-lg max-w-none 
                   prose-headings:font-semibold prose-headings:tracking-tight
-                  prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-foreground
-                  prose-h3:text-xl md:prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-primary
-                  prose-h4:text-lg md:prose-h4:text-xl prose-h4:mt-6 prose-h4:mb-2 prose-h4:text-foreground/90
-                  prose-p:text-muted-foreground prose-p:leading-relaxed md:prose-p:leading-[1.8] prose-p:mb-4 prose-p:text-[15px] md:prose-p:text-[17px]
+                  prose-h2:text-xl md:prose-h2:text-3xl prose-h2:mt-8 md:prose-h2:mt-10 prose-h2:mb-3 md:prose-h2:mb-4 prose-h2:text-foreground
+                  prose-h3:text-lg md:prose-h3:text-2xl prose-h3:mt-6 md:prose-h3:mt-8 prose-h3:mb-2 md:prose-h3:mb-3 prose-h3:text-primary
+                  prose-h4:text-base md:prose-h4:text-xl prose-h4:mt-5 md:prose-h4:mt-6 prose-h4:mb-2 prose-h4:text-foreground/90
+                  prose-p:text-muted-foreground prose-p:leading-[1.75] md:prose-p:leading-[1.8] prose-p:mb-5 md:prose-p:mb-6 prose-p:text-[15px] md:prose-p:text-[17px]
                   prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-a:font-semibold prose-a:transition-colors
-                  prose-strong:text-foreground prose-strong:font-semibold md:prose-strong:text-[17px]
-                  prose-ul:text-muted-foreground prose-ul:my-5 prose-ul:space-y-2 prose-ul:pl-4
-                  prose-ol:text-muted-foreground prose-ol:my-5 prose-ol:space-y-2 prose-ol:pl-4
-                  prose-li:text-[15px] md:prose-li:text-[17px] prose-li:leading-relaxed md:prose-li:leading-[1.7] prose-li:my-0
+                  prose-strong:text-foreground prose-strong:font-semibold prose-strong:text-[15px] md:prose-strong:text-[17px]
+                  prose-ul:text-muted-foreground prose-ul:my-4 md:prose-ul:my-5 prose-ul:space-y-2 md:prose-ul:space-y-2.5 prose-ul:pl-5
+                  prose-ol:text-muted-foreground prose-ol:my-4 md:prose-ol:my-5 prose-ol:space-y-2 md:prose-ol:space-y-2.5 prose-ol:pl-5
+                  prose-li:text-[15px] md:prose-li:text-[17px] prose-li:leading-[1.7] md:prose-li:leading-[1.75] prose-li:my-0
                   prose-li:marker:text-primary prose-li:marker:font-medium
-                  prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:my-6 prose-blockquote:rounded-r-lg
-                  prose-code:text-primary prose-code:bg-primary/10 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:font-mono
-                  prose-table:my-6 prose-table:border prose-table:border-border
-                  prose-img:rounded-2xl prose-img:shadow-lg prose-img:my-6
-                  first:prose-p:text-base md:first:prose-p:text-lg first:prose-p:font-medium first:prose-p:text-foreground/80"
+                  prose-blockquote:border-l-3 md:prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-3 md:prose-blockquote:py-4 prose-blockquote:px-4 md:prose-blockquote:px-6 prose-blockquote:my-5 md:prose-blockquote:my-6 prose-blockquote:rounded-r-lg
+                  prose-code:text-primary prose-code:bg-primary/10 prose-code:px-1.5 md:prose-code:px-2 prose-code:py-0.5 md:prose-code:py-1 prose-code:rounded prose-code:text-xs md:prose-code:text-sm prose-code:font-mono
+                  prose-table:my-5 md:prose-table:my-6 prose-table:border prose-table:border-border
+                  prose-img:rounded-xl md:prose-img:rounded-2xl prose-img:shadow-lg prose-img:my-5 md:prose-img:my-6
+                  first:prose-p:text-[15px] md:first:prose-p:text-lg first:prose-p:font-medium first:prose-p:text-foreground/80 first:prose-p:mb-6 md:first:prose-p:mb-7"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
             </div>
