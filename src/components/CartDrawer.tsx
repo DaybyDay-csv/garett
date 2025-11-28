@@ -46,9 +46,26 @@ export const CartDrawer = () => {
   // Current stage and discount
   const currentStage = getCurrentPromotionalStage();
   const hasGWPActive = currentStage?.hasGWP ?? false;
-  const discountPercentage = currentStage?.baseDiscount ?? 0;
-  const discountAmount = subtotalOriginal * (discountPercentage / 100);
-  const subtotalWithDiscount = subtotalOriginal - discountAmount;
+  
+  // Calculate discounts separately for AeroGlow (50%) and other products (stage discount)
+  let totalDiscount = 0;
+  const hasAeroGlow = items.some(item => item.product.node.handle === 'plancha-pelo-aeroglow');
+  
+  items.filter(item => !item.isGWP).forEach(item => {
+    const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
+    const itemTotal = originalPrice * item.quantity;
+    
+    if (item.product.node.handle === 'plancha-pelo-aeroglow') {
+      // AeroGlow has exclusive 50% discount
+      totalDiscount += itemTotal * 0.5;
+    } else {
+      // Other products get stage discount
+      const discountPercentage = currentStage?.baseDiscount ?? 0;
+      totalDiscount += itemTotal * (discountPercentage / 100);
+    }
+  });
+  
+  const subtotalWithDiscount = subtotalOriginal - totalDiscount;
 
   // GWP threshold
   const GWP_THRESHOLD = 70;
@@ -57,7 +74,7 @@ export const CartDrawer = () => {
   const hasUnlockedGWP = subtotalWithDiscount >= GWP_THRESHOLD;
 
   // Calculate total savings
-  const totalSavings = discountAmount;
+  const totalSavings = totalDiscount;
   const handleCheckout = async () => {
     try {
       // Track InitiateCheckout event
@@ -196,13 +213,24 @@ export const CartDrawer = () => {
                     <span>€{subtotalOriginal.toFixed(2)}</span>
                   </div>
                   
-                  {/* Active Discount */}
-                  {currentStage && discountPercentage > 0 && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
+                  {/* Active Discounts */}
+                  {hasAeroGlow && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
                       <span className="flex items-center gap-1.5">
                         <Sparkles className="w-3 h-3" />
-                        Descuento ({discountPercentage}%)
+                        Descuento AeroGlow Exclusivo (50%)
                       </span>
-                      <span>-€{discountAmount.toFixed(2)}</span>
+                      <span>-€{(items.filter(item => item.product.node.handle === 'plancha-pelo-aeroglow').reduce((sum, item) => {
+                        const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
+                        return sum + originalPrice * item.quantity * 0.5;
+                      }, 0)).toFixed(2)}</span>
+                    </div>}
+                  
+                  {currentStage && currentStage.baseDiscount > 0 && !hasAeroGlow && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
+                      <span className="flex items-center gap-1.5">
+                        <Sparkles className="w-3 h-3" />
+                        Descuento ({currentStage.baseDiscount}%)
+                      </span>
+                      <span>-€{totalDiscount.toFixed(2)}</span>
                     </div>}
                   
                   {/* Gift With Purchase */}
