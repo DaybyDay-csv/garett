@@ -62,11 +62,11 @@ const BlogPost = () => {
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <article>
             {/* Hero Image */}
             {post.image && (
-              <div className="aspect-[21/9] rounded-3xl overflow-hidden mb-10 shadow-2xl border border-border/50">
+              <div className="aspect-[21/9] rounded-3xl overflow-hidden mb-12 shadow-2xl">
                 <img 
                   src={post.image} 
                   alt={post.title}
@@ -76,76 +76,81 @@ const BlogPost = () => {
             )}
 
             {/* Article Header */}
-            <header className="mb-12">
-              <Badge variant="outline" className="mb-5 text-primary border-primary/60 px-4 py-1.5 text-sm font-semibold">
-                {post.category}
-              </Badge>
-              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6 tracking-tight leading-[1.15]">
-                {post.title}
-              </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-[1.6] font-light">
-                {post.excerpt}
-              </p>
-              
-              <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b">
-                <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <User className="w-4 h-4" />
-                    <span>{post.author}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    <span>{new Date(post.date).toLocaleDateString('es-ES', { 
-                      day: 'numeric', 
-                      month: 'long',
-                      year: 'numeric'
-                    })}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4" />
-                    <span>{post.readTime} de lectura</span>
-                  </div>
-                </div>
+            <div className="bg-card rounded-3xl shadow-lg border border-border/50 p-8 md:p-12 mb-8">
+              <header className="mb-0">
+                <Badge variant="outline" className="mb-5 text-primary border-primary/60 px-4 py-1.5 text-sm font-semibold">
+                  {post.category}
+                </Badge>
+                <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6 tracking-tight leading-[1.15]">
+                  {post.title}
+                </h1>
+                <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-[1.6] font-light">
+                  {post.excerpt}
+                </p>
                 
-                <div className="flex items-center gap-2">
-                  <Button variant="ghost" size="sm">
-                    <Bookmark className="w-4 h-4 mr-2" />
-                    Guardar
-                  </Button>
-                  <Button variant="ghost" size="sm">
-                    <Share2 className="w-4 h-4 mr-2" />
-                    Compartir
-                  </Button>
+                <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-border/50">
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <User className="w-4 h-4" />
+                      <span>{post.author}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4" />
+                      <span>{new Date(post.date).toLocaleDateString('es-ES', { 
+                        day: 'numeric', 
+                        month: 'long',
+                        year: 'numeric'
+                      })}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4" />
+                      <span>{post.readTime} de lectura</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-2">
+                    <Button variant="ghost" size="sm">
+                      <Bookmark className="w-4 h-4 mr-2" />
+                      Guardar
+                    </Button>
+                    <Button variant="ghost" size="sm">
+                      <Share2 className="w-4 h-4 mr-2" />
+                      Compartir
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </header>
+              </header>
+            </div>
 
             {/* Article Content */}
-            <div 
-              className="prose prose-lg max-w-none 
-                prose-headings:font-bold prose-headings:tracking-tight
-                prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:text-foreground prose-h2:border-b prose-h2:border-border/50 prose-h2:pb-3
-                prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-primary prose-h3:font-semibold
-                prose-h4:text-xl prose-h4:mt-8 prose-h4:mb-3 prose-h4:text-foreground/90 prose-h4:font-semibold
-                prose-p:text-muted-foreground prose-p:leading-[1.8] prose-p:mb-5 prose-p:text-[17px]
-                prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-a:font-medium prose-a:transition-colors
-                prose-strong:text-foreground prose-strong:font-bold prose-strong:text-[17px]
-                prose-ul:text-muted-foreground prose-ul:my-6 prose-ul:space-y-3
-                prose-ol:text-muted-foreground prose-ol:my-6 prose-ol:space-y-3
-                prose-li:text-[17px] prose-li:leading-[1.7] prose-li:my-0
-                prose-li:marker:text-primary prose-li:marker:font-bold
-                prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:my-8 prose-blockquote:rounded-r-lg
-                prose-code:text-primary prose-code:bg-primary/10 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:font-mono
-                prose-table:my-8 prose-table:border prose-table:border-border
-                prose-img:rounded-2xl prose-img:shadow-lg prose-img:my-8"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
+            <div className="bg-card rounded-3xl shadow-lg border border-border/50 p-8 md:p-12">
+              <div 
+                className="prose prose-lg max-w-none 
+                  prose-headings:font-bold prose-headings:tracking-tight
+                  prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:text-foreground prose-h2:border-b prose-h2:border-border/30 prose-h2:pb-4
+                  prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-primary prose-h3:font-bold
+                  prose-h4:text-xl prose-h4:mt-8 prose-h4:mb-3 prose-h4:text-foreground/90 prose-h4:font-semibold
+                  prose-p:text-muted-foreground prose-p:leading-[1.8] prose-p:mb-6 prose-p:text-[17px]
+                  prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-a:font-semibold prose-a:transition-colors
+                  prose-strong:text-foreground prose-strong:font-bold prose-strong:text-[17px]
+                  prose-ul:text-muted-foreground prose-ul:my-8 prose-ul:space-y-3 prose-ul:pl-6
+                  prose-ol:text-muted-foreground prose-ol:my-8 prose-ol:space-y-3 prose-ol:pl-6
+                  prose-li:text-[17px] prose-li:leading-[1.8] prose-li:my-0 prose-li:pl-2
+                  prose-li:marker:text-primary prose-li:marker:font-bold prose-li:marker:text-lg
+                  prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:my-8 prose-blockquote:rounded-r-lg
+                  prose-code:text-primary prose-code:bg-primary/10 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                  prose-table:my-8 prose-table:border prose-table:border-border
+                  prose-img:rounded-2xl prose-img:shadow-lg prose-img:my-8
+                  first:prose-p:text-lg first:prose-p:font-medium first:prose-p:text-foreground/80"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
+            </div>
           </article>
 
           {/* Related Articles */}
           {relatedPosts.length > 0 && (
-            <section className="mt-20 pt-12 border-t">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8">
+            <section className="mt-16">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 px-2">
                 Más artículos que te pueden interesar
               </h2>
               <div className="grid md:grid-cols-3 gap-6">
@@ -190,9 +195,9 @@ const BlogPost = () => {
 
           {/* CTA Section */}
           <section className="mt-16">
-            <Card className="bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20 overflow-hidden relative">
+            <Card className="bg-gradient-to-br from-primary/10 via-primary/5 to-secondary/10 border-primary/30 overflow-hidden relative shadow-xl">
               <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-              <CardContent className="p-8 md:p-12 text-center relative">
+              <CardContent className="p-10 md:p-14 text-center relative">
                 <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                   ¿Listo para transformar tu rutina de belleza?
                 </h3>
