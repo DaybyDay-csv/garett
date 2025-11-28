@@ -141,7 +141,16 @@ Resultados visibles desde el primer uso.</span>
                   <div className="relative bg-gray-900/90 rounded-2xl p-3 md:p-6 border border-red-600/30 overflow-hidden">
                   {loading ? <div className="aspect-square flex items-center justify-center">
                       <Zap className="w-20 h-20 text-red-500 animate-pulse" />
-                    </div> : <VideoPlayer srcWebM="/videos/aeroglow-product.webm" src="/videos/aeroglow-product.mp4" poster={aeroglowHero} autoplay={true} muted={true} loop={true} controls={false} className="animate-fade-in" fallback={<img src={aeroglowHero} alt="AeroGlow Hair Straightener" className="w-full h-full object-contain animate-fade-in" />} />}
+                    </div> : <VideoPlayer 
+                      srcWebM="/videos/aeroglow-product.webm" 
+                      poster={aeroglowHero} 
+                      autoplay={true} 
+                      muted={true} 
+                      loop={true} 
+                      controls={false} 
+                      className="animate-fade-in" 
+                      fallback={<img src={aeroglowHero} alt="AeroGlow Hair Straightener" className="w-full h-full object-contain animate-fade-in" />} 
+                    />}
                 </div>
                 
                 {/* Floating Discount Badge */}

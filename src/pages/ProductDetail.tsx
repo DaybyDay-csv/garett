@@ -403,7 +403,6 @@ const ProductDetail = () => {
               <div className="rounded-lg overflow-hidden bg-gray-900/50 ring-2 ring-red-600/30">
                 <VideoPlayer 
                   srcWebM="/videos/aeroglow-product.webm" 
-                  src="/videos/aeroglow-product.mp4" 
                   poster={node.images.edges[0]?.node.url} 
                   autoplay={false} 
                   muted={true} 
