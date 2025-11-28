@@ -174,11 +174,11 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
           {!hideAddToCart && (
             <Button 
               onClick={handleAddToCart}
-              disabled={!firstVariant?.availableForSale || isLaunch}
+              disabled={!firstVariant?.availableForSale}
               size="lg"
               className="w-full md:inline-flex h-12 text-base backdrop-blur-sm disabled:opacity-60"
             >
-              {isLaunch ? 'Próximamente' : (firstVariant?.availableForSale ? 'Añadir al carrito' : 'Agotado')}
+              {firstVariant?.availableForSale ? 'Añadir al carrito' : 'Agotado'}
             </Button>
           )}
         </div>
