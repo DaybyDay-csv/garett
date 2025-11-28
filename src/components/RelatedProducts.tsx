@@ -20,11 +20,43 @@ export const RelatedProducts = ({ currentProduct }: RelatedProductsProps) => {
       try {
         const allProducts = await fetchProducts(100);
         
-        // Filter out current product and get related ones based on tags
+        // Extract category from current product tags
+        const categoryTag = currentProduct.node.tags.find(tag => 
+          tag.startsWith('category:')
+        );
+        const currentCategory = categoryTag?.replace('category:', '');
+        
+        // Filter products: same category OR matching tags
         const filtered = allProducts
-          .filter(p => p.node.id !== currentProduct.node.id)
+          .filter(p => {
+            // Exclude current product
+            if (p.node.id === currentProduct.node.id) return false;
+            
+            // Check if product has same category
+            const productCategoryTag = p.node.tags.find(tag => 
+              tag.startsWith('category:')
+            );
+            const productCategory = productCategoryTag?.replace('category:', '');
+            
+            // Match by category OR by shared tags
+            return productCategory === currentCategory || 
+                   p.node.tags.some(tag => currentProduct.node.tags.includes(tag));
+          })
           .sort((a, b) => {
-            // Prioritize products with matching tags
+            // First prioritize by category match
+            const aCategoryTag = a.node.tags.find(tag => tag.startsWith('category:'));
+            const aCategory = aCategoryTag?.replace('category:', '');
+            const bCategoryTag = b.node.tags.find(tag => tag.startsWith('category:'));
+            const bCategory = bCategoryTag?.replace('category:', '');
+            
+            const aCategoryMatch = aCategory === currentCategory ? 1 : 0;
+            const bCategoryMatch = bCategory === currentCategory ? 1 : 0;
+            
+            if (aCategoryMatch !== bCategoryMatch) {
+              return bCategoryMatch - aCategoryMatch;
+            }
+            
+            // Then by matching tags
             const aMatchingTags = a.node.tags.filter(tag => 
               currentProduct.node.tags.includes(tag)
             ).length;
@@ -33,7 +65,7 @@ export const RelatedProducts = ({ currentProduct }: RelatedProductsProps) => {
             ).length;
             return bMatchingTags - aMatchingTags;
           })
-          .slice(0, 4);
+          .slice(0, 6);
         
         setRelatedProducts(filtered);
       } catch (error) {
