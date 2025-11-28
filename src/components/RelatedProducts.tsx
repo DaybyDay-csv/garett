@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
+import { getCategoryFromTags } from "@/lib/categories";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -20,11 +21,8 @@ export const RelatedProducts = ({ currentProduct }: RelatedProductsProps) => {
       try {
         const allProducts = await fetchProducts(100);
         
-        // Extract category from current product tags
-        const categoryTag = currentProduct.node.tags.find(tag => 
-          tag.startsWith('category:')
-        );
-        const currentCategory = categoryTag?.replace('category:', '');
+        // Extract category from current product using centralized function
+        const currentCategory = getCategoryFromTags(currentProduct.node.tags);
         
         // Filter products: same category OR matching tags
         const filtered = allProducts
@@ -33,24 +31,19 @@ export const RelatedProducts = ({ currentProduct }: RelatedProductsProps) => {
             if (p.node.id === currentProduct.node.id) return false;
             
             // Check if product has same category
-            const productCategoryTag = p.node.tags.find(tag => 
-              tag.startsWith('category:')
-            );
-            const productCategory = productCategoryTag?.replace('category:', '');
+            const productCategory = getCategoryFromTags(p.node.tags);
             
             // Match by category OR by shared tags
-            return productCategory === currentCategory || 
+            return (currentCategory && productCategory && productCategory.slug === currentCategory.slug) || 
                    p.node.tags.some(tag => currentProduct.node.tags.includes(tag));
           })
           .sort((a, b) => {
             // First prioritize by category match
-            const aCategoryTag = a.node.tags.find(tag => tag.startsWith('category:'));
-            const aCategory = aCategoryTag?.replace('category:', '');
-            const bCategoryTag = b.node.tags.find(tag => tag.startsWith('category:'));
-            const bCategory = bCategoryTag?.replace('category:', '');
+            const aCategory = getCategoryFromTags(a.node.tags);
+            const bCategory = getCategoryFromTags(b.node.tags);
             
-            const aCategoryMatch = aCategory === currentCategory ? 1 : 0;
-            const bCategoryMatch = bCategory === currentCategory ? 1 : 0;
+            const aCategoryMatch = (currentCategory && aCategory && aCategory.slug === currentCategory.slug) ? 1 : 0;
+            const bCategoryMatch = (currentCategory && bCategory && bCategory.slug === currentCategory.slug) ? 1 : 0;
             
             if (aCategoryMatch !== bCategoryMatch) {
               return bCategoryMatch - aCategoryMatch;

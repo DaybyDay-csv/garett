@@ -14,6 +14,7 @@ import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, Zoom
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { calculatePromotionalPrice, formatPrice, getCurrentPromotionalStage } from "@/lib/promotions";
 import { getProductContent, detectProductCategory } from "@/lib/productContent";
+import { getCategoryFromTags } from "@/lib/categories";
 import * as LucideIcons from "lucide-react";
 import gwpHeadband from "@/assets/gwp-headband.png";
 import Zoom from "react-medium-image-zoom";
@@ -222,27 +223,16 @@ const ProductDetail = () => {
   
   // Get category from product tags for breadcrumb
   const getCategoryInfo = () => {
-    const categoryTag = node.tags.find(tag => tag.startsWith('category:'));
-    if (!categoryTag) return { name: 'Productos', slug: 'productos', path: '/productos' };
+    const category = getCategoryFromTags(node.tags);
     
-    const categorySlug = categoryTag.replace('category:', '');
-    const categoryNames: Record<string, string> = {
-      'depilacion-ipl': 'Depilación IPL',
-      'masajeadores-faciales': 'Masajeadores Faciales',
-      'limpieza-facial': 'Limpieza Facial',
-      'mesoterapia': 'Mesoterapia',
-      'corporales': 'Cuidado Corporal',
-      'cuidado-capilar': 'Cuidado Capilar',
-      'capilar': 'Cuidado Capilar',
-      'pretty-face': 'Pretty Face',
-      'smartwatches': 'Smartwatches',
-      'accessories': 'Accesorios'
-    };
+    if (!category) {
+      return { name: 'Productos', slug: 'productos', path: '/productos' };
+    }
     
     return {
-      name: categoryNames[categorySlug] || 'Productos',
-      slug: categorySlug,
-      path: `/categoria/${categorySlug}`
+      name: category.name,
+      slug: category.slug,
+      path: `/categoria/${category.slug}`
     };
   };
   

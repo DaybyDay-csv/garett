@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
+import { CATEGORIES, productBelongsToCategory, getCategoryFromTags } from "@/lib/categories";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -29,14 +30,13 @@ const Search = () => {
   const [priceFilter, setPriceFilter] = useState(searchParams.get('price') || 'all');
   const [sortBy, setSortBy] = useState(searchParams.get('sort') || 'relevance');
 
+  // Use centralized categories
   const categories = [
     { value: 'all', label: 'Todas las categorías' },
-    { value: 'cuidado-capilar', label: 'Cuidado Capilar' },
-    { value: 'masajeadores-faciales', label: 'Masajeadores Faciales' },
-    { value: 'limpieza-facial', label: 'Limpieza Facial' },
-    { value: 'mesoterapia', label: 'Mesoterapia' },
-    { value: 'corporales', label: 'Cuidado Corporal' },
-    { value: 'depilacion-ipl', label: 'Depilación IPL' },
+    ...Object.values(CATEGORIES).map(cat => ({
+      value: cat.slug,
+      label: cat.name
+    }))
   ];
 
   const priceRanges = [
@@ -84,10 +84,10 @@ const Search = () => {
       );
     }
 
-    // Category filter
+    // Category filter using centralized function
     if (categoryFilter !== 'all') {
       filtered = filtered.filter(p => 
-        p.node.tags.some(tag => tag === `category:${categoryFilter}`)
+        productBelongsToCategory(p.node.tags, categoryFilter)
       );
     }
 
@@ -119,23 +119,16 @@ const Search = () => {
     } else if (sortBy === 'name') {
       filtered.sort((a, b) => a.node.title.localeCompare(b.node.title));
     } else {
-      // Default sorting by category priority
-      const categoryPriority: Record<string, number> = {
-        'masajeadores-faciales': 1,
-        'limpieza-facial': 2,
-        'cuidado-capilar': 3,
-        'smartwatches': 4,
-        'mesoterapia': 5,
-        'corporales': 6,
-        'depilacion-ipl': 7,
-      };
+      // Default sorting by category priority using centralized categories
+      const categoryPriority: Record<string, number> = {};
+      Object.values(CATEGORIES).forEach((cat, index) => {
+        categoryPriority[cat.slug] = index + 1;
+      });
       
       filtered.sort((a, b) => {
         const getCategoryPriority = (product: ShopifyProduct) => {
-          const categoryTag = product.node.tags.find(tag => tag.startsWith('category:'));
-          if (!categoryTag) return 999;
-          const category = categoryTag.replace('category:', '');
-          return categoryPriority[category] || 999;
+          const category = getCategoryFromTags(product.node.tags);
+          return category ? (categoryPriority[category.slug] || 999) : 999;
         };
         
         return getCategoryPriority(a) - getCategoryPriority(b);
