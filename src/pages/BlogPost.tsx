@@ -123,25 +123,25 @@ const BlogPost = () => {
             </div>
 
             {/* Article Content */}
-            <div className="bg-card rounded-3xl shadow-lg border border-border/50 p-8 md:p-12">
+            <div className="bg-card rounded-3xl shadow-lg border border-border/50 p-6 md:p-10">
               <div 
-                className="prose prose-lg max-w-none 
-                  prose-headings:font-bold prose-headings:tracking-tight
-                  prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:text-foreground prose-h2:border-b prose-h2:border-border/30 prose-h2:pb-4
-                  prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-primary prose-h3:font-bold
-                  prose-h4:text-xl prose-h4:mt-8 prose-h4:mb-3 prose-h4:text-foreground/90 prose-h4:font-semibold
-                  prose-p:text-muted-foreground prose-p:leading-[1.8] prose-p:mb-6 prose-p:text-[17px]
+                className="prose prose-base md:prose-lg max-w-none 
+                  prose-headings:font-semibold prose-headings:tracking-tight
+                  prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-foreground
+                  prose-h3:text-xl md:prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-primary
+                  prose-h4:text-lg md:prose-h4:text-xl prose-h4:mt-6 prose-h4:mb-2 prose-h4:text-foreground/90
+                  prose-p:text-muted-foreground prose-p:leading-relaxed md:prose-p:leading-[1.8] prose-p:mb-4 prose-p:text-[15px] md:prose-p:text-[17px]
                   prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-a:font-semibold prose-a:transition-colors
-                  prose-strong:text-foreground prose-strong:font-bold prose-strong:text-[17px]
-                  prose-ul:text-muted-foreground prose-ul:my-8 prose-ul:space-y-3 prose-ul:pl-6
-                  prose-ol:text-muted-foreground prose-ol:my-8 prose-ol:space-y-3 prose-ol:pl-6
-                  prose-li:text-[17px] prose-li:leading-[1.8] prose-li:my-0 prose-li:pl-2
-                  prose-li:marker:text-primary prose-li:marker:font-bold prose-li:marker:text-lg
-                  prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:my-8 prose-blockquote:rounded-r-lg
+                  prose-strong:text-foreground prose-strong:font-semibold md:prose-strong:text-[17px]
+                  prose-ul:text-muted-foreground prose-ul:my-5 prose-ul:space-y-2 prose-ul:pl-4
+                  prose-ol:text-muted-foreground prose-ol:my-5 prose-ol:space-y-2 prose-ol:pl-4
+                  prose-li:text-[15px] md:prose-li:text-[17px] prose-li:leading-relaxed md:prose-li:leading-[1.7] prose-li:my-0
+                  prose-li:marker:text-primary prose-li:marker:font-medium
+                  prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:my-6 prose-blockquote:rounded-r-lg
                   prose-code:text-primary prose-code:bg-primary/10 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:font-mono
-                  prose-table:my-8 prose-table:border prose-table:border-border
-                  prose-img:rounded-2xl prose-img:shadow-lg prose-img:my-8
-                  first:prose-p:text-lg first:prose-p:font-medium first:prose-p:text-foreground/80"
+                  prose-table:my-6 prose-table:border prose-table:border-border
+                  prose-img:rounded-2xl prose-img:shadow-lg prose-img:my-6
+                  first:prose-p:text-base md:first:prose-p:text-lg first:prose-p:font-medium first:prose-p:text-foreground/80"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
             </div>
