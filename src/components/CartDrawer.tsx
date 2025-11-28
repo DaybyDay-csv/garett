@@ -38,8 +38,8 @@ export const CartDrawer = () => {
 
   // Calculate original prices (without discounts) - exclude GWP items
   const subtotalOriginal = items.filter(item => !item.isGWP).reduce((sum, item) => {
-    // Use the actual variant price, not the minimum price
-    const originalPrice = parseFloat(item.price.amount);
+    // Use the original product price from the product data, not the variant price which might be discounted
+    const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
     return sum + originalPrice * item.quantity;
   }, 0);
 
@@ -159,7 +159,7 @@ export const CartDrawer = () => {
                           {item.selectedOptions.map(option => option.value).join(' • ')}
                         </p>
                         <p className={`font-semibold text-sm mt-0.5 ${item.isGWP ? 'text-purple-600 dark:text-purple-400' : ''}`}>
-                          {item.isGWP ? 'GRATIS' : `€${parseFloat(item.price.amount).toFixed(2)}`}
+                          {item.isGWP ? 'GRATIS' : `€${parseFloat(item.product.node.priceRange.minVariantPrice.amount).toFixed(2)}`}
                         </p>
                       </div>
                       
