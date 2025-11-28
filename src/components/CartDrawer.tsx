@@ -225,12 +225,15 @@ export const CartDrawer = () => {
                       }, 0)).toFixed(2)}</span>
                     </div>}
                   
-                  {currentStage && currentStage.baseDiscount > 0 && !hasAeroGlow && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
+                  {currentStage && currentStage.baseDiscount > 0 && items.some(item => !item.isGWP && item.product.node.handle !== 'plancha-pelo-aeroglow') && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
                       <span className="flex items-center gap-1.5">
                         <Sparkles className="w-3 h-3" />
                         Descuento ({currentStage.baseDiscount}%)
                       </span>
-                      <span>-€{totalDiscount.toFixed(2)}</span>
+                      <span>-€{(items.filter(item => !item.isGWP && item.product.node.handle !== 'plancha-pelo-aeroglow').reduce((sum, item) => {
+                        const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
+                        return sum + originalPrice * item.quantity * (currentStage.baseDiscount / 100);
+                      }, 0)).toFixed(2)}</span>
                     </div>}
                   
                   {/* Gift With Purchase */}
