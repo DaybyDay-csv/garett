@@ -11,7 +11,7 @@ import { PromotionalBanners } from "@/components/PromotionalBanners";
 import { BlackFridayFeatured } from "@/components/BlackFridayFeatured";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { FAQ } from "@/components/FAQ";
-import { SEOContent } from "@/components/SEOContent";
+import { BlogCarousel } from "@/components/BlogCarousel";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -296,8 +296,8 @@ const Index = () => {
       {/* Customer Testimonials */}
       <Testimonials />
 
-      {/* SEO Content Section with Internal Links */}
-      <SEOContent />
+      {/* Blog Articles Carousel */}
+      <BlogCarousel />
 
       {/* FAQ Section */}
       <FAQ 

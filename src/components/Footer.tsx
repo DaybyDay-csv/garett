@@ -76,6 +76,11 @@ export const Footer = () => {
             <h3 className="font-semibold text-base mb-5">Información</h3>
             <ul className="space-y-3 text-sm">
               <li>
+                <Link to="/blog" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  Blog y Guías
+                </Link>
+              </li>
+              <li>
                 <Link to="/black-friday" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Black Friday
                 </Link>

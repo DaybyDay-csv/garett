@@ -16,6 +16,8 @@ import Search from "./pages/Search";
 import BlackFriday from "./pages/BlackFriday";
 import NewArrivals from "./pages/NewArrivals";
 import Superventas from "./pages/Superventas";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import WarrantyPolicy from "./pages/WarrantyPolicy";
 import TerminosCondiciones from "./pages/TerminosCondiciones";
 import AvisoLegal from "./pages/AvisoLegal";
@@ -45,6 +47,8 @@ const App = () => (
             <Route path="/black-friday" element={<BlackFriday />} />
             <Route path="/novedades" element={<NewArrivals />} />
             <Route path="/superventas" element={<Superventas />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/garantia" element={<WarrantyPolicy />} />
             <Route path="/terminos-condiciones" element={<TerminosCondiciones />} />
             <Route path="/aviso-legal" element={<AvisoLegal />} />

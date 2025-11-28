@@ -39,6 +39,56 @@
     <priority>0.8</priority>
   </url>
   
+  <!-- Blog -->
+  <url>
+    <loc>https://garett.es/blog</loc>
+    <lastmod>2025-11-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://garett.es/blog/tecnologia-belleza-profesional-casa</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://garett.es/blog/cuidado-capilar-tecnologia-ionica</loc>
+    <lastmod>2025-11-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://garett.es/blog/masajeadores-faciales-guia-completa</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://garett.es/blog/depilacion-ipl-guia-definitiva</loc>
+    <lastmod>2025-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://garett.es/blog/limpieza-facial-profunda-rutina</loc>
+    <lastmod>2025-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://garett.es/blog/mesoterapia-sin-agujas-casa</loc>
+    <lastmod>2025-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
   <!-- Category Pages -->
   <url>
     <loc>https://garett.es/categoria/cuidado-capilar</loc>
