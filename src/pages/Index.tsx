@@ -70,7 +70,7 @@ const Index = () => {
 
   return <div className="min-h-screen bg-background">
       <SEO 
-        title="Garett Beauty España - Tecnología de Belleza Profesional"
+        title="Garett Beauty España - Belleza Profesional"
         description="Descubre los mejores dispositivos de belleza profesional. Cuidado capilar, facial y corporal con tecnología avanzada. Envío gratis en 24-48h y garantía 2 años."
         canonicalUrl="/"
         schema={homeSchema}
