@@ -2,7 +2,7 @@ import blogBeautyTech from "@/assets/blog/beauty-tech.jpg";
 import blogHairCare from "@/assets/blog/hair-care.jpg";
 import blogFacialMassage from "@/assets/blog/facial-massage.jpg";
 import blogIPL from "@/assets/blog/ipl-hair-removal.jpg";
-import blogCleansing from "@/assets/blog/facial-cleansing.jpg";
+import blogCleansing from "@/assets/blog/facial-cleansing.webp";
 import blogMesotherapy from "@/assets/blog/mesotherapy.jpg";
 
 export interface BlogPost {
