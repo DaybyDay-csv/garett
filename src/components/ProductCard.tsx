@@ -106,29 +106,28 @@ export const ProductCard = ({ product, tagIndex }: ProductCardProps) => {
         {/* Max 2 tags at bottom-left - Priority: Lanzamiento > Superventa > Nuevo > X% OFF */}
         <div className="absolute bottom-2 left-2 flex gap-1.5">
           {isLaunch ? (
-            <Badge variant="destructive" className="text-xs">
+            <Badge variant="default" className="text-xs">
               Lanzamiento
             </Badge>
           ) : (
             <>
               {isBestseller && (
-                <Badge className="bg-rose-400 text-white border-0 text-xs">
-                  <Flame className="w-3 h-3 mr-1" />
+                <Badge variant="secondary" className="text-xs">
                   Superventa
                 </Badge>
               )}
               {!isBestseller && isNew && (
-                <Badge variant="default" className="bg-primary text-primary-foreground text-xs">
+                <Badge variant="default" className="text-xs">
                   Nuevo
                 </Badge>
               )}
               {!isBestseller && !isNew && priceInfo.hasDiscount && (
-                <Badge className="bg-red-700 text-white border-0 text-xs">
+                <Badge variant="outline" className="text-xs bg-background">
                   {priceInfo.discountLabel} OFF
                 </Badge>
               )}
               {isBestseller && priceInfo.hasDiscount && (
-                <Badge className="bg-red-700 text-white border-0 text-xs">
+                <Badge variant="outline" className="text-xs bg-background">
                   {priceInfo.discountLabel} OFF
                 </Badge>
               )}

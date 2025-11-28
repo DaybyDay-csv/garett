@@ -46,39 +46,32 @@ export const BlackFridayFeatured = () => {
   }
 
   return (
-    <section className="py-8 md:py-12 bg-gradient-to-br from-gray-950 via-gray-900 to-red-950 relative overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(239,68,68,0.3),transparent_70%)]" />
-      </div>
-      
-      <div className="container relative z-10">
+    <section className="py-12 md:py-16 bg-muted/30">
+      <div className="container">
         {/* Header */}
-        <div className="text-center mb-8 md:mb-12">
-          <div className="inline-flex items-center gap-2 bg-red-600/20 text-red-400 px-4 py-2 rounded-full text-sm font-bold border border-red-500/50 mb-4 animate-pulse">
-            <Flame className="w-4 h-4" />
-            BLACK FRIDAY ACTIVO
-            <Flame className="w-4 h-4" />
+        <div className="text-center mb-10 md:mb-12">
+          <div className="inline-flex items-center gap-2 bg-foreground/5 text-foreground px-4 py-2 rounded-md text-sm font-medium border border-border mb-4">
+            Black Friday
           </div>
           
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-3">
-            Ofertas <span className="text-red-500">Exclusivas</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-3">
+            Ofertas Especiales
           </h2>
           
-          <p className="text-gray-300 text-lg mb-4">
+          <p className="text-muted-foreground text-lg mb-4">
             Descuentos de hasta 50% en productos seleccionados
           </p>
           
-          <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
-            <Timer className="w-4 h-4 text-red-400" />
-            <span>Oferta limitada • Black Friday 2025</span>
+          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <Timer className="w-4 h-4" />
+            <span>Oferta limitada - Black Friday 2025</span>
           </div>
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
           {products.map((product) => (
-            <div key={product.node.id} className="transform hover:scale-105 transition-transform duration-300">
+            <div key={product.node.id}>
               <ProductCard product={product} />
             </div>
           ))}
@@ -89,17 +82,16 @@ export const BlackFridayFeatured = () => {
           <Button 
             asChild 
             size="lg"
-            className="bg-red-600 hover:bg-red-700 text-white border-0 shadow-lg shadow-red-600/50 hover:shadow-red-600/70 transition-all"
+            variant="default"
           >
             <Link to="/black-friday">
-              <Zap className="w-5 h-5 mr-2" />
               Ver todas las ofertas Black Friday
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </Button>
           
-          <p className="text-gray-400 text-sm mt-4">
-            ⚡ Envío gratis en todos los pedidos • Devoluciones hasta 30 días
+          <p className="text-muted-foreground text-sm mt-4">
+            Envío gratis en todos los pedidos - Devoluciones hasta 30 días
           </p>
         </div>
       </div>
