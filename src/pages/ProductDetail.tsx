@@ -217,7 +217,7 @@ const ProductDetail = () => {
   const progressPercentage = Math.min(potentialTotal / GWP_THRESHOLD * 100, 100);
   const remainingForGWP = Math.max(GWP_THRESHOLD - potentialTotal, 0);
   const willUnlockGWP = potentialTotal >= GWP_THRESHOLD && cartTotal < GWP_THRESHOLD;
-  return <div className={`min-h-screen ${isAeroGlow ? 'bg-gradient-to-br from-gray-950 via-gray-900 to-red-950' : 'bg-background'}`}>
+  return <div className="min-h-screen bg-background">
       <Header />
       
       <div className="container py-8">
@@ -232,7 +232,7 @@ const ProductDetail = () => {
           {/* Images/Video - Interactive Gallery */}
           <div className="space-y-4">
             {/* Main Media Display with Zoom */}
-            <div className={`relative aspect-square rounded-lg overflow-hidden group ${isAeroGlow ? 'bg-gray-900/50 ring-2 ring-red-600/30 shadow-2xl shadow-red-950/50' : 'bg-secondary/20'}`}>
+            <div className="relative aspect-square rounded-lg overflow-hidden group bg-muted/10 border">
               {node.images.edges[selectedImage]?.node && <Zoom>
                 <img src={node.images.edges[selectedImage].node.url} alt={node.images.edges[selectedImage].node.altText || node.title} className="w-full h-full object-cover cursor-zoom-in transition-transform duration-300" />
               </Zoom>}
@@ -258,8 +258,8 @@ const ProductDetail = () => {
               {/* Image thumbnails */}
               {node.images.edges.map((image, idx) => <button key={idx} onClick={() => {
               setSelectedImage(idx);
-            }} className={`aspect-square bg-secondary/20 rounded-lg overflow-hidden border-2 transition-all hover:scale-105 ${selectedImage === idx ? isAeroGlow ? 'border-red-500 shadow-lg shadow-red-500/30 scale-105' : 'border-primary shadow-lg scale-105' : isAeroGlow ? 'border-red-800/50 opacity-60 hover:opacity-100' : 'border-transparent hover:border-primary/50'} ${isAeroGlow ? 'bg-gray-900/30' : ''}`}>
-                  <img src={image.node.url} alt={image.node.altText || `${node.title} - ${idx + 1}`} className={`w-full h-full object-cover ${isAeroGlow ? 'opacity-70' : ''}`} />
+            }} className={`aspect-square bg-muted/10 rounded-lg overflow-hidden border-2 transition-all hover:scale-105 ${selectedImage === idx ? 'border-primary scale-105' : 'border-transparent hover:border-muted-foreground/30'}`}>
+                  <img src={image.node.url} alt={image.node.altText || `${node.title} - ${idx + 1}`} className="w-full h-full object-cover" />
                 </button>)}
             </div>
             
@@ -281,26 +281,26 @@ const ProductDetail = () => {
             <div>
               <div className="flex gap-2 mb-3 flex-wrap">
                 {/* Promotional Stage Badge - Highest priority */}
-                {priceInfo.hasDiscount && priceInfo.stage && <Badge className={`bg-gradient-to-r ${priceInfo.stage.color} text-white border-0 ${isAeroGlow ? 'animate-pulse text-lg px-4 py-2' : ''}`}>
-                    <Zap className={`mr-1 ${isAeroGlow ? 'w-5 h-5' : 'w-3 h-3'}`} />
+                {priceInfo.hasDiscount && priceInfo.stage && <Badge variant="destructive">
+                    <Zap className="mr-1 w-3 h-3" />
                     {priceInfo.stage.badge} {priceInfo.discountLabel}
                   </Badge>}
-                {!isAeroGlow && isNew && <Badge>Nuevo</Badge>}
-                {!isAeroGlow && isBestseller && <Badge variant="secondary">Bestseller</Badge>}
-                <Badge variant="outline" className={`gap-1 ${isAeroGlow ? 'border-red-600/30 text-gray-300' : ''}`}>
+                {isNew && <Badge>Nuevo</Badge>}
+                {isBestseller && <Badge variant="secondary">Bestseller</Badge>}
+                <Badge variant="outline" className="gap-1">
                   <Shield className="w-3 h-3" />
                   Garantía 2 años
                 </Badge>
               </div>
               
-              <h1 className={`text-3xl md:text-4xl font-bold mb-4 ${isAeroGlow ? 'text-white drop-shadow-lg' : ''}`}>{node.title}</h1>
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">{node.title}</h1>
               
               {/* Quick Benefits - Above the fold */}
               <div className="flex flex-wrap gap-3 mb-4">
                 {productContent.quickBenefits.map((benefit, idx) => {
                 const IconComponent = (LucideIcons as any)[benefit.icon] || Clock;
-                return <div key={idx} className={`flex items-center gap-1.5 text-sm ${isAeroGlow ? 'text-gray-200' : 'text-muted-foreground'}`}>
-                      <IconComponent className={`w-4 h-4 ${isAeroGlow ? 'text-red-400' : 'text-primary'}`} />
+                return <div key={idx} className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                      <IconComponent className="w-4 h-4 text-primary" />
                       <span>{benefit.text}</span>
                     </div>;
               })}
@@ -308,28 +308,28 @@ const ProductDetail = () => {
             </div>
 
             {/* Price */}
-            <div className={`border-t border-b py-6 ${isAeroGlow ? 'border-red-900/30 bg-gradient-to-r from-red-950/20 to-pink-950/20 rounded-lg px-4' : ''}`}>
+            <div className="border-t border-b py-6">
               {priceInfo.hasDiscount ? <div className="space-y-2">
                   <div className="flex items-baseline gap-3">
-                    <div className={`text-4xl font-bold ${isAeroGlow ? 'text-red-500 text-5xl' : 'text-primary'}`}>
+                    <div className="text-4xl font-bold text-primary">
                       €{priceInfo.discountedPrice.toFixed(2)}
                     </div>
-                    <Badge variant="destructive" className={`text-base px-3 py-1 ${isAeroGlow ? 'bg-gradient-to-r from-red-600 to-pink-600 text-lg px-4 py-2' : ''}`}>
+                    <Badge variant="destructive" className="text-base px-3 py-1">
                       {priceInfo.discountLabel}
                     </Badge>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className={`text-xl line-through ${isAeroGlow ? 'text-gray-500' : 'text-muted-foreground'}`}>
+                    <span className="text-xl line-through text-muted-foreground">
                       €{priceInfo.originalPrice.toFixed(2)}
                     </span>
-                    <span className={`text-sm ${isAeroGlow ? 'text-gray-400 font-semibold' : 'text-muted-foreground'}`}>
+                    <span className="text-sm text-muted-foreground">
                       Ahorras €{(priceInfo.originalPrice - priceInfo.discountedPrice).toFixed(2)}
                     </span>
                   </div>
-                  <p className={`text-sm ${isAeroGlow ? 'text-gray-400' : 'text-muted-foreground'}`}>IVA incluido</p>
+                  <p className="text-sm text-muted-foreground">IVA incluido</p>
                 </div> : <div>
-                  <div className={`text-4xl font-bold ${isAeroGlow ? 'text-white' : ''}`}>€{priceInfo.originalPrice.toFixed(2)}</div>
-                  <p className={`text-sm mt-1 ${isAeroGlow ? 'text-gray-400' : 'text-muted-foreground'}`}>IVA incluido</p>
+                  <div className="text-4xl font-bold">€{priceInfo.originalPrice.toFixed(2)}</div>
+                  <p className="text-sm mt-1 text-muted-foreground">IVA incluido</p>
                 </div>}
             </div>
 
@@ -400,9 +400,9 @@ const ProductDetail = () => {
 
             {/* Product Video - Below Add to Cart for AeroGlow */}
             {isAeroGlow && (
-              <div className="rounded-lg overflow-hidden bg-gray-900/50 ring-2 ring-red-600/30">
+              <div className="rounded-lg overflow-hidden border bg-muted/10">
                 <VideoPlayer 
-                  srcWebM="/videos/aeroglow-product.webm" 
+                  srcWebM="/videos/aeroglow-product-new.webm" 
                   poster={node.images.edges[0]?.node.url} 
                   autoplay={false} 
                   muted={true} 
@@ -429,37 +429,37 @@ const ProductDetail = () => {
             </div>
 
             {/* Product Details Sections - User Focused */}
-            <div className={`space-y-3 pt-6 border-t ${isAeroGlow ? 'border-red-900/30' : ''}`}>
-              <h3 className={`font-semibold text-lg mb-4 ${isAeroGlow ? 'text-white' : ''}`}>Información del producto</h3>
+            <div className="space-y-3 pt-6 border-t">
+              <h3 className="font-semibold text-lg mb-4">Información del producto</h3>
               
               {/* Why It Works */}
-              <Collapsible className={`border rounded-lg ${isAeroGlow ? 'border-red-800/50 bg-gray-900/50' : ''}`}>
-                <CollapsibleTrigger className={`flex items-center justify-between w-full p-4 transition-colors ${isAeroGlow ? 'hover:bg-red-950/30 text-white' : 'hover:bg-muted/50'}`}>
+              <Collapsible className="border rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 transition-colors hover:bg-muted/50">
                   <div className="flex items-center gap-3">
-                    <Sparkle className={`w-5 h-5 ${isAeroGlow ? 'text-red-400' : 'text-primary'}`} />
+                    <Sparkle className="w-5 h-5 text-primary" />
                     <span className="font-medium text-left">{productContent.dropdowns.howItWorks.title}</span>
                   </div>
-                  <ChevronDown className={`w-5 h-5 transition-transform ${isAeroGlow ? 'text-gray-300' : 'text-muted-foreground'}`} />
+                  <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className={`px-4 pb-4 text-sm space-y-2 ${isAeroGlow ? 'text-gray-200' : 'text-muted-foreground'}`}>
-                  <p className={`font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>{productContent.dropdowns.howItWorks.summary}</p>
+                <CollapsibleContent className="px-4 pb-4 text-sm space-y-2 text-muted-foreground">
+                  <p className="font-medium text-foreground">{productContent.dropdowns.howItWorks.summary}</p>
                   {productContent.dropdowns.howItWorks.details.map((detail, idx) => <p key={idx}>{detail}</p>)}
                 </CollapsibleContent>
               </Collapsible>
 
               {/* Expected Results */}
-              <Collapsible className={`border rounded-lg ${isAeroGlow ? 'border-red-800/50 bg-gray-900/50' : ''}`}>
-                <CollapsibleTrigger className={`flex items-center justify-between w-full p-4 transition-colors ${isAeroGlow ? 'hover:bg-red-950/30 text-white' : 'hover:bg-muted/50'}`}>
+              <Collapsible className="border rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 transition-colors hover:bg-muted/50">
                   <div className="flex items-center gap-3">
-                    <Clock className={`w-5 h-5 ${isAeroGlow ? 'text-red-400' : 'text-primary'}`} />
+                    <Clock className="w-5 h-5 text-primary" />
                     <span className="font-medium text-left">Resultados esperados</span>
                   </div>
-                  <ChevronDown className={`w-5 h-5 transition-transform ${isAeroGlow ? 'text-gray-300' : 'text-muted-foreground'}`} />
+                  <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className={`px-4 pb-4 text-sm space-y-2 ${isAeroGlow ? 'text-gray-200' : 'text-muted-foreground'}`}>
+                <CollapsibleContent className="px-4 pb-4 text-sm space-y-2 text-muted-foreground">
                   <div className="space-y-3">
                     {productContent.dropdowns.expectedResults.phases.map((phase, idx) => <div key={idx}>
-                        <p className={`font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>{phase.timeframe}</p>
+                        <p className="font-medium text-foreground">{phase.timeframe}</p>
                         <p>{phase.description}</p>
                       </div>)}
                   </div>
@@ -468,68 +468,68 @@ const ProductDetail = () => {
               </Collapsible>
 
               {/* How to Use */}
-              <Collapsible className={`border rounded-lg ${isAeroGlow ? 'border-red-800/50 bg-gray-900/50' : ''}`}>
-                <CollapsibleTrigger className={`flex items-center justify-between w-full p-4 transition-colors ${isAeroGlow ? 'hover:bg-red-950/30 text-white' : 'hover:bg-muted/50'}`}>
+              <Collapsible className="border rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 transition-colors hover:bg-muted/50">
                   <div className="flex items-center gap-3">
-                    <Check className={`w-5 h-5 ${isAeroGlow ? 'text-red-400' : 'text-primary'}`} />
+                    <Check className="w-5 h-5 text-primary" />
                     <span className="font-medium text-left">Cómo usar (muy fácil)</span>
                   </div>
-                  <ChevronDown className={`w-5 h-5 transition-transform ${isAeroGlow ? 'text-gray-300' : 'text-muted-foreground'}`} />
+                  <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className={`px-4 pb-4 text-sm ${isAeroGlow ? 'text-gray-200' : 'text-muted-foreground'}`}>
+                <CollapsibleContent className="px-4 pb-4 text-sm text-muted-foreground">
                   <ol className="space-y-2 list-decimal list-inside">
                     {productContent.dropdowns.howToUse.steps.map((step, idx) => <li key={idx}>{step}</li>)}
                   </ol>
-                  <p className={`mt-3 font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>{productContent.dropdowns.howToUse.additionalNote}</p>
+                  <p className="mt-3 font-medium text-foreground">{productContent.dropdowns.howToUse.additionalNote}</p>
                 </CollapsibleContent>
               </Collapsible>
 
               {/* What Makes It Different */}
-              <Collapsible className={`border rounded-lg ${isAeroGlow ? 'border-red-800/50 bg-gray-900/50' : ''}`}>
-                <CollapsibleTrigger className={`flex items-center justify-between w-full p-4 transition-colors ${isAeroGlow ? 'hover:bg-red-950/30 text-white' : 'hover:bg-muted/50'}`}>
+              <Collapsible className="border rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 transition-colors hover:bg-muted/50">
                   <div className="flex items-center gap-3">
-                    <Award className={`w-5 h-5 ${isAeroGlow ? 'text-red-400' : 'text-primary'}`} />
+                    <Award className="w-5 h-5 text-primary" />
                     <span className="font-medium text-left">¿Qué la diferencia?</span>
                   </div>
-                  <ChevronDown className={`w-5 h-5 transition-transform ${isAeroGlow ? 'text-gray-300' : 'text-muted-foreground'}`} />
+                  <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className={`px-4 pb-4 text-sm space-y-3 ${isAeroGlow ? 'text-gray-200' : 'text-muted-foreground'}`}>
+                <CollapsibleContent className="px-4 pb-4 text-sm space-y-3 text-muted-foreground">
                   {productContent.dropdowns.whatMakesDifferent.map((diff, idx) => <div key={idx}>
-                      <p className={`font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>{diff.title}</p>
+                      <p className="font-medium text-foreground">{diff.title}</p>
                       <p>{diff.description}</p>
                     </div>)}
                 </CollapsibleContent>
               </Collapsible>
 
               {/* Safety & Guarantee */}
-              <Collapsible className={`border rounded-lg ${isAeroGlow ? 'border-red-800/50 bg-gray-900/50' : ''}`}>
-                <CollapsibleTrigger className={`flex items-center justify-between w-full p-4 transition-colors ${isAeroGlow ? 'hover:bg-red-950/30 text-white' : 'hover:bg-muted/50'}`}>
+              <Collapsible className="border rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 transition-colors hover:bg-muted/50">
                   <div className="flex items-center gap-3">
-                    <Shield className={`w-5 h-5 ${isAeroGlow ? 'text-red-400' : 'text-primary'}`} />
+                    <Shield className="w-5 h-5 text-primary" />
                     <span className="font-medium text-left">Seguridad y garantía</span>
                   </div>
-                  <ChevronDown className={`w-5 h-5 transition-transform ${isAeroGlow ? 'text-gray-300' : 'text-muted-foreground'}`} />
+                  <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className={`px-4 pb-4 text-sm space-y-2 ${isAeroGlow ? 'text-gray-200' : 'text-muted-foreground'}`}>
+                <CollapsibleContent className="px-4 pb-4 text-sm space-y-2 text-muted-foreground">
                   <div className="space-y-3">
                     <div className="flex items-start gap-2">
-                      <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${isAeroGlow ? 'text-green-400' : 'text-green-600'}`} />
+                      <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-600" />
                       <div>
-                        <p className={`font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>Certificado CE</p>
+                        <p className="font-medium text-foreground">Certificado CE</p>
                         <p>Cumple con todos los estándares europeos de seguridad</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${isAeroGlow ? 'text-green-400' : 'text-green-600'}`} />
+                      <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-600" />
                       <div>
-                        <p className={`font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>24 meses de garantía comercial</p>
+                        <p className="font-medium text-foreground">24 meses de garantía comercial</p>
                         <p>Contra defectos de fabricación</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${isAeroGlow ? 'text-green-400' : 'text-green-600'}`} />
+                      <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-600" />
                       <div>
-                        <p className={`font-medium ${isAeroGlow ? 'text-white' : 'text-foreground'}`}>Devolución por defecto técnico</p>
+                        <p className="font-medium text-foreground">Devolución por defecto técnico</p>
                         <Link to="/garantia" className="text-sm underline hover:text-primary">
                           Consulta condiciones en política de garantía
                         </Link>
@@ -542,7 +542,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Trust Footer */}
-            <div className={`p-4 rounded-lg text-xs border ${isAeroGlow ? 'bg-red-950/20 border-red-900/30 text-gray-300' : 'bg-muted/30 border text-muted-foreground'}`}>
+            <div className="p-4 rounded-lg text-xs border bg-muted/30 text-muted-foreground">
               <p>Los resultados pueden variar. Úsalo con constancia para mejores resultados. Certificado CE. Garantía comercial 2 años. Producto higiénico-sanitario: no admite devolución una vez desprecintado salvo defecto técnico verificado.</p>
             </div>
           </div>
@@ -550,7 +550,7 @@ const ProductDetail = () => {
       </div>
 
       {/* Sticky Buy Box - Mobile Only */}
-      {isMobile && !isAeroGlow && <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border p-4 shadow-lg">
+      {isMobile && <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border p-4 shadow-lg">
           <div className="container flex items-center gap-3">
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold truncate">{node.title}</p>
