@@ -7,6 +7,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { Testimonials } from "@/components/Testimonials";
 import { UGCSection } from "@/components/UGCSection";
 import { PromotionalBanners } from "@/components/PromotionalBanners";
+import { BlackFridayFeatured } from "@/components/BlackFridayFeatured";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -50,6 +51,9 @@ const Index = () => {
       <div className="container py-8 md:py-12">
         <TrustBadges />
       </div>
+
+      {/* Black Friday Featured Products */}
+      <BlackFridayFeatured />
 
       {/* Promotional Banners Carousel */}
       <PromotionalBanners />
