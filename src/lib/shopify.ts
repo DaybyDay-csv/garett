@@ -141,7 +141,7 @@ export async function fetchProducts(first: number = 50, query?: string): Promise
   return data.data.products.edges;
 }
 
-// Cart Create Mutation
+// Cart Create Mutation with Discount Codes
 export const CART_CREATE_MUTATION = `
   mutation cartCreate($input: CartInput!) {
     cartCreate(input: $input) {
@@ -154,12 +154,26 @@ export const CART_CREATE_MUTATION = `
             amount
             currencyCode
           }
+          subtotalAmount {
+            amount
+            currencyCode
+          }
+        }
+        discountCodes {
+          code
+          applicable
         }
         lines(first: 100) {
           edges {
             node {
               id
               quantity
+              cost {
+                totalAmount {
+                  amount
+                  currencyCode
+                }
+              }
               merchandise {
                 ... on ProductVariant {
                   id
@@ -211,15 +225,25 @@ export async function fetchGWPProduct(): Promise<ShopifyProduct | null> {
   }
 }
 
-// Create Checkout
-export async function createStorefrontCheckout(items: Array<{ variantId: string; quantity: number }>): Promise<string> {
+// Create Checkout with Discount Codes
+export async function createStorefrontCheckout(
+  items: Array<{ variantId: string; quantity: number }>,
+  discountCodes?: string[]
+): Promise<string> {
   const lines = items.map(item => ({
     quantity: item.quantity,
     merchandiseId: item.variantId,
   }));
 
+  const input: any = { lines };
+  
+  // Add discount codes if provided
+  if (discountCodes && discountCodes.length > 0) {
+    input.discountCodes = discountCodes;
+  }
+
   const cartData = await storefrontApiRequest(CART_CREATE_MUTATION, {
-    input: { lines },
+    input,
   });
 
   if (cartData.data.cartCreate.userErrors.length > 0) {
@@ -234,5 +258,11 @@ export async function createStorefrontCheckout(items: Array<{ variantId: string;
 
   const url = new URL(cart.checkoutUrl);
   url.searchParams.set('channel', 'online_store');
+  
+  // Log discount application status
+  if (cart.discountCodes && cart.discountCodes.length > 0) {
+    console.log('Discount codes applied:', cart.discountCodes);
+  }
+  
   return url.toString();
 }

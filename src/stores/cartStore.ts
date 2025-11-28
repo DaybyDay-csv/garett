@@ -163,8 +163,28 @@ export const useCartStore = create<CartStore>()(
 
         setLoading(true);
         try {
+          // Get current promotional stage and discount code
+          const currentStage = getCurrentPromotionalStage();
+          const discountCodes: string[] = [];
+          
+          // Add stage discount code if available
+          if (currentStage?.code) {
+            discountCodes.push(currentStage.code);
+          }
+          
+          // Check if cart contains AeroGlow products (requires special 10% code)
+          const hasAeroGlow = items.some(item => 
+            item.product.node.handle === 'plancha-pelo-aeroglow'
+          );
+          
+          if (hasAeroGlow) {
+            // Add AeroGlow specific discount code (10% additional)
+            discountCodes.push('AEROGLOW10');
+          }
+          
           const checkoutUrl = await createStorefrontCheckout(
-            items.map(item => ({ variantId: item.variantId, quantity: item.quantity }))
+            items.map(item => ({ variantId: item.variantId, quantity: item.quantity })),
+            discountCodes.length > 0 ? discountCodes : undefined
           );
           setCheckoutUrl(checkoutUrl);
         } catch (error) {
