@@ -33,7 +33,7 @@ export const HeroSection = () => {
       <div className="container relative py-8 md:py-20 h-full px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start md:items-center h-full">
           {/* Text Content - Left Side */}
-          <div className="space-y-3 md:space-y-4 text-left max-w-[240px] md:max-w-sm lg:ml-12 relative">
+          <div className="space-y-3 md:space-y-4 text-left max-w-[200px] md:max-w-xs lg:ml-12 relative">
             {/* Soft gradient behind text for readability */}
             <div className={`absolute inset-0 -inset-x-4 -inset-y-2 bg-gradient-to-r rounded-lg blur-md -z-10 ${isAlternateHero ? 'from-black/40' : 'from-background/60'} to-transparent`} />
             
