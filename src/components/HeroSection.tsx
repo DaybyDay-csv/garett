@@ -47,7 +47,7 @@ export const HeroSection = () => {
       <div className="container relative py-8 md:py-20 h-full px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start md:items-center h-full">
           {/* Text Content - Left Side */}
-          <div className="space-y-4 md:space-y-6 text-left max-w-[320px] md:max-w-xl lg:ml-12 relative">
+          <div className="space-y-3 md:space-y-5 text-left max-w-[280px] md:max-w-md lg:ml-12 relative">
             {/* Soft gradient behind text for readability */}
             <div className={`absolute inset-0 -inset-x-4 -inset-y-2 bg-gradient-to-r rounded-lg blur-md -z-10 ${
               isAlternateHero ? 'from-black/40' : 'from-background/60'
@@ -60,34 +60,34 @@ export const HeroSection = () => {
               Tecnología polaca de última generación
             </div>
             
-            <h1 className={`text-3xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight animate-fade-in [animation-delay:100ms] ${
+            <h1 className={`text-2xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight animate-fade-in [animation-delay:100ms] ${
               isAlternateHero ? 'text-white' : 'text-foreground'
             }`}>
-              Tecnología estética profesional<br />
-              con resultados en semanas.<br />
+              Tecnología estética profesional con resultados en semanas.
+              <br />
               <span className={isAlternateHero ? 'text-white' : 'text-primary'}>Hoy con hasta -50%</span>
             </h1>
             
-            <p className={`text-base md:text-lg leading-relaxed animate-fade-in [animation-delay:150ms] ${
+            <p className={`text-sm md:text-base leading-relaxed animate-fade-in [animation-delay:150ms] ${
               isAlternateHero ? 'text-white/90' : 'text-foreground/80'
             }`}>
               Dispositivos faciales y corporales con base científica, sin agujas ni dolor, con la confianza de El Corte Inglés.
             </p>
             
             {/* CTAs */}
-            <div className="flex flex-col gap-3 md:gap-4 w-full md:max-w-none animate-fade-in [animation-delay:200ms]">
-              <Button asChild size="lg" className={`text-base md:text-base group h-12 md:h-12 px-6 max-w-[240px] md:max-w-none ${
+            <div className="flex flex-col gap-2 md:gap-3 w-full animate-fade-in [animation-delay:200ms]">
+              <Button asChild size="default" className={`text-sm md:text-sm group h-10 md:h-11 px-5 w-full ${
                 isAlternateHero 
                   ? 'bg-white hover:bg-white/90 text-gray-900 shadow-lg' 
                   : 'bg-foreground hover:bg-foreground/90 text-background shadow-lg'
               }`}>
-                <Link to="/black-friday">
+                <Link to="/black-friday" className="flex items-center justify-center gap-2">
                   Ver dispositivos Black Friday
-                  <ArrowRight className="ml-2 w-5 h-5 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               
-              <Button asChild variant="outline" size="lg" className={`text-base md:text-base h-12 md:h-12 px-6 max-w-[240px] md:max-w-none ${
+              <Button asChild variant="outline" size="default" className={`text-sm md:text-sm h-10 md:h-11 px-5 w-full ${
                 isAlternateHero 
                   ? 'border-white/50 bg-white/10 text-white hover:bg-white/20 hover:text-white hover:border-white' 
                   : 'border-foreground/30 bg-background/80 text-foreground hover:bg-foreground/10 hover:border-foreground/50'
@@ -99,7 +99,7 @@ export const HeroSection = () => {
             </div>
             
             {/* Trust Indicators */}
-            <div className={`flex flex-col gap-2 md:gap-3 text-sm md:text-sm pt-2 md:pt-4 animate-fade-in [animation-delay:300ms] ${
+            <div className={`flex flex-col gap-1.5 md:gap-2 text-xs md:text-sm pt-1 md:pt-2 animate-fade-in [animation-delay:300ms] ${
               isAlternateHero ? 'text-white' : 'text-foreground'
             }`}>
               <div className="flex items-center gap-2">
