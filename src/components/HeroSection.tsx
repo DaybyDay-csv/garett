@@ -33,7 +33,7 @@ export const HeroSection = () => {
       <div className="container relative py-8 md:py-20 h-full px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start md:items-center h-full">
           {/* Text Content - Left Side */}
-          <div className="space-y-3 md:space-y-4 text-left max-w-[200px] md:max-w-xs lg:ml-12 relative">
+          <div className="space-y-3 md:space-y-5 text-left max-w-[280px] md:max-w-md lg:ml-12 relative">
             {/* Soft gradient behind text for readability */}
             <div className={`absolute inset-0 -inset-x-4 -inset-y-2 bg-gradient-to-r rounded-lg blur-md -z-10 ${isAlternateHero ? 'from-black/40' : 'from-background/60'} to-transparent`} />
             
@@ -55,14 +55,14 @@ export const HeroSection = () => {
             
             {/* CTAs */}
             <div className="flex flex-col gap-2 md:gap-3 w-full animate-fade-in [animation-delay:200ms]">
-              <Button asChild size="sm" className={`text-xs md:text-sm group h-8 md:h-9 px-4 w-full ${isAlternateHero ? 'bg-white hover:bg-white/90 text-gray-900 shadow-lg' : 'bg-foreground hover:bg-foreground/90 text-background shadow-lg'}`}>
+              <Button asChild size="default" className={`text-sm md:text-sm group h-10 md:h-11 px-5 w-full ${isAlternateHero ? 'bg-white hover:bg-white/90 text-gray-900 shadow-lg' : 'bg-foreground hover:bg-foreground/90 text-background shadow-lg'}`}>
                 <Link to="/black-friday" className="flex items-center justify-center gap-2">
-                  Ver Black Friday
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  Ver dispositivos Black Friday
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               
-              <Button asChild variant="outline" size="sm" className={`text-xs md:text-sm h-8 md:h-9 px-4 w-full ${isAlternateHero ? 'border-white/50 bg-white/10 text-white hover:bg-white/20 hover:text-white hover:border-white' : 'border-foreground/30 bg-background/80 text-foreground hover:bg-foreground/10 hover:border-foreground/50'}`}>
+              <Button asChild variant="outline" size="default" className={`text-sm md:text-sm h-10 md:h-11 px-5 w-full ${isAlternateHero ? 'border-white/50 bg-white/10 text-white hover:bg-white/20 hover:text-white hover:border-white' : 'border-foreground/30 bg-background/80 text-foreground hover:bg-foreground/10 hover:border-foreground/50'}`}>
                 <Link to="/superventas">
                   Superventas 
                 </Link>
