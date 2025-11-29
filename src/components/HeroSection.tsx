@@ -37,8 +37,8 @@ export const HeroSection = () => {
             {/* Soft gradient behind text for readability */}
             <div className={`absolute inset-0 -inset-x-4 -inset-y-2 bg-gradient-to-r rounded-lg blur-md -z-10 ${isAlternateHero ? 'from-black/40' : 'from-background/60'} to-transparent`} />
             
-            <div className={`inline-flex items-center gap-2 px-4 py-2 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium animate-fade-in ${isAlternateHero ? 'bg-white/20 text-white border border-white/30' : 'bg-primary/10 text-primary border border-primary/20'}`}>
-              <Sparkles className="w-4 h-4 md:w-4 md:h-4" />
+            <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs font-medium animate-fade-in ${isAlternateHero ? 'bg-white/20 text-white border border-white/30' : 'bg-primary/10 text-primary border border-primary/20'}`}>
+              <Sparkles className="w-3 h-3 md:w-3.5 md:h-3.5" />
               Tecnología polaca de última generación
             </div>
             
@@ -54,15 +54,15 @@ export const HeroSection = () => {
             </p>
             
             {/* CTAs */}
-            <div className="flex flex-col gap-2 md:gap-3 w-full max-w-[240px] animate-fade-in [animation-delay:200ms]">
-              <Button asChild size="default" className={`text-sm md:text-sm group h-10 md:h-11 px-5 w-full ${isAlternateHero ? 'bg-white hover:bg-white/90 text-gray-900 shadow-lg' : 'bg-foreground hover:bg-foreground/90 text-background shadow-lg'}`}>
+            <div className="flex flex-col gap-2 md:gap-3 w-full max-w-[200px] animate-fade-in [animation-delay:200ms]">
+              <Button asChild size="default" className={`text-xs md:text-sm group h-9 md:h-10 px-4 w-full ${isAlternateHero ? 'bg-white hover:bg-white/90 text-gray-900 shadow-lg' : 'bg-foreground hover:bg-foreground/90 text-background shadow-lg'}`}>
                 <Link to="/black-friday" className="flex items-center justify-center gap-2">
                   Ver Black Friday
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               
-              <Button asChild variant="outline" size="default" className={`text-sm md:text-sm h-10 md:h-11 px-5 w-full ${isAlternateHero ? 'border-white/50 bg-white/10 text-white hover:bg-white/20 hover:text-white hover:border-white' : 'border-foreground/30 bg-background/80 text-foreground hover:bg-foreground/10 hover:border-foreground/50'}`}>
+              <Button asChild variant="outline" size="default" className={`text-xs md:text-sm h-9 md:h-10 px-4 w-full ${isAlternateHero ? 'border-white/50 bg-white/10 text-white hover:bg-white/20 hover:text-white hover:border-white' : 'border-foreground/30 bg-background/80 text-foreground hover:bg-foreground/10 hover:border-foreground/50'}`}>
                 <Link to="/superventas">
                   Superventas 
                 </Link>
