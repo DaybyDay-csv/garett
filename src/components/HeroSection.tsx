@@ -55,14 +55,14 @@ export const HeroSection = () => {
             
             {/* CTAs */}
             <div className="flex flex-col gap-2 md:gap-3 w-full animate-fade-in [animation-delay:200ms]">
-              <Button asChild size="default" className={`text-sm md:text-sm group h-10 md:h-11 px-5 w-full ${isAlternateHero ? 'bg-white hover:bg-white/90 text-gray-900 shadow-lg' : 'bg-foreground hover:bg-foreground/90 text-background shadow-lg'}`}>
+              <Button asChild size="sm" className={`text-xs md:text-sm group h-8 md:h-9 px-4 w-full ${isAlternateHero ? 'bg-white hover:bg-white/90 text-gray-900 shadow-lg' : 'bg-foreground hover:bg-foreground/90 text-background shadow-lg'}`}>
                 <Link to="/black-friday" className="flex items-center justify-center gap-2">
-                  Ver dispositivos Black Friday
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  Ver Black Friday
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               
-              <Button asChild variant="outline" size="default" className={`text-sm md:text-sm h-10 md:h-11 px-5 w-full ${isAlternateHero ? 'border-white/50 bg-white/10 text-white hover:bg-white/20 hover:text-white hover:border-white' : 'border-foreground/30 bg-background/80 text-foreground hover:bg-foreground/10 hover:border-foreground/50'}`}>
+              <Button asChild variant="outline" size="sm" className={`text-xs md:text-sm h-8 md:h-9 px-4 w-full ${isAlternateHero ? 'border-white/50 bg-white/10 text-white hover:bg-white/20 hover:text-white hover:border-white' : 'border-foreground/30 bg-background/80 text-foreground hover:bg-foreground/10 hover:border-foreground/50'}`}>
                 <Link to="/superventas">
                   Superventas 
                 </Link>
