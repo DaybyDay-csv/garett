@@ -12,6 +12,9 @@ import { BlackFridayFeatured } from "@/components/BlackFridayFeatured";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { FAQ } from "@/components/FAQ";
 import { BlogCarousel } from "@/components/BlogCarousel";
+import { TrustBlock } from "@/components/TrustBlock";
+import { ObjectionsSection } from "@/components/ObjectionsSection";
+import { ResultsTimeline } from "@/components/ResultsTimeline";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -85,8 +88,17 @@ const Index = () => {
         <TrustBadges />
       </div>
 
+      {/* Trust Block - "Cuidar tu piel sin miedo" */}
+      <TrustBlock />
+
+      {/* Results Timeline - "Resultados en semanas" */}
+      <ResultsTimeline />
+
       {/* Black Friday Featured Products */}
       <BlackFridayFeatured />
+
+      {/* Objections Section - Addressing concerns */}
+      <ObjectionsSection />
 
       {/* Promotional Banners Carousel */}
       <PromotionalBanners />

@@ -20,6 +20,7 @@ import { productSpecificFAQs } from "@/lib/faqData";
 import { getCategoryFromTags } from "@/lib/categories";
 import * as LucideIcons from "lucide-react";
 import gwpHeadband from "@/assets/gwp-headband.png";
+import elCorteInglesLogo from "@/assets/el-corte-ingles-logo.png";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -420,7 +421,15 @@ const ProductDetail = () => {
                 </Badge>
               </div>
               
-              <h1 className="text-3xl md:text-4xl font-semibold mb-5 md:mb-4 tracking-tight leading-tight">{node.title}</h1>
+              <h1 className="text-3xl md:text-4xl font-semibold mb-5 md:mb-4 tracking-tight leading-tight">
+                {productContent.pdpHeadline || node.title}
+              </h1>
+              
+              {productContent.pdpSubheadline && (
+                <p className="text-base md:text-lg text-muted-foreground mb-4 leading-relaxed">
+                  {productContent.pdpSubheadline}
+                </p>
+              )}
               
               {/* Quick Benefits - Above the fold */}
               <div className="flex flex-wrap gap-3 mb-5">
@@ -454,9 +463,21 @@ const ProductDetail = () => {
                     </span>
                   </div>
                   <p className="text-sm text-muted-foreground">IVA incluido</p>
+                  
+                  {/* ECI Trust Microcopy */}
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground mt-3 pt-3 border-t">
+                    <img src={elCorteInglesLogo} alt="El Corte Inglés" className="h-4" />
+                    <span>También disponible en El Corte Inglés</span>
+                  </div>
                 </div> : <div>
                   <div className="text-4xl md:text-5xl font-semibold tracking-tight">€{priceInfo.originalPrice.toFixed(2)}</div>
                   <p className="text-sm mt-1 text-muted-foreground">IVA incluido</p>
+                  
+                  {/* ECI Trust Microcopy */}
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground mt-3 pt-3 border-t">
+                    <img src={elCorteInglesLogo} alt="El Corte Inglés" className="h-4" />
+                    <span>También disponible en El Corte Inglés</span>
+                  </div>
                 </div>}
             </div>
 

@@ -1,6 +1,8 @@
 import { LucideIcon } from "lucide-react";
 
 export interface ProductContent {
+  pdpHeadline?: string;
+  pdpSubheadline?: string;
   quickBenefits: Array<{
     icon: string;
     text: string;
@@ -32,9 +34,11 @@ export interface ProductContent {
 const productContentMap: Record<string, ProductContent> = {
   // IPL / Depilación (Flash, Flash Pro, Cold White)
   'depilacion-ipl': {
+    pdpHeadline: 'Reduce hasta un 90% del vello visible en 8 semanas',
+    pdpSubheadline: 'Luz pulsada doméstica certificada para depilación permanente desde casa',
     quickBenefits: [
       { icon: 'Zap', text: '400.000 pulsos de luz' },
-      { icon: 'Check', text: 'Resultados desde 4 semanas' },
+      { icon: 'Check', text: 'Resultados desde semana 4' },
       { icon: 'Award', text: 'Tecnología clínica en casa' }
     ],
     dropdowns: {
@@ -98,10 +102,12 @@ const productContentMap: Record<string, ProductContent> = {
 
   // Pretty Face - Masajeador facial con EMS (sin vibración ni LED)
   'pretty-face': {
+    pdpHeadline: 'Piel más firme y efecto "lifting" en 4 semanas, sin agujas',
+    pdpSubheadline: 'Combina EMS y masaje relajante para trabajar flacidez y firmeza desde casa',
     quickBenefits: [
       { icon: 'Zap', text: 'Tecnología EMS Fitness' },
       { icon: 'Heart', text: 'Modo Relajación' },
-      { icon: 'Sparkles', text: 'Máxima absorción de activos' }
+      { icon: 'Clock', text: 'Resultados desde semana 4' }
     ],
     dropdowns: {
       howItWorks: {
@@ -160,8 +166,10 @@ const productContentMap: Record<string, ProductContent> = {
 
   // Masajeadores Faciales (Lift Skin, Fresh Eye) - con vibración y LED
   'masajeadores-faciales': {
+    pdpHeadline: 'Piel más firme y efecto "lifting" en 4 semanas, sin agujas',
+    pdpSubheadline: 'Vibración sónica + EMS + LED para reafirmar y tonificar desde casa, en sesiones de 10 minutos',
     quickBenefits: [
-      { icon: 'Clock', text: '10 min al día' },
+      { icon: 'Clock', text: 'Resultados desde semana 4' },
       { icon: 'Sparkles', text: 'Firmeza natural' },
       { icon: 'Zap', text: 'Vibración + EMS + LED' }
     ],
@@ -227,10 +235,12 @@ const productContentMap: Record<string, ProductContent> = {
 
   // Limpieza Facial (Clean, Clean Pro, Sonic Scrub)
   'limpieza-facial': {
+    pdpHeadline: 'Cutis limpio y receptivo a tus cremas',
+    pdpSubheadline: 'Te guiamos hacia una limpieza profunda que ayuda a que tus tratamientos penetren mejor',
     quickBenefits: [
       { icon: 'Clock', text: '1 min al día' },
       { icon: 'Sparkles', text: 'Limpieza 10x más profunda' },
-      { icon: 'Check', text: 'Poros visiblemente más finos' }
+      { icon: 'Check', text: 'Para pieles maduras y sensibles' }
     ],
     dropdowns: {
       howItWorks: {
@@ -293,10 +303,12 @@ const productContentMap: Record<string, ProductContent> = {
 
   // Mesoterapia (Calm Skin, Fresh Skin Pro, Serum Skin)
   'mesoterapia': {
+    pdpHeadline: 'Piel más firme y efecto "lifting" en 4 semanas, sin agujas',
+    pdpSubheadline: 'Mesoterapia sin agujas, sin dolor. Utiliza la misma base tecnológica que los tratamientos de cabina',
     quickBenefits: [
       { icon: 'Droplets', text: 'Absorción 90% mayor' },
-      { icon: 'Sparkles', text: 'Sin agujas, sin dolor' },
-      { icon: 'Check', text: 'Penetración profunda' }
+      { icon: 'Clock', text: 'Resultados desde semana 4' },
+      { icon: 'Check', text: 'Sin agujas, sin dolor' }
     ],
     dropdowns: {
       howItWorks: {
@@ -425,10 +437,12 @@ const productContentMap: Record<string, ProductContent> = {
 
   // AeroGlow - Plancha de pelo con tecnología iónica
   'cuidado-capilar': {
+    pdpHeadline: 'Pelo liso y protegido, sin daños por calor',
+    pdpSubheadline: 'Peina y seca con aire, sin quemar tu melena. Tecnología pensada para pelo maduro y teñido',
     quickBenefits: [
-      { icon: 'Zap', text: 'Iones negativos anti-frizz' },
-      { icon: 'Wind', text: 'Motor 110.000 RPM' },
-      { icon: 'Thermometer', text: '5 niveles temperatura' }
+      { icon: 'Wind', text: 'Seca y alisa con aire' },
+      { icon: 'Shield', text: 'Sin daño térmico' },
+      { icon: 'Sparkles', text: 'Para pelo teñido y maduro' }
     ],
     dropdowns: {
       howItWorks: {
