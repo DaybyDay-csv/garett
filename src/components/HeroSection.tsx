@@ -60,29 +60,34 @@ export const HeroSection = () => {
               Tecnología polaca de última generación
             </div>
             
-            <h1 className={`text-4xl md:text-6xl lg:text-7xl font-semibold leading-[0.95] tracking-tight animate-fade-in [animation-delay:100ms] ${
+            <h1 className={`text-3xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight animate-fade-in [animation-delay:100ms] ${
               isAlternateHero ? 'text-white' : 'text-header'
             }`}>
-              BLACK FRIDAY<br />
-              UP TO 50% OFF<br />
-              TU SPA DE<br className="hidden md:block" />{" "}
-              LUJO EN CASA
+              Tecnología estética profesional<br />
+              con resultados en semanas.<br />
+              <span className="text-primary">Hoy con hasta -50%</span>
             </h1>
+            
+            <p className={`text-base md:text-lg leading-relaxed animate-fade-in [animation-delay:150ms] ${
+              isAlternateHero ? 'text-white/90' : 'text-muted-foreground'
+            }`}>
+              Dispositivos faciales y corporales con base científica, sin agujas ni dolor, con la confianza de El Corte Inglés.
+            </p>
             
             {/* CTAs */}
             <div className="flex flex-col gap-3 md:gap-4 w-full md:max-w-none animate-fade-in [animation-delay:200ms]">
-              <Button asChild size="lg" className={`text-base md:text-base group h-12 md:h-12 px-6 max-w-[180px] md:max-w-none ${
+              <Button asChild size="lg" className={`text-base md:text-base group h-12 md:h-12 px-6 max-w-[240px] md:max-w-none ${
                 isAlternateHero 
                   ? 'bg-white hover:bg-white/90 text-gray-900' 
                   : 'bg-header hover:bg-header/90 text-header-foreground'
               }`}>
-                <Link to="/productos">
-                  Ver Productos
+                <Link to="/black-friday">
+                  Ver dispositivos Black Friday
                   <ArrowRight className="ml-2 w-5 h-5 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               
-              <Button asChild variant="outline" size="lg" className={`text-base md:text-base h-12 md:h-12 px-6 max-w-[180px] md:max-w-none ${
+              <Button asChild variant="outline" size="lg" className={`text-base md:text-base h-12 md:h-12 px-6 max-w-[240px] md:max-w-none ${
                 isAlternateHero 
                   ? 'border-white/50 bg-white/10 text-white hover:bg-white/20 hover:text-white' 
                   : 'border-header/30 bg-header/5 text-header hover:bg-header/10 hover:text-header'
@@ -99,15 +104,19 @@ export const HeroSection = () => {
             }`}>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
-                <span className="font-medium">Garantía 2 años</span>
+                <span className="font-medium">Firmeza visible en 4 semanas desde casa</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
-                <span className="font-medium">Envío gratis desde 150€</span>
+                <span className="font-medium">Hasta un 90% menos de vello en 8 semanas</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
-                <span className="font-medium">En El Corte Inglés</span>
+                <span className="font-medium">Ahorra hasta 3.000€/año vs clínicas</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
+                <span className="font-medium">Garantía extendida + En El Corte Inglés</span>
               </div>
             </div>
           </div>
