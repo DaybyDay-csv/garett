@@ -54,7 +54,7 @@ export const HeroSection = () => {
             </p>
             
             {/* CTAs */}
-            <div className="flex flex-col gap-2 md:gap-3 w-full animate-fade-in [animation-delay:200ms]">
+            <div className="flex flex-col gap-2 md:gap-3 w-full max-w-[240px] animate-fade-in [animation-delay:200ms]">
               <Button asChild size="default" className={`text-sm md:text-sm group h-10 md:h-11 px-5 w-full ${isAlternateHero ? 'bg-white hover:bg-white/90 text-gray-900 shadow-lg' : 'bg-foreground hover:bg-foreground/90 text-background shadow-lg'}`}>
                 <Link to="/black-friday" className="flex items-center justify-center gap-2">
                   Ver dispositivos Black Friday
