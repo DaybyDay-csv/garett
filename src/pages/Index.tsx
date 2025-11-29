@@ -14,7 +14,6 @@ import { FAQ } from "@/components/FAQ";
 import { BlogCarousel } from "@/components/BlogCarousel";
 import { ObjectionsSection } from "@/components/ObjectionsSection";
 import { ResultsTimeline } from "@/components/ResultsTimeline";
-import { ProductComparison } from "@/components/ProductComparison";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -295,9 +294,6 @@ const Index = () => {
 
       {/* Objections Section - Addressing concerns */}
       <ObjectionsSection />
-
-      {/* Product Comparison Section */}
-      <ProductComparison />
 
       {/* Promotional Banners Carousel */}
       <PromotionalBanners />
