@@ -48,8 +48,10 @@ export const HeroSection = () => {
               <span className={isAlternateHero ? 'text-white' : 'text-primary'}>Hoy con hasta -50%</span>
             </h1>
             
-            <p className={`text-xs md:text-sm leading-relaxed animate-fade-in [animation-delay:150ms] ${isAlternateHero ? 'text-white/90' : 'text-foreground/80'}`}>Sin agujas, sin dolor. 
-Con la confianza de El Corte Inglés.</p>
+            <p className={`text-xs md:text-sm leading-relaxed animate-fade-in [animation-delay:150ms] ${isAlternateHero ? 'text-white/90' : 'text-foreground/80'}`}>
+              Sin agujas, sin dolor.<br />
+              Con la confianza de El Corte Inglés.
+            </p>
             
             {/* CTAs */}
             <div className="flex flex-col gap-2 md:gap-3 w-full animate-fade-in [animation-delay:200ms]">
