@@ -68,10 +68,10 @@ export const HeroSection = () => {
               <span className={isAlternateHero ? 'text-white' : 'text-primary'}>Hoy con hasta -50%</span>
             </h1>
             
-            <p className={`text-sm md:text-base leading-relaxed animate-fade-in [animation-delay:150ms] ${
+            <p className={`text-xs md:text-sm leading-relaxed animate-fade-in [animation-delay:150ms] ${
               isAlternateHero ? 'text-white/90' : 'text-foreground/80'
             }`}>
-              Dispositivos faciales y corporales con base científica, sin agujas ni dolor, con la confianza de El Corte Inglés.
+              Sin agujas, sin dolor. Con la confianza de El Corte Inglés.
             </p>
             
             {/* CTAs */}
@@ -99,24 +99,24 @@ export const HeroSection = () => {
             </div>
             
             {/* Trust Indicators */}
-            <div className={`flex flex-col gap-1.5 md:gap-2 text-xs md:text-sm pt-1 md:pt-2 animate-fade-in [animation-delay:300ms] ${
+            <div className={`flex flex-col gap-1 md:gap-1.5 text-[10px] md:text-xs pt-1 md:pt-2 animate-fade-in [animation-delay:300ms] ${
               isAlternateHero ? 'text-white' : 'text-foreground'
             }`}>
               <div className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
-                <span className="font-medium">Firmeza visible en 4 semanas desde casa</span>
+                <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
+                <span className="font-medium">Firmeza visible en 4 semanas</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
-                <span className="font-medium">Hasta un 90% menos de vello en 8 semanas</span>
+                <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
+                <span className="font-medium">90% menos vello en 8 semanas</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
-                <span className="font-medium">Ahorra hasta 3.000€/año vs clínicas</span>
+                <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
+                <span className="font-medium">Ahorra 3.000€/año vs clínicas</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
-                <span className="font-medium">Garantía extendida + En El Corte Inglés</span>
+                <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
+                <span className="font-medium">Garantía extendida + El Corte Inglés</span>
               </div>
             </div>
           </div>
