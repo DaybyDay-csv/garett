@@ -12,7 +12,6 @@ import { BlackFridayFeatured } from "@/components/BlackFridayFeatured";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { FAQ } from "@/components/FAQ";
 import { BlogCarousel } from "@/components/BlogCarousel";
-import { TrustBlock } from "@/components/TrustBlock";
 import { ObjectionsSection } from "@/components/ObjectionsSection";
 import { ResultsTimeline } from "@/components/ResultsTimeline";
 import { Button } from "@/components/ui/button";
@@ -88,20 +87,8 @@ const Index = () => {
         <TrustBadges />
       </div>
 
-      {/* Trust Block - "Cuidar tu piel sin miedo" */}
-      <TrustBlock />
-
-      {/* Results Timeline - "Resultados en semanas" */}
-      <ResultsTimeline />
-
       {/* Black Friday Featured Products */}
       <BlackFridayFeatured />
-
-      {/* Objections Section - Addressing concerns */}
-      <ObjectionsSection />
-
-      {/* Promotional Banners Carousel */}
-      <PromotionalBanners />
 
       {/* Superventas - Horizontal Scroll */}
       {bestSellers.length > 0 && <section id="superventas" className="py-10 md:py-12 bg-gradient-to-b from-background to-secondary/10">
@@ -129,6 +116,9 @@ const Index = () => {
           </div>
         </section>}
 
+
+      {/* Results Timeline - "Resultados en semanas" */}
+      <ResultsTimeline />
 
       {/* Categories Section */}
       <section className="py-12 md:py-20 bg-white">
@@ -301,6 +291,12 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Objections Section - Addressing concerns */}
+      <ObjectionsSection />
+
+      {/* Promotional Banners Carousel */}
+      <PromotionalBanners />
 
       {/* UGC Section - Real User Stories */}
       <UGCSection />
