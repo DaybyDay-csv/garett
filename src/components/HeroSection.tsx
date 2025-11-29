@@ -54,22 +54,22 @@ export const HeroSection = () => {
             } to-transparent`} />
             
             <div className={`inline-flex items-center gap-2 px-4 py-2 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium animate-fade-in ${
-              isAlternateHero ? 'bg-white/20 text-white' : 'bg-primary/10 text-primary'
+              isAlternateHero ? 'bg-white/20 text-white border border-white/30' : 'bg-primary/10 text-primary border border-primary/20'
             }`}>
               <Sparkles className="w-4 h-4 md:w-4 md:h-4" />
               Tecnología polaca de última generación
             </div>
             
             <h1 className={`text-3xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight animate-fade-in [animation-delay:100ms] ${
-              isAlternateHero ? 'text-white' : 'text-header'
+              isAlternateHero ? 'text-white' : 'text-foreground'
             }`}>
               Tecnología estética profesional<br />
               con resultados en semanas.<br />
-              <span className="text-primary">Hoy con hasta -50%</span>
+              <span className={isAlternateHero ? 'text-white' : 'text-primary'}>Hoy con hasta -50%</span>
             </h1>
             
             <p className={`text-base md:text-lg leading-relaxed animate-fade-in [animation-delay:150ms] ${
-              isAlternateHero ? 'text-white/90' : 'text-muted-foreground'
+              isAlternateHero ? 'text-white/90' : 'text-foreground/80'
             }`}>
               Dispositivos faciales y corporales con base científica, sin agujas ni dolor, con la confianza de El Corte Inglés.
             </p>
@@ -78,8 +78,8 @@ export const HeroSection = () => {
             <div className="flex flex-col gap-3 md:gap-4 w-full md:max-w-none animate-fade-in [animation-delay:200ms]">
               <Button asChild size="lg" className={`text-base md:text-base group h-12 md:h-12 px-6 max-w-[240px] md:max-w-none ${
                 isAlternateHero 
-                  ? 'bg-white hover:bg-white/90 text-gray-900' 
-                  : 'bg-header hover:bg-header/90 text-header-foreground'
+                  ? 'bg-white hover:bg-white/90 text-gray-900 shadow-lg' 
+                  : 'bg-foreground hover:bg-foreground/90 text-background shadow-lg'
               }`}>
                 <Link to="/black-friday">
                   Ver dispositivos Black Friday
@@ -89,8 +89,8 @@ export const HeroSection = () => {
               
               <Button asChild variant="outline" size="lg" className={`text-base md:text-base h-12 md:h-12 px-6 max-w-[240px] md:max-w-none ${
                 isAlternateHero 
-                  ? 'border-white/50 bg-white/10 text-white hover:bg-white/20 hover:text-white' 
-                  : 'border-header/30 bg-header/5 text-header hover:bg-header/10 hover:text-header'
+                  ? 'border-white/50 bg-white/10 text-white hover:bg-white/20 hover:text-white hover:border-white' 
+                  : 'border-foreground/30 bg-background/80 text-foreground hover:bg-foreground/10 hover:border-foreground/50'
               }`}>
                 <Link to="/superventas">
                   Superventas 
@@ -100,22 +100,22 @@ export const HeroSection = () => {
             
             {/* Trust Indicators */}
             <div className={`flex flex-col gap-2 md:gap-3 text-sm md:text-sm pt-2 md:pt-4 animate-fade-in [animation-delay:300ms] ${
-              isAlternateHero ? 'text-white' : 'text-header'
+              isAlternateHero ? 'text-white' : 'text-foreground'
             }`}>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
+                <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
                 <span className="font-medium">Firmeza visible en 4 semanas desde casa</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
+                <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
                 <span className="font-medium">Hasta un 90% menos de vello en 8 semanas</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
+                <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
                 <span className="font-medium">Ahorra hasta 3.000€/año vs clínicas</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
+                <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
                 <span className="font-medium">Garantía extendida + En El Corte Inglés</span>
               </div>
             </div>
