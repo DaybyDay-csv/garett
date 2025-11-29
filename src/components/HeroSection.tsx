@@ -75,7 +75,10 @@ export const HeroSection = () => {
                 <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
                 <span className="font-medium">Firmeza visible en 4 semanas</span>
               </div>
-              
+              <div className="flex items-center gap-2">
+                <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
+                <span className="font-medium">90% menos vello en 8 semanas</span>
+              </div>
               <div className="flex items-center gap-2">
                 <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isAlternateHero ? 'bg-green-400' : 'bg-green-600'}`}></div>
                 <span className="font-medium">Ahorra 3.000€/año vs clínicas</span>
