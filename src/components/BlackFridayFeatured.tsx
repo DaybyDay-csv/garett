@@ -68,7 +68,7 @@ export const BlackFridayFeatured = () => {
         <div className="text-center space-y-4">
           <Button asChild size="lg" variant="default" className="px-8 py-6 text-base">
             <Link to="/black-friday">
-              Ver las ofertas Black Friday
+              Ver las ofertas Cyber Monday 
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </Button>
