@@ -30,9 +30,9 @@ export const Header = () => {
     to: '/productos',
     hasDropdown: true
   }, {
-    label: 'Black Friday',
-    to: '/black-friday'
-  }, {
+    // Hidden for Christmas campaign - will be reactivated as /navidad
+    // label: 'Black Friday',
+    // to: '/black-friday'
     label: 'Novedades',
     to: '/novedades'
   }];
@@ -89,12 +89,12 @@ export const Header = () => {
             </Button>
           </Link>
           
-          {/* Mobile Black Friday Button */}
-          <Link to="/black-friday" className="md:hidden">
+          {/* Mobile Black Friday Button - Hidden for Christmas campaign */}
+          {/* <Link to="/black-friday" className="md:hidden">
             <Button variant="ghost" size="sm" className="text-white hover:text-white/80 hover:bg-white/10 text-xs font-medium px-3 py-2">
               Black Friday
             </Button>
-          </Link>
+          </Link> */}
           
           <CartDrawer />
           
