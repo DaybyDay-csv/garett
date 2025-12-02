@@ -45,7 +45,7 @@ export const HeroSection = () => {
             <h1 className={`text-2xl md:text-5xl lg:text-7xl font-semibold leading-tight tracking-tight animate-fade-in [animation-delay:100ms] ${isAlternateHero ? 'text-white' : 'text-foreground'}`}>
               Tecnología estética profesional con resultados en semanas.
               <br />
-              <span className={isAlternateHero ? 'text-white' : 'text-primary'}>Hoy con hasta -50%</span>
+              
             </h1>
             
             <p className={`text-xs md:text-base lg:text-lg leading-relaxed animate-fade-in [animation-delay:150ms] ${isAlternateHero ? 'text-white/90' : 'text-foreground/80'}`}>
