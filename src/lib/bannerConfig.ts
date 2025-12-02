@@ -38,21 +38,21 @@ export const bannerConfig: Record<string, BannerConfig> = {
   },
   blackFriday: {
     id: 'blackFriday',
-    active: true,
-    startDate: new Date('2024-01-01'), // Active now for demo
+    active: false, // Hidden for Christmas campaign
+    startDate: new Date('2024-01-01'),
     endDate: new Date('2026-12-31'),
     priority: 5,
-    showInCarousel: true,
-    showInAnnouncementBar: true,
+    showInCarousel: false,
+    showInAnnouncementBar: false,
   },
   cyberMonday: {
     id: 'cyberMonday',
-    active: true,
-    startDate: new Date('2024-01-01'), // Active now for demo
+    active: false, // Hidden for Christmas campaign
+    startDate: new Date('2024-01-01'),
     endDate: new Date('2026-12-31'),
     priority: 5,
-    showInCarousel: true,
-    showInAnnouncementBar: true,
+    showInCarousel: false,
+    showInAnnouncementBar: false,
   },
 };
 

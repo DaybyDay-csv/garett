@@ -54,10 +54,11 @@ export const HeroSection = () => {
             </p>
             
             {/* CTAs */}
+            {/* CTAs - Updated for Christmas campaign */}
             <div className="flex flex-col gap-2 md:gap-4 w-full max-w-[200px] md:max-w-[280px] animate-fade-in [animation-delay:200ms]">
               <Button asChild size="default" className={`text-xs md:text-base group h-9 md:h-12 lg:h-14 px-4 md:px-6 w-full ${isAlternateHero ? 'bg-white hover:bg-white/90 text-gray-900 shadow-lg' : 'bg-foreground hover:bg-foreground/90 text-background shadow-lg'}`}>
-                <Link to="/black-friday" className="flex items-center justify-center gap-2">
-                  Ver Cyber Monday  
+                <Link to="/productos" className="flex items-center justify-center gap-2">
+                  Ver Productos
                   <ArrowRight className="w-3.5 h-3.5 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
