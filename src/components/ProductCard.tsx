@@ -34,11 +34,11 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
   if (isAeroGlow) {
     priceInfo = {
       originalPrice: 449,
-      discountedPrice: 224.50,
+      discountedPrice: 314.30,
       hasDiscount: true,
-      discountLabel: '-50%',
+      discountLabel: '-30%',
       stage: {
-        badge: 'BLACK FRIDAY',
+        badge: 'OFERTA',
         color: 'from-red-600 to-pink-600'
       }
     };

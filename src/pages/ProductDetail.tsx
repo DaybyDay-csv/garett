@@ -115,16 +115,16 @@ const ProductDetail = () => {
   // Black Friday unlock date
   const unlockDate = new Date('2025-11-28T00:00:00');
 
-  // Special Black Friday pricing for AeroGlow
+  // Special pricing for AeroGlow
   let priceInfo;
   if (isAeroGlow) {
     priceInfo = {
       originalPrice: 449,
-      discountedPrice: 224.50,
+      discountedPrice: 314.30,
       hasDiscount: true,
-      discountLabel: '-50%',
+      discountLabel: '-30%',
       stage: {
-        badge: 'BLACK FRIDAY',
+        badge: 'OFERTA',
         color: 'from-red-600 to-pink-600'
       }
     };
