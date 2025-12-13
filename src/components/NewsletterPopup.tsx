@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -115,15 +115,17 @@ export const NewsletterPopup = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
           
           {/* Close Button */}
-          <button 
-            onClick={handleClose} 
-            className="absolute right-3 top-3 z-10 rounded-full p-1.5 bg-white/10 hover:bg-white/20 transition-colors text-white/80 hover:text-white"
-            aria-label="Cerrar"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 6L6 18M6 6l12 12" />
-            </svg>
-          </button>
+          <DialogClose asChild>
+            <button 
+              onClick={handleClose} 
+              className="absolute right-3 top-3 z-20 rounded-full p-1.5 bg-white/10 hover:bg-white/20 transition-colors text-white/80 hover:text-white"
+              aria-label="Cerrar"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </DialogClose>
 
           {/* Content */}
           <div className="relative z-10 p-8 space-y-5">
