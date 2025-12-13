@@ -46,9 +46,7 @@ export const AeroGlowBanner = () => {
           {/* Left Content */}
           <div className="text-center lg:text-left space-y-3 md:space-y-4 order-2 lg:order-1">
             {/* Black Friday Event Badge */}
-            <div className="inline-flex items-center gap-2 bg-foreground/5 text-foreground px-3 py-1.5 md:px-4 md:py-2 rounded-md text-xs md:text-sm font-medium border border-border">
-              Black Friday - AeroGlow
-            </div>
+            
             
             {/* Headline */}
             <div className="space-y-2 px-2">
@@ -122,16 +120,7 @@ Resultados visibles desde el primer uso.</span>
                   <div className="relative bg-muted rounded-xl p-3 md:p-6 border border-border overflow-hidden">
                   {loading ? <div className="aspect-square flex items-center justify-center">
                       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-foreground" />
-                    </div> : <VideoPlayer 
-                      srcWebM="/videos/aeroglow-product.webm" 
-                      poster={aeroglowHero} 
-                      autoplay={true} 
-                      muted={true} 
-                      loop={true} 
-                      controls={false} 
-                      className="animate-fade-in" 
-                      fallback={<img src={aeroglowHero} alt="AeroGlow Hair Straightener" className="w-full h-full object-contain animate-fade-in" />} 
-                    />}
+                    </div> : <VideoPlayer srcWebM="/videos/aeroglow-product.webm" poster={aeroglowHero} autoplay={true} muted={true} loop={true} controls={false} className="animate-fade-in" fallback={<img src={aeroglowHero} alt="AeroGlow Hair Straightener" className="w-full h-full object-contain animate-fade-in" />} />}
                 </div>
               </div>
             </div>
