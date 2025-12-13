@@ -47,7 +47,7 @@ export const CartDrawer = () => {
   const currentStage = getCurrentPromotionalStage();
   const hasGWPActive = currentStage?.hasGWP ?? false;
   
-  // Calculate discounts separately for AeroGlow (50%) and other products (stage discount)
+  // Calculate discounts separately for AeroGlow (30%) and other products (stage discount)
   let totalDiscount = 0;
   const hasAeroGlow = items.some(item => item.product.node.handle === 'plancha-pelo-aeroglow');
   
@@ -56,8 +56,8 @@ export const CartDrawer = () => {
     const itemTotal = originalPrice * item.quantity;
     
     if (item.product.node.handle === 'plancha-pelo-aeroglow') {
-      // AeroGlow has exclusive 50% discount
-      totalDiscount += itemTotal * 0.5;
+      // AeroGlow has exclusive 30% discount
+      totalDiscount += itemTotal * 0.3;
     } else {
       // Other products get stage discount
       const discountPercentage = currentStage?.baseDiscount ?? 0;
@@ -217,11 +217,11 @@ export const CartDrawer = () => {
                   {hasAeroGlow && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
                       <span className="flex items-center gap-1.5">
                         <Sparkles className="w-3 h-3" />
-                        Descuento AeroGlow Exclusivo (50%)
+                        Descuento AeroGlow (30%)
                       </span>
                       <span>-€{(items.filter(item => item.product.node.handle === 'plancha-pelo-aeroglow').reduce((sum, item) => {
                         const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-                        return sum + originalPrice * item.quantity * 0.5;
+                        return sum + originalPrice * item.quantity * 0.3;
                       }, 0)).toFixed(2)}</span>
                     </div>}
                   

@@ -167,7 +167,7 @@ export const useCartStore = create<CartStore>()(
           const currentStage = getCurrentPromotionalStage();
           const discountCodes: string[] = [];
           
-          // Check if cart contains AeroGlow products (requires special 50% exclusive code)
+          // Check if cart contains AeroGlow products (requires special 30% exclusive code)
           const hasAeroGlow = items.some(item => 
             item.product.node.handle === 'plancha-pelo-aeroglow'
           );
@@ -178,8 +178,8 @@ export const useCartStore = create<CartStore>()(
           );
           
           if (hasAeroGlow) {
-            // Add AeroGlow exclusive discount code (50% off)
-            discountCodes.push('AEROGLOW DROP EXCLUSIVE');
+            // Add AeroGlow exclusive discount code (30% off)
+            discountCodes.push('AEROGLOW30');
           }
           
           // Add stage discount code for other products if available
