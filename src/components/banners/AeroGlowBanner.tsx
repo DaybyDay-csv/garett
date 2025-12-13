@@ -171,9 +171,7 @@ Resultados visibles desde el primer uso.</span>
           {/* Final CTA */}
           <div className="text-center mt-6 md:mt-8 space-y-3 px-4 flex flex-col items-center">
             <NewsletterCTA variant="inline" text="Recibe las ofertas" />
-            <p className="text-[10px] md:text-xs text-muted-foreground">
-              Oferta limitada - Black Friday
-            </p>
+            
           </div>
         </div>
       </div>
