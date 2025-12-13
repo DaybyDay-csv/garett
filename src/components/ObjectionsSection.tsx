@@ -1,14 +1,12 @@
 import { Shield, Euro, Clock, TrendingUp } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
 export const ObjectionsSection = () => {
-  return (
-    <section className="py-12 md:py-20 bg-background">
+  return <section className="py-12 md:py-20 bg-background">
       <div className="container px-6">
         <div className="text-center mb-10 md:mb-12">
           <h2 className="text-2xl md:text-4xl font-semibold text-foreground mb-3 md:mb-4 tracking-tight">
-            Resolvemos tus dudas antes de empezar
+            Las preguntas más frecuentes   
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
             Las preguntas más comunes que nos hacen nuestras clientas
@@ -96,6 +94,5 @@ export const ObjectionsSection = () => {
           </Card>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
