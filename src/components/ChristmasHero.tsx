@@ -49,7 +49,7 @@ export const ChristmasHero = () => {
       <div className="container relative z-10 px-6 py-12 md:py-20 lg:py-28 h-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
           {/* Text Content - Left Side */}
-          <div className="space-y-5 md:space-y-6 text-left max-w-[320px] md:max-w-xl lg:max-w-2xl">
+          <div className="space-y-4 md:space-y-5 text-left max-w-[280px] md:max-w-md lg:max-w-xl">
             {/* Badge */}
             <Badge className="bg-gray-900/10 text-gray-900 border-gray-900/20 hover:bg-gray-900/20 px-4 py-2 text-sm">
               <Gift className="w-4 h-4 mr-2" />
@@ -98,17 +98,17 @@ export const ChristmasHero = () => {
               </div>}
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <Button asChild size="lg" className="bg-gray-900 hover:bg-gray-800 text-white shadow-lg h-12 px-6 text-base">
+            <div className="flex flex-col sm:flex-row gap-2 pt-2">
+              <Button asChild size="default" className="bg-gray-900 hover:bg-gray-800 text-white shadow-lg h-10 px-4 text-sm">
                 <a href="#christmas-bundles">
-                  <Gift className="w-5 h-5 mr-2" />
+                  <Gift className="w-4 h-4 mr-2" />
                   Ver Packs de Navidad
                 </a>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-gray-900/30 bg-white/50 text-gray-900 hover:bg-white/70 h-12 px-6 text-base">
+              <Button asChild variant="outline" size="default" className="border-gray-900/30 bg-white/50 text-gray-900 hover:bg-white/70 h-10 px-4 text-sm">
                 <Link to="/productos">
                   Ver productos
-                  <ArrowRight className="w-5 h-5 ml-1" />
+                  <ArrowRight className="w-4 h-4 ml-1" />
                 </Link>
               </Button>
             </div>
