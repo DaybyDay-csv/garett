@@ -6,46 +6,38 @@ import { getCurrentPromotionalStage, isHighDiscountPeriod, getECIComparisonMessa
 import { useEffect, useState } from "react";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import heroChristmas from "@/assets/hero-christmas.png";
-
 export const ChristmasHero = () => {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
   const currentStage = getCurrentPromotionalStage();
   const isHighDiscount = isHighDiscountPeriod();
   const eciMessage = getECIComparisonMessage();
-
   useEffect(() => {
     const targetDate = currentStage?.endDate || new Date('2025-12-25T00:00:00');
-    
     const calculateTimeLeft = () => {
       const now = new Date();
       const difference = targetDate.getTime() - now.getTime();
-      
       if (difference > 0) {
         setTimeLeft({
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
+          hours: Math.floor(difference / (1000 * 60 * 60) % 24),
+          minutes: Math.floor(difference / 1000 / 60 % 60),
+          seconds: Math.floor(difference / 1000 % 60)
         });
       }
     };
-
     calculateTimeLeft();
     const timer = setInterval(calculateTimeLeft, 1000);
     return () => clearInterval(timer);
   }, [currentStage]);
-
-  return (
-    <section className="relative overflow-hidden min-h-[600px] md:min-h-[700px] lg:min-h-[800px]">
+  return <section className="relative overflow-hidden min-h-[600px] md:min-h-[700px] lg:min-h-[800px]">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <OptimizedImage 
-          src={heroChristmas} 
-          alt="Garett Beauty - Tecnología estética profesional" 
-          className="w-full h-full object-cover object-right" 
-          priority 
-          blurPlaceholder 
-        />
+        <OptimizedImage src={heroChristmas} alt="Garett Beauty - Tecnología estética profesional" className="w-full h-full object-cover object-right" priority blurPlaceholder />
       </div>
 
       <div className="container relative z-10 px-6 py-12 md:py-20 lg:py-28 h-full">
@@ -73,52 +65,41 @@ export const ChristmasHero = () => {
             </p>
 
             {/* ECI comparison badge */}
-            {eciMessage && (
-              <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2">
-                <Sparkles className="w-4 h-4 text-amber-600" />
-                <span className="text-gray-800 text-sm">{eciMessage}</span>
-              </div>
-            )}
+            {eciMessage}
 
             {/* Countdown */}
-            {isHighDiscount && (
-              <div className="flex gap-3 md:gap-4">
-                {[
-                  { value: timeLeft.days, label: "Días" },
-                  { value: timeLeft.hours, label: "Horas" },
-                  { value: timeLeft.minutes, label: "Min" },
-                  { value: timeLeft.seconds, label: "Seg" },
-                ].map((item, index) => (
-                  <div key={index} className="text-center">
+            {isHighDiscount && <div className="flex gap-3 md:gap-4">
+                {[{
+              value: timeLeft.days,
+              label: "Días"
+            }, {
+              value: timeLeft.hours,
+              label: "Horas"
+            }, {
+              value: timeLeft.minutes,
+              label: "Min"
+            }, {
+              value: timeLeft.seconds,
+              label: "Seg"
+            }].map((item, index) => <div key={index} className="text-center">
                     <div className="bg-gray-900/10 backdrop-blur-sm rounded-lg px-3 py-2 md:px-4 md:py-3 min-w-[50px] md:min-w-[60px]">
                       <span className="text-xl md:text-2xl font-bold text-gray-900">
                         {item.value.toString().padStart(2, '0')}
                       </span>
                     </div>
                     <span className="text-xs text-gray-700 mt-1 block">{item.label}</span>
-                  </div>
-                ))}
-              </div>
-            )}
+                  </div>)}
+              </div>}
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <Button 
-                asChild 
-                size="lg" 
-                className="bg-gray-900 hover:bg-gray-800 text-white shadow-lg h-12 px-6 text-base"
-              >
+              <Button asChild size="lg" className="bg-gray-900 hover:bg-gray-800 text-white shadow-lg h-12 px-6 text-base">
                 <a href="#christmas-bundles">
                   <Gift className="w-5 h-5 mr-2" />
                   Ver Packs de Navidad
                 </a>
               </Button>
-              <Button 
-                asChild 
-                variant="outline" 
-                size="lg"
-                className="border-gray-900/30 bg-white/50 text-gray-900 hover:bg-white/70 h-12 px-6 text-base"
-              >
+              <Button asChild variant="outline" size="lg" className="border-gray-900/30 bg-white/50 text-gray-900 hover:bg-white/70 h-12 px-6 text-base">
                 <Link to="/productos">
                   Ver productos
                   <ArrowRight className="w-5 h-5 ml-1" />
@@ -147,6 +128,5 @@ export const ChristmasHero = () => {
           <div className="hidden lg:block" />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
