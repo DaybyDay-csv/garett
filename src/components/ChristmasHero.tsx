@@ -12,7 +12,7 @@ export const ChristmasHero = () => {
   const eciMessage = getECIComparisonMessage();
 
   useEffect(() => {
-    const targetDate = currentStage?.endDate || new Date('2024-12-25T00:00:00');
+    const targetDate = currentStage?.endDate || new Date('2025-12-25T00:00:00');
     
     const calculateTimeLeft = () => {
       const now = new Date();
