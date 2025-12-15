@@ -61,9 +61,8 @@ export const CartDrawer = () => {
   
   // Helper to check if item is a bundle
   const isBundleProduct = (item: typeof items[0]) => 
-    item.product.node.handle.startsWith('pack-') || 
     item.product.node.productType === 'Bundle' ||
-    item.product.node.tags?.includes('bundle:true');
+    item.product.node.handle.startsWith('pack-');
   
   const hasBundles = items.some(item => !item.isGWP && isBundleProduct(item));
   
