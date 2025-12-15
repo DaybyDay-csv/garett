@@ -31,6 +31,7 @@ import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { LEDWavelengthBenefits } from "@/components/LEDWavelengthBenefits";
 const ProductDetail = () => {
   const {
     handle
@@ -774,6 +775,19 @@ const ProductDetail = () => {
             </Button>
           </div>
         </div>}
+
+      {/* LED Wavelength Benefits - Only for LED products */}
+      {(() => {
+        const category = detectProductCategory(node);
+        if (category === 'terapia-luz-led') {
+          return (
+            <div className="container px-6">
+              <LEDWavelengthBenefits productHandle={node.handle} />
+            </div>
+          );
+        }
+        return null;
+      })()}
 
       {/* FAQ Section - Product Specific */}
       {(() => {

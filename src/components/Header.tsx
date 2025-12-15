@@ -20,6 +20,7 @@ export const Header = () => {
     { label: 'Mesoterapia', path: '/categoria/mesoterapia' },
     { label: 'Cuidado Corporal', path: '/categoria/corporales' },
     { label: 'Depilación IPL', path: '/categoria/depilacion-ipl' },
+    { label: 'Terapia de Luz LED', path: '/categoria/terapia-luz-led' },
   ];
 
   const navLinks = [{

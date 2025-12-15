@@ -699,6 +699,75 @@ const productContentMap: Record<string, ProductContent> = {
     }
   },
 
+  // Terapia de Luz LED (Máscara LED, Manopla LED)
+  'terapia-luz-led': {
+    pdpHeadline: 'Rejuvenecimiento facial profesional con fototerapia LED',
+    pdpSubheadline: 'Tecnología clínica de luz LED para estimular colágeno, reducir arrugas y mejorar el tono de piel desde casa',
+    quickBenefits: [
+      { icon: 'Sparkles', text: 'Múltiples longitudes de onda' },
+      { icon: 'Clock', text: 'Sesiones de 15-20 minutos' },
+      { icon: 'Check', text: 'Sin dolor, sin recuperación' }
+    ],
+    dropdowns: {
+      howItWorks: {
+        title: '¿Por qué funciona la fototerapia LED?',
+        summary: 'Diferentes colores de luz penetran a distintas profundidades de la piel para activar procesos de regeneración celular',
+        details: [
+          'Luz Roja (630-660nm): Penetra hasta 8-10mm en la dermis. Estimula los fibroblastos para producir más colágeno y elastina. Reduce arrugas, mejora la firmeza y acelera la cicatrización. Es el tratamiento anti-edad por excelencia.',
+          'Luz Verde (520nm): Penetra las capas medias de la piel. Regula la producción de melanina, reduciendo manchas y unificando el tono. Ideal para hiperpigmentación, pecas y daño solar acumulado.',
+          'Luz Infrarroja (850nm): Penetra hasta 40mm, alcanzando músculos y tejidos profundos. Mejora la circulación sanguínea, reduce inflamación y acelera la recuperación celular. Potencia los efectos de las otras luces.',
+          'La combinación de longitudes de onda trabaja en sinergia: mientras la luz roja estimula colágeno en la superficie, la infrarroja prepara los tejidos profundos. Es como tener una clínica estética completa en casa.'
+        ]
+      },
+      expectedResults: {
+        phases: [
+          {
+            timeframe: '2-4 semanas',
+            description: 'Piel más luminosa e hidratada. Mejora visible en textura y tono. La piel se siente más "viva" y receptiva a otros tratamientos.'
+          },
+          {
+            timeframe: '6-8 semanas',
+            description: 'Reducción notable de líneas finas. Manchas más claras. Poros menos visibles. El colágeno nuevo empieza a notarse en la firmeza.'
+          },
+          {
+            timeframe: '3-6 meses',
+            description: 'Resultados comparables a tratamientos de clínica. Piel firme, tono uniforme, arrugas suavizadas. Efectos acumulativos que mejoran con cada sesión.'
+          }
+        ],
+        usageNote: 'Para resultados óptimos, usar 4-5 veces por semana durante los primeros 3 meses, luego 2-3 veces semanales de mantenimiento. Consistencia es clave.'
+      },
+      howToUse: {
+        steps: [
+          'Limpia tu rostro completamente (sin maquillaje ni cremas)',
+          'Ajusta el dispositivo cómodamente sobre tu rostro/manos',
+          'Selecciona el programa de luz según tu objetivo',
+          'Relájate durante 15-20 minutos mientras el dispositivo trabaja',
+          'Aplica tu sérum o crema favorita después—la piel está más receptiva',
+          'Repite 4-5 veces por semana para resultados óptimos'
+        ],
+        additionalNote: 'Usa gafas protectoras incluidas si el dispositivo emite luz intensa cerca de los ojos. No usar si estás tomando medicamentos fotosensibilizantes.'
+      },
+      whatMakesDifferent: [
+        {
+          title: 'Tecnología de clínica en casa',
+          description: 'Los mismos LEDs médicos que usan las clínicas estéticas. 140+ LEDs de alta potencia distribuidos estratégicamente para cobertura completa.'
+        },
+        {
+          title: 'Múltiples longitudes de onda',
+          description: 'No es solo luz roja. Combina rojo, verde e infrarrojo para tratar múltiples problemas simultáneamente: arrugas, manchas, flacidez y textura.'
+        },
+        {
+          title: 'Ahorro considerable',
+          description: 'Una sesión de fototerapia LED en clínica cuesta 60-100€. Necesitas 10-20 sesiones. Este dispositivo se paga solo en pocas semanas de uso.'
+        },
+        {
+          title: 'Diseño ergonómico premium',
+          description: 'Silicona médica hipoalergénica que se adapta perfectamente al contorno facial/manos. Cómodo para sesiones largas sin fatiga.'
+        }
+      ]
+    }
+  },
+
   // Default - Belleza general
   'default': {
     quickBenefits: [
@@ -801,6 +870,13 @@ export function detectProductCategory(product: any): string {
     // Normalize category names
     if (category === 'capilar') return 'cuidado-capilar';
     return category;
+  }
+  
+  // LED therapy devices (before IPL to catch specific tags)
+  if (handle.includes('led') || handle.includes('mascara-led') || handle.includes('manopla-led') ||
+      title.toLowerCase().includes('led') || title.toLowerCase().includes('fototerapia') ||
+      product.tags?.some((tag: string) => tag.includes('terapia-luz-led'))) {
+    return 'terapia-luz-led';
   }
   
   // IPL devices
