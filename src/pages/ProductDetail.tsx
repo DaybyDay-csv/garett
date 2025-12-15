@@ -114,7 +114,9 @@ const ProductDetail = () => {
   const isFreshEye = node.handle === 'masajeador-ojos-fresh-eye';
   
   // Check if this is a LED launch product (Máscara LED or Manopla LED)
-  const isLEDLaunch = node.handle === 'mascara-led-garett-beauty' || node.handle === 'manopla-led-garett-beauty';
+  const isMascaraLED = node.handle === 'mascara-led-garett-beauty';
+  const isManopolaLED = node.handle === 'manopla-led-garett-beauty';
+  const isLEDLaunch = isMascaraLED || isManopolaLED;
 
   // Black Friday unlock date
   const unlockDate = new Date('2025-11-28T00:00:00');
@@ -132,12 +134,23 @@ const ProductDetail = () => {
         color: 'from-red-600 to-pink-600'
       }
     };
-  } else if (isLEDLaunch) {
-    // LED products have fixed 30% launch discount
-    const basePrice = parseFloat(originalPrice);
+  } else if (isMascaraLED) {
+    // Máscara LED: €350 base, 30% off = €245
     priceInfo = {
-      originalPrice: basePrice,
-      discountedPrice: basePrice * 0.7, // 30% off
+      originalPrice: 350,
+      discountedPrice: 245,
+      hasDiscount: true,
+      discountLabel: '-30%',
+      stage: {
+        badge: 'LANZAMIENTO',
+        color: 'from-red-600 to-pink-600'
+      }
+    };
+  } else if (isManopolaLED) {
+    // Manopla LED: €299 base, 30% off = €209.30
+    priceInfo = {
+      originalPrice: 299,
+      discountedPrice: 209.30,
       hasDiscount: true,
       discountLabel: '-30%',
       stage: {
