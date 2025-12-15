@@ -155,7 +155,7 @@ export const ChristmasBundles = () => {
   const calculatePricing = (shopifyBundle: ShopifyProduct | undefined, originalValue: number) => {
     const bundleBasePrice = shopifyBundle 
       ? parseFloat(shopifyBundle.node.priceRange.minVariantPrice.amount)
-      : originalValue * 0.87; // Fallback ~13% bundle discount
+      : originalValue * 0.87;
     
     if (!currentStage) {
       return {
@@ -181,12 +181,6 @@ export const ChristmasBundles = () => {
       promoDiscount
     };
   };
-
-  // Split bundles into pairs
-  const bundlePairs = [];
-  for (let i = 0; i < BUNDLE_CONFIG.length; i += 2) {
-    bundlePairs.push(BUNDLE_CONFIG.slice(i, i + 2));
-  }
 
   if (loading) {
     return (
@@ -231,122 +225,112 @@ export const ChristmasBundles = () => {
           )}
         </div>
 
-        {/* Bundles grid */}
-        <div className="space-y-12 md:space-y-16">
-          {bundlePairs.map((pair, pairIndex) => (
-            <div key={pairIndex} className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
-              {pair.map((config) => {
-                const shopifyBundle = getShopifyBundle(config.id);
-                const bundleProducts = getBundleProducts(config);
-                const pricing = calculatePricing(shopifyBundle, config.originalValue);
-                
-                return (
-                  <div 
-                    key={config.id} 
-                    className="bg-white border border-border/50 shadow-sm overflow-hidden"
-                  >
-                    {/* Bundle Header */}
-                    <div className="bg-gradient-to-r from-red-50 to-secondary/30 p-5 md:p-6 border-b border-border/30">
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <h3 className="text-xl md:text-2xl font-semibold text-foreground">
-                            {config.name}
-                          </h3>
-                          <p className="text-sm text-muted-foreground mt-1">{config.subtitle}</p>
-                        </div>
-                        <Badge className="bg-red-600 text-white hover:bg-red-700 text-sm px-3 py-1">
-                          -{pricing.totalSavingsPercent}%
-                        </Badge>
-                      </div>
+        {/* Bundles grid - 2 columns mobile, 3 columns desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
+          {BUNDLE_CONFIG.map((config) => {
+            const shopifyBundle = getShopifyBundle(config.id);
+            const bundleProducts = getBundleProducts(config);
+            const pricing = calculatePricing(shopifyBundle, config.originalValue);
+            
+            return (
+              <div 
+                key={config.id} 
+                className="bg-white border border-border/50 shadow-sm overflow-hidden flex flex-col"
+              >
+                {/* Bundle Header */}
+                <div className="bg-gradient-to-r from-red-50 to-secondary/30 p-3 md:p-4 border-b border-border/30">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <h3 className="text-sm md:text-lg font-semibold text-foreground leading-tight">
+                        {config.name}
+                      </h3>
+                      <p className="text-xs text-muted-foreground mt-0.5 truncate">{config.subtitle}</p>
                     </div>
-
-                    {/* Products Grid - Visual Display */}
-                    <div className="p-5 md:p-6">
-                      <p className="text-xs font-semibold text-muted-foreground mb-4 uppercase tracking-wider">
-                        Productos incluidos
-                      </p>
-                      
-                      <div className={`grid gap-4 mb-6 ${bundleProducts.length >= 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
-                        {bundleProducts.map((product, idx) => (
-                          <div key={idx} className="text-center">
-                            <div className="aspect-square bg-secondary/20 mb-3 overflow-hidden">
-                              {product.image ? (
-                                <img 
-                                  src={product.image} 
-                                  alt={product.title}
-                                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                />
-                              ) : (
-                                <div className="w-full h-full flex items-center justify-center text-muted-foreground/30">
-                                  <Gift className="w-12 h-12" />
-                                </div>
-                              )}
-                            </div>
-                            <p className="text-xs md:text-sm font-medium text-foreground line-clamp-2 mb-1">
-                              {product.title}
-                              {product.quantity > 1 && <span className="text-muted-foreground"> x{product.quantity}</span>}
-                            </p>
-                            <p className="text-sm text-muted-foreground">
-                              {(product.price * product.quantity).toFixed(2)}€
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Benefits */}
-                      <div className="border-t border-border/30 pt-4 mb-6">
-                        <div className="flex flex-wrap gap-2">
-                          {config.benefits.map((benefit, index) => (
-                            <span 
-                              key={index} 
-                              className="inline-flex items-center gap-1.5 text-xs bg-emerald-50 text-emerald-700 px-3 py-1.5"
-                            >
-                              <Check className="w-3 h-3" />
-                              {benefit}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Pricing and CTA */}
-                      <div className="bg-secondary/20 -mx-5 md:-mx-6 -mb-5 md:-mb-6 p-5 md:p-6">
-                        <div className="flex items-end justify-between mb-4">
-                          <div>
-                            <p className="text-xs text-muted-foreground mb-1">Valor total</p>
-                            <p className="text-lg text-muted-foreground line-through">
-                              {pricing.originalValue.toFixed(2)}€
-                            </p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-sm text-emerald-600 font-medium mb-1">
-                              Ahorras {pricing.totalSavings.toFixed(2)}€
-                            </p>
-                            <p className="text-3xl font-bold text-foreground">
-                              {pricing.finalPrice.toFixed(2)}€
-                            </p>
-                          </div>
-                        </div>
-                        
-                        <Button 
-                          className="w-full bg-red-700 hover:bg-red-800 text-white h-12 text-base"
-                          onClick={() => handleAddToCart(config.name, shopifyBundle)}
-                          disabled={!shopifyBundle}
-                        >
-                          <ShoppingBag className="w-5 h-5 mr-2" />
-                          Anadir pack al carrito
-                        </Button>
-                      </div>
-                    </div>
+                    <Badge className="bg-red-600 text-white hover:bg-red-700 text-xs px-2 py-0.5 flex-shrink-0">
+                      -{pricing.totalSavingsPercent}%
+                    </Badge>
                   </div>
-                );
-              })}
-            </div>
-          ))}
+                </div>
+
+                {/* Products Grid - Visual Display */}
+                <div className="p-3 md:p-4 flex-1 flex flex-col">
+                  <p className="text-[10px] md:text-xs font-semibold text-muted-foreground mb-2 uppercase tracking-wider">
+                    Incluye
+                  </p>
+                  
+                  <div className={`grid gap-2 mb-3 ${bundleProducts.length >= 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
+                    {bundleProducts.map((product, idx) => (
+                      <div key={idx} className="text-center">
+                        <div className="aspect-square bg-secondary/20 mb-1.5 overflow-hidden">
+                          {product.image ? (
+                            <img 
+                              src={product.image} 
+                              alt={product.title}
+                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-muted-foreground/30">
+                              <Gift className="w-6 h-6" />
+                            </div>
+                          )}
+                        </div>
+                        <p className="text-[10px] md:text-xs text-muted-foreground line-clamp-1">
+                          {product.quantity > 1 && `${product.quantity}x `}{product.price.toFixed(0)}€
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Benefits - Hidden on mobile for space */}
+                  <div className="hidden md:flex flex-wrap gap-1.5 mb-3 border-t border-border/30 pt-3">
+                    {config.benefits.slice(0, 2).map((benefit, index) => (
+                      <span 
+                        key={index} 
+                        className="inline-flex items-center gap-1 text-[10px] bg-emerald-50 text-emerald-700 px-2 py-1"
+                      >
+                        <Check className="w-2.5 h-2.5" />
+                        {benefit}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Pricing and CTA */}
+                  <div className="mt-auto bg-secondary/20 -mx-3 md:-mx-4 -mb-3 md:-mb-4 p-3 md:p-4">
+                    <div className="flex items-end justify-between mb-2">
+                      <div>
+                        <p className="text-[10px] text-muted-foreground">Valor</p>
+                        <p className="text-xs md:text-sm text-muted-foreground line-through">
+                          {pricing.originalValue.toFixed(0)}€
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-[10px] text-emerald-600 font-medium">
+                          Ahorras {pricing.totalSavings.toFixed(0)}€
+                        </p>
+                        <p className="text-lg md:text-2xl font-bold text-foreground">
+                          {pricing.finalPrice.toFixed(0)}€
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <Button 
+                      className="w-full bg-red-700 hover:bg-red-800 text-white h-9 md:h-10 text-xs md:text-sm"
+                      onClick={() => handleAddToCart(config.name, shopifyBundle)}
+                      disabled={!shopifyBundle}
+                    >
+                      <ShoppingBag className="w-4 h-4 mr-1.5" />
+                      Anadir pack
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* Bottom message */}
-        <div className="mt-12 text-center">
-          <p className="text-muted-foreground mb-4">
+        <div className="mt-10 text-center">
+          <p className="text-muted-foreground text-sm mb-3">
             Prefieres elegir tu mismo? Todos los productos tambien disponibles por separado.
           </p>
           <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5">
