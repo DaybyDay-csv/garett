@@ -167,6 +167,12 @@ export const useCartStore = create<CartStore>()(
           const currentStage = getCurrentPromotionalStage();
           const discountCodes: string[] = [];
           
+          // Helper to check if item is a bundle
+          const isBundleProduct = (item: CartItem) => 
+            item.product.node.handle.startsWith('pack-') || 
+            item.product.node.productType === 'Bundle' ||
+            item.product.node.tags?.includes('bundle:true');
+          
           // Check if cart contains AeroGlow products (requires special 30% exclusive code)
           const hasAeroGlow = items.some(item => 
             item.product.node.handle === 'plancha-pelo-aeroglow'
@@ -178,12 +184,16 @@ export const useCartStore = create<CartStore>()(
             item.product.node.handle === 'manopla-led-garett-beauty'
           );
           
-          // Check if cart has non-special products (neither AeroGlow nor LED launch)
+          // Check if cart contains bundle products
+          const hasBundles = items.some(item => !item.isGWP && isBundleProduct(item));
+          
+          // Check if cart has non-special products (neither AeroGlow nor LED launch nor bundles)
           const hasOtherProducts = items.some(item => 
             !item.isGWP && 
             item.product.node.handle !== 'plancha-pelo-aeroglow' &&
             item.product.node.handle !== 'mascara-led-garett-beauty' &&
-            item.product.node.handle !== 'manopla-led-garett-beauty'
+            item.product.node.handle !== 'manopla-led-garett-beauty' &&
+            !isBundleProduct(item)
           );
           
           if (hasAeroGlow) {
@@ -196,8 +206,8 @@ export const useCartStore = create<CartStore>()(
             discountCodes.push('LANZAMIENTO30');
           }
           
-          // Add stage discount code for other products if available
-          if (hasOtherProducts && currentStage?.code) {
+          // Add stage discount code for other products and bundles if available
+          if ((hasOtherProducts || hasBundles) && currentStage?.code) {
             discountCodes.push(currentStage.code);
           }
           
