@@ -169,9 +169,8 @@ export const useCartStore = create<CartStore>()(
           
           // Helper to check if item is a bundle
           const isBundleProduct = (item: CartItem) => 
-            item.product.node.handle.startsWith('pack-') || 
             item.product.node.productType === 'Bundle' ||
-            item.product.node.tags?.includes('bundle:true');
+            item.product.node.handle.startsWith('pack-');
           
           // Check if cart contains AeroGlow products (requires special 30% exclusive code)
           const hasAeroGlow = items.some(item => 
