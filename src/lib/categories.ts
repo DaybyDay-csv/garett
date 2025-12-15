@@ -7,6 +7,12 @@ export interface CategoryConfig {
 }
 
 export const CATEGORIES: Record<string, CategoryConfig> = {
+  'terapia-luz-led': {
+    slug: 'terapia-luz-led',
+    name: 'Terapia de Luz LED',
+    description: 'Dispositivos de fototerapia LED para rejuvenecimiento y tratamiento de la piel',
+    tags: ['category:terapia-luz-led']
+  },
   'cuidado-capilar': {
     slug: 'cuidado-capilar',
     name: 'Cuidado Capilar',
@@ -54,12 +60,6 @@ export const CATEGORIES: Record<string, CategoryConfig> = {
     name: 'Accesorios',
     description: 'Recambios y accesorios para tus dispositivos',
     tags: ['category:accesorios', 'category:accessories']
-  },
-  'terapia-luz-led': {
-    slug: 'terapia-luz-led',
-    name: 'Terapia de Luz LED',
-    description: 'Dispositivos de fototerapia LED para rejuvenecimiento y tratamiento de la piel',
-    tags: ['category:terapia-luz-led']
   }
 };
 
