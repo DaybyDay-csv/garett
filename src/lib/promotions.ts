@@ -17,13 +17,13 @@ export interface PromotionalStage {
   eciDiscount?: number; // El Corte Inglés discount for comparison
 }
 
-// Christmas Campaign Stages 2024
+// Christmas Campaign Stages 2025
 export const promotionalStages: PromotionalStage[] = [
   {
     name: "Pre-Navidad",
     dates: "1-10 Dic",
-    startDate: new Date('2024-12-01T00:00:00'),
-    endDate: new Date('2024-12-10T23:59:59'),
+    startDate: new Date('2025-12-01T00:00:00'),
+    endDate: new Date('2025-12-10T23:59:59'),
     baseDiscount: 10,
     bundleExtraDiscount: 0,
     discount: "-10%",
@@ -38,8 +38,8 @@ export const promotionalStages: PromotionalStage[] = [
   {
     name: "Semana Navidad 1",
     dates: "11-15 Dic",
-    startDate: new Date('2024-12-11T00:00:00'),
-    endDate: new Date('2024-12-15T23:59:59'),
+    startDate: new Date('2025-12-11T00:00:00'),
+    endDate: new Date('2025-12-15T23:59:59'),
     baseDiscount: 20,
     bundleExtraDiscount: 10, // +10% extra for bundles
     discount: "-20%",
@@ -54,8 +54,8 @@ export const promotionalStages: PromotionalStage[] = [
   {
     name: "Puente",
     dates: "16 Dic",
-    startDate: new Date('2024-12-16T00:00:00'),
-    endDate: new Date('2024-12-16T23:59:59'),
+    startDate: new Date('2025-12-16T00:00:00'),
+    endDate: new Date('2025-12-16T23:59:59'),
     baseDiscount: 10,
     bundleExtraDiscount: 10, // Keep bundle extra
     discount: "-10%",
@@ -70,8 +70,8 @@ export const promotionalStages: PromotionalStage[] = [
   {
     name: "Semana Navidad 2",
     dates: "17-21 Dic",
-    startDate: new Date('2024-12-17T00:00:00'),
-    endDate: new Date('2024-12-21T23:59:59'),
+    startDate: new Date('2025-12-17T00:00:00'),
+    endDate: new Date('2025-12-21T23:59:59'),
     baseDiscount: 25,
     bundleExtraDiscount: 10, // +10% extra for bundles (or 5% if margin tight)
     discount: "-25%",
@@ -86,8 +86,8 @@ export const promotionalStages: PromotionalStage[] = [
   {
     name: "Navidad-Reyes",
     dates: "22 Dic - 6 Ene",
-    startDate: new Date('2024-12-22T00:00:00'),
-    endDate: new Date('2025-01-06T23:59:59'),
+    startDate: new Date('2025-12-22T00:00:00'),
+    endDate: new Date('2026-01-06T23:59:59'),
     baseDiscount: 15,
     bundleExtraDiscount: 0,
     discount: "-15%",

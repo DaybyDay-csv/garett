@@ -6,11 +6,65 @@ import { Gift, Sparkles, ShoppingBag, Check } from "lucide-react";
 import { christmasBundles, calculateBundlePrice, getCurrentPromotionalStage } from "@/lib/promotions";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
+import { useEffect, useState } from "react";
+import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 
 export const ChristmasBundles = () => {
   const currentStage = getCurrentPromotionalStage();
   const addItem = useCartStore(state => state.addItem);
   const setIsOpen = useCartStore(state => state.setIsOpen);
+  const [shopifyBundles, setShopifyBundles] = useState<ShopifyProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadBundles = async () => {
+      try {
+        const products = await fetchProducts(50, "tag:bundle:true");
+        setShopifyBundles(products);
+      } catch (error) {
+        console.error('Error loading bundles:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadBundles();
+  }, []);
+
+  const handleAddToCart = (bundle: typeof christmasBundles[0], shopifyProduct?: ShopifyProduct) => {
+    if (shopifyProduct) {
+      const variant = shopifyProduct.node.variants.edges[0]?.node;
+      if (variant) {
+        addItem({
+          product: shopifyProduct,
+          variantId: variant.id,
+          variantTitle: variant.title,
+          price: variant.price,
+          quantity: 1,
+          selectedOptions: variant.selectedOptions || []
+        });
+        setIsOpen(true);
+        toast.success(`${bundle.name} añadido al carrito`);
+      }
+    } else {
+      toast.success(`${bundle.name} añadido`, {
+        description: "Ve al carrito para completar tu compra"
+      });
+    }
+  };
+
+  // Map static bundle data with Shopify products
+  const getBundleShopifyProduct = (bundleId: string): ShopifyProduct | undefined => {
+    const handleMap: Record<string, string> = {
+      "pack-relax-body-glow": "pack-relax-body-glow",
+      "pack-duo-glow-led": "pack-duo-glow-led",
+      "pack-ritual-piel-nueva": "pack-ritual-piel-nueva",
+      "pack-lifting-en-casa": "pack-lifting-en-casa",
+      "pack-mirada-descansada": "pack-mirada-descansada",
+      "pack-glow-diario": "pack-glow-diario"
+    };
+    const handle = handleMap[bundleId];
+    return shopifyBundles.find(p => p.node.handle === handle);
+  };
 
   return (
     <section id="christmas-bundles" className="py-16 md:py-24 bg-gradient-to-b from-background via-secondary/20 to-background">
@@ -44,6 +98,7 @@ export const ChristmasBundles = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {christmasBundles.map((bundle) => {
             const pricing = calculateBundlePrice(bundle);
+            const shopifyProduct = getBundleShopifyProduct(bundle.id);
             
             return (
               <Card 
@@ -100,11 +155,7 @@ export const ChristmasBundles = () => {
                   {/* CTA */}
                   <Button 
                     className="w-full bg-red-700 hover:bg-red-800 text-white"
-                    onClick={() => {
-                      toast.success(`${bundle.name} añadido`, {
-                        description: "Ve al carrito para completar tu compra"
-                      });
-                    }}
+                    onClick={() => handleAddToCart(bundle, shopifyProduct)}
                   >
                     <ShoppingBag className="w-4 h-4 mr-2" />
                     Añadir pack
