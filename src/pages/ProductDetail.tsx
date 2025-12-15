@@ -112,7 +112,7 @@ const ProductDetail = () => {
 
   // Check if this is Fresh Eye (out of stock)
   const isFreshEye = node.handle === 'masajeador-ojos-fresh-eye';
-  
+
   // Check if this is a LED launch product (Máscara LED or Manopla LED)
   const isMascaraLED = node.handle === 'mascara-led-garett-beauty';
   const isManopolaLED = node.handle === 'manopla-led-garett-beauty';
@@ -258,28 +258,27 @@ const ProductDetail = () => {
   const progressPercentage = Math.min(potentialTotal / GWP_THRESHOLD * 100, 100);
   const remainingForGWP = Math.max(GWP_THRESHOLD - potentialTotal, 0);
   const willUnlockGWP = potentialTotal >= GWP_THRESHOLD && cartTotal < GWP_THRESHOLD;
-  
+
   // Get category from product tags for breadcrumb
   const getCategoryInfo = () => {
     const category = getCategoryFromTags(node.tags);
-    
     if (!category) {
-      return { name: 'Productos', slug: 'productos', path: '/productos' };
+      return {
+        name: 'Productos',
+        slug: 'productos',
+        path: '/productos'
+      };
     }
-    
     return {
       name: category.name,
       slug: category.slug,
       path: `/categoria/${category.slug}`
     };
   };
-  
   const categoryInfo = getCategoryInfo();
 
   // Create SEO meta description from product
-  const metaDescription = node.description 
-    ? node.description.substring(0, 157) + '...'
-    : `Compra ${node.title} en Garett Beauty. ${categoryInfo.name} con la mejor tecnología y calidad profesional. Envío gratis y garantía 2 años.`;
+  const metaDescription = node.description ? node.description.substring(0, 157) + '...' : `Compra ${node.title} en Garett Beauty. ${categoryInfo.name} con la mejor tecnología y calidad profesional. Envío gratis y garantía 2 años.`;
 
   // Product schema markup for rich snippets
   const productSchema = {
@@ -297,11 +296,7 @@ const ProductDetail = () => {
       '@type': 'Offer',
       price: priceInfo.discountedPrice.toFixed(2),
       priceCurrency: variant?.price.currencyCode || 'EUR',
-      availability: isFreshEye 
-        ? 'https://schema.org/OutOfStock'
-        : (variant?.availableForSale 
-          ? 'https://schema.org/InStock' 
-          : 'https://schema.org/OutOfStock'),
+      availability: isFreshEye ? 'https://schema.org/OutOfStock' : variant?.availableForSale ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       url: `${window.location.origin}/producto/${node.handle}`,
       priceValidUntil: '2025-12-31',
       seller: {
@@ -322,32 +317,27 @@ const ProductDetail = () => {
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Inicio',
-        item: window.location.origin
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Productos',
-        item: `${window.location.origin}/productos`
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: categoryInfo.name,
-        item: `${window.location.origin}${categoryInfo.path}`
-      },
-      {
-        '@type': 'ListItem',
-        position: 4,
-        name: node.title,
-        item: `${window.location.origin}/producto/${node.handle}`
-      }
-    ]
+    itemListElement: [{
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Inicio',
+      item: window.location.origin
+    }, {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Productos',
+      item: `${window.location.origin}/productos`
+    }, {
+      '@type': 'ListItem',
+      position: 3,
+      name: categoryInfo.name,
+      item: `${window.location.origin}${categoryInfo.path}`
+    }, {
+      '@type': 'ListItem',
+      position: 4,
+      name: node.title,
+      item: `${window.location.origin}/producto/${node.handle}`
+    }]
   };
 
   // Combined schema
@@ -359,32 +349,21 @@ const ProductDetail = () => {
   // Get product FAQs based on category
   const productCategory = detectProductCategory(node);
   const productFAQs = productSpecificFAQs[productCategory as keyof typeof productSpecificFAQs] || [];
-  
   return <div className="min-h-screen bg-background">
-      <SEO 
-        title={node.title}
-        description={metaDescription}
-        canonicalUrl={`/producto/${node.handle}`}
-        image={node.images.edges[0]?.node.url}
-        type="product"
-        price={priceInfo.discountedPrice.toFixed(2)}
-        currency={variant?.price.currencyCode || 'EUR'}
-        availability={isFreshEye ? 'out of stock' : (variant?.availableForSale ? 'in stock' : 'out of stock')}
-        brand="Garett Beauty"
-        schema={combinedSchema}
-        faqs={productFAQs}
-      />
+      <SEO title={node.title} description={metaDescription} canonicalUrl={`/producto/${node.handle}`} image={node.images.edges[0]?.node.url} type="product" price={priceInfo.discountedPrice.toFixed(2)} currency={variant?.price.currencyCode || 'EUR'} availability={isFreshEye ? 'out of stock' : variant?.availableForSale ? 'in stock' : 'out of stock'} brand="Garett Beauty" schema={combinedSchema} faqs={productFAQs} />
       <Header />
       
       <div className="container py-8 px-6">
         {/* Breadcrumb Navigation */}
-        <Breadcrumb 
-          items={[
-            { label: 'Productos', href: '/productos' },
-            { label: categoryInfo.name, href: categoryInfo.path },
-            { label: node.title }
-          ]}
-        />
+        <Breadcrumb items={[{
+        label: 'Productos',
+        href: '/productos'
+      }, {
+        label: categoryInfo.name,
+        href: categoryInfo.path
+      }, {
+        label: node.title
+      }]} />
         
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
           {/* Images/Video - Interactive Gallery */}
@@ -455,11 +434,9 @@ const ProductDetail = () => {
                 {productContent.pdpHeadline || node.title}
               </h1>
               
-              {productContent.pdpSubheadline && (
-                <p className="text-base md:text-lg text-muted-foreground mb-4 leading-relaxed">
+              {productContent.pdpSubheadline && <p className="text-base md:text-lg text-muted-foreground mb-4 leading-relaxed">
                   {productContent.pdpSubheadline}
-                </p>
-              )}
+                </p>}
               
               {/* Quick Benefits - Above the fold */}
               <div className="flex flex-wrap gap-3 mb-5">
@@ -497,7 +474,7 @@ const ProductDetail = () => {
                   {/* ECI Trust Microcopy */}
                   <div className="flex items-center gap-2 text-sm text-muted-foreground mt-3 pt-3 border-t">
                     <img src={elCorteInglesLogo} alt="El Corte Inglés" className="h-4" />
-                    <span>También disponible en El Corte Inglés</span>
+                    <span>Con la confianza de El Corte Inglés</span>
                   </div>
                 </div> : <div>
                   <div className="text-4xl md:text-5xl font-semibold tracking-tight">€{priceInfo.originalPrice.toFixed(2)}</div>
@@ -567,8 +544,7 @@ const ProductDetail = () => {
               </div>}
 
             {/* Add to Cart or Email Notification for Fresh Eye */}
-            {isFreshEye ? (
-              <div className="space-y-4">
+            {isFreshEye ? <div className="space-y-4">
                 <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
                   <div className="flex items-start gap-3 mb-3">
                     <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
@@ -585,74 +561,29 @@ const ProductDetail = () => {
 
                 <form onSubmit={handleNotifySubmit} className="space-y-3">
                   <div className="flex flex-col sm:flex-row gap-2">
-                    <Input
-                      type="email"
-                      placeholder="tu@email.com"
-                      value={notifyEmail}
-                      onChange={(e) => setNotifyEmail(e.target.value)}
-                      required
-                      className="flex-1"
-                      disabled={isSubmittingEmail}
-                    />
-                    <Button 
-                      type="submit" 
-                      className="sm:w-auto"
-                      disabled={isSubmittingEmail}
-                    >
-                      {isSubmittingEmail ? (
-                        <>
+                    <Input type="email" placeholder="tu@email.com" value={notifyEmail} onChange={e => setNotifyEmail(e.target.value)} required className="flex-1" disabled={isSubmittingEmail} />
+                    <Button type="submit" className="sm:w-auto" disabled={isSubmittingEmail}>
+                      {isSubmittingEmail ? <>
                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                           Enviando...
-                        </>
-                      ) : (
-                        <>
+                        </> : <>
                           <Bell className="w-4 h-4 mr-2" />
                           Notificarme
-                        </>
-                      )}
+                        </>}
                     </Button>
                   </div>
                   <p className="text-xs text-muted-foreground">
                     Te enviaremos un único email cuando el producto esté disponible.
                   </p>
                 </form>
-              </div>
-            ) : (
-              <Button 
-                size="lg" 
-                className="w-full h-12 text-base" 
-                onClick={handleAddToCart} 
-                disabled={!variant?.availableForSale}
-              >
+              </div> : <Button size="lg" className="w-full h-12 text-base" onClick={handleAddToCart} disabled={!variant?.availableForSale}>
                 {variant?.availableForSale ? 'Añadir al carrito' : 'Agotado'}
-              </Button>
-            )}
+              </Button>}
 
             {/* Product Video - Below Add to Cart for AeroGlow */}
-            {isAeroGlow && (
-              <div className="rounded-lg overflow-hidden border bg-muted/10 mt-4 aspect-video">
-                <VideoPlayer 
-                  srcWebM="/videos/aeroglow-product-demo.webm" 
-                  poster={node.images.edges[0]?.node.url} 
-                  autoplay={false} 
-                  muted={true} 
-                  loop={true} 
-                  controls={true} 
-                  showPlayButton={false}
-                  preload="metadata"
-                  className="w-full h-full"
-                  fallback={
-                    node.images.edges[0]?.node && (
-                      <img 
-                        src={node.images.edges[0].node.url} 
-                        alt={node.images.edges[0].node.altText || node.title} 
-                        className="w-full h-full object-cover" 
-                      />
-                    )
-                  }
-                />
-              </div>
-            )}
+            {isAeroGlow && <div className="rounded-lg overflow-hidden border bg-muted/10 mt-4 aspect-video">
+                <VideoPlayer srcWebM="/videos/aeroglow-product-demo.webm" poster={node.images.edges[0]?.node.url} autoplay={false} muted={true} loop={true} controls={true} showPlayButton={false} preload="metadata" className="w-full h-full" fallback={node.images.edges[0]?.node && <img src={node.images.edges[0].node.url} alt={node.images.edges[0].node.altText || node.title} className="w-full h-full object-cover" />} />
+              </div>}
 
 
             {/* Trust Badges - Compact Version */}
@@ -807,36 +738,28 @@ const ProductDetail = () => {
 
       {/* LED Wavelength Benefits - Only for LED products */}
       {(() => {
-        const category = detectProductCategory(node);
-        if (category === 'terapia-luz-led') {
-          return (
-            <div className="container px-6">
+      const category = detectProductCategory(node);
+      if (category === 'terapia-luz-led') {
+        return <div className="container px-6">
               <LEDWavelengthBenefits productHandle={node.handle} />
-            </div>
-          );
-        }
-        return null;
-      })()}
+            </div>;
+      }
+      return null;
+    })()}
 
       {/* FAQ Section - Product Specific */}
       {(() => {
-        const category = detectProductCategory(node);
-        const faqs = productSpecificFAQs[category as keyof typeof productSpecificFAQs];
-        if (faqs && faqs.length > 0) {
-          return (
-            <div className="bg-gradient-to-b from-background to-secondary/5 py-12">
+      const category = detectProductCategory(node);
+      const faqs = productSpecificFAQs[category as keyof typeof productSpecificFAQs];
+      if (faqs && faqs.length > 0) {
+        return <div className="bg-gradient-to-b from-background to-secondary/5 py-12">
               <div className="container px-6">
-                <FAQ 
-                  items={faqs}
-                  title="Preguntas frecuentes"
-                  description={`Respuestas sobre ${node.title}`}
-                />
+                <FAQ items={faqs} title="Preguntas frecuentes" description={`Respuestas sobre ${node.title}`} />
               </div>
-            </div>
-          );
-        }
-        return null;
-      })()}
+            </div>;
+      }
+      return null;
+    })()}
 
       {/* Related Products Section */}
       <div className="container py-8 px-6">
