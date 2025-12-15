@@ -22,8 +22,7 @@ const BUNDLE_CONFIG = [
     id: "pack-duo-glow-led",
     name: "Pack Duo Glow LED",
     subtitle: "2 Manoplas LED",
-    productPatterns: ["Manopla LED"],
-    productQuantities: [2],
+    productPatterns: ["Manopla LED", "Manopla LED"],
     benefits: ["Rejuvenecimiento dual", "Tratamiento completo", "Resultados visibles"],
     originalValue: 448
   },
@@ -132,18 +131,17 @@ export const ChristmasBundles = () => {
   const getBundleProducts = (config: typeof BUNDLE_CONFIG[0]): BundleProductInfo[] => {
     const products: BundleProductInfo[] = [];
     
-    config.productPatterns.forEach((pattern, index) => {
+    config.productPatterns.forEach((pattern) => {
       const matchingProduct = allProducts.find(p => 
         p.node.title.toLowerCase().includes(pattern.toLowerCase())
       );
       
       if (matchingProduct) {
-        const quantity = config.productQuantities?.[index] || 1;
         products.push({
           title: matchingProduct.node.title,
           price: parseFloat(matchingProduct.node.priceRange.minVariantPrice.amount),
           image: matchingProduct.node.images.edges[0]?.node.url || '',
-          quantity
+          quantity: 1
         });
       }
     });
@@ -275,7 +273,7 @@ export const ChristmasBundles = () => {
                           )}
                         </div>
                         <p className="text-[10px] md:text-xs text-muted-foreground line-clamp-1">
-                          {product.quantity > 1 && `${product.quantity}x `}{product.price.toFixed(0)}€
+                          {product.price.toFixed(0)}€
                         </p>
                       </div>
                     ))}
