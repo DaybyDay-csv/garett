@@ -6,6 +6,8 @@ import { getCurrentPromotionalStage, isHighDiscountPeriod, getECIComparisonMessa
 import { useEffect, useState } from "react";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import heroChristmas from "@/assets/hero-christmas.png";
+import heroChristmasMobile from "@/assets/hero-christmas-mobile.png";
+
 export const ChristmasHero = () => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -35,8 +37,12 @@ export const ChristmasHero = () => {
     return () => clearInterval(timer);
   }, [currentStage]);
   return <section className="relative overflow-hidden min-h-[600px] md:min-h-[700px] lg:min-h-[800px]">
-      {/* Background Image */}
-      <div className="absolute inset-0">
+      {/* Background Image - Mobile */}
+      <div className="absolute inset-0 md:hidden">
+        <OptimizedImage src={heroChristmasMobile} alt="Garett Beauty - Tecnología estética profesional" className="w-full h-full object-cover object-bottom" priority blurPlaceholder />
+      </div>
+      {/* Background Image - Desktop */}
+      <div className="absolute inset-0 hidden md:block">
         <OptimizedImage src={heroChristmas} alt="Garett Beauty - Tecnología estética profesional" className="w-full h-full object-cover object-right" priority blurPlaceholder />
       </div>
 
