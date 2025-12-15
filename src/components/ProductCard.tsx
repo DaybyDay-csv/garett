@@ -29,7 +29,10 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
   // Check if this is Fresh Eye (out of stock)
   const isFreshEye = node.handle === 'masajeador-ojos-fresh-eye';
   
-  // Calculate promotional pricing - special handling for AeroGlow
+  // Check if this is a LED launch product (Máscara LED or Manopla LED)
+  const isLEDLaunch = node.handle === 'mascara-led-garett-beauty' || node.handle === 'manopla-led-garett-beauty';
+  
+  // Calculate promotional pricing - special handling for AeroGlow and LED launch products
   let priceInfo;
   if (isAeroGlow) {
     priceInfo = {
@@ -38,7 +41,20 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
       hasDiscount: true,
       discountLabel: '-30%',
       stage: {
-        badge: 'OFERTA',
+        badge: 'LANZAMIENTO',
+        color: 'from-red-600 to-pink-600'
+      }
+    };
+  } else if (isLEDLaunch) {
+    // LED products have fixed 30% launch discount
+    const basePrice = parseFloat(originalPrice.amount);
+    priceInfo = {
+      originalPrice: basePrice,
+      discountedPrice: basePrice * 0.7, // 30% off
+      hasDiscount: true,
+      discountLabel: '-30%',
+      stage: {
+        badge: 'LANZAMIENTO',
         color: 'from-red-600 to-pink-600'
       }
     };
