@@ -27,6 +27,7 @@ import categoryLimpiezaFacial from "@/assets/category-limpieza-facial.jpg";
 import categoryMesoterapia from "@/assets/category-mesoterapia.jpg";
 import categoryCorporales from "@/assets/category-corporales.jpg";
 import categoryDepilacionIPL from "@/assets/category-depilacion-ipl.jpg";
+import categoryTerapiaLuzLED from "@/assets/category-terapia-luz-led.jpg";
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
@@ -280,6 +281,32 @@ const Index = () => {
                   </h3>
                   <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
                     Depilación láser profesional en casa
+                  </p>
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            {/* Terapia de Luz LED */}
+            <Link to="/categoria/terapia-luz-led" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
+                <div className="aspect-video overflow-hidden">
+                  <OptimizedImage 
+                    src={categoryTerapiaLuzLED} 
+                    alt="Terapia de Luz LED - Fototerapia profesional para rejuvenecimiento" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    blurPlaceholder
+                  />
+                </div>
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
+                    Terapia de Luz LED
+                  </h3>
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
+                    Fototerapia profesional para rejuvenecimiento
                   </p>
                   <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
                     <span>Ver productos</span>
