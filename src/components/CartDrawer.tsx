@@ -59,24 +59,41 @@ export const CartDrawer = () => {
   const isLEDLaunchProduct = (handle: string) => 
     handle === 'mascara-led-garett-beauty' || handle === 'manopla-led-garett-beauty';
   
+  // Helper to get fixed LED prices
+  const getLEDOriginalPrice = (handle: string) => {
+    if (handle === 'mascara-led-garett-beauty') return 350;
+    if (handle === 'manopla-led-garett-beauty') return 299;
+    return 0;
+  };
+  
   items.filter(item => !item.isGWP).forEach(item => {
-    const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-    const itemTotal = originalPrice * item.quantity;
+    const handle = item.product.node.handle;
+    const itemQuantity = item.quantity;
     
-    if (item.product.node.handle === 'plancha-pelo-aeroglow') {
-      // AeroGlow has exclusive 30% discount
-      totalDiscount += itemTotal * 0.3;
-    } else if (isLEDLaunchProduct(item.product.node.handle)) {
-      // LED launch products have 30% discount
-      totalDiscount += itemTotal * 0.3;
+    if (handle === 'plancha-pelo-aeroglow') {
+      // AeroGlow: €449 base, 30% off
+      totalDiscount += 449 * itemQuantity * 0.3;
+    } else if (isLEDLaunchProduct(handle)) {
+      // LED launch products: fixed prices, 30% off
+      const basePrice = getLEDOriginalPrice(handle);
+      totalDiscount += basePrice * itemQuantity * 0.3;
     } else {
       // Other products get stage discount
+      const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
       const discountPercentage = currentStage?.baseDiscount ?? 0;
-      totalDiscount += itemTotal * (discountPercentage / 100);
+      totalDiscount += originalPrice * itemQuantity * (discountPercentage / 100);
     }
   });
   
-  const subtotalWithDiscount = subtotalOriginal - totalDiscount;
+  // Calculate subtotal with fixed prices for special products
+  const subtotalOriginalFixed = items.filter(item => !item.isGWP).reduce((sum, item) => {
+    const handle = item.product.node.handle;
+    if (handle === 'plancha-pelo-aeroglow') return sum + 449 * item.quantity;
+    if (isLEDLaunchProduct(handle)) return sum + getLEDOriginalPrice(handle) * item.quantity;
+    return sum + parseFloat(item.product.node.priceRange.minVariantPrice.amount) * item.quantity;
+  }, 0);
+  
+  const subtotalWithDiscount = subtotalOriginalFixed - totalDiscount;
 
   // GWP threshold
   const GWP_THRESHOLD = 70;
@@ -187,7 +204,13 @@ export const CartDrawer = () => {
                           {item.selectedOptions.map(option => option.value).join(' • ')}
                         </p>
                         <p className={`font-semibold text-sm mt-0.5 ${item.isGWP ? 'text-purple-600 dark:text-purple-400' : ''}`}>
-                          {item.isGWP ? 'GRATIS' : `€${parseFloat(item.product.node.priceRange.minVariantPrice.amount).toFixed(2)}`}
+                          {item.isGWP ? 'GRATIS' : `€${(() => {
+                            const handle = item.product.node.handle;
+                            if (handle === 'plancha-pelo-aeroglow') return '449.00';
+                            if (handle === 'mascara-led-garett-beauty') return '350.00';
+                            if (handle === 'manopla-led-garett-beauty') return '299.00';
+                            return parseFloat(item.product.node.priceRange.minVariantPrice.amount).toFixed(2);
+                          })()}`}
                         </p>
                       </div>
                       
@@ -221,7 +244,7 @@ export const CartDrawer = () => {
                 <div className="space-y-1.5 text-sm">
                   <div className="flex justify-between text-muted-foreground text-xs">
                     <span>Subtotal</span>
-                    <span>€{subtotalOriginal.toFixed(2)}</span>
+                    <span>€{subtotalOriginalFixed.toFixed(2)}</span>
                   </div>
                   
                   {/* Active Discounts */}
@@ -231,8 +254,7 @@ export const CartDrawer = () => {
                         Descuento AeroGlow (30%)
                       </span>
                       <span>-€{(items.filter(item => item.product.node.handle === 'plancha-pelo-aeroglow').reduce((sum, item) => {
-                        const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-                        return sum + originalPrice * item.quantity * 0.3;
+                        return sum + 449 * item.quantity * 0.3;
                       }, 0)).toFixed(2)}</span>
                     </div>}
                   
@@ -242,8 +264,8 @@ export const CartDrawer = () => {
                         Dto. Lanzamiento LED (30%)
                       </span>
                       <span>-€{(items.filter(item => isLEDLaunchProduct(item.product.node.handle)).reduce((sum, item) => {
-                        const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-                        return sum + originalPrice * item.quantity * 0.3;
+                        const basePrice = getLEDOriginalPrice(item.product.node.handle);
+                        return sum + basePrice * item.quantity * 0.3;
                       }, 0)).toFixed(2)}</span>
                     </div>}
                   
