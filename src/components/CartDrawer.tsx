@@ -47,9 +47,17 @@ export const CartDrawer = () => {
   const currentStage = getCurrentPromotionalStage();
   const hasGWPActive = currentStage?.hasGWP ?? false;
   
-  // Calculate discounts separately for AeroGlow (30%) and other products (stage discount)
+  // Calculate discounts separately for AeroGlow (30%), LED launch (30%), and other products (stage discount)
   let totalDiscount = 0;
   const hasAeroGlow = items.some(item => item.product.node.handle === 'plancha-pelo-aeroglow');
+  const hasLEDLaunch = items.some(item => 
+    item.product.node.handle === 'mascara-led-garett-beauty' || 
+    item.product.node.handle === 'manopla-led-garett-beauty'
+  );
+  
+  // Helper to check if item is LED launch product
+  const isLEDLaunchProduct = (handle: string) => 
+    handle === 'mascara-led-garett-beauty' || handle === 'manopla-led-garett-beauty';
   
   items.filter(item => !item.isGWP).forEach(item => {
     const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
@@ -57,6 +65,9 @@ export const CartDrawer = () => {
     
     if (item.product.node.handle === 'plancha-pelo-aeroglow') {
       // AeroGlow has exclusive 30% discount
+      totalDiscount += itemTotal * 0.3;
+    } else if (isLEDLaunchProduct(item.product.node.handle)) {
+      // LED launch products have 30% discount
       totalDiscount += itemTotal * 0.3;
     } else {
       // Other products get stage discount
@@ -225,12 +236,23 @@ export const CartDrawer = () => {
                       }, 0)).toFixed(2)}</span>
                     </div>}
                   
-                  {currentStage && currentStage.baseDiscount > 0 && items.some(item => !item.isGWP && item.product.node.handle !== 'plancha-pelo-aeroglow') && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
+                  {hasLEDLaunch && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
+                      <span className="flex items-center gap-1.5">
+                        <Sparkles className="w-3 h-3" />
+                        Dto. Lanzamiento LED (30%)
+                      </span>
+                      <span>-€{(items.filter(item => isLEDLaunchProduct(item.product.node.handle)).reduce((sum, item) => {
+                        const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
+                        return sum + originalPrice * item.quantity * 0.3;
+                      }, 0)).toFixed(2)}</span>
+                    </div>}
+                  
+                  {currentStage && currentStage.baseDiscount > 0 && items.some(item => !item.isGWP && item.product.node.handle !== 'plancha-pelo-aeroglow' && !isLEDLaunchProduct(item.product.node.handle)) && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
                       <span className="flex items-center gap-1.5">
                         <Sparkles className="w-3 h-3" />
                         Descuento ({currentStage.baseDiscount}%)
                       </span>
-                      <span>-€{(items.filter(item => !item.isGWP && item.product.node.handle !== 'plancha-pelo-aeroglow').reduce((sum, item) => {
+                      <span>-€{(items.filter(item => !item.isGWP && item.product.node.handle !== 'plancha-pelo-aeroglow' && !isLEDLaunchProduct(item.product.node.handle)).reduce((sum, item) => {
                         const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
                         return sum + originalPrice * item.quantity * (currentStage.baseDiscount / 100);
                       }, 0)).toFixed(2)}</span>

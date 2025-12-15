@@ -172,14 +172,28 @@ export const useCartStore = create<CartStore>()(
             item.product.node.handle === 'plancha-pelo-aeroglow'
           );
           
-          // Check if cart has non-AeroGlow products
+          // Check if cart contains LED launch products (30% launch discount)
+          const hasLEDLaunch = items.some(item => 
+            item.product.node.handle === 'mascara-led-garett-beauty' || 
+            item.product.node.handle === 'manopla-led-garett-beauty'
+          );
+          
+          // Check if cart has non-special products (neither AeroGlow nor LED launch)
           const hasOtherProducts = items.some(item => 
-            !item.isGWP && item.product.node.handle !== 'plancha-pelo-aeroglow'
+            !item.isGWP && 
+            item.product.node.handle !== 'plancha-pelo-aeroglow' &&
+            item.product.node.handle !== 'mascara-led-garett-beauty' &&
+            item.product.node.handle !== 'manopla-led-garett-beauty'
           );
           
           if (hasAeroGlow) {
             // Add AeroGlow exclusive discount code (30% off)
             discountCodes.push('AEROGLOW30');
+          }
+          
+          if (hasLEDLaunch) {
+            // Add LED launch discount code (30% off)
+            discountCodes.push('LANZAMIENTO30');
           }
           
           // Add stage discount code for other products if available
