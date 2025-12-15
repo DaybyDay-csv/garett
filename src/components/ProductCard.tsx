@@ -26,9 +26,6 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
   // Check if this is the AeroGlow product (Black Friday event)
   const isAeroGlow = node.handle.includes('aeroglow') || node.title.toLowerCase().includes('aeroglow');
   
-  // Check if this is Fresh Eye (out of stock)
-  const isFreshEye = node.handle === 'masajeador-ojos-fresh-eye';
-  
   // Check if this is a LED launch product (Máscara LED or Manopla LED)
   const isMascaraLED = node.handle === 'mascara-led-garett-beauty';
   const isManopolaLED = node.handle === 'manopla-led-garett-beauty';
@@ -83,9 +80,6 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
-    // Don't add Fresh Eye to cart - it's out of stock
-    if (isFreshEye) return;
     
     if (!firstVariant) return;
     
@@ -204,11 +198,11 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
           {!hideAddToCart && (
             <Button 
               onClick={handleAddToCart}
-              disabled={isFreshEye || !firstVariant?.availableForSale}
+              disabled={!firstVariant?.availableForSale}
               size="lg"
               className="w-full md:inline-flex h-12 text-base backdrop-blur-sm disabled:opacity-60"
             >
-              {isFreshEye ? 'Agotado' : (firstVariant?.availableForSale ? 'Añadir al carrito' : 'Agotado')}
+              {firstVariant?.availableForSale ? 'Añadir al carrito' : 'Agotado'}
             </Button>
           )}
         </div>
