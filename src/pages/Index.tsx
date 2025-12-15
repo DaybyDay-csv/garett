@@ -4,11 +4,11 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { ProductCard } from "@/components/ProductCard";
 import { TrustBadges } from "@/components/TrustBadges";
-import { HeroSection } from "@/components/HeroSection";
+import { ChristmasHero } from "@/components/ChristmasHero";
+import { ChristmasBundles } from "@/components/ChristmasBundles";
 import { Testimonials } from "@/components/Testimonials";
 import { UGCSection } from "@/components/UGCSection";
 import { PromotionalBanners } from "@/components/PromotionalBanners";
-// import { BlackFridayFeatured } from "@/components/BlackFridayFeatured"; // Hidden for Christmas campaign
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { FAQ } from "@/components/FAQ";
 import { BlogCarousel } from "@/components/BlogCarousel";
@@ -80,16 +80,16 @@ const Index = () => {
       />
       <Header />
       
-      {/* Hero Section with UVP */}
-      <HeroSection />
+      {/* Christmas Hero Section */}
+      <ChristmasHero />
+      
+      {/* Christmas Bundles Section */}
+      <ChristmasBundles />
       
       {/* Trust Badges */}
       <div className="container py-6 md:py-12 px-6">
         <TrustBadges />
       </div>
-
-      {/* Black Friday Featured Products - Hidden for Christmas campaign */}
-      {/* <BlackFridayFeatured /> */}
 
       {/* Superventas - Horizontal Scroll */}
       {bestSellers.length > 0 && <section id="superventas" className="py-10 md:py-12 bg-gradient-to-b from-background to-secondary/10">
