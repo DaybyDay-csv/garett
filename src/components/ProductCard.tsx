@@ -129,13 +129,22 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
           <OptimizedImage
             src={image.url}
             alt={image.altText || node.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ${!firstVariant?.availableForSale ? 'opacity-60 grayscale' : ''}`}
             blurPlaceholder
           />
         )}
         
-        {/* Max 2 tags at bottom-left - Only show if not hidden */}
-        {!hideBadges && (
+        {/* Out of stock overlay */}
+        {!firstVariant?.availableForSale && (
+          <div className="absolute top-2 right-2">
+            <Badge variant="secondary" className="text-xs bg-gray-800 text-white">
+              Agotado
+            </Badge>
+          </div>
+        )}
+        
+        {/* Max 2 tags at bottom-left - Only show if not hidden and in stock */}
+        {!hideBadges && firstVariant?.availableForSale && (
           <div className="absolute bottom-2 left-2 flex gap-1.5">
             {isLaunch ? (
               <Badge variant="default" className="text-xs">

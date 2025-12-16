@@ -540,10 +540,46 @@ const ProductDetail = () => {
                 </div>
               </div>}
 
-            {/* Add to Cart */}
-            <Button size="lg" className="w-full h-12 text-base" onClick={handleAddToCart} disabled={!variant?.availableForSale}>
-              {variant?.availableForSale ? 'Añadir al carrito' : 'Agotado'}
-            </Button>
+            {/* Add to Cart or Out of Stock Notification */}
+            {variant?.availableForSale ? (
+              <Button size="lg" className="w-full h-12 text-base" onClick={handleAddToCart}>
+                Añadir al carrito
+              </Button>
+            ) : (
+              <div className="space-y-4">
+                <Button size="lg" className="w-full h-12 text-base" disabled>
+                  Agotado
+                </Button>
+                
+                {/* Email Notification Form */}
+                <div className="bg-muted/30 rounded-lg p-4 border">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Bell className="w-5 h-5 text-primary" />
+                    <span className="font-medium">¿Quieres que te avisemos?</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Déjanos tu email y te notificaremos cuando el producto esté disponible.
+                  </p>
+                  <form onSubmit={handleNotifySubmit} className="flex gap-2">
+                    <Input
+                      type="email"
+                      placeholder="Tu email"
+                      value={notifyEmail}
+                      onChange={(e) => setNotifyEmail(e.target.value)}
+                      className="flex-1"
+                      disabled={isSubmittingEmail}
+                    />
+                    <Button type="submit" disabled={isSubmittingEmail}>
+                      {isSubmittingEmail ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        'Avisar'
+                      )}
+                    </Button>
+                  </form>
+                </div>
+              </div>
+            )}
 
             {/* Product Video - Below Add to Cart for AeroGlow */}
             {isAeroGlow && <div className="rounded-lg overflow-hidden border bg-muted/10 mt-4 aspect-video">
