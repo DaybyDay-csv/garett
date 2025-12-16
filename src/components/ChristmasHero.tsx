@@ -56,7 +56,7 @@ export const ChristmasHero = () => {
             </Badge>
 
             {/* Main heading */}
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight tracking-tight">
+            <h1 className="md:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight tracking-tight text-4xl">
               Regala{" "}
               <span className="text-white">belleza</span>
               <br />
@@ -64,7 +64,7 @@ export const ChristmasHero = () => {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xs md:text-base text-gray-800 max-w-[220px] md:max-w-md font-light">
+            <p className="md:text-base text-gray-800 max-w-[220px] md:max-w-md font-light text-sm pb-[10px]">
               Rutinas completas de spa en casa. 
               <span className="text-amber-700 font-semibold"> Hasta {currentStage ? `-${currentStage.baseDiscount + (currentStage.bundleExtraDiscount || 0)}%` : "-35%"} en packs</span>
             </p>
