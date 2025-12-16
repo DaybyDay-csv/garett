@@ -319,6 +319,40 @@ const Index = () => {
         </div>
       </section>
 
+      {/* New Arrivals - LED products first */}
+      {newProducts.length > 0 && <section className="py-12 md:py-20 bg-background">
+          <div className="container px-6">
+            <div className="flex items-center justify-between mb-8 md:mb-10">
+              <div>
+                <h2 className="text-2xl md:text-4xl font-semibold text-foreground tracking-tight">
+                  Novedades
+                </h2>
+                <p className="text-muted-foreground mt-2 text-sm md:text-lg">Lo último en tecnología de belleza</p>
+              </div>
+              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5 h-11 px-4">
+                <Link to="/novedades">Ver todas</Link>
+              </Button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+              {[...newProducts]
+                .sort((a, b) => {
+                  const aIsLED = a.node.title.toLowerCase().includes('máscara led') || a.node.title.toLowerCase().includes('mascara led') || a.node.title.toLowerCase().includes('manopla led');
+                  const bIsLED = b.node.title.toLowerCase().includes('máscara led') || b.node.title.toLowerCase().includes('mascara led') || b.node.title.toLowerCase().includes('manopla led');
+                  if (aIsLED && !bIsLED) return -1;
+                  if (!aIsLED && bIsLED) return 1;
+                  // Máscara before Manopla
+                  const aIsMascara = a.node.title.toLowerCase().includes('máscara') || a.node.title.toLowerCase().includes('mascara');
+                  const bIsMascara = b.node.title.toLowerCase().includes('máscara') || b.node.title.toLowerCase().includes('mascara');
+                  if (aIsMascara && !bIsMascara) return -1;
+                  if (!aIsMascara && bIsMascara) return 1;
+                  return 0;
+                })
+                .slice(0, 6)
+                .map(product => <ProductCard key={product.node.id} product={product} />)}
+            </div>
+          </div>
+        </section>}
+
       {/* Objections Section - Addressing concerns */}
       <ObjectionsSection />
 
@@ -341,39 +375,19 @@ const Index = () => {
         description="Resolvemos tus dudas sobre nuestros dispositivos de belleza profesional"
       />
 
-      <div className="container py-16 px-6">
-        {/* New Arrivals */}
-        {newProducts.length > 0 && <section className="py-8">
-            <div className="flex items-center justify-between mb-8 md:mb-10">
-              <div>
-                <h2 className="text-2xl md:text-4xl font-semibold text-foreground tracking-tight">
-                  Novedades
-                </h2>
-                <p className="text-muted-foreground mt-2 text-sm md:text-lg">Lo último en tecnología de belleza</p>
-              </div>
-              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5 h-11 px-4">
-                <Link to="/novedades">Ver todas</Link>
-              </Button>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-              {newProducts.slice(0, 6).map(product => <ProductCard key={product.node.id} product={product} />)}
-            </div>
-          </section>}
+      {/* Empty/Loading States */}
+      {products.length === 0 && !loading && <section className="py-20 text-center container px-6">
+          <ShoppingBag className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+          <h3 className="text-2xl font-bold mb-2">No hay productos aún</h3>
+          <p className="text-muted-foreground mb-6">
+            Estamos preparando nuestro catálogo. ¡Vuelve pronto!
+          </p>
+        </section>}
 
-        {/* All Products or Empty State */}
-        {products.length === 0 && !loading && <section className="py-20 text-center">
-            <ShoppingBag className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-2xl font-bold mb-2">No hay productos aún</h3>
-            <p className="text-muted-foreground mb-6">
-              Estamos preparando nuestro catálogo. ¡Vuelve pronto!
-            </p>
-          </section>}
-
-        {loading && <section className="py-20 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-4 text-muted-foreground">Cargando productos...</p>
-          </section>}
-      </div>
+      {loading && <section className="py-20 text-center container px-6">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-muted-foreground">Cargando productos...</p>
+        </section>}
 
       <Footer />
     </div>;
