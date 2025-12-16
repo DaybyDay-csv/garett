@@ -132,10 +132,10 @@ const ProductDetail = () => {
       }
     };
   } else if (isMascaraLED) {
-    // Máscara LED: €350 base, 30% off = €245
+    // Máscara LED: €450 base, 30% off = €315
     priceInfo = {
-      originalPrice: 350,
-      discountedPrice: 245,
+      originalPrice: 450,
+      discountedPrice: 315,
       hasDiscount: true,
       discountLabel: '-30%',
       stage: {
