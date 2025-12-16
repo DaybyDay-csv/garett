@@ -187,7 +187,7 @@ export const ChristmasBundles = () => {
           {currentStage && currentStage.bundleExtraDiscount > 0 && <div className="mt-6 inline-flex items-center gap-2 bg-gradient-to-r from-red-50 to-emerald-50 border border-red-200 rounded-full px-5 py-2">
               <Sparkles className="w-4 h-4 text-red-600" />
               <span className="text-red-700 font-medium">
-                +{currentStage.bundleExtraDiscount}% extra en packs hasta el {currentStage.endDate.getDate()}/{currentStage.endDate.getMonth() + 1}
+                +{currentStage.bundleExtraDiscount}% extra hasta el {currentStage.endDate.getDate()}/{currentStage.endDate.getMonth() + 1}
               </span>
             </div>}
         </div>
