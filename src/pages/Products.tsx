@@ -44,12 +44,13 @@ const Products = () => {
 
     // Default category priority (smartwatches last)
     const categoryPriority: Record<string, number> = {
-      'masajeadores-faciales': 1,
-      'limpieza-facial': 2,
-      'cuidado-capilar': 3,
-      'mesoterapia': 4,
-      'corporales': 5,
-      'depilacion-ipl': 6,
+      'terapia-luz-led': 1,
+      'masajeadores-faciales': 2,
+      'limpieza-facial': 3,
+      'cuidado-capilar': 4,
+      'mesoterapia': 5,
+      'corporales': 6,
+      'depilacion-ipl': 7,
       'smartwatches': 999, // Always last
     };
 
@@ -108,6 +109,7 @@ const Products = () => {
   }, [sortBy, categoryFilter, products]);
   const categories = [
     { value: "all", label: "Todas las categorías" },
+    { value: "terapia-luz-led", label: "Terapia de Luz LED" },
     { value: "masajeadores-faciales", label: "Masajeadores faciales" },
     { value: "limpieza-facial", label: "Limpieza facial" },
     { value: "cuidado-capilar", label: "Cuidado capilar" },
