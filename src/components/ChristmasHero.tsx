@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import heroChristmas from "@/assets/hero-christmas.png";
 import heroChristmasMobile from "@/assets/hero-christmas-mobile.png";
-
 export const ChristmasHero = () => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -59,7 +58,7 @@ export const ChristmasHero = () => {
             {/* Main heading */}
             <h1 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight tracking-tight">
               Regala{" "}
-              <span className="text-amber-600">belleza</span>
+              <span className="text-white">belleza</span>
               <br />
               esta Navidad
             </h1>
