@@ -15,42 +15,60 @@ const BUNDLE_CONFIG = [{
   subtitle: "Calm Skin + Cellu Body",
   productPatterns: ["Calm Skin", "Cellu Body"],
   benefits: ["Relajacion profunda", "Tonificacion corporal", "Piel mas suave"],
-  originalValue: 236
+  originalValue: 236,
+  christmasPrice: 205,
+  savings: 31,
+  savingsPercent: 13
 }, {
   id: "pack-duo-glow-led",
   name: "Pack Duo Glow LED",
   subtitle: "2 Manoplas LED",
   productPatterns: ["Manopla LED", "Manopla LED"],
   benefits: ["Rejuvenecimiento dual", "Tratamiento completo", "Resultados visibles"],
-  originalValue: 448
+  originalValue: 448,
+  christmasPrice: 379,
+  savings: 69,
+  savingsPercent: 15
 }, {
   id: "pack-ritual-piel-nueva",
   name: "Pack Ritual Piel Nueva",
   subtitle: "Multiclean + Breeze Scrub + Pretty Face",
   productPatterns: ["Multi Clean", "Breeze", "Pretty Face"],
   benefits: ["Limpieza profunda", "Exfoliacion suave", "Hidratacion intensiva"],
-  originalValue: 265
+  originalValue: 265,
+  christmasPrice: 235,
+  savings: 30,
+  savingsPercent: 11
 }, {
   id: "pack-lifting-en-casa",
   name: "Pack Lifting en Casa",
   subtitle: "Multiclean + Fresh Skin Pro",
   productPatterns: ["Multi Clean", "Fresh Skin Pro"],
   benefits: ["Efecto tensor", "Limpieza profesional", "Piel rejuvenecida"],
-  originalValue: 249
+  originalValue: 249,
+  christmasPrice: 215,
+  savings: 34,
+  savingsPercent: 14
 }, {
   id: "pack-mirada-descansada",
   name: "Pack Mirada Descansada",
   subtitle: "Fresh Skin Pro + Fresh Eye",
   productPatterns: ["Fresh Skin Pro", "Fresh Eye"],
   benefits: ["Reduce ojeras", "Minimiza arrugas", "Mirada luminosa"],
-  originalValue: 225.99
+  originalValue: 225.99,
+  christmasPrice: 199,
+  savings: 27,
+  savingsPercent: 12
 }, {
   id: "pack-glow-diario",
   name: "Pack Glow Diario",
   subtitle: "Pretty Face + Fresh Eye",
   productPatterns: ["Pretty Face", "Fresh Eye"],
   benefits: ["Uso diario", "Luminosidad natural", "Facil de usar"],
-  originalValue: 143
+  originalValue: 143,
+  christmasPrice: 125,
+  savings: 18,
+  savingsPercent: 13
 }];
 interface BundleProductInfo {
   title: string;
@@ -130,29 +148,13 @@ export const ChristmasBundles = () => {
     return products;
   };
 
-  // Calculate pricing with current promo
-  const calculatePricing = (shopifyBundle: ShopifyProduct | undefined, originalValue: number) => {
-    const bundleBasePrice = shopifyBundle ? parseFloat(shopifyBundle.node.priceRange.minVariantPrice.amount) : originalValue * 0.87;
-    if (!currentStage) {
-      return {
-        originalValue,
-        bundleBasePrice,
-        finalPrice: bundleBasePrice,
-        totalSavings: originalValue - bundleBasePrice,
-        totalSavingsPercent: Math.round((originalValue - bundleBasePrice) / originalValue * 100)
-      };
-    }
-    const promoDiscount = currentStage.baseDiscount + currentStage.bundleExtraDiscount;
-    const finalPrice = bundleBasePrice * (1 - promoDiscount / 100);
-    const totalSavings = originalValue - finalPrice;
-    const totalSavingsPercent = Math.round(totalSavings / originalValue * 100);
+  // Calculate pricing with fixed christmas prices
+  const calculatePricing = (config: typeof BUNDLE_CONFIG[0]) => {
     return {
-      originalValue,
-      bundleBasePrice,
-      finalPrice: Math.round(finalPrice * 100) / 100,
-      totalSavings: Math.round(totalSavings * 100) / 100,
-      totalSavingsPercent,
-      promoDiscount
+      originalValue: config.originalValue,
+      finalPrice: config.christmasPrice,
+      totalSavings: config.savings,
+      totalSavingsPercent: config.savingsPercent
     };
   };
   if (loading) {
@@ -197,7 +199,7 @@ export const ChristmasBundles = () => {
           {BUNDLE_CONFIG.map(config => {
           const shopifyBundle = getShopifyBundle(config.id);
           const bundleProducts = getBundleProducts(config);
-          const pricing = calculatePricing(shopifyBundle, config.originalValue);
+          const pricing = calculatePricing(config);
           return <div key={config.id} className="bg-white border border-border/50 shadow-sm overflow-hidden flex flex-col">
                 {/* Bundle Header */}
                 <div className="bg-gradient-to-r from-red-50 to-secondary/30 p-3 md:p-4 border-b border-border/30">
