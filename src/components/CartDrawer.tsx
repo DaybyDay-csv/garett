@@ -73,14 +73,14 @@ export const CartDrawer = () => {
     return 0;
   };
   
-  // Fixed Christmas bundle pricing
+  // Fixed Christmas bundle pricing (30% off)
   const BUNDLE_FIXED_PRICES: Record<string, { originalValue: number; christmasPrice: number; savings: number; savingsPercent: number }> = {
-    'pack-relax-body-glow': { originalValue: 236, christmasPrice: 205, savings: 31, savingsPercent: 13 },
-    'pack-duo-glow-led': { originalValue: 448, christmasPrice: 379, savings: 69, savingsPercent: 15 },
-    'pack-ritual-piel-nueva': { originalValue: 265, christmasPrice: 235, savings: 30, savingsPercent: 11 },
-    'pack-lifting-en-casa': { originalValue: 249, christmasPrice: 215, savings: 34, savingsPercent: 14 },
-    'pack-mirada-descansada': { originalValue: 225.99, christmasPrice: 199, savings: 27, savingsPercent: 12 },
-    'pack-glow-diario': { originalValue: 143, christmasPrice: 125, savings: 18, savingsPercent: 13 },
+    'pack-relax-body-glow': { originalValue: 236, christmasPrice: 165.20, savings: 70.80, savingsPercent: 30 },
+    'pack-duo-glow-led': { originalValue: 448, christmasPrice: 313.60, savings: 134.40, savingsPercent: 30 },
+    'pack-ritual-piel-nueva': { originalValue: 265, christmasPrice: 185.50, savings: 79.50, savingsPercent: 30 },
+    'pack-lifting-en-casa': { originalValue: 249, christmasPrice: 174.30, savings: 74.70, savingsPercent: 30 },
+    'pack-mirada-descansada': { originalValue: 225.99, christmasPrice: 158.20, savings: 67.80, savingsPercent: 30 },
+    'pack-glow-diario': { originalValue: 143, christmasPrice: 100.10, savings: 42.90, savingsPercent: 30 },
   };
   
   // Helper to get bundle fixed pricing

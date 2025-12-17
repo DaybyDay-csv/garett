@@ -16,9 +16,9 @@ const BUNDLE_CONFIG = [{
   productPatterns: ["Calm Skin", "Cellu Body"],
   benefits: ["Relajacion profunda", "Tonificacion corporal", "Piel mas suave"],
   originalValue: 236,
-  christmasPrice: 205,
-  savings: 31,
-  savingsPercent: 13
+  christmasPrice: 165.20,
+  savings: 70.80,
+  savingsPercent: 30
 }, {
   id: "pack-duo-glow-led",
   name: "Pack Duo Glow LED",
@@ -26,9 +26,9 @@ const BUNDLE_CONFIG = [{
   productPatterns: ["Manopla LED", "Manopla LED"],
   benefits: ["Rejuvenecimiento dual", "Tratamiento completo", "Resultados visibles"],
   originalValue: 448,
-  christmasPrice: 379,
-  savings: 69,
-  savingsPercent: 15
+  christmasPrice: 313.60,
+  savings: 134.40,
+  savingsPercent: 30
 }, {
   id: "pack-ritual-piel-nueva",
   name: "Pack Ritual Piel Nueva",
@@ -36,9 +36,9 @@ const BUNDLE_CONFIG = [{
   productPatterns: ["Multi Clean", "Breeze", "Pretty Face"],
   benefits: ["Limpieza profunda", "Exfoliacion suave", "Hidratacion intensiva"],
   originalValue: 265,
-  christmasPrice: 235,
-  savings: 30,
-  savingsPercent: 11
+  christmasPrice: 185.50,
+  savings: 79.50,
+  savingsPercent: 30
 }, {
   id: "pack-lifting-en-casa",
   name: "Pack Lifting en Casa",
@@ -46,9 +46,9 @@ const BUNDLE_CONFIG = [{
   productPatterns: ["Multi Clean", "Fresh Skin Pro"],
   benefits: ["Efecto tensor", "Limpieza profesional", "Piel rejuvenecida"],
   originalValue: 249,
-  christmasPrice: 215,
-  savings: 34,
-  savingsPercent: 14
+  christmasPrice: 174.30,
+  savings: 74.70,
+  savingsPercent: 30
 }, {
   id: "pack-mirada-descansada",
   name: "Pack Mirada Descansada",
@@ -56,9 +56,9 @@ const BUNDLE_CONFIG = [{
   productPatterns: ["Fresh Skin Pro", "Fresh Eye"],
   benefits: ["Reduce ojeras", "Minimiza arrugas", "Mirada luminosa"],
   originalValue: 225.99,
-  christmasPrice: 199,
-  savings: 27,
-  savingsPercent: 12
+  christmasPrice: 158.20,
+  savings: 67.80,
+  savingsPercent: 30
 }, {
   id: "pack-glow-diario",
   name: "Pack Glow Diario",
@@ -66,9 +66,9 @@ const BUNDLE_CONFIG = [{
   productPatterns: ["Pretty Face", "Fresh Eye"],
   benefits: ["Uso diario", "Luminosidad natural", "Facil de usar"],
   originalValue: 143,
-  christmasPrice: 125,
-  savings: 18,
-  savingsPercent: 13
+  christmasPrice: 100.10,
+  savings: 42.90,
+  savingsPercent: 30
 }];
 interface BundleProductInfo {
   title: string;
