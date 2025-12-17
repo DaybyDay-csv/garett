@@ -73,6 +73,19 @@ export const CartDrawer = () => {
     return 0;
   };
   
+  // Fixed Christmas bundle pricing
+  const BUNDLE_FIXED_PRICES: Record<string, { originalValue: number; christmasPrice: number; savings: number; savingsPercent: number }> = {
+    'pack-relax-body-glow': { originalValue: 236, christmasPrice: 205, savings: 31, savingsPercent: 13 },
+    'pack-duo-glow-led': { originalValue: 448, christmasPrice: 379, savings: 69, savingsPercent: 15 },
+    'pack-ritual-piel-nueva': { originalValue: 265, christmasPrice: 235, savings: 30, savingsPercent: 11 },
+    'pack-lifting-en-casa': { originalValue: 249, christmasPrice: 215, savings: 34, savingsPercent: 14 },
+    'pack-mirada-descansada': { originalValue: 225.99, christmasPrice: 199, savings: 27, savingsPercent: 12 },
+    'pack-glow-diario': { originalValue: 143, christmasPrice: 125, savings: 18, savingsPercent: 13 },
+  };
+  
+  // Helper to get bundle fixed pricing
+  const getBundleFixedPricing = (handle: string) => BUNDLE_FIXED_PRICES[handle] || null;
+  
   items.filter(item => !item.isGWP).forEach(item => {
     const handle = item.product.node.handle;
     const itemQuantity = item.quantity;
@@ -85,10 +98,16 @@ export const CartDrawer = () => {
       const basePrice = getLEDOriginalPrice(handle);
       totalDiscount += basePrice * itemQuantity * 0.3;
     } else if (isBundleProduct(item)) {
-      // Bundles get base discount + bundle extra discount
-      const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-      const bundleDiscount = (currentStage?.baseDiscount ?? 0) + (currentStage?.bundleExtraDiscount ?? 0);
-      totalDiscount += originalPrice * itemQuantity * (bundleDiscount / 100);
+      // Bundles use fixed Christmas pricing
+      const bundlePricing = getBundleFixedPricing(handle);
+      if (bundlePricing) {
+        totalDiscount += bundlePricing.savings * itemQuantity;
+      } else {
+        // Fallback for unknown bundles
+        const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
+        const bundleDiscount = (currentStage?.baseDiscount ?? 0) + (currentStage?.bundleExtraDiscount ?? 0);
+        totalDiscount += originalPrice * itemQuantity * (bundleDiscount / 100);
+      }
     } else {
       // Other products get stage discount
       const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
@@ -97,11 +116,14 @@ export const CartDrawer = () => {
     }
   });
   
-  // Calculate subtotal with fixed prices for special products
+  // Calculate subtotal with fixed prices for special products and bundles
   const subtotalOriginalFixed = items.filter(item => !item.isGWP).reduce((sum, item) => {
     const handle = item.product.node.handle;
     if (handle === 'plancha-pelo-aeroglow') return sum + 449 * item.quantity;
     if (isLEDLaunchProduct(handle)) return sum + getLEDOriginalPrice(handle) * item.quantity;
+    // For bundles, use original value from fixed pricing
+    const bundlePricing = getBundleFixedPricing(handle);
+    if (bundlePricing) return sum + bundlePricing.originalValue * item.quantity;
     return sum + parseFloat(item.product.node.priceRange.minVariantPrice.amount) * item.quantity;
   }, 0);
   
@@ -282,15 +304,17 @@ export const CartDrawer = () => {
                     </div>}
                   
                   {/* Bundle discount */}
-                  {hasBundles && currentStage && (currentStage.baseDiscount > 0 || currentStage.bundleExtraDiscount > 0) && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
+                  {hasBundles && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
                       <span className="flex items-center gap-1.5">
                         <Sparkles className="w-3 h-3" />
-                        Dto. Pack ({(currentStage.baseDiscount + currentStage.bundleExtraDiscount)}%)
+                        Dto. Pack Navidad
                       </span>
                       <span>-€{(items.filter(item => !item.isGWP && isBundleProduct(item)).reduce((sum, item) => {
-                        const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-                        const bundleDiscount = currentStage.baseDiscount + currentStage.bundleExtraDiscount;
-                        return sum + originalPrice * item.quantity * (bundleDiscount / 100);
+                        const bundlePricing = getBundleFixedPricing(item.product.node.handle);
+                        if (bundlePricing) {
+                          return sum + bundlePricing.savings * item.quantity;
+                        }
+                        return sum;
                       }, 0)).toFixed(2)}</span>
                     </div>}
                   
