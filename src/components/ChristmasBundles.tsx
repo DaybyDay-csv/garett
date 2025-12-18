@@ -169,7 +169,7 @@ export const ChristmasBundles = () => {
         </div>
       </section>;
   }
-  return <section id="christmas-bundles" className="py-16 md:py-24 bg-gradient-to-b from-background via-secondary/20 to-background">
+  return <section id="christmas-bundles" className="py-16 md:py-24 bg-gradient-to-b from-background via-secondary/5 to-background">
       <div className="container px-6">
         {/* Section header */}
         <div className="text-center mb-12 md:mb-16">
