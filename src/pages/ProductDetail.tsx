@@ -374,7 +374,7 @@ const ProductDetail = () => {
               
               {/* Zoom Indicator */}
               <div className="absolute top-4 right-4 bg-black/60 text-white px-3 py-2 rounded-lg flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ZoomIn className="w-4 h-4" />
+                <ZoomIn className="w-4 h-4 text-white" />
                 <span className="text-xs font-medium">Click para ampliar</span>
               </div>
               
@@ -401,11 +401,11 @@ const ProductDetail = () => {
             {/* Trust Indicators Below Images */}
             <div className="bg-header-foreground/10 rounded-lg p-4 space-y-2">
               <div className="flex items-center gap-2 text-sm">
-                <Check className="w-4 h-4 text-green-400" />
+                <Check className="w-4 h-4 text-header-foreground" />
                 <span className="text-header-foreground/80">Imágenes reales del producto</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
-                <Maximize2 className="w-4 h-4 text-primary" />
+                <Maximize2 className="w-4 h-4 text-header-foreground" />
                 <span className="text-header-foreground/80">Haz click para ver en detalle</span>
               </div>
             </div>
@@ -426,7 +426,7 @@ const ProductDetail = () => {
                 {isNew && <Badge className="text-sm">Nuevo</Badge>}
                 {isBestseller && <Badge variant="secondary" className="text-sm">Bestseller</Badge>}
                 <Badge variant="outline" className="gap-1 text-sm border-header-foreground/30 text-header-foreground">
-                  <Shield className="w-3 h-3" />
+                  <Shield className="w-3 h-3 text-header-foreground" />
                   Garantía 2 años
                 </Badge>
               </div>
@@ -444,7 +444,7 @@ const ProductDetail = () => {
                 {productContent.quickBenefits.map((benefit, idx) => {
                 const IconComponent = (LucideIcons as any)[benefit.icon] || Clock;
                 return <div key={idx} className="flex items-center gap-1.5 text-sm text-header-foreground/70">
-                      <IconComponent className="w-4 h-4 text-primary" />
+                      <IconComponent className="w-4 h-4 text-header-foreground" />
                       <span>{benefit.text}</span>
                     </div>;
               })}
@@ -555,7 +555,7 @@ const ProductDetail = () => {
                 {/* Email Notification Form */}
                 <div className="bg-header-foreground/10 rounded-lg p-4 border border-header-foreground/20">
                   <div className="flex items-center gap-2 mb-3">
-                    <Bell className="w-5 h-5 text-primary" />
+                    <Bell className="w-5 h-5 text-header-foreground" />
                     <span className="font-medium text-header-foreground">¿Quieres que te avisemos?</span>
                   </div>
                   <p className="text-sm text-header-foreground/70 mb-4">
@@ -589,10 +589,10 @@ const ProductDetail = () => {
               <Collapsible className="border border-header-foreground/20 rounded-lg">
                 <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-header-foreground/10">
                   <div className="flex items-center gap-3">
-                    <Sparkle className="w-5 h-5 text-primary" />
+                    <Sparkle className="w-5 h-5 text-header-foreground" />
                     <span className="font-medium text-left text-base text-header-foreground">{productContent.dropdowns.howItWorks.title}</span>
                   </div>
-                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground/60" />
+                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground" />
                 </CollapsibleTrigger>
                 <CollapsibleContent className="px-5 pb-5 text-sm space-y-2 text-header-foreground/70 leading-relaxed">
                   <p className="font-medium text-header-foreground">{productContent.dropdowns.howItWorks.summary}</p>
@@ -604,10 +604,10 @@ const ProductDetail = () => {
               <Collapsible className="border border-header-foreground/20 rounded-lg">
                 <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-header-foreground/10">
                   <div className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-primary" />
+                    <Clock className="w-5 h-5 text-header-foreground" />
                     <span className="font-medium text-left text-base text-header-foreground">Resultados esperados</span>
                   </div>
-                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground/60" />
+                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground" />
                 </CollapsibleTrigger>
                 <CollapsibleContent className="px-5 pb-5 text-sm space-y-2 text-header-foreground/70 leading-relaxed">
                   <div className="space-y-3">
@@ -624,10 +624,10 @@ const ProductDetail = () => {
               <Collapsible className="border border-header-foreground/20 rounded-lg">
                 <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-header-foreground/10">
                   <div className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-primary" />
+                    <Check className="w-5 h-5 text-header-foreground" />
                     <span className="font-medium text-left text-base text-header-foreground">Cómo usar (muy fácil)</span>
                   </div>
-                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground/60" />
+                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground" />
                 </CollapsibleTrigger>
                 <CollapsibleContent className="px-5 pb-5 text-sm text-header-foreground/70 leading-relaxed">
                   <ol className="space-y-2 list-decimal list-inside">
@@ -641,10 +641,10 @@ const ProductDetail = () => {
               <Collapsible className="border border-header-foreground/20 rounded-lg">
                 <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-header-foreground/10">
                   <div className="flex items-center gap-3">
-                    <Award className="w-5 h-5 text-primary" />
+                    <Award className="w-5 h-5 text-header-foreground" />
                     <span className="font-medium text-left text-base text-header-foreground">¿Qué la diferencia?</span>
                   </div>
-                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground/60" />
+                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground" />
                 </CollapsibleTrigger>
                 <CollapsibleContent className="px-5 pb-5 text-sm space-y-3 text-header-foreground/70 leading-relaxed">
                   {productContent.dropdowns.whatMakesDifferent.map((diff, idx) => <div key={idx}>
@@ -658,10 +658,10 @@ const ProductDetail = () => {
               <Collapsible className="border border-header-foreground/20 rounded-lg">
                 <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-header-foreground/10">
                   <div className="flex items-center gap-3">
-                    <Shield className="w-5 h-5 text-primary" />
+                    <Shield className="w-5 h-5 text-header-foreground" />
                     <span className="font-medium text-left text-base text-header-foreground">Seguridad y garantía</span>
                   </div>
-                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground/60" />
+                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground" />
                 </CollapsibleTrigger>
                 <CollapsibleContent className="px-5 pb-5 text-sm space-y-2 text-header-foreground/70 leading-relaxed">
                   <div className="space-y-3">
