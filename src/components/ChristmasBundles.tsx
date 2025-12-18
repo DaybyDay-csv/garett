@@ -182,7 +182,7 @@ export const ChristmasBundles = () => {
             <span className="font-semibold text-red-700">spa en casa</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
-            Disenados para regalar (o regalarte).
+            Diseñados para regalar (o regalarte).
           </p>
           
           {/* Current promo indicator */}
