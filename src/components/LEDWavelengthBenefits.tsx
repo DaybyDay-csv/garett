@@ -107,11 +107,11 @@ export const LEDWavelengthBenefits = ({ productHandle }: LEDWavelengthBenefitsPr
       {/* Wavelength Benefits Section */}
       <section>
         <div className="text-center mb-8">
-          <Badge variant="outline" className="mb-4">Tecnología LED Avanzada</Badge>
-          <h2 className="text-2xl md:text-3xl font-thin tracking-tight text-foreground mb-3">
+          <Badge variant="outline" className="mb-4 border-header-foreground/30 text-header-foreground">Tecnología LED Avanzada</Badge>
+          <h2 className="text-2xl md:text-3xl font-thin tracking-tight text-header-foreground mb-3">
             Beneficios de cada longitud de onda
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-header-foreground/70 max-w-2xl mx-auto">
             Cada color de luz penetra a diferente profundidad y activa procesos específicos de regeneración celular
           </p>
         </div>
@@ -120,7 +120,7 @@ export const LEDWavelengthBenefits = ({ productHandle }: LEDWavelengthBenefitsPr
           {wavelengths.map((wavelength) => {
             const IconComponent = wavelength.icon;
             return (
-              <Card key={wavelength.name} className={`${wavelength.borderColor} border-2 overflow-hidden`}>
+              <Card key={wavelength.name} className={`${wavelength.borderColor} border-2 overflow-hidden bg-header-foreground/5`}>
                 <div className={`${wavelength.color} h-2`} />
                 <CardContent className="pt-6">
                   <div className="flex items-center gap-3 mb-4">
@@ -129,26 +129,26 @@ export const LEDWavelengthBenefits = ({ productHandle }: LEDWavelengthBenefitsPr
                     </div>
                     <div>
                       <h3 className={`font-semibold ${wavelength.textColor}`}>{wavelength.name}</h3>
-                      <p className="text-xs text-muted-foreground">{wavelength.wavelength}</p>
+                      <p className="text-xs text-header-foreground/60">{wavelength.wavelength}</p>
                     </div>
                   </div>
                   
                   <div className="mb-4">
-                    <span className="text-xs font-medium text-muted-foreground">Penetración:</span>
-                    <span className="ml-2 text-sm font-semibold">{wavelength.penetration}</span>
+                    <span className="text-xs font-medium text-header-foreground/60">Penetración:</span>
+                    <span className="ml-2 text-sm font-semibold text-header-foreground">{wavelength.penetration}</span>
                   </div>
 
                   <ul className="space-y-2 mb-4">
                     {wavelength.benefits.map((benefit, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-sm">
                         <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${wavelength.textColor}`} />
-                        <span className="text-muted-foreground">{benefit}</span>
+                        <span className="text-header-foreground/80">{benefit}</span>
                       </li>
                     ))}
                   </ul>
 
                   <div className={`${wavelength.bgColor} rounded-lg p-3`}>
-                    <p className="text-xs font-medium text-muted-foreground">Ideal para:</p>
+                    <p className="text-xs font-medium text-gray-600">Ideal para:</p>
                     <p className={`text-sm font-semibold ${wavelength.textColor}`}>{wavelength.bestFor}</p>
                   </div>
                 </CardContent>
@@ -161,23 +161,23 @@ export const LEDWavelengthBenefits = ({ productHandle }: LEDWavelengthBenefitsPr
       {/* Treatment Routines Section */}
       <section>
         <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-thin tracking-tight text-foreground mb-3">
+          <h2 className="text-2xl md:text-3xl font-thin tracking-tight text-header-foreground mb-3">
             Rutinas de tratamiento recomendadas
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-header-foreground/70 max-w-2xl mx-auto">
             Programas diseñados para diferentes objetivos de belleza
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
           {treatmentRoutines.map((routine, idx) => (
-            <Card key={idx} className="bg-muted/30">
+            <Card key={idx} className="bg-header-foreground/10 border-header-foreground/20">
               <CardContent className="pt-6">
-                <h3 className="font-semibold text-lg mb-3">{routine.title}</h3>
+                <h3 className="font-semibold text-lg mb-3 text-header-foreground">{routine.title}</h3>
                 
-                <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
+                <div className="flex items-center gap-4 mb-4 text-sm text-header-foreground/70">
                   <div className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
+                    <Clock className="w-4 h-4 text-header-foreground" />
                     <span>{routine.duration}</span>
                   </div>
                   <span>•</span>
@@ -199,7 +199,7 @@ export const LEDWavelengthBenefits = ({ productHandle }: LEDWavelengthBenefitsPr
                   })}
                 </div>
 
-                <p className="text-sm text-muted-foreground">{routine.description}</p>
+                <p className="text-sm text-header-foreground/70">{routine.description}</p>
               </CardContent>
             </Card>
           ))}
@@ -207,22 +207,22 @@ export const LEDWavelengthBenefits = ({ productHandle }: LEDWavelengthBenefitsPr
       </section>
 
       {/* Safety & Contraindications Section */}
-      <section className="bg-muted/30 rounded-2xl p-6 md:p-8">
+      <section className="bg-header-foreground/10 rounded-2xl p-6 md:p-8 border border-header-foreground/20">
         <div className="grid md:grid-cols-2 gap-8">
           {/* Contraindications */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <AlertTriangle className="w-5 h-5 text-amber-500" />
-              <h3 className="font-semibold text-lg">Contraindicaciones</h3>
+              <AlertTriangle className="w-5 h-5 text-amber-400" />
+              <h3 className="font-semibold text-lg text-header-foreground">Contraindicaciones</h3>
             </div>
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-sm text-header-foreground/70 mb-4">
               No uses este dispositivo si tienes alguna de estas condiciones:
             </p>
             <ul className="space-y-2">
               {contraindications.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-2 text-sm">
-                  <X className="w-4 h-4 mt-0.5 text-red-500 flex-shrink-0" />
-                  <span className="text-muted-foreground">{item}</span>
+                  <X className="w-4 h-4 mt-0.5 text-red-400 flex-shrink-0" />
+                  <span className="text-header-foreground/80">{item}</span>
                 </li>
               ))}
             </ul>
@@ -231,17 +231,17 @@ export const LEDWavelengthBenefits = ({ productHandle }: LEDWavelengthBenefitsPr
           {/* Safety Tips */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Check className="w-5 h-5 text-green-500" />
-              <h3 className="font-semibold text-lg">Consejos de seguridad</h3>
+              <Check className="w-5 h-5 text-green-400" />
+              <h3 className="font-semibold text-lg text-header-foreground">Consejos de seguridad</h3>
             </div>
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-sm text-header-foreground/70 mb-4">
               Para un uso seguro y efectivo:
             </p>
             <ul className="space-y-2">
               {safetyTips.map((tip, idx) => (
                 <li key={idx} className="flex items-start gap-2 text-sm">
-                  <Check className="w-4 h-4 mt-0.5 text-green-500 flex-shrink-0" />
-                  <span className="text-muted-foreground">{tip}</span>
+                  <Check className="w-4 h-4 mt-0.5 text-green-400 flex-shrink-0" />
+                  <span className="text-header-foreground/80">{tip}</span>
                 </li>
               ))}
             </ul>
