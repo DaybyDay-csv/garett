@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { ChristmasSeal } from "@/components/ChristmasSeal";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { Filter, ShoppingBag } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -130,11 +131,14 @@ const Products = () => {
           ]}
         />
         
-        <div className="mb-8 md:mb-10">
-          <h1 className="mb-3 text-xl md:text-2xl font-semibold tracking-tight">Todos los productos</h1>
-          <p className="text-left font-semibold text-xl md:text-3xl text-foreground leading-tight">
-            Reafirmación inmediata, cuidado integral, limpieza profunda.        
-          </p>
+        <div className="mb-8 md:mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <h1 className="mb-3 text-xl md:text-2xl font-semibold tracking-tight">Todos los productos</h1>
+            <p className="text-left font-semibold text-xl md:text-3xl text-foreground leading-tight">
+              Reafirmación inmediata, cuidado integral, limpieza profunda.        
+            </p>
+          </div>
+          <ChristmasSeal size="md" className="self-center md:self-auto" />
         </div>
 
         {/* Filters and Sorting */}
