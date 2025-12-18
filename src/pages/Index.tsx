@@ -84,7 +84,7 @@ const Index = () => {
       </div>
       
       {/* Christmas Bundles Section */}
-      <ChristmasBundles />
+      <ChristmasBundles className="bg-red-700" />
       
       {/* Trust Badges */}
       <div className="container py-6 md:py-12 px-6">
