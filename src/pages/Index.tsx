@@ -6,6 +6,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { TrustBadges } from "@/components/TrustBadges";
 import { ChristmasHero } from "@/components/ChristmasHero";
 import { ChristmasBundles } from "@/components/ChristmasBundles";
+import { ChristmasSeal } from "@/components/ChristmasSeal";
 import { Testimonials } from "@/components/Testimonials";
 import { UGCSection } from "@/components/UGCSection";
 import { PromotionalBanners } from "@/components/PromotionalBanners";
@@ -82,6 +83,11 @@ const Index = () => {
       
       {/* Christmas Hero Section */}
       <ChristmasHero />
+      
+      {/* Christmas Seal - Below Hero */}
+      <div className="container py-6 md:py-10 px-6 flex justify-center">
+        <ChristmasSeal size="lg" className="animate-fade-in" />
+      </div>
       
       {/* Christmas Bundles Section */}
       <ChristmasBundles />

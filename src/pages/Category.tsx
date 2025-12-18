@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { SEO } from "@/components/SEO";
+import { ChristmasSeal } from "@/components/ChristmasSeal";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { CATEGORIES, productBelongsToCategory } from "@/lib/categories";
 import { ShoppingBag } from "lucide-react";
@@ -112,13 +113,16 @@ const Category = () => {
           ]}
         />
         
-        <div className="mb-8 md:mb-10">
-          <h1 className="mb-3 text-3xl md:text-4xl font-semibold tracking-tight">
-            {currentCategory.name}
-          </h1>
-          <p className="text-muted-foreground text-base md:text-lg">
-            {currentCategory.description}
-          </p>
+        <div className="mb-8 md:mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <h1 className="mb-3 text-3xl md:text-4xl font-semibold tracking-tight">
+              {currentCategory.name}
+            </h1>
+            <p className="text-muted-foreground text-base md:text-lg">
+              {currentCategory.description}
+            </p>
+          </div>
+          <ChristmasSeal size="md" className="self-center md:self-auto" />
         </div>
 
         {/* Products Grid */}

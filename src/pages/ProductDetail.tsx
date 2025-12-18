@@ -32,6 +32,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { LEDWavelengthBenefits } from "@/components/LEDWavelengthBenefits";
+import { ChristmasSeal } from "@/components/ChristmasSeal";
 const ProductDetail = () => {
   const {
     handle
@@ -413,7 +414,10 @@ const ProductDetail = () => {
             {/* Product Info */}
           <div className="space-y-6">
             <div>
-              <div className="flex gap-2 mb-4 flex-wrap">
+              <div className="flex gap-2 mb-4 flex-wrap items-center">
+                {/* Christmas Seal */}
+                <ChristmasSeal size="sm" className="mr-2" />
+                
                 {/* Promotional Stage Badge - Highest priority */}
                 {priceInfo.hasDiscount && priceInfo.stage && <Badge variant="destructive" className="text-sm md:text-base px-3 py-1">
                     <Zap className="mr-1 w-4 h-4" />
