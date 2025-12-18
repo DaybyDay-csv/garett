@@ -71,21 +71,15 @@ const Index = () => {
       'query-input': 'required name=search_term_string'
     }
   };
-
   return <div className="min-h-screen bg-background">
-      <SEO 
-        title="Garett Beauty España - Belleza Profesional"
-        description="Descubre los mejores dispositivos de belleza profesional. Cuidado capilar, facial y corporal con tecnología avanzada. Envío gratis en 24-48h y garantía 2 años."
-        canonicalUrl="/"
-        schema={homeSchema}
-      />
+      <SEO title="Garett Beauty España - Belleza Profesional" description="Descubre los mejores dispositivos de belleza profesional. Cuidado capilar, facial y corporal con tecnología avanzada. Envío gratis en 24-48h y garantía 2 años." canonicalUrl="/" schema={homeSchema} />
       <Header />
       
       {/* Christmas Hero Section */}
       <ChristmasHero />
       
       {/* Christmas Seal - Below Hero */}
-      <div className="container py-6 md:py-10 px-6 flex justify-center">
+      <div className="container md:py-10 px-6 py-[20px] flex items-start justify-center bg-header">
         <ChristmasSeal size="lg" className="animate-fade-in" />
       </div>
       
@@ -144,12 +138,7 @@ const Index = () => {
             <Link to="/categoria/cuidado-capilar" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage 
-                    src={categoryCuidadoCapilar} 
-                    alt="Cuidado capilar - Dispositivos profesionales para el cabello" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    blurPlaceholder
-                  />
+                  <OptimizedImage src={categoryCuidadoCapilar} alt="Cuidado capilar - Dispositivos profesionales para el cabello" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
                 </div>
                 <CardContent className="p-4 md:p-6">
                   <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
@@ -170,12 +159,7 @@ const Index = () => {
             <Link to="/categoria/masajeadores-faciales" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage 
-                    src={categoryMasajeadoresFaciales} 
-                    alt="Masajeadores faciales - Estimulación facial avanzada" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    blurPlaceholder
-                  />
+                  <OptimizedImage src={categoryMasajeadoresFaciales} alt="Masajeadores faciales - Estimulación facial avanzada" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
                 </div>
                 <CardContent className="p-4 md:p-6">
                   <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
@@ -196,12 +180,7 @@ const Index = () => {
             <Link to="/categoria/limpieza-facial" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage 
-                    src={categoryLimpiezaFacial} 
-                    alt="Limpieza facial - Limpieza profunda profesional" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    blurPlaceholder
-                  />
+                  <OptimizedImage src={categoryLimpiezaFacial} alt="Limpieza facial - Limpieza profunda profesional" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
                 </div>
                 <CardContent className="p-4 md:p-6">
                   <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
@@ -222,12 +201,7 @@ const Index = () => {
             <Link to="/categoria/mesoterapia" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage 
-                    src={categoryMesoterapia} 
-                    alt="Dispositivos de Mesoterapia - Tratamientos de rejuvenecimiento" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    blurPlaceholder
-                  />
+                  <OptimizedImage src={categoryMesoterapia} alt="Dispositivos de Mesoterapia - Tratamientos de rejuvenecimiento" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
                 </div>
                 <CardContent className="p-4 md:p-6">
                   <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
@@ -248,12 +222,7 @@ const Index = () => {
             <Link to="/categoria/corporales" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage 
-                    src={categoryCorporales} 
-                    alt="Dispositivos corporales - Tratamientos para todo el cuerpo" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    blurPlaceholder
-                  />
+                  <OptimizedImage src={categoryCorporales} alt="Dispositivos corporales - Tratamientos para todo el cuerpo" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
                 </div>
                 <CardContent className="p-4 md:p-6">
                   <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
@@ -274,12 +243,7 @@ const Index = () => {
             <Link to="/categoria/depilacion-ipl" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage 
-                    src={categoryDepilacionIPL} 
-                    alt="Depilación e IPL - Depilación permanente profesional" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    blurPlaceholder
-                  />
+                  <OptimizedImage src={categoryDepilacionIPL} alt="Depilación e IPL - Depilación permanente profesional" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
                 </div>
                 <CardContent className="p-4 md:p-6">
                   <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
@@ -300,12 +264,7 @@ const Index = () => {
             <Link to="/categoria/terapia-luz-led" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
-                  <OptimizedImage 
-                    src={categoryTerapiaLuzLED} 
-                    alt="Terapia de Luz LED - Fototerapia profesional para rejuvenecimiento" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    blurPlaceholder
-                  />
+                  <OptimizedImage src={categoryTerapiaLuzLED} alt="Terapia de Luz LED - Fototerapia profesional para rejuvenecimiento" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
                 </div>
                 <CardContent className="p-4 md:p-6">
                   <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
@@ -340,21 +299,18 @@ const Index = () => {
               </Button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-              {[...newProducts]
-                .sort((a, b) => {
-                  const aIsLED = a.node.title.toLowerCase().includes('máscara led') || a.node.title.toLowerCase().includes('mascara led') || a.node.title.toLowerCase().includes('manopla led');
-                  const bIsLED = b.node.title.toLowerCase().includes('máscara led') || b.node.title.toLowerCase().includes('mascara led') || b.node.title.toLowerCase().includes('manopla led');
-                  if (aIsLED && !bIsLED) return -1;
-                  if (!aIsLED && bIsLED) return 1;
-                  // Máscara before Manopla
-                  const aIsMascara = a.node.title.toLowerCase().includes('máscara') || a.node.title.toLowerCase().includes('mascara');
-                  const bIsMascara = b.node.title.toLowerCase().includes('máscara') || b.node.title.toLowerCase().includes('mascara');
-                  if (aIsMascara && !bIsMascara) return -1;
-                  if (!aIsMascara && bIsMascara) return 1;
-                  return 0;
-                })
-                .slice(0, 6)
-                .map(product => <ProductCard key={product.node.id} product={product} />)}
+              {[...newProducts].sort((a, b) => {
+            const aIsLED = a.node.title.toLowerCase().includes('máscara led') || a.node.title.toLowerCase().includes('mascara led') || a.node.title.toLowerCase().includes('manopla led');
+            const bIsLED = b.node.title.toLowerCase().includes('máscara led') || b.node.title.toLowerCase().includes('mascara led') || b.node.title.toLowerCase().includes('manopla led');
+            if (aIsLED && !bIsLED) return -1;
+            if (!aIsLED && bIsLED) return 1;
+            // Máscara before Manopla
+            const aIsMascara = a.node.title.toLowerCase().includes('máscara') || a.node.title.toLowerCase().includes('mascara');
+            const bIsMascara = b.node.title.toLowerCase().includes('máscara') || b.node.title.toLowerCase().includes('mascara');
+            if (aIsMascara && !bIsMascara) return -1;
+            if (!aIsMascara && bIsMascara) return 1;
+            return 0;
+          }).slice(0, 6).map(product => <ProductCard key={product.node.id} product={product} />)}
             </div>
           </div>
         </section>}
@@ -375,11 +331,7 @@ const Index = () => {
       <BlogCarousel />
 
       {/* FAQ Section */}
-      <FAQ 
-        items={homeFAQs}
-        title="Preguntas frecuentes"
-        description="Resolvemos tus dudas sobre nuestros dispositivos de belleza profesional"
-      />
+      <FAQ items={homeFAQs} title="Preguntas frecuentes" description="Resolvemos tus dudas sobre nuestros dispositivos de belleza profesional" />
 
       {/* Empty/Loading States */}
       {products.length === 0 && !loading && <section className="py-20 text-center container px-6">
