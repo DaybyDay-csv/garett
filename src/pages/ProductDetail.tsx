@@ -399,14 +399,14 @@ const ProductDetail = () => {
             </div>
             
             {/* Trust Indicators Below Images */}
-            <div className="bg-muted/30 rounded-lg p-4 space-y-2">
+            <div className="bg-header-foreground/10 rounded-lg p-4 space-y-2">
               <div className="flex items-center gap-2 text-sm">
-                <Check className="w-4 h-4 text-green-600" />
-                <span className="text-muted-foreground">Imágenes reales del producto</span>
+                <Check className="w-4 h-4 text-green-400" />
+                <span className="text-header-foreground/80">Imágenes reales del producto</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Maximize2 className="w-4 h-4 text-primary" />
-                <span className="text-muted-foreground">Haz click para ver en detalle</span>
+                <span className="text-header-foreground/80">Haz click para ver en detalle</span>
               </div>
             </div>
           </div>
@@ -425,7 +425,7 @@ const ProductDetail = () => {
                   </Badge>}
                 {isNew && <Badge className="text-sm">Nuevo</Badge>}
                 {isBestseller && <Badge variant="secondary" className="text-sm">Bestseller</Badge>}
-                <Badge variant="outline" className="gap-1 text-sm">
+                <Badge variant="outline" className="gap-1 text-sm border-header-foreground/30 text-header-foreground">
                   <Shield className="w-3 h-3" />
                   Garantía 2 años
                 </Badge>
@@ -536,9 +536,9 @@ const ProductDetail = () => {
 
             {/* Variants */}
             {node.variants.edges.length > 1 && <div className="my-6">
-                <label className="text-sm font-medium mb-3 block">Variante</label>
+                <label className="text-sm font-medium mb-3 block text-header-foreground">Variante</label>
                 <div className="flex flex-wrap gap-2">
-                  {node.variants.edges.map((v, idx) => <Button key={v.node.id} variant={selectedVariant === idx ? "default" : "outline"} onClick={() => setSelectedVariant(idx)} className="h-11">
+                  {node.variants.edges.map((v, idx) => <Button key={v.node.id} variant={selectedVariant === idx ? "default" : "outline"} onClick={() => setSelectedVariant(idx)} className={`h-11 ${selectedVariant !== idx ? 'border-header-foreground/30 text-header-foreground hover:bg-header-foreground/10' : ''}`}>
                       {v.node.title}
                     </Button>)}
                 </div>
@@ -556,12 +556,12 @@ const ProductDetail = () => {
                 </Button>
                 
                 {/* Email Notification Form */}
-                <div className="bg-muted/30 rounded-lg p-4 border">
+                <div className="bg-header-foreground/10 rounded-lg p-4 border border-header-foreground/20">
                   <div className="flex items-center gap-2 mb-3">
                     <Bell className="w-5 h-5 text-primary" />
-                    <span className="font-medium">¿Quieres que te avisemos?</span>
+                    <span className="font-medium text-header-foreground">¿Quieres que te avisemos?</span>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-sm text-header-foreground/70 mb-4">
                     Déjanos tu email y te notificaremos cuando el producto esté disponible.
                   </p>
                   <form onSubmit={handleNotifySubmit} className="flex gap-2">
@@ -570,7 +570,7 @@ const ProductDetail = () => {
                       placeholder="Tu email"
                       value={notifyEmail}
                       onChange={(e) => setNotifyEmail(e.target.value)}
-                      className="flex-1"
+                      className="flex-1 bg-header-foreground/10 border-header-foreground/20 text-header-foreground placeholder:text-header-foreground/50"
                       disabled={isSubmittingEmail}
                     />
                     <Button type="submit" disabled={isSubmittingEmail}>
@@ -592,42 +592,42 @@ const ProductDetail = () => {
 
 
             {/* Trust Badges - Compact Version */}
-            <div className="pt-6 border-t">
-              <TrustBadges variant="compact" />
+            <div className="pt-6 border-t border-header-foreground/20">
+              <TrustBadges variant="compact" darkBackground />
             </div>
 
             {/* Product Details Sections - User Focused */}
-            <div className="space-y-3 pt-8 border-t">
-              <h3 className="font-semibold text-lg md:text-xl mb-5 tracking-tight">Información del producto</h3>
+            <div className="space-y-3 pt-8 border-t border-header-foreground/20">
+              <h3 className="font-semibold text-lg md:text-xl mb-5 tracking-tight text-header-foreground">Información del producto</h3>
               
               {/* Why It Works */}
-              <Collapsible className="border rounded-lg">
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-muted/50">
+              <Collapsible className="border border-header-foreground/20 rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-header-foreground/10">
                   <div className="flex items-center gap-3">
                     <Sparkle className="w-5 h-5 text-primary" />
-                    <span className="font-medium text-left text-base">{productContent.dropdowns.howItWorks.title}</span>
+                    <span className="font-medium text-left text-base text-header-foreground">{productContent.dropdowns.howItWorks.title}</span>
                   </div>
-                  <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
+                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground/60" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className="px-5 pb-5 text-sm space-y-2 text-muted-foreground leading-relaxed">
-                  <p className="font-medium text-foreground">{productContent.dropdowns.howItWorks.summary}</p>
+                <CollapsibleContent className="px-5 pb-5 text-sm space-y-2 text-header-foreground/70 leading-relaxed">
+                  <p className="font-medium text-header-foreground">{productContent.dropdowns.howItWorks.summary}</p>
                   {productContent.dropdowns.howItWorks.details.map((detail, idx) => <p key={idx}>{detail}</p>)}
                 </CollapsibleContent>
               </Collapsible>
 
               {/* Expected Results */}
-              <Collapsible className="border rounded-lg">
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-muted/50">
+              <Collapsible className="border border-header-foreground/20 rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-header-foreground/10">
                   <div className="flex items-center gap-3">
                     <Clock className="w-5 h-5 text-primary" />
-                    <span className="font-medium text-left text-base">Resultados esperados</span>
+                    <span className="font-medium text-left text-base text-header-foreground">Resultados esperados</span>
                   </div>
-                  <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
+                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground/60" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className="px-5 pb-5 text-sm space-y-2 text-muted-foreground leading-relaxed">
+                <CollapsibleContent className="px-5 pb-5 text-sm space-y-2 text-header-foreground/70 leading-relaxed">
                   <div className="space-y-3">
                     {productContent.dropdowns.expectedResults.phases.map((phase, idx) => <div key={idx}>
-                        <p className="font-medium text-foreground">{phase.timeframe}</p>
+                        <p className="font-medium text-header-foreground">{phase.timeframe}</p>
                         <p>{phase.description}</p>
                       </div>)}
                   </div>
@@ -636,69 +636,69 @@ const ProductDetail = () => {
               </Collapsible>
 
               {/* How to Use */}
-              <Collapsible className="border rounded-lg">
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-muted/50">
+              <Collapsible className="border border-header-foreground/20 rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-header-foreground/10">
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary" />
-                    <span className="font-medium text-left text-base">Cómo usar (muy fácil)</span>
+                    <span className="font-medium text-left text-base text-header-foreground">Cómo usar (muy fácil)</span>
                   </div>
-                  <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
+                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground/60" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed">
+                <CollapsibleContent className="px-5 pb-5 text-sm text-header-foreground/70 leading-relaxed">
                   <ol className="space-y-2 list-decimal list-inside">
                     {productContent.dropdowns.howToUse.steps.map((step, idx) => <li key={idx}>{step}</li>)}
                   </ol>
-                  <p className="mt-3 font-medium text-foreground">{productContent.dropdowns.howToUse.additionalNote}</p>
+                  <p className="mt-3 font-medium text-header-foreground">{productContent.dropdowns.howToUse.additionalNote}</p>
                 </CollapsibleContent>
               </Collapsible>
 
               {/* What Makes It Different */}
-              <Collapsible className="border rounded-lg">
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-muted/50">
+              <Collapsible className="border border-header-foreground/20 rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-header-foreground/10">
                   <div className="flex items-center gap-3">
                     <Award className="w-5 h-5 text-primary" />
-                    <span className="font-medium text-left text-base">¿Qué la diferencia?</span>
+                    <span className="font-medium text-left text-base text-header-foreground">¿Qué la diferencia?</span>
                   </div>
-                  <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
+                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground/60" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className="px-5 pb-5 text-sm space-y-3 text-muted-foreground leading-relaxed">
+                <CollapsibleContent className="px-5 pb-5 text-sm space-y-3 text-header-foreground/70 leading-relaxed">
                   {productContent.dropdowns.whatMakesDifferent.map((diff, idx) => <div key={idx}>
-                      <p className="font-medium text-foreground">{diff.title}</p>
+                      <p className="font-medium text-header-foreground">{diff.title}</p>
                       <p>{diff.description}</p>
                     </div>)}
                 </CollapsibleContent>
               </Collapsible>
 
               {/* Safety & Guarantee */}
-              <Collapsible className="border rounded-lg">
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-muted/50">
+              <Collapsible className="border border-header-foreground/20 rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-header-foreground/10">
                   <div className="flex items-center gap-3">
                     <Shield className="w-5 h-5 text-primary" />
-                    <span className="font-medium text-left text-base">Seguridad y garantía</span>
+                    <span className="font-medium text-left text-base text-header-foreground">Seguridad y garantía</span>
                   </div>
-                  <ChevronDown className="w-5 h-5 transition-transform text-muted-foreground" />
+                  <ChevronDown className="w-5 h-5 transition-transform text-header-foreground/60" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className="px-5 pb-5 text-sm space-y-2 text-muted-foreground leading-relaxed">
+                <CollapsibleContent className="px-5 pb-5 text-sm space-y-2 text-header-foreground/70 leading-relaxed">
                   <div className="space-y-3">
                     <div className="flex items-start gap-2">
-                      <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-600" />
+                      <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-400" />
                       <div>
-                        <p className="font-medium text-foreground">Certificado CE</p>
+                        <p className="font-medium text-header-foreground">Certificado CE</p>
                         <p>Cumple con todos los estándares europeos de seguridad</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-600" />
+                      <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-400" />
                       <div>
-                        <p className="font-medium text-foreground">24 meses de garantía comercial</p>
+                        <p className="font-medium text-header-foreground">24 meses de garantía comercial</p>
                         <p>Contra defectos de fabricación</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-600" />
+                      <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-400" />
                       <div>
-                        <p className="font-medium text-foreground">Devolución por defecto técnico</p>
-                        <Link to="/garantia" className="text-sm underline hover:text-primary">
+                        <p className="font-medium text-header-foreground">Devolución por defecto técnico</p>
+                        <Link to="/garantia" className="text-sm underline hover:text-primary text-header-foreground/80">
                           Consulta condiciones en política de garantía
                         </Link>
                       </div>
@@ -710,7 +710,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Trust Footer */}
-            <div className="p-5 rounded-lg text-xs border bg-muted/30 text-muted-foreground leading-relaxed">
+            <div className="p-5 rounded-lg text-xs border border-header-foreground/20 bg-header-foreground/10 text-header-foreground/70 leading-relaxed">
               <p>Los resultados pueden variar. Úsalo con constancia para mejores resultados. Certificado CE. Garantía comercial 2 años. Producto higiénico-sanitario: no admite devolución una vez desprecintado salvo defecto técnico verificado.</p>
             </div>
           </div>
