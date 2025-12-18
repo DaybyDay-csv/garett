@@ -347,7 +347,7 @@ const ProductDetail = () => {
   // Get product FAQs based on category
   const productCategory = detectProductCategory(node);
   const productFAQs = productSpecificFAQs[productCategory as keyof typeof productSpecificFAQs] || [];
-  return <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-header text-header-foreground">
       <SEO title={node.title} description={metaDescription} canonicalUrl={`/producto/${node.handle}`} image={node.images.edges[0]?.node.url} type="product" price={priceInfo.discountedPrice.toFixed(2)} currency={variant?.price.currencyCode || 'EUR'} availability={variant?.availableForSale ? 'in stock' : 'out of stock'} brand="Garett Beauty" schema={combinedSchema} faqs={productFAQs} />
       <Header />
       
@@ -431,11 +431,11 @@ const ProductDetail = () => {
                 </Badge>
               </div>
               
-              <h1 className="text-3xl md:text-4xl font-semibold mb-5 md:mb-4 tracking-tight leading-tight">
+              <h1 className="text-3xl md:text-4xl font-semibold mb-5 md:mb-4 tracking-tight leading-tight text-header-foreground">
                 {productContent.pdpHeadline || node.title}
               </h1>
               
-              {productContent.pdpSubheadline && <p className="text-base md:text-lg text-muted-foreground mb-4 leading-relaxed">
+              {productContent.pdpSubheadline && <p className="text-base md:text-lg text-header-foreground/70 mb-4 leading-relaxed">
                   {productContent.pdpSubheadline}
                 </p>}
               
@@ -443,7 +443,7 @@ const ProductDetail = () => {
               <div className="flex flex-wrap gap-3 mb-5">
                 {productContent.quickBenefits.map((benefit, idx) => {
                 const IconComponent = (LucideIcons as any)[benefit.icon] || Clock;
-                return <div key={idx} className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                return <div key={idx} className="flex items-center gap-1.5 text-sm text-header-foreground/70">
                       <IconComponent className="w-4 h-4 text-primary" />
                       <span>{benefit.text}</span>
                     </div>;
@@ -452,7 +452,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Price */}
-            <div className="border-t border-b py-6 my-6">
+            <div className="border-t border-b border-header-foreground/20 py-6 my-6">
               {priceInfo.hasDiscount ? <div className="space-y-2">
                   <div className="flex items-baseline gap-3">
                     <div className="text-4xl md:text-5xl font-semibold text-primary tracking-tight">
@@ -463,26 +463,26 @@ const ProductDetail = () => {
                     </Badge>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xl line-through text-muted-foreground">
+                    <span className="text-xl line-through text-header-foreground/50">
                       €{priceInfo.originalPrice.toFixed(2)}
                     </span>
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-sm text-header-foreground/70">
                       Ahorras €{(priceInfo.originalPrice - priceInfo.discountedPrice).toFixed(2)}
                     </span>
                   </div>
-                  <p className="text-sm text-muted-foreground">IVA incluido</p>
+                  <p className="text-sm text-header-foreground/70">IVA incluido</p>
                   
                   {/* ECI Trust Microcopy */}
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mt-3 pt-3 border-t">
+                  <div className="flex items-center gap-2 text-sm text-header-foreground/70 mt-3 pt-3 border-t border-header-foreground/20">
                     <img src={elCorteInglesLogo} alt="El Corte Inglés" className="h-4" />
                     <span>Con la confianza de El Corte Inglés</span>
                   </div>
                 </div> : <div>
-                  <div className="text-4xl md:text-5xl font-semibold tracking-tight">€{priceInfo.originalPrice.toFixed(2)}</div>
-                  <p className="text-sm mt-1 text-muted-foreground">IVA incluido</p>
+                  <div className="text-4xl md:text-5xl font-semibold tracking-tight text-header-foreground">€{priceInfo.originalPrice.toFixed(2)}</div>
+                  <p className="text-sm mt-1 text-header-foreground/70">IVA incluido</p>
                   
                   {/* ECI Trust Microcopy */}
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mt-3 pt-3 border-t">
+                  <div className="flex items-center gap-2 text-sm text-header-foreground/70 mt-3 pt-3 border-t border-header-foreground/20">
                     <img src={elCorteInglesLogo} alt="El Corte Inglés" className="h-4" />
                     <span>También disponible en El Corte Inglés</span>
                   </div>
