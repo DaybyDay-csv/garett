@@ -455,7 +455,7 @@ const ProductDetail = () => {
             <div className="border-t border-b border-header-foreground/20 py-6 my-6">
               {priceInfo.hasDiscount ? <div className="space-y-2">
                   <div className="flex items-baseline gap-3">
-                    <div className="text-4xl md:text-5xl font-semibold text-primary tracking-tight">
+                    <div className="text-4xl md:text-5xl font-semibold tracking-tight text-primary-foreground">
                       €{priceInfo.discountedPrice.toFixed(2)}
                     </div>
                     <Badge variant="destructive" className="text-base md:text-lg px-4 py-1.5">
@@ -545,12 +545,9 @@ const ProductDetail = () => {
               </div>}
 
             {/* Add to Cart or Out of Stock Notification */}
-            {variant?.availableForSale ? (
-              <Button size="lg" className="w-full h-12 text-base" onClick={handleAddToCart}>
+            {variant?.availableForSale ? <Button size="lg" className="w-full h-12 text-base" onClick={handleAddToCart}>
                 Añadir al carrito
-              </Button>
-            ) : (
-              <div className="space-y-4">
+              </Button> : <div className="space-y-4">
                 <Button size="lg" className="w-full h-12 text-base" disabled>
                   Agotado
                 </Button>
@@ -565,25 +562,13 @@ const ProductDetail = () => {
                     Déjanos tu email y te notificaremos cuando el producto esté disponible.
                   </p>
                   <form onSubmit={handleNotifySubmit} className="flex gap-2">
-                    <Input
-                      type="email"
-                      placeholder="Tu email"
-                      value={notifyEmail}
-                      onChange={(e) => setNotifyEmail(e.target.value)}
-                      className="flex-1 bg-header-foreground/10 border-header-foreground/20 text-header-foreground placeholder:text-header-foreground/50"
-                      disabled={isSubmittingEmail}
-                    />
+                    <Input type="email" placeholder="Tu email" value={notifyEmail} onChange={e => setNotifyEmail(e.target.value)} className="flex-1 bg-header-foreground/10 border-header-foreground/20 text-header-foreground placeholder:text-header-foreground/50" disabled={isSubmittingEmail} />
                     <Button type="submit" disabled={isSubmittingEmail}>
-                      {isSubmittingEmail ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                      ) : (
-                        'Avisar'
-                      )}
+                      {isSubmittingEmail ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Avisar'}
                     </Button>
                   </form>
                 </div>
-              </div>
-            )}
+              </div>}
 
             {/* Product Video - Below Add to Cart for AeroGlow */}
             {isAeroGlow && <div className="rounded-lg overflow-hidden border bg-muted/10 mt-4 aspect-video">
