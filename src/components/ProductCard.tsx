@@ -122,7 +122,7 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
   return (
     <Link 
       to={`/producto/${node.handle}`}
-      className="group block bg-header rounded-none overflow-hidden border border-header hover:shadow-lg transition-all"
+      className="group block bg-card rounded-none overflow-hidden border hover:shadow-lg transition-all"
     >
       <div className="aspect-square bg-secondary/20 overflow-hidden relative">
         {image && (
@@ -169,13 +169,13 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
       </div>
       
       <div className="p-5">
-        <h3 className="font-semibold text-base mb-3 line-clamp-2 group-hover:text-primary transition-colors leading-snug text-header-foreground">
+        <h3 className="font-semibold text-base mb-3 line-clamp-2 group-hover:text-primary transition-colors leading-snug">
           {node.title}
         </h3>
         
         {/* Description hidden on all screens */}
         {node.description && (
-          <p className="hidden text-sm text-header-foreground/70 line-clamp-2 mb-3">
+          <p className="hidden text-sm text-muted-foreground line-clamp-2 mb-3">
             {node.description}
           </p>
         )}
@@ -192,12 +192,12 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
                     {priceInfo.discountLabel}
                   </span>
                 </div>
-                <span className="block text-sm text-header-foreground/60 line-through">
+                <span className="block text-sm text-muted-foreground line-through">
                   €{priceInfo.originalPrice.toFixed(2)}
                 </span>
               </div>
             ) : (
-              <span className="text-2xl md:text-3xl font-semibold tracking-tight text-header-foreground">
+              <span className="text-2xl md:text-3xl font-semibold tracking-tight">
                 €{priceInfo.originalPrice.toFixed(2)}
               </span>
             )}
