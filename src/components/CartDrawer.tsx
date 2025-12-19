@@ -9,6 +9,16 @@ import { useCartStore } from "@/stores/cartStore";
 import { getCurrentPromotionalStage } from "@/lib/promotions";
 import { toast } from "sonner";
 import gwpHeadband from "@/assets/gwp-headband.png";
+
+// Imágenes de fallback para bundles (primer producto del pack)
+const BUNDLE_FALLBACK_IMAGES: Record<string, string> = {
+  'pack-relax-body-glow': 'https://cdn.shopify.com/s/files/1/0788/4256/2253/files/pistola-masaje-beauty.png',
+  'pack-duo-glow-led': 'https://cdn.shopify.com/s/files/1/0788/4256/2253/files/mascara-led.png',
+  'pack-ritual-piel-nueva': 'https://cdn.shopify.com/s/files/1/0788/4256/2253/files/cepillo-limpieza-facial.png',
+  'pack-lifting-en-casa': 'https://cdn.shopify.com/s/files/1/0788/4256/2253/files/masajeador-facial-ems.png',
+  'pack-mirada-descansada': 'https://cdn.shopify.com/s/files/1/0788/4256/2253/files/masajeador-ojos.png',
+  'pack-glow-diario': 'https://cdn.shopify.com/s/files/1/0788/4256/2253/files/cepillo-limpieza-facial.png',
+};
 export const CartDrawer = () => {
   const {
     items,
@@ -222,7 +232,16 @@ export const CartDrawer = () => {
                 <div className="space-y-2.5">
                   {items.filter(item => !item.isGWP).map(item => <div key={item.variantId} className={`flex gap-2.5 p-2 border rounded-lg ${item.isGWP ? 'bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-800' : ''}`}>
                       <div className="w-14 h-14 bg-secondary/20 rounded-md overflow-hidden flex-shrink-0 relative">
-                        {item.product.node.images?.edges?.[0]?.node && <img src={item.product.node.images.edges[0].node.url} alt={item.product.node.title} className="w-full h-full object-cover" />}
+                        {(() => {
+                          const handle = item.product.node.handle;
+                          const shopifyImage = item.product.node.images?.edges?.[0]?.node?.url;
+                          const bundleFallback = BUNDLE_FALLBACK_IMAGES[handle];
+                          const imageUrl = shopifyImage || bundleFallback;
+                          
+                          return imageUrl ? (
+                            <img src={imageUrl} alt={item.product.node.title} className="w-full h-full object-cover" />
+                          ) : null;
+                        })()}
                         {item.isGWP && <div className="absolute top-0 right-0 bg-gradient-to-br from-purple-500 to-pink-500 text-white text-[8px] font-bold px-1 py-0.5 rounded-bl">
                             GRATIS
                           </div>}
