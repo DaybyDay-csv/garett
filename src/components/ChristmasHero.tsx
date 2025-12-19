@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Gift, Sparkles, ArrowRight } from "lucide-react";
-import { getCurrentPromotionalStage, isHighDiscountPeriod, getECIComparisonMessage } from "@/lib/promotions";
+import { getCurrentPromotionalStage, isHighDiscountPeriod } from "@/lib/promotions";
 import { useEffect, useState } from "react";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import heroChristmas from "@/assets/hero-christmas.png";
@@ -16,7 +16,7 @@ export const ChristmasHero = () => {
   });
   const currentStage = getCurrentPromotionalStage();
   const isHighDiscount = isHighDiscountPeriod();
-  const eciMessage = getECIComparisonMessage();
+  
   useEffect(() => {
     const targetDate = currentStage?.endDate || new Date('2025-12-25T00:00:00');
     const calculateTimeLeft = () => {
@@ -69,8 +69,6 @@ export const ChristmasHero = () => {
               <span className="text-amber-700 font-semibold"> Hasta {currentStage ? `-${currentStage.baseDiscount + (currentStage.bundleExtraDiscount || 0)}%` : "-35%"} en packs</span>
             </p>
 
-            {/* ECI comparison badge */}
-            {eciMessage}
 
             {/* Countdown */}
             {isHighDiscount && <div className="flex gap-2 md:gap-3">
