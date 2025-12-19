@@ -46,50 +46,76 @@ export const CartDrawer = () => {
   // Current stage and discount
   const currentStage = getCurrentPromotionalStage();
   const hasGWPActive = currentStage?.hasGWP ?? false;
-  
+
   // Calculate discounts separately for AeroGlow (30%), LED launch (30%), bundles, and other products
   let totalDiscount = 0;
   const hasAeroGlow = items.some(item => item.product.node.handle === 'plancha-pelo-aeroglow');
-  const hasLEDLaunch = items.some(item => 
-    item.product.node.handle === 'mascara-led-garett-beauty' || 
-    item.product.node.handle === 'manopla-led-garett-beauty'
-  );
-  
+  const hasLEDLaunch = items.some(item => item.product.node.handle === 'mascara-led-garett-beauty' || item.product.node.handle === 'manopla-led-garett-beauty');
+
   // Helper to check if item is LED launch product
-  const isLEDLaunchProduct = (handle: string) => 
-    handle === 'mascara-led-garett-beauty' || handle === 'manopla-led-garett-beauty';
-  
+  const isLEDLaunchProduct = (handle: string) => handle === 'mascara-led-garett-beauty' || handle === 'manopla-led-garett-beauty';
+
   // Helper to check if item is a bundle
-  const isBundleProduct = (item: typeof items[0]) => 
-    item.product.node.productType === 'Bundle' ||
-    item.product.node.handle.startsWith('pack-');
-  
+  const isBundleProduct = (item: typeof items[0]) => item.product.node.productType === 'Bundle' || item.product.node.handle.startsWith('pack-');
   const hasBundles = items.some(item => !item.isGWP && isBundleProduct(item));
-  
+
   // Helper to get fixed LED prices
   const getLEDOriginalPrice = (handle: string) => {
     if (handle === 'mascara-led-garett-beauty') return 350;
     if (handle === 'manopla-led-garett-beauty') return 299;
     return 0;
   };
-  
+
   // Fixed Christmas bundle pricing (30% off)
-  const BUNDLE_FIXED_PRICES: Record<string, { originalValue: number; christmasPrice: number; savings: number; savingsPercent: number }> = {
-    'pack-relax-body-glow': { originalValue: 236, christmasPrice: 165.20, savings: 70.80, savingsPercent: 30 },
-    'pack-duo-glow-led': { originalValue: 448, christmasPrice: 313.60, savings: 134.40, savingsPercent: 30 },
-    'pack-ritual-piel-nueva': { originalValue: 265, christmasPrice: 185.50, savings: 79.50, savingsPercent: 30 },
-    'pack-lifting-en-casa': { originalValue: 249, christmasPrice: 174.30, savings: 74.70, savingsPercent: 30 },
-    'pack-mirada-descansada': { originalValue: 225.99, christmasPrice: 158.20, savings: 67.80, savingsPercent: 30 },
-    'pack-glow-diario': { originalValue: 143, christmasPrice: 100.10, savings: 42.90, savingsPercent: 30 },
+  const BUNDLE_FIXED_PRICES: Record<string, {
+    originalValue: number;
+    christmasPrice: number;
+    savings: number;
+    savingsPercent: number;
+  }> = {
+    'pack-relax-body-glow': {
+      originalValue: 236,
+      christmasPrice: 165.20,
+      savings: 70.80,
+      savingsPercent: 30
+    },
+    'pack-duo-glow-led': {
+      originalValue: 448,
+      christmasPrice: 313.60,
+      savings: 134.40,
+      savingsPercent: 30
+    },
+    'pack-ritual-piel-nueva': {
+      originalValue: 265,
+      christmasPrice: 185.50,
+      savings: 79.50,
+      savingsPercent: 30
+    },
+    'pack-lifting-en-casa': {
+      originalValue: 249,
+      christmasPrice: 174.30,
+      savings: 74.70,
+      savingsPercent: 30
+    },
+    'pack-mirada-descansada': {
+      originalValue: 225.99,
+      christmasPrice: 158.20,
+      savings: 67.80,
+      savingsPercent: 30
+    },
+    'pack-glow-diario': {
+      originalValue: 143,
+      christmasPrice: 100.10,
+      savings: 42.90,
+      savingsPercent: 30
+    }
   };
-  
+
   // Helper to get bundle fixed pricing
   const getBundleFixedPricing = (handle: string) => BUNDLE_FIXED_PRICES[handle] || null;
-  
   items.filter(item => !item.isGWP).forEach(item => {
     const handle = item.product.node.handle;
     const itemQuantity = item.quantity;
-    
     if (handle === 'plancha-pelo-aeroglow') {
       // AeroGlow: €449 base, 30% off
       totalDiscount += 449 * itemQuantity * 0.3;
@@ -115,7 +141,7 @@ export const CartDrawer = () => {
       totalDiscount += originalPrice * itemQuantity * (discountPercentage / 100);
     }
   });
-  
+
   // Calculate subtotal with fixed prices for special products and bundles
   const subtotalOriginalFixed = items.filter(item => !item.isGWP).reduce((sum, item) => {
     const handle = item.product.node.handle;
@@ -126,7 +152,6 @@ export const CartDrawer = () => {
     if (bundlePricing) return sum + bundlePricing.originalValue * item.quantity;
     return sum + parseFloat(item.product.node.priceRange.minVariantPrice.amount) * item.quantity;
   }, 0);
-  
   const subtotalWithDiscount = subtotalOriginalFixed - totalDiscount;
 
   // GWP threshold
@@ -239,12 +264,12 @@ export const CartDrawer = () => {
                         </p>
                         <p className={`font-semibold text-sm mt-0.5 ${item.isGWP ? 'text-purple-600 dark:text-purple-400' : ''}`}>
                           {item.isGWP ? 'GRATIS' : `€${(() => {
-                            const handle = item.product.node.handle;
-                            if (handle === 'plancha-pelo-aeroglow') return '449.00';
-                            if (handle === 'mascara-led-garett-beauty') return '350.00';
-                            if (handle === 'manopla-led-garett-beauty') return '299.00';
-                            return parseFloat(item.product.node.priceRange.minVariantPrice.amount).toFixed(2);
-                          })()}`}
+                      const handle = item.product.node.handle;
+                      if (handle === 'plancha-pelo-aeroglow') return '449.00';
+                      if (handle === 'mascara-led-garett-beauty') return '350.00';
+                      if (handle === 'manopla-led-garett-beauty') return '299.00';
+                      return parseFloat(item.product.node.priceRange.minVariantPrice.amount).toFixed(2);
+                    })()}`}
                         </p>
                       </div>
                       
@@ -276,7 +301,7 @@ export const CartDrawer = () => {
               {/* Raffle Note */}
               <div className="bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-950/30 dark:to-yellow-950/30 rounded-lg p-2.5 border border-amber-200 dark:border-amber-800 mt-2">
                 <p className="text-[11px] text-amber-800 dark:text-amber-200 leading-snug">
-                  <span className="font-bold">🎁 SORTEO:</span> Usa el código <span className="font-bold bg-amber-200 dark:bg-amber-800 px-1 rounded">NAVIDADGARETT</span> en el checkout para entrar en el sorteo y elegir el producto que TÚ quieras.
+                  <span className="font-bold">SORTEO:</span> Usa el código <span className="font-bold bg-amber-200 dark:bg-amber-800 px-1 rounded">NAVIDADGARETT</span> en el checkout para entrar en el sorteo y elegir el producto que TÚ quieras.
                 </p>
               </div>
               
@@ -294,9 +319,9 @@ export const CartDrawer = () => {
                         <Sparkles className="w-3 h-3" />
                         Descuento AeroGlow (30%)
                       </span>
-                      <span>-€{(items.filter(item => item.product.node.handle === 'plancha-pelo-aeroglow').reduce((sum, item) => {
-                        return sum + 449 * item.quantity * 0.3;
-                      }, 0)).toFixed(2)}</span>
+                      <span>-€{items.filter(item => item.product.node.handle === 'plancha-pelo-aeroglow').reduce((sum, item) => {
+                    return sum + 449 * item.quantity * 0.3;
+                  }, 0).toFixed(2)}</span>
                     </div>}
                   
                   {hasLEDLaunch && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
@@ -304,10 +329,10 @@ export const CartDrawer = () => {
                         <Sparkles className="w-3 h-3" />
                         Dto. Lanzamiento LED (30%)
                       </span>
-                      <span>-€{(items.filter(item => isLEDLaunchProduct(item.product.node.handle)).reduce((sum, item) => {
-                        const basePrice = getLEDOriginalPrice(item.product.node.handle);
-                        return sum + basePrice * item.quantity * 0.3;
-                      }, 0)).toFixed(2)}</span>
+                      <span>-€{items.filter(item => isLEDLaunchProduct(item.product.node.handle)).reduce((sum, item) => {
+                    const basePrice = getLEDOriginalPrice(item.product.node.handle);
+                    return sum + basePrice * item.quantity * 0.3;
+                  }, 0).toFixed(2)}</span>
                     </div>}
                   
                   {/* Bundle discount */}
@@ -316,13 +341,13 @@ export const CartDrawer = () => {
                         <Sparkles className="w-3 h-3" />
                         Dto. Pack Navidad
                       </span>
-                      <span>-€{(items.filter(item => !item.isGWP && isBundleProduct(item)).reduce((sum, item) => {
-                        const bundlePricing = getBundleFixedPricing(item.product.node.handle);
-                        if (bundlePricing) {
-                          return sum + bundlePricing.savings * item.quantity;
-                        }
-                        return sum;
-                      }, 0)).toFixed(2)}</span>
+                      <span>-€{items.filter(item => !item.isGWP && isBundleProduct(item)).reduce((sum, item) => {
+                    const bundlePricing = getBundleFixedPricing(item.product.node.handle);
+                    if (bundlePricing) {
+                      return sum + bundlePricing.savings * item.quantity;
+                    }
+                    return sum;
+                  }, 0).toFixed(2)}</span>
                     </div>}
                   
                   {/* Regular product discount */}
@@ -331,10 +356,10 @@ export const CartDrawer = () => {
                         <Sparkles className="w-3 h-3" />
                         Descuento Navidad ({currentStage.baseDiscount}%)
                       </span>
-                      <span>-€{(items.filter(item => !item.isGWP && item.product.node.handle !== 'plancha-pelo-aeroglow' && !isLEDLaunchProduct(item.product.node.handle) && !isBundleProduct(item)).reduce((sum, item) => {
-                        const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-                        return sum + originalPrice * item.quantity * (currentStage.baseDiscount / 100);
-                      }, 0)).toFixed(2)}</span>
+                      <span>-€{items.filter(item => !item.isGWP && item.product.node.handle !== 'plancha-pelo-aeroglow' && !isLEDLaunchProduct(item.product.node.handle) && !isBundleProduct(item)).reduce((sum, item) => {
+                    const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
+                    return sum + originalPrice * item.quantity * (currentStage.baseDiscount / 100);
+                  }, 0).toFixed(2)}</span>
                     </div>}
                   
                   {/* Gift With Purchase */}
