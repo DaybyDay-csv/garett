@@ -21,7 +21,7 @@ export const TrustBadges = ({
       <div className={`flex flex-col items-center text-center rounded-lg ${cardClasses} ${isCart ? 'p-2' : isCompact ? 'p-3' : 'p-5 md:p-6'}`}>
         <Shield className={`text-primary mb-1 ${isCart ? 'w-5 h-5' : isCompact ? 'w-7 h-7 md:w-8 md:h-8' : 'w-10 h-10 md:w-12 md:h-12'}`} />
         <h3 className={`font-semibold leading-tight ${titleClasses} ${isCart ? 'text-[11px] mb-0.5' : isCompact ? 'text-sm md:text-sm mb-1' : 'text-sm md:text-lg mb-1'}`}>
-          Garantía 2 años
+          Garantía 3 años
         </h3>
         <p className={`leading-tight ${descClasses} ${isCart ? 'text-[9px]' : 'text-xs leading-relaxed'}`}>
           Contra defectos de fabricación
