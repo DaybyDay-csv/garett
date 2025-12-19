@@ -236,15 +236,45 @@ export const CartDrawer = () => {
                           {item.isGWP && <Gift className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 flex-shrink-0" />}
                         </div>
                         
-                        <p className={`font-semibold text-sm mt-0.5 ${item.isGWP ? 'text-purple-600 dark:text-purple-400' : ''}`}>
-                          {item.isGWP ? 'GRATIS' : `€${(() => {
-                      const handle = item.product.node.handle;
-                      if (handle === 'plancha-pelo-aeroglow') return '449.00';
-                      if (handle === 'mascara-led-garett-beauty') return '350.00';
-                      if (handle === 'manopla-led-garett-beauty') return '299.00';
-                      return parseFloat(item.product.node.priceRange.minVariantPrice.amount).toFixed(2);
-                    })()}`}
-                        </p>
+                        {item.isGWP ? (
+                          <p className="font-semibold text-sm mt-0.5 text-purple-600 dark:text-purple-400">GRATIS</p>
+                        ) : (() => {
+                          const handle = item.product.node.handle;
+                          let originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
+                          let discountPercent = currentStage?.baseDiscount ?? 0;
+                          
+                          if (handle === 'plancha-pelo-aeroglow') {
+                            originalPrice = 449;
+                            discountPercent = 30;
+                          } else if (handle === 'mascara-led-garett-beauty') {
+                            originalPrice = 350;
+                            discountPercent = 30;
+                          } else if (handle === 'manopla-led-garett-beauty') {
+                            originalPrice = 299;
+                            discountPercent = 30;
+                          } else if (isBundleProduct(item)) {
+                            const bundlePricing = getBundleFixedPricing(handle);
+                            if (bundlePricing) {
+                              return (
+                                <div className="flex items-center gap-1.5 mt-0.5">
+                                  <span className="text-xs text-muted-foreground line-through">€{bundlePricing.originalValue.toFixed(2)}</span>
+                                  <span className="font-semibold text-sm text-green-600 dark:text-green-400">€{bundlePricing.christmasPrice.toFixed(2)}</span>
+                                </div>
+                              );
+                            }
+                          }
+                          
+                          const finalPrice = originalPrice * (1 - discountPercent / 100);
+                          
+                          return discountPercent > 0 ? (
+                            <div className="flex items-center gap-1.5 mt-0.5">
+                              <span className="text-xs text-muted-foreground line-through">€{originalPrice.toFixed(2)}</span>
+                              <span className="font-semibold text-sm text-green-600 dark:text-green-400">€{finalPrice.toFixed(2)}</span>
+                            </div>
+                          ) : (
+                            <p className="font-semibold text-sm mt-0.5">€{originalPrice.toFixed(2)}</p>
+                          );
+                        })()}
                       </div>
                       
                       {!item.isGWP && <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
