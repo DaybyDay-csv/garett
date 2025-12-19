@@ -209,14 +209,14 @@ export const CartDrawer = () => {
         </SheetHeader>
         
         {/* GWP Progress Bar - Compact */}
-        {hasGWPActive && items.length > 0 && <div className="flex-shrink-0 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-2 border border-purple-200 dark:border-purple-800 mt-3">
+        {hasGWPActive && items.length > 0 && <div className="flex-shrink-0 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-2 border mt-3 border-primary-glow">
             <div className="flex items-center gap-2 mb-1">
               <div className="w-10 h-10 rounded-md overflow-hidden bg-white flex-shrink-0 border border-purple-200">
                 {gwpProduct?.node.images?.edges?.[0]?.node ? <img src={gwpProduct.node.images.edges[0].node.url} alt="Banda de pelo gratis" className="w-full h-full object-cover" /> : <img src={gwpHeadband} alt="Banda de pelo gratis" className="w-full h-full object-cover" />}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5">
-                  <Gift className="w-3 h-3 text-purple-600 dark:text-purple-400 flex-shrink-0" />
+                  
                   <span className="font-semibold text-sm text-purple-800 leading-tight truncate">
                     {hasUnlockedGWP ? '¡Regalo desbloqueado!' : 'Casi consigues tu regalo gratis'}
                   </span>
