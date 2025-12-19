@@ -12,12 +12,12 @@ import gwpHeadband from "@/assets/gwp-headband.png";
 
 // Imágenes de fallback para bundles (primer producto del pack)
 const BUNDLE_FALLBACK_IMAGES: Record<string, string> = {
-  'pack-relax-body-glow': 'https://cdn.shopify.com/s/files/1/0788/4256/2253/files/pistola-masaje-beauty.png',
-  'pack-duo-glow-led': 'https://cdn.shopify.com/s/files/1/0788/4256/2253/files/mascara-led.png',
-  'pack-ritual-piel-nueva': 'https://cdn.shopify.com/s/files/1/0788/4256/2253/files/cepillo-limpieza-facial.png',
-  'pack-lifting-en-casa': 'https://cdn.shopify.com/s/files/1/0788/4256/2253/files/masajeador-facial-ems.png',
-  'pack-mirada-descansada': 'https://cdn.shopify.com/s/files/1/0788/4256/2253/files/masajeador-ojos.png',
-  'pack-glow-diario': 'https://cdn.shopify.com/s/files/1/0788/4256/2253/files/cepillo-limpieza-facial.png',
+  'pack-relax-body-glow': 'https://cdn.shopify.com/s/files/1/0948/9580/0683/files/172_3afa61d839340df066d5eafa8d38eaaf.jpg?v=1762798843',
+  'pack-duo-glow-led': 'https://cdn.shopify.com/s/files/1/0948/9580/0683/files/manopla-led-1.png?v=1765822763',
+  'pack-ritual-piel-nueva': 'https://cdn.shopify.com/s/files/1/0948/9580/0683/files/177_43667ac48ff0894c9a265cca3cd1b26b.jpg?v=1762798845',
+  'pack-lifting-en-casa': 'https://cdn.shopify.com/s/files/1/0948/9580/0683/files/95_14761db03d22136544659baee30e9203.jpg?v=1762798855',
+  'pack-mirada-descansada': 'https://cdn.shopify.com/s/files/1/0948/9580/0683/files/73_89c81ec9f56eb428ad789c45cd88c12e.jpg?v=1762798852',
+  'pack-glow-diario': 'https://cdn.shopify.com/s/files/1/0948/9580/0683/files/175_39199cdc11c520c653601745bf21ed7b.webp?v=1762798844',
 };
 export const CartDrawer = () => {
   const {
