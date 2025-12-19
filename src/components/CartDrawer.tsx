@@ -273,6 +273,13 @@ export const CartDrawer = () => {
                 </div>
               </div>
               
+              {/* Raffle Note */}
+              <div className="bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-950/30 dark:to-yellow-950/30 rounded-lg p-2.5 border border-amber-200 dark:border-amber-800 mt-2">
+                <p className="text-[11px] text-amber-800 dark:text-amber-200 leading-snug">
+                  <span className="font-bold">🎁 SORTEO:</span> Usa el código <span className="font-bold bg-amber-200 dark:bg-amber-800 px-1 rounded">NAVIDADGARETT</span> en el checkout para entrar en el sorteo y elegir el producto que TÚ quieras.
+                </p>
+              </div>
+              
               <div className="flex-shrink-0 space-y-3 pt-3 border-t bg-background mt-3">
                 {/* Price Breakdown */}
                 <div className="space-y-1.5 text-sm">
