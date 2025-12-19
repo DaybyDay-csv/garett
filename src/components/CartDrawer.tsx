@@ -235,9 +235,7 @@ export const CartDrawer = () => {
                           </h4>
                           {item.isGWP && <Gift className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 flex-shrink-0" />}
                         </div>
-                        <p className="text-[11px] text-muted-foreground mt-0.5">
-                          {item.selectedOptions.map(option => option.value).join(' • ')}
-                        </p>
+                        
                         <p className={`font-semibold text-sm mt-0.5 ${item.isGWP ? 'text-purple-600 dark:text-purple-400' : ''}`}>
                           {item.isGWP ? 'GRATIS' : `€${(() => {
                       const handle = item.product.node.handle;
