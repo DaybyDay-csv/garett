@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { X, Clock } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getCurrentPromotionalStage } from "@/lib/promotions";
 
@@ -75,56 +75,43 @@ export const FloatingCountdown = () => {
 
   return (
     <div className="fixed bottom-3 right-3 z-50 animate-fade-in">
-      <div className="bg-primary text-primary-foreground rounded-lg shadow-lg p-2.5 pr-8 max-w-[200px] relative">
+      <div className="bg-[#8B2635] text-white rounded-lg shadow-lg p-2 pr-6 max-w-[180px] relative">
         {/* Close button */}
         <Button
           variant="ghost"
           size="icon"
-          className="absolute top-1 right-1 h-4 w-4 text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/20"
+          className="absolute top-0.5 right-0.5 h-4 w-4 text-white/70 hover:text-white hover:bg-white/20"
           onClick={() => setIsDismissed(true)}
         >
           <X className="h-2.5 w-2.5" />
         </Button>
 
         {/* Stage info */}
-        <div className="flex items-center gap-1.5 mb-1.5">
-          <StageIcon className="w-3 h-3" />
-          <span className="font-semibold text-xs">{currentStage.badge}</span>
-        </div>
-
-        {/* Countdown */}
         <div className="flex items-center gap-1 mb-1">
-          <Clock className="w-2.5 h-2.5 opacity-80" />
-          <span className="text-[9px] opacity-80">Termina en:</span>
+          <StageIcon className="w-2.5 h-2.5" />
+          <span className="font-semibold text-[10px]">{currentStage.badge}</span>
         </div>
         
-        <div className="flex gap-1">
+        <div className="flex gap-0.5">
           {timeLeft.days > 0 && (
-            <div className="bg-primary-foreground/20 rounded px-1 py-0.5 min-w-[28px] text-center">
-              <div className="text-xs font-bold tabular-nums">{timeLeft.days}</div>
-              <div className="text-[7px] opacity-70">días</div>
+            <div className="bg-white/20 rounded px-1 py-0.5 min-w-[24px] text-center">
+              <div className="text-[10px] font-bold tabular-nums">{timeLeft.days}</div>
+              <div className="text-[6px] opacity-70">días</div>
             </div>
           )}
-          <div className="bg-primary-foreground/20 rounded px-1 py-0.5 min-w-[28px] text-center">
-            <div className="text-xs font-bold tabular-nums">{String(timeLeft.hours).padStart(2, '0')}</div>
-            <div className="text-[7px] opacity-70">hrs</div>
+          <div className="bg-white/20 rounded px-1 py-0.5 min-w-[24px] text-center">
+            <div className="text-[10px] font-bold tabular-nums">{String(timeLeft.hours).padStart(2, '0')}</div>
+            <div className="text-[6px] opacity-70">hrs</div>
           </div>
-          <div className="bg-primary-foreground/20 rounded px-1 py-0.5 min-w-[28px] text-center">
-            <div className="text-xs font-bold tabular-nums">{String(timeLeft.minutes).padStart(2, '0')}</div>
-            <div className="text-[7px] opacity-70">min</div>
+          <div className="bg-white/20 rounded px-1 py-0.5 min-w-[24px] text-center">
+            <div className="text-[10px] font-bold tabular-nums">{String(timeLeft.minutes).padStart(2, '0')}</div>
+            <div className="text-[6px] opacity-70">min</div>
           </div>
-          <div className="bg-primary-foreground/20 rounded px-1 py-0.5 min-w-[28px] text-center">
-            <div className="text-xs font-bold tabular-nums">{String(timeLeft.seconds).padStart(2, '0')}</div>
-            <div className="text-[7px] opacity-70">seg</div>
+          <div className="bg-white/20 rounded px-1 py-0.5 min-w-[24px] text-center">
+            <div className="text-[10px] font-bold tabular-nums">{String(timeLeft.seconds).padStart(2, '0')}</div>
+            <div className="text-[6px] opacity-70">seg</div>
           </div>
         </div>
-
-        {/* Urgency indicator */}
-        {timeLeft.days === 0 && timeLeft.hours < 6 && (
-          <div className="mt-1.5 text-[8px] bg-primary-foreground/20 rounded px-1.5 py-0.5 text-center font-medium animate-pulse">
-            ⚡ ¡Últimas horas!
-          </div>
-        )}
       </div>
     </div>
   );
