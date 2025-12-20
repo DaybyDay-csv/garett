@@ -175,6 +175,16 @@ export const CartDrawer = () => {
   // Calculate total savings
   const totalSavings = totalDiscount;
   const handleCheckout = async () => {
+    // Detectar si estamos en un iframe (preview de Lovable)
+    const isInIframe = window.self !== window.top;
+    const shouldOpenNewTab = !isMobile || isInIframe;
+    
+    // Safari bloquea window.open() después de async, así que abrimos antes
+    let newWindow: Window | null = null;
+    if (shouldOpenNewTab) {
+      newWindow = window.open('about:blank', '_blank');
+    }
+    
     try {
       // Track InitiateCheckout event
       if (typeof window !== 'undefined' && (window as any).fbq) {
@@ -192,20 +202,24 @@ export const CartDrawer = () => {
       await createCheckout();
       const checkoutUrl = useCartStore.getState().checkoutUrl;
       if (checkoutUrl) {
-        // Detectar si estamos en un iframe (preview de Lovable)
-        const isInIframe = window.self !== window.top;
-        
-        if (isMobile && !isInIframe) {
-          // En móvil real (no preview): redirigir en la misma ventana
+        if (shouldOpenNewTab && newWindow) {
+          // Asignar URL a la ventana ya abierta
+          newWindow.location.href = checkoutUrl;
+        } else if (isMobile && !isInIframe) {
+          // En móvil real: redirigir en la misma ventana
           window.location.href = checkoutUrl;
-        } else {
-          // En escritorio o en preview: abrir en nueva pestaña
-          window.open(checkoutUrl, '_blank');
         }
         setIsOpen(false);
+      } else if (newWindow) {
+        // Si no hay URL, cerrar la ventana vacía
+        newWindow.close();
       }
     } catch (error) {
       console.error('Checkout failed:', error);
+      // Cerrar ventana vacía si hay error
+      if (newWindow) {
+        newWindow.close();
+      }
       toast.error('Error al crear el checkout', {
         description: 'Por favor, inténtalo de nuevo.'
       });
