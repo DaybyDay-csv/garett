@@ -192,11 +192,14 @@ export const CartDrawer = () => {
       await createCheckout();
       const checkoutUrl = useCartStore.getState().checkoutUrl;
       if (checkoutUrl) {
-        if (isMobile) {
-          // En móvil: redirigir en la misma ventana para mejor UX
+        // Detectar si estamos en un iframe (preview de Lovable)
+        const isInIframe = window.self !== window.top;
+        
+        if (isMobile && !isInIframe) {
+          // En móvil real (no preview): redirigir en la misma ventana
           window.location.href = checkoutUrl;
         } else {
-          // En escritorio: abrir en nueva pestaña
+          // En escritorio o en preview: abrir en nueva pestaña
           window.open(checkoutUrl, '_blank');
         }
         setIsOpen(false);
