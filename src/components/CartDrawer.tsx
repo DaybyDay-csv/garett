@@ -9,6 +9,7 @@ import { useCartStore } from "@/stores/cartStore";
 import { getCurrentPromotionalStage } from "@/lib/promotions";
 import { toast } from "sonner";
 import gwpHeadband from "@/assets/gwp-headband.png";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Imágenes de fallback para bundles (primer producto del pack)
 const BUNDLE_FALLBACK_IMAGES: Record<string, string> = {
@@ -20,6 +21,7 @@ const BUNDLE_FALLBACK_IMAGES: Record<string, string> = {
   'pack-glow-diario': 'https://cdn.shopify.com/s/files/1/0948/9580/0683/files/175_39199cdc11c520c653601745bf21ed7b.webp?v=1762798844',
 };
 export const CartDrawer = () => {
+  const isMobile = useIsMobile();
   const {
     items,
     isLoading,
@@ -190,7 +192,13 @@ export const CartDrawer = () => {
       await createCheckout();
       const checkoutUrl = useCartStore.getState().checkoutUrl;
       if (checkoutUrl) {
-        window.open(checkoutUrl, '_blank');
+        if (isMobile) {
+          // En móvil: redirigir en la misma ventana para mejor UX
+          window.location.href = checkoutUrl;
+        } else {
+          // En escritorio: abrir en nueva pestaña
+          window.open(checkoutUrl, '_blank');
+        }
         setIsOpen(false);
       }
     } catch (error) {
