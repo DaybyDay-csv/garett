@@ -177,11 +177,8 @@ export const useCartStore = create<CartStore>()(
             item.product.node.handle === 'plancha-pelo-aeroglow'
           );
           
-          // Check if cart contains LED launch products (30% launch discount)
-          const hasLEDLaunch = items.some(item => 
-            item.product.node.handle === 'mascara-led-garett-beauty' || 
-            item.product.node.handle === 'manopla-led-garett-beauty'
-          );
+          // Note: LED launch products (Máscara LED, Manopla LED) already have discounted prices in Shopify
+          // so we don't need to apply any discount code for them
           
           // Check if cart contains bundle products
           const hasBundles = items.some(item => !item.isGWP && isBundleProduct(item));
@@ -198,11 +195,6 @@ export const useCartStore = create<CartStore>()(
           if (hasAeroGlow) {
             // Add AeroGlow exclusive discount code (30% off)
             discountCodes.push('AEROGLOW30');
-          }
-          
-          if (hasLEDLaunch) {
-            // Add LED launch discount code (30% off)
-            discountCodes.push('LANZAMIENTO30');
           }
           
           // Add stage discount code for other products and bundles if available

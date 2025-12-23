@@ -71,10 +71,17 @@ export const CartDrawer = () => {
   const isBundleProduct = (item: typeof items[0]) => item.product.node.productType === 'Bundle' || item.product.node.handle.startsWith('pack-');
   const hasBundles = items.some(item => !item.isGWP && isBundleProduct(item));
 
-  // Helper to get fixed LED prices
+  // Helper to get fixed LED prices (compare_at_price from Shopify)
   const getLEDOriginalPrice = (handle: string) => {
-    if (handle === 'mascara-led-garett-beauty') return 350;
-    if (handle === 'manopla-led-garett-beauty') return 299;
+    if (handle === 'mascara-led-garett-beauty') return 450; // compare_at_price in Shopify
+    if (handle === 'manopla-led-garett-beauty') return 299; // compare_at_price in Shopify
+    return 0;
+  };
+  
+  // Helper to get LED final prices (already discounted in Shopify)
+  const getLEDFinalPrice = (handle: string) => {
+    if (handle === 'mascara-led-garett-beauty') return 315; // price in Shopify
+    if (handle === 'manopla-led-garett-beauty') return 209.30; // price in Shopify
     return 0;
   };
 
@@ -132,9 +139,10 @@ export const CartDrawer = () => {
       // AeroGlow: €449 base, 30% off
       totalDiscount += 449 * itemQuantity * 0.3;
     } else if (isLEDLaunchProduct(handle)) {
-      // LED launch products: fixed prices, 30% off
-      const basePrice = getLEDOriginalPrice(handle);
-      totalDiscount += basePrice * itemQuantity * 0.3;
+      // LED launch products: calculate discount from original to final price
+      const originalPrice = getLEDOriginalPrice(handle);
+      const finalPrice = getLEDFinalPrice(handle);
+      totalDiscount += (originalPrice - finalPrice) * itemQuantity;
     } else if (isBundleProduct(item)) {
       // Bundles use fixed Christmas pricing
       const bundlePricing = getBundleFixedPricing(handle);
@@ -284,18 +292,31 @@ export const CartDrawer = () => {
                           <p className="font-semibold text-sm mt-0.5 text-purple-600 dark:text-purple-400">GRATIS</p>
                         ) : (() => {
                           const handle = item.product.node.handle;
-                          let originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-                          let discountPercent = currentStage?.baseDiscount ?? 0;
                           
                           if (handle === 'plancha-pelo-aeroglow') {
-                            originalPrice = 449;
-                            discountPercent = 30;
+                            // AeroGlow: original 449€, 30% off
+                            return (
+                              <div className="flex items-center gap-1.5 mt-0.5">
+                                <span className="text-xs text-muted-foreground line-through">€449.00</span>
+                                <span className="font-semibold text-sm text-green-600 dark:text-green-400">€314.30</span>
+                              </div>
+                            );
                           } else if (handle === 'mascara-led-garett-beauty') {
-                            originalPrice = 350;
-                            discountPercent = 30;
+                            // Máscara LED: original 450€, final 315€
+                            return (
+                              <div className="flex items-center gap-1.5 mt-0.5">
+                                <span className="text-xs text-muted-foreground line-through">€450.00</span>
+                                <span className="font-semibold text-sm text-green-600 dark:text-green-400">€315.00</span>
+                              </div>
+                            );
                           } else if (handle === 'manopla-led-garett-beauty') {
-                            originalPrice = 299;
-                            discountPercent = 30;
+                            // Manopla LED: original 299€, final 209.30€
+                            return (
+                              <div className="flex items-center gap-1.5 mt-0.5">
+                                <span className="text-xs text-muted-foreground line-through">€299.00</span>
+                                <span className="font-semibold text-sm text-green-600 dark:text-green-400">€209.30</span>
+                              </div>
+                            );
                           } else if (isBundleProduct(item)) {
                             const bundlePricing = getBundleFixedPricing(handle);
                             if (bundlePricing) {
@@ -308,6 +329,9 @@ export const CartDrawer = () => {
                             }
                           }
                           
+                          // For other products (non-special), use regular pricing
+                          const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
+                          const discountPercent = currentStage?.baseDiscount ?? 0;
                           const finalPrice = originalPrice * (1 - discountPercent / 100);
                           
                           return discountPercent > 0 ? (
@@ -378,8 +402,9 @@ export const CartDrawer = () => {
                         Dto. Lanzamiento LED (30%)
                       </span>
                       <span>-€{items.filter(item => isLEDLaunchProduct(item.product.node.handle)).reduce((sum, item) => {
-                    const basePrice = getLEDOriginalPrice(item.product.node.handle);
-                    return sum + basePrice * item.quantity * 0.3;
+                    const originalPrice = getLEDOriginalPrice(item.product.node.handle);
+                    const finalPrice = getLEDFinalPrice(item.product.node.handle);
+                    return sum + (originalPrice - finalPrice) * item.quantity;
                   }, 0).toFixed(2)}</span>
                     </div>}
                   
