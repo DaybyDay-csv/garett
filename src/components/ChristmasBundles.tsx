@@ -75,6 +75,7 @@ interface BundleProductInfo {
   price: number;
   image: string;
   quantity: number;
+  handle: string;
 }
 export const ChristmasBundles = () => {
   const currentStage = getCurrentPromotionalStage();
@@ -141,7 +142,8 @@ export const ChristmasBundles = () => {
           title: matchingProduct.node.title,
           price: parseFloat(matchingProduct.node.priceRange.minVariantPrice.amount),
           image: matchingProduct.node.images.edges[0]?.node.url || '',
-          quantity: 1
+          quantity: 1,
+          handle: matchingProduct.node.handle
         });
       }
     });
@@ -218,16 +220,16 @@ export const ChristmasBundles = () => {
                   </p>
                   
                   <div className={`grid gap-2 mb-3 ${bundleProducts.length >= 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
-                    {bundleProducts.map((product, idx) => <div key={idx} className="text-center">
+                    {bundleProducts.map((product, idx) => <Link key={idx} to={`/producto/${product.handle}`} className="text-center group cursor-pointer">
                         <div className="aspect-square bg-secondary/20 mb-1.5 overflow-hidden">
-                          {product.image ? <img src={product.image} alt={product.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" /> : <div className="w-full h-full flex items-center justify-center text-muted-foreground/30">
+                          {product.image ? <img src={product.image} alt={product.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" /> : <div className="w-full h-full flex items-center justify-center text-muted-foreground/30">
                               <Gift className="w-6 h-6" />
                             </div>}
                         </div>
-                        <p className="text-[10px] md:text-xs text-muted-foreground line-clamp-1">
+                        <p className="text-[10px] md:text-xs text-muted-foreground line-clamp-1 group-hover:text-foreground transition-colors">
                           {product.price.toFixed(0)}€
                         </p>
-                      </div>)}
+                      </Link>)}
                   </div>
 
                   {/* Benefits - Hidden on mobile for space */}
