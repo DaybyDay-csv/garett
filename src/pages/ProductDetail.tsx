@@ -577,9 +577,6 @@ const ProductDetail = () => {
               </div>}
 
 
-            {/* Product Disclaimer - Health Precautions */}
-            <ProductDisclaimer tags={node.tags} />
-
             {/* Trust Badges - Compact Version */}
             <div className="pt-6 border-t border-header-foreground/20">
               <TrustBadges variant="compact" darkBackground />
@@ -697,6 +694,9 @@ const ProductDetail = () => {
                 </CollapsibleContent>
               </Collapsible>
             </div>
+
+            {/* Product Disclaimer - Health Precautions */}
+            <ProductDisclaimer tags={node.tags} />
 
             {/* Trust Footer */}
             <div className="p-5 rounded-lg text-xs border border-header-foreground/20 bg-header-foreground/10 text-header-foreground/70 leading-relaxed">
