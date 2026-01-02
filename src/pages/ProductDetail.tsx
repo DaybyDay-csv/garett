@@ -746,11 +746,7 @@ const ProductDetail = () => {
       const category = detectProductCategory(node);
       const faqs = productSpecificFAQs[category as keyof typeof productSpecificFAQs];
       if (faqs && faqs.length > 0) {
-        return <div className="bg-gradient-to-b from-background to-secondary/5 py-12">
-              <div className="container px-6">
-                <FAQ items={faqs} title="Preguntas frecuentes" description={`Respuestas sobre ${node.title}`} />
-              </div>
-            </div>;
+        return <FAQ items={faqs} title="Preguntas frecuentes" description={`Respuestas sobre ${node.title}`} />;
       }
       return null;
     })()}
