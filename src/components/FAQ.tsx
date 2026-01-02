@@ -31,7 +31,7 @@ export const FAQ = ({ items, title, description }: FAQProps) => {
   };
 
   return (
-    <section className="py-12 md:py-20 bg-gradient-to-b from-background to-secondary/5">
+    <section className="py-12 md:py-20 bg-secondary/5">
       <script type="application/ld+json">
         {JSON.stringify(faqSchema)}
       </script>
