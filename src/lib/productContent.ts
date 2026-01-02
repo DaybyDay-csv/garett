@@ -704,19 +704,19 @@ const productContentMap: Record<string, ProductContent> = {
     pdpHeadline: 'Rejuvenecimiento facial profesional con fototerapia LED',
     pdpSubheadline: 'Tecnología clínica de luz LED para estimular colágeno, reducir arrugas y mejorar el tono de piel desde casa',
     quickBenefits: [
-      { icon: 'Sparkles', text: 'Múltiples longitudes de onda' },
-      { icon: 'Clock', text: 'Sesiones de 15-20 minutos' },
+      { icon: 'Sparkles', text: '4 modos de luz LED' },
+      { icon: 'Clock', text: 'Timer 5, 10 o 15 min' },
       { icon: 'Check', text: 'Sin dolor, sin recuperación' }
     ],
     dropdowns: {
       howItWorks: {
         title: '¿Por qué funciona la fototerapia LED?',
-        summary: 'Diferentes colores de luz penetran a distintas profundidades de la piel para activar procesos de regeneración celular',
+        summary: 'Cuatro modos de luz que penetran a distintas profundidades para activar procesos específicos de regeneración celular',
         details: [
-          'Luz Roja (630-660nm): Penetra hasta 8-10mm en la dermis. Estimula los fibroblastos para producir más colágeno y elastina. Reduce arrugas, mejora la firmeza y acelera la cicatrización. Es el tratamiento anti-edad por excelencia.',
-          'Luz Verde (520nm): Penetra las capas medias de la piel. Regula la producción de melanina, reduciendo manchas y unificando el tono. Ideal para hiperpigmentación, pecas y daño solar acumulado.',
-          'Luz Infrarroja (850nm): Penetra hasta 40mm, alcanzando músculos y tejidos profundos. Mejora la circulación sanguínea, reduce inflamación y acelera la recuperación celular. Potencia los efectos de las otras luces.',
-          'La combinación de longitudes de onda trabaja en sinergia: mientras la luz roja estimula colágeno en la superficie, la infrarroja prepara los tejidos profundos. Es como tener una clínica estética completa en casa.'
+          'Luz Verde - Calm (520nm): Efecto calmante que reduce rojeces e irritación. Regula la producción de melanina y unifica el tono de piel. Ideal para pieles sensibles o después de tratamientos intensos.',
+          'Luz Amarilla - Luminosidad (590nm): Revitaliza pieles apagadas y cansadas. Mejora la oxigenación celular y aporta un brillo natural e inmediato. Perfecta para eventos especiales.',
+          'Luz Roja - Rejuvenecimiento (630nm): Estimula los fibroblastos para producir colágeno y elastina. Reduce arrugas y líneas finas. El tratamiento anti-edad por excelencia.',
+          'Luz Roja - Firmeza (660nm): Penetra más profundamente para reafirmar tejidos y definir contornos faciales. Mejora la elasticidad y produce un efecto lifting natural.'
         ]
       },
       expectedResults: {
@@ -739,22 +739,22 @@ const productContentMap: Record<string, ProductContent> = {
       howToUse: {
         steps: [
           'Limpia tu rostro completamente (sin maquillaje ni cremas)',
-          'Ajusta el dispositivo cómodamente sobre tu rostro/manos',
-          'Selecciona el programa de luz según tu objetivo',
-          'Relájate durante 15-20 minutos mientras el dispositivo trabaja',
-          'Aplica tu sérum o crema favorita después—la piel está más receptiva',
-          'Repite 4-5 veces por semana para resultados óptimos'
+          'Ajusta la máscara cómodamente sobre tu rostro',
+          'Selecciona el modo de luz según tu objetivo (Calm, Luminosidad, Rejuvenecimiento o Firmeza)',
+          'Elige el tiempo de sesión: 5, 10 o 15 minutos según tu disponibilidad',
+          'Relájate mientras el temporizador cuenta—se apaga automáticamente',
+          'Aplica tu sérum o crema favorita después—la piel está más receptiva'
         ],
-        additionalNote: 'Usa gafas protectoras incluidas si el dispositivo emite luz intensa cerca de los ojos. No usar si estás tomando medicamentos fotosensibilizantes.'
+        additionalNote: 'Usa las gafas protectoras incluidas. El temporizador integrado (5/10/15 min) permite adaptar cada sesión a tu rutina. No usar si estás tomando medicamentos fotosensibilizantes.'
       },
       whatMakesDifferent: [
         {
-          title: 'Tecnología de clínica en casa',
-          description: 'Los mismos LEDs médicos que usan las clínicas estéticas. 140+ LEDs de alta potencia distribuidos estratégicamente para cobertura completa.'
+          title: '4 modos de luz para cada necesidad',
+          description: 'Calm (verde), Luminosidad (amarilla), Rejuvenecimiento (roja 630nm) y Firmeza (roja 660nm). Cuatro tratamientos en un solo dispositivo.'
         },
         {
-          title: 'Múltiples longitudes de onda',
-          description: 'No es solo luz roja. Combina rojo, verde e infrarrojo para tratar múltiples problemas simultáneamente: arrugas, manchas, flacidez y textura.'
+          title: 'Temporizador integrado',
+          description: 'Elige entre sesiones de 5, 10 o 15 minutos. Se apaga automáticamente para que puedas relajarte sin preocuparte.'
         },
         {
           title: 'Ahorro considerable',
@@ -762,7 +762,7 @@ const productContentMap: Record<string, ProductContent> = {
         },
         {
           title: 'Diseño ergonómico premium',
-          description: 'Silicona médica hipoalergénica que se adapta perfectamente al contorno facial/manos. Cómodo para sesiones largas sin fatiga.'
+          description: 'Silicona médica hipoalergénica que se adapta perfectamente al contorno facial. Cómoda para sesiones largas sin fatiga.'
         }
       ]
     }

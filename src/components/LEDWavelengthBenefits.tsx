@@ -8,24 +8,7 @@ interface LEDWavelengthBenefitsProps {
 
 const wavelengths = [
   {
-    name: "Luz Roja",
-    wavelength: "630-660nm",
-    color: "bg-red-500",
-    textColor: "text-red-600",
-    borderColor: "border-red-200",
-    bgColor: "bg-red-50",
-    icon: Sun,
-    penetration: "8-10mm",
-    benefits: [
-      "Estimula producción de colágeno",
-      "Reduce arrugas y líneas finas",
-      "Mejora la firmeza de la piel",
-      "Acelera la cicatrización"
-    ],
-    bestFor: "Anti-edad y rejuvenecimiento"
-  },
-  {
-    name: "Luz Verde",
+    name: "Luz Verde (Calm)",
     wavelength: "520nm",
     color: "bg-green-500",
     textColor: "text-green-600",
@@ -34,53 +17,94 @@ const wavelengths = [
     icon: Sparkles,
     penetration: "3-5mm",
     benefits: [
+      "Calma y reduce rojeces",
+      "Efecto calmante y anti-estrés",
       "Regula producción de melanina",
-      "Reduce manchas y pecas",
-      "Unifica el tono de piel",
-      "Trata hiperpigmentación"
+      "Unifica el tono de piel"
     ],
-    bestFor: "Tono uniforme y manchas"
+    bestFor: "Calmar y reducir irritación"
   },
   {
-    name: "Luz Infrarroja",
-    wavelength: "850nm",
-    color: "bg-amber-600",
-    textColor: "text-amber-700",
-    borderColor: "border-amber-200",
-    bgColor: "bg-amber-50",
-    icon: Zap,
-    penetration: "Hasta 40mm",
+    name: "Luz Amarilla (Luminosidad)",
+    wavelength: "590nm",
+    color: "bg-yellow-500",
+    textColor: "text-yellow-600",
+    borderColor: "border-yellow-200",
+    bgColor: "bg-yellow-50",
+    icon: Sun,
+    penetration: "4-6mm",
     benefits: [
-      "Penetra tejidos profundos",
-      "Mejora circulación sanguínea",
-      "Reduce inflamación",
-      "Acelera recuperación celular"
+      "Aporta luminosidad y vitalidad",
+      "Mejora la oxigenación celular",
+      "Reduce aspecto apagado",
+      "Revitaliza pieles cansadas"
     ],
-    bestFor: "Regeneración profunda"
+    bestFor: "Luminosidad y vitalidad"
+  },
+  {
+    name: "Luz Roja (Rejuvenecimiento)",
+    wavelength: "630nm",
+    color: "bg-red-500",
+    textColor: "text-red-600",
+    borderColor: "border-red-200",
+    bgColor: "bg-red-50",
+    icon: Zap,
+    penetration: "8-10mm",
+    benefits: [
+      "Estimula producción de colágeno",
+      "Reduce arrugas y líneas finas",
+      "Acelera regeneración celular",
+      "Mejora textura de la piel"
+    ],
+    bestFor: "Anti-edad y rejuvenecimiento"
+  },
+  {
+    name: "Luz Roja (Firmeza)",
+    wavelength: "660nm",
+    color: "bg-rose-600",
+    textColor: "text-rose-700",
+    borderColor: "border-rose-200",
+    bgColor: "bg-rose-50",
+    icon: Zap,
+    penetration: "10-12mm",
+    benefits: [
+      "Penetra tejidos más profundos",
+      "Mejora firmeza y elasticidad",
+      "Reafirma contornos faciales",
+      "Efecto lifting natural"
+    ],
+    bestFor: "Firmeza y elasticidad profunda"
   }
 ];
 
 const treatmentRoutines = [
   {
+    title: "Rutina Calmante",
+    frequency: "3-4 veces/semana",
+    duration: "10-15 minutos",
+    lights: ["Luz Verde (Calm)"],
+    description: "Luz verde para calmar rojeces e irritación. Ideal después de tratamientos intensos."
+  },
+  {
+    title: "Rutina Luminosidad",
+    frequency: "3-4 veces/semana",
+    duration: "10-15 minutos",
+    lights: ["Luz Amarilla (Luminosidad)"],
+    description: "Devuelve vitalidad y brillo a pieles apagadas y cansadas."
+  },
+  {
     title: "Rutina Anti-Edad",
     frequency: "4-5 veces/semana",
-    duration: "20 minutos",
-    lights: ["Luz Roja", "Luz Infrarroja"],
-    description: "Combina luz roja e infrarroja para máxima estimulación de colágeno"
-  },
-  {
-    title: "Rutina Antimanchas",
-    frequency: "3-4 veces/semana",
     duration: "15 minutos",
-    lights: ["Luz Verde"],
-    description: "Sesiones de luz verde para regular melanina y unificar tono"
+    lights: ["Luz Roja (Rejuvenecimiento)"],
+    description: "Estimula colágeno para reducir arrugas y líneas finas."
   },
   {
-    title: "Rutina Completa",
-    frequency: "3 veces/semana",
-    duration: "30 minutos",
-    lights: ["Luz Roja", "Luz Verde", "Luz Infrarroja"],
-    description: "Programa combinado para tratamiento integral de la piel"
+    title: "Rutina Firmeza",
+    frequency: "4-5 veces/semana",
+    duration: "15 minutos",
+    lights: ["Luz Roja (Firmeza)"],
+    description: "Penetración profunda para reafirmar y definir contornos."
   }
 ];
 
@@ -116,7 +140,7 @@ export const LEDWavelengthBenefits = ({ productHandle }: LEDWavelengthBenefitsPr
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {wavelengths.map((wavelength) => {
             const IconComponent = wavelength.icon;
             return (
