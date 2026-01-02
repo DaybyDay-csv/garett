@@ -33,6 +33,7 @@ import { RelatedProducts } from "@/components/RelatedProducts";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { LEDWavelengthBenefits } from "@/components/LEDWavelengthBenefits";
 import { ChristmasSeal } from "@/components/ChristmasSeal";
+import { ProductDisclaimer } from "@/components/ProductDisclaimer";
 const ProductDetail = () => {
   const {
     handle
@@ -575,6 +576,9 @@ const ProductDetail = () => {
                 <VideoPlayer srcWebM="/videos/aeroglow-product-demo.webm" poster={node.images.edges[0]?.node.url} autoplay={false} muted={true} loop={true} controls={true} showPlayButton={false} preload="metadata" className="w-full h-full" fallback={node.images.edges[0]?.node && <img src={node.images.edges[0].node.url} alt={node.images.edges[0].node.altText || node.title} className="w-full h-full object-cover" />} />
               </div>}
 
+
+            {/* Product Disclaimer - Health Precautions */}
+            <ProductDisclaimer tags={node.tags} />
 
             {/* Trust Badges - Compact Version */}
             <div className="pt-6 border-t border-header-foreground/20">
