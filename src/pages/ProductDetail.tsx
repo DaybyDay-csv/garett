@@ -109,47 +109,21 @@ const ProductDetail = () => {
   const variant = node.variants.edges[selectedVariant]?.node;
   const originalPrice = variant ? variant.price.amount : "0";
 
-  // Check if this is the AeroGlow product (Black Friday event)
-  const isAeroGlow = node.handle.includes('aeroglow') || node.title.toLowerCase().includes('aeroglow');
-
-  // Check if this is a LED launch product (Máscara LED or Manopla LED)
+  // Check if this is a LED launch product (has permanent 30% discount in Shopify)
   const isMascaraLED = node.handle === 'mascara-led-garett-beauty';
   const isManopolaLED = node.handle === 'manopla-led-garett-beauty';
   const isLEDLaunch = isMascaraLED || isManopolaLED;
 
-  // Black Friday unlock date
-  const unlockDate = new Date('2025-11-28T00:00:00');
-
-  // Special pricing for AeroGlow and LED launch products
+  // Special pricing for LED launch products (permanent discount in Shopify)
   let priceInfo;
-  if (isAeroGlow) {
+  if (isLEDLaunch) {
+    // LED products have permanent 30% discount configured in Shopify
+    // Price in Shopify is already discounted, compare_at_price is the original
+    const originalPriceValue = isMascaraLED ? 450 : 299;
+    const discountedPriceValue = parseFloat(originalPrice);
     priceInfo = {
-      originalPrice: 449,
-      discountedPrice: 314.30,
-      hasDiscount: true,
-      discountLabel: '-30%',
-      stage: {
-        badge: 'LANZAMIENTO',
-        color: 'from-red-600 to-pink-600'
-      }
-    };
-  } else if (isMascaraLED) {
-    // Máscara LED: €450 base, 30% off = €315
-    priceInfo = {
-      originalPrice: 450,
-      discountedPrice: 315,
-      hasDiscount: true,
-      discountLabel: '-30%',
-      stage: {
-        badge: 'LANZAMIENTO',
-        color: 'from-red-600 to-pink-600'
-      }
-    };
-  } else if (isManopolaLED) {
-    // Manopla LED: €299 base, 30% off = €209.30
-    priceInfo = {
-      originalPrice: 299,
-      discountedPrice: 209.30,
+      originalPrice: originalPriceValue,
+      discountedPrice: discountedPriceValue,
       hasDiscount: true,
       discountLabel: '-30%',
       stage: {
@@ -572,7 +546,7 @@ const ProductDetail = () => {
               </div>}
 
             {/* Product Video - Below Add to Cart for AeroGlow */}
-            {isAeroGlow && <div className="rounded-lg overflow-hidden border bg-muted/10 mt-4 aspect-video">
+            {node.handle.includes('aeroglow') && <div className="rounded-lg overflow-hidden border bg-muted/10 mt-4 aspect-video">
                 <VideoPlayer srcWebM="/videos/aeroglow-product-demo.webm" poster={node.images.edges[0]?.node.url} autoplay={false} muted={true} loop={true} controls={true} showPlayButton={false} preload="metadata" className="w-full h-full" fallback={node.images.edges[0]?.node && <img src={node.images.edges[0].node.url} alt={node.images.edges[0].node.altText || node.title} className="w-full h-full object-cover" />} />
               </div>}
 

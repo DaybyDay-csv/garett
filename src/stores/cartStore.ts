@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { ShopifyProduct, createStorefrontCheckout, fetchGWPProduct, GWP_VARIANT_ID, GWP_THRESHOLD } from '@/lib/shopify';
-import { getCurrentPromotionalStage } from '@/lib/promotions';
+import { ShopifyProduct, createStorefrontCheckout, fetchGWPProduct } from '@/lib/shopify';
 
 export interface CartItem {
   product: ShopifyProduct;
@@ -57,44 +56,11 @@ export const useCartStore = create<CartStore>()(
 
       checkAndAddGWP: () => {
         const { items, gwpProduct } = get();
-        const currentStage = getCurrentPromotionalStage();
         
-        // Only add GWP if stage has GWP active
-        if (!currentStage?.hasGWP || !gwpProduct) return;
-        
-        // Calculate subtotal without GWP items and with discount
-        const nonGWPItems = items.filter(item => !item.isGWP);
-        const subtotal = nonGWPItems.reduce((sum, item) => {
-          const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-          return sum + (originalPrice * item.quantity);
-        }, 0);
-        
-        const discountPercentage = currentStage.baseDiscount ?? 0;
-        const subtotalWithDiscount = subtotal * (1 - discountPercentage / 100);
-        
+        // GWP is no longer active (Christmas campaign ended)
+        // Remove any existing GWP items
         const hasGWP = items.some(item => item.isGWP);
-        const meetsThreshold = subtotalWithDiscount >= GWP_THRESHOLD;
-        
-        // Add GWP if threshold met and not already in cart
-        if (meetsThreshold && !hasGWP) {
-          const gwpVariant = gwpProduct.node.variants.edges[0].node;
-          const gwpItem: CartItem = {
-            product: gwpProduct,
-            variantId: GWP_VARIANT_ID,
-            variantTitle: gwpVariant.title,
-            price: {
-              amount: '0.00', // Free gift
-              currencyCode: 'EUR'
-            },
-            quantity: 1,
-            selectedOptions: gwpVariant.selectedOptions,
-            isGWP: true
-          };
-          set({ items: [...items, gwpItem] });
-        }
-        
-        // Remove GWP if threshold not met
-        if (!meetsThreshold && hasGWP) {
+        if (hasGWP) {
           set({ items: items.filter(item => !item.isGWP) });
         }
       },
@@ -163,48 +129,11 @@ export const useCartStore = create<CartStore>()(
 
         setLoading(true);
         try {
-          // Get current promotional stage and discount code
-          const currentStage = getCurrentPromotionalStage();
-          const discountCodes: string[] = [];
-          
-          // Helper to check if item is a bundle
-          const isBundleProduct = (item: CartItem) => 
-            item.product.node.productType === 'Bundle' ||
-            item.product.node.handle.startsWith('pack-');
-          
-          // Check if cart contains AeroGlow products (requires special 30% exclusive code)
-          const hasAeroGlow = items.some(item => 
-            item.product.node.handle === 'plancha-pelo-aeroglow'
-          );
-          
           // Note: LED launch products (Máscara LED, Manopla LED) already have discounted prices in Shopify
-          // so we don't need to apply any discount code for them
-          
-          // Check if cart contains bundle products
-          const hasBundles = items.some(item => !item.isGWP && isBundleProduct(item));
-          
-          // Check if cart has non-special products (neither AeroGlow nor LED launch nor bundles)
-          const hasOtherProducts = items.some(item => 
-            !item.isGWP && 
-            item.product.node.handle !== 'plancha-pelo-aeroglow' &&
-            item.product.node.handle !== 'mascara-led-garett-beauty' &&
-            item.product.node.handle !== 'manopla-led-garett-beauty' &&
-            !isBundleProduct(item)
-          );
-          
-          if (hasAeroGlow) {
-            // Add AeroGlow exclusive discount code (30% off)
-            discountCodes.push('AEROGLOW30');
-          }
-          
-          // Add stage discount code for other products and bundles if available
-          if ((hasOtherProducts || hasBundles) && currentStage?.code) {
-            discountCodes.push(currentStage.code);
-          }
+          // No discount codes needed - prices are set correctly in Shopify
           
           const checkoutUrl = await createStorefrontCheckout(
-            items.map(item => ({ variantId: item.variantId, quantity: item.quantity })),
-            discountCodes.length > 0 ? discountCodes : undefined
+            items.map(item => ({ variantId: item.variantId, quantity: item.quantity }))
           );
           setCheckoutUrl(checkoutUrl);
         } catch (error) {

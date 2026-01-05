@@ -1,14 +1,11 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { TrustBadges } from "@/components/TrustBadges";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Gift, Sparkles } from "lucide-react";
+import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Sparkles } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
-import { getCurrentPromotionalStage } from "@/lib/promotions";
 import { toast } from "sonner";
-import gwpHeadband from "@/assets/gwp-headband.png";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 // Imágenes de fallback para bundles (primer producto del pack)
@@ -20,6 +17,7 @@ const BUNDLE_FALLBACK_IMAGES: Record<string, string> = {
   'pack-mirada-descansada': 'https://cdn.shopify.com/s/files/1/0948/9580/0683/files/73_89c81ec9f56eb428ad789c45cd88c12e.jpg?v=1762798852',
   'pack-glow-diario': 'https://cdn.shopify.com/s/files/1/0948/9580/0683/files/175_39199cdc11c520c653601745bf21ed7b.webp?v=1762798844',
 };
+
 export const CartDrawer = () => {
   const isMobile = useIsMobile();
   const {
@@ -32,7 +30,6 @@ export const CartDrawer = () => {
     setIsOpen,
     loadGWPProduct,
     checkAndAddGWP,
-    gwpProduct
   } = useCartStore();
 
   // Load GWP product on mount
@@ -48,140 +45,29 @@ export const CartDrawer = () => {
   // Exclude GWP items from count
   const totalItems = items.filter(item => !item.isGWP).reduce((sum, item) => sum + item.quantity, 0);
 
-  // Calculate original prices (without discounts) - exclude GWP items
-  const subtotalOriginal = items.filter(item => !item.isGWP).reduce((sum, item) => {
-    // Use the original product price from the product data, not the variant price which might be discounted
-    const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-    return sum + originalPrice * item.quantity;
-  }, 0);
-
-  // Current stage and discount
-  const currentStage = getCurrentPromotionalStage();
-  const hasGWPActive = currentStage?.hasGWP ?? false;
-
-  // Calculate discounts separately for AeroGlow (30%), LED launch (30%), bundles, and other products
-  let totalDiscount = 0;
-  const hasAeroGlow = items.some(item => item.product.node.handle === 'plancha-pelo-aeroglow');
-  const hasLEDLaunch = items.some(item => item.product.node.handle === 'mascara-led-garett-beauty' || item.product.node.handle === 'manopla-led-garett-beauty');
-
-  // Helper to check if item is LED launch product
+  // Check if product is LED launch (permanent 30% discount in Shopify)
   const isLEDLaunchProduct = (handle: string) => handle === 'mascara-led-garett-beauty' || handle === 'manopla-led-garett-beauty';
 
-  // Helper to check if item is a bundle
-  const isBundleProduct = (item: typeof items[0]) => item.product.node.productType === 'Bundle' || item.product.node.handle.startsWith('pack-');
-  const hasBundles = items.some(item => !item.isGWP && isBundleProduct(item));
-
-  // Helper to get fixed LED prices (compare_at_price from Shopify)
-  const getLEDOriginalPrice = (handle: string) => {
-    if (handle === 'mascara-led-garett-beauty') return 450; // compare_at_price in Shopify
-    if (handle === 'manopla-led-garett-beauty') return 299; // compare_at_price in Shopify
-    return 0;
-  };
-  
-  // Helper to get LED final prices (already discounted in Shopify)
-  const getLEDFinalPrice = (handle: string) => {
-    if (handle === 'mascara-led-garett-beauty') return 315; // price in Shopify
-    if (handle === 'manopla-led-garett-beauty') return 209.30; // price in Shopify
-    return 0;
-  };
-
-  // Fixed Christmas bundle pricing (30% off)
-  const BUNDLE_FIXED_PRICES: Record<string, {
-    originalValue: number;
-    christmasPrice: number;
-    savings: number;
-    savingsPercent: number;
-  }> = {
-    'pack-relax-body-glow': {
-      originalValue: 236,
-      christmasPrice: 165.20,
-      savings: 70.80,
-      savingsPercent: 30
-    },
-    'pack-duo-glow-led': {
-      originalValue: 448,
-      christmasPrice: 313.60,
-      savings: 134.40,
-      savingsPercent: 30
-    },
-    'pack-ritual-piel-nueva': {
-      originalValue: 265,
-      christmasPrice: 185.50,
-      savings: 79.50,
-      savingsPercent: 30
-    },
-    'pack-lifting-en-casa': {
-      originalValue: 249,
-      christmasPrice: 174.30,
-      savings: 74.70,
-      savingsPercent: 30
-    },
-    'pack-mirada-descansada': {
-      originalValue: 225.99,
-      christmasPrice: 158.20,
-      savings: 67.80,
-      savingsPercent: 30
-    },
-    'pack-glow-diario': {
-      originalValue: 143,
-      christmasPrice: 100.10,
-      savings: 42.90,
-      savingsPercent: 30
-    }
-  };
-
-  // Helper to get bundle fixed pricing
-  const getBundleFixedPricing = (handle: string) => BUNDLE_FIXED_PRICES[handle] || null;
-  items.filter(item => !item.isGWP).forEach(item => {
-    const handle = item.product.node.handle;
-    const itemQuantity = item.quantity;
-    if (handle === 'plancha-pelo-aeroglow') {
-      // AeroGlow: €449 base, 30% off
-      totalDiscount += 449 * itemQuantity * 0.3;
-    } else if (isLEDLaunchProduct(handle)) {
-      // LED launch products: calculate discount from original to final price
-      const originalPrice = getLEDOriginalPrice(handle);
-      const finalPrice = getLEDFinalPrice(handle);
-      totalDiscount += (originalPrice - finalPrice) * itemQuantity;
-    } else if (isBundleProduct(item)) {
-      // Bundles use fixed Christmas pricing
-      const bundlePricing = getBundleFixedPricing(handle);
-      if (bundlePricing) {
-        totalDiscount += bundlePricing.savings * itemQuantity;
-      } else {
-        // Fallback for unknown bundles
-        const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-        const bundleDiscount = (currentStage?.baseDiscount ?? 0) + (currentStage?.bundleExtraDiscount ?? 0);
-        totalDiscount += originalPrice * itemQuantity * (bundleDiscount / 100);
-      }
-    } else {
-      // Other products get stage discount
-      const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-      const discountPercentage = currentStage?.baseDiscount ?? 0;
-      totalDiscount += originalPrice * itemQuantity * (discountPercentage / 100);
-    }
-  });
-
-  // Calculate subtotal with fixed prices for special products and bundles
-  const subtotalOriginalFixed = items.filter(item => !item.isGWP).reduce((sum, item) => {
-    const handle = item.product.node.handle;
-    if (handle === 'plancha-pelo-aeroglow') return sum + 449 * item.quantity;
-    if (isLEDLaunchProduct(handle)) return sum + getLEDOriginalPrice(handle) * item.quantity;
-    // For bundles, use original value from fixed pricing
-    const bundlePricing = getBundleFixedPricing(handle);
-    if (bundlePricing) return sum + bundlePricing.originalValue * item.quantity;
-    return sum + parseFloat(item.product.node.priceRange.minVariantPrice.amount) * item.quantity;
+  // Calculate total price using cart item prices (already correct from Shopify)
+  const subtotalWithDiscount = items.filter(item => !item.isGWP).reduce((sum, item) => {
+    const price = parseFloat(item.price.amount);
+    return sum + price * item.quantity;
   }, 0);
-  const subtotalWithDiscount = subtotalOriginalFixed - totalDiscount;
 
-  // GWP threshold
-  const GWP_THRESHOLD = 70;
-  const progressPercentage = Math.min(subtotalWithDiscount / GWP_THRESHOLD * 100, 100);
-  const remainingForGWP = Math.max(GWP_THRESHOLD - subtotalWithDiscount, 0);
-  const hasUnlockedGWP = subtotalWithDiscount >= GWP_THRESHOLD;
+  // Calculate savings only for LED products that have permanent discount
+  let totalSavings = 0;
+  const hasLEDLaunch = items.some(item => !item.isGWP && isLEDLaunchProduct(item.product.node.handle));
+  
+  if (hasLEDLaunch) {
+    items.filter(item => !item.isGWP && isLEDLaunchProduct(item.product.node.handle)).forEach(item => {
+      const handle = item.product.node.handle;
+      // LED products have 30% off from compare_at_price
+      const originalPrice = handle === 'mascara-led-garett-beauty' ? 450 : 299;
+      const currentPrice = parseFloat(item.price.amount);
+      totalSavings += (originalPrice - currentPrice) * item.quantity;
+    });
+  }
 
-  // Calculate total savings
-  const totalSavings = totalDiscount;
   const handleCheckout = async () => {
     // Detectar si estamos en un iframe (preview de Lovable)
     const isInIframe = window.self !== window.top;
@@ -233,13 +119,17 @@ export const CartDrawer = () => {
       });
     }
   };
-  return <Sheet open={isOpen} onOpenChange={setIsOpen}>
+
+  return (
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <Button variant="outline" size="icon" className="relative bg-header-foreground/10 border-header-foreground/30 text-header-foreground hover:bg-header-foreground/20">
           <ShoppingCart className="h-5 w-5" />
-          {totalItems > 0 && <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs">
+          {totalItems > 0 && (
+            <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs">
               {totalItems}
-            </Badge>}
+            </Badge>
+          )}
         </Button>
       </SheetTrigger>
       
@@ -251,19 +141,20 @@ export const CartDrawer = () => {
           </SheetDescription>
         </SheetHeader>
         
-        {/* GWP Progress Bar - Compact */}
-        {hasGWPActive && items.length > 0}
-        
         <div className="flex flex-col flex-1 pt-4 min-h-0">
-          {items.length === 0 ? <div className="flex-1 flex items-center justify-center">
+          {items.length === 0 ? (
+            <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
                 <ShoppingCart className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                 <p className="text-muted-foreground">Tu carrito está vacío</p>
               </div>
-            </div> : <>
+            </div>
+          ) : (
+            <>
               <div className="flex-1 overflow-y-auto pr-1 min-h-0">
                 <div className="space-y-2.5">
-                  {items.filter(item => !item.isGWP).map(item => <div key={item.variantId} className={`flex gap-2.5 p-2 border rounded-lg ${item.isGWP ? 'bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-800' : ''}`}>
+                  {items.filter(item => !item.isGWP).map(item => (
+                    <div key={item.variantId} className="flex gap-2.5 p-2 border rounded-lg">
                       <div className="w-14 h-14 bg-secondary/20 rounded-md overflow-hidden flex-shrink-0 relative">
                         {(() => {
                           const handle = item.product.node.handle;
@@ -275,9 +166,6 @@ export const CartDrawer = () => {
                             <img src={imageUrl} alt={item.product.node.title} className="w-full h-full object-cover" />
                           ) : null;
                         })()}
-                        {item.isGWP && <div className="absolute top-0 right-0 bg-gradient-to-br from-purple-500 to-pink-500 text-white text-[8px] font-bold px-1 py-0.5 rounded-bl">
-                            GRATIS
-                          </div>}
                       </div>
                       
                       <div className="flex-1 min-w-0">
@@ -285,164 +173,67 @@ export const CartDrawer = () => {
                           <h4 className="font-medium text-xs leading-tight flex-1 line-clamp-2">
                             {item.product.node.title}
                           </h4>
-                          {item.isGWP && <Gift className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 flex-shrink-0" />}
                         </div>
                         
-                        {item.isGWP ? (
-                          <p className="font-semibold text-sm mt-0.5 text-purple-600 dark:text-purple-400">GRATIS</p>
-                        ) : (() => {
+                        {(() => {
                           const handle = item.product.node.handle;
+                          const price = parseFloat(item.price.amount);
                           
-                          if (handle === 'plancha-pelo-aeroglow') {
-                            // AeroGlow: original 449€, 30% off
-                            return (
-                              <div className="flex items-center gap-1.5 mt-0.5">
-                                <span className="text-xs text-muted-foreground line-through">€449.00</span>
-                                <span className="font-semibold text-sm text-green-600 dark:text-green-400">€314.30</span>
-                              </div>
-                            );
-                          } else if (handle === 'mascara-led-garett-beauty') {
-                            // Máscara LED: original 450€, final 315€
+                          // LED products show original crossed out price
+                          if (handle === 'mascara-led-garett-beauty') {
                             return (
                               <div className="flex items-center gap-1.5 mt-0.5">
                                 <span className="text-xs text-muted-foreground line-through">€450.00</span>
-                                <span className="font-semibold text-sm text-green-600 dark:text-green-400">€315.00</span>
+                                <span className="font-semibold text-sm text-green-600 dark:text-green-400">€{price.toFixed(2)}</span>
                               </div>
                             );
                           } else if (handle === 'manopla-led-garett-beauty') {
-                            // Manopla LED: original 299€, final 209.30€
                             return (
                               <div className="flex items-center gap-1.5 mt-0.5">
                                 <span className="text-xs text-muted-foreground line-through">€299.00</span>
-                                <span className="font-semibold text-sm text-green-600 dark:text-green-400">€209.30</span>
+                                <span className="font-semibold text-sm text-green-600 dark:text-green-400">€{price.toFixed(2)}</span>
                               </div>
                             );
-                          } else if (isBundleProduct(item)) {
-                            const bundlePricing = getBundleFixedPricing(handle);
-                            if (bundlePricing) {
-                              return (
-                                <div className="flex items-center gap-1.5 mt-0.5">
-                                  <span className="text-xs text-muted-foreground line-through">€{bundlePricing.originalValue.toFixed(2)}</span>
-                                  <span className="font-semibold text-sm text-green-600 dark:text-green-400">€{bundlePricing.christmasPrice.toFixed(2)}</span>
-                                </div>
-                              );
-                            }
                           }
                           
-                          // For other products (non-special), use regular pricing
-                          const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-                          const discountPercent = currentStage?.baseDiscount ?? 0;
-                          const finalPrice = originalPrice * (1 - discountPercent / 100);
-                          
-                          return discountPercent > 0 ? (
-                            <div className="flex items-center gap-1.5 mt-0.5">
-                              <span className="text-xs text-muted-foreground line-through">€{originalPrice.toFixed(2)}</span>
-                              <span className="font-semibold text-sm text-green-600 dark:text-green-400">€{finalPrice.toFixed(2)}</span>
-                            </div>
-                          ) : (
-                            <p className="font-semibold text-sm mt-0.5">€{originalPrice.toFixed(2)}</p>
-                          );
+                          // Regular products - just show the price
+                          return <p className="font-semibold text-sm mt-0.5">€{price.toFixed(2)}</p>;
                         })()}
                       </div>
                       
-                      {!item.isGWP && <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
-                          <Button variant="ghost" size="icon" className="h-5 w-5" onClick={() => removeItem(item.variantId)}>
-                            <Trash2 className="h-3 w-3" />
+                      <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
+                        <Button variant="ghost" size="icon" className="h-5 w-5" onClick={() => removeItem(item.variantId)}>
+                          <Trash2 className="h-3 w-3" />
+                        </Button>
+                        
+                        <div className="flex items-center gap-0.5">
+                          <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => updateQuantity(item.variantId, item.quantity - 1)}>
+                            <Minus className="h-2.5 w-2.5" />
                           </Button>
-                          
-                          <div className="flex items-center gap-0.5">
-                            <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => updateQuantity(item.variantId, item.quantity - 1)}>
-                              <Minus className="h-2.5 w-2.5" />
-                            </Button>
-                            <span className="w-7 text-center text-xs font-medium">{item.quantity}</span>
-                            <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => updateQuantity(item.variantId, item.quantity + 1)}>
-                              <Plus className="h-2.5 w-2.5" />
-                            </Button>
-                          </div>
-                        </div>}
-                      
-                      {item.isGWP && <div className="flex items-center text-purple-600 dark:text-purple-400">
-                          <Badge variant="outline" className="border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 text-[10px] px-1.5 py-0.5">
-                            Regalo automático
-                          </Badge>
-                        </div>}
-                    </div>)}
+                          <span className="w-7 text-center text-xs font-medium">{item.quantity}</span>
+                          <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => updateQuantity(item.variantId, item.quantity + 1)}>
+                            <Plus className="h-2.5 w-2.5" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </div>
-              
-              {/* Raffle Note */}
-              <div className="bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-950/30 dark:to-yellow-950/30 rounded-lg p-2.5 border border-amber-200 dark:border-amber-800 mt-2">
-                <p className="text-[11px] text-amber-800 dark:text-amber-200 leading-snug">
-                  <span className="font-bold">SORTEO:</span> Usa el código <span className="font-bold bg-amber-200 dark:bg-amber-800 px-1 rounded">NAVIDADGARETT</span> en el checkout para entrar en el sorteo y elegir el producto que TÚ quieras.
-                </p>
               </div>
               
               <div className="flex-shrink-0 space-y-3 pt-3 border-t bg-background mt-3">
                 {/* Price Breakdown */}
                 <div className="space-y-1.5 text-sm">
-                  <div className="flex justify-between text-muted-foreground text-xs">
-                    <span>Subtotal</span>
-                    <span>€{subtotalOriginalFixed.toFixed(2)}</span>
-                  </div>
-                  
-                  {/* Active Discounts */}
-                  {hasAeroGlow && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
-                      <span className="flex items-center gap-1.5">
-                        <Sparkles className="w-3 h-3" />
-                        Descuento AeroGlow (30%)
-                      </span>
-                      <span>-€{items.filter(item => item.product.node.handle === 'plancha-pelo-aeroglow').reduce((sum, item) => {
-                    return sum + 449 * item.quantity * 0.3;
-                  }, 0).toFixed(2)}</span>
-                    </div>}
-                  
-                  {hasLEDLaunch && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
+                  {/* LED Launch discount */}
+                  {hasLEDLaunch && (
+                    <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
                       <span className="flex items-center gap-1.5">
                         <Sparkles className="w-3 h-3" />
                         Dto. Lanzamiento LED (30%)
                       </span>
-                      <span>-€{items.filter(item => isLEDLaunchProduct(item.product.node.handle)).reduce((sum, item) => {
-                    const originalPrice = getLEDOriginalPrice(item.product.node.handle);
-                    const finalPrice = getLEDFinalPrice(item.product.node.handle);
-                    return sum + (originalPrice - finalPrice) * item.quantity;
-                  }, 0).toFixed(2)}</span>
-                    </div>}
-                  
-                  {/* Bundle discount */}
-                  {hasBundles && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
-                      <span className="flex items-center gap-1.5">
-                        <Sparkles className="w-3 h-3" />
-                        Dto. Pack Navidad
-                      </span>
-                      <span>-€{items.filter(item => !item.isGWP && isBundleProduct(item)).reduce((sum, item) => {
-                    const bundlePricing = getBundleFixedPricing(item.product.node.handle);
-                    if (bundlePricing) {
-                      return sum + bundlePricing.savings * item.quantity;
-                    }
-                    return sum;
-                  }, 0).toFixed(2)}</span>
-                    </div>}
-                  
-                  {/* Regular product discount */}
-                  {currentStage && currentStage.baseDiscount > 0 && items.some(item => !item.isGWP && item.product.node.handle !== 'plancha-pelo-aeroglow' && !isLEDLaunchProduct(item.product.node.handle) && !isBundleProduct(item)) && <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
-                      <span className="flex items-center gap-1.5">
-                        <Sparkles className="w-3 h-3" />
-                        Descuento Navidad ({currentStage.baseDiscount}%)
-                      </span>
-                      <span>-€{items.filter(item => !item.isGWP && item.product.node.handle !== 'plancha-pelo-aeroglow' && !isLEDLaunchProduct(item.product.node.handle) && !isBundleProduct(item)).reduce((sum, item) => {
-                    const originalPrice = parseFloat(item.product.node.priceRange.minVariantPrice.amount);
-                    return sum + originalPrice * item.quantity * (currentStage.baseDiscount / 100);
-                  }, 0).toFixed(2)}</span>
-                    </div>}
-                  
-                  {/* Gift With Purchase */}
-                  {hasGWPActive && hasUnlockedGWP && <div className="flex justify-between text-purple-600 dark:text-purple-400 text-xs">
-                      <span className="flex items-center gap-1.5">
-                        <Gift className="w-3 h-3" />
-                        Regalo: Banda de pelo
-                      </span>
-                      <span className="font-semibold">GRATIS</span>
-                    </div>}
+                      <span>-€{totalSavings.toFixed(2)}</span>
+                    </div>
+                  )}
                   
                   <div className="h-px bg-border my-1.5"></div>
                   
@@ -453,24 +244,27 @@ export const CartDrawer = () => {
                   </div>
                   
                   {/* Total Savings */}
-                  {totalSavings > 0 && <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200 dark:border-green-800 rounded-lg p-2 text-center">
+                  {totalSavings > 0 && (
+                    <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200 dark:border-green-800 rounded-lg p-2 text-center">
                       <p className="text-xs font-bold text-green-700 dark:text-green-300">
                         ¡Ahorras €{totalSavings.toFixed(2)} en esta compra!
                       </p>
-                      {hasUnlockedGWP && <p className="text-[10px] text-green-600 dark:text-green-400 mt-0.5">
-                          Incluye banda de pelo gratis
-                        </p>}
-                    </div>}
+                    </div>
+                  )}
                 </div>
                 
                 <Button onClick={handleCheckout} className="w-full h-11" disabled={items.length === 0 || isLoading}>
-                  {isLoading ? <>
+                  {isLoading ? (
+                    <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                       Creando checkout...
-                    </> : <>
+                    </>
+                  ) : (
+                    <>
                       <ExternalLink className="w-4 h-4 mr-2" />
                       Finalizar compra
-                    </>}
+                    </>
+                  )}
                 </Button>
                 
                 {/* Trust Badges in Cart */}
@@ -478,8 +272,10 @@ export const CartDrawer = () => {
                   <TrustBadges variant="cart" />
                 </div>
               </div>
-            </>}
+            </>
+          )}
         </div>
       </SheetContent>
-    </Sheet>;
+    </Sheet>
+  );
 };
