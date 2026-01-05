@@ -175,13 +175,13 @@ export const ChristmasBundles = () => {
       <div className="container px-6">
         {/* Section header */}
         <div className="text-center mb-12 md:mb-16">
-          <Badge className="mb-4 bg-red-100 text-red-700 border-red-200 hover:bg-red-100">
+          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20 hover:bg-primary/10">
             <Gift className="w-4 h-4 mr-2" />
             Edicion Enero
           </Badge>
           <h2 className="text-3xl md:text-5xl font-light text-foreground mb-4 tracking-tight">
             Rutinas de{" "}
-            <span className="font-semibold text-red-700">spa en casa</span>
+            <span className="font-semibold text-primary">spa en casa</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
             Pensados para regalar (o regalarte).
@@ -199,7 +199,7 @@ export const ChristmasBundles = () => {
           const pricing = calculatePricing(config);
           return <div key={config.id} className="bg-white border border-border/50 shadow-sm overflow-hidden flex flex-col">
                 {/* Bundle Header */}
-                <div className="bg-gradient-to-r from-red-50 to-secondary/30 p-3 md:p-4 border-b border-border/30">
+                <div className="bg-gradient-to-r from-primary/5 to-secondary/30 p-3 md:p-4 border-b border-border/30">
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
                       <h3 className="text-sm md:text-lg font-semibold text-foreground leading-tight">
@@ -207,7 +207,7 @@ export const ChristmasBundles = () => {
                       </h3>
                       <p className="text-xs text-muted-foreground mt-0.5 truncate">{config.subtitle}</p>
                     </div>
-                    <Badge className="bg-red-600 text-white hover:bg-red-700 text-xs px-2 py-0.5 flex-shrink-0">
+                    <Badge className="bg-primary text-primary-foreground hover:bg-primary/90 text-xs px-2 py-0.5 flex-shrink-0">
                       -{pricing.totalSavingsPercent}%
                     </Badge>
                   </div>
@@ -259,7 +259,7 @@ export const ChristmasBundles = () => {
                       </div>
                     </div>
                     
-                    <Button className="w-full bg-red-700 hover:bg-red-800 text-white h-9 md:h-10 text-xs md:text-sm" onClick={() => handleAddToCart(config.name, shopifyBundle)} disabled={!shopifyBundle}>
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-9 md:h-10 text-xs md:text-sm" onClick={() => handleAddToCart(config.name, shopifyBundle)} disabled={!shopifyBundle}>
                       <ShoppingBag className="w-4 h-4 mr-1.5" />
                       Anadir pack
                     </Button>
