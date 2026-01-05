@@ -23,50 +23,24 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
   const originalPrice = node.priceRange.minVariantPrice;
   const image = node.images.edges[0]?.node;
   
-  // Check if this is the AeroGlow product (Black Friday event)
-  const isAeroGlow = node.handle.includes('aeroglow') || node.title.toLowerCase().includes('aeroglow');
-  
-  // Check if this is a LED launch product (Máscara LED or Manopla LED)
+  // Check if this is a LED launch product (has permanent 30% discount in Shopify)
   const isMascaraLED = node.handle === 'mascara-led-garett-beauty';
   const isManopolaLED = node.handle === 'manopla-led-garett-beauty';
   const isLEDLaunch = isMascaraLED || isManopolaLED;
   
-  // Calculate promotional pricing - special handling for AeroGlow and LED launch products
+  // Calculate promotional pricing
   let priceInfo;
-  if (isAeroGlow) {
+  if (isLEDLaunch) {
+    // LED products have permanent 30% discount configured in Shopify
+    // Price in Shopify is already discounted, compare_at_price is the original
+    const originalPriceValue = isMascaraLED ? 450 : 299;
+    const discountedPriceValue = parseFloat(originalPrice.amount);
     priceInfo = {
-      originalPrice: 449,
-      discountedPrice: 314.30,
+      originalPrice: originalPriceValue,
+      discountedPrice: discountedPriceValue,
       hasDiscount: true,
       discountLabel: '-30%',
-      stage: {
-        badge: 'LANZAMIENTO',
-        color: 'from-red-600 to-pink-600'
-      }
-    };
-  } else if (isMascaraLED) {
-    // Máscara LED: €450 base, 30% off = €315
-    priceInfo = {
-      originalPrice: 450,
-      discountedPrice: 315,
-      hasDiscount: true,
-      discountLabel: '-30%',
-      stage: {
-        badge: 'LANZAMIENTO',
-        color: 'from-red-600 to-pink-600'
-      }
-    };
-  } else if (isManopolaLED) {
-    // Manopla LED: €299 base, 30% off = €209.30
-    priceInfo = {
-      originalPrice: 299,
-      discountedPrice: 209.30,
-      hasDiscount: true,
-      discountLabel: '-30%',
-      stage: {
-        badge: 'LANZAMIENTO',
-        color: 'from-red-600 to-pink-600'
-      }
+      stage: null
     };
   } else {
     priceInfo = calculatePromotionalPrice(originalPrice.amount);
