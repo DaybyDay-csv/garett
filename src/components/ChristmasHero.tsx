@@ -81,7 +81,7 @@ export const ChristmasHero = () => {
                 <span className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-primary/10 flex items-center justify-center">
                   <Gift className="w-3 h-3 md:w-3.5 md:h-3.5 text-primary" />
                 </span>
-                Disponible en El Corte Inglés
+                Con la confianza de El Corte Inglés
               </div>
             </div>
 
