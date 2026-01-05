@@ -57,49 +57,40 @@ export const ChristmasHero = () => {
 
             {/* Main heading */}
             <h1 className="md:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight tracking-tight text-4xl">
-              Regala{" "}
-              <span className="text-white">belleza</span>
+              Tu spa en casa,{" "}
+              <span className="text-white">resultados</span>
               <br />
-              esta Navidad
+              profesionales
             </h1>
 
             {/* Subtitle */}
             <p className="md:text-base text-gray-800 max-w-[220px] md:max-w-md font-light text-sm pb-[10px]">
-              Rutinas completas de spa en casa. 
-              <span className="text-amber-700 font-semibold"> Hasta {currentStage ? `-${currentStage.baseDiscount + (currentStage.bundleExtraDiscount || 0)}%` : "-35%"} en packs</span>
+              Dispositivos de estética avanzada con tecnología europea. 
+              <span className="text-amber-700 font-semibold"> Hasta -30% en packs</span>
             </p>
 
-
-            {/* Countdown */}
-            {isHighDiscount && <div className="flex gap-2 md:gap-3">
-                {[{
-              value: timeLeft.days,
-              label: "Días"
-            }, {
-              value: timeLeft.hours,
-              label: "Horas"
-            }, {
-              value: timeLeft.minutes,
-              label: "Min"
-            }, {
-              value: timeLeft.seconds,
-              label: "Seg"
-            }].map((item, index) => <div key={index} className="text-center">
-                    <div className="bg-gray-900/10 backdrop-blur-sm rounded-lg px-2 py-1.5 md:px-3 md:py-2 min-w-[40px] md:min-w-[50px]">
-                      <span className="text-base md:text-xl font-bold text-gray-900">
-                        {item.value.toString().padStart(2, '0')}
-                      </span>
-                    </div>
-                    <span className="text-[10px] md:text-xs text-gray-700 mt-0.5 block">{item.label}</span>
-                  </div>)}
-              </div>}
+            {/* Key differentiators */}
+            <div className="flex flex-col gap-2 py-2">
+              <div className="flex items-center gap-2 text-gray-800 text-xs md:text-sm">
+                <span className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Sparkles className="w-3 h-3 md:w-3.5 md:h-3.5 text-primary" />
+                </span>
+                Tecnología LED, EMS y Radiofrecuencia
+              </div>
+              <div className="flex items-center gap-2 text-gray-800 text-xs md:text-sm">
+                <span className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Gift className="w-3 h-3 md:w-3.5 md:h-3.5 text-primary" />
+                </span>
+                Disponible en El Corte Inglés
+              </div>
+            </div>
 
             {/* CTAs */}
             <div className="flex flex-col gap-2 w-full max-w-[200px] md:max-w-[280px]">
               <Button asChild size="default" className="bg-gray-900 hover:bg-gray-800 text-white shadow-lg h-9 md:h-10 px-4 text-xs md:text-sm w-full">
                 <a href="#christmas-bundles" className="flex items-center justify-center gap-2">
                   <Gift className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                  Ver Packs de Navidad
+                  Ver Packs Exclusivos
                 </a>
               </Button>
               <Button asChild variant="outline" size="default" className="border-gray-900/30 bg-white/50 text-gray-900 hover:bg-white/70 h-9 md:h-10 px-4 text-xs md:text-sm w-full">
