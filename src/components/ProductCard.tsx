@@ -20,30 +20,23 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
   const { node } = product;
   
   const firstVariant = node.variants.edges[0]?.node;
-  const originalPrice = node.priceRange.minVariantPrice;
+  const currentPrice = parseFloat(firstVariant?.price.amount || node.priceRange.minVariantPrice.amount);
+  const compareAtPrice = firstVariant?.compareAtPrice ? parseFloat(firstVariant.compareAtPrice.amount) : null;
   const image = node.images.edges[0]?.node;
   
-  // Check if this is a LED launch product (has permanent 30% discount in Shopify)
-  const isMascaraLED = node.handle === 'mascara-led-garett-beauty';
-  const isManopolaLED = node.handle === 'manopla-led-garett-beauty';
-  const isLEDLaunch = isMascaraLED || isManopolaLED;
-  
-  // Calculate promotional pricing
+  // Use Shopify's compareAtPrice if available, otherwise fall back to promotional pricing
   let priceInfo;
-  if (isLEDLaunch) {
-    // LED products have permanent 30% discount configured in Shopify
-    // Price in Shopify is already discounted, compare_at_price is the original
-    const originalPriceValue = isMascaraLED ? 450 : 299;
-    const discountedPriceValue = parseFloat(originalPrice.amount);
+  if (compareAtPrice && compareAtPrice > currentPrice) {
+    const discountPercent = Math.round((1 - currentPrice / compareAtPrice) * 100);
     priceInfo = {
-      originalPrice: originalPriceValue,
-      discountedPrice: discountedPriceValue,
+      originalPrice: compareAtPrice,
+      discountedPrice: currentPrice,
       hasDiscount: true,
-      discountLabel: '-30%',
+      discountLabel: `-${discountPercent}%`,
       stage: null
     };
   } else {
-    priceInfo = calculatePromotionalPrice(originalPrice.amount);
+    priceInfo = calculatePromotionalPrice(currentPrice.toString());
   }
   
   // Extract badges from tags
