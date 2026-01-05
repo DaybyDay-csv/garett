@@ -51,8 +51,8 @@ export const ChristmasHero = () => {
           <div className="space-y-3 md:space-y-5 text-left max-w-[240px] md:max-w-md lg:max-w-xl">
             {/* Badge */}
             <Badge className="bg-gray-900/10 text-gray-900 border-gray-900/20 hover:bg-gray-900/20 px-3 py-1.5 text-[10px] md:text-sm">
-              <Gift className="w-3 h-3 md:w-4 md:h-4 mr-1.5" />
-              {currentStage?.badge || "NAVIDAD 2024"}
+              <Sparkles className="w-3 h-3 md:w-4 md:h-4 mr-1.5" />
+              Tecnología Eslava
             </Badge>
 
             {/* Main heading */}
