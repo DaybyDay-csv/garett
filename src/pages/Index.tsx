@@ -79,9 +79,7 @@ const Index = () => {
       <ChristmasHero />
       
       {/* Christmas Seal - Below Hero */}
-      <div className="container md:py-10 px-6 py-[20px] flex items-start justify-center bg-header">
-        <ChristmasSeal size="lg" className="animate-fade-in" />
-      </div>
+      
       
       {/* Christmas Bundles Section */}
       <ChristmasBundles />

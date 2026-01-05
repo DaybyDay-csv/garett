@@ -177,7 +177,7 @@ export const ChristmasBundles = () => {
         <div className="text-center mb-12 md:mb-16">
           <Badge className="mb-4 bg-red-100 text-red-700 border-red-200 hover:bg-red-100">
             <Gift className="w-4 h-4 mr-2" />
-            Edicion Navidad
+            Edicion Enero
           </Badge>
           <h2 className="text-3xl md:text-5xl font-light text-foreground mb-4 tracking-tight">
             Rutinas de{" "}
