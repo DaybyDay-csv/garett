@@ -34,6 +34,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { LEDWavelengthBenefits } from "@/components/LEDWavelengthBenefits";
 import { ChristmasSeal } from "@/components/ChristmasSeal";
 import { ProductDisclaimer } from "@/components/ProductDisclaimer";
+import { trackProductView, trackAddToCart } from "@/hooks/usePageTracking";
 const ProductDetail = () => {
   const {
     handle
@@ -61,15 +62,15 @@ const ProductDetail = () => {
         if (found) {
           setProduct(found);
 
-          // Track ViewContent event when product loads
+          // Track view_item event (GA4 + Meta Pixel)
           const variant = found.node.variants.edges[0]?.node;
-          if (variant && typeof window !== 'undefined' && (window as any).fbq) {
-            (window as any).fbq('track', 'ViewContent', {
-              content_name: found.node.title,
-              content_ids: [variant.id],
-              content_type: 'product',
-              value: parseFloat(variant.price.amount),
-              currency: 'EUR'
+          if (variant) {
+            trackProductView({
+              id: variant.id,
+              name: found.node.title,
+              price: parseFloat(variant.price.amount),
+              category: found.node.productType || undefined,
+              variant: variant.title,
             });
           }
         } else {
@@ -153,16 +154,16 @@ const ProductDetail = () => {
     };
     addItem(cartItem);
 
-    // Track AddToCart event
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'AddToCart', {
-        content_name: node.title,
-        content_ids: [variant.id],
-        content_type: 'product',
-        value: priceInfo.discountedPrice,
-        currency: 'EUR'
-      });
-    }
+    // Track AddToCart event (GA4 + Meta Pixel)
+    trackAddToCart({
+      id: variant.id,
+      name: node.title,
+      price: priceInfo.discountedPrice,
+      quantity: 1,
+      variant: variant.title,
+      category: node.productType || undefined,
+    });
+
     const discountText = priceInfo.hasDiscount ? ` (${priceInfo.discountLabel} aplicado)` : '';
     toast.success('Añadido al carrito', {
       description: `${node.title}${discountText}`,

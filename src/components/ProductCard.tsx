@@ -7,15 +7,18 @@ import { Link } from "react-router-dom";
 import { calculatePromotionalPrice, formatPrice } from "@/lib/promotions";
 import { Flame } from "lucide-react";
 import { OptimizedImage } from "@/components/OptimizedImage";
+import { trackAddToCart, trackProductClick } from "@/hooks/usePageTracking";
 
 interface ProductCardProps {
   product: ShopifyProduct;
   tagIndex?: number;
   hideBadges?: boolean;
   hideAddToCart?: boolean;
+  listName?: string;
+  position?: number;
 }
 
-export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCart = false }: ProductCardProps) => {
+export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCart = false, listName, position }: ProductCardProps) => {
   const addItem = useCartStore(state => state.addItem);
   const { node } = product;
   
@@ -43,6 +46,18 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
   const isNew = node.tags.includes('new:true');
   const isBestseller = node.tags.includes('bestseller:true');
   const isLaunch = node.tags.includes('launch:bf2025');
+
+  // Track product click
+  const handleProductClick = () => {
+    trackProductClick({
+      id: firstVariant?.id || node.id,
+      name: node.title,
+      price: priceInfo.discountedPrice,
+      category: node.productType || undefined,
+      position,
+      listName,
+    });
+  };
   
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -65,16 +80,15 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
     
     addItem(cartItem);
     
-    // Track AddToCart event
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'AddToCart', {
-        content_name: node.title,
-        content_ids: [firstVariant.id],
-        content_type: 'product',
-        value: priceInfo.discountedPrice,
-        currency: 'EUR'
-      });
-    }
+    // Track AddToCart event (GA4 + Meta Pixel)
+    trackAddToCart({
+      id: firstVariant.id,
+      name: node.title,
+      price: priceInfo.discountedPrice,
+      quantity: 1,
+      variant: firstVariant.title,
+      category: node.productType || undefined,
+    });
     
     const discountText = priceInfo.hasDiscount 
       ? ` (${priceInfo.discountLabel} aplicado)` 
@@ -89,6 +103,7 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
   return (
     <Link 
       to={`/producto/${node.handle}`}
+      onClick={handleProductClick}
       className="group block bg-card rounded-none overflow-hidden border hover:shadow-lg transition-all"
     >
       <div className="aspect-square bg-secondary/20 overflow-hidden relative">
