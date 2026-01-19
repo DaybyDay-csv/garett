@@ -7,6 +7,7 @@ import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Sparkles } fr
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { trackBeginCheckout, trackViewCart, trackRemoveFromCart } from "@/hooks/usePageTracking";
 
 // Imágenes de fallback para bundles (primer producto del pack)
 const BUNDLE_FALLBACK_IMAGES: Record<string, string> = {
@@ -41,6 +42,20 @@ export const CartDrawer = () => {
   useEffect(() => {
     checkAndAddGWP();
   }, [items.length, checkAndAddGWP]);
+
+  // Track view_cart when drawer opens
+  useEffect(() => {
+    if (isOpen && items.length > 0) {
+      const cartItems = items.filter(item => !item.isGWP).map(item => ({
+        id: item.variantId,
+        name: item.product.node.title,
+        price: parseFloat(item.price.amount),
+        quantity: item.quantity,
+      }));
+      const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      trackViewCart(cartItems, total);
+    }
+  }, [isOpen]);
 
   // Exclude GWP items from count
   const totalItems = items.filter(item => !item.isGWP).reduce((sum, item) => sum + item.quantity, 0);
@@ -80,19 +95,15 @@ export const CartDrawer = () => {
     }
     
     try {
-      // Track InitiateCheckout event
-      if (typeof window !== 'undefined' && (window as any).fbq) {
-        (window as any).fbq('track', 'InitiateCheckout', {
-          content_ids: items.filter(item => !item.isGWP).map(item => item.variantId),
-          contents: items.filter(item => !item.isGWP).map(item => ({
-            id: item.variantId,
-            quantity: item.quantity
-          })),
-          value: subtotalWithDiscount,
-          currency: 'EUR',
-          num_items: totalItems
-        });
-      }
+      // Track begin_checkout event (GA4 + Meta Pixel)
+      const checkoutItems = items.filter(item => !item.isGWP).map(item => ({
+        id: item.variantId,
+        name: item.product.node.title,
+        price: parseFloat(item.price.amount),
+        quantity: item.quantity,
+      }));
+      trackBeginCheckout(checkoutItems, subtotalWithDiscount);
+
       await createCheckout();
       const checkoutUrl = useCartStore.getState().checkoutUrl;
       if (checkoutUrl) {
@@ -202,7 +213,20 @@ export const CartDrawer = () => {
                       </div>
                       
                       <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
-                        <Button variant="ghost" size="icon" className="h-5 w-5" onClick={() => removeItem(item.variantId)}>
+                        <Button 
+                          variant="ghost" 
+                          size="icon" 
+                          className="h-5 w-5" 
+                          onClick={() => {
+                            trackRemoveFromCart({
+                              id: item.variantId,
+                              name: item.product.node.title,
+                              price: parseFloat(item.price.amount),
+                              quantity: item.quantity,
+                            });
+                            removeItem(item.variantId);
+                          }}
+                        >
                           <Trash2 className="h-3 w-3" />
                         </Button>
                         
