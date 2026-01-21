@@ -34,6 +34,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { LEDWavelengthBenefits } from "@/components/LEDWavelengthBenefits";
 import { ChristmasSeal } from "@/components/ChristmasSeal";
 import { ProductDisclaimer } from "@/components/ProductDisclaimer";
+import { ScalapayWidget } from "@/components/ScalapayWidget";
 import { trackProductView, trackAddToCart } from "@/hooks/usePageTracking";
 const ProductDetail = () => {
   const {
@@ -448,6 +449,9 @@ const ProductDetail = () => {
                   </div>
                   <p className="text-sm text-header-foreground/70">IVA incluido</p>
                   
+                  {/* Scalapay Widget */}
+                  <ScalapayWidget price={priceInfo.discountedPrice} className="mt-3" />
+                  
                   {/* ECI Trust Microcopy */}
                   <div className="flex items-center gap-2 text-sm text-header-foreground/70 mt-3 pt-3 border-t border-header-foreground/20">
                     <img src={elCorteInglesLogo} alt="El Corte Inglés" className="h-4" />
@@ -456,6 +460,9 @@ const ProductDetail = () => {
                 </div> : <div>
                   <div className="text-4xl md:text-5xl font-semibold tracking-tight text-header-foreground">€{priceInfo.originalPrice.toFixed(2)}</div>
                   <p className="text-sm mt-1 text-header-foreground/70">IVA incluido</p>
+                  
+                  {/* Scalapay Widget */}
+                  <ScalapayWidget price={priceInfo.originalPrice} className="mt-3" />
                   
                   {/* ECI Trust Microcopy */}
                   <div className="flex items-center gap-2 text-sm text-header-foreground/70 mt-3 pt-3 border-t border-header-foreground/20">
