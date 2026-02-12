@@ -62,7 +62,7 @@ export const ChristmasHero = () => {
 
             {/* Subtitle */}
             <p className="md:text-base text-white/85 max-w-[220px] md:max-w-md font-light text-sm pb-[10px]">
-              Dispositivos de estética avanzada con tecnología europea. 
+              Dispositivos de estética avanzada con tecnología eslava. 
               <span className="text-amber-300 font-semibold"> Hasta -30% en packs</span>
             </p>
 
