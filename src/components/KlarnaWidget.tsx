@@ -9,7 +9,6 @@ interface KlarnaWidgetProps {
 export const KlarnaWidget = ({ price, variant = "product", className = "" }: KlarnaWidgetProps) => {
   const installmentAmount = (price / 3).toFixed(2);
   
-  // Klarna typically works for purchases between €5 and €1500
   const isEligible = price >= 5 && price <= 1500;
   
   if (!isEligible) return null;
@@ -30,17 +29,17 @@ export const KlarnaWidget = ({ price, variant = "product", className = "" }: Kla
   }
   
   return (
-    <div className={`flex items-center gap-3 py-2.5 px-3.5 bg-[#FFB3C7]/10 rounded-lg border border-[#FFB3C7]/25 ${className}`}>
+    <div className={`flex items-center gap-3 py-3 px-4 rounded-lg border border-[#FFB3C7]/30 bg-[#FFB3C7]/10 ${className}`}>
       <img 
         src={klarnaLogo} 
         alt="Klarna" 
-        className="h-6 rounded"
+        className="h-7 rounded"
       />
       <div className="flex flex-col">
-        <span className="text-sm font-medium text-foreground">
+        <span className="text-sm font-semibold text-header-foreground">
           3 cuotas de €{installmentAmount}
         </span>
-        <span className="text-xs text-muted-foreground">
+        <span className="text-xs text-header-foreground/70">
           sin intereses con Klarna
         </span>
       </div>
