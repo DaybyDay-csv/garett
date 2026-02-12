@@ -5,7 +5,6 @@ import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { SEO } from "@/components/SEO";
-import { ChristmasSeal } from "@/components/ChristmasSeal";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { CATEGORIES, productBelongsToCategory } from "@/lib/categories";
 import { ShoppingBag } from "lucide-react";
@@ -122,7 +121,6 @@ const Category = () => {
               {currentCategory.description}
             </p>
           </div>
-          <ChristmasSeal size="md" className="self-center md:self-auto" />
         </div>
 
         {/* Products Grid */}

@@ -4,7 +4,6 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { ChristmasSeal } from "@/components/ChristmasSeal";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { Filter, ShoppingBag } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -138,7 +137,6 @@ const Products = () => {
               Reafirmación inmediata, cuidado integral, limpieza profunda.        
             </p>
           </div>
-          <ChristmasSeal size="md" className="self-center md:self-auto" />
         </div>
 
         {/* Filters and Sorting */}
