@@ -6,7 +6,6 @@ import { ProductCard } from "@/components/ProductCard";
 import { TrustBadges } from "@/components/TrustBadges";
 import { ChristmasHero } from "@/components/ChristmasHero";
 import { ChristmasBundles } from "@/components/ChristmasBundles";
-import { ChristmasSeal } from "@/components/ChristmasSeal";
 import { Testimonials } from "@/components/Testimonials";
 import { UGCSection } from "@/components/UGCSection";
 import { PromotionalBanners } from "@/components/PromotionalBanners";

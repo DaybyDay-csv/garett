@@ -32,7 +32,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { LEDWavelengthBenefits } from "@/components/LEDWavelengthBenefits";
-import { ChristmasSeal } from "@/components/ChristmasSeal";
 import { ProductDisclaimer } from "@/components/ProductDisclaimer";
 import { ScalapayWidget } from "@/components/ScalapayWidget";
 import { trackProductView, trackAddToCart } from "@/hooks/usePageTracking";
@@ -392,8 +391,6 @@ const ProductDetail = () => {
           <div className="space-y-6">
             <div>
               <div className="flex gap-2 mb-4 flex-wrap items-center">
-                {/* Christmas Seal */}
-                <ChristmasSeal size="sm" className="mr-2" />
                 
                 {/* Promotional Stage Badge - Highest priority */}
                 {priceInfo.hasDiscount && priceInfo.stage && <Badge variant="destructive" className="text-sm md:text-base px-3 py-1">
