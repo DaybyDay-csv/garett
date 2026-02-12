@@ -5,7 +5,7 @@ export const ObjectionsSection = () => {
   return <section className="py-12 md:py-20 bg-background">
       <div className="container px-6">
         <div className="text-center mb-10 md:mb-12">
-          <h2 className="text-2xl md:text-4xl font-semibold text-foreground mb-3 md:mb-4 tracking-tight">Los temas más frecuentes
+          <h2 className="text-2xl md:text-4xl font-semibold text-foreground mb-3 md:mb-4 tracking-tight">Los temas más frecuentes entre nuestras clientas 
 
         </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">Los temas más comunes entre nuestras clientas
