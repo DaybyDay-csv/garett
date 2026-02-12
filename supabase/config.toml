@@ -2,3 +2,6 @@ project_id = "xprccglyucneflgzxlyi"
 
 [functions.newsletter-signup]
 verify_jwt = false
+
+[functions.beauty-advisor]
+verify_jwt = false

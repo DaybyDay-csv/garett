@@ -9,6 +9,7 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { NewsletterPopup } from "@/components/NewsletterPopup";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { PageTracker } from "@/components/PageTracker";
+import { BeautyAdvisorChat } from "@/components/BeautyAdvisorChat";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
@@ -38,6 +39,7 @@ const App = () => (
           <PageTracker />
           <ScrollToTop />
           <AnnouncementBar />
+          <BeautyAdvisorChat />
           <FloatingCountdown />
           <NewsletterPopup />
           <Routes>
