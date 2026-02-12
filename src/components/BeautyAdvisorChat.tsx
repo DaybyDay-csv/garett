@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send, Sparkles, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
 type Message = { role: "user" | "assistant"; content: string };
@@ -170,7 +171,30 @@ export const BeautyAdvisorChat = () => {
                 >
                   {msg.role === "assistant" ? (
                     <div className="prose prose-sm max-w-none [&>p]:my-1 [&>ul]:my-1 [&>ol]:my-1 text-inherit">
-                      <ReactMarkdown>{msg.content}</ReactMarkdown>
+                      <ReactMarkdown
+                        components={{
+                          a: ({ href, children }) => {
+                            if (href?.startsWith('/')) {
+                              return (
+                                <Link
+                                  to={href}
+                                  className="text-primary underline underline-offset-2 font-medium hover:text-primary/80 transition-colors"
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  {children}
+                                </Link>
+                              );
+                            }
+                            return (
+                              <a href={href} target="_blank" rel="noopener noreferrer" className="text-primary underline">
+                                {children}
+                              </a>
+                            );
+                          },
+                        }}
+                      >
+                        {msg.content}
+                      </ReactMarkdown>
                     </div>
                   ) : (
                     msg.content
