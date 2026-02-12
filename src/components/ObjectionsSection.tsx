@@ -8,9 +8,9 @@ export const ObjectionsSection = () => {
           <h2 className="text-2xl md:text-4xl font-semibold text-foreground mb-3 md:mb-4 tracking-tight">Los temas más frecuentes entre nuestras clientas 
 
         </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">Los temas más comunes entre nuestras clientas
+          
 
-        </p>
+
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
