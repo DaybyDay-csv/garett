@@ -5,7 +5,7 @@ import { TrustBadges } from "@/components/TrustBadges";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Sparkles } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
-import { ScalapayWidget } from "@/components/ScalapayWidget";
+import { KlarnaWidget } from "@/components/KlarnaWidget";
 import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { trackBeginCheckout, trackViewCart, trackRemoveFromCart } from "@/hooks/usePageTracking";
@@ -277,8 +277,8 @@ export const CartDrawer = () => {
                     </div>
                   )}
                   
-                  {/* Scalapay Widget */}
-                  <ScalapayWidget price={subtotalWithDiscount} variant="cart" />
+                  {/* Klarna Widget */}
+                  <KlarnaWidget price={subtotalWithDiscount} variant="cart" />
                 </div>
                 
                 <Button onClick={handleCheckout} className="w-full h-11" disabled={items.length === 0 || isLoading}>
