@@ -60,6 +60,140 @@ const testimonials = [
       "Compré a través de El Corte Inglés un Multi Clean Blanco para mi hija y lo recibió a los 2 días, en perfecto estado y está encantada con el aparato. Muy satisfecho con el servicio de El Corte Inglés y con la calidad del producto.",
     result: "Entrega rápida y calidad excelente",
   },
+  // Diciembre 2025
+  {
+    name: "Sofía M.",
+    location: "España",
+    rating: 5,
+    date: "5 dic 2025",
+    verified: true,
+    image: "SM",
+    review:
+      "Lo compre para regalar a mi madre por navidad y al final me he quedado yo tambien uno jajaja. El multi clean es una pasada, la piel se queda super limpia y suave. Envio rapidisimo ademas",
+    result: "Piel super limpia y suave",
+  },
+  {
+    name: "Raquel",
+    location: "España",
+    rating: 5,
+    date: "12 dic 2025",
+    verified: true,
+    image: "RA",
+    review:
+      "Llevaba tiempo mirando el Fresh Skin Pro y al final me animé con la oferta de navidad. Llevo 3 semanas usandolo y la verdad q se nota bastante, sobre todo en la firmeza de la piel. Mi marido hasta me ha dicho q me ve la cara diferente jaja",
+    result: "Firmeza visible en 3 semanas",
+  },
+  {
+    name: "Ana Belén",
+    location: "España",
+    rating: 4,
+    date: "18 dic 2025",
+    verified: true,
+    image: "AB",
+    review:
+      "El producto esta bien, se nota la calidad. Lo unico q al principio no sabia muy bien como usarlo pero les escribí por instagram y me explicaron todo super bien. Ahora lo uso casi todos los dias y la piel se ve mucho mejor. Le quito una estrella porq el manual podria ser mas claro",
+    result: "Piel mucho mejor con uso diario",
+  },
+  {
+    name: "Patri_glow",
+    location: "España",
+    rating: 5,
+    date: "27 dic 2025",
+    verified: true,
+    image: "PG",
+    review:
+      "Me regalaron el pretty face por reyes adelantado y ostras que vicio!! lo uso por las noches con mi serum y noto la piel mas tersa y luminosa. Mis amigas me preguntan q me hago en la cara 😂 totalmente recomendable",
+    result: "Piel tersa y luminosa",
+  },
+  // Enero 2026
+  {
+    name: "Carmen R.",
+    location: "España",
+    rating: 5,
+    date: "3 ene 2026",
+    verified: true,
+    image: "CR",
+    review:
+      "Empece el año estrenando el Calm Skin y no puedo estar mas contenta. Tengo la piel sensible y con rojeces y desde que lo uso noto la piel mucho mas calmada. Lo uso con mi crema hidratante y va genial. Muy contenta con la compra!!",
+    result: "Piel calmada y sin rojeces",
+  },
+  {
+    name: "David",
+    location: "España",
+    rating: 5,
+    date: "8 ene 2026",
+    verified: true,
+    image: "DA",
+    review:
+      "Se lo compré a mi novia por navidad y esta encantadisima. Usa el fresh skin pro todos los dias y dice q le ha cambiado la piel. Yo tambien lo he probado alguna vez y la verdad q mola bastante, deja la piel muy suave",
+    result: "Cambio de piel notable",
+  },
+  {
+    name: "Lucia_bcn",
+    location: "España",
+    rating: 5,
+    date: "12 ene 2026",
+    verified: true,
+    image: "LB",
+    review:
+      "Tengo el multi clean y la mascara led y madre mia la diferencia! antes me gastaba un dineral en tratamientos faciales y ahora me los hago en casa viendo netflix jaja. En serio, la mascara led es otro nivel, se nota mucho en la luminosidad de la piel",
+    result: "Resultados de clínica en casa",
+  },
+  {
+    name: "Marta Jiménez",
+    location: "España",
+    rating: 5,
+    date: "15 ene 2026",
+    verified: true,
+    image: "MJ",
+    review:
+      "Después de probar mil cremas antiarrugas que no hacian nada, probé el Fresh Skin Pro por recomendación de una amiga. Llevo un mes y medio y las arrugas del contorno de ojos se han reducido un monton. Ojalá lo hubiera descubierto antes la verdad",
+    result: "Arrugas reducidas en mes y medio",
+  },
+  {
+    name: "Bea",
+    location: "España",
+    rating: 4,
+    date: "19 ene 2026",
+    verified: true,
+    image: "BE",
+    review:
+      "Me compré la manopla LED para el cuerpo y esta muy bien. La uso en piernas y brazos y la piel se ve mas uniforme y tersa. Lo unico es q es un poco grande para la cara pero para eso hay otros productos. En general muy satisfecha, la recomiendo 100%",
+    result: "Piel corporal más uniforme",
+  },
+  {
+    name: "Nuria",
+    location: "España",
+    rating: 5,
+    date: "22 ene 2026",
+    verified: true,
+    image: "NU",
+    review:
+      "Alucino con el IPL, llevo 6 semanas y ya casi no me sale pelo en las piernas!! Habia probado otros de amazon mas baratos y nada, este si que funciona de verdad. Ademas el servicio post venta es 10, me resolvieron todas las dudas por whatsapp",
+    result: "Casi sin vello en 6 semanas",
+  },
+  {
+    name: "Isabel García",
+    location: "España",
+    rating: 5,
+    date: "26 ene 2026",
+    verified: true,
+    image: "IG",
+    review:
+      "Tengo 52 años y sinceramente no esperaba mucho pero vaya sorpresa. Con el Serum Skin y el Fresh Eye llevo dos meses y las ojeras se me han reducido muchisimo. Mi hermana no se lo creia cuando me vio y se ha comprado los mismos jaja. Muy recomendable para pieles maduras",
+    result: "Ojeras reducidas a los 52 años",
+  },
+  {
+    name: "Javi_fit",
+    location: "España",
+    rating: 5,
+    date: "30 ene 2026",
+    verified: true,
+    image: "JF",
+    review:
+      "Soy tio y no me da verguenza decirlo, uso el multi clean y el cellu body despues de entrenar y la piel se queda increible. Mis colegas del gym flipan cuando les digo q uso aparatos de belleza pero esque funcionan! la recuperacion muscular con el cellu body es brutal",
+    result: "Piel increíble post-entreno",
+  },
 ];
 export const Testimonials = () => {
   return (
