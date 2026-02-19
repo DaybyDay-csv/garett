@@ -127,9 +127,10 @@ export const RelatedProducts = ({ currentProduct }: RelatedProductsProps) => {
 
   return (
     <div className="py-12 border-t">
-      <h2 className="text-2xl md:text-3xl font-semibold mb-8">
-        También te puede interesar
+      <h2 className="text-2xl md:text-3xl font-semibold mb-2">
+        Completa tu rutina
       </h2>
+      <p className="text-sm text-muted-foreground mb-8">Productos que complementan tu compra</p>
       
       <div className="relative group">
         {/* Left Arrow */}
