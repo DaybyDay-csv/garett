@@ -2,15 +2,35 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import garettLogoFooter from "@/assets/garett-logo-footer.png";
+import { Lock } from "lucide-react";
 
-const ComingSoon = () => {
+interface ComingSoonProps {
+  onAdminLogin?: () => void;
+}
+
+const ADMIN_PASSWORD = "garett2025";
+
+const ComingSoon = ({ onAdminLogin }: ComingSoonProps) => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
       setSubmitted(true);
+    }
+  };
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === ADMIN_PASSWORD) {
+      onAdminLogin?.();
+    } else {
+      setLoginError(true);
+      setTimeout(() => setLoginError(false), 2000);
     }
   };
 
@@ -112,6 +132,42 @@ const ComingSoon = () => {
             Garett Beauty España
           </p>
         </div>
+      </div>
+
+      {/* Admin login - subtle button bottom right */}
+      <div className="absolute bottom-6 right-6 z-20">
+        {!showLogin ? (
+          <button
+            onClick={() => setShowLogin(true)}
+            className="opacity-20 hover:opacity-60 transition-opacity duration-300"
+            aria-label="Admin"
+          >
+            <Lock className="w-4 h-4" style={{ color: "hsl(0,0%,100%)" }} />
+          </button>
+        ) : (
+          <form onSubmit={handleLogin} className="flex items-center gap-2">
+            <Input
+              type="password"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoFocus
+              className={`w-40 h-9 bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-white/50 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-none text-xs tracking-wide ${
+                loginError ? "border-red-500/70" : ""
+              }`}
+            />
+            <Button
+              type="submit"
+              className="h-9 px-4 rounded-none text-[10px] tracking-widest uppercase font-medium"
+              style={{
+                background: "hsl(0,0%,100%)",
+                color: "hsl(217, 44%, 11%)",
+              }}
+            >
+              Entrar
+            </Button>
+          </form>
+        )}
       </div>
     </div>
   );
