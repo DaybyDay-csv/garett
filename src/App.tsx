@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/sonner";
-import ComingSoon from "./pages/ComingSoon";
+
 import Index from "./pages/Index";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
@@ -26,18 +25,7 @@ import { HelmetProvider } from "react-helmet-async";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [isAdmin, setIsAdmin] = useState(
-    () => sessionStorage.getItem("garett_admin") === "true"
-  );
 
-  const handleAdminLogin = () => {
-    sessionStorage.setItem("garett_admin", "true");
-    setIsAdmin(true);
-  };
-
-  if (!isAdmin) {
-    return <ComingSoon onAdminLogin={handleAdminLogin} />;
-  }
 
   return (
     <HelmetProvider>
