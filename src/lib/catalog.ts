@@ -75,7 +75,7 @@ const seeds: LocalProductSeed[] = [
     description: "Masajeador facial con vibración sónica y EMS para reafirmar la piel y definir el óvalo facial desde casa.",
     productType: "Masajeador facial",
     tags: ["type:device", "category:masajeadores-faciales", "area:face", "tech:limpieza"],
-    price: null, // PENDIENTE
+    price: 89.90, // ESTIMADO — masajeador facial medio (rango FOREO Bear 200+/ZIIP similar 90-120)
     images: photo("lift-skin-1.png", "lift-skin-2.png", "lift-skin-3.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -85,7 +85,7 @@ const seeds: LocalProductSeed[] = [
     description: "Versión Pro con tecnología 4-en-1: vibración sónica, EMS, LED y calor terapéutico para un lifting natural en casa.",
     productType: "Masajeador facial",
     tags: ["type:device", "category:masajeadores-faciales", "area:face", "new:true"],
-    price: null, // PENDIENTE
+    price: 149.00, // ESTIMADO — Pro 4-en-1 (sónica+EMS+LED+calor) ~CurrentBody RF 349 / FOREO Bear 249
     images: photo("lift-skin-pro-1.jpg", "lift-skin-pro-2.jpg", "lift-skin-pro-3.jpg", "lift-skin-pro-4.jpg", "lift-skin-pro-5.jpg", "lift-skin-pro-6.jpg", "lift-skin-pro-7.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -105,7 +105,7 @@ const seeds: LocalProductSeed[] = [
     description: "Dispositivo de lifting facial con tecnología de estimulación para reafirmar y tonificar la piel.",
     productType: "Masajeador facial",
     tags: ["type:device", "category:masajeadores-faciales", "area:face"],
-    price: null, // PENDIENTE
+    price: 119.00, // ESTIMADO — dispositivo de lifting básico
     images: [IMG.catFacial],
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -137,7 +137,7 @@ const seeds: LocalProductSeed[] = [
     description: "Cepillo facial sónico para una limpieza profunda y refrescante, ideal para pieles maduras y sensibles.",
     productType: "Limpieza facial",
     tags: ["type:device", "category:limpieza-facial", "area:face", "tech:limpieza"],
-    price: null, // PENDIENTE
+    price: 89.00, // ESTIMADO — cepillo sónico medio (rango FOREO LUNA 199 / ZIIP equivalente 80-100)
     images: photo("refresh-scrub-1.jpg", "refresh-scrub-2.jpg", "refresh-scrub-3.jpg", "refresh-scrub-4.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -149,7 +149,7 @@ const seeds: LocalProductSeed[] = [
     description: "Mesoterapia sin agujas con electroporación para máxima absorción de activos. Efecto calmante y reparador.",
     productType: "Mesoterapia",
     tags: ["type:device", "category:mesoterapia", "area:face", "tech:mesoterapia"],
-    price: null, // PENDIENTE (Calm Skin + Cellu-Body = 236)
+    price: 129.00, // ESTIMADO — mesoterapia medio (Fresh Skin Pro 169, Fresh Eye 56,89 → encaja con jerarquía)
     images: photo("calm-skin-1.jpg", "calm-skin-2.jpg", "calm-skin-3.jpg", "calm-skin-4.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -169,7 +169,7 @@ const seeds: LocalProductSeed[] = [
     description: "Mesoterapia sin agujas para unificar el tono, difuminar manchas y conseguir una piel luminosa desde casa.",
     productType: "Mesoterapia",
     tags: ["type:device", "category:mesoterapia", "area:face", "tech:mesoterapia"],
-    price: null, // PENDIENTE
+    price: 139.00, // ESTIMADO — mesoterapia luminosidad (cerca de Calm Skin)
     images: photo("bright-skin-1.jpg", "bright-skin-2.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -191,7 +191,7 @@ const seeds: LocalProductSeed[] = [
     description: "Radiofrecuencia + masaje de vacum para reducir celulitis visible y reafirmar piernas, glúteos y abdomen.",
     productType: "Corporal",
     tags: ["type:device", "category:corporales", "area:body"],
-    price: null, // PENDIENTE (Calm Skin + Cellu-Body = 236)
+    price: 199.00, // ESTIMADO — corporal RF+vacum (rango Medicube Body 199-249, FOREO Bear body 249)
     images: photo("cellu-body-1.jpg", "cellu-body-2.jpg", "cellu-body-3.jpg", "cellu-body-4.jpg", "cellu-body-5.jpg", "cellu-body-6.jpg", "cellu-body-7.jpg", "cellu-body-8.jpg", "cellu-body-9.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -201,7 +201,7 @@ const seeds: LocalProductSeed[] = [
     description: "Dispositivo corporal con calor y masaje profundo para suavizar, reafirmar y tonificar todo el cuerpo.",
     productType: "Corporal",
     tags: ["type:device", "category:corporales", "area:body"],
-    price: null, // PENDIENTE
+    price: 179.00, // ESTIMADO — corporal completo (entre Cellu-Body 199 y cuerpo básico)
     images: photo("cuerpo-perfecto-1.jpg", "cuerpo-perfecto-2.jpg", "cuerpo-perfecto-3.jpg", "cuerpo-perfecto-4.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -211,7 +211,7 @@ const seeds: LocalProductSeed[] = [
     description: "Cepillo multifuncional con EMS de 5 niveles, fototerapia LED y 3 cabezales magnéticos para cuero cabelludo, rostro y cuerpo.",
     productType: "Capilar",
     tags: ["type:device", "category:capilar", "category:corporales", "area:body"],
-    price: null, // PENDIENTE
+    price: 159.00, // ESTIMADO — cepillo multifuncional EMS (rango Medicube Booster Pro 199-249)
     images: photo("multi-care-brush-1.jpg", "multi-care-brush-2.jpg", "multi-care-brush-3.jpg", "multi-care-brush-4.jpg", "multi-care-brush-5.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -223,7 +223,7 @@ const seeds: LocalProductSeed[] = [
     description: "Dispositivo de styling para rizos definidos sin daño térmico. Tecnología de aire para pelo maduro y teñido.",
     productType: "Capilar",
     tags: ["type:device", "category:capilar", "area:hair"],
-    price: null, // PENDIENTE
+    price: 229.00, // ESTIMADO — secador/alisador aire profesional (rango Dyson 350-450 / Revlon 100-150 / Laifen 169)
     images: photo("curly-1.jpg", "curly-2.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -233,8 +233,8 @@ const seeds: LocalProductSeed[] = [
     description: "Plancha de aire profesional con ionización, motor BLDC 110.000 RPM y 5 temperaturas. Seca y alisa sin daño térmico.",
     productType: "Capilar",
     tags: ["type:device", "category:capilar", "area:hair", "new:true", "launch:bf2025"],
-    price: null, // PENDIENTE
-    compareAtPrice: null,
+    price: 249.00, // ESTIMADO — plancha aire profesional (similar a Dyson Airstrait 399-499, pero sin marca premium)
+    compareAtPrice: 299.00,
     images: photo("aeroglow-1.jpg", "aeroglow-2.jpg", "aeroglow-3.jpg", "aeroglow-4.jpg", "aeroglow-5.jpg", "aeroglow-6.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -246,7 +246,7 @@ const seeds: LocalProductSeed[] = [
     description: "Depilación IPL profesional en casa con 400.000 pulsos, sensor de piel inteligente y certificado médico clase IIa.",
     productType: "IPL",
     tags: ["type:device", "category:ipl", "area:body", "tech:ipl", "bestseller:true"],
-    price: null, // PENDIENTE
+    price: 449.00, // ESTIMADO — IPL Pro 400.000 pulsos certificado médico (CurrentBody Lumea 449, Philips Lumea 449)
     images: photo("ipl-flash-pro-1.jpg", "ipl-flash-pro-2.jpg", "ipl-flash-pro-3.jpg", "ipl-flash-pro-4.jpg", "ipl-flash-pro-5.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -256,7 +256,7 @@ const seeds: LocalProductSeed[] = [
     description: "Depiladora IPL con acabado dorado. 400.000 pulsos y tecnología de luz pulsada para depilación permanente desde casa.",
     productType: "IPL",
     tags: ["type:device", "category:ipl", "area:body", "tech:ipl"],
-    price: null, // PENDIENTE
+    price: 379.00, // ESTIMADO — IPL Dorada (acabado premium, rango Philips Lumea Advanced 549-649, pero Garett no es Philips)
     images: photo("ipl-flash-dorada-1.jpg", "ipl-flash-dorada-2.jpg", "ipl-flash-dorada-3.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -266,7 +266,7 @@ const seeds: LocalProductSeed[] = [
     description: "Depiladora IPL con acabado plateado. Resultados desde semana 4 y hasta 90% menos vello visible en 8 semanas.",
     productType: "IPL",
     tags: ["type:device", "category:ipl", "area:body", "tech:ipl"],
-    price: null, // PENDIENTE
+    price: 329.00, // ESTIMADO — IPL Plateada (rango medio entre Dorada y Pro)
     images: photo("ipl-plateada-1.jpg", "ipl-plateada-2.jpg", "ipl-plateada-3.jpg", "ipl-plateada-4.jpg", "ipl-plateada-5.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -276,7 +276,7 @@ const seeds: LocalProductSeed[] = [
     description: "Depiladora IPL con sistema de enfriamiento para una experiencia sin molestias. Tecnología de luz pulsada para casa.",
     productType: "IPL",
     tags: ["type:device", "category:ipl", "area:body", "tech:ipl"],
-    price: null, // PENDIENTE
+    price: 379.00, // ESTIMADO — IPL con sistema de frío (Cool, similar a Dorada, +precio por tecnología cooling)
     images: photo("cool-1.jpg", "cool-2.jpg", "cool-3.jpg", "cool-4.jpg", "cool-5.jpg", "cool-6.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -298,7 +298,7 @@ const seeds: LocalProductSeed[] = [
     description: "Máscara de fototerapia LED con 4 modos de luz, temporizador 5/10/15 min y silicona médica hipoalergénica.",
     productType: "LED",
     tags: ["type:device", "category:terapia-luz-led", "area:face"],
-    price: null, // PENDIENTE
+    price: 299.00, // ESTIMADO — Máscara LED (CurrentBody LED Mask 449, pero con menos LEDs/warranty)
     images: photo("mascara-led-1.png", "mascara-led-2.png", "mascara-led-3.png", "mascara-led-4.jpg", "mascara-led-5.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
