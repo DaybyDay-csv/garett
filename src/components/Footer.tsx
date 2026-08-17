@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Instagram, Twitter, Youtube } from "lucide-react";
-import garettLogo from "@/assets/garett-logo-footer.png";
+import garettLogo from "@/assets/garett-logo-white.png";
 import garettPattern from "@/assets/garett-pattern-2.png";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 export const Footer = () => {
@@ -168,7 +168,7 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold text-base mb-5">Mantente informado</h3>
             <p className="text-primary-foreground/70 text-sm mb-5 leading-relaxed">
-              Recibe alertas de cada etapa de ofertas y descuentos exclusivos
+              Suscríbete y consigue un <span className="text-primary-foreground font-semibold">13% de descuento</span> en tu primer pedido.
             </p>
             <NewsletterCTA variant="default" size="sm" text="Notificarme" className="bg-white/10 hover:bg-white/20 border-white/20 text-white w-full" />
             <div className="flex flex-wrap items-center gap-3 mt-4 text-xs text-primary-foreground/50">
@@ -183,8 +183,22 @@ export const Footer = () => {
           </div>
         </div>
 
+        {/* Payment methods */}
+        <div className="pt-10 border-t border-primary-foreground/20 mb-8">
+          <p className="text-xs text-primary-foreground/50 mb-4 uppercase tracking-wider">Pagos seguros</p>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center justify-center h-8 px-4 rounded-md bg-white/10 text-primary-foreground text-xs font-semibold tracking-wide">Visa</span>
+            <span className="inline-flex items-center justify-center h-8 px-4 rounded-md bg-white/10 text-primary-foreground text-xs font-semibold tracking-wide">Mastercard</span>
+            <span className="inline-flex items-center justify-center h-8 px-4 rounded-md bg-white/10 text-primary-foreground text-xs font-semibold tracking-wide">Amex</span>
+            <span className="inline-flex items-center justify-center h-8 px-4 rounded-md bg-white/10 text-primary-foreground text-xs font-semibold tracking-wide">PayPal</span>
+            <span className="inline-flex items-center justify-center h-8 px-4 rounded-md bg-[#FFA8CD] text-foreground text-xs font-bold tracking-wide">Klarna</span>
+            <span className="inline-flex items-center justify-center h-8 px-4 rounded-md bg-white/10 text-primary-foreground text-xs font-semibold tracking-wide">Apple Pay</span>
+            <span className="inline-flex items-center justify-center h-8 px-4 rounded-md bg-white/10 text-primary-foreground text-xs font-semibold tracking-wide">Google Pay</span>
+          </div>
+        </div>
+
         {/* Bottom Bar */}
-        <div className="pt-10 border-t border-primary-foreground/20">
+        <div className="pt-8 border-t border-primary-foreground/20">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/50">
             <p>
               © {currentYear} Garett. Todos los derechos reservados.
