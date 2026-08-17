@@ -5,181 +5,268 @@ import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
-import { Filter, ShoppingBag } from "lucide-react";
+import { Filter, ShoppingBag, X } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+
+const CATEGORIES = [
+  { value: "all", label: "Todas" },
+  { value: "terapia-luz-led", label: "Terapia LED" },
+  { value: "masajeadores-faciales", label: "Masajeadores faciales" },
+  { value: "limpieza-facial", label: "Limpieza facial" },
+  { value: "mesoterapia", label: "Mesoterapia" },
+  { value: "corporales", label: "Corporales" },
+  { value: "cuidado-capilar", label: "Cuidado capilar" },
+  { value: "depilacion-ipl", label: "Depilación IPL" },
+];
+
+const PRICE_BUCKETS = [
+  { value: "all", label: "Todos los precios", min: 0, max: Infinity },
+  { value: "lt100", label: "Menos de 100€", min: 0, max: 100 },
+  { value: "100-200", label: "100€ – 200€", min: 100, max: 200 },
+  { value: "200-350", label: "200€ – 350€", min: 200, max: 350 },
+  { value: "gte350", label: "Más de 350€", min: 350, max: Infinity },
+];
+
 const Products = () => {
   const [searchParams] = useSearchParams();
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
+  const [priceFilter, setPriceFilter] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("default");
+  const [activeBadges, setActiveBadges] = useState<string[]>([]);
 
-  // Initialize category from URL params
   useEffect(() => {
-    const categoryParam = searchParams.get('category');
-    if (categoryParam) {
-      setCategoryFilter(categoryParam);
-    }
+    const categoryParam = searchParams.get("category");
+    if (categoryParam) setCategoryFilter(categoryParam);
   }, [searchParams]);
+
   useEffect(() => {
     const loadProducts = async () => {
       try {
         const data = await fetchProducts(50);
-        // Filter out GWP product from display
-        const filteredData = data.filter(p => !isGWPProduct(p));
+        const filteredData = data.filter((p) => !isGWPProduct(p));
         setProducts(filteredData);
         setFilteredProducts(filteredData);
       } catch (error) {
-        console.error('Error loading products:', error);
+        console.error("Error loading products:", error);
       } finally {
         setLoading(false);
       }
     };
     loadProducts();
   }, []);
+
   useEffect(() => {
     let filtered = [...products];
 
-    // Default category priority (smartwatches last)
-    const categoryPriority: Record<string, number> = {
-      'terapia-luz-led': 1,
-      'masajeadores-faciales': 2,
-      'limpieza-facial': 3,
-      'cuidado-capilar': 4,
-      'mesoterapia': 5,
-      'corporales': 6,
-      'depilacion-ipl': 7,
-      'smartwatches': 999, // Always last
-    };
-
-    const getCategoryPriority = (product: ShopifyProduct) => {
-      const categoryTag = product.node.tags.find(tag => tag.startsWith('category:'));
-      if (!categoryTag) return 500;
-      const category = categoryTag.replace('category:', '');
-      return categoryPriority[category] || 500;
-    };
-
-    // Category priority sorting
     if (categoryFilter !== "all") {
-      filtered.sort((a, b) => {
-        const aHasCategory = a.node.tags.some(tag => tag === `category:${categoryFilter}`);
-        const bHasCategory = b.node.tags.some(tag => tag === `category:${categoryFilter}`);
-        
-        if (aHasCategory && !bHasCategory) return -1;
-        if (!aHasCategory && bHasCategory) return 1;
-        
-        // Within same filter status, apply default priority
-        return getCategoryPriority(a) - getCategoryPriority(b);
-      });
-    } else if (sortBy === "default") {
-      // Default sorting by category priority
-      filtered.sort((a, b) => getCategoryPriority(a) - getCategoryPriority(b));
+      filtered = filtered.filter((p) =>
+        p.node.tags.some((t) => t === `category:${categoryFilter}`),
+      );
     }
 
-    // Price sorting (applied after category sorting)
+    const priceBucket = PRICE_BUCKETS.find((b) => b.value === priceFilter) ?? PRICE_BUCKETS[0];
+    filtered = filtered.filter((p) => {
+      const price = parseFloat(p.node.priceRange.minVariantPrice.amount);
+      return price >= priceBucket.min && price < priceBucket.max;
+    });
+
+    if (activeBadges.includes("bestseller")) {
+      filtered = filtered.filter((p) => p.node.tags.includes("bestseller:true"));
+    }
+    if (activeBadges.includes("new")) {
+      filtered = filtered.filter((p) => p.node.tags.includes("new:true"));
+    }
+    if (activeBadges.includes("discount")) {
+      filtered = filtered.filter((p) => {
+        const v = p.node.variants.edges[0]?.node;
+        if (!v?.compareAtPrice) return false;
+        return parseFloat(v.compareAtPrice.amount) > parseFloat(v.price.amount);
+      });
+    }
+
     if (sortBy === "price-asc") {
-      filtered.sort((a, b) => {
-        // Keep category priority if filter is active
-        if (categoryFilter !== "all") {
-          const aHasCategory = a.node.tags.some(tag => tag === `category:${categoryFilter}`);
-          const bHasCategory = b.node.tags.some(tag => tag === `category:${categoryFilter}`);
-          if (aHasCategory !== bHasCategory) {
-            return aHasCategory ? -1 : 1;
-          }
-        }
-        return parseFloat(a.node.priceRange.minVariantPrice.amount) - parseFloat(b.node.priceRange.minVariantPrice.amount);
-      });
+      filtered.sort(
+        (a, b) =>
+          parseFloat(a.node.priceRange.minVariantPrice.amount) -
+          parseFloat(b.node.priceRange.minVariantPrice.amount),
+      );
     } else if (sortBy === "price-desc") {
-      filtered.sort((a, b) => {
-        // Keep category priority if filter is active
-        if (categoryFilter !== "all") {
-          const aHasCategory = a.node.tags.some(tag => tag === `category:${categoryFilter}`);
-          const bHasCategory = b.node.tags.some(tag => tag === `category:${categoryFilter}`);
-          if (aHasCategory !== bHasCategory) {
-            return aHasCategory ? -1 : 1;
-          }
-        }
-        return parseFloat(b.node.priceRange.minVariantPrice.amount) - parseFloat(a.node.priceRange.minVariantPrice.amount);
-      });
+      filtered.sort(
+        (a, b) =>
+          parseFloat(b.node.priceRange.minVariantPrice.amount) -
+          parseFloat(a.node.priceRange.minVariantPrice.amount),
+      );
     }
-    
-    setFilteredProducts(filtered);
-  }, [sortBy, categoryFilter, products]);
-  const categories = [
-    { value: "all", label: "Todas las categorías" },
-    { value: "terapia-luz-led", label: "Terapia de Luz LED" },
-    { value: "masajeadores-faciales", label: "Masajeadores faciales" },
-    { value: "limpieza-facial", label: "Limpieza facial" },
-    { value: "cuidado-capilar", label: "Cuidado capilar" },
-    { value: "smartwatches", label: "Smartwatches" },
-    { value: "mesoterapia", label: "Dispositivos de Mesoterapia" },
-    { value: "corporales", label: "Dispositivos corporales" },
-    { value: "depilacion-ipl", label: "Depilación e IPL" }
-  ];
 
-  return <div className="min-h-screen bg-background">
+    setFilteredProducts(filtered);
+  }, [sortBy, categoryFilter, priceFilter, activeBadges, products]);
+
+  const toggleBadge = (badge: string) => {
+    setActiveBadges((prev) => (prev.includes(badge) ? prev.filter((b) => b !== badge) : [...prev, badge]));
+  };
+
+  const clearAll = () => {
+    setCategoryFilter("all");
+    setPriceFilter("all");
+    setActiveBadges([]);
+  };
+
+  const hasActiveFilters = categoryFilter !== "all" || priceFilter !== "all" || activeBadges.length > 0;
+
+  return (
+    <div className="min-h-screen bg-background">
       <Header />
-      
-      <div className="container py-8 px-6">
-        {/* Breadcrumb Navigation */}
-        <Breadcrumb 
-          items={[
-            { label: 'Productos' }
-          ]}
-        />
-        
-        <div className="mb-8 md:mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div>
-            <h1 className="mb-3 text-xl md:text-2xl font-semibold tracking-tight">Todos los productos</h1>
-            <p className="text-left font-semibold text-xl md:text-3xl text-foreground leading-tight">
-              Reafirmación inmediata, cuidado integral, limpieza profunda.        
-            </p>
-          </div>
+      <div className="container py-8">
+        <Breadcrumb items={[{ label: "Productos" }]} />
+
+        <div className="mb-6">
+          <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Catálogo</p>
+          <h1 className="text-2xl md:text-4xl font-semibold tracking-tight">Todos los productos</h1>
+          <p className="text-muted-foreground mt-2 text-sm md:text-base">
+            Reafirmación inmediata, cuidado integral, limpieza profunda.
+          </p>
         </div>
 
-        {/* Filters and Sorting */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-            <SelectTrigger className="w-full sm:w-[240px] h-11">
-              <SelectValue placeholder="Filtrar por categoría" />
+        {/* Filter chips row */}
+        <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-3 mb-6 border-b border-border">
+          {CATEGORIES.map((cat) => {
+            const active = categoryFilter === cat.value;
+            return (
+              <button
+                key={cat.value}
+                onClick={() => setCategoryFilter(cat.value)}
+                className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  active
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-card border border-border text-foreground hover:bg-muted"
+                }`}
+              >
+                {cat.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Active filter chips + sort */}
+        <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
+          <div className="flex items-center gap-2 flex-wrap">
+            {activeBadges.includes("bestseller") && (
+              <button onClick={() => toggleBadge("bestseller")} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-light text-primary text-xs font-medium border border-primary/20">
+                Bestseller
+                <X className="w-3 h-3" />
+              </button>
+            )}
+            {activeBadges.includes("new") && (
+              <button onClick={() => toggleBadge("new")} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-light text-primary text-xs font-medium border border-primary/20">
+                Nuevo
+                <X className="w-3 h-3" />
+              </button>
+            )}
+            {activeBadges.includes("discount") && (
+              <button onClick={() => toggleBadge("discount")} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-light text-primary text-xs font-medium border border-primary/20">
+                En oferta
+                <X className="w-3 h-3" />
+              </button>
+            )}
+            {hasActiveFilters && (
+              <button onClick={clearAll} className="text-xs text-muted-foreground hover:text-foreground underline">
+                Limpiar todo
+              </button>
+            )}
+          </div>
+          <Select value={priceFilter} onValueChange={setPriceFilter}>
+            <SelectTrigger className="w-full sm:w-[200px] h-10">
+              <SelectValue placeholder="Rango de precio" />
             </SelectTrigger>
             <SelectContent>
-              {categories.map(cat => (
-                <SelectItem key={cat.value} value={cat.value}>
-                  {cat.label}
+              {PRICE_BUCKETS.map((bucket) => (
+                <SelectItem key={bucket.value} value={bucket.value}>
+                  {bucket.label}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
+        </div>
 
+        {/* Toolbar second row: badges + sort */}
+        <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-muted-foreground">Filtrar:</span>
+            <button
+              onClick={() => toggleBadge("bestseller")}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                activeBadges.includes("bestseller")
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-card border-border text-foreground hover:bg-muted"
+              }`}
+            >
+              Más vendidos
+            </button>
+            <button
+              onClick={() => toggleBadge("new")}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                activeBadges.includes("new")
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-card border-border text-foreground hover:bg-muted"
+              }`}
+            >
+              Novedades
+            </button>
+            <button
+              onClick={() => toggleBadge("discount")}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                activeBadges.includes("discount")
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-card border-border text-foreground hover:bg-muted"
+              }`}
+            >
+              En oferta
+            </button>
+          </div>
           <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="w-full sm:w-[220px] h-11">
+            <SelectTrigger className="w-full sm:w-[200px] h-10">
               <SelectValue placeholder="Ordenar por" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="default">Predeterminado</SelectItem>
+              <SelectItem value="default">Destacados</SelectItem>
               <SelectItem value="price-asc">Precio: Menor a mayor</SelectItem>
               <SelectItem value="price-desc">Precio: Mayor a menor</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
+        {/* Result count */}
+        <p className="text-sm text-muted-foreground mb-4">
+          {loading ? "Cargando..." : `${filteredProducts.length} producto${filteredProducts.length !== 1 ? "s" : ""}`}
+        </p>
+
         {/* Products Grid */}
-        {loading ? <div className="py-20 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+        {loading ? (
+          <div className="py-20 text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto" />
             <p className="mt-4 text-muted-foreground">Cargando productos...</p>
-          </div> : filteredProducts.length === 0 ? <div className="py-20 text-center">
+          </div>
+        ) : filteredProducts.length === 0 ? (
+          <div className="py-20 text-center">
             <ShoppingBag className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-2xl font-bold mb-2">No hay productos</h3>
-            <p className="text-muted-foreground">Estamos preparando nuestro catálogo</p>
-          </div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-            {filteredProducts.map(product => <ProductCard key={product.node.id} product={product} />)}
-          </div>}
+            <p className="text-muted-foreground">Prueba a quitar algunos filtros.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.node.id} product={product} />
+            ))}
+          </div>
+        )}
       </div>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
 export default Products;
