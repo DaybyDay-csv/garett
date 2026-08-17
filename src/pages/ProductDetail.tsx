@@ -37,6 +37,7 @@ import { KlarnaWidget } from "@/components/KlarnaWidget";
 import { trackProductView, trackAddToCart } from "@/hooks/usePageTracking";
 import { addToRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { RecentlyViewed } from "@/components/RecentlyViewed";
+import { BundlePicker } from "@/components/BundlePicker";
 const ProductDetail = () => {
   const {
     handle
@@ -856,6 +857,11 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* T37 — Bundle Picker: 3 packs con descuento */}
+      <div className="container">
+        <BundlePicker currentProductHandle={node.handle} currentProductPrice={priceInfo.discountedPrice} />
       </div>
 
       {/* Brand Story / Mission Block (Report: Element 09) */}
