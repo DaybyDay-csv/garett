@@ -1,10 +1,13 @@
-// Shopify API Configuration
+// Shopify API Configuration (tienda offline — conservada como referencia)
 export const SHOPIFY_API_VERSION = '2025-07';
 export const SHOPIFY_STORE_PERMANENT_DOMAIN = 'garett-connect-shop-w1cxe.myshopify.com';
 export const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
 export const SHOPIFY_STOREFRONT_TOKEN = 'a85fa80606d59d56da27fc9c3f2075b3';
 
-// TypeScript Interfaces
+// La tienda Shopify está offline (plan no activo).
+// El catálogo vive ahora en src/lib/catalog.ts (datos locales).
+// Este módulo mantiene la interfaz para no romper componentes.
+import { LOCAL_PRODUCTS, LOCAL_PRODUCTS_BY_HANDLE } from './catalog';
 export interface ShopifyProduct {
   node: {
     id: string;
@@ -55,162 +58,37 @@ export interface ShopifyProduct {
   };
 }
 
-// Storefront API helper
-export async function storefrontApiRequest(query: string, variables: any = {}) {
-  const response = await fetch(SHOPIFY_STOREFRONT_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN
-    },
-    body: JSON.stringify({
-      query,
-      variables,
-    }),
-  });
-
-  if (response.status === 402) {
-    throw new Error('Shopify API access requires an active billing plan');
-  }
-
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-
-  const data = await response.json();
-  
-  if (data.errors) {
-    throw new Error(`Error calling Shopify: ${data.errors.map((e: any) => e.message).join(', ')}`);
-  }
-
-  return data;
-}
-
-// Fetch Products Query
-export const STOREFRONT_PRODUCTS_QUERY = `
-  query GetProducts($first: Int!, $query: String) {
-    products(first: $first, query: $query) {
-      edges {
-        node {
-          id
-          title
-          description
-          handle
-          tags
-          productType
-          priceRange {
-            minVariantPrice {
-              amount
-              currencyCode
-            }
-          }
-          images(first: 15) {
-            edges {
-              node {
-                url
-                altText
-              }
-            }
-          }
-          variants(first: 10) {
-            edges {
-              node {
-                id
-                title
-                price {
-                  amount
-                  currencyCode
-                }
-                compareAtPrice {
-                  amount
-                  currencyCode
-                }
-                availableForSale
-                selectedOptions {
-                  name
-                  value
-                }
-              }
-            }
-          }
-          options {
-            name
-            values
-          }
-        }
-      }
-    }
-  }
-`;
-
-// Fetch Products
+// Fetch Products (local catalog)
 export async function fetchProducts(first: number = 50, query?: string): Promise<ShopifyProduct[]> {
-  const data = await storefrontApiRequest(STOREFRONT_PRODUCTS_QUERY, { first, query });
-  return data.data.products.edges;
-}
+  let products = LOCAL_PRODUCTS;
 
-// Cart Create Mutation with Discount Codes
-export const CART_CREATE_MUTATION = `
-  mutation cartCreate($input: CartInput!) {
-    cartCreate(input: $input) {
-      cart {
-        id
-        checkoutUrl
-        totalQuantity
-        cost {
-          totalAmount {
-            amount
-            currencyCode
-          }
-          subtotalAmount {
-            amount
-            currencyCode
-          }
+  // Apply Shopify-style query filter (e.g. "product_type:Plancha OR title:AeroGlow")
+  if (query) {
+    const normalized = query.toLowerCase();
+    products = products.filter((p) => {
+      const node = p.node;
+      const conditions = normalized.split(/\s+or\s+/i);
+      return conditions.some((cond) => {
+        const m = cond.trim().match(/^([a-z_]+):(.+)$/);
+        if (m) {
+          const [, field, value] = m;
+          const v = value.toLowerCase();
+          if (field === 'product_type' || field === 'type') return node.productType.toLowerCase().includes(v);
+          if (field === 'title') return node.title.toLowerCase().includes(v);
+          if (field === 'tag') return node.tags.some((t) => t.toLowerCase().includes(v));
+          return false;
         }
-        discountCodes {
-          code
-          applicable
-        }
-        lines(first: 100) {
-          edges {
-            node {
-              id
-              quantity
-              cost {
-                totalAmount {
-                  amount
-                  currencyCode
-                }
-              }
-              merchandise {
-                ... on ProductVariant {
-                  id
-                  title
-                  price {
-                    amount
-                    currencyCode
-                  }
-                  product {
-                    title
-                    handle
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      userErrors {
-        field
-        message
-      }
-    }
+        return node.title.toLowerCase().includes(cond.trim());
+      });
+    });
   }
-`;
+
+  return products.slice(0, first);
+}
 
 // GWP Product Configuration
-export const GWP_PRODUCT_ID = 'gid://shopify/Product/14828986794347';
-export const GWP_VARIANT_ID = 'gid://shopify/ProductVariant/52558159380843';
+export const GWP_PRODUCT_ID = 'gid://local/Product/gwp-hairband';
+export const GWP_VARIANT_ID = 'local://gwp-hairband/variant/0';
 export const GWP_THRESHOLD = 70; // €70 threshold
 export const GWP_PRODUCT_TITLE = 'Banda de Pelo Premium Garett - Special BF';
 
@@ -219,58 +97,16 @@ export const isGWPProduct = (product: ShopifyProduct): boolean => {
   return product.node.title === GWP_PRODUCT_TITLE || product.node.id === GWP_PRODUCT_ID;
 };
 
-// Fetch GWP Product
+// Fetch GWP Product (local catalog)
 export async function fetchGWPProduct(): Promise<ShopifyProduct | null> {
-  try {
-    const data = await storefrontApiRequest(STOREFRONT_PRODUCTS_QUERY, { 
-      first: 1, 
-      query: 'title:"Banda de Pelo Premium Garett - Special BF"' 
-    });
-    return data.data.products.edges[0] || null;
-  } catch (error) {
-    console.error('Failed to fetch GWP product:', error);
-    return null;
-  }
+  return LOCAL_PRODUCTS_BY_HANDLE['gwp-hairband'] ?? null;
 }
 
-// Create Checkout with Discount Codes
+// Create Checkout (Stripe pending — throws for now)
 export async function createStorefrontCheckout(
   items: Array<{ variantId: string; quantity: number }>,
   discountCodes?: string[]
 ): Promise<string> {
-  const lines = items.map(item => ({
-    quantity: item.quantity,
-    merchandiseId: item.variantId,
-  }));
-
-  const input: any = { lines };
-  
-  // Add discount codes if provided
-  if (discountCodes && discountCodes.length > 0) {
-    input.discountCodes = discountCodes;
-  }
-
-  const cartData = await storefrontApiRequest(CART_CREATE_MUTATION, {
-    input,
-  });
-
-  if (cartData.data.cartCreate.userErrors.length > 0) {
-    throw new Error(`Cart creation failed: ${cartData.data.cartCreate.userErrors.map((e: any) => e.message).join(', ')}`);
-  }
-
-  const cart = cartData.data.cartCreate.cart;
-  
-  if (!cart.checkoutUrl) {
-    throw new Error('No checkout URL returned from Shopify');
-  }
-
-  const url = new URL(cart.checkoutUrl);
-  url.searchParams.set('channel', 'online_store');
-  
-  // Log discount application status
-  if (cart.discountCodes && cart.discountCodes.length > 0) {
-    console.log('Discount codes applied:', cart.discountCodes);
-  }
-  
-  return url.toString();
+  console.log('Checkout requested:', { items, discountCodes });
+  throw new Error('El checkout con Stripe aún no está configurado. Próximamente.');
 }
