@@ -1,14 +1,18 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { TrustBadges } from "@/components/TrustBadges";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Sparkles } from "lucide-react";
+import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Sparkles, Truck, ArrowRight } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { KlarnaWidget } from "@/components/KlarnaWidget";
 import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { trackBeginCheckout, trackViewCart, trackRemoveFromCart } from "@/hooks/usePageTracking";
+import { Link } from "react-router-dom";
+
+const FREE_SHIPPING_THRESHOLD = 49;
 
 // Imágenes de fallback para bundles (primer producto del pack)
 const BUNDLE_FALLBACK_IMAGES: Record<string, string> = {
@@ -147,7 +151,17 @@ export const CartDrawer = () => {
       
       <SheetContent className="w-full sm:max-w-lg flex flex-col h-full">
         <SheetHeader className="flex-shrink-0">
-          <SheetTitle>Carrito</SheetTitle>
+          <div className="flex items-center justify-between gap-2">
+            <SheetTitle>Carrito</SheetTitle>
+            {items.filter(i => !i.isGWP).length > 0 && (
+              <Button asChild variant="ghost" size="sm" className="text-xs" onClick={() => setIsOpen(false)}>
+                <Link to="/productos">
+                  <ArrowRight className="w-3 h-3 mr-1" />
+                  Sigue comprando
+                </Link>
+              </Button>
+            )}
+          </div>
           <SheetDescription>
             {totalItems === 0 ? "Tu carrito está vacío" : `${totalItems} producto${totalItems !== 1 ? 's' : ''} en tu carrito`}
           </SheetDescription>
@@ -247,6 +261,31 @@ export const CartDrawer = () => {
               </div>
               
               <div className="flex-shrink-0 space-y-3 pt-3 border-t bg-background mt-3">
+                {/* Free Shipping Progress */}
+                {(() => {
+                  const remaining = Math.max(FREE_SHIPPING_THRESHOLD - subtotalWithDiscount, 0);
+                  const progressPercent = Math.min((subtotalWithDiscount / FREE_SHIPPING_THRESHOLD) * 100, 100);
+                  const unlocked = subtotalWithDiscount >= FREE_SHIPPING_THRESHOLD;
+                  return (
+                    <div className={`rounded-lg p-3 border ${unlocked ? 'bg-primary-light border-primary/20' : 'bg-muted border-border'}`}>
+                      <div className="flex items-center gap-2 text-sm font-medium">
+                        <Truck className={`w-4 h-4 flex-shrink-0 ${unlocked ? 'text-primary' : 'text-muted-foreground'}`} />
+                        {unlocked ? (
+                          <span className="text-foreground">¡Envío gratis desbloqueado!</span>
+                        ) : (
+                          <span className="text-foreground">
+                            Te faltan <span className="font-bold text-primary">€{remaining.toFixed(2)}</span> para envío gratis
+                          </span>
+                        )}
+                      </div>
+                      <Progress value={progressPercent} className="h-1.5 mt-2" />
+                      <p className="text-[10px] text-muted-foreground mt-1.5">
+                        Envío gratis en pedidos +{FREE_SHIPPING_THRESHOLD}€ en Península
+                      </p>
+                    </div>
+                  );
+                })()}
+
                 {/* Price Breakdown */}
                 <div className="space-y-1.5 text-sm">
                   {/* LED Launch discount */}
