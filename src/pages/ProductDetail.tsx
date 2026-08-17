@@ -440,6 +440,12 @@ const ProductDetail = () => {
                   <Shield className="w-3 h-3 text-foreground" />
                   Garantía 2 años
                 </Badge>
+                {variant?.availableForSale && (
+                  <Badge variant="outline" className="gap-1 text-sm border-green-600/40 text-green-700 bg-green-50">
+                    <Check className="w-3 h-3 text-green-700" />
+                    En stock
+                  </Badge>
+                )}
               </div>
               
               <h1 className="text-3xl md:text-4xl font-semibold mb-5 md:mb-4 tracking-tight leading-tight text-foreground">
