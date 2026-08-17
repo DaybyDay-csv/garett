@@ -8,15 +8,6 @@ import { ShopifyProduct } from "./shopify";
 import aeroglowDualImg from "@/assets/aeroglow-dual.png";
 import aeroglowHeroImg from "@/assets/aeroglow-hero.png";
 import aeroglowIonImg from "@/assets/aeroglow-ion-tech.png";
-import manoplaLed1Img from "@/assets/products/manopla-led-1.png";
-import manoplaLed2Img from "@/assets/products/manopla-led-2.png";
-import manoplaLed3Img from "@/assets/products/manopla-led-3.png";
-import manoplaLed4Img from "@/assets/products/manopla-led-4.png";
-import mascaraLed1Img from "@/assets/products/mascara-led-1.png";
-import mascaraLed2Img from "@/assets/products/mascara-led-2.png";
-import mascaraLed3Img from "@/assets/products/mascara-led-3.png";
-import mascaraLed4Img from "@/assets/products/mascara-led-4.jpg";
-import mascaraLed5Img from "@/assets/products/mascara-led-5.jpg";
 import gwpHeadbandImg from "@/assets/gwp-headband.png";
 import catFacialImg from "@/assets/category-masajeadores-faciales.webp";
 import catLimpiezaImg from "@/assets/category-limpieza-facial.webp";
@@ -28,19 +19,15 @@ import catLEDImg from "@/assets/category-terapia-luz-led.jpg";
 import catAccessoriesImg from "@/assets/category-accessories.jpg";
 import catSmartImg from "@/assets/category-smartwatches.jpg";
 
+const productImgModules = import.meta.glob(
+  "@/assets/products/*.{jpg,png}",
+  { eager: true, query: "?url", import: "default" },
+) as Record<string, string>;
+
 const IMG = {
   aeroglowDual: aeroglowDualImg,
   aeroglowHero: aeroglowHeroImg,
   aeroglowIon: aeroglowIonImg,
-  manoplaLed1: manoplaLed1Img,
-  manoplaLed2: manoplaLed2Img,
-  manoplaLed3: manoplaLed3Img,
-  manoplaLed4: manoplaLed4Img,
-  mascaraLed1: mascaraLed1Img,
-  mascaraLed2: mascaraLed2Img,
-  mascaraLed3: mascaraLed3Img,
-  mascaraLed4: mascaraLed4Img,
-  mascaraLed5: mascaraLed5Img,
   gwpHeadband: gwpHeadbandImg,
   catFacial: catFacialImg,
   catLimpieza: catLimpiezaImg,
@@ -52,6 +39,10 @@ const IMG = {
   catAccessories: catAccessoriesImg,
   catSmart: catSmartImg,
 };
+
+function photo(...names: string[]): string[] {
+  return names.map((n) => productImgModules[`/src/assets/products/${n}`]).filter(Boolean);
+}
 
 interface LocalProductSeed {
   handle: string;
@@ -75,7 +66,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Masajeador facial",
     tags: ["type:device", "category:masajeadores-faciales", "area:eye", "tech:limpieza"],
     price: 56.89,
-    images: [IMG.catFacial],
+    images: photo("fresh-eye-1.jpg", "fresh-eye-2.jpg", "fresh-eye-3.jpg", "fresh-eye-4.jpg", "fresh-eye-5.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -85,7 +76,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Masajeador facial",
     tags: ["type:device", "category:masajeadores-faciales", "area:face", "tech:limpieza"],
     price: null, // PENDIENTE
-    images: [IMG.catFacial],
+    images: photo("lift-skin-1.png", "lift-skin-2.png", "lift-skin-3.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -95,7 +86,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Masajeador facial",
     tags: ["type:device", "category:masajeadores-faciales", "area:face", "new:true"],
     price: null, // PENDIENTE
-    images: [IMG.catFacial],
+    images: photo("lift-skin-pro-1.jpg", "lift-skin-pro-2.jpg", "lift-skin-pro-3.jpg", "lift-skin-pro-4.jpg", "lift-skin-pro-5.jpg", "lift-skin-pro-6.jpg", "lift-skin-pro-7.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -105,7 +96,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Masajeador facial",
     tags: ["type:device", "category:masajeadores-faciales", "area:face", "tech:mesoterapia"],
     price: 86.11,
-    images: [IMG.catFacial],
+    images: photo("pretty-face-1.png", "pretty-face-2.png", "pretty-face-3.png"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -127,7 +118,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Limpieza facial",
     tags: ["type:device", "category:limpieza-facial", "area:face", "tech:limpieza"],
     price: 79.90,
-    images: [IMG.catLimpieza],
+    images: photo("multiclean-1.jpg", "multiclean-2.jpg", "multiclean-3.jpg", "multiclean-4.jpg", "multiclean-5.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -137,7 +128,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Limpieza facial",
     tags: ["type:device", "category:limpieza-facial", "area:face", "tech:limpieza"],
     price: 98.99,
-    images: [IMG.catLimpieza],
+    images: photo("breeze-scrub-1.jpg", "breeze-scrub-2.jpg", "breeze-scrub-3.jpg", "breeze-scrub-4.jpg", "breeze-scrub-5.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -147,7 +138,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Limpieza facial",
     tags: ["type:device", "category:limpieza-facial", "area:face", "tech:limpieza"],
     price: null, // PENDIENTE
-    images: [IMG.catLimpieza],
+    images: photo("refresh-scrub-1.jpg", "refresh-scrub-2.jpg", "refresh-scrub-3.jpg", "refresh-scrub-4.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
 
@@ -159,7 +150,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Mesoterapia",
     tags: ["type:device", "category:mesoterapia", "area:face", "tech:mesoterapia"],
     price: null, // PENDIENTE (Calm Skin + Cellu-Body = 236)
-    images: [IMG.catMeso],
+    images: photo("calm-skin-1.jpg", "calm-skin-2.jpg", "calm-skin-3.jpg", "calm-skin-4.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -169,7 +160,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Mesoterapia",
     tags: ["type:device", "category:mesoterapia", "area:face", "tech:mesoterapia"],
     price: 169.10,
-    images: [IMG.catMeso],
+    images: photo("fresh-skin-pro-1.jpg", "fresh-skin-pro-2.jpg", "fresh-skin-pro-3.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -179,7 +170,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Mesoterapia",
     tags: ["type:device", "category:mesoterapia", "area:face", "tech:mesoterapia"],
     price: null, // PENDIENTE
-    images: [IMG.catMeso],
+    images: photo("bright-skin-1.jpg", "bright-skin-2.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -189,7 +180,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Mesoterapia",
     tags: ["type:device", "category:mesoterapia", "area:face", "tech:mesoterapia"],
     price: 59.01,
-    images: [IMG.catMeso],
+    images: photo("serum-skin-1.jpg", "serum-skin-2.jpg", "serum-skin-3.jpg", "serum-skin-4.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
 
@@ -201,7 +192,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Corporal",
     tags: ["type:device", "category:corporales", "area:body"],
     price: null, // PENDIENTE (Calm Skin + Cellu-Body = 236)
-    images: [IMG.catCorporal],
+    images: photo("cellu-body-1.jpg", "cellu-body-2.jpg", "cellu-body-3.jpg", "cellu-body-4.jpg", "cellu-body-5.jpg", "cellu-body-6.jpg", "cellu-body-7.jpg", "cellu-body-8.jpg", "cellu-body-9.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -211,7 +202,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Corporal",
     tags: ["type:device", "category:corporales", "area:body"],
     price: null, // PENDIENTE
-    images: [IMG.catCorporal],
+    images: photo("cuerpo-perfecto-1.jpg", "cuerpo-perfecto-2.jpg", "cuerpo-perfecto-3.jpg", "cuerpo-perfecto-4.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -221,7 +212,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Capilar",
     tags: ["type:device", "category:capilar", "category:corporales", "area:body"],
     price: null, // PENDIENTE
-    images: [IMG.catCapilar],
+    images: photo("multi-care-brush-1.jpg", "multi-care-brush-2.jpg", "multi-care-brush-3.jpg", "multi-care-brush-4.jpg", "multi-care-brush-5.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
 
@@ -233,7 +224,7 @@ const seeds: LocalProductSeed[] = [
     productType: "Capilar",
     tags: ["type:device", "category:capilar", "area:hair"],
     price: null, // PENDIENTE
-    images: [IMG.catCapilar],
+    images: photo("curly-1.jpg", "curly-2.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -244,7 +235,7 @@ const seeds: LocalProductSeed[] = [
     tags: ["type:device", "category:capilar", "area:hair", "new:true", "launch:bf2025"],
     price: null, // PENDIENTE
     compareAtPrice: null,
-    images: [IMG.aeroglowHero, IMG.aeroglowDual, IMG.aeroglowIon],
+    images: photo("aeroglow-1.jpg", "aeroglow-2.jpg", "aeroglow-3.jpg", "aeroglow-4.jpg", "aeroglow-5.jpg", "aeroglow-6.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
 
@@ -256,7 +247,7 @@ const seeds: LocalProductSeed[] = [
     productType: "IPL",
     tags: ["type:device", "category:ipl", "area:body", "tech:ipl", "bestseller:true"],
     price: null, // PENDIENTE
-    images: [IMG.catIPL],
+    images: photo("ipl-flash-pro-1.jpg", "ipl-flash-pro-2.jpg", "ipl-flash-pro-3.jpg", "ipl-flash-pro-4.jpg", "ipl-flash-pro-5.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -266,7 +257,7 @@ const seeds: LocalProductSeed[] = [
     productType: "IPL",
     tags: ["type:device", "category:ipl", "area:body", "tech:ipl"],
     price: null, // PENDIENTE
-    images: [IMG.catIPL],
+    images: photo("ipl-flash-dorada-1.jpg", "ipl-flash-dorada-2.jpg", "ipl-flash-dorada-3.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -276,7 +267,7 @@ const seeds: LocalProductSeed[] = [
     productType: "IPL",
     tags: ["type:device", "category:ipl", "area:body", "tech:ipl"],
     price: null, // PENDIENTE
-    images: [IMG.catIPL],
+    images: photo("ipl-plateada-1.jpg", "ipl-plateada-2.jpg", "ipl-plateada-3.jpg", "ipl-plateada-4.jpg", "ipl-plateada-5.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -286,7 +277,7 @@ const seeds: LocalProductSeed[] = [
     productType: "IPL",
     tags: ["type:device", "category:ipl", "area:body", "tech:ipl"],
     price: null, // PENDIENTE
-    images: [IMG.catIPL],
+    images: photo("cool-1.jpg", "cool-2.jpg", "cool-3.jpg", "cool-4.jpg", "cool-5.jpg", "cool-6.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
 
@@ -298,7 +289,7 @@ const seeds: LocalProductSeed[] = [
     productType: "LED",
     tags: ["type:device", "category:terapia-luz-led", "area:face"],
     price: 224.00,
-    images: [IMG.manoplaLed1, IMG.manoplaLed2, IMG.manoplaLed3, IMG.manoplaLed4],
+    images: photo("manopla-led-1.png", "manopla-led-2.png", "manopla-led-3.png", "manopla-led-4.png"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -308,7 +299,7 @@ const seeds: LocalProductSeed[] = [
     productType: "LED",
     tags: ["type:device", "category:terapia-luz-led", "area:face"],
     price: null, // PENDIENTE
-    images: [IMG.mascaraLed1, IMG.mascaraLed2, IMG.mascaraLed3, IMG.mascaraLed4, IMG.mascaraLed5],
+    images: photo("mascara-led-1.png", "mascara-led-2.png", "mascara-led-3.png", "mascara-led-4.jpg", "mascara-led-5.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
 
