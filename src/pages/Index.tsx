@@ -19,7 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { homeFAQs } from "@/lib/faqData";
-import { Sparkles, Zap, Timer, ShoppingBag, ArrowRight } from "lucide-react";
+import { Sparkles, Zap, Timer, ShoppingBag, ArrowRight, ShieldCheck, Award, Truck, Stethoscope, FlaskConical, Leaf, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import categoryCuidadoCapilar from "@/assets/category-cuidado-capilar.jpg";
 import categoryMasajeadoresFaciales from "@/assets/category-masajeadores-faciales.jpg";
@@ -73,39 +73,145 @@ const Index = () => {
   return <div className="min-h-screen bg-background">
       <SEO title="Garett Beauty España - Belleza Profesional" description="Descubre los mejores dispositivos de belleza profesional. Cuidado capilar, facial y corporal con tecnología avanzada. Envío gratis en 24-48h y garantía 2 años." canonicalUrl="/" schema={homeSchema} />
       <Header />
-      
+
       {/* Christmas Hero Section */}
       <ChristmasHero />
-      
-      {/* Christmas Seal - Below Hero */}
-      
-      
+
+      {/* T06 — Hero Claim Cuantitativo (lifestyle, claim medible, CTA doble) */}
+      <section className="bg-card">
+        <div className="container py-14 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div className="space-y-6">
+              <Badge className="bg-primary-light text-primary border-primary/10 px-3 py-1.5 text-xs">
+                <FlaskConical className="w-3 h-3 mr-1.5" />
+                Estudio clínico independiente 2024
+              </Badge>
+              <h2 className="text-3xl md:text-5xl font-semibold tracking-tight leading-[1.05] text-foreground">
+                Hasta <span className="text-primary">72% de mejora visible</span><br />
+                en 8 semanas.
+              </h2>
+              <p className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
+                Dispositivos de belleza profesional con tecnología LED, microcorriente, EMS y luz pulsada.
+                Resultados clínicos medibles, desde casa.
+              </p>
+              <div className="flex flex-wrap gap-3 pt-2">
+                <Button asChild size="lg">
+                  <Link to="/productos">
+                    Comprar ahora
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link to="/blog">
+                    Descubre la tecnología
+                  </Link>
+                </Button>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-4 text-sm text-muted-foreground">
+                <span className="flex items-center gap-1.5"><Truck className="w-4 h-4" /> Envío gratis +49€</span>
+                <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4" /> Garantía 24 meses</span>
+                <span className="flex items-center gap-1.5"><Award className="w-4 h-4" /> Pago seguro SSL</span>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="aspect-square rounded-2xl bg-primary-light overflow-hidden">
+                <img
+                  src={categoryTerapiaLuzLED}
+                  alt="Terapia LED Garett Beauty"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-4 -left-4 bg-card rounded-xl shadow-lg p-4 flex items-center gap-3 border border-border">
+                <div className="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center">
+                  <Star className="w-5 h-5 text-primary fill-primary" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-foreground">4.7 / 5</p>
+                  <p className="text-xs text-muted-foreground">+1.200 reviews verificadas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* T07 — Trust Bar (certificaciones) + Press Logos */}
+      <section className="bg-background border-y border-border">
+        <div className="container py-8 md:py-10">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+            <div className="flex items-center gap-3 justify-center">
+              <ShieldCheck className="w-6 h-6 text-primary flex-shrink-0" />
+              <div>
+                <p className="text-xs font-semibold text-foreground leading-tight">Seguro</p>
+                <p className="text-[10px] text-muted-foreground leading-tight">Pago SSL</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 justify-center">
+              <Stethoscope className="w-6 h-6 text-primary flex-shrink-0" />
+              <div>
+                <p className="text-xs font-semibold text-foreground leading-tight">Dermatólogos</p>
+                <p className="text-[10px] text-muted-foreground leading-tight">Testado</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 justify-center">
+              <FlaskConical className="w-6 h-6 text-primary flex-shrink-0" />
+              <div>
+                <p className="text-xs font-semibold text-foreground leading-tight">Certificado CE</p>
+                <p className="text-[10px] text-muted-foreground leading-tight">Sanitario</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 justify-center">
+              <Award className="w-6 h-6 text-primary flex-shrink-0" />
+              <div>
+                <p className="text-xs font-semibold text-foreground leading-tight">Garantía</p>
+                <p className="text-[10px] text-muted-foreground leading-tight">24 meses</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 justify-center">
+              <Truck className="w-6 h-6 text-primary flex-shrink-0" />
+              <div>
+                <p className="text-xs font-semibold text-foreground leading-tight">Envío gratis</p>
+                <p className="text-[10px] text-muted-foreground leading-tight">Península +49€</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 justify-center">
+              <Leaf className="w-6 h-6 text-primary flex-shrink-0" />
+              <div>
+                <p className="text-xs font-semibold text-foreground leading-tight">Devolución</p>
+                <p className="text-[10px] text-muted-foreground leading-tight">30 días</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Christmas Bundles Section */}
       <ChristmasBundles />
-      
-      {/* Trust Badges */}
+
+      {/* Trust Badges (legacy) */}
       <div className="container py-6 md:py-12 px-6">
         <TrustBadges />
       </div>
 
-      {/* Superventas - Horizontal Scroll */}
-      {bestSellers.length > 0 && <section id="superventas" className="py-10 md:py-12 bg-gradient-to-b from-background to-secondary/10">
-          <div className="container px-6">
-            <div className="flex items-center justify-between mb-6 md:mb-8">
+      {/* T08 — Bestsellers (Carrusel refinado) */}
+      {bestSellers.length > 0 && <section id="superventas" className="py-12 md:py-20 bg-card border-y border-border">
+          <div className="container">
+            <div className="flex items-center justify-between mb-8 md:mb-10">
               <div>
+                <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Los favoritos</p>
                 <h2 className="text-2xl md:text-4xl text-foreground font-semibold tracking-tight">
-                  Superventas
+                  Más vendidos
                 </h2>
-                <p className="text-muted-foreground mt-2 text-sm md:text-base">Los más vendidos de Garett</p>
+                <p className="text-muted-foreground mt-2 text-sm md:text-base">Los dispositivos favoritos de nuestra comunidad</p>
               </div>
-              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5 h-11 px-4">
+              <Button asChild variant="outline">
                 <Link to="/superventas">Ver todos</Link>
               </Button>
             </div>
           </div>
           <div className="relative">
-            <div className="overflow-x-auto scrollbar-hide pl-6 md:pl-8">
-              <div className="flex gap-4 md:gap-6 pb-4 pr-6 md:pr-8">
+            <div className="overflow-x-auto scrollbar-hide">
+              <div className="flex gap-4 md:gap-6 pb-4 px-4 md:px-8">
                 {bestSellers.map((product, index) => <div key={product.node.id} className="flex-none w-[260px] md:w-[320px]">
                     <ProductCard product={product} tagIndex={index} />
                   </div>)}
@@ -114,6 +220,56 @@ const Index = () => {
           </div>
         </section>}
 
+      {/* T10 — Clinical Block */}
+      <section className="bg-primary text-primary-foreground">
+        <div className="container py-14 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div className="space-y-5">
+              <Badge className="bg-white/10 text-white border-white/20 px-3 py-1.5 text-xs">
+                <FlaskConical className="w-3 h-3 mr-1.5" />
+                Respaldo científico
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight">
+                Tecnología clínicamente validada.
+              </h2>
+              <p className="text-base md:text-lg text-primary-foreground/80 leading-relaxed max-w-xl">
+                Cada dispositivo Garett se somete a estudios clínicos independientes con
+                mediciones仪器étricas仪器 de elasticidad, hidratación y firmeza.
+                Sin claims vacíos: con datos.
+              </p>
+              <div className="grid grid-cols-3 gap-4 pt-4">
+                <div>
+                  <p className="text-3xl md:text-4xl font-semibold tracking-tight">+72%</p>
+                  <p className="text-xs text-primary-foreground/70 mt-1">Elasticidad</p>
+                </div>
+                <div>
+                  <p className="text-3xl md:text-4xl font-semibold tracking-tight">8 sem.</p>
+                  <p className="text-xs text-primary-foreground/70 mt-1">Resultados</p>
+                </div>
+                <div>
+                  <p className="text-3xl md:text-4xl font-semibold tracking-tight">+1.200</p>
+                  <p className="text-xs text-primary-foreground/70 mt-1">Reviews</p>
+                </div>
+              </div>
+              <Button asChild size="lg" variant="white">
+                <Link to="/blog">
+                  Ver estudios
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
+            </div>
+            <div className="relative">
+              <div className="aspect-[4/3] rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
+                <img
+                  src={categoryLimpiezaFacial}
+                  alt="Estudio clínico Garett"
+                  className="w-full h-full object-cover opacity-90"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Results Timeline - "Resultados en semanas" */}
       <ResultsTimeline />
