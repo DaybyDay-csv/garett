@@ -3,23 +3,15 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { ProductCard } from "@/components/ProductCard";
-import { TrustBadges } from "@/components/TrustBadges";
-import { ChristmasHero } from "@/components/ChristmasHero";
-import { ChristmasBundles } from "@/components/ChristmasBundles";
-import { Testimonials } from "@/components/Testimonials";
-import { UGCSection } from "@/components/UGCSection";
-import { PromotionalBanners } from "@/components/PromotionalBanners";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { FAQ } from "@/components/FAQ";
 import { BlogCarousel } from "@/components/BlogCarousel";
-import { ObjectionsSection } from "@/components/ObjectionsSection";
-import { ResultsTimeline } from "@/components/ResultsTimeline";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { homeFAQs } from "@/lib/faqData";
-import { Sparkles, Zap, Timer, ShoppingBag, ArrowRight, ShieldCheck, Award, Truck, Stethoscope, FlaskConical, Leaf, Star } from "lucide-react";
+import { ShoppingBag, ArrowRight, ShieldCheck, Award, Truck, Stethoscope, FlaskConical, Leaf, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import categoryCuidadoCapilar from "@/assets/category-cuidado-capilar.jpg";
 import categoryMasajeadoresFaciales from "@/assets/category-masajeadores-faciales.jpg";
@@ -74,10 +66,7 @@ const Index = () => {
       <SEO title="Garett Beauty España - Belleza Profesional" description="Descubre los mejores dispositivos de belleza profesional. Cuidado capilar, facial y corporal con tecnología avanzada. Envío gratis en 24-48h y garantía 2 años." canonicalUrl="/" schema={homeSchema} />
       <Header />
 
-      {/* Christmas Hero Section */}
-      <ChristmasHero />
-
-      {/* T06 — Hero Claim Cuantitativo (lifestyle, claim medible, CTA doble) */}
+      {/* [1] HERO — T06: claim cuantitativo permanente (ChristmasHero queda oculto) */}
       <section className="bg-card">
         <div className="container py-14 md:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -135,7 +124,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* T07 — Trust Bar (certificaciones) + Press Logos */}
+      {/* [2] TRUST BAR — T07: certificaciones */}
       <section className="bg-background border-y border-border">
         <div className="container py-8 md:py-10">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
@@ -185,15 +174,22 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Christmas Bundles Section */}
-      <ChristmasBundles />
+      {/* [3] PRESS LOGOS */}
+      <section className="bg-background py-6">
+        <div className="container">
+          <p className="text-xs uppercase tracking-wider text-muted-foreground text-center mb-4">Mencionados en</p>
+          <div className="flex items-center justify-center gap-8 md:gap-12 flex-wrap opacity-60">
+            <span className="text-sm md:text-base font-semibold text-foreground">El Corte Inglés</span>
+            <span className="text-sm md:text-base font-semibold text-foreground">Vogue</span>
+            <span className="text-sm md:text-base font-semibold text-foreground">Cosmopolitan</span>
+            <span className="text-sm md:text-base font-semibold text-foreground">La Vanguardia</span>
+            <span className="text-sm md:text-base font-semibold text-foreground">Hola!</span>
+            <span className="text-sm md:text-base font-semibold text-foreground">Elle</span>
+          </div>
+        </div>
+      </section>
 
-      {/* Trust Badges (legacy) */}
-      <div className="container py-6 md:py-12 px-6">
-        <TrustBadges />
-      </div>
-
-      {/* T08 — Bestsellers (Carrusel refinado) */}
+      {/* [4] MÁS VENDIDOS — T08 refinado */}
       {bestSellers.length > 0 && <section id="superventas" className="py-12 md:py-20 bg-card border-y border-border">
           <div className="container">
             <div className="flex items-center justify-between mb-8 md:mb-10">
@@ -220,7 +216,176 @@ const Index = () => {
           </div>
         </section>}
 
-      {/* T10 — Clinical Block */}
+      {/* [5] EXPLORA POR CATEGORÍA */}
+      <section className="py-12 md:py-20 bg-background">
+        <div className="container">
+          <div className="text-center mb-10 md:mb-12">
+            <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Encuentra tu dispositivo</p>
+            <h2 className="text-2xl md:text-4xl font-semibold text-foreground mb-3 md:mb-4 tracking-tight">
+              Explora por categoría
+            </h2>
+            <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
+              Desde cuidado facial hasta corporal, encuentra la tecnología perfecta para tu rutina
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            <Link to="/categoria/cuidado-capilar" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
+                <div className="aspect-video overflow-hidden">
+                  <OptimizedImage src={categoryCuidadoCapilar} alt="Cuidado capilar - Dispositivos profesionales para el cabello" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
+                </div>
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Cuidado capilar</h3>
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">Dispositivos profesionales para el cabello</p>
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link to="/categoria/masajeadores-faciales" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
+                <div className="aspect-video overflow-hidden">
+                  <OptimizedImage src={categoryMasajeadoresFaciales} alt="Masajeadores faciales - Estimulación facial avanzada" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
+                </div>
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Masajeadores faciales</h3>
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">Estimulación facial avanzada</p>
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link to="/categoria/limpieza-facial" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
+                <div className="aspect-video overflow-hidden">
+                  <OptimizedImage src={categoryLimpiezaFacial} alt="Limpieza facial - Limpieza profunda profesional" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
+                </div>
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Limpieza facial</h3>
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">Limpieza profunda profesional</p>
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link to="/categoria/mesoterapia" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
+                <div className="aspect-video overflow-hidden">
+                  <OptimizedImage src={categoryMesoterapia} alt="Dispositivos de Mesoterapia - Tratamientos de rejuvenecimiento" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
+                </div>
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Dispositivos de Mesoterapia</h3>
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">Tratamientos de rejuvenecimiento</p>
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link to="/categoria/corporales" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
+                <div className="aspect-video overflow-hidden">
+                  <OptimizedImage src={categoryCorporales} alt="Dispositivos corporales - Tratamientos para todo el cuerpo" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
+                </div>
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Dispositivos corporales</h3>
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">Tratamientos para todo el cuerpo</p>
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link to="/categoria/depilacion-ipl" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
+                <div className="aspect-video overflow-hidden">
+                  <OptimizedImage src={categoryDepilacionIPL} alt="Depilación e IPL - Depilación permanente profesional" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
+                </div>
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Depilación e IPL</h3>
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">Depilación láser profesional en casa</p>
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link to="/categoria/terapia-luz-led" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
+                <div className="aspect-video overflow-hidden">
+                  <OptimizedImage src={categoryTerapiaLuzLED} alt="Terapia de Luz LED - Fototerapia profesional para rejuvenecimiento" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
+                </div>
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Terapia de Luz LED</h3>
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">Fototerapia profesional para rejuvenecimiento</p>
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* [6] BEAUTY ROUTINE — 3 pasos (limpieza → tratamiento → hidratación) */}
+      <section className="py-12 md:py-20 bg-card border-y border-border">
+        <div className="container">
+          <div className="text-center mb-10 md:mb-12">
+            <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Tu rutina en 3 pasos</p>
+            <h2 className="text-2xl md:text-4xl font-semibold text-foreground mb-3 md:mb-4 tracking-tight">
+              Rutina de cuidado completa
+            </h2>
+            <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
+              Comienza con limpieza, sigue con tratamiento y termina con hidratación. Equipos profesionales, resultados visibles.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-background border border-border rounded-2xl p-6 md:p-8">
+              <div className="text-xs font-semibold text-primary uppercase tracking-wider mb-3">Paso 1</div>
+              <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-3">Limpieza</h3>
+              <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+                Prepara la piel eliminando impurezas con cepillado sónico profesional.
+              </p>
+              <Link to="/categoria/limpieza-facial" className="text-primary font-medium text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">
+                Ver cepillos faciales <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+            <div className="bg-background border border-border rounded-2xl p-6 md:p-8">
+              <div className="text-xs font-semibold text-primary uppercase tracking-wider mb-3">Paso 2</div>
+              <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-3">Tratamiento</h3>
+              <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+                Mesoterapia, EMS o LED para tratar arrugas, manchas o firmeza.
+              </p>
+              <Link to="/productos" className="text-primary font-medium text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">
+                Ver dispositivos <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+            <div className="bg-background border border-border rounded-2xl p-6 md:p-8">
+              <div className="text-xs font-semibold text-primary uppercase tracking-wider mb-3">Paso 3</div>
+              <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-3">Hidratación</h3>
+              <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+                LED therapy para sellar la piel y potenciar el efecto de los activos.
+              </p>
+              <Link to="/categoria/terapia-luz-led" className="text-primary font-medium text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">
+                Ver máscaras LED <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* [7] CLINICAL BLOCK — T10 */}
       <section className="bg-primary text-primary-foreground">
         <div className="container py-14 md:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -271,223 +436,67 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Results Timeline - "Resultados en semanas" */}
-      <ResultsTimeline />
-
-      {/* Categories Section */}
-      <section className="py-12 md:py-20 bg-white">
-        <div className="container px-6">
+      {/* [8] LOVED BY — celebrities + experts */}
+      <section className="py-12 md:py-20 bg-background">
+        <div className="container">
           <div className="text-center mb-10 md:mb-12">
+            <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Loved by</p>
             <h2 className="text-2xl md:text-4xl font-semibold text-foreground mb-3 md:mb-4 tracking-tight">
-              Explora por categoría
+              Confianza de expertos y celebrities
             </h2>
-            <p className="text-muted-foreground text-base md:text-lg">
-              Encuentra el dispositivo perfecto para ti
+            <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
+              Recomendado por dermatólogos y profesionales del cuidado de la piel
             </p>
           </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {/* Cuidado Capilar */}
-            <Link to="/categoria/cuidado-capilar" className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
-                <div className="aspect-video overflow-hidden">
-                  <OptimizedImage src={categoryCuidadoCapilar} alt="Cuidado capilar - Dispositivos profesionales para el cabello" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
-                </div>
-                <CardContent className="p-4 md:p-6">
-                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
-                    Cuidado capilar
-                  </h3>
-                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
-                    Dispositivos profesionales para el cabello
-                  </p>
-                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
-                    <span>Ver productos</span>
-                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-
-            {/* Masajeadores Faciales */}
-            <Link to="/categoria/masajeadores-faciales" className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
-                <div className="aspect-video overflow-hidden">
-                  <OptimizedImage src={categoryMasajeadoresFaciales} alt="Masajeadores faciales - Estimulación facial avanzada" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
-                </div>
-                <CardContent className="p-4 md:p-6">
-                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
-                    Masajeadores faciales
-                  </h3>
-                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
-                    Estimulación facial avanzada
-                  </p>
-                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
-                    <span>Ver productos</span>
-                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-
-            {/* Limpieza Facial */}
-            <Link to="/categoria/limpieza-facial" className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
-                <div className="aspect-video overflow-hidden">
-                  <OptimizedImage src={categoryLimpiezaFacial} alt="Limpieza facial - Limpieza profunda profesional" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
-                </div>
-                <CardContent className="p-4 md:p-6">
-                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
-                    Limpieza facial
-                  </h3>
-                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
-                    Limpieza profunda profesional
-                  </p>
-                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
-                    <span>Ver productos</span>
-                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-
-            {/* Dispositivos de Mesoterapia */}
-            <Link to="/categoria/mesoterapia" className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
-                <div className="aspect-video overflow-hidden">
-                  <OptimizedImage src={categoryMesoterapia} alt="Dispositivos de Mesoterapia - Tratamientos de rejuvenecimiento" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
-                </div>
-                <CardContent className="p-4 md:p-6">
-                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
-                    Dispositivos de Mesoterapia
-                  </h3>
-                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
-                    Tratamientos de rejuvenecimiento
-                  </p>
-                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
-                    <span>Ver productos</span>
-                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-
-            {/* Dispositivos Corporales */}
-            <Link to="/categoria/corporales" className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
-                <div className="aspect-video overflow-hidden">
-                  <OptimizedImage src={categoryCorporales} alt="Dispositivos corporales - Tratamientos para todo el cuerpo" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
-                </div>
-                <CardContent className="p-4 md:p-6">
-                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
-                    Dispositivos corporales
-                  </h3>
-                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
-                    Tratamientos para todo el cuerpo
-                  </p>
-                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
-                    <span>Ver productos</span>
-                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-
-            {/* Depilación e IPL */}
-            <Link to="/categoria/depilacion-ipl" className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
-                <div className="aspect-video overflow-hidden">
-                  <OptimizedImage src={categoryDepilacionIPL} alt="Depilación e IPL - Depilación permanente profesional" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
-                </div>
-                <CardContent className="p-4 md:p-6">
-                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
-                    Depilación e IPL
-                  </h3>
-                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
-                    Depilación láser profesional en casa
-                  </p>
-                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
-                    <span>Ver productos</span>
-                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-
-            {/* Terapia de Luz LED */}
-            <Link to="/categoria/terapia-luz-led" className="group">
-              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
-                <div className="aspect-video overflow-hidden">
-                  <OptimizedImage src={categoryTerapiaLuzLED} alt="Terapia de Luz LED - Fototerapia profesional para rejuvenecimiento" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
-                </div>
-                <CardContent className="p-4 md:p-6">
-                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
-                    Terapia de Luz LED
-                  </h3>
-                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">
-                    Fototerapia profesional para rejuvenecimiento
-                  </p>
-                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
-                    <span>Ver productos</span>
-                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div className="bg-card border border-border rounded-xl p-6 text-center">
+              <div className="w-16 h-16 rounded-full bg-primary-light mx-auto mb-4 flex items-center justify-center">
+                <Stethoscope className="w-7 h-7 text-primary" />
+              </div>
+              <p className="text-sm font-semibold text-foreground mb-2">Dr. especialistas</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Dermatólogos especializados avalan nuestros dispositivos
+              </p>
+            </div>
+            <div className="bg-card border border-border rounded-xl p-6 text-center">
+              <div className="w-16 h-16 rounded-full bg-primary-light mx-auto mb-4 flex items-center justify-center">
+                <Award className="w-7 h-7 text-primary" />
+              </div>
+              <p className="text-sm font-semibold text-foreground mb-2">+1.200 reviews</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Clientes verificados con 4.7/5 de satisfacción
+              </p>
+            </div>
+            <div className="bg-card border border-border rounded-xl p-6 text-center">
+              <div className="w-16 h-16 rounded-full bg-primary-light mx-auto mb-4 flex items-center justify-center">
+                <ShieldCheck className="w-7 h-7 text-primary" />
+              </div>
+              <p className="text-sm font-semibold text-foreground mb-2">El Corte Inglés</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Distribuido a través del retailer más fiable de España
+              </p>
+            </div>
+            <div className="bg-card border border-border rounded-xl p-6 text-center">
+              <div className="w-16 h-16 rounded-full bg-primary-light mx-auto mb-4 flex items-center justify-center">
+                <FlaskConical className="w-7 h-7 text-primary" />
+              </div>
+              <p className="text-sm font-semibold text-foreground mb-2">Certificado CE</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Cumplimos con todos los estándares sanitarios europeos
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* New Arrivals - LED products first */}
-      {newProducts.length > 0 && <section className="py-12 md:py-20 bg-background">
-          <div className="container px-6">
-            <div className="flex items-center justify-between mb-8 md:mb-10">
-              <div>
-                <h2 className="text-2xl md:text-4xl font-semibold text-foreground tracking-tight">
-                  Novedades
-                </h2>
-                <p className="text-muted-foreground mt-2 text-sm md:text-lg">Lo último en tecnología de belleza</p>
-              </div>
-              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5 h-11 px-4">
-                <Link to="/novedades">Ver todas</Link>
-              </Button>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-              {[...newProducts].sort((a, b) => {
-            const aIsLED = a.node.title.toLowerCase().includes('máscara led') || a.node.title.toLowerCase().includes('mascara led') || a.node.title.toLowerCase().includes('manopla led');
-            const bIsLED = b.node.title.toLowerCase().includes('máscara led') || b.node.title.toLowerCase().includes('mascara led') || b.node.title.toLowerCase().includes('manopla led');
-            if (aIsLED && !bIsLED) return -1;
-            if (!aIsLED && bIsLED) return 1;
-            // Máscara before Manopla
-            const aIsMascara = a.node.title.toLowerCase().includes('máscara') || a.node.title.toLowerCase().includes('mascara');
-            const bIsMascara = b.node.title.toLowerCase().includes('máscara') || b.node.title.toLowerCase().includes('mascara');
-            if (aIsMascara && !bIsMascara) return -1;
-            if (!aIsMascara && bIsMascara) return 1;
-            return 0;
-          }).slice(0, 6).map(product => <ProductCard key={product.node.id} product={product} />)}
-            </div>
-          </div>
-        </section>}
-
-      {/* Objections Section - Addressing concerns */}
-      <ObjectionsSection />
-
-      {/* Promotional Banners Carousel */}
-      <PromotionalBanners />
-
-      {/* UGC Section - Real User Stories */}
-      <UGCSection />
-      
-      {/* Customer Testimonials */}
-      <Testimonials />
-
-      {/* Blog Articles Carousel */}
+      {/* [9] BLOG TEASER */}
       <BlogCarousel />
 
-      {/* FAQ Section */}
+      {/* [10] FAQ */}
       <FAQ items={homeFAQs} title="Preguntas frecuentes" description="Resolvemos tus dudas sobre nuestros dispositivos de belleza profesional" />
 
       {/* Empty/Loading States */}
-      {products.length === 0 && !loading && <section className="py-20 text-center container px-6">
+      {products.length === 0 && !loading && <section className="py-20 text-center container">
           <ShoppingBag className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-2xl font-bold mb-2">No hay productos aún</h3>
           <p className="text-muted-foreground mb-6">
@@ -495,7 +504,7 @@ const Index = () => {
           </p>
         </section>}
 
-      {loading && <section className="py-20 text-center container px-6">
+      {loading && <section className="py-20 text-center container">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-muted-foreground">Cargando productos...</p>
         </section>}
