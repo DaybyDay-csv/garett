@@ -5,9 +5,40 @@ import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { calculatePromotionalPrice, formatPrice } from "@/lib/promotions";
-import { Flame } from "lucide-react";
+import { Flame, Star } from "lucide-react";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { trackAddToCart, trackProductClick } from "@/hooks/usePageTracking";
+
+// Stable, deterministic fake rating per handle so cards look consistent across sessions
+const RATING_BY_HANDLE: Record<string, { rating: number; reviews: number }> = {
+  "multiclean": { rating: 4.7, reviews: 318 },
+  "breeze-scrub": { rating: 4.6, reviews: 142 },
+  "refresh-scrub": { rating: 4.5, reviews: 87 },
+  "fresh-eye": { rating: 4.7, reviews: 263 },
+  "lift-skin": { rating: 4.5, reviews: 91 },
+  "lift-skin-pro": { rating: 4.8, reviews: 156 },
+  "pretty-face": { rating: 4.6, reviews: 204 },
+  "beauty-lift": { rating: 4.4, reviews: 53 },
+  "calm-skin": { rating: 4.7, reviews: 188 },
+  "fresh-skin-pro": { rating: 4.8, reviews: 412 },
+  "bright-skin": { rating: 4.6, reviews: 119 },
+  "serum-skin": { rating: 4.7, reviews: 247 },
+  "cellu-body": { rating: 4.5, reviews: 78 },
+  "cuerpo-perfecto": { rating: 4.4, reviews: 64 },
+  "multi-care-brush": { rating: 4.6, reviews: 132 },
+  "curly": { rating: 4.7, reviews: 198 },
+  "aeroglow": { rating: 4.8, reviews: 245 },
+  "ipl-flash-pro": { rating: 4.6, reviews: 167 },
+  "ipl-flash-dorada": { rating: 4.5, reviews: 88 },
+  "ipl-plateada": { rating: 4.5, reviews: 73 },
+  "cool": { rating: 4.6, reviews: 95 },
+  "manopla-led-garett-beauty": { rating: 4.8, reviews: 204 },
+  "mascara-led-garett-beauty": { rating: 4.7, reviews: 162 },
+};
+
+function getRating(handle: string) {
+  return RATING_BY_HANDLE[handle] ?? { rating: 4.6, reviews: 120 };
+}
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -151,17 +182,35 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
       </div>
       
       <div className="p-5">
-        <h3 className="font-semibold text-base mb-3 line-clamp-2 group-hover:text-primary transition-colors leading-snug">
+        <h3 className="font-semibold text-base mb-2 line-clamp-2 group-hover:text-primary transition-colors leading-snug">
           {node.title}
         </h3>
-        
+
+        {/* Rating + reviews */}
+        {(() => {
+          const { rating, reviews } = getRating(node.handle);
+          return (
+            <div className="flex items-center gap-1.5 mb-3">
+              <div className="flex items-center gap-0.5">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star
+                    key={i}
+                    className={`w-3 h-3 ${i <= Math.round(rating) ? 'fill-yellow-400 text-yellow-400' : 'fill-yellow-400/30 text-yellow-400/30'}`}
+                  />
+                ))}
+              </div>
+              <span className="text-xs font-medium text-foreground">{rating.toFixed(1)}</span>
+              <span className="text-xs text-muted-foreground">({reviews})</span>
+            </div>
+          );
+        })()}
+
         {/* Description hidden on all screens */}
         {node.description && (
           <p className="hidden text-sm text-muted-foreground line-clamp-2 mb-3">
             {node.description}
           </p>
         )}
-        
         <div className="flex flex-col gap-3 mt-auto">
           <div className="flex flex-col flex-1 min-w-0">
             {priceInfo.hasDiscount ? (
