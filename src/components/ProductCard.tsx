@@ -5,39 +5,39 @@ import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { calculatePromotionalPrice, formatPrice } from "@/lib/promotions";
-import { Flame, Star } from "lucide-react";
+import { Flame, Star, AlertCircle } from "lucide-react";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { trackAddToCart, trackProductClick } from "@/hooks/usePageTracking";
 
 // Stable, deterministic fake rating per handle so cards look consistent across sessions
-const RATING_BY_HANDLE: Record<string, { rating: number; reviews: number }> = {
-  "multiclean": { rating: 4.7, reviews: 318 },
-  "breeze-scrub": { rating: 4.6, reviews: 142 },
-  "refresh-scrub": { rating: 4.5, reviews: 87 },
-  "fresh-eye": { rating: 4.7, reviews: 263 },
-  "lift-skin": { rating: 4.5, reviews: 91 },
-  "lift-skin-pro": { rating: 4.8, reviews: 156 },
-  "pretty-face": { rating: 4.6, reviews: 204 },
-  "beauty-lift": { rating: 4.4, reviews: 53 },
-  "calm-skin": { rating: 4.7, reviews: 188 },
-  "fresh-skin-pro": { rating: 4.8, reviews: 412 },
-  "bright-skin": { rating: 4.6, reviews: 119 },
-  "serum-skin": { rating: 4.7, reviews: 247 },
-  "cellu-body": { rating: 4.5, reviews: 78 },
-  "cuerpo-perfecto": { rating: 4.4, reviews: 64 },
-  "multi-care-brush": { rating: 4.6, reviews: 132 },
-  "curly": { rating: 4.7, reviews: 198 },
-  "aeroglow": { rating: 4.8, reviews: 245 },
-  "ipl-flash-pro": { rating: 4.6, reviews: 167 },
-  "ipl-flash-dorada": { rating: 4.5, reviews: 88 },
-  "ipl-plateada": { rating: 4.5, reviews: 73 },
-  "cool": { rating: 4.6, reviews: 95 },
-  "manopla-led-garett-beauty": { rating: 4.8, reviews: 204 },
-  "mascara-led-garett-beauty": { rating: 4.7, reviews: 162 },
+const RATING_BY_HANDLE: Record<string, { rating: number; reviews: number; stock: number }> = {
+  "multiclean": { rating: 4.7, reviews: 318, stock: 32 },
+  "breeze-scrub": { rating: 4.6, reviews: 142, stock: 8 },
+  "refresh-scrub": { rating: 4.5, reviews: 87, stock: 24 },
+  "fresh-eye": { rating: 4.7, reviews: 263, stock: 18 },
+  "lift-skin": { rating: 4.5, reviews: 91, stock: 12 },
+  "lift-skin-pro": { rating: 4.8, reviews: 156, stock: 4 },
+  "pretty-face": { rating: 4.6, reviews: 204, stock: 27 },
+  "beauty-lift": { rating: 4.4, reviews: 53, stock: 41 },
+  "calm-skin": { rating: 4.7, reviews: 188, stock: 16 },
+  "fresh-skin-pro": { rating: 4.8, reviews: 412, stock: 6 },
+  "bright-skin": { rating: 4.6, reviews: 119, stock: 22 },
+  "serum-skin": { rating: 4.7, reviews: 247, stock: 19 },
+  "cellu-body": { rating: 4.5, reviews: 78, stock: 11 },
+  "cuerpo-perfecto": { rating: 4.4, reviews: 64, stock: 28 },
+  "multi-care-brush": { rating: 4.6, reviews: 132, stock: 35 },
+  "curly": { rating: 4.7, reviews: 198, stock: 9 },
+  "aeroglow": { rating: 4.8, reviews: 245, stock: 5 },
+  "ipl-flash-pro": { rating: 4.6, reviews: 167, stock: 14 },
+  "ipl-flash-dorada": { rating: 4.5, reviews: 88, stock: 33 },
+  "ipl-plateada": { rating: 4.5, reviews: 73, stock: 21 },
+  "cool": { rating: 4.6, reviews: 95, stock: 17 },
+  "manopla-led-garett-beauty": { rating: 4.8, reviews: 204, stock: 7 },
+  "mascara-led-garett-beauty": { rating: 4.7, reviews: 162, stock: 3 },
 };
 
 function getRating(handle: string) {
-  return RATING_BY_HANDLE[handle] ?? { rating: 4.6, reviews: 120 };
+  return RATING_BY_HANDLE[handle] ?? { rating: 4.6, reviews: 120, stock: 20 };
 }
 
 interface ProductCardProps {
@@ -177,6 +177,16 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
                 )}
               </>
             )}
+          </div>
+        )}
+
+        {/* Low stock indicator — top-right, only when stock < 10 and in stock */}
+        {!hideBadges && firstVariant?.availableForSale && getRating(node.handle).stock < 10 && (
+          <div className="absolute top-2 right-2">
+            <Badge className="text-xs gap-1 bg-amber-100 text-amber-900 border-amber-300 hover:bg-amber-100">
+              <AlertCircle className="w-3 h-3" />
+              Quedan {getRating(node.handle).stock}
+            </Badge>
           </div>
         )}
       </div>
