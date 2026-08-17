@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
+import { WishlistDrawer } from "./WishlistDrawer";
 import { Button } from "./ui/button";
 import { Menu, ChevronDown, Search } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -87,6 +88,8 @@ export const Header = () => {
               <Search className="h-5 w-5" />
             </Button>
           </Link>
+
+          <WishlistDrawer />
 
           <CartDrawer />
 
