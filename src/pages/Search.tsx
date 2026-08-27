@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
+import { searchProducts } from "@/lib/searchRelevance";
 import { CATEGORIES, productBelongsToCategory, getCategoryFromTags } from "@/lib/categories";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -72,17 +73,9 @@ const Search = () => {
   }, []);
 
   useEffect(() => {
-    let filtered = [...allProducts];
-
-    // Search filter
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(p => 
-        p.node.title.toLowerCase().includes(query) ||
-        p.node.description.toLowerCase().includes(query) ||
-        p.node.tags.some(tag => tag.toLowerCase().includes(query))
-      );
-    }
+    let filtered: ShopifyProduct[] = searchQuery
+      ? searchProducts(searchQuery, allProducts)
+      : [...allProducts];
 
     // Category filter using centralized function
     if (categoryFilter !== 'all') {

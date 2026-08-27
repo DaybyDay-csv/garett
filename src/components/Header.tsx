@@ -1,14 +1,29 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
 import { WishlistDrawer } from "./WishlistDrawer";
 import { Button } from "./ui/button";
 import { Menu, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { CategoryNav } from "@/components/CategoryNav";
 import { CATEGORY_NAV } from "@/lib/categories";
 import garettLogo from "@/assets/garett-logo-navy.png";
 
 export const Header = () => {
+  const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSearch, setMobileSearch] = useState("");
+
+  const handleMobileSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = mobileSearch.trim();
+    if (!q) return;
+    setMobileMenuOpen(false);
+    setMobileSearch("");
+    navigate(`/busqueda?q=${encodeURIComponent(q)}`);
+  };
+
   const navLinks = [
     { label: 'Inicio', to: '/' },
     { label: 'Productos', to: '/productos' },
@@ -48,18 +63,33 @@ export const Header = () => {
           <CartDrawer />
 
           {/* Mobile Menu */}
-          <Sheet>
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild className="md:hidden">
               <Button variant="ghost" size="icon" className="text-foreground hover:bg-muted">
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px]">
-              <SheetHeader className="mb-8">
+              <SheetHeader className="mb-6">
                 <SheetTitle className="flex items-center gap-2">
                   <img src={garettLogo} alt="GARETT" className="h-7 object-contain" />
                 </SheetTitle>
               </SheetHeader>
+
+              {/* Buscador */}
+              <form onSubmit={handleMobileSearch} className="mb-6">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder="Buscar: arrugas, celulitis, pelo..."
+                    value={mobileSearch}
+                    onChange={(e) => setMobileSearch(e.target.value)}
+                    className="pl-9 h-11 text-sm"
+                  />
+                </div>
+              </form>
+
               <nav className="flex flex-col space-y-2">
                 {navLinks.map(link => (
                   <Link
