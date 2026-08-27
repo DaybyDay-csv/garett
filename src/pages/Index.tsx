@@ -235,7 +235,7 @@ const Index = () => {
                   <OptimizedImage src={categoryCuidadoCapilar} alt="Cuidado capilar - Dispositivos profesionales para el cabello" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
                 </div>
                 <CardContent className="p-4 md:p-6">
-                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Cuidado capilar</h3>
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Cuidado Capilar</h3>
                   <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">Dispositivos profesionales para el cabello</p>
                   <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
                     <span>Ver productos</span>
@@ -250,7 +250,7 @@ const Index = () => {
                   <OptimizedImage src={categoryMasajeadoresFaciales} alt="Masajeadores faciales - Estimulación facial avanzada" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
                 </div>
                 <CardContent className="p-4 md:p-6">
-                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Masajeadores faciales</h3>
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Masajeadores Faciales</h3>
                   <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">Estimulación facial avanzada</p>
                   <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
                     <span>Ver productos</span>
@@ -265,7 +265,7 @@ const Index = () => {
                   <OptimizedImage src={categoryLimpiezaFacial} alt="Limpieza facial - Limpieza profunda profesional" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
                 </div>
                 <CardContent className="p-4 md:p-6">
-                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Limpieza facial</h3>
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Limpieza Facial</h3>
                   <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">Limpieza profunda profesional</p>
                   <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
                     <span>Ver productos</span>
@@ -280,7 +280,7 @@ const Index = () => {
                   <OptimizedImage src={categoryMesoterapia} alt="Dispositivos de Mesoterapia - Tratamientos de rejuvenecimiento" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
                 </div>
                 <CardContent className="p-4 md:p-6">
-                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Dispositivos de Mesoterapia</h3>
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Mesoterapia</h3>
                   <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">Tratamientos de rejuvenecimiento</p>
                   <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
                     <span>Ver productos</span>
@@ -295,7 +295,7 @@ const Index = () => {
                   <OptimizedImage src={categoryCorporales} alt="Dispositivos corporales - Tratamientos para todo el cuerpo" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
                 </div>
                 <CardContent className="p-4 md:p-6">
-                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Dispositivos corporales</h3>
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Cuidado Corporal</h3>
                   <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">Tratamientos para todo el cuerpo</p>
                   <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
                     <span>Ver productos</span>
@@ -310,7 +310,7 @@ const Index = () => {
                   <OptimizedImage src={categoryDepilacionIPL} alt="Depilación e IPL - Depilación permanente profesional" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
                 </div>
                 <CardContent className="p-4 md:p-6">
-                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Depilación e IPL</h3>
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Depilación IPL</h3>
                   <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">Depilación láser profesional en casa</p>
                   <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
                     <span>Ver productos</span>

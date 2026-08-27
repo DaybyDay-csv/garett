@@ -56,20 +56,20 @@ export const CATEGORIES: Record<string, CategoryConfig> = {
     description: 'Tecnología de luz pulsada para depilación permanente en casa',
     tags: ['category:depilacion-ipl', 'category:ipl'],
     disclaimer: 'No apto para pieles muy oscuras (fototipos V-VI), tatuajes, lunares o zonas pigmentadas. No usar durante el embarazo, con medicación fotosensibilizante o sobre piel irritada. Evitar exposición solar intensa antes y después del tratamiento.'
-  },
-  'smartwatches': {
-    slug: 'smartwatches',
-    name: 'Smartwatches',
-    description: 'Relojes inteligentes para seguimiento de actividad y salud',
-    tags: ['category:smartwatches']
-  },
-  'accesorios': {
-    slug: 'accesorios',
-    name: 'Accesorios',
-    description: 'Recambios y accesorios para tus dispositivos',
-    tags: ['category:accesorios', 'category:accessories']
   }
 };
+
+// Orden canónico de categorías para navegación (navbar, menús, cross-links).
+// Solo colecciones con productos reales.
+export const CATEGORY_NAV: Array<{ slug: string; name: string }> = [
+  { slug: 'cuidado-capilar', name: 'Cuidado Capilar' },
+  { slug: 'masajeadores-faciales', name: 'Masajeadores Faciales' },
+  { slug: 'limpieza-facial', name: 'Limpieza Facial' },
+  { slug: 'mesoterapia', name: 'Mesoterapia' },
+  { slug: 'corporales', name: 'Cuidado Corporal' },
+  { slug: 'depilacion-ipl', name: 'Depilación IPL' },
+  { slug: 'terapia-luz-led', name: 'Terapia de Luz LED' }
+];
 
 // Helper para obtener la categoría desde los tags del producto
 export const getCategoryFromTags = (tags: string[]): CategoryConfig | null => {

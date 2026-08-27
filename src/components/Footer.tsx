@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Instagram, Twitter, Youtube } from "lucide-react";
 import garettLogo from "@/assets/garett-logo-white.png";
 import garettPattern from "@/assets/garett-pattern-2.png";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
+import { CATEGORY_NAV } from "@/lib/categories";
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
   return <footer className="relative bg-primary text-primary-foreground overflow-hidden">
@@ -43,41 +44,13 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold text-base mb-5">Categorías</h3>
             <ul className="space-y-3 text-sm">
-              <li>
-                <Link to="/categoria/cuidado-capilar" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  Cuidado capilar
-                </Link>
-              </li>
-              <li>
-                <Link to="/categoria/masajeadores-faciales" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  Masajeadores faciales
-                </Link>
-              </li>
-              <li>
-                <Link to="/categoria/limpieza-facial" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  Limpieza facial
-                </Link>
-              </li>
-              <li>
-                <Link to="/categoria/mesoterapia" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  Dispositivos de Mesoterapia
-                </Link>
-              </li>
-              <li>
-                <Link to="/categoria/corporales" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  Dispositivos corporales
-                </Link>
-              </li>
-              <li>
-                <Link to="/categoria/depilacion-ipl" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  Depilación e IPL
-                </Link>
-              </li>
-              <li>
-                <Link to="/categoria/terapia-luz-led" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  Terapia de Luz LED
-                </Link>
-              </li>
+              {CATEGORY_NAV.map((category) => (
+                <li key={category.slug}>
+                  <Link to={`/categoria/${category.slug}`} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                    {category.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

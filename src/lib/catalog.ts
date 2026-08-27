@@ -16,8 +16,6 @@ import catCorporalImg from "@/assets/category-corporales.webp";
 import catCapilarImg from "@/assets/category-cuidado-capilar.webp";
 import catIPLImg from "@/assets/category-depilacion-ipl.webp";
 import catLEDImg from "@/assets/category-terapia-luz-led.jpg";
-import catAccessoriesImg from "@/assets/category-accessories.jpg";
-import catSmartImg from "@/assets/category-smartwatches.jpg";
 
 const productImgModules = import.meta.glob(
   "@/assets/products/*.{jpg,png}",
@@ -36,8 +34,6 @@ const IMG = {
   catCapilar: catCapilarImg,
   catIPL: catIPLImg,
   catLED: catLEDImg,
-  catAccessories: catAccessoriesImg,
-  catSmart: catSmartImg,
 };
 
 function photo(...names: string[]): string[] {
@@ -74,7 +70,7 @@ const seeds: LocalProductSeed[] = [
     title: "Lift Skin - Masajeador Facial Reafirmante",
     description: "Masajeador facial con vibración sónica y EMS para reafirmar la piel y definir el óvalo facial desde casa.",
     productType: "Masajeador facial",
-    tags: ["type:device", "category:masajeadores-faciales", "area:face", "tech:limpieza"],
+    tags: ["type:device", "category:masajeadores-faciales", "area:face", "tech:limpieza", "bestseller:true"],
     price: 89.90, // ESTIMADO — masajeador facial medio (rango FOREO Bear 200+/ZIIP similar 90-120)
     images: photo("lift-skin-1.png", "lift-skin-2.png", "lift-skin-3.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
@@ -116,7 +112,7 @@ const seeds: LocalProductSeed[] = [
     title: "Multiclean - Cepillo Facial Sónico",
     description: "Cepillo facial sónico de 7.500 vibraciones/minuto para una limpieza 10x más profunda. Impermeable IPX7 y batería de 2 semanas.",
     productType: "Limpieza facial",
-    tags: ["type:device", "category:limpieza-facial", "area:face", "tech:limpieza"],
+    tags: ["type:device", "category:limpieza-facial", "area:face", "tech:limpieza", "bestseller:true"],
     price: 79.90,
     images: photo("multiclean-1.jpg", "multiclean-2.jpg", "multiclean-3.jpg", "multiclean-4.jpg", "multiclean-5.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
@@ -158,7 +154,7 @@ const seeds: LocalProductSeed[] = [
     title: "Fresh Skin Pro - Dispositivo de Mesoterapia",
     description: "Mesoterapia sin agujas ni dolor. Electroporación que abre microcanales para que tus sérums penetren hasta las capas profundas.",
     productType: "Mesoterapia",
-    tags: ["type:device", "category:mesoterapia", "area:face", "tech:mesoterapia"],
+    tags: ["type:device", "category:mesoterapia", "area:face", "tech:mesoterapia", "bestseller:true"],
     price: 169.10,
     images: photo("fresh-skin-pro-1.jpg", "fresh-skin-pro-2.jpg", "fresh-skin-pro-3.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
@@ -190,7 +186,7 @@ const seeds: LocalProductSeed[] = [
     title: "Cellu-Body - Masajeador Corporal Anticelulítico",
     description: "Radiofrecuencia + masaje de vacum para reducir celulitis visible y reafirmar piernas, glúteos y abdomen.",
     productType: "Corporal",
-    tags: ["type:device", "category:corporales", "area:body"],
+    tags: ["type:device", "category:corporales", "area:body", "bestseller:true"],
     price: 199.00, // ESTIMADO — corporal RF+vacum (rango Medicube Body 199-249, FOREO Bear body 249)
     images: photo("cellu-body-1.jpg", "cellu-body-2.jpg", "cellu-body-3.jpg", "cellu-body-4.jpg", "cellu-body-5.jpg", "cellu-body-6.jpg", "cellu-body-7.jpg", "cellu-body-8.jpg", "cellu-body-9.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
@@ -287,7 +283,7 @@ const seeds: LocalProductSeed[] = [
     title: "Manopla LED Garett Beauty - Fototerapia LED",
     description: "Manopla de fototerapia LED con 4 modos de luz (Calm, Luminosidad, Rejuvenecimiento, Firmeza) para rejuvenecimiento facial.",
     productType: "LED",
-    tags: ["type:device", "category:terapia-luz-led", "area:face"],
+    tags: ["type:device", "category:terapia-luz-led", "area:face", "new:true"],
     price: 224.00,
     images: photo("manopla-led-1.png", "manopla-led-2.png", "manopla-led-3.png", "manopla-led-4.png"),
     options: [{ name: "Title", values: ["Default Title"] }],
@@ -297,7 +293,7 @@ const seeds: LocalProductSeed[] = [
     title: "Máscara LED Garett Beauty - Fototerapia LED Facial",
     description: "Máscara de fototerapia LED con 4 modos de luz, temporizador 5/10/15 min y silicona médica hipoalergénica.",
     productType: "LED",
-    tags: ["type:device", "category:terapia-luz-led", "area:face"],
+    tags: ["type:device", "category:terapia-luz-led", "area:face", "bestseller:true", "new:true"],
     price: 299.00, // ESTIMADO — Máscara LED (CurrentBody LED Mask 449, pero con menos LEDs/warranty)
     images: photo("mascara-led-1.png", "mascara-led-2.png", "mascara-led-3.png", "mascara-led-4.jpg", "mascara-led-5.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],

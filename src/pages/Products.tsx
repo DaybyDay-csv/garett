@@ -5,20 +5,14 @@ import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
-import { productBelongsToCategory } from "@/lib/categories";
+import { productBelongsToCategory, CATEGORY_NAV } from "@/lib/categories";
 import { Filter, ShoppingBag, X } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 
 const CATEGORIES = [
   { value: "all", label: "Todas" },
-  { value: "terapia-luz-led", label: "Terapia LED" },
-  { value: "masajeadores-faciales", label: "Masajeadores faciales" },
-  { value: "limpieza-facial", label: "Limpieza facial" },
-  { value: "mesoterapia", label: "Mesoterapia" },
-  { value: "corporales", label: "Corporales" },
-  { value: "cuidado-capilar", label: "Cuidado capilar" },
-  { value: "depilacion-ipl", label: "Depilación IPL" },
+  ...CATEGORY_NAV.map((c) => ({ value: c.slug, label: c.name })),
 ];
 
 const PRICE_BUCKETS = [

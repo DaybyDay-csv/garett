@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ProductCard } from "@/components/ProductCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
-import { CATEGORIES, productBelongsToCategory } from "@/lib/categories";
 import { Sparkles } from "lucide-react";
-import { InfiniteScrollCarousel } from "@/components/InfiniteScrollCarousel";
 
 const NewArrivals = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -15,11 +14,12 @@ const NewArrivals = () => {
     const loadProducts = async () => {
       try {
         const data = await fetchProducts(50);
-        // Filter out GWP product - show all products
-        const filteredProducts = data.filter(p => !isGWPProduct(p));
-        setProducts(filteredProducts);
+        const newProducts = data.filter(
+          (p) => !isGWPProduct(p) && p.node.tags.includes("new:true")
+        );
+        setProducts(newProducts);
       } catch (error) {
-        console.error('Error loading products:', error);
+        console.error("Error loading products:", error);
       } finally {
         setLoading(false);
       }
@@ -28,30 +28,13 @@ const NewArrivals = () => {
     loadProducts();
   }, []);
 
-  // Use centralized categories
-  const categoriesArray = Object.values(CATEGORIES);
-
-  // Group products by category
-  const productsByCategory = categoriesArray.map(category => ({
-    slug: category.slug,
-    label: category.name,
-    products: products.filter(p => 
-      productBelongsToCategory(p.node.tags, category.slug)
-    )
-  })).filter(cat => cat.products.length > 0);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <div className="container py-8">
-        {/* Breadcrumb Navigation */}
-        <Breadcrumb 
-          items={[
-            { label: 'Novedades' }
-          ]}
-        />
-        
+        <Breadcrumb items={[{ label: "Novedades" }]} />
+
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2 flex items-center gap-3">
             <Sparkles className="w-10 h-10 text-primary" />
@@ -75,19 +58,16 @@ const NewArrivals = () => {
             </p>
           </div>
         ) : (
-          <div className="space-y-16">
-            {productsByCategory.map((category) => (
-              <div key={category.slug} className="space-y-6">
-                <div>
-                  <h2 className="text-2xl sm:text-3xl font-bold">{category.label}</h2>
-                  <p className="text-sm text-muted-foreground">
-                    {category.products.length} producto{category.products.length !== 1 ? 's' : ''}
-                  </p>
-                </div>
-                <InfiniteScrollCarousel products={category.products} />
-              </div>
-            ))}
-          </div>
+          <>
+            <p className="text-sm text-muted-foreground mb-4">
+              {products.length} producto{products.length !== 1 ? "s" : ""} nuevo{products.length !== 1 ? "s" : ""}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {products.map((product) => (
+                <ProductCard key={product.node.id} product={product} />
+              ))}
+            </div>
+          </>
         )}
       </div>
 

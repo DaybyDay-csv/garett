@@ -7,6 +7,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { SEO } from "@/components/SEO";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { CATEGORIES, productBelongsToCategory } from "@/lib/categories";
+import { CategoryNav } from "@/components/CategoryNav";
 import { ShoppingBag } from "lucide-react";
 
 const Category = () => {
@@ -111,6 +112,11 @@ const Category = () => {
             { label: currentCategory.name }
           ]}
         />
+        
+        {/* Cross-collection navigation */}
+        <div className="mb-6">
+          <CategoryNav activeSlug={category} />
+        </div>
         
         <div className="mb-8 md:mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
