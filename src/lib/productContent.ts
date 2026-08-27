@@ -1,4 +1,5 @@
 import { LucideIcon } from "lucide-react";
+import { PRODUCT_CONTENT_BY_HANDLE } from "./productContentByHandle";
 
 export interface ProductContent {
   pdpHeadline?: string;
@@ -933,6 +934,16 @@ export function detectProductCategory(product: any): string {
 
 // Main function to get product content
 export function getProductContent(categoryOrProduct: string | any, handle?: string): ProductContent {
+  // 1) Contenido específico por producto (handle del catálogo)
+  if (handle && PRODUCT_CONTENT_BY_HANDLE[handle]) {
+    return PRODUCT_CONTENT_BY_HANDLE[handle];
+  }
+  if (typeof categoryOrProduct === 'object' && categoryOrProduct?.handle) {
+    const specific = PRODUCT_CONTENT_BY_HANDLE[categoryOrProduct.handle];
+    if (specific) return specific;
+  }
+
+  // 2) Fallback por categoría
   let category: string;
   
   // If we receive a full product object, detect category
