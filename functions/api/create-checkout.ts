@@ -29,9 +29,12 @@ export async function onRequestOptions() {
 
 // Diagnóstico temporal: confirma si el secreto llega a la Function en runtime.
 export async function onRequestGet({ env }: { env: Env }) {
+  const v = (env as Record<string, unknown>).STRIPE_SECRET_KEY;
   return json({
     ok: true,
-    hasStripeSecret: typeof env.STRIPE_SECRET_KEY === 'string' && env.STRIPE_SECRET_KEY.length > 0,
+    type: typeof v,
+    length: typeof v === 'string' ? v.length : null,
+    hasStripeSecret: typeof v === 'string' && v.length > 0,
     envKeys: Object.keys(env),
   });
 }
