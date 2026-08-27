@@ -18,6 +18,7 @@ import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
 import TerminosCondiciones from "./pages/TerminosCondiciones";
 import WarrantyPolicy from "./pages/WarrantyPolicy";
 import NotFound from "./pages/NotFound";
+import CheckoutSuccess from "./pages/CheckoutSuccess";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { PageTracker } from "./components/PageTracker";
 import { HelmetProvider } from "react-helmet-async";
@@ -49,6 +50,7 @@ const App = () => {
             <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
             <Route path="/terminos-condiciones" element={<TerminosCondiciones />} />
             <Route path="/garantia" element={<WarrantyPolicy />} />
+            <Route path="/checkout/gracias" element={<CheckoutSuccess />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

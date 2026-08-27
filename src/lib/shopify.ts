@@ -102,11 +102,36 @@ export async function fetchGWPProduct(): Promise<ShopifyProduct | null> {
   return LOCAL_PRODUCTS_BY_HANDLE['gwp-hairband'] ?? null;
 }
 
-// Create Checkout (Stripe pending — throws for now)
+export interface CheckoutLineItem {
+  name: string;
+  unitAmountCents: number;
+  quantity: number;
+}
+
+// Create Stripe Checkout via Cloudflare Pages Function (/api/create-checkout).
+// La secret key vive en el servidor (secreto de Cloudflare Pages), nunca aquí.
 export async function createStorefrontCheckout(
-  items: Array<{ variantId: string; quantity: number }>,
-  discountCodes?: string[]
+  items: CheckoutLineItem[]
 ): Promise<string> {
-  console.log('Checkout requested:', { items, discountCodes });
-  throw new Error('El checkout con Stripe aún no está configurado. Próximamente.');
+  const response = await fetch('/api/create-checkout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      items: items.map((item) => ({
+        name: item.name,
+        unit_amount: item.unitAmountCents,
+        quantity: item.quantity,
+      })),
+    }),
+  });
+
+  const data = (await response.json().catch(() => null)) as
+    | { url?: string; error?: string }
+    | null;
+
+  if (!response.ok || !data?.url) {
+    throw new Error(data?.error || 'Error creando el checkout.');
+  }
+
+  return data.url;
 }

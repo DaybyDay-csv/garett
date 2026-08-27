@@ -133,7 +133,13 @@ export const useCartStore = create<CartStore>()(
           // No discount codes needed - prices are set correctly in Shopify
           
           const checkoutUrl = await createStorefrontCheckout(
-            items.map(item => ({ variantId: item.variantId, quantity: item.quantity }))
+            items
+              .filter(item => !item.isGWP)
+              .map(item => ({
+                name: item.product.node.title,
+                unitAmountCents: Math.round(parseFloat(item.price.amount) * 100),
+                quantity: item.quantity,
+              }))
           );
           setCheckoutUrl(checkoutUrl);
         } catch (error) {
