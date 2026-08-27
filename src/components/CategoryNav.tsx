@@ -12,7 +12,7 @@ export const CategoryNav = ({ activeSlug, className, includeAll = true }: Catego
   return (
     <nav
       className={cn(
-        "flex items-center gap-1 overflow-x-auto scrollbar-hide",
+        "flex items-center gap-5 md:gap-7 overflow-x-auto scrollbar-hide",
         className
       )}
       aria-label="Categorías"
@@ -21,10 +21,10 @@ export const CategoryNav = ({ activeSlug, className, includeAll = true }: Catego
         <Link
           to="/productos"
           className={cn(
-            "flex-shrink-0 px-4 py-2 text-sm font-medium rounded-full transition-colors whitespace-nowrap",
+            "flex-shrink-0 whitespace-nowrap text-[13px] uppercase tracking-wide transition-colors",
             !activeSlug
-              ? "bg-primary text-primary-foreground"
-              : "text-foreground hover:bg-muted"
+              ? "text-foreground font-semibold"
+              : "text-muted-foreground hover:text-foreground"
           )}
         >
           Todos
@@ -37,10 +37,10 @@ export const CategoryNav = ({ activeSlug, className, includeAll = true }: Catego
             key={cat.slug}
             to={`/categoria/${cat.slug}`}
             className={cn(
-              "flex-shrink-0 px-4 py-2 text-sm font-medium rounded-full transition-colors whitespace-nowrap",
+              "flex-shrink-0 whitespace-nowrap text-[13px] uppercase tracking-wide transition-colors",
               active
-                ? "bg-primary text-primary-foreground"
-                : "text-foreground hover:bg-muted"
+                ? "text-foreground font-semibold"
+                : "text-muted-foreground hover:text-foreground"
             )}
           >
             {cat.name}
