@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
+import { productBelongsToCategory } from "@/lib/categories";
 import { Filter, ShoppingBag, X } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
@@ -64,7 +65,7 @@ const Products = () => {
 
     if (categoryFilter !== "all") {
       filtered = filtered.filter((p) =>
-        p.node.tags.some((t) => t === `category:${categoryFilter}`),
+        productBelongsToCategory(p.node.tags, categoryFilter),
       );
     }
 

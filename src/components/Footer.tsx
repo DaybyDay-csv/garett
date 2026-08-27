@@ -73,6 +73,11 @@ export const Footer = () => {
                   Depilación e IPL
                 </Link>
               </li>
+              <li>
+                <Link to="/categoria/terapia-luz-led" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  Terapia de Luz LED
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -84,9 +89,6 @@ export const Footer = () => {
                 <Link to="/blog" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Blog y Guías
                 </Link>
-              </li>
-              <li>
-                
               </li>
               <li>
                 <Link to="/novedades" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
@@ -146,9 +148,8 @@ export const Footer = () => {
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 mt-0.5 flex-shrink-0 text-primary-foreground/60" />
                 <div>
-                  <a className="text-primary-foreground/70 hover:text-primary-foreground transition-colors" href="tel:+34913822400\n">
+                  <a className="text-primary-foreground/70 hover:text-primary-foreground transition-colors" href="tel:+34913822400">
                     +34 913822400
-
                   </a>
                   <p className="text-primary-foreground/50 text-xs mt-1.5">
                     Lun - Vie: 9:00 - 18:00

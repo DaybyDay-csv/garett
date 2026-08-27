@@ -399,7 +399,7 @@ const Index = () => {
               </h2>
               <p className="text-base md:text-lg text-primary-foreground/80 leading-relaxed max-w-xl">
                 Cada dispositivo Garett se somete a estudios clínicos independientes con
-                mediciones仪器étricas仪器 de elasticidad, hidratación y firmeza.
+                mediciones de elasticidad, hidratación y firmeza.
                 Sin claims vacíos: con datos.
               </p>
               <div className="grid grid-cols-3 gap-4 pt-4">
