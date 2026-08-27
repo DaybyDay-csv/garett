@@ -450,11 +450,11 @@ const ProductDetail = () => {
               </div>
               
               <h1 className="text-3xl md:text-4xl font-semibold mb-5 md:mb-4 tracking-tight leading-tight text-foreground">
-                {productContent.pdpHeadline || node.title}
+                {node.title}
               </h1>
               
-              {productContent.pdpSubheadline && <p className="text-base md:text-lg text-foreground/70 mb-4 leading-relaxed">
-                  {productContent.pdpSubheadline}
+              {(productContent.pdpHeadline || productContent.pdpSubheadline) && <p className="text-base md:text-lg text-foreground/70 mb-4 leading-relaxed">
+                  {productContent.pdpHeadline || productContent.pdpSubheadline}
                 </p>}
               
               {/* Quick Benefits - Above the fold */}
