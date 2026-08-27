@@ -61,6 +61,9 @@ export async function onRequestPost({
   form.append('mode', 'payment');
   form.append('success_url', `${origin}/checkout/gracias`);
   form.append('cancel_url', `${origin}/productos`);
+  // Recolección de datos de cliente (estilo Shopify): email (por defecto), teléfono y dirección de envío.
+  form.append('phone_number_collection[enabled]', 'true');
+  form.append('shipping_address_collection[allowed_countries][0]', 'ES');
   items.forEach((item, i) => {
     form.append(`line_items[${i}][quantity]`, String(item.quantity));
     form.append(`line_items[${i}][price_data][currency]`, 'eur');
