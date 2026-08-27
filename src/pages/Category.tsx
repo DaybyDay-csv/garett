@@ -11,7 +11,7 @@ import { CategoryNav } from "@/components/CategoryNav";
 import { ShoppingBag } from "lucide-react";
 
 const Category = () => {
-  const { category } = useParams<{ category: string }>();
+  const { slug: category } = useParams<{ slug: string }>();
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
 
