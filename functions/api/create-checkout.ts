@@ -13,7 +13,7 @@ interface CheckoutItem {
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
@@ -25,18 +25,6 @@ const json = (body: unknown, status = 200) =>
 
 export async function onRequestOptions() {
   return new Response(null, { headers: CORS });
-}
-
-// Diagnóstico temporal: confirma si el secreto llega a la Function en runtime.
-export async function onRequestGet({ env }: { env: Env }) {
-  const v = (env as Record<string, unknown>).STRIPE_SECRET_KEY;
-  return json({
-    ok: true,
-    type: typeof v,
-    length: typeof v === 'string' ? v.length : null,
-    hasStripeSecret: typeof v === 'string' && v.length > 0,
-    envKeys: Object.keys(env),
-  });
 }
 
 export async function onRequestPost({
