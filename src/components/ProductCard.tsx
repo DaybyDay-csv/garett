@@ -137,7 +137,7 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
       onClick={handleProductClick}
       className="group block bg-card rounded-none overflow-hidden border hover:shadow-lg transition-all"
     >
-      <div className="aspect-square bg-secondary/20 overflow-hidden relative">
+      <div className="aspect-square bg-white overflow-hidden relative p-6">
         {image && (
           <OptimizedImage
             src={image.url}

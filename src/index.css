@@ -10,7 +10,7 @@ Rebrand 2026-08-17 (#03142E navy + #F3F3F3 page + #FFFFFF product).
 @layer base {
   :root {
     /* Surface */
-    --background: 0 0% 95%;          /* #F3F3F3 — page background */
+    --background: 0 0% 97%;          /* #F7F7F7 — page background */
     --foreground: 218 86% 9%;        /* #03142E — primary text (navy) */
 
     --card: 0 0% 100%;               /* #FFFFFF — product/surface cards */
