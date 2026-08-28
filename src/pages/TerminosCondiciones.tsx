@@ -186,7 +186,7 @@ const TerminosCondiciones = () => {
               </p>
               <div className="bg-muted/50 rounded-md p-4 space-y-2">
                 <p><strong className="text-foreground">Email:</strong> <a href="mailto:info@garett.es" className="text-primary hover:underline">info@garett.es</a></p>
-                <p><strong className="text-foreground">Teléfono:</strong> +34 913822400</p>
+                <p><strong className="text-foreground">Teléfono:</strong> +34 679 23 51 48</p>
               </div>
             </div>
           </section>
@@ -200,7 +200,7 @@ const TerminosCondiciones = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button asChild variant="default">
-                  <a href="tel:913822400">
+                  <a href="tel:+34679235148">
                     <Phone className="w-4 h-4 mr-2" />
                     Llamar ahora
                   </a>

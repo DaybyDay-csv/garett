@@ -104,7 +104,7 @@ const AvisoLegal = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button asChild variant="default">
-                  <a href="tel:913822400">
+                  <a href="tel:+34679235148">
                     <Phone className="w-4 h-4 mr-2" />
                     Llamar ahora
                   </a>

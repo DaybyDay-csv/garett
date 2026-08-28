@@ -204,7 +204,7 @@ const PoliticaPrivacidad = () => {
               </p>
               <div className="bg-muted/50 rounded-md p-4 space-y-2">
                 <p><strong className="text-foreground">Email:</strong> <a href="mailto:administracion@x-net.es" className="text-primary hover:underline">administracion@x-net.es</a></p>
-                <p><strong className="text-foreground">Teléfono:</strong> +34 913822400</p>
+                <p><strong className="text-foreground">Teléfono:</strong> +34 679 23 51 48</p>
                 <p><strong className="text-foreground">Dirección postal:</strong> Calle Tomás Redondo, 3. 1ª planta Nave 5, 28033, Madrid (España)</p>
               </div>
             </div>
@@ -219,7 +219,7 @@ const PoliticaPrivacidad = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button asChild variant="default">
-                  <a href="tel:913822400">
+                  <a href="tel:+34679235148">
                     <Phone className="w-4 h-4 mr-2" />
                     Llamar ahora
                   </a>

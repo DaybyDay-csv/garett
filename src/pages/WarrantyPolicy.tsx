@@ -101,7 +101,7 @@ export default function WarrantyPolicy() {
                   <div className="mt-2 space-y-1 bg-background rounded-md p-3">
                     <div className="flex items-center gap-2">
                       <Phone className="w-4 h-4 text-primary" />
-                      <a href="tel:913812400" className="font-semibold hover:text-primary">913 81 24 00</a>
+                      <a href="tel:+34679235148" className="font-semibold hover:text-primary">+34 679 23 51 48</a>
                     </div>
                   </div>
                 </div>
@@ -169,7 +169,7 @@ export default function WarrantyPolicy() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button asChild variant="default">
-                  <a href="tel:913812400">
+                  <a href="tel:+34679235148">
                     <Phone className="w-4 h-4 mr-2" />
                     Llamar al SAT
                   </a>

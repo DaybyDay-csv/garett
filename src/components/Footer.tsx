@@ -121,8 +121,8 @@ export const Footer = () => {
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 mt-0.5 flex-shrink-0 text-primary-foreground/60" />
                 <div>
-                  <a className="text-primary-foreground/70 hover:text-primary-foreground transition-colors" href="tel:+34913822400">
-                    +34 913822400
+                  <a className="text-primary-foreground/70 hover:text-primary-foreground transition-colors" href="tel:+34679235148">
+                    +34 679 23 51 48
                   </a>
                   <p className="text-primary-foreground/50 text-xs mt-1.5">
                     Lun - Vie: 9:00 - 18:00
