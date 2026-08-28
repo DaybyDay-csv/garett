@@ -1,0 +1,27 @@
+// Mapeo handle (catálogo local) → Stripe Price ID.
+// Los price IDs NO son secretos. Creados vía Stripe API el 2026-08-28.
+export const STRIPE_PRICE_BY_HANDLE: Record<string, string> = {
+  "fresh-eye": "price_1U9W01FS9PHCKZwwyXcknImI",
+  "lift-skin": "price_1U9W02FS9PHCKZwwZSnfqaNl",
+  "lift-skin-pro": "price_1U9W03FS9PHCKZwwEFNym5hC",
+  "pretty-face": "price_1U9W04FS9PHCKZwwPXI6cL6F",
+  "beauty-lift": "price_1U9W05FS9PHCKZwwHeOSrUlu",
+  "multiclean": "price_1U9W06FS9PHCKZwwQKbLrvvo",
+  "breeze-scrub": "price_1U9W07FS9PHCKZwwqwPIxNbE",
+  "refresh-scrub": "price_1U9W08FS9PHCKZww423TwfzL",
+  "calm-skin": "price_1U9W09FS9PHCKZwwkYian6gu",
+  "fresh-skin-pro": "price_1U9W09FS9PHCKZwwCjqnXBp9",
+  "bright-skin": "price_1U9W0AFS9PHCKZwwMAAOPsJr",
+  "serum-skin": "price_1U9W0BFS9PHCKZwwfRAzExYE",
+  "cellu-body": "price_1U9W0CFS9PHCKZwwaB5Udcob",
+  "cuerpo-perfecto": "price_1U9W0DFS9PHCKZwwTKUW3iFu",
+  "multi-care-brush": "price_1U9W0EFS9PHCKZwwEFvi9f4y",
+  "curly": "price_1U9W0EFS9PHCKZwwjnx5J7N6",
+  "aeroglow": "price_1U9W0FFS9PHCKZwwrVoIfvQC",
+  "ipl-flash-pro": "price_1U9W0GFS9PHCKZwwiavw3M6s",
+  "ipl-flash-dorada": "price_1U9W0HFS9PHCKZwwEhyJsfSs",
+  "ipl-plateada": "price_1U9W0HFS9PHCKZwwu11FLaWI",
+  "cool": "price_1U9W0IFS9PHCKZww6k5MfHWA",
+  "manopla-led-garett-beauty": "price_1U9W0JFS9PHCKZwwvPIGvuX3",
+  "mascara-led-garett-beauty": "price_1U9W0JFS9PHCKZwwVA3FPGRH",
+};

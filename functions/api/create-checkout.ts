@@ -6,8 +6,7 @@ interface Env {
 }
 
 interface CheckoutItem {
-  name: string;
-  unit_amount: number; // céntimos de euro
+  price: string; // Stripe Price ID (producto ya creado en Stripe)
   quantity: number;
 }
 
@@ -45,7 +44,7 @@ export async function onRequestPost({
   try {
     const body = (await request.json()) as { items?: CheckoutItem[] };
     items = (body.items ?? []).filter(
-      (i) => i && i.quantity > 0 && Number.isFinite(i.unit_amount),
+      (i) => i && i.quantity > 0 && typeof i.price === 'string' && i.price.startsWith('price_'),
     );
   } catch {
     return json({ error: 'Petición inválida.' }, 400);
@@ -66,12 +65,7 @@ export async function onRequestPost({
   form.append('shipping_address_collection[allowed_countries][0]', 'ES');
   items.forEach((item, i) => {
     form.append(`line_items[${i}][quantity]`, String(item.quantity));
-    form.append(`line_items[${i}][price_data][currency]`, 'eur');
-    form.append(`line_items[${i}][price_data][product_data][name]`, item.name);
-    form.append(
-      `line_items[${i}][price_data][unit_amount]`,
-      String(Math.round(item.unit_amount)),
-    );
+    form.append(`line_items[${i}][price]`, item.price);
   });
 
   try {

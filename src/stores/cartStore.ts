@@ -136,8 +136,7 @@ export const useCartStore = create<CartStore>()(
             items
               .filter(item => !item.isGWP)
               .map(item => ({
-                name: item.product.node.title,
-                unitAmountCents: Math.round(parseFloat(item.price.amount) * 100),
+                handle: item.product.node.handle,
                 quantity: item.quantity,
               }))
           );

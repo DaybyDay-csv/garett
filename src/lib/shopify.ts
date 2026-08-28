@@ -8,6 +8,7 @@ export const SHOPIFY_STOREFRONT_TOKEN = 'a85fa80606d59d56da27fc9c3f2075b3';
 // El catálogo vive ahora en src/lib/catalog.ts (datos locales).
 // Este módulo mantiene la interfaz para no romper componentes.
 import { LOCAL_PRODUCTS, LOCAL_PRODUCTS_BY_HANDLE } from './catalog';
+import { STRIPE_PRICE_BY_HANDLE } from './stripePrices';
 export interface ShopifyProduct {
   node: {
     id: string;
@@ -103,13 +104,12 @@ export async function fetchGWPProduct(): Promise<ShopifyProduct | null> {
 }
 
 export interface CheckoutLineItem {
-  name: string;
-  unitAmountCents: number;
+  handle: string;
   quantity: number;
 }
 
 // Create Stripe Checkout via Cloudflare Pages Function (/api/create-checkout).
-// La secret key vive en el servidor (secreto de Cloudflare Pages), nunca aquí.
+// Usa los Price IDs de Stripe (productos linkeados) para la contabilidad por producto.
 export async function createStorefrontCheckout(
   items: CheckoutLineItem[]
 ): Promise<string> {
@@ -117,11 +117,11 @@ export async function createStorefrontCheckout(
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      items: items.map((item) => ({
-        name: item.name,
-        unit_amount: item.unitAmountCents,
-        quantity: item.quantity,
-      })),
+      items: items.map((item) => {
+        const price = STRIPE_PRICE_BY_HANDLE[item.handle];
+        if (!price) throw new Error(`Precio de Stripe no encontrado: ${item.handle}`);
+        return { price, quantity: item.quantity };
+      }),
     }),
   });
 
