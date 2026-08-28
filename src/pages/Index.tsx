@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
+import { LOCAL_PRODUCTS_BY_HANDLE } from "@/lib/catalog";
+import { BUNDLES } from "@/lib/bundles";
 import { homeFAQs } from "@/lib/faqData";
 import { ShoppingBag, ArrowRight, ShieldCheck, Award, Truck, Stethoscope, FlaskConical, Leaf, Star } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -215,6 +217,47 @@ const Index = () => {
             </div>
           </div>
         </section>}
+
+      {/* BUNDLES CON DESCUENTO */}
+      <section className="py-12 md:py-20 bg-background">
+        <div className="container">
+          <div className="text-center mb-10 md:mb-12">
+            <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Packs con descuento</p>
+            <h2 className="text-2xl md:text-4xl font-semibold text-foreground mb-3 tracking-tight">
+              Ahorra combinando tu rutina
+            </h2>
+            <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
+              Rutinas completas con precio especial frente a comprarlos por separado.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {BUNDLES.map(bundle => {
+              const first = LOCAL_PRODUCTS_BY_HANDLE[bundle.includes[0]];
+              return (
+                <Card key={bundle.handle} className="overflow-hidden flex flex-col">
+                  <div className="aspect-[16/9] bg-muted relative">
+                    {first && <img src={first.node.images.edges[0]?.node.url} alt={bundle.title} className="w-full h-full object-cover" />}
+                    <Badge className="absolute top-3 left-3">{bundle.badge}</Badge>
+                  </div>
+                  <CardContent className="p-6 flex flex-col flex-1">
+                    <h3 className="text-lg font-semibold text-foreground mb-2">{bundle.title}</h3>
+                    <p className="text-sm text-muted-foreground mb-4">{bundle.description}</p>
+                    <div className="flex items-baseline gap-2 mt-auto mb-4">
+                      <span className="text-2xl font-semibold text-primary">€{bundle.bundlePrice.toFixed(2)}</span>
+                      <span className="text-sm text-muted-foreground line-through">€{bundle.originalPrice.toFixed(2)}</span>
+                    </div>
+                    <Button asChild variant="outline">
+                      <Link to={`/producto/${bundle.includes[0]}`}>
+                        Ver pack <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* [5] EXPLORA POR CATEGORÍA */}
       <section className="py-12 md:py-20 bg-background">

@@ -12,7 +12,7 @@ import { Progress } from "@/components/ui/progress";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
-import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, ZoomIn, Maximize2, ChevronDown, Clock, Award, Sparkle, Zap, Droplets, Activity, Battery, Package, Lock, Calendar, AlertTriangle, Bell, Loader2, Star, Users, TrendingUp, Heart, RefreshCw, Stethoscope } from "lucide-react";
+import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, ZoomIn, Maximize2, ChevronDown, Clock, Award, Sparkle, Zap, Droplets, Activity, Battery, Package, Lock, Calendar, AlertTriangle, Bell, Loader2, Star, Users, TrendingUp, Heart, RefreshCw, Stethoscope, Leaf } from "lucide-react";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { calculatePromotionalPrice, formatPrice, getCurrentPromotionalStage } from "@/lib/promotions";
 import { getProductContent, detectProductCategory } from "@/lib/productContent";
@@ -441,6 +441,14 @@ const ProductDetail = () => {
                   <Shield className="w-3 h-3 text-foreground" />
                   Garantía 2 años
                 </Badge>
+                <Badge variant="outline" className="gap-1 text-sm border-border/30 text-foreground">
+                  <Stethoscope className="w-3 h-3 text-foreground" />
+                  Dermatólogos testado
+                </Badge>
+                <Badge variant="outline" className="gap-1 text-sm border-border/30 text-foreground">
+                  <Leaf className="w-3 h-3 text-foreground" />
+                  Cruelty-free
+                </Badge>
                 {variant?.availableForSale && (
                   <Badge variant="outline" className="gap-1 text-sm border-green-600/40 text-green-700 bg-green-50">
                     <Check className="w-3 h-3 text-green-700" />
@@ -764,19 +772,29 @@ const ProductDetail = () => {
 
             {/* T15 — Resultados con claims cuantitativos + Expert quote */}
             <div className="bg-card border border-border rounded-2xl p-6 md:p-8 my-8">
-              <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Resultados clínicos</p>
-              <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 tracking-tight">
-                Lo que notarás en {productContent.dropdowns.expectedResults.phases.length} fases
+              <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Antes y después · Resultados</p>
+              <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-8 tracking-tight">
+                Tu evolución en {productContent.dropdowns.expectedResults.phases.length} fases
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="relative">
                 {productContent.dropdowns.expectedResults.phases.map((phase, idx) => (
-                  <div key={idx} className="bg-background border border-border rounded-xl p-4">
-                    <p className="text-sm font-semibold text-primary mb-2">{phase.timeframe}</p>
-                    <p className="text-sm text-foreground/80 leading-relaxed">{phase.description}</p>
+                  <div key={idx} className="flex gap-4 mb-6 last:mb-0">
+                    <div className="flex flex-col items-center">
+                      <div className="w-9 h-9 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold flex-shrink-0">
+                        {idx + 1}
+                      </div>
+                      {idx < productContent.dropdowns.expectedResults.phases.length - 1 && (
+                        <div className="w-px flex-1 bg-border my-1" />
+                      )}
+                    </div>
+                    <div className="pb-2">
+                      <p className="text-sm font-semibold text-primary mb-1">{phase.timeframe}</p>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{phase.description}</p>
+                    </div>
                   </div>
                 ))}
               </div>
-              <div className="border-t border-border pt-6 flex items-start gap-4">
+              <div className="border-t border-border pt-6 flex items-start gap-4 mt-6">
                 <div className="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center flex-shrink-0">
                   <Stethoscope className="w-5 h-5 text-primary" />
                 </div>
@@ -918,22 +936,20 @@ const ProductDetail = () => {
                   </span>}
               </div>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <span className="flex items-center gap-0.5">
+                  {[1,2,3,4,5].map(i => (
+                    <Star key={i} className={`w-3 h-3 ${i <= 4 ? 'fill-yellow-400 text-yellow-400' : 'fill-yellow-400/60 text-yellow-400/60'}`} />
+                  ))}
+                  <span className="font-medium text-foreground">4.8</span>
+                </span>
                 <Shield className="w-3 h-3" />
                 <span>Garantía 2 años</span>
-                <span className="hidden md:inline">· Envío gratis +70€ · 14 días devolución</span>
+                <span className="hidden sm:inline">· 3 cuotas sin intereses</span>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="hidden md:flex items-center gap-1 text-sm text-muted-foreground">
-                {[1,2,3,4,5].map(i => (
-                  <Star key={i} className={`w-3 h-3 ${i <= 4 ? 'fill-yellow-400 text-yellow-400' : 'fill-yellow-400/60 text-yellow-400/60'}`} />
-                ))}
-                <span className="ml-1">4.8</span>
-              </div>
-              <Button size="lg" className="flex-shrink-0 h-12 px-6" onClick={handleAddToCart} disabled={!variant?.availableForSale}>
-                {variant?.availableForSale ? 'Añadir al carrito' : 'Agotado'}
-              </Button>
-            </div>
+            <Button size="lg" className="flex-shrink-0 h-12 px-6" onClick={handleAddToCart} disabled={!variant?.availableForSale}>
+              {variant?.availableForSale ? 'Añadir al carrito' : 'Agotado'}
+            </Button>
           </div>
         </div>
       {/* LED Wavelength Benefits - Only for LED products */}

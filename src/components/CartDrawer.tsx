@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -10,6 +10,9 @@ import { KlarnaWidget } from "@/components/KlarnaWidget";
 import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { trackBeginCheckout, trackViewCart, trackRemoveFromCart } from "@/hooks/usePageTracking";
+import { getRecommendations } from "@/lib/recommendations";
+import { LOCAL_PRODUCTS, LOCAL_PRODUCTS_BY_HANDLE } from "@/lib/catalog";
+import { ShopifyProduct } from "@/lib/shopify";
 import { Link } from "react-router-dom";
 
 const FREE_SHIPPING_THRESHOLD = 49;
@@ -30,6 +33,7 @@ export const CartDrawer = () => {
     items,
     isLoading,
     isOpen,
+    addItem,
     updateQuantity,
     removeItem,
     createCheckout,
@@ -73,6 +77,31 @@ export const CartDrawer = () => {
     const price = parseFloat(item.price.amount);
     return sum + price * item.quantity;
   }, 0);
+
+  // Cross-sell: recomendaciones basadas en el contenido del carrito
+  const recommendations = useMemo(() => {
+    const cartHandles = items.filter(i => !i.isGWP).map(i => i.product.node.handle);
+    if (cartHandles.length === 0) return [];
+    const { handles } = getRecommendations(cartHandles[0], LOCAL_PRODUCTS, 4);
+    return handles
+      .filter(h => !cartHandles.includes(h))
+      .map(h => LOCAL_PRODUCTS_BY_HANDLE[h])
+      .filter((p): p is ShopifyProduct => Boolean(p))
+      .slice(0, 3);
+  }, [items]);
+
+  const addRecommended = (rec: ShopifyProduct) => {
+    const v = rec.node.variants.edges[0]?.node;
+    if (!v) return;
+    addItem({
+      product: rec,
+      variantId: v.id,
+      variantTitle: v.title,
+      price: { ...v.price },
+      quantity: 1,
+      selectedOptions: v.selectedOptions || [],
+    });
+  };
 
   // Calculate savings only for LED products that have permanent discount
   let totalSavings = 0;
@@ -261,6 +290,26 @@ export const CartDrawer = () => {
               </div>
               
               <div className="flex-shrink-0 space-y-3 pt-3 border-t bg-background mt-3">
+                {/* Cross-sell "Completa tu rutina" */}
+                {recommendations.length > 0 && (
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide flex items-center gap-1.5 mb-2">
+                      <Sparkles className="w-3.5 h-3.5 text-primary" /> Completa tu rutina
+                    </p>
+                    <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
+                      {recommendations.map(rec => (
+                        <div key={rec.node.id} className="flex-shrink-0 w-20">
+                          <img src={rec.node.images.edges[0]?.node.url} alt={rec.node.title} className="w-20 h-20 object-cover rounded-lg bg-muted" />
+                          <p className="text-[11px] leading-tight line-clamp-2 mt-1 text-foreground">{rec.node.title}</p>
+                          <button onClick={() => addRecommended(rec)} className="text-[11px] text-primary font-medium underline">
+                            Añadir
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* Free Shipping Progress */}
                 {(() => {
                   const remaining = Math.max(FREE_SHIPPING_THRESHOLD - subtotalWithDiscount, 0);

@@ -8,6 +8,7 @@ import { SEO } from "@/components/SEO";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { CATEGORIES, productBelongsToCategory } from "@/lib/categories";
 import { CategoryNav } from "@/components/CategoryNav";
+import { IPLComparison } from "@/components/IPLComparison";
 import { ShoppingBag } from "lucide-react";
 
 const Category = () => {
@@ -152,6 +153,12 @@ const Category = () => {
           </div>
         )}
       </div>
+
+      {category === 'depilacion-ipl' && (
+        <div className="container px-6">
+          <IPLComparison />
+        </div>
+      )}
 
       <Footer />
     </div>
