@@ -90,7 +90,7 @@ const AvisoLegal = () => {
             <h3 className="text-xl font-semibold">Contacto</h3>
             <div className="text-muted-foreground space-y-3">
               <p>
-                Te invitamos a que te pongas en contacto con nosotros en relación con cualquier cuestión o comentario sobre el sitio web mediante correo electrónico: <a href="mailto:info@garett.es" className="text-primary hover:underline">info@garett.es</a>
+                Te invitamos a que te pongas en contacto con nosotros en relación con cualquier cuestión o comentario sobre el sitio web mediante correo electrónico: <a href="mailto:info@intermexbeauty.es" className="text-primary hover:underline">info@intermexbeauty.es</a>
               </p>
             </div>
           </section>
@@ -110,7 +110,7 @@ const AvisoLegal = () => {
                   </a>
                 </Button>
                 <Button asChild variant="outline">
-                  <a href="mailto:info@garett.es">
+                  <a href="mailto:info@intermexbeauty.es">
                     <Mail className="w-4 h-4 mr-2" />
                     Enviar email
                   </a>

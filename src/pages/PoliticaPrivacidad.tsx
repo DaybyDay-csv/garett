@@ -46,7 +46,7 @@ const PoliticaPrivacidad = () => {
                 Ni nuestro sistema ni nosotros mismos podemos conocer tus datos personales, como por ejemplo nombre, dirección, teléfono, etc., si no ha sido el propio Usuario quien nos los ha proporcionado.
               </p>
               <p>
-                Si tienes cualquier duda acerca de los tratamientos de datos descritos en la Política, puedes realizar una consulta a administracion@x-net.es.
+                Si tienes cualquier duda acerca de los tratamientos de datos descritos en la Política, puedes realizar una consulta a info@intermexbeauty.es.
               </p>
               <p>
                 El Usuario declara bajo su responsabilidad y garantiza que los datos que facilita a X-Net son ciertos, correctos y que le pertenecen. En el caso que el Usuario proporcionase así como y datos personales de terceros, garantiza haberles informado previamente del correspondiente tratamiento, de acuerdo con el contenido de la presente Política, y, en caso de ser necesario, haber recabado su previo consentimiento expreso para el tratamiento en concreto. En este sentido, es obligación de los Usuarios mantener actualizados los datos de tal forma que correspondan con la realidad en cada momento. Cualquier manifestación falsa o inexacta que se produzca como consecuencia de los datos manifestados, así como los perjuicios que tal información pudiera causar, será responsabilidad directa y exclusiva de los Usuarios.
@@ -66,7 +66,7 @@ const PoliticaPrivacidad = () => {
                 El responsable del tratamiento de tus datos personales es <strong className="text-foreground">X-NET S.L.</strong>, con CIF: <strong className="text-foreground">B-80406770</strong> y domicilio social en: <strong className="text-foreground">Calle Tomás Redondo, 3. 1ª planta Nave 5, 28033, Madrid (España)</strong>.
               </p>
               <p>
-                Puede ponerse en contacto con nosotros mediante correo electrónico a: <a href="mailto:administracion@x-net.es" className="text-primary hover:underline">administracion@x-net.es</a>
+                Puede ponerse en contacto con nosotros mediante correo electrónico a: <a href="mailto:info@intermexbeauty.es" className="text-primary hover:underline">info@intermexbeauty.es</a>
               </p>
             </div>
           </section>
@@ -168,7 +168,7 @@ const PoliticaPrivacidad = () => {
                 <li><strong className="text-foreground">Retirada del consentimiento:</strong> en cualquier momento, sin que ello afecte a la licitud del tratamiento previo.</li>
               </ul>
               <p>
-                Para ejercer estos derechos, puedes enviar un correo electrónico a: <a href="mailto:administracion@x-net.es" className="text-primary hover:underline">administracion@x-net.es</a>
+                Para ejercer estos derechos, puedes enviar un correo electrónico a: <a href="mailto:info@intermexbeauty.es" className="text-primary hover:underline">info@intermexbeauty.es</a>
               </p>
               <p>
                 Asimismo, tienes derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">www.aepd.es</a>) si consideras que el tratamiento de tus datos vulnera la normativa vigente.
@@ -203,7 +203,7 @@ const PoliticaPrivacidad = () => {
                 Si tienes alguna pregunta o inquietud sobre esta Política de Privacidad o sobre cómo tratamos tus datos personales, puedes contactarnos en:
               </p>
               <div className="bg-muted/50 rounded-md p-4 space-y-2">
-                <p><strong className="text-foreground">Email:</strong> <a href="mailto:administracion@x-net.es" className="text-primary hover:underline">administracion@x-net.es</a></p>
+                <p><strong className="text-foreground">Email:</strong> <a href="mailto:info@intermexbeauty.es" className="text-primary hover:underline">info@intermexbeauty.es</a></p>
                 <p><strong className="text-foreground">Teléfono:</strong> +34 679 23 51 48</p>
                 <p><strong className="text-foreground">Dirección postal:</strong> Calle Tomás Redondo, 3. 1ª planta Nave 5, 28033, Madrid (España)</p>
               </div>
@@ -225,7 +225,7 @@ const PoliticaPrivacidad = () => {
                   </a>
                 </Button>
                 <Button asChild variant="outline">
-                  <a href="mailto:administracion@x-net.es">
+                  <a href="mailto:info@intermexbeauty.es">
                     <Mail className="w-4 h-4 mr-2" />
                     Enviar email
                   </a>

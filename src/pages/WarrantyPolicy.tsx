@@ -175,7 +175,7 @@ export default function WarrantyPolicy() {
                   </a>
                 </Button>
                 <Button asChild variant="outline">
-                  <a href="mailto:info@garett.es">
+                  <a href="mailto:info@intermexbeauty.es">
                     <Mail className="w-4 h-4 mr-2" />
                     Enviar email
                   </a>

@@ -122,7 +122,7 @@ const PoliticaCookies = () => {
                 Si tiene alguna pregunta sobre nuestra Política de Cookies, puede ponerse en contacto con nosotros en:
               </p>
               <div className="bg-muted/50 rounded-md p-4 space-y-2">
-                <p><strong className="text-foreground">Email:</strong> <a href="mailto:info@garett.es" className="text-primary hover:underline">info@garett.es</a></p>
+                <p><strong className="text-foreground">Email:</strong> <a href="mailto:info@intermexbeauty.es" className="text-primary hover:underline">info@intermexbeauty.es</a></p>
                 <p><strong className="text-foreground">Teléfono:</strong> +34 679 23 51 48</p>
               </div>
             </div>
@@ -143,7 +143,7 @@ const PoliticaCookies = () => {
                   </a>
                 </Button>
                 <Button asChild variant="outline">
-                  <a href="mailto:info@garett.es">
+                  <a href="mailto:info@intermexbeauty.es">
                     <Mail className="w-4 h-4 mr-2" />
                     Enviar email
                   </a>
