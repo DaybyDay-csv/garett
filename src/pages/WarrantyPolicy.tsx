@@ -97,7 +97,7 @@ export default function WarrantyPolicy() {
               <li className="flex items-start gap-2">
                 <span className="text-primary font-bold">•</span>
                 <div>
-                  <span>Contactar con el Servicio Técnico Autorizado X-Net:</span>
+                  <span>Contactar con el Servicio Técnico Oficial Garett:</span>
                   <div className="mt-2 space-y-1 bg-background rounded-md p-3">
                     <div className="flex items-center gap-2">
                       <Phone className="w-4 h-4 text-primary" />

@@ -24,7 +24,7 @@ const TerminosCondiciones = () => {
               <span className="text-primary">1.</span> Información general
             </h2>
             <p className="text-muted-foreground">
-              Este sitio web es operado por X-NET S.L., empresa legalmente constituida en España, y distribuidora oficial de la marca de dispositivos de belleza Garett, incluyendo aparatos tecnológicos para el cuidado facial y corporal de uso doméstico. Al acceder y utilizar este sitio web, usted acepta cumplir con los siguientes términos y condiciones de uso. Si no está de acuerdo con ellos, le recomendamos no utilizar este sitio.
+              Este sitio web es operado por GARETT Sp. z o.o. (NIF/VAT: 9591956774, REGON: 260782107, KRS: 0000943657), empresa constituida conforme a las leyes de Polonia, con domicilio en ul. Sandomierska 209, 25-330 Kielce (Polonia), y titular de la marca de dispositivos de belleza Garett, incluyendo aparatos tecnológicos para el cuidado facial y corporal de uso doméstico. Al acceder y utilizar este sitio web, usted acepta cumplir con los siguientes términos y condiciones de uso. Si no está de acuerdo con ellos, le recomendamos no utilizar este sitio.
             </p>
           </section>
 
@@ -74,7 +74,7 @@ const TerminosCondiciones = () => {
                 Una vez completado el proceso de compra y aceptadas estas condiciones, el usuario recibirá un correo electrónico de confirmación, que incluirá el resumen de los dispositivos adquiridos, el precio final con impuestos aplicables y, en su caso, los gastos de envío.
               </p>
               <p>
-                X-NET S.L. emitirá una factura electrónica correspondiente al pedido realizado. El usuario podrá solicitar una copia en formato papel, sin coste adicional, escribiendo a la dirección de contacto indicada en el sitio web.
+                GARETT Sp. z o.o. emitirá una factura electrónica correspondiente al pedido realizado. El usuario podrá solicitar una copia en formato papel, sin coste adicional, escribiendo a la dirección de contacto indicada en el sitio web.
               </p>
               <p>
                 El pedido será entregado en la dirección indicada por el usuario, dentro de los plazos especificados según la zona geográfica. Para más información, consulte la cláusula relativa a envíos y entrega.
@@ -98,7 +98,7 @@ const TerminosCondiciones = () => {
                 <li><strong className="text-foreground">Latinoamérica:</strong> la entrega está sujeta a disponibilidad logística; los plazos pueden variar según país y servicio de mensajería local. El cliente asumirá los gastos de aduana y aranceles aplicables en destino.</li>
               </ul>
               <p>
-                X-NET S.L. no será responsable por retrasos imputables a servicios de mensajería externa o causas de fuerza mayor.
+                GARETT Sp. z o.o. no será responsable por retrasos imputables a servicios de mensajería externa o causas de fuerza mayor.
               </p>
             </div>
           </section>
@@ -112,7 +112,7 @@ const TerminosCondiciones = () => {
                 Conforme a la normativa vigente sobre protección de los consumidores y usuarios, el usuario dispone de un plazo de 14 días naturales desde la recepción del dispositivo para ejercer su derecho de desistimiento, siempre que el producto no haya sido usado y se encuentre en su embalaje original, en perfecto estado.
               </p>
               <p>
-                Para tramitar una devolución, el usuario deberá ponerse en contacto con el servicio de atención al cliente a través del correo electrónico indicado en el sitio web. X-NET S.L. facilitará instrucciones sobre cómo devolver el producto.
+                Para tramitar una devolución, el usuario deberá ponerse en contacto con el servicio de atención al cliente a través del correo electrónico indicado en el sitio web. GARETT Sp. z o.o. facilitará instrucciones sobre cómo devolver el producto.
               </p>
               <p>
                 Los gastos de devolución correrán a cargo del usuario, salvo que la devolución se deba a un defecto de fabricación, error en el envío o incumplimiento de las condiciones acordadas.
@@ -135,7 +135,7 @@ const TerminosCondiciones = () => {
                 La garantía no cubre daños derivados del uso indebido, negligencia, caídas, golpes, exposición a líquidos no recomendados, manipulación no autorizada o desgaste normal del producto.
               </p>
               <p>
-                Para hacer efectiva la garantía, el usuario deberá conservar el comprobante de compra y ponerse en contacto con el servicio de atención al cliente de X-NET S.L.
+                Para hacer efectiva la garantía, el usuario deberá conservar el comprobante de compra y ponerse en contacto con el servicio de atención al cliente de GARETT Sp. z o.o.
               </p>
             </div>
           </section>
@@ -145,7 +145,7 @@ const TerminosCondiciones = () => {
               <span className="text-primary">8.</span> Propiedad intelectual
             </h2>
             <p className="text-muted-foreground">
-              Todos los contenidos de este sitio web (textos, imágenes, logotipos, diseños, vídeos, software) son propiedad de Garett Sp. z o.o. o de X-NET S.L., y están protegidos por las leyes de propiedad intelectual e industrial vigentes. Queda prohibida su reproducción, distribución, modificación, comunicación pública o cualquier otra forma de explotación sin autorización previa y expresa por escrito.
+              Todos los contenidos de este sitio web (textos, imágenes, logotipos, diseños, vídeos, software) son propiedad de GARETT Sp. z o.o. y están protegidos por las leyes de propiedad intelectual e industrial vigentes. Queda prohibida su reproducción, distribución, modificación, comunicación pública o cualquier otra forma de explotación sin autorización previa y expresa por escrito.
             </p>
           </section>
 
@@ -154,7 +154,7 @@ const TerminosCondiciones = () => {
               <span className="text-primary">9.</span> Protección de datos personales
             </h2>
             <p className="text-muted-foreground">
-              Los datos personales proporcionados por los usuarios serán tratados conforme a lo establecido en la Política de Privacidad de X-NET S.L., disponible en este sitio web, y de acuerdo con el Reglamento General de Protección de Datos (RGPD) y la normativa española aplicable.
+              Los datos personales proporcionados por los usuarios serán tratados conforme a lo establecido en la Política de Privacidad de GARETT Sp. z o.o., disponible en este sitio web, y de acuerdo con el Reglamento General de Protección de Datos (RGPD) y la normativa española aplicable.
             </p>
           </section>
 
@@ -163,7 +163,7 @@ const TerminosCondiciones = () => {
               <span className="text-primary">10.</span> Modificaciones de los términos y condiciones
             </h2>
             <p className="text-muted-foreground">
-              X-NET S.L. se reserva el derecho de modificar estos términos y condiciones en cualquier momento. Las modificaciones serán comunicadas a través del sitio web y entrarán en vigor desde su publicación. Se recomienda a los usuarios revisar periódicamente estos términos.
+              GARETT Sp. z o.o. se reserva el derecho de modificar estos términos y condiciones en cualquier momento. Las modificaciones serán comunicadas a través del sitio web y entrarán en vigor desde su publicación. Se recomienda a los usuarios revisar periódicamente estos términos.
             </p>
           </section>
 
@@ -187,6 +187,7 @@ const TerminosCondiciones = () => {
               <div className="bg-muted/50 rounded-md p-4 space-y-2">
                 <p><strong className="text-foreground">Email:</strong> <a href="mailto:info@intermexbeauty.es" className="text-primary hover:underline">info@intermexbeauty.es</a></p>
                 <p><strong className="text-foreground">Teléfono:</strong> +34 679 23 51 48</p>
+                <p><strong className="text-foreground">Dirección:</strong> ul. Sandomierska 209, 25-330 Kielce (Polonia)</p>
               </div>
             </div>
           </section>

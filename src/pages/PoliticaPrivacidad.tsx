@@ -16,7 +16,7 @@ const PoliticaPrivacidad = () => {
           <div className="text-center border-b pb-6">
             <Shield className="w-12 h-12 text-primary mx-auto mb-4" />
             <h1 className="text-3xl font-bold mb-2">Política de Privacidad</h1>
-            <p className="text-muted-foreground">Junio 2025</p>
+            <p className="text-muted-foreground">Septiembre 2026</p>
           </div>
 
           <section className="space-y-4">
@@ -25,7 +25,7 @@ const PoliticaPrivacidad = () => {
             </h2>
             <div className="text-muted-foreground space-y-3">
               <p>
-                La presente Política de Privacidad (la «Política») describe cómo X-Net S.L. (en adelante, "X-Net" o "nosotros") recoge, utiliza, almacena, comparte y protege la información personal derivada del acceso desde nuestros establecimientos físicos, canales telefónicos y entornos digitales, siendo estos últimos la presente página web www.garettespaña.es (en adelante "la Página Web") así como nuestra aplicación móvil (en adelante la "App") (en adelante, y de forma conjunta los "Canales") a determinadas áreas, servicios, y productos por parte de los usuarios (en adelante, los "Usuarios" e individualmente considerados el «Usuario») a través de dichos Canales, formalicen o no una relación contractual con nosotros.
+                La presente Política de Privacidad (la «Política») describe cómo GARETT Sp. z o.o. (en adelante, "GARETT" o "nosotros") recoge, utiliza, almacena, comparte y protege la información personal derivada del acceso desde nuestros canales telefónicos y entornos digitales, siendo estos últimos la presente página web www.garettespaña.es (en adelante "la Página Web") así como nuestra aplicación móvil (en adelante la "App") (en adelante, y de forma conjunta los "Canales") a determinadas áreas, servicios, y productos por parte de los usuarios (en adelante, los "Usuarios" e individualmente considerados el «Usuario») a través de dichos Canales, formalicen o no una relación contractual con nosotros.
               </p>
               <p className="text-foreground font-medium">En particular, la presente Política informa a los Usuarios sobre:</p>
               <ul className="space-y-2 ml-6 list-disc">
@@ -40,7 +40,7 @@ const PoliticaPrivacidad = () => {
                 Asimismo, durante tu navegación por el Sitio Web, instalaremos "cookies" en tu dispositivo u ordenador. Por favor, revisa nuestra <Link to="/politica-cookies" className="text-primary hover:underline">Política de Cookies</Link> para ampliar la información acerca de qué cookies utilizamos y cómo modificar los permisos sobre cookies en tus dispositivos.
               </p>
               <p>
-                En relación con el uso y navegación de la Página Web y de la App, X-Net almacena los datos del dispositivo de conexión que el Usuario utiliza para acceder a los servicios ofrecidos a través de éstos. En este sentido cuando el Usuario accede a la Página Web o a la App, el sistema donde ambas están alojadas reconoce automáticamente la dirección "IP" de tu dispositivo, información sobre tu dispositivo, el tipo de dispositivo, tu conexión a Internet, tu tipo de navegador, la versión y el sistema operativo, el día y la hora a la que has entrado, a la que te has desconectado, y por qué áreas de nuestras Página Web y/o App te has movido (clickstream). Nuestro sistema ha de conocer estos datos e informaciones de tu dispositivo porque tiene que poder comunicarse con él para enviarte lo que le pidas a través de tu navegador y, en consecuencia, para que tu, como Usuario puedas verlo en tu pantalla.
+                En relación con el uso y navegación de la Página Web y de la App, GARETT almacena los datos del dispositivo de conexión que el Usuario utiliza para acceder a los servicios ofrecidos a través de éstos. En este sentido cuando el Usuario accede a la Página Web o a la App, el sistema donde ambas están alojadas reconoce automáticamente la dirección "IP" de tu dispositivo, información sobre tu dispositivo, el tipo de dispositivo, tu conexión a Internet, tu tipo de navegador, la versión y el sistema operativo, el día y la hora a la que has entrado, a la que te has desconectado, y por qué áreas de nuestras Página Web y/o App te has movido (clickstream). Nuestro sistema ha de conocer estos datos e informaciones de tu dispositivo porque tiene que poder comunicarse con él para enviarte lo que le pidas a través de tu navegador y, en consecuencia, para que tu, como Usuario puedas verlo en tu pantalla.
               </p>
               <p>
                 Ni nuestro sistema ni nosotros mismos podemos conocer tus datos personales, como por ejemplo nombre, dirección, teléfono, etc., si no ha sido el propio Usuario quien nos los ha proporcionado.
@@ -49,7 +49,7 @@ const PoliticaPrivacidad = () => {
                 Si tienes cualquier duda acerca de los tratamientos de datos descritos en la Política, puedes realizar una consulta a info@intermexbeauty.es.
               </p>
               <p>
-                El Usuario declara bajo su responsabilidad y garantiza que los datos que facilita a X-Net son ciertos, correctos y que le pertenecen. En el caso que el Usuario proporcionase así como y datos personales de terceros, garantiza haberles informado previamente del correspondiente tratamiento, de acuerdo con el contenido de la presente Política, y, en caso de ser necesario, haber recabado su previo consentimiento expreso para el tratamiento en concreto. En este sentido, es obligación de los Usuarios mantener actualizados los datos de tal forma que correspondan con la realidad en cada momento. Cualquier manifestación falsa o inexacta que se produzca como consecuencia de los datos manifestados, así como los perjuicios que tal información pudiera causar, será responsabilidad directa y exclusiva de los Usuarios.
+                El Usuario declara bajo su responsabilidad y garantiza que los datos que facilita a GARETT son ciertos, correctos y que le pertenecen. En el caso que el Usuario proporcionase así como y datos personales de terceros, garantiza haberles informado previamente del correspondiente tratamiento, de acuerdo con el contenido de la presente Política, y, en caso de ser necesario, haber recabado su previo consentimiento expreso para el tratamiento en concreto. En este sentido, es obligación de los Usuarios mantener actualizados los datos de tal forma que correspondan con la realidad en cada momento. Cualquier manifestación falsa o inexacta que se produzca como consecuencia de los datos manifestados, así como los perjuicios que tal información pudiera causar, será responsabilidad directa y exclusiva de los Usuarios.
               </p>
               <p>
                 Nuestro Sitio Web y las aplicaciones que eventualmente podamos utilizar, no están dirigidas a los niños y no recogemos, conscientemente, datos de menores.
@@ -63,7 +63,7 @@ const PoliticaPrivacidad = () => {
             </h2>
             <div className="text-muted-foreground space-y-3">
               <p>
-                El responsable del tratamiento de tus datos personales es <strong className="text-foreground">X-NET S.L.</strong>, con CIF: <strong className="text-foreground">B-80406770</strong> y domicilio social en: <strong className="text-foreground">Calle Tomás Redondo, 3. 1ª planta Nave 5, 28033, Madrid (España)</strong>.
+                El responsable del tratamiento de tus datos personales es <strong className="text-foreground">GARETT Sp. z o.o.</strong>, con NIF/VAT: <strong className="text-foreground">9591956774</strong>, REGON: <strong className="text-foreground">260782107</strong> y KRS: <strong className="text-foreground">0000943657</strong>, con domicilio social en: <strong className="text-foreground">ul. Sandomierska 209, 25-330 Kielce (Polonia)</strong>.
               </p>
               <p>
                 Puede ponerse en contacto con nosotros mediante correo electrónico a: <a href="mailto:info@intermexbeauty.es" className="text-primary hover:underline">info@intermexbeauty.es</a>
@@ -181,7 +181,7 @@ const PoliticaPrivacidad = () => {
               <span className="text-primary">9.</span> Seguridad de los datos
             </h2>
             <p className="text-muted-foreground">
-              En X-NET S.L. aplicamos medidas técnicas y organizativas apropiadas para proteger tus datos personales frente a accesos no autorizados, pérdida, destrucción o alteración. Sin embargo, ningún sistema de transmisión por Internet o de almacenamiento electrónico es completamente seguro, por lo que no podemos garantizar la seguridad absoluta.
+              En GARETT Sp. z o.o. aplicamos medidas técnicas y organizativas apropiadas para proteger tus datos personales frente a accesos no autorizados, pérdida, destrucción o alteración. Sin embargo, ningún sistema de transmisión por Internet o de almacenamiento electrónico es completamente seguro, por lo que no podemos garantizar la seguridad absoluta.
             </p>
           </section>
 
@@ -205,7 +205,7 @@ const PoliticaPrivacidad = () => {
               <div className="bg-muted/50 rounded-md p-4 space-y-2">
                 <p><strong className="text-foreground">Email:</strong> <a href="mailto:info@intermexbeauty.es" className="text-primary hover:underline">info@intermexbeauty.es</a></p>
                 <p><strong className="text-foreground">Teléfono:</strong> +34 679 23 51 48</p>
-                <p><strong className="text-foreground">Dirección postal:</strong> Calle Tomás Redondo, 3. 1ª planta Nave 5, 28033, Madrid (España)</p>
+                <p><strong className="text-foreground">Dirección postal:</strong> ul. Sandomierska 209, 25-330 Kielce (Polonia)</p>
               </div>
             </div>
           </section>
