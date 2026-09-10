@@ -29,7 +29,9 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
 
 const sheetVariants = cva(
-  "fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
+  // Apple sheet: damping 0.8 / response 0.3 ≈ ease-spring; el cierre es más
+  // rápido que la apertura. Entra y sale por el mismo lado (consistencia espacial).
+  "fixed z-50 gap-4 bg-background p-6 shadow-lg ease-spring data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-[250ms] data-[state=open]:duration-[400ms]",
   {
     variants: {
       side: {

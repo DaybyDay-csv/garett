@@ -5,6 +5,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { Sparkles } from "lucide-react";
+import { ProductGridSkeleton } from "@/components/ProductGridSkeleton";
 
 const NewArrivals = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -46,9 +47,8 @@ const NewArrivals = () => {
         </div>
 
         {loading ? (
-          <div className="py-20 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-4 text-muted-foreground">Cargando novedades...</p>
+          <div className="py-10">
+            <ProductGridSkeleton count={6} />
           </div>
         ) : products.length === 0 ? (
           <div className="py-20 text-center">

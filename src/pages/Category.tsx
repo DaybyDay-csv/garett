@@ -10,6 +10,7 @@ import { CATEGORIES, productBelongsToCategory } from "@/lib/categories";
 import { CategoryNav } from "@/components/CategoryNav";
 import { IPLComparison } from "@/components/IPLComparison";
 import { ShoppingBag } from "lucide-react";
+import { ProductGridSkeleton } from "@/components/ProductGridSkeleton";
 
 const Category = () => {
   const { slug: category } = useParams<{ slug: string }>();
@@ -132,10 +133,7 @@ const Category = () => {
 
         {/* Products Grid */}
         {loading ? (
-          <div className="py-20 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-4 text-muted-foreground">Cargando productos...</p>
-          </div>
+          <ProductGridSkeleton count={6} />
         ) : products.length === 0 ? (
           <div className="py-20 text-center">
             <ShoppingBag className="w-16 h-16 text-muted-foreground mx-auto mb-4" />

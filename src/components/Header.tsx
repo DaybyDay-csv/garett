@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
 import { WishlistDrawer } from "./WishlistDrawer";
 import { Button } from "./ui/button";
@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { CategoryNav } from "@/components/CategoryNav";
 import { CATEGORY_NAV } from "@/lib/categories";
+import { cn } from "@/lib/utils";
 import garettLogo from "@/assets/garett-logo-navy.png";
 
 export const Header = () => {
@@ -31,7 +32,7 @@ export const Header = () => {
     { label: 'Superventas', to: '/superventas' },
   ];
 
-  return <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/90 shadow-sm">
+  return <header className="sticky top-0 z-50 w-full border-b border-border surface-material">
       <div className="container flex h-20 items-center justify-between gap-4">
         <Link to="/" className="flex items-center gap-3 flex-shrink-0">
           <img src={garettLogo} alt="GARETT" className="h-9 object-contain" />
@@ -40,13 +41,19 @@ export const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           {navLinks.map(link => (
-            <Link
+            <NavLink
               key={link.to}
               to={link.to}
-              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors tracking-wide"
+              end={link.to === '/'}
+              className={({ isActive }) => cn(
+                "relative text-sm font-medium tracking-wide text-foreground/80 transition-colors",
+                "after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-foreground after:transition-transform after:duration-300 after:ease-spring",
+                "hover:text-foreground hover:after:scale-x-100",
+                isActive && "text-foreground after:scale-x-100"
+              )}
             >
               {link.label}
-            </Link>
+            </NavLink>
           ))}
         </nav>
 

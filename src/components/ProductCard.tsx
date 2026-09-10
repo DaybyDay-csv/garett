@@ -135,14 +135,14 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
     <Link 
       to={`/producto/${node.handle}`}
       onClick={handleProductClick}
-      className="group block bg-card rounded-none overflow-hidden border hover:shadow-lg transition-all"
+      className="group block bg-card rounded-none overflow-hidden border transition-[transform,box-shadow] duration-300 ease-spring hover:shadow-lg hover:-translate-y-0.5"
     >
       <div className="aspect-square bg-white overflow-hidden relative p-6">
         {image && (
           <OptimizedImage
             src={image.url}
             alt={image.altText || node.title}
-            className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ${!firstVariant?.availableForSale ? 'opacity-60 grayscale' : ''}`}
+            className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-spring ${!firstVariant?.availableForSale ? 'opacity-60 grayscale' : ''}`}
             blurPlaceholder
           />
         )}
@@ -250,7 +250,7 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
               onClick={handleAddToCart}
               disabled={!firstVariant?.availableForSale}
               size="lg"
-              className="w-full md:inline-flex h-12 text-base backdrop-blur-sm disabled:opacity-60"
+              className="w-full md:inline-flex h-12 text-base disabled:opacity-60"
             >
               {firstVariant?.availableForSale ? 'Añadir al carrito' : 'Agotado'}
             </Button>

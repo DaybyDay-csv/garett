@@ -9,6 +9,7 @@ import { BlogCarousel } from "@/components/BlogCarousel";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { ProductGridSkeleton } from "@/components/ProductGridSkeleton";
 import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { LOCAL_PRODUCTS_BY_HANDLE } from "@/lib/catalog";
 import { BUNDLES } from "@/lib/bundles";
@@ -73,19 +74,19 @@ const Index = () => {
         <div className="container py-14 md:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div className="space-y-6">
-              <Badge className="bg-primary-light text-primary border-primary/10 px-3 py-1.5 text-xs">
+              <Badge className="animate-fade-up bg-primary-light text-primary border-primary/10 px-3 py-1.5 text-xs">
                 <FlaskConical className="w-3 h-3 mr-1.5" />
                 Estudio clínico independiente 2024
               </Badge>
-              <h2 className="text-3xl md:text-5xl font-semibold tracking-tight leading-[1.05] text-foreground">
+              <h2 className="animate-fade-up [animation-delay:80ms] text-3xl md:text-5xl font-semibold tracking-tight leading-[1.05] text-foreground">
                 Hasta <span className="text-primary">72% de mejora visible</span><br />
                 en 8 semanas.
               </h2>
-              <p className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
+              <p className="animate-fade-up [animation-delay:160ms] text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
                 Dispositivos de belleza profesional con tecnología LED, microcorriente, EMS y luz pulsada.
                 Resultados clínicos medibles, desde casa.
               </p>
-              <div className="flex flex-wrap gap-3 pt-2">
+              <div className="animate-fade-up [animation-delay:240ms] flex flex-wrap gap-3 pt-2">
                 <Button asChild size="lg">
                   <Link to="/productos">
                     Comprar ahora
@@ -98,13 +99,13 @@ const Index = () => {
                   </Link>
                 </Button>
               </div>
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-4 text-sm text-muted-foreground">
+              <div className="animate-fade-up [animation-delay:320ms] flex flex-wrap items-center gap-x-6 gap-y-2 pt-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1.5"><Truck className="w-4 h-4" /> Envío gratis +49€</span>
                 <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4" /> Garantía 24 meses</span>
                 <span className="flex items-center gap-1.5"><Award className="w-4 h-4" /> Pago seguro SSL</span>
               </div>
             </div>
-            <div className="relative">
+            <div className="animate-fade-up [animation-delay:200ms] relative">
               <div className="aspect-square rounded-2xl bg-primary-light overflow-hidden">
                 <img
                   src={categoryTerapiaLuzLED}
@@ -112,7 +113,7 @@ const Index = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-4 -left-4 bg-card rounded-xl shadow-lg p-4 flex items-center gap-3 border border-border">
+              <div className="animate-fade-up [animation-delay:450ms] absolute -bottom-4 -left-4 bg-card rounded-xl shadow-lg p-4 flex items-center gap-3 border border-border">
                 <div className="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center">
                   <Star className="w-5 h-5 text-primary fill-primary" />
                 </div>
@@ -547,9 +548,8 @@ const Index = () => {
           </p>
         </section>}
 
-      {loading && <section className="py-20 text-center container">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-4 text-muted-foreground">Cargando productos...</p>
+      {loading && <section className="py-20 container">
+          <ProductGridSkeleton count={4} className="lg:grid-cols-4" />
         </section>}
 
       <Footer />

@@ -369,7 +369,7 @@ const ProductDetail = () => {
                   // Force re-render
                   window.dispatchEvent(new Event('wishlist-change'));
                 }}
-                className="absolute top-4 left-4 z-10 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center border shadow-sm hover:scale-110 transition-transform"
+                className="absolute top-4 left-4 z-10 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center border shadow-sm transition-transform duration-200 ease-out hover:scale-110 active:scale-90"
               >
                 <Heart className={`w-5 h-5 ${JSON.parse(localStorage.getItem('garett_wishlist') || '[]').includes(node.handle) ? 'fill-red-500 text-red-500' : 'text-foreground'}`} />
               </button>
@@ -393,7 +393,7 @@ const ProductDetail = () => {
               {/* Image thumbnails */}
               {node.images.edges.map((image, idx) => <button key={idx} onClick={() => {
               setSelectedImage(idx);
-            }} className={`aspect-square bg-muted/10 rounded-lg overflow-hidden border-2 transition-all hover:scale-105 ${selectedImage === idx ? 'border-primary scale-105' : 'border-transparent hover:border-muted-foreground/30'}`}>
+            }} className={`aspect-square bg-muted/10 rounded-lg overflow-hidden border-2 transition-[transform,border-color] duration-300 ease-spring hover:scale-105 ${selectedImage === idx ? 'border-primary scale-105' : 'border-transparent hover:border-muted-foreground/30'}`}>
                   <img src={image.node.url} alt={image.node.altText || `${node.title} - ${idx + 1}`} className="w-full h-full object-cover" />
                 </button>)}
             </div>
@@ -923,7 +923,7 @@ const ProductDetail = () => {
       </div>
 
       {/* Sticky Buy Box - All devices (Report: Element 05 - ALL 25 stores) */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border p-3 md:p-4 shadow-lg safe-area-inset-bottom">
+      <div className="surface-material fixed bottom-0 left-0 right-0 z-50 border-t border-border p-3 md:p-4 shadow-lg safe-area-inset-bottom animate-slide-up [animation-delay:300ms]">
           <div className="container flex items-center gap-3">
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold truncate">{node.title}</p>

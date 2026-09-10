@@ -9,6 +9,7 @@ import { productBelongsToCategory, CATEGORY_NAV } from "@/lib/categories";
 import { Filter, ShoppingBag, X } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { ProductGridSkeleton } from "@/components/ProductGridSkeleton";
 
 const CATEGORIES = [
   { value: "all", label: "Todas" },
@@ -241,10 +242,7 @@ const Products = () => {
 
         {/* Products Grid */}
         {loading ? (
-          <div className="py-20 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto" />
-            <p className="mt-4 text-muted-foreground">Cargando productos...</p>
-          </div>
+          <ProductGridSkeleton count={6} />
         ) : filteredProducts.length === 0 ? (
           <div className="py-20 text-center">
             <ShoppingBag className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
