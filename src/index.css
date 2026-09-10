@@ -45,8 +45,6 @@ Rebrand 2026-08-17 (#03142E navy + #F3F3F3 page + #FFFFFF product).
 
     --radius: 0.5rem;
 
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
     /* Header — light surface, navy text */
     --header: 0 0% 100%;
     --header-foreground: 218 86% 9%;
@@ -153,6 +151,19 @@ Rebrand 2026-08-17 (#03142E navy + #F3F3F3 page + #FFFFFF product).
   button, a {
     @apply transition-colors duration-200;
   }
+
+  /* Reduced motion: sin deslizamientos ni rebotes; el contenido aparece
+     directamente (la animación se colapsa a su estado final). */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
 @layer utilities {
@@ -171,5 +182,28 @@ Rebrand 2026-08-17 (#03142E navy + #F3F3F3 page + #FFFFFF product).
   }
   .section-tight {
     @apply px-4 md:px-8 py-10 md:py-16;
+  }
+
+  /* Material translúcido para chrome flotante (header, barra de compra):
+     el contenido hace scroll por debajo. Respeta prefers-reduced-transparency
+     y entornos sin backdrop-filter con fondo sólido. */
+  .surface-material {
+    background-color: hsl(var(--background) / 0.85);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .surface-material {
+      background-color: hsl(var(--background));
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .surface-material {
+      background-color: hsl(var(--background));
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
   }
 }

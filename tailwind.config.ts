@@ -20,6 +20,11 @@ export default {
       fontFamily: {
         sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
       },
+      // Curva de desaceleración iOS (equivalente CSS del spring crítico de
+      // "Designing Fluid Interfaces"): rápida al inicio, asiento suave, sin rebote.
+      transitionTimingFunction: {
+        spring: 'cubic-bezier(0.32, 0.72, 0, 1)',
+      },
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1.5', letterSpacing: '0.01em' }],
         'sm': ['0.875rem', { lineHeight: '1.5', letterSpacing: '0.01em' }],
@@ -125,11 +130,32 @@ export default {
           "0%": { transform: "translateX(-100%)" },
           "100%": { transform: "translateX(100%)" },
         },
+        "fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(16px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "slide-up": {
+          from: { transform: "translateY(100%)" },
+          to: { transform: "translateY(0)" },
+        },
+        "badge-pop": {
+          "0%": { transform: "scale(1)" },
+          "40%": { transform: "scale(1.3)" },
+          "100%": { transform: "scale(1)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         shimmer: "shimmer 2s infinite",
+        "fade-in": "fade-in 0.5s ease-spring both",
+        "fade-up": "fade-up 0.6s ease-spring both",
+        "slide-up": "slide-up 0.45s ease-spring both",
+        "badge-pop": "badge-pop 0.35s ease-spring",
       },
     },
   },
