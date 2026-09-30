@@ -14,8 +14,10 @@ import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { LOCAL_PRODUCTS_BY_HANDLE } from "@/lib/catalog";
 import { BUNDLES } from "@/lib/bundles";
 import { homeFAQs } from "@/lib/faqData";
-import { ShoppingBag, ArrowRight, ShieldCheck, Award, Truck, Stethoscope, FlaskConical, Leaf, Star } from "lucide-react";
+import { ShoppingBag, ArrowRight, ShieldCheck, Award, Truck, FlaskConical, Leaf, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
+import { DEVOLUCION, ENVIO, GARANTIA, CONTACTO } from "@/lib/policies";
+import { UGCSection } from "@/components/UGCSection";
 import categoryCuidadoCapilar from "@/assets/category-cuidado-capilar.jpg";
 import categoryMasajeadoresFaciales from "@/assets/category-masajeadores-faciales.jpg";
 import categoryLimpiezaFacial from "@/assets/category-limpieza-facial.jpg";
@@ -50,7 +52,7 @@ const Index = () => {
     '@type': 'WebSite',
     name: 'Garett Beauty España',
     url: window.location.origin,
-    description: 'Tecnología de belleza profesional para resultados visibles. Dispositivos de cuidado capilar, facial y corporal con garantía 2 años.',
+    description: `Tecnología de belleza profesional para resultados visibles. Dispositivos de cuidado capilar, facial y corporal con garantía comercial de ${GARANTIA.comercial.anios} años.`,
     publisher: {
       '@type': 'Organization',
       name: 'Garett Beauty',
@@ -66,25 +68,25 @@ const Index = () => {
     }
   };
   return <div className="min-h-screen bg-background">
-      <SEO title="Garett Beauty España - Belleza Profesional" description="Descubre los mejores dispositivos de belleza profesional. Cuidado capilar, facial y corporal con tecnología avanzada. Envío gratis en 24-48h y garantía 2 años." canonicalUrl="/" schema={homeSchema} />
+      <SEO title="Garett Beauty España - Belleza Profesional" description={`Descubre los mejores dispositivos de belleza profesional. Cuidado capilar, facial y corporal con tecnología avanzada. ${ENVIO.textoCorto} y garantía comercial de ${GARANTIA.comercial.anios} años.`} canonicalUrl="/" schema={homeSchema} />
       <Header />
 
-      {/* [1] HERO — T06: claim cuantitativo permanente (ChristmasHero queda oculto) */}
+      {/* [1] HERO — sin claims sin fuente: solo lo demostrable (CE, garantía, devolución, contacto) */}
       <section className="bg-card">
         <div className="container py-14 md:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div className="space-y-6">
               <Badge className="animate-fade-up bg-primary-light text-primary border-primary/10 px-3 py-1.5 text-xs">
-                <FlaskConical className="w-3 h-3 mr-1.5" />
-                Estudio clínico independiente 2024
+                <ShieldCheck className="w-3 h-3 mr-1.5" />
+                Dispositivos médicos CE clase IIa
               </Badge>
               <h2 className="animate-fade-up [animation-delay:80ms] text-3xl md:text-5xl font-semibold tracking-tight leading-[1.05] text-foreground">
-                Hasta <span className="text-primary">72% de mejora visible</span><br />
-                en 8 semanas.
+                Tecnología de belleza <span className="text-primary">profesional</span><br />
+                para usar en casa.
               </h2>
               <p className="animate-fade-up [animation-delay:160ms] text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
-                Dispositivos de belleza profesional con tecnología LED, microcorriente, EMS y luz pulsada.
-                Resultados clínicos medibles, desde casa.
+                Dispositivos con tecnología LED, microcorriente, EMS y luz pulsada para tu rutina facial y corporal.
+                Con garantía comercial de {GARANTIA.comercial.anios} años, {DEVOLUCION.diasPrecintoIntacto} días de devolución con {DEVOLUCION.condicion} y teléfono de soporte si te surge una duda.
               </p>
               <div className="animate-fade-up [animation-delay:240ms] flex flex-wrap gap-3 pt-2">
                 <Button asChild size="lg">
@@ -99,11 +101,15 @@ const Index = () => {
                   </Link>
                 </Button>
               </div>
-              <div className="animate-fade-up [animation-delay:320ms] flex flex-wrap items-center gap-x-6 gap-y-2 pt-4 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1.5"><Truck className="w-4 h-4" /> Envío gratis +49€</span>
-                <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4" /> Garantía 24 meses</span>
+              <div className="animate-fade-up [animation-delay:320ms] flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-muted-foreground">
+                <span className="flex items-center gap-1.5"><Truck className="w-4 h-4" /> {ENVIO.textoCorto}</span>
+                <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4" /> Garantía {GARANTIA.comercial.anios} años</span>
                 <span className="flex items-center gap-1.5"><Award className="w-4 h-4" /> Pago seguro SSL</span>
               </div>
+              <a href={CONTACTO.telefonoHref} className="animate-fade-up [animation-delay:400ms] inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Phone className="w-4 h-4" />
+                {CONTACTO.textoJuntoAlCta}
+              </a>
             </div>
             <div className="animate-fade-up [animation-delay:200ms] relative">
               <div className="aspect-square rounded-2xl bg-primary-light overflow-hidden">
@@ -115,11 +121,11 @@ const Index = () => {
               </div>
               <div className="animate-fade-up [animation-delay:450ms] absolute -bottom-4 -left-4 bg-card rounded-xl shadow-lg p-4 flex items-center gap-3 border border-border">
                 <div className="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center">
-                  <Star className="w-5 h-5 text-primary fill-primary" />
+                  <ShieldCheck className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-foreground">4.7 / 5</p>
-                  <p className="text-xs text-muted-foreground">+1.200 reviews verificadas</p>
+                  <p className="text-sm font-semibold text-foreground">CE clase IIa</p>
+                  <p className="text-xs text-muted-foreground">Dispositivos médicos certificados</p>
                 </div>
               </div>
             </div>
@@ -138,56 +144,41 @@ const Index = () => {
                 <p className="text-[10px] text-muted-foreground leading-tight">Pago SSL</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 justify-center">
-              <Stethoscope className="w-6 h-6 text-primary flex-shrink-0" />
+            <a href={CONTACTO.telefonoHref} className="flex items-center gap-3 justify-center hover:opacity-80 transition-opacity">
+              <Phone className="w-6 h-6 text-primary flex-shrink-0" />
               <div>
-                <p className="text-xs font-semibold text-foreground leading-tight">Dermatólogos</p>
-                <p className="text-[10px] text-muted-foreground leading-tight">Testado</p>
+                <p className="text-xs font-semibold text-foreground leading-tight">{CONTACTO.telefono}</p>
+                <p className="text-[10px] text-muted-foreground leading-tight">{CONTACTO.horario}</p>
               </div>
-            </div>
+            </a>
             <div className="flex items-center gap-3 justify-center">
               <FlaskConical className="w-6 h-6 text-primary flex-shrink-0" />
               <div>
-                <p className="text-xs font-semibold text-foreground leading-tight">Certificado CE</p>
-                <p className="text-[10px] text-muted-foreground leading-tight">Sanitario</p>
+                <p className="text-xs font-semibold text-foreground leading-tight">CE clase IIa</p>
+                <p className="text-[10px] text-muted-foreground leading-tight">Dispositivo médico</p>
               </div>
             </div>
             <div className="flex items-center gap-3 justify-center">
               <Award className="w-6 h-6 text-primary flex-shrink-0" />
               <div>
                 <p className="text-xs font-semibold text-foreground leading-tight">Garantía</p>
-                <p className="text-[10px] text-muted-foreground leading-tight">24 meses</p>
+                <p className="text-[10px] text-muted-foreground leading-tight">{GARANTIA.comercial.anios} años comercial · {GARANTIA.legal.anios} legal</p>
               </div>
             </div>
             <div className="flex items-center gap-3 justify-center">
               <Truck className="w-6 h-6 text-primary flex-shrink-0" />
               <div>
                 <p className="text-xs font-semibold text-foreground leading-tight">Envío gratis</p>
-                <p className="text-[10px] text-muted-foreground leading-tight">Península +49€</p>
+                <p className="text-[10px] text-muted-foreground leading-tight">Todos los pedidos</p>
               </div>
             </div>
             <div className="flex items-center gap-3 justify-center">
               <Leaf className="w-6 h-6 text-primary flex-shrink-0" />
               <div>
                 <p className="text-xs font-semibold text-foreground leading-tight">Devolución</p>
-                <p className="text-[10px] text-muted-foreground leading-tight">30 días</p>
+                <p className="text-[10px] text-muted-foreground leading-tight">{DEVOLUCION.diasPrecintoIntacto} días · {DEVOLUCION.condicion}</p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* [3] PRESS LOGOS */}
-      <section className="bg-background py-6">
-        <div className="container">
-          <p className="text-xs uppercase tracking-wider text-muted-foreground text-center mb-4">Mencionados en</p>
-          <div className="flex items-center justify-center gap-8 md:gap-12 flex-wrap opacity-60">
-            <span className="text-sm md:text-base font-semibold text-foreground">El Corte Inglés</span>
-            <span className="text-sm md:text-base font-semibold text-foreground">Vogue</span>
-            <span className="text-sm md:text-base font-semibold text-foreground">Cosmopolitan</span>
-            <span className="text-sm md:text-base font-semibold text-foreground">La Vanguardia</span>
-            <span className="text-sm md:text-base font-semibold text-foreground">Hola!</span>
-            <span className="text-sm md:text-base font-semibold text-foreground">Elle</span>
           </div>
         </div>
       </section>
@@ -429,40 +420,42 @@ const Index = () => {
         </div>
       </section>
 
-      {/* [7] CLINICAL BLOCK — T10 */}
+      {/* [7] CONFIANZA — solo lo demostrable: CE clase IIa (FAQ), garantía y devolución (policies), contacto */}
       <section className="bg-primary text-primary-foreground">
         <div className="container py-14 md:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="space-y-5">
               <Badge className="bg-white/10 text-white border-white/20 px-3 py-1.5 text-xs">
-                <FlaskConical className="w-3 h-3 mr-1.5" />
-                Respaldo científico
+                <ShieldCheck className="w-3 h-3 mr-1.5" />
+                Compra con respaldo
               </Badge>
               <h2 className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight">
-                Tecnología clínicamente validada.
+                Esto es lo que te garantizamos, por escrito.
               </h2>
               <p className="text-base md:text-lg text-primary-foreground/80 leading-relaxed max-w-xl">
-                Cada dispositivo Garett se somete a estudios clínicos independientes con
-                mediciones de elasticidad, hidratación y firmeza.
-                Sin claims vacíos: con datos.
+                Nuestros dispositivos están certificados como dispositivos médicos CE clase IIa. Tienes {GARANTIA.comercial.anios} años de garantía comercial y {GARANTIA.legal.anios} de garantía legal, {DEVOLUCION.diasPrecintoIntacto} días de devolución con {DEVOLUCION.condicion} y un teléfono real al que llamar si te surge una duda:{" "}
+                <a href={CONTACTO.telefonoHref} className="font-semibold underline underline-offset-4 hover:no-underline">
+                  {CONTACTO.telefono}
+                </a>{" "}
+                ({CONTACTO.horario}).
               </p>
               <div className="grid grid-cols-3 gap-4 pt-4">
                 <div>
-                  <p className="text-3xl md:text-4xl font-semibold tracking-tight">+72%</p>
-                  <p className="text-xs text-primary-foreground/70 mt-1">Elasticidad</p>
+                  <p className="text-3xl md:text-4xl font-semibold tracking-tight">CE IIa</p>
+                  <p className="text-xs text-primary-foreground/70 mt-1">Dispositivo médico</p>
                 </div>
                 <div>
-                  <p className="text-3xl md:text-4xl font-semibold tracking-tight">8 sem.</p>
-                  <p className="text-xs text-primary-foreground/70 mt-1">Resultados</p>
+                  <p className="text-3xl md:text-4xl font-semibold tracking-tight">{GARANTIA.comercial.anios} años</p>
+                  <p className="text-xs text-primary-foreground/70 mt-1">Garantía comercial</p>
                 </div>
                 <div>
-                  <p className="text-3xl md:text-4xl font-semibold tracking-tight">+1.200</p>
-                  <p className="text-xs text-primary-foreground/70 mt-1">Reviews</p>
+                  <p className="text-3xl md:text-4xl font-semibold tracking-tight">{DEVOLUCION.diasPrecintoIntacto} días</p>
+                  <p className="text-xs text-primary-foreground/70 mt-1">Devolución con {DEVOLUCION.condicion}</p>
                 </div>
               </div>
               <Button asChild size="lg" variant="white">
                 <Link to="/blog">
-                  Ver estudios
+                  Guías y consejos
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
@@ -471,7 +464,7 @@ const Index = () => {
               <div className="aspect-[4/3] rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
                 <img
                   src={categoryLimpiezaFacial}
-                  alt="Estudio clínico Garett"
+                  alt="Dispositivos de belleza Garett"
                   className="w-full h-full object-cover opacity-90"
                 />
               </div>
@@ -480,58 +473,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* [8] LOVED BY — celebrities + experts */}
-      <section className="py-12 md:py-20 bg-background">
-        <div className="container">
-          <div className="text-center mb-10 md:mb-12">
-            <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Loved by</p>
-            <h2 className="text-2xl md:text-4xl font-semibold text-foreground mb-3 md:mb-4 tracking-tight">
-              Confianza de expertos y celebrities
-            </h2>
-            <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
-              Recomendado por dermatólogos y profesionales del cuidado de la piel
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            <div className="bg-card border border-border rounded-xl p-6 text-center">
-              <div className="w-16 h-16 rounded-full bg-primary-light mx-auto mb-4 flex items-center justify-center">
-                <Stethoscope className="w-7 h-7 text-primary" />
-              </div>
-              <p className="text-sm font-semibold text-foreground mb-2">Dr. especialistas</p>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Dermatólogos especializados avalan nuestros dispositivos
-              </p>
-            </div>
-            <div className="bg-card border border-border rounded-xl p-6 text-center">
-              <div className="w-16 h-16 rounded-full bg-primary-light mx-auto mb-4 flex items-center justify-center">
-                <Award className="w-7 h-7 text-primary" />
-              </div>
-              <p className="text-sm font-semibold text-foreground mb-2">+1.200 reviews</p>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Clientes verificados con 4.7/5 de satisfacción
-              </p>
-            </div>
-            <div className="bg-card border border-border rounded-xl p-6 text-center">
-              <div className="w-16 h-16 rounded-full bg-primary-light mx-auto mb-4 flex items-center justify-center">
-                <ShieldCheck className="w-7 h-7 text-primary" />
-              </div>
-              <p className="text-sm font-semibold text-foreground mb-2">El Corte Inglés</p>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Distribuido a través del retailer más fiable de España
-              </p>
-            </div>
-            <div className="bg-card border border-border rounded-xl p-6 text-center">
-              <div className="w-16 h-16 rounded-full bg-primary-light mx-auto mb-4 flex items-center justify-center">
-                <FlaskConical className="w-7 h-7 text-primary" />
-              </div>
-              <p className="text-sm font-semibold text-foreground mb-2">Certificado CE</p>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Cumplimos con todos los estándares sanitarios europeos
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* [8] UGC — contenido real de clientas y creadoras (vídeos en public/videos/) */}
+      <UGCSection />
 
       {/* [9] BLOG TEASER */}
       <BlogCarousel />

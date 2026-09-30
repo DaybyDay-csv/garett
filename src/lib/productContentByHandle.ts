@@ -1,5 +1,10 @@
 import type { ProductContent } from "./productContent";
 
+// Cifra canónica de pulsos IPL. Debe coincidir con catalog.ts (descripciones de
+// ipl-flash-pro e ipl-flash-dorada). Si el fabricante confirma otra cifra
+// (p. ej. 999.999), se cambia SOLO aquí.
+export const IPL_PULSOS = "400.000";
+
 // Contenido de PDP POR PRODUCTO (clave = handle del catálogo local).
 // Extraído de garett.eu (fichas reales de cada dispositivo) y adaptado a
 // la estructura de alta conversión de Garett España.
@@ -79,7 +84,7 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
           "Desliza el cabezal por mejillas, mandíbula y cuello en movimientos ascendentes.",
           "Usa 5-10 minutos al día, idealmente con tu sérum.",
         ],
-        additionalNote: "Incluye: dispositivo, manual PL/EN, cable de carga y comprobante de compra.",
+        additionalNote: "Incluye: dispositivo, manual, cable de carga y comprobante de compra.",
       },
       whatMakesDifferent: [
         { title: "4 tecnologías en 1", description: "Vibración, EMS, calor y fotones en un solo gesto." },
@@ -120,7 +125,7 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
           "Desliza por el rostro y el cuello siguiendo las líneas de masaje.",
           "Úsalo 10 minutos, 4-5 veces por semana.",
         ],
-        additionalNote: "Incluye: dispositivo, manual PL/EN, cable de carga y comprobante de compra.",
+        additionalNote: "Incluye: dispositivo, manual, cable de carga y comprobante de compra.",
       },
       whatMakesDifferent: [
         { title: "4-en-1 profesional", description: "La versión más completa de la línea de masajeadores." },
@@ -243,7 +248,7 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
           "Masajea en círculos con el cabezal sónico.",
           "Termina con el modo ionización y tu sérum.",
         ],
-        additionalNote: "Incluye: dispositivo, funda protectora/estación de carga y manual PL/EN.",
+        additionalNote: "Incluye: dispositivo, funda protectora/estación de carga y manual.",
       },
       whatMakesDifferent: [
         { title: "4 funciones en 1", description: "Limpieza, ionización, LED y termolifting." },
@@ -283,7 +288,7 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
           "Desliza la espátula por la piel con suavidad.",
           "Aplica tu sérum tras el tratamiento.",
         ],
-        additionalNote: "Incluye: dispositivo, 2 pipetas, manual PL/EN y cable de carga.",
+        additionalNote: "Incluye: dispositivo, 2 pipetas, manual y cable de carga.",
       },
       whatMakesDifferent: [
         { title: "Cavitación", description: "Exfoliación profunda sin abrasión mecánica." },
@@ -366,7 +371,7 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
           "Selecciona el modo frío o caliente.",
           "Desliza por el rostro durante 5-10 minutos.",
         ],
-        additionalNote: "Incluye: dispositivo, manual EN/PL, soporte blanco y cable tipo C.",
+        additionalNote: "Incluye: dispositivo, manual, soporte blanco y cable tipo C.",
       },
       whatMakesDifferent: [
         { title: "Frío + calor", description: "Compresa térmica para tratar según la necesidad." },
@@ -407,7 +412,7 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
           "Aplica un sérum y selecciona el modo.",
           "Desliza el dispositivo 10 minutos, 4-5 veces por semana.",
         ],
-        additionalNote: "Incluye: dispositivo, manual PL/EN, cable de carga USB-C y comprobante de compra.",
+        additionalNote: "Incluye: dispositivo, manual, cable de carga USB-C y comprobante de compra.",
       },
       whatMakesDifferent: [
         { title: "Radiofrecuencia", description: "La tecnología más completa de la gama mesoterapia." },
@@ -447,7 +452,7 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
           "Desliza el dispositivo por el rostro.",
           "Usa 5-10 minutos al día.",
         ],
-        additionalNote: "Incluye: dispositivo, manual PL/EN, cable de carga y comprobante de compra.",
+        additionalNote: "Incluye: dispositivo, manual, cable de carga y comprobante de compra.",
       },
       whatMakesDifferent: [
         { title: "Triple luz", description: "Roja + violeta + azul para luminosidad y tono." },
@@ -488,7 +493,7 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
           "Selecciona el modo y desliza por el rostro.",
           "Usa 5-10 minutos al día.",
         ],
-        additionalNote: "Incluye: dispositivo, 3 dispensadores, manual PL/EN y cable de carga.",
+        additionalNote: "Incluye: dispositivo, 3 dispensadores, manual y cable de carga.",
       },
       whatMakesDifferent: [
         { title: "Dosificador integrado", description: "Aplica y trata a la vez." },
@@ -571,7 +576,7 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
           "Desliza el cabezal de ventosas sobre la piel.",
           "Usa 10-15 minutos por zona, 3-4 veces por semana.",
         ],
-        additionalNote: "Incluye: dispositivo, 2 tapas, filtros reemplazables, manual PL/EN y cable de carga.",
+        additionalNote: "Incluye: dispositivo, 2 tapas, filtros reemplazables, manual y cable de carga.",
       },
       whatMakesDifferent: [
         { title: "Ventosas", description: "Función de masaje al vacío estilo ventosas chinas." },
@@ -706,10 +711,10 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
 
   // ===== IPL =====
   "ipl-flash-pro": {
-    pdpHeadline: "Hasta 999.999 pulsos de depilación profesional",
+    pdpHeadline: `${IPL_PULSOS} pulsos de depilación profesional`,
     pdpSubheadline: "Depiladora IPL con cabezal de enfriamiento, superficie de 4,5 cm², 5 niveles de potencia y 2 modos.",
     quickBenefits: [
-      { icon: "Zap", text: "999.999 pulsos" },
+      { icon: "Zap", text: `${IPL_PULSOS} pulsos` },
       { icon: "Snowflake", text: "Cabezal de enfriamiento" },
       { icon: "Maximize2", text: "Superficie 4,5 cm²" },
       { icon: "Settings", text: "2 modos (auto/manual)" },
@@ -742,15 +747,16 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
       whatMakesDifferent: [
         { title: "Superficie 4,5 cm²", description: "Tratamiento más rápido en zonas amplias." },
         { title: "Cabezal frío", description: "Máximo confort durante la sesión." },
+        { title: "Pecho, espalda y cuello", description: "Sirve igual para el vello corporal masculino: misma luz, misma rutina. La IPL actúa sobre la raíz del vello en cualquier zona del cuerpo." },
       ],
     },
   },
 
   "ipl-flash-dorada": {
-    pdpHeadline: "Hasta 999.000 pulsos con cabezal refrescante",
+    pdpHeadline: `${IPL_PULSOS} pulsos con cabezal refrescante`,
     pdpSubheadline: "Depiladora IPL con 5 niveles de potencia, área de 3 cm², pantalla LCD y cabezal reemplazable con compresa refrescante.",
     quickBenefits: [
-      { icon: "Zap", text: "Hasta 999.000 pulsos" },
+      { icon: "Zap", text: `${IPL_PULSOS} pulsos` },
       { icon: "Snowflake", text: "Cabezal refrescante" },
       { icon: "Gauge", text: "5 niveles de potencia" },
       { icon: "Shield", text: "Gafas protectoras" },
@@ -762,6 +768,7 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
         details: [
           "Las lámparas se pueden reemplazar cuando se desgastan.",
           "Área de depilación de 3 cm².",
+          "Funciona igual en pecho, espalda y cuello: la luz actúa sobre el vello en cualquier zona del cuerpo.",
         ],
       },
       expectedResults: {
@@ -788,10 +795,10 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
   },
 
   "ipl-plateada": {
-    pdpHeadline: "Depilación IPL con cabezal refrescante y 999.000 pulsos",
+    pdpHeadline: "Depilación IPL con cabezal refrescante",
     pdpSubheadline: "Depiladora IPL con 5 niveles de potencia, área de 3 cm², pantalla LCD y cabezal reemplazable con compresa refrescante.",
     quickBenefits: [
-      { icon: "Zap", text: "Hasta 999.000 pulsos" },
+      { icon: "Check", text: "Resultados desde semana 4" },
       { icon: "Snowflake", text: "Cabezal refrescante" },
       { icon: "Gauge", text: "5 niveles de potencia" },
       { icon: "Shield", text: "Gafas protectoras" },
@@ -803,6 +810,7 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
         details: [
           "Las lámparas se pueden reemplazar cuando se desgastan.",
           "Área de depilación de 3 cm².",
+          "Funciona igual en pecho, espalda y cuello: la luz actúa sobre el vello en cualquier zona del cuerpo.",
         ],
       },
       expectedResults: {
@@ -844,6 +852,7 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
         details: [
           "El cabezal frío calma la piel durante la sesión.",
           "5 niveles de potencia para adaptarse a tu piel.",
+          "Funciona igual en pecho, espalda y cuello: la luz actúa sobre el vello en cualquier zona del cuerpo.",
         ],
       },
       expectedResults: {
@@ -860,7 +869,7 @@ export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
           "Selecciona el nivel de potencia.",
           "Desliza el cabezal aplicando pulsos.",
         ],
-        additionalNote: "Incluye: dispositivo, gafas de seguridad, maquinilla, manual PL/EN y cable de alimentación.",
+        additionalNote: "Incluye: dispositivo, gafas de seguridad, maquinilla, manual y cable de alimentación.",
       },
       whatMakesDifferent: [
         { title: "Refrigeración", description: "Cabezal frío para máxima comodidad." },

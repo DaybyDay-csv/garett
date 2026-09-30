@@ -1,6 +1,7 @@
 import { FileText, Mail, Phone, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { DEVOLUCION, ENVIO, GARANTIA } from "@/lib/policies";
 
 const TerminosCondiciones = () => {
   return (
@@ -71,7 +72,7 @@ const TerminosCondiciones = () => {
                 <li><strong className="text-foreground">Shop Pay (Shopify):</strong> sistema de pago rápido ofrecido por Shopify para usuarios registrados que permite realizar la compra de forma más ágil, con datos previamente guardados.</li>
               </ul>
               <p>
-                Una vez completado el proceso de compra y aceptadas estas condiciones, el usuario recibirá un correo electrónico de confirmación, que incluirá el resumen de los dispositivos adquiridos, el precio final con impuestos aplicables y, en su caso, los gastos de envío.
+                Una vez completado el proceso de compra y aceptadas estas condiciones, el usuario recibirá un correo electrónico de confirmación, que incluirá el resumen de los dispositivos adquiridos y el precio final con impuestos aplicables.
               </p>
               <p>
                 GARETT Sp. z o.o. emitirá una factura electrónica correspondiente al pedido realizado. El usuario podrá solicitar una copia en formato papel, sin coste adicional, escribiendo a la dirección de contacto indicada en el sitio web.
@@ -88,15 +89,21 @@ const TerminosCondiciones = () => {
             </h2>
             <div className="text-muted-foreground space-y-3">
               <p>
-                Los precios de los dispositivos de belleza están indicados en euros (€) e incluyen el IVA correspondiente, salvo que se indique expresamente lo contrario. Los gastos de envío no están incluidos en el precio y se calcularán en el momento de la compra, según la dirección de entrega y el tipo de envío seleccionado.
+                Los precios de los dispositivos de belleza están indicados en euros (€) e incluyen el IVA correspondiente, salvo que se indique expresamente lo contrario.
+                {ENVIO.gratisTodosLosPedidos ? " El envío es gratuito en todos los pedidos, sin importe mínimo de compra." : " Los gastos de envío no están incluidos en el precio y se calcularán en el momento de la compra."}
               </p>
               <p>Los envíos se realizan a:</p>
               <ul className="space-y-2 ml-6 list-disc">
-                <li><strong className="text-foreground">España peninsular y Baleares:</strong> entrega estándar entre 2 y 4 días laborables.</li>
-                <li><strong className="text-foreground">Islas Canarias, Ceuta y Melilla:</strong> entrega entre 5 y 10 días laborables; pueden aplicarse tasas aduaneras e impuestos locales no incluidos en el precio del pedido.</li>
-                <li><strong className="text-foreground">Portugal:</strong> entrega estándar entre 3 y 5 días laborables.</li>
-                <li><strong className="text-foreground">Latinoamérica:</strong> la entrega está sujeta a disponibilidad logística; los plazos pueden variar según país y servicio de mensajería local. El cliente asumirá los gastos de aduana y aranceles aplicables en destino.</li>
+                {ENVIO.plazos.map((plazo) => (
+                  <li key={plazo.zona}>
+                    <strong className="text-foreground">{plazo.zona}:</strong> entrega estándar entre {plazo.diasMin} y {plazo.diasMax} días laborables.
+                    {plazo.zona.startsWith("Canarias") && " Pueden aplicarse tasas aduaneras e impuestos locales no incluidos en el precio del pedido."}
+                  </li>
+                ))}
               </ul>
+              <p>
+                También se realizan envíos a Portugal y, sujeto a disponibilidad logística, a Latinoamérica. En esos destinos, los plazos de entrega pueden variar según país y servicio de mensajería local, y el cliente asumirá los gastos de aduana y aranceles aplicables en destino.
+              </p>
               <p>
                 GARETT Sp. z o.o. no será responsable por retrasos imputables a servicios de mensajería externa o causas de fuerza mayor.
               </p>
@@ -109,7 +116,13 @@ const TerminosCondiciones = () => {
             </h2>
             <div className="text-muted-foreground space-y-3">
               <p>
-                Conforme a la normativa vigente sobre protección de los consumidores y usuarios, el usuario dispone de un plazo de 14 días naturales desde la recepción del dispositivo para ejercer su derecho de desistimiento, siempre que el producto no haya sido usado y se encuentre en su embalaje original, en perfecto estado.
+                Además del derecho legal de desistimiento, GARETT Sp. z o.o. ofrece una devolución comercial de {DEVOLUCION.diasPrecintoIntacto} días desde la recepción del dispositivo, siempre que el producto conserve su precinto intacto y se encuentre en su embalaje original, en perfecto estado.
+              </p>
+              <p>
+                Conforme al artículo 102 del RDL 1/2007, el usuario dispone asimismo de un derecho legal de desistimiento de un mínimo de {DEVOLUCION.desistimientoLegalDiasMinimo} días naturales desde la recepción del dispositivo.
+              </p>
+              <p>
+                {DEVOLUCION.desprecintado.texto} Esta excepción se aplica conforme al artículo 103.e) del RDL 1/2007. En caso de defecto verificado, se aplicará la garantía descrita en la cláusula siguiente.
               </p>
               <p>
                 Para tramitar una devolución, el usuario deberá ponerse en contacto con el servicio de atención al cliente a través del correo electrónico indicado en el sitio web. GARETT Sp. z o.o. facilitará instrucciones sobre cómo devolver el producto.
@@ -129,7 +142,10 @@ const TerminosCondiciones = () => {
             </h2>
             <div className="text-muted-foreground space-y-3">
               <p>
-                Todos los dispositivos de belleza de la marca Garett cuentan con una garantía del fabricante de 24 meses contra defectos de fabricación, siempre que el dispositivo haya sido utilizado conforme a las instrucciones del manual de uso.
+                Todos los dispositivos de belleza de la marca Garett cuentan con una garantía comercial del fabricante de {GARANTIA.comercial.anios} años contra defectos de fabricación, siempre que el dispositivo haya sido utilizado conforme a las instrucciones del manual de uso.
+              </p>
+              <p>
+                Esta garantía comercial es adicional a la garantía legal que asiste al consumidor frente al vendedor ({GARANTIA.legal.anios} años, conforme al RD 7/2021) y no la limita.
               </p>
               <p>
                 La garantía no cubre daños derivados del uso indebido, negligencia, caídas, golpes, exposición a líquidos no recomendados, manipulación no autorizada o desgaste normal del producto.

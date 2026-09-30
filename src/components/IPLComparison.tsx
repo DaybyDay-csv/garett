@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { LOCAL_PRODUCTS_BY_HANDLE } from "@/lib/catalog";
+import { IPL_PULSOS } from "@/lib/productContentByHandle";
 import { Check, Minus } from "lucide-react";
 
 interface IPLModel {
@@ -13,10 +14,10 @@ interface IPLModel {
 }
 
 const MODELS: IPLModel[] = [
-  { handle: "ipl-flash-pro", pulsos: "999.999", area: "4,5 cm²", cooling: true, modos: "Auto + manual", extra: "Gafas + maquinilla" },
-  { handle: "ipl-flash-dorada", pulsos: "999.000", area: "3 cm²", cooling: true, modos: "Manual", extra: "Lámpara reemplazable" },
-  { handle: "ipl-plateada", pulsos: "999.000", area: "3 cm²", cooling: true, modos: "Manual", extra: "Lámpara reemplazable" },
-  { handle: "cool", pulsos: "Larga duración", area: "3 cm²", cooling: true, modos: "Manual", extra: "Gafas + maquinilla" },
+  { handle: "ipl-flash-pro", pulsos: IPL_PULSOS, area: "4,5 cm²", cooling: true, modos: "Auto + manual", extra: "Gafas + maquinilla" },
+  { handle: "ipl-flash-dorada", pulsos: IPL_PULSOS, area: "3 cm²", cooling: true, modos: "Manual", extra: "Lámpara reemplazable" },
+  { handle: "ipl-plateada", pulsos: "—", area: "3 cm²", cooling: true, modos: "Manual", extra: "Lámpara reemplazable" },
+  { handle: "cool", pulsos: "—", area: "3 cm²", cooling: true, modos: "Manual", extra: "Gafas + maquinilla" },
 ];
 
 export const IPLComparison = () => {

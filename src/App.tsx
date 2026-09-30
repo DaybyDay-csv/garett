@@ -12,6 +12,8 @@ import BlackFriday from "./pages/BlackFriday";
 import NewArrivals from "./pages/NewArrivals";
 import Superventas from "./pages/Superventas";
 import Search from "./pages/Search";
+import IdeasRegalo from "./pages/IdeasRegalo";
+import EnviosYEntregas from "./pages/EnviosYEntregas";
 import AvisoLegal from "./pages/AvisoLegal";
 import PoliticaCookies from "./pages/PoliticaCookies";
 import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
@@ -21,6 +23,7 @@ import NotFound from "./pages/NotFound";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { PageTracker } from "./components/PageTracker";
+import { BeautyAdvisorChat } from "./components/BeautyAdvisorChat";
 import { HelmetProvider } from "react-helmet-async";
 
 const queryClient = new QueryClient();
@@ -45,6 +48,8 @@ const App = () => {
             <Route path="/novedades" element={<NewArrivals />} />
             <Route path="/superventas" element={<Superventas />} />
             <Route path="/busqueda" element={<Search />} />
+            <Route path="/ideas-regalo" element={<IdeasRegalo />} />
+            <Route path="/envios-y-entregas" element={<EnviosYEntregas />} />
             <Route path="/aviso-legal" element={<AvisoLegal />} />
             <Route path="/politica-cookies" element={<PoliticaCookies />} />
             <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
@@ -53,6 +58,8 @@ const App = () => {
             <Route path="/checkout/gracias" element={<CheckoutSuccess />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          {/* Glow: asesor virtual global en toda la web (H9). */}
+          <BeautyAdvisorChat />
         </BrowserRouter>
         <Toaster />
       </QueryClientProvider>

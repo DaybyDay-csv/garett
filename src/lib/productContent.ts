@@ -1,5 +1,5 @@
 import { LucideIcon } from "lucide-react";
-import { PRODUCT_CONTENT_BY_HANDLE } from "./productContentByHandle";
+import { PRODUCT_CONTENT_BY_HANDLE, IPL_PULSOS } from "./productContentByHandle";
 
 export interface ProductContent {
   pdpHeadline?: string;
@@ -33,12 +33,12 @@ export interface ProductContent {
 }
 
 const productContentMap: Record<string, ProductContent> = {
-  // IPL / Depilación (Flash, Flash Pro, Cold White)
+  // IPL / Depilación (Flash, Flash Pro, Dorada, Plateada, Cool)
   'depilacion-ipl': {
     pdpHeadline: 'Reduce hasta un 90% del vello visible en 8 semanas',
     pdpSubheadline: 'Luz pulsada doméstica certificada para depilación permanente desde casa',
     quickBenefits: [
-      { icon: 'Zap', text: '400.000 pulsos de luz' },
+      { icon: 'Zap', text: `${IPL_PULSOS} pulsos de luz` },
       { icon: 'Check', text: 'Resultados desde semana 4' },
       { icon: 'Award', text: 'Tecnología clínica en casa' }
     ],
@@ -49,7 +49,8 @@ const productContentMap: Record<string, ProductContent> = {
         details: [
           'La tecnología IPL (Luz Pulsada Intensa) emite destellos de luz que el vello absorbe. Esta energía se transforma en calor suave que debilita el folículo piloso desde la raíz, ralentizando su crecimiento de forma progresiva.',
           'No es dolor, es efectividad. El sistema trabaja selectivamente sobre la melanina del vello, respetando tu piel.',
-          'Cada pulso cubre un área amplia, haciendo el tratamiento rápido y cómodo. Es como tener tu propia clínica láser en casa.'
+          'Cada pulso cubre un área amplia, haciendo el tratamiento rápido y cómodo. Es como tener tu propia clínica láser en casa.',
+          'Sirve en cualquier zona del cuerpo: piernas, axilas, bikini y también pecho, espalda y cuello. La luz actúa sobre el vello, da igual quién lo lleve.'
         ]
       },
       expectedResults: {
@@ -82,7 +83,7 @@ const productContentMap: Record<string, ProductContent> = {
       },
       whatMakesDifferent: [
         {
-          title: '400.000 pulsos: Años de uso garantizado',
+          title: `${IPL_PULSOS} pulsos: Años de uso garantizado`,
           description: 'Mientras otras lámparas se agotan pronto, esta te dura años tratando todo el cuerpo. No necesitarás recambios.'
         },
         {
@@ -92,6 +93,10 @@ const productContentMap: Record<string, ProductContent> = {
         {
           title: 'Certificado médico clase IIa',
           description: 'No es un juguete de belleza. Es un dispositivo médico certificado con eficacia probada clínicamente.'
+        },
+        {
+          title: 'También para hombre',
+          description: 'Pecho, espalda o cuello: mismo dispositivo, mismas sesiones. La IPL no distingue de género, solo reacciona al tono de piel y al color del vello.'
         },
         {
           title: 'Ahorro vs depilación láser',
@@ -881,7 +886,7 @@ export function detectProductCategory(product: any): string {
   }
   
   // IPL devices
-  if (handle.includes('flash') || handle.includes('cold-white') || handle.includes('ipl') || 
+  if (handle.includes('flash') || handle.includes('ipl') || 
       title.includes('depilación') || title.includes('ipl')) {
     return 'depilacion-ipl';
   }

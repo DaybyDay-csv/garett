@@ -1,16 +1,13 @@
 import { Instagram, Youtube, Play } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { OptimizedImage } from "@/components/OptimizedImage";
+import { GARANTIA, CONTACTO } from "@/lib/policies";
 import ugc1 from "@/assets/ugc/ugc-1.jpg";
 import ugc2 from "@/assets/ugc/ugc-2.jpg";
-import ugc3 from "@/assets/ugc/ugc-3.jpg";
-import ugc4 from "@/assets/ugc/ugc-4.jpg";
 import ugc5 from "@/assets/ugc/ugc-5.jpg";
 import ugcAina from "@/assets/ugc/ugc-aina.png";
-import ugcMaria from "@/assets/ugc/ugc-maria.png";
 import ugcTriniSierra from "@/assets/ugc/ugc-trini-sierra.jpg";
 interface UGCItem {
   id: number;
@@ -102,6 +99,11 @@ export const UGCSection = () => {
                 if (item.type === "video") {
                   setPlayingVideo(playingVideo === item.id ? null : item.id);
                 }
+              }} role={item.type === "video" ? "button" : undefined} tabIndex={item.type === "video" ? 0 : undefined} aria-label={item.type === "video" ? `Reproducir el vídeo de ${item.name} (${item.handle})` : undefined} aria-pressed={item.type === "video" ? playingVideo === item.id : undefined} onKeyDown={e => {
+                if (item.type === "video" && (e.key === "Enter" || e.key === " ")) {
+                  e.preventDefault();
+                  setPlayingVideo(playingVideo === item.id ? null : item.id);
+                }
               }}>
                 {item.type === "image" ? (
                   <OptimizedImage 
@@ -176,14 +178,13 @@ export const UGCSection = () => {
             </p>
             
             <p className="text-muted-foreground leading-relaxed font-extralight text-sm">
-              Y, sobre todo, confianza: certificación CE, garantía comercial de 24 meses y el respaldo de grandes retailers como El Corte Inglés.
+              Y, sobre todo, confianza: dispositivos médicos CE clase IIa, {GARANTIA.comercial.texto} y teléfono de soporte ({CONTACTO.telefono}, {CONTACTO.horario}).
             </p>
             
             <p className="text-muted-foreground leading-relaxed font-extralight text-sm">
               Somos esa mezcla de tecnología y belleza en estado puro que te ayuda a verte (y sentirte) mejor cada día, sin complicaciones.
             </p>
           </div>
-          <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground"></Button>
         </div>
       </div>
     </section>;

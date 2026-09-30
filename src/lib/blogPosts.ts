@@ -4,6 +4,7 @@ import blogFacialMassage from "@/assets/blog/facial-massage.jpg";
 import blogIPL from "@/assets/blog/ipl-hair-removal.jpg";
 import blogCleansing from "@/assets/blog/facial-cleansing.webp";
 import blogMesotherapy from "@/assets/blog/mesotherapy.jpg";
+import { IPL_PULSOS } from "./productContentByHandle";
 
 export interface BlogPost {
   slug: string;
@@ -163,7 +164,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-11-12",
     author: "Equipo Garett Beauty",
     content: `
-      <p>La <a href="/categoria/depilacion-ipl">tecnología IPL (Luz Pulsada Intensa)</a> es el método más efectivo para <strong>depilación permanente en casa</strong>. Nuestros dispositivos ofrecen hasta 500,000 pulsaciones, suficientes para tratarte durante años.</p>
+      <p>La <a href="/categoria/depilacion-ipl">tecnología IPL (Luz Pulsada Intensa)</a> es el método más efectivo para <strong>depilación permanente en casa</strong>. El IPL Flash Pro y la IPL Flash Dorada ofrecen ${IPL_PULSOS} pulsos, suficientes para tratarte durante años.</p>
 
       <h2>¿Cómo Funciona la Depilación IPL?</h2>
       
@@ -203,9 +204,6 @@ export const blogPosts: BlogPost[] = [
       <h2>¿En Qué Tipos de Piel Funciona?</h2>
       
       <p>La IPL funciona mejor en pieles claras con vello oscuro (fototipos I-IV). En vello rubio, pelirrojo o canoso los resultados son limitados, ya que contienen poca melanina.</p>
-
-      <h3>Nuestros Modelos Avanzados</h3>
-      <p>Algunos modelos como el Cold White funcionan también en tonos más oscuros gracias a tecnología mejorada.</p>
 
       <h2>Precauciones Importantes</h2>
       

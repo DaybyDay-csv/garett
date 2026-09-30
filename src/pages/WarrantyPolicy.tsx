@@ -1,6 +1,7 @@
 import { Shield, Phone, Mail, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { DEVOLUCION, GARANTIA } from "@/lib/policies";
 
 export default function WarrantyPolicy() {
   return (
@@ -24,8 +25,8 @@ export default function WarrantyPolicy() {
               <span className="text-primary">1.</span> Duración y Ámbito
             </h2>
             <ul className="space-y-2 text-muted-foreground ml-6">
-              <li><strong className="text-foreground">Duración:</strong> 2 años desde la fecha de compra indicada en el justificante.</li>
-              <li><strong className="text-foreground">Ámbito:</strong> España. Garantía comercial del fabricante, adicional e independiente de la garantía legal del vendedor (3 años).</li>
+              <li><strong className="text-foreground">Duración:</strong> {GARANTIA.comercial.anios} años desde la fecha de compra indicada en el justificante.</li>
+              <li><strong className="text-foreground">Ámbito:</strong> España. Garantía comercial del fabricante, adicional e independiente de la garantía legal del vendedor ({GARANTIA.legal.anios} años).</li>
             </ul>
           </section>
 
@@ -35,11 +36,14 @@ export default function WarrantyPolicy() {
               <div>
                 <h2 className="text-xl font-semibold mb-3">2. Política Higiénico-Sanitaria</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Por razones higiénico-sanitarias, los productos de cuidado personal y contacto corporal directo 
-                  (depiladoras, dispositivos faciales, limpiadores ultrasónicos, masajeadores, cepillos, mascarillas LED, 
-                  IPL, EMS, RF, etc.) <strong className="text-foreground">no podrán devolverse ni cambiarse una vez desprecintados o utilizados</strong>, 
-                  conforme al artículo 103.e) del RDL 1/2007. Solo se admitirán devoluciones por defecto técnico o fallo de 
+                  Por razones higiénico-sanitarias, los productos de cuidado personal y contacto corporal directo
+                  (depiladoras, dispositivos faciales, limpiadores ultrasónicos, masajeadores, cepillos, mascarillas LED,
+                  IPL, EMS, RF, etc.) <strong className="text-foreground">no podrán devolverse ni cambiarse una vez desprecintados o utilizados</strong>,
+                  conforme al artículo 103.e) del RDL 1/2007. Solo se admitirán devoluciones por defecto técnico o fallo de
                   fabricación verificado.
+                </p>
+                <p className="text-muted-foreground leading-relaxed mt-3">
+                  Recuerda: nuestra política de devolución es de {DEVOLUCION.diasPrecintoIntacto} días con el precinto intacto ({DEVOLUCION.desistimientoLegalDiasMinimo} días como mínimo legal de desistimiento). Una vez desprecintado el producto, solo se admite reclamación por garantía.
                 </p>
               </div>
             </div>

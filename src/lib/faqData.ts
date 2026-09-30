@@ -1,4 +1,5 @@
 import { FAQItem } from "@/components/FAQ";
+import { DEVOLUCION, GARANTIA } from "@/lib/policies";
 
 export const homeFAQs: FAQItem[] = [
   {
@@ -23,11 +24,11 @@ export const homeFAQs: FAQItem[] = [
   },
   {
     question: "¿Ofrecen garantía y devoluciones?",
-    answer: "Sí. Todos nuestros productos incluyen 2 años de garantía oficial del fabricante contra defectos de fabricación. Además, tienes 14 días de derecho de devolución desde la recepción del producto si no estás completamente satisfecha. Nuestro servicio de atención al cliente en España está disponible para resolver cualquier duda o incidencia. Tu satisfacción es nuestra prioridad."
+    answer: `Sí. Todos nuestros productos incluyen ${GARANTIA.comercial.anios} años de garantía comercial del fabricante contra defectos de fabricación. Además, tienes ${DEVOLUCION.diasPrecintoIntacto} días para devolver tu producto con el precinto intacto; por razones higiénico-sanitarias, los productos desprecintados no admiten devolución, salvo defecto verificado. También cuentas con el derecho legal de desistimiento mínimo de ${DEVOLUCION.desistimientoLegalDiasMinimo} días naturales. Nuestro servicio de atención al cliente en España está disponible para resolver cualquier duda o incidencia. Tu satisfacción es nuestra prioridad.`
   },
   {
     question: "¿Los dispositivos funcionan en todos los tipos de piel y cabello?",
-    answer: "La mayoría sí. Los dispositivos de cuidado capilar funcionan en todo tipo de cabello (fino, grueso, rizado). Los masajeadores faciales y limpieza facial son aptos para todo tipo de piel, incluyendo sensible. La depilación IPL es más efectiva en pieles claras con vello oscuro (fototipos I-IV), aunque algunos modelos avanzados como el Cold White funcionan también en tonos más oscuros. Cada producto especifica sus indicaciones en la descripción detallada."
+    answer: "La mayoría sí. Los dispositivos de cuidado capilar funcionan en todo tipo de cabello (fino, grueso, rizado). Los masajeadores faciales y limpieza facial son aptos para todo tipo de piel, incluyendo sensible. La depilación IPL es más efectiva en pieles claras con vello oscuro (fototipos I-IV). Cada producto especifica sus indicaciones en la descripción detallada."
   },
   {
     question: "¿Cómo sé qué intensidad o modo usar en mi dispositivo?",
@@ -63,7 +64,7 @@ export const productSpecificFAQs = {
   'limpieza-facial': [
     {
       question: "¿Con qué frecuencia debo cambiar el cabezal?",
-      answer: "Recomendamos cambiar el cabezal cada 3 meses para mantener la efectividad óptima. Los cabezales de repuesto están disponibles en nuestra tienda. Un indicador visual en algunos modelos te avisa cuando es momento de cambiarlo."
+      answer: "Recomendamos cambiar el cabezal cada 3 meses para mantener la efectividad óptima. Los cabezales de repuesto están en preparación y todavía no están a la venta; mientras tanto, consulta disponibilidad con nuestro servicio de atención al cliente. Un indicador visual en algunos modelos te avisa cuando es momento de cambiarlo."
     },
     {
       question: "¿Es mejor que limpiar con las manos?",

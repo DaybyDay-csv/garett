@@ -4,6 +4,7 @@ import garettLogo from "@/assets/garett-logo-white.png";
 import garettPattern from "@/assets/garett-pattern-2.png";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 import { CATEGORY_NAV } from "@/lib/categories";
+import { CUPON_PRIMER_PEDIDO, GARANTIA } from "@/lib/policies";
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
   return <footer className="relative bg-primary text-primary-foreground overflow-hidden">
@@ -99,9 +100,9 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link to="/envios-y-entregas" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Envíos y entregas
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -142,7 +143,7 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold text-base mb-5">Mantente informado</h3>
             <p className="text-primary-foreground/70 text-sm mb-5 leading-relaxed">
-              Suscríbete y consigue un <span className="text-primary-foreground font-semibold">13% de descuento</span> en tu primer pedido.
+              Suscríbete y recibe tu código <span className="text-primary-foreground font-semibold">{CUPON_PRIMER_PEDIDO.codigo}</span>: {CUPON_PRIMER_PEDIDO.porcentaje}% en tu primer pedido.
             </p>
             <NewsletterCTA variant="default" size="sm" text="Notificarme" className="bg-white/10 hover:bg-white/20 border-white/20 text-white w-full" />
             <div className="flex flex-wrap items-center gap-3 mt-4 text-xs text-primary-foreground/50">
@@ -180,7 +181,7 @@ export const Footer = () => {
             <div className="flex items-center gap-4 text-xs">
               <span>Certificado CE</span>
               <span>•</span>
-              <span>Garantía 24 meses</span>
+              <span>Garantía {GARANTIA.comercial.anios} años</span>
               <span>•</span>
               <span>Pago seguro SSL</span>
             </div>

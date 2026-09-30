@@ -12,7 +12,8 @@ import { Progress } from "@/components/ui/progress";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
-import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, ZoomIn, Maximize2, ChevronDown, Clock, Award, Sparkle, Zap, Droplets, Activity, Battery, Package, Lock, Calendar, AlertTriangle, Bell, Loader2, Star, Users, TrendingUp, Heart, RefreshCw, Stethoscope, Leaf } from "lucide-react";
+import { ArrowLeft, Check, Shield, Truck, RotateCcw, Flame, Gift, Sparkles, ZoomIn, Maximize2, ChevronDown, Clock, Award, Sparkle, Zap, Droplets, Activity, Battery, Package, Lock, Calendar, AlertTriangle, Bell, Loader2, Users, TrendingUp, Phone, Heart, RefreshCw, Stethoscope, Leaf } from "lucide-react";
+import { DEVOLUCION, GARANTIA, ENVIO, CONTACTO } from "@/lib/policies";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { calculatePromotionalPrice, formatPrice, getCurrentPromotionalStage } from "@/lib/promotions";
 import { getProductContent, detectProductCategory } from "@/lib/productContent";
@@ -38,6 +39,178 @@ import { trackProductView, trackAddToCart } from "@/hooks/usePageTracking";
 import { addToRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { RecentlyViewed } from "@/components/RecentlyViewed";
 import { BundlePicker } from "@/components/BundlePicker";
+
+// Especificaciones técnicas por producto (H13): SOLO datos que ya existen en
+// el código (descripciones del catálogo y contenido de producto que se muestra
+// en esta misma página). Fuera J/cm², nm o baterías que no consten; y fuera
+// las cifras de pulsos del IPL mientras no haya una sola cifra contrastada
+// (H13: 400.000 vs 999.999 vs 500.000 según el fichero).
+const SPECS_BY_HANDLE: Record<string, {
+  label: string;
+  value: string;
+}[]> = {
+  "fresh-eye": [{
+    label: "Tecnología",
+    value: "Vibración y luz LED"
+  }, {
+    label: "Carga",
+    value: "USB-C"
+  }],
+  "lift-skin": [{
+    label: "Tecnología",
+    value: "Vibración sónica, pulsos EMS y calor"
+  }],
+  "lift-skin-pro": [{
+    label: "Funciones",
+    value: "EMS, luz LED roja/azul/violeta y compresa tibia (4-en-1)"
+  }],
+  "pretty-face": [{
+    label: "Tecnología",
+    value: "Electroestimulación EMS Fitness y masaje mecánico"
+  }],
+  "beauty-lift": [{
+    label: "Tecnología",
+    value: "Estimulación facial para reafirmar y tonificar"
+  }],
+  multiclean: [{
+    label: "Funciones",
+    value: "Limpieza sónica, ionización, luz LED roja y termolifting"
+  }, {
+    label: "Modos",
+    value: "2 modos de funcionamiento"
+  }, {
+    label: "Niveles de potencia",
+    value: "3"
+  }, {
+    label: "Resistencia al agua",
+    value: "IPX7"
+  }],
+  "breeze-scrub": [{
+    label: "Tecnología",
+    value: "Cavitación ultrasónica, sonoforesis y vapor"
+  }],
+  "refresh-scrub": [{
+    label: "Tecnología",
+    value: "Cavitación, sonoforesis y EMS"
+  }],
+  "calm-skin": [{
+    label: "Tecnología",
+    value: "Mesoterapia sin agujas: EMS, compresa fría/tibia y luz roja/azul"
+  }],
+  "fresh-skin-pro": [{
+    label: "Funciones",
+    value: "Modo RF, EMS, luz LED roja/azul, compresa fría/tibia"
+  }],
+  "bright-skin": [{
+    label: "Tecnología",
+    value: "Fototerapia LED (roja, violeta y azul), corrientes EMS y vibraciones sónicas"
+  }],
+  "serum-skin": [{
+    label: "Funciones",
+    value: "Recipiente para activos, EMS, luz LED roja/azul e ionización sónica"
+  }],
+  "cellu-body": [{
+    label: "Tecnología",
+    value: "Radiofrecuencia y masaje"
+  }],
+  "cuerpo-perfecto": [{
+    label: "Tecnología",
+    value: "Terapia EMS, masaje al vacío (ventosas) y luz roja"
+  }],
+  "multi-care-brush": [{
+    label: "Funciones",
+    value: "3 cabezales magnéticos para cuero cabelludo, rostro y cuerpo"
+  }, {
+    label: "Tecnología",
+    value: "EMS de 5 niveles y fototerapia LED"
+  }],
+  curly: [{
+    label: "Temperatura",
+    value: "150-200 °C"
+  }, {
+    label: "Niveles",
+    value: "4"
+  }, {
+    label: "Pantalla",
+    value: "LCD"
+  }, {
+    label: "Batería",
+    value: "4800 mAh"
+  }, {
+    label: "Seguridad",
+    value: "Apagado automático"
+  }],
+  aeroglow: [{
+    label: "Tecnología",
+    value: "Tecnología iónica; seca y alisa en húmedo"
+  }, {
+    label: "Niveles de calor",
+    value: "5"
+  }, {
+    label: "Pantalla",
+    value: "LCD"
+  }],
+  "ipl-flash-pro": [{
+    label: "Niveles de potencia",
+    value: "5"
+  }, {
+    label: "Modos",
+    value: "2 (auto/manual)"
+  }, {
+    label: "Superficie del cabezal",
+    value: "4,5 cm²"
+  }, {
+    label: "Cabezal",
+    value: "De enfriamiento"
+  }, {
+    label: "Sensor de piel",
+    value: "Inteligente: detecta el tono de piel"
+  }],
+  "ipl-flash-dorada": [{
+    label: "Niveles de potencia",
+    value: "5"
+  }, {
+    label: "Área de depilación",
+    value: "3 cm²"
+  }, {
+    label: "Pantalla",
+    value: "LCD"
+  }, {
+    label: "Cabezal",
+    value: "Reemplazable, con compresa refrescante"
+  }],
+  "ipl-plateada": [{
+    label: "Niveles de potencia",
+    value: "5"
+  }, {
+    label: "Área de depilación",
+    value: "3 cm²"
+  }, {
+    label: "Pantalla",
+    value: "LCD"
+  }, {
+    label: "Cabezal",
+    value: "Reemplazable, con compresa refrescante"
+  }],
+  cool: [{
+    label: "Niveles de potencia",
+    value: "5"
+  }, {
+    label: "Área de depilación",
+    value: "3 cm²"
+  }, {
+    label: "Cabezal",
+    value: "De enfriamiento"
+  }],
+  // Manopla y máscara LED: sin filas. Sus fichas muestran el fallback de
+  // categoría 'terapia-luz-led' (4 modos, timer 5/10/15 min) porque las claves
+  // de PRODUCT_CONTENT_BY_HANDLE ('manopla-led'/'mascara-led') no coinciden
+  // con los handles reales, y el contenido específico del producto los
+  // contradice (productContentByHandle.ts:884 y :926: 7 colores/150 LEDs y
+  // 4 modos de intensidad; 4 colores y 10-20 min). Mientras el mapping no se
+  // arregle y una sola fuente gane, ninguna cifra en el acordeón.
+};
+
 const ProductDetail = () => {
   const {
     handle
@@ -256,7 +429,7 @@ const ProductDetail = () => {
   const categoryInfo = getCategoryInfo();
 
   // Create SEO meta description from product
-  const metaDescription = node.description ? node.description.substring(0, 157) + '...' : `Compra ${node.title} en Garett Beauty. ${categoryInfo.name} con la mejor tecnología y calidad profesional. Envío gratis y garantía 2 años.`;
+  const metaDescription = node.description ? node.description.substring(0, 157) + '...' : `Compra ${node.title} en Garett Beauty. ${categoryInfo.name} con la mejor tecnología y calidad profesional. Envío gratis y garantía ${GARANTIA.comercial.anios} años.`;
 
   // Product schema markup for rich snippets
   const productSchema = {
@@ -276,19 +449,14 @@ const ProductDetail = () => {
       priceCurrency: variant?.price.currencyCode || 'EUR',
       availability: variant?.availableForSale ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       url: `${window.location.origin}/producto/${node.handle}`,
-      priceValidUntil: '2025-12-31',
+      // Sin priceValidUntil: no hay promoción con fecha que lo respalde.
       seller: {
         '@type': 'Organization',
         name: 'Garett Beauty'
       }
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.8',
-      reviewCount: '127',
-      bestRating: '5',
-      worstRating: '1'
     }
+    // Sin aggregateRating: no hay reseñas verificadas todavía. Solo se añade
+    // cuando existan reseñas reales por producto (H1).
   };
 
   // Breadcrumb schema
@@ -327,6 +495,14 @@ const ProductDetail = () => {
   // Get product FAQs based on category
   const productCategory = detectProductCategory(node);
   const productFAQs = productSpecificFAQs[productCategory as keyof typeof productSpecificFAQs] || [];
+
+  // Especificaciones (H13): datos existentes en el código + contenido de la
+  // caja que ya consta en el "Incluye:" de cada producto.
+  const specs = SPECS_BY_HANDLE[node.handle];
+  const certificacion = node.tags.includes('category:ipl') ? 'Certificado médico clase IIa' : 'CE';
+  const contenidoCaja = productContent.dropdowns.howToUse.additionalNote.startsWith('Incluye:')
+    ? productContent.dropdowns.howToUse.additionalNote.replace(/^Incluye:\s*/, '')
+    : null;
   return <div className="min-h-screen bg-background text-foreground">
       <SEO title={node.title} description={metaDescription} canonicalUrl={`/producto/${node.handle}`} image={node.images.edges[0]?.node.url} type="product" price={priceInfo.discountedPrice.toFixed(2)} currency={variant?.price.currencyCode || 'EUR'} availability={variant?.availableForSale ? 'in stock' : 'out of stock'} brand="Garett Beauty" schema={combinedSchema} faqs={productFAQs} />
       <Header />
@@ -414,16 +590,7 @@ const ProductDetail = () => {
             {/* Product Info */}
           <div className="space-y-6">
             <div>
-              {/* Social Proof Stack - Above the fold (Report: ALL 25 stores) */}
-              <div className="flex items-center gap-3 mb-3">
-                <div className="flex items-center gap-0.5">
-                  {[1,2,3,4,5].map(i => (
-                    <Star key={i} className={`w-4 h-4 ${i <= 4 ? 'fill-yellow-400 text-yellow-400' : 'fill-yellow-400/60 text-yellow-400/60'}`} />
-                  ))}
-                </div>
-                <span className="text-sm font-medium text-foreground">4.8</span>
-                <span className="text-sm text-foreground/60">· 127 valoraciones</span>
-              </div>
+              {/* Sin rating ni reseñas: no hay reseñas verificadas todavía (H1). Nada que enseñar hasta que existan. */}
 
               <div className="flex gap-2 mb-4 flex-wrap items-center">
                 
@@ -439,7 +606,7 @@ const ProductDetail = () => {
                   </Badge>}
                 <Badge variant="outline" className="gap-1 text-sm border-border/30 text-foreground">
                   <Shield className="w-3 h-3 text-foreground" />
-                  Garantía 2 años
+                  {GARANTIA.comercial.nombre} {GARANTIA.comercial.anios} años
                 </Badge>
                 <Badge variant="outline" className="gap-1 text-sm border-border/30 text-foreground">
                   <Stethoscope className="w-3 h-3 text-foreground" />
@@ -602,15 +769,24 @@ const ProductDetail = () => {
                </div>
              </div>}
 
+            {/* ¿Dudas? Teléfono real junto al CTA (R5) */}
+            <a
+              href={CONTACTO.telefonoHref}
+              className="flex items-center justify-center gap-2 mt-3 text-sm text-foreground/70 hover:text-foreground transition-colors"
+            >
+              <Phone className="w-4 h-4" />
+              {CONTACTO.textoJuntoAlCta}
+            </a>
+
             {/* Shipping, Returns & Trust Info Near CTA (Report: ALL 25 stores) */}
             <div className="grid grid-cols-2 gap-3 mt-4">
               <div className="flex items-center gap-2 text-sm text-foreground/70">
                 <Truck className="w-4 h-4 text-foreground flex-shrink-0" />
-                <span>Envío gratis +70€</span>
+                <span>{ENVIO.textoCorto}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-foreground/70">
                 <RefreshCw className="w-4 h-4 text-foreground flex-shrink-0" />
-                <span>14 días devolución</span>
+                <span>{DEVOLUCION.textoCorto}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-foreground/70">
                 <Shield className="w-4 h-4 text-foreground flex-shrink-0" />
@@ -618,7 +794,7 @@ const ProductDetail = () => {
               </div>
               <div className="flex items-center gap-2 text-sm text-foreground/70">
                 <Package className="w-4 h-4 text-foreground flex-shrink-0" />
-                <span>Envío 24-48h</span>
+                <span>Entrega {ENVIO.plazos[0].diasMin}-{ENVIO.plazos[0].diasMax} días ({ENVIO.plazos[0].zona})</span>
               </div>
             </div>
 
@@ -644,13 +820,7 @@ const ProductDetail = () => {
               </span>
             </div>
 
-            {/* Scarcity Cues (Report: Element 06) */}
-            {isBestseller && <div className="flex items-center gap-2 mt-4 px-3 py-2 rounded-lg bg-muted border border-border/20">
-                <Users className="w-4 h-4 text-foreground" />
-                <span className="text-sm text-foreground/80">
-                  <span className="font-semibold text-foreground">+500 vendidos</span> — Uno de nuestros más vendidos
-                </span>
-              </div>}
+            {/* Sin "+500 vendidos": cifra no contrastada, fuera (H1) */}
 
             {/* Trust Badges - Compact Version */}
             <div className="pt-6 border-t border-border/20">
@@ -660,7 +830,34 @@ const ProductDetail = () => {
             {/* Product Details Sections - User Focused */}
             <div className="space-y-3 pt-8 border-t border-border/20">
               <h3 className="font-semibold text-lg md:text-xl mb-5 tracking-tight text-foreground">Información del producto</h3>
-              
+
+              {/* Especificaciones (H13): solo datos que existen en el código */}
+              {(specs || contenidoCaja) && <Collapsible className="border border-border/20 rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-muted">
+                  <div className="flex items-center gap-3">
+                    <Package className="w-5 h-5 text-foreground" />
+                    <span className="font-medium text-left text-base text-foreground">Especificaciones</span>
+                  </div>
+                  <ChevronDown className="w-5 h-5 transition-transform text-foreground" />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="px-5 pb-5 text-sm text-foreground/70 leading-relaxed">
+                  <div className="divide-y divide-border/10">
+                    {specs?.map((spec, idx) => <div key={idx} className="flex items-start justify-between gap-4 py-2.5">
+                        <span className="font-medium text-foreground flex-shrink-0">{spec.label}</span>
+                        <span className="text-right">{spec.value}</span>
+                      </div>)}
+                    <div className="flex items-start justify-between gap-4 py-2.5">
+                      <span className="font-medium text-foreground flex-shrink-0">Certificación</span>
+                      <span className="text-right">{certificacion}</span>
+                    </div>
+                    {contenidoCaja && <div className="flex items-start justify-between gap-4 py-2.5">
+                        <span className="font-medium text-foreground flex-shrink-0">Contenido de la caja</span>
+                        <span className="text-right">{contenidoCaja}</span>
+                      </div>}
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>}
+
               {/* Why It Works */}
               <Collapsible className="border border-border/20 rounded-lg">
                 <CollapsibleTrigger className="flex items-center justify-between w-full p-5 transition-colors hover:bg-muted">
@@ -751,8 +948,22 @@ const ProductDetail = () => {
                     <div className="flex items-start gap-2">
                       <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-400" />
                       <div>
-                        <p className="font-medium text-foreground">24 meses de garantía comercial</p>
+                        <p className="font-medium text-foreground">{GARANTIA.comercial.texto}</p>
                         <p>Contra defectos de fabricación</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-400" />
+                      <div>
+                        <p className="font-medium text-foreground">{GARANTIA.legal.texto}</p>
+                        <p>Cubierta por la ley ante defectos de conformidad</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-400" />
+                      <div>
+                        <p className="font-medium text-foreground">{DEVOLUCION.textoCorto}</p>
+                        <p>{DEVOLUCION.desprecintado.texto}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
@@ -794,84 +1005,17 @@ const ProductDetail = () => {
                   </div>
                 ))}
               </div>
-              <div className="border-t border-border pt-6 flex items-start gap-4 mt-6">
-                <div className="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center flex-shrink-0">
-                  <Stethoscope className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-foreground mb-1">Recomendado por especialistas</p>
-                  <p className="text-sm text-muted-foreground italic leading-relaxed">
-                    "Los dispositivos de belleza tecnológica han demostrado mejoras medibles en firmeza, hidratación y elasticidad — siempre con uso constante y siguiendo las indicaciones del fabricante."
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-2">— Equipo clínico Garett Beauty</p>
-                </div>
-              </div>
+              {/* Sin cita de especialistas: no hay clínico con nombre y colegiado que la avale (H8). Se recupera cuando alguien la pueda firmar. */}
             </div>
 
             {/* Product Disclaimer - Health Precautions */}
             <ProductDisclaimer tags={node.tags} />
 
-            {/* T16 — Reviews integrados + FAQ accordion visual */}
-            <div className="bg-card border border-border rounded-2xl p-6 md:p-8 my-8">
-              <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
-                <div>
-                  <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Opiniones verificadas</p>
-                  <h3 className="text-xl md:text-2xl font-semibold text-foreground tracking-tight">
-                    Lo que dicen nuestros clientes
-                  </h3>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-0.5">
-                    {[1,2,3,4,5].map(i => (
-                      <Star key={i} className={`w-4 h-4 ${i <= 4 ? 'fill-yellow-400 text-yellow-400' : 'fill-yellow-400/60 text-yellow-400/60'}`} />
-                    ))}
-                  </div>
-                  <span className="text-sm font-semibold text-foreground">4.8 / 5</span>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-background border border-border rounded-xl p-4">
-                  <div className="flex items-center gap-0.5 mb-3">
-                    {[1,2,3,4,5].map(i => (
-                      <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-sm text-foreground/80 italic leading-relaxed mb-3">
-                    "Lo uso cada mañana desde hace 6 semanas. Se nota la piel más firme y luminosa. 100% recomendado."
-                  </p>
-                  <p className="text-xs text-muted-foreground">— Laura M. · Cliente verificado</p>
-                </div>
-                <div className="bg-background border border-border rounded-xl p-4">
-                  <div className="flex items-center gap-0.5 mb-3">
-                    {[1,2,3,4,5].map(i => (
-                      <Star key={i} className={`w-3 h-3 ${i <= 4 ? 'fill-yellow-400 text-yellow-400' : 'fill-yellow-400/60 text-yellow-400/60'}`} />
-                    ))}
-                  </div>
-                  <p className="text-sm text-foreground/80 italic leading-relaxed mb-3">
-                    "El envío rapidísimo y la atención al cliente resolvió una duda en menos de 24h. Producto de calidad."
-                  </p>
-                  <p className="text-xs text-muted-foreground">— Carlos R. · Cliente verificado</p>
-                </div>
-                <div className="bg-background border border-border rounded-xl p-4">
-                  <div className="flex items-center gap-0.5 mb-3">
-                    {[1,2,3,4,5].map(i => (
-                      <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-sm text-foreground/80 italic leading-relaxed mb-3">
-                    "He probado muchos y este tiene una calidad-precio inmejorable. La batería dura semanas."
-                  </p>
-                  <p className="text-xs text-muted-foreground">— María G. · Cliente verificado</p>
-                </div>
-              </div>
-              <p className="text-xs text-muted-foreground mt-4 text-center">
-                Las reseñas se validan tras la compra. Resultados pueden variar.
-              </p>
-            </div>
+            {/* Sin sección de reseñas: no hay reseñas verificadas por producto todavía (H1). Nada que enseñar hasta que existan. */}
 
             {/* Trust Footer */}
             <div className="p-5 rounded-lg text-xs border border-border/20 bg-muted text-foreground/70 leading-relaxed">
-              <p>Los resultados pueden variar. Úsalo con constancia para mejores resultados. Certificado CE. Garantía comercial 2 años. Producto higiénico-sanitario: no admite devolución una vez desprecintado salvo defecto técnico verificado.</p>
+              <p>Los resultados pueden variar. Úsalo con constancia para mejores resultados. Certificado CE. {GARANTIA.comercial.texto}. {DEVOLUCION.textoCorto}. {DEVOLUCION.desprecintado.texto}</p>
             </div>
           </div>
         </div>
@@ -936,14 +1080,8 @@ const ProductDetail = () => {
                   </span>}
               </div>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span className="flex items-center gap-0.5">
-                  {[1,2,3,4,5].map(i => (
-                    <Star key={i} className={`w-3 h-3 ${i <= 4 ? 'fill-yellow-400 text-yellow-400' : 'fill-yellow-400/60 text-yellow-400/60'}`} />
-                  ))}
-                  <span className="font-medium text-foreground">4.8</span>
-                </span>
                 <Shield className="w-3 h-3" />
-                <span>Garantía 2 años</span>
+                <span>{GARANTIA.comercial.nombre} {GARANTIA.comercial.anios} años</span>
                 <span className="hidden sm:inline">· 3 cuotas sin intereses</span>
               </div>
             </div>

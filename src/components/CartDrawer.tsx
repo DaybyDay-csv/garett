@@ -1,21 +1,17 @@
 import { useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { TrustBadges } from "@/components/TrustBadges";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Sparkles, Truck, ArrowRight } from "lucide-react";
+import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Sparkles, Truck, ArrowRight, Shield, RotateCcw } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { KlarnaWidget } from "@/components/KlarnaWidget";
 import { toast } from "sonner";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { trackBeginCheckout, trackViewCart, trackRemoveFromCart } from "@/hooks/usePageTracking";
 import { getRecommendations } from "@/lib/recommendations";
 import { LOCAL_PRODUCTS, LOCAL_PRODUCTS_BY_HANDLE } from "@/lib/catalog";
 import { ShopifyProduct } from "@/lib/shopify";
+import { DEVOLUCION, ENVIO, GARANTIA } from "@/lib/policies";
 import { Link } from "react-router-dom";
-
-const FREE_SHIPPING_THRESHOLD = 49;
 
 // Imágenes de fallback para bundles (primer producto del pack)
 const BUNDLE_FALLBACK_IMAGES: Record<string, string> = {
@@ -28,7 +24,6 @@ const BUNDLE_FALLBACK_IMAGES: Record<string, string> = {
 };
 
 export const CartDrawer = () => {
-  const isMobile = useIsMobile();
   const {
     items,
     isLoading,
@@ -118,16 +113,6 @@ export const CartDrawer = () => {
   }
 
   const handleCheckout = async () => {
-    // Detectar si estamos en un iframe (preview de Lovable)
-    const isInIframe = window.self !== window.top;
-    const shouldOpenNewTab = !isMobile || isInIframe;
-    
-    // Safari bloquea window.open() después de async, así que abrimos antes
-    let newWindow: Window | null = null;
-    if (shouldOpenNewTab) {
-      newWindow = window.open('about:blank', '_blank');
-    }
-    
     try {
       // Track begin_checkout event (GA4 + Meta Pixel)
       const checkoutItems = items.filter(item => !item.isGWP).map(item => ({
@@ -141,24 +126,16 @@ export const CartDrawer = () => {
       await createCheckout();
       const checkoutUrl = useCartStore.getState().checkoutUrl;
       if (checkoutUrl) {
-        if (shouldOpenNewTab && newWindow) {
-          // Asignar URL a la ventana ya abierta
-          newWindow.location.href = checkoutUrl;
-        } else if (isMobile && !isInIframe) {
-          // En móvil real: redirigir en la misma ventana
-          window.location.href = checkoutUrl;
-        }
+        // Redirección en la misma pestaña: no depende de popups ni de bloqueadores.
+        window.location.href = checkoutUrl;
         setIsOpen(false);
-      } else if (newWindow) {
-        // Si no hay URL, cerrar la ventana vacía
-        newWindow.close();
+      } else {
+        toast.error('No hemos podido iniciar el pago', {
+          description: 'Por favor, inténtalo de nuevo.'
+        });
       }
     } catch (error) {
       console.error('Checkout failed:', error);
-      // Cerrar ventana vacía si hay error
-      if (newWindow) {
-        newWindow.close();
-      }
       toast.error('Error al crear el checkout', {
         description: 'Por favor, inténtalo de nuevo.'
       });
@@ -310,30 +287,15 @@ export const CartDrawer = () => {
                   </div>
                 )}
 
-                {/* Free Shipping Progress */}
-                {(() => {
-                  const remaining = Math.max(FREE_SHIPPING_THRESHOLD - subtotalWithDiscount, 0);
-                  const progressPercent = Math.min((subtotalWithDiscount / FREE_SHIPPING_THRESHOLD) * 100, 100);
-                  const unlocked = subtotalWithDiscount >= FREE_SHIPPING_THRESHOLD;
-                  return (
-                    <div className={`rounded-lg p-3 border ${unlocked ? 'bg-primary-light border-primary/20' : 'bg-muted border-border'}`}>
-                      <div className="flex items-center gap-2 text-sm font-medium">
-                        <Truck className={`w-4 h-4 flex-shrink-0 ${unlocked ? 'text-primary' : 'text-muted-foreground'}`} />
-                        {unlocked ? (
-                          <span className="text-foreground">¡Envío gratis desbloqueado!</span>
-                        ) : (
-                          <span className="text-foreground">
-                            Te faltan <span className="font-bold text-primary">€{remaining.toFixed(2)}</span> para envío gratis
-                          </span>
-                        )}
-                      </div>
-                      <Progress value={progressPercent} className="h-1.5 mt-2" />
-                      <p className="text-[10px] text-muted-foreground mt-1.5">
-                        Envío gratis en pedidos +{FREE_SHIPPING_THRESHOLD}€ en Península
-                      </p>
+                {/* Envío gratis en todos los pedidos (policies): sin umbral ni barra de progreso */}
+                {ENVIO.gratisTodosLosPedidos && (
+                  <div className="rounded-lg p-3 border bg-primary-light border-primary/20">
+                    <div className="flex items-center gap-2 text-sm font-medium">
+                      <Truck className="w-4 h-4 flex-shrink-0 text-primary" />
+                      <span className="text-foreground">Envío gratis incluido</span>
                     </div>
-                  );
-                })()}
+                  </div>
+                )}
 
                 {/* Price Breakdown */}
                 <div className="space-y-1.5 text-sm">
@@ -383,9 +345,24 @@ export const CartDrawer = () => {
                   )}
                 </Button>
                 
-                {/* Trust Badges in Cart */}
+                {/* Sellos de confianza: leen de policies (única fuente de verdad) */}
                 <div className="border-t pt-2.5 mt-2.5">
-                  <TrustBadges variant="cart" />
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="flex flex-col items-center text-center rounded-lg bg-card border p-2">
+                      <Truck className="w-4 h-4 text-primary mb-1" />
+                      <p className="text-[10px] leading-tight font-medium">{ENVIO.textoCorto}</p>
+                    </div>
+                    <div className="flex flex-col items-center text-center rounded-lg bg-card border p-2">
+                      <RotateCcw className="w-4 h-4 text-primary mb-1" />
+                      <p className="text-[10px] leading-tight font-medium">{DEVOLUCION.textoCorto}</p>
+                    </div>
+                    <div className="flex flex-col items-center text-center rounded-lg bg-card border p-2">
+                      <Shield className="w-4 h-4 text-primary mb-1" />
+                      <p className="text-[10px] leading-tight font-medium">
+                        {GARANTIA.comercial.anios} años comercial · {GARANTIA.legal.anios} años legal
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </>

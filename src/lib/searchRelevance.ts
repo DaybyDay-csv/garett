@@ -52,6 +52,20 @@ const INTENT_GROUPS: Array<{ keywords: string[]; handles: string[] }> = [
     keywords: ['cuero cabelludo', 'cepillar pelo', 'masaje capilar', 'multi'],
     handles: ['multi-care-brush'],
   },
+  {
+    // Regalo: quien busca esto no sabe qué dispositivo quiere, solo a quién
+    // y con cuánto. Handles elegidos por adecuación y precio (spread de
+    // categorías y de presupuesto), sin productos inventados. La guía completa
+    // por presupuesto vive en /ideas-regalo.
+    //
+    // Límite conocido: "para él" no rankea por regalo ('él' se normaliza a
+    // 'el', stopword, así que la query queda sin tokens y searchProducts
+    // devuelve el catálogo completo). Añadir 'el' como keyword contaminaría
+    // cualquier búsqueda (intentMatch es substring bidireccional). "Regalo
+    // para él" sí funciona vía 'regalo' y "para ella" vía 'ella'.
+    keywords: ['regalo', 'regalar', 'regalos', 'gift', 'gifts', 'sorpresa', 'ella', 'cumpleanos', 'navidad', 'reyes', 'aniversario', 'valentin'],
+    handles: ['fresh-eye', 'serum-skin', 'multiclean', 'pretty-face', 'bright-skin', 'lift-skin-pro', 'multi-care-brush', 'fresh-skin-pro', 'cellu-body', 'curly', 'aeroglow', 'manopla-led-garett-beauty', 'mascara-led-garett-beauty', 'ipl-plateada'],
+  },
 ];
 
 const normalize = (s: string): string =>
