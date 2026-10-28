@@ -25,7 +25,7 @@ const TerminosCondiciones = () => {
               <span className="text-primary">1.</span> Información general
             </h2>
             <p className="text-muted-foreground">
-              Este sitio web es operado por INTERMEX BEAUTY — razón social pendiente de confirmar, titular de la marca de dispositivos de belleza Intermex Beauty, incluyendo aparatos tecnológicos para el cuidado facial y corporal de uso doméstico. Al acceder y utilizar este sitio web, usted acepta cumplir con los siguientes términos y condiciones de uso. Si no está de acuerdo con ellos, le recomendamos no utilizar este sitio.
+              Este sitio web es operado por INTERMEX BEAUTY S.L. (CIF B75920421), titular de la marca de dispositivos de belleza Intermex Beauty, incluyendo aparatos tecnológicos para el cuidado facial y corporal de uso doméstico. Al acceder y utilizar este sitio web, usted acepta cumplir con los siguientes términos y condiciones de uso. Si no está de acuerdo con ellos, le recomendamos no utilizar este sitio.
             </p>
           </section>
 
@@ -203,7 +203,7 @@ const TerminosCondiciones = () => {
               <div className="bg-muted/50 rounded-md p-4 space-y-2">
                 <p><strong className="text-foreground">Email:</strong> <a href="mailto:info@intermexbeauty.es" className="text-primary hover:underline">info@intermexbeauty.es</a></p>
                 <p><strong className="text-foreground">Teléfono:</strong> +34 679 23 51 48</p>
-                <p><strong className="text-foreground">Dirección:</strong> ul. Sandomierska 209, 25-330 Kielce (Polonia)</p>
+                <p><strong className="text-foreground">Dirección:</strong> España (domicilio fiscal pendiente de confirmar)</p>
               </div>
             </div>
           </section>

@@ -12,8 +12,8 @@
 export const BRAND = {
   /** Nombre comercial de la tienda. */
   name: "Intermex Beauty",
-  /** Entidad legal titular del sitio. Razón social pendiente de confirmar. */
-  legalName: "INTERMEX BEAUTY — razón social pendiente de confirmar",
+  /** Entidad legal titular del sitio (domicilio fiscal pendiente de confirmar). */
+  legalName: "INTERMEX BEAUTY S.L. (CIF B75920421)",
   /** Dominio oficial del sitio. */
   domain: "intermexbeauty.es",
   /** URL base absoluta del sitio. */

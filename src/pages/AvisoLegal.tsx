@@ -29,7 +29,7 @@ const AvisoLegal = () => {
                   <div>
                     <h3 className="font-semibold text-foreground mb-2">Propiedad</h3>
                     <p className="text-muted-foreground">
-                      Este sitio web es propiedad de la empresa <strong className="text-foreground">INTERMEX BEAUTY — razón social pendiente de confirmar</strong>.
+                      Este sitio web es propiedad de la empresa <strong className="text-foreground">INTERMEX BEAUTY S.L. (CIF B75920421)</strong>.
                     </p>
                   </div>
                 </div>
@@ -41,7 +41,7 @@ const AvisoLegal = () => {
             <h3 className="text-xl font-semibold">Propiedad intelectual</h3>
             <div className="text-muted-foreground space-y-3">
               <p>
-                Todos los contenidos de este sitio web, incluyendo a título enunciativo pero no limitativo el diseño gráfico, las imágenes, los vídeos, las animaciones, los textos, el software, los productos y demás elementos contenidos en el dominio intermexbeauty.es, así como los signos distintivos (marcas, nombres comerciales, logotipos), son propiedad de <strong className="text-foreground">INTERMEX BEAUTY — razón social pendiente de confirmar</strong>.
+                Todos los contenidos de este sitio web, incluyendo a título enunciativo pero no limitativo el diseño gráfico, las imágenes, los vídeos, las animaciones, los textos, el software, los productos y demás elementos contenidos en el dominio intermexbeauty.es, así como los signos distintivos (marcas, nombres comerciales, logotipos), son propiedad de <strong className="text-foreground">INTERMEX BEAUTY S.L. (CIF B75920421)</strong>.
               </p>
               <p>
                 Asimismo, determinados contenidos creados directamente por INTERMEX BEAUTY, tales como textos descriptivos, fotografías, materiales promocionales o elementos gráficos originales, son propiedad exclusiva de INTERMEX BEAUTY, quedando igualmente protegidos por la normativa nacional e internacional sobre propiedad intelectual e industrial.

@@ -63,7 +63,7 @@ const PoliticaPrivacidad = () => {
             </h2>
             <div className="text-muted-foreground space-y-3">
               <p>
-                El responsable del tratamiento de tus datos personales es <strong className="text-foreground">INTERMEX BEAUTY — razón social pendiente de confirmar</strong>.
+                El responsable del tratamiento de tus datos personales es <strong className="text-foreground">INTERMEX BEAUTY S.L. (CIF B75920421)</strong>.
               </p>
               <p>
                 Puede ponerse en contacto con nosotros mediante correo electrónico a: <a href="mailto:info@intermexbeauty.es" className="text-primary hover:underline">info@intermexbeauty.es</a>
@@ -205,7 +205,7 @@ const PoliticaPrivacidad = () => {
               <div className="bg-muted/50 rounded-md p-4 space-y-2">
                 <p><strong className="text-foreground">Email:</strong> <a href="mailto:info@intermexbeauty.es" className="text-primary hover:underline">info@intermexbeauty.es</a></p>
                 <p><strong className="text-foreground">Teléfono:</strong> +34 679 23 51 48</p>
-                <p><strong className="text-foreground">Dirección postal:</strong> ul. Sandomierska 209, 25-330 Kielce (Polonia)</p>
+                <p><strong className="text-foreground">Dirección postal:</strong> España (domicilio fiscal pendiente de confirmar)</p>
               </div>
             </div>
           </section>
