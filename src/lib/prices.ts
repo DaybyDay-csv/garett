@@ -33,6 +33,8 @@ export interface ComponentePack {
 export interface Pack {
   /** Handle del pack. */
   handle: string;
+  /** Nombre del pack (igual que bundles.ts `title`). */
+  nombre: string;
   /** Componentes con sus cantidades. */
   componentes: ComponentePack[];
   /** Precio final del pack, ya rebajado, en céntimos de euro. */
@@ -76,6 +78,7 @@ export const PRECIOS: Record<string, PrecioProducto> = {
 export const PACKS: Pack[] = [
   {
     handle: "pack-ritual-belleza-eco",
+    nombre: "Pack Ritual Belleza Eco",
     componentes: [
       { handle: "multiclean", cantidad: 1 },
       { handle: "serum-skin", cantidad: 1 },
@@ -85,6 +88,7 @@ export const PACKS: Pack[] = [
   },
   {
     handle: "pack-ritual-cara-completa",
+    nombre: "Pack Ritual Cara Completa",
     componentes: [
       { handle: "multiclean", cantidad: 1 },
       { handle: "fresh-eye", cantidad: 1 },
@@ -95,6 +99,7 @@ export const PACKS: Pack[] = [
   },
   {
     handle: "pack-ritual-premium",
+    nombre: "Pack Ritual Premium",
     componentes: [
       { handle: "multiclean", cantidad: 1 },
       { handle: "calm-skin", cantidad: 1 },
@@ -103,3 +108,93 @@ export const PACKS: Pack[] = [
     precioCentimos: 26500,
   },
 ];
+
+/**
+ * Espejo del desglose del servidor (functions/api/create-checkout.ts
+ * `desglosaCarrito`): extrae packs de forma avariciosa y cobra el resto a
+ * precio base. MISMO ALGORITMO — si cambias uno, cambia el otro.
+ *
+ * Sirve para que el carrito muestre el importe que de verdad se va a cobrar
+ * en Stripe (paridad carrito-cobro), incluso cuando el carrito contiene un
+ * pack junto a otros productos o cantidades extra.
+ */
+
+/** Línea de carrito a desglosar. */
+export interface LineaCarrito {
+  handle: string;
+  cantidad: number;
+}
+
+/** Línea ya desglosada, con su importe unitario final en céntimos. */
+export interface LineaDesglosada {
+  handle: string;
+  cantidad: number;
+  importeUnitarioCentimos: number;
+}
+
+/** Reparto proporcional del precio del pack (última línea absorbe el redondeo). */
+function repartePrecioPack(pack: Pack, handles: string[]): number[] {
+  const totalBase = handles.reduce((s, h) => s + PRECIOS[h].precioCentimos, 0);
+  let asignado = 0;
+  return handles.map((h, i) => {
+    if (i === handles.length - 1) {
+      return pack.precioCentimos - asignado;
+    }
+    const importe = Math.floor(
+      (pack.precioCentimos * PRECIOS[h].precioCentimos) / totalBase,
+    );
+    asignado += importe;
+    return importe;
+  });
+}
+
+/** Desglosa un carrito en las líneas que se cobrarán en Stripe. */
+export function desglosaCarrito(
+  lineas: LineaCarrito[],
+): LineaDesglosada[] {
+  const disponibles = new Map<string, number>(
+    lineas.map((l) => [l.handle, l.cantidad]),
+  );
+  const finales: LineaDesglosada[] = [];
+
+  let quedanPacks = true;
+  while (quedanPacks) {
+    quedanPacks = false;
+    for (const pack of PACKS) {
+      if (pack.componentes.every((c) => (disponibles.get(c.handle) ?? 0) >= c.cantidad)) {
+        const handles = pack.componentes.map((c) => c.handle);
+        const importes = repartePrecioPack(pack, handles);
+        handles.forEach((h, i) => {
+          finales.push({
+            handle: h,
+            cantidad: 1,
+            importeUnitarioCentimos: importes[i],
+          });
+          disponibles.set(h, disponibles.get(h)! - 1);
+        });
+        quedanPacks = true;
+      }
+    }
+  }
+
+  for (const linea of lineas) {
+    const restante = disponibles.get(linea.handle) ?? 0;
+    if (restante > 0) {
+      finales.push({
+        handle: linea.handle,
+        cantidad: restante,
+        importeUnitarioCentimos: PRECIOS[linea.handle].precioCentimos,
+      });
+    }
+  }
+
+  return finales;
+}
+
+/** Importe total (en céntimos) que se cobrará en Stripe por este carrito, sin envío. */
+export function totalCobro(lineas: LineaCarrito[]): number {
+  return desglosaCarrito(lineas).reduce(
+    (s, l) => s + l.importeUnitarioCentimos * l.cantidad,
+    0,
+  );
+}

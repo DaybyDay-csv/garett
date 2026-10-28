@@ -5,10 +5,12 @@
 // Precios (H3): los line_items se construyen SIEMPRE en el servidor con
 // price_data a partir de la tabla local (./prices, duplicado de src/lib/prices.ts).
 // Los price_ que llegan del cliente se IGNORAN como importe; solo se usan para
-// recuperar el handle mientras el frontend siga mandando price_ (ver
+// recuperar el handle mientras algún cliente antiguo siga mandando price_ (ver
 // HANDLE_BY_PRICE más abajo). Un handle que no esté en la tabla se rechaza.
-// Si el carrito coincide exactamente con un pack de la tabla, el precio del
-// pack se reparte entre las líneas de forma proporcional.
+// Los packs se detectan de forma avariciosa: si el carrito contiene los
+// componentes de un pack, esos componentes se cobran al precio del pack
+// (reparto proporcional, la última línea absorbe el redondeo) y el resto a
+// precio base. El total NUNCA supera la suma de precios base.
 import { PRECIOS, PACKS, type Pack } from './prices';
 
 interface Env {
@@ -94,47 +96,91 @@ function aLineas(items: CheckoutItem[]): LineaCarrito[] {
   return [...lineas.entries()].map(([handle, cantidad]) => ({ handle, cantidad }));
 }
 
-/** Match exacto: el carrito es exactamente el pack (mismos handles y cantidades). */
-function packExacto(lineas: LineaCarrito[]): Pack | null {
-  return (
-    PACKS.find(
-      (p) =>
-        p.componentes.length === lineas.length &&
-        p.componentes.every((c) => {
-          const linea = lineas.find((l) => l.handle === c.handle);
-          return linea !== undefined && linea.cantidad === c.cantidad;
-        }) &&
-        lineas.every((l) => p.componentes.some((c) => c.handle === l.handle)),
-    ) ?? null
-  );
-}
-
 /**
  * Reparte el precio del pack entre las líneas, proporcional al precio base de
  * cada una. La última línea absorbe el redondeo para que la suma dé exactamente
- * el precio del pack. Devuelve null si algún componente del pack tuviera más de
- * una unidad (hoy no ocurre): en ese caso se cobra a precio base, sin descuento.
+ * el precio del pack. Mismo algoritmo que BundlePicker en el cliente, para que
+ * el total del carrito y el cobro coincidan al céntimo.
  */
 function repartePrecioPack(
   pack: Pack,
-  lineas: LineaCarrito[],
-): number[] | null {
-  if (lineas.some((l) => l.cantidad !== 1)) return null;
-  const totalBase = lineas.reduce(
-    (s, l) => s + PRECIOS[l.handle].precioCentimos,
+  handles: string[],
+): number[] {
+  const totalBase = handles.reduce(
+    (s, h) => s + PRECIOS[h].precioCentimos,
     0,
   );
   let asignado = 0;
-  return lineas.map((l, i) => {
-    if (i === lineas.length - 1) {
+  return handles.map((h, i) => {
+    if (i === handles.length - 1) {
       return pack.precioCentimos - asignado;
     }
     const importe = Math.floor(
-      (pack.precioCentimos * PRECIOS[l.handle].precioCentimos) / totalBase,
+      (pack.precioCentimos * PRECIOS[h].precioCentimos) / totalBase,
     );
     asignado += importe;
     return importe;
   });
+}
+
+/** Línea final a cobrar en Stripe. */
+interface LineaFinal {
+  handle: string;
+  nombre: string;
+  cantidad: number;
+  /** Importe unitario de la línea, en céntimos. */
+  importeUnitario: number;
+}
+
+/**
+ * Extrae packs del carrito de forma AVARICIOSA (greedy): mientras quede un
+ * pack cuyos componentes estén (con cantidad >= 1) en el carrito, sus
+ * componentes se cobran al precio repartido del pack (proporcional al base,
+ * última línea absorbe el redondeo) y se descuentan esas unidades. El resto se
+ * cobra a precio base. Así un pack dentro de un carrito más grande conserva su
+ * descuento, las líneas del recibo coinciden 1 a 1 con las del carrito y el
+ * total cobrado NUNCA supera la suma de precios base (nunca se sobrecobra).
+ */
+export function desglosaCarrito(lineas: LineaCarrito[]): LineaFinal[] {
+  const disponibles = new Map<string, number>(
+    lineas.map((l) => [l.handle, l.cantidad]),
+  );
+  const finales: LineaFinal[] = [];
+
+  let quedanPacks = true;
+  while (quedanPacks) {
+    quedanPacks = false;
+    for (const pack of PACKS) {
+      if (pack.componentes.every((c) => (disponibles.get(c.handle) ?? 0) >= c.cantidad)) {
+        const handles = pack.componentes.map((c) => c.handle);
+        const importes = repartePrecioPack(pack, handles);
+        handles.forEach((h, i) => {
+          finales.push({
+            handle: h,
+            nombre: PRECIOS[h].nombre,
+            cantidad: 1,
+            importeUnitario: importes[i],
+          });
+          disponibles.set(h, disponibles.get(h)! - 1);
+        });
+        quedanPacks = true;
+      }
+    }
+  }
+
+  for (const linea of lineas) {
+    const restante = disponibles.get(linea.handle) ?? 0;
+    if (restante > 0) {
+      finales.push({
+        handle: linea.handle,
+        nombre: PRECIOS[linea.handle].nombre,
+        cantidad: restante,
+        importeUnitario: PRECIOS[linea.handle].precioCentimos,
+      });
+    }
+  }
+
+  return finales;
 }
 
 /**
@@ -201,8 +247,7 @@ export async function onRequestPost({
 
   const origin = new URL(request.url).origin;
 
-  const pack = packExacto(lineas);
-  const importesPack = pack ? repartePrecioPack(pack, lineas) : null;
+  const finales = desglosaCarrito(lineas);
 
   const form = new URLSearchParams();
   form.append('mode', 'payment');
@@ -218,13 +263,11 @@ export async function onRequestPost({
   form.append('custom_fields[0][label][custom]', '¿Es un regalo? Mensaje para el ticket');
   form.append('custom_fields[0][type]', 'text');
   form.append('custom_fields[0][optional]', 'true');
-  lineas.forEach((linea, i) => {
-    const precio = PRECIOS[linea.handle];
-    const unit = importesPack ? importesPack[i] : precio.precioCentimos;
+  finales.forEach((linea, i) => {
     form.append(`line_items[${i}][quantity]`, String(linea.cantidad));
     form.append(`line_items[${i}][price_data][currency]`, 'eur');
-    form.append(`line_items[${i}][price_data][unit_amount]`, String(unit));
-    form.append(`line_items[${i}][price_data][product_data][name]`, precio.nombre);
+    form.append(`line_items[${i}][price_data][unit_amount]`, String(linea.importeUnitario));
+    form.append(`line_items[${i}][price_data][product_data][name]`, linea.nombre);
   });
 
   await provisionaCuponPrimerPedido(secret);

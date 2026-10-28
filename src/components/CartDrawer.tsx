@@ -11,6 +11,7 @@ import { getRecommendations } from "@/lib/recommendations";
 import { LOCAL_PRODUCTS, LOCAL_PRODUCTS_BY_HANDLE } from "@/lib/catalog";
 import { ShopifyProduct } from "@/lib/shopify";
 import { DEVOLUCION, ENVIO, GARANTIA } from "@/lib/policies";
+import { totalCobro } from "@/lib/prices";
 import { Link } from "react-router-dom";
 
 // Imágenes de fallback para bundles (primer producto del pack)
@@ -67,11 +68,19 @@ export const CartDrawer = () => {
   // Check if product is LED launch (permanent 30% discount in Shopify)
   const isLEDLaunchProduct = (handle: string) => handle === 'mascara-led-intermex-beauty' || handle === 'manopla-led-intermex-beauty';
 
-  // Calculate total price using cart item prices (already correct from Shopify)
-  const subtotalWithDiscount = items.filter(item => !item.isGWP).reduce((sum, item) => {
-    const price = parseFloat(item.price.amount);
-    return sum + price * item.quantity;
-  }, 0);
+  // Paridad carrito-cobro: el total mostrado es el que cobrará Stripe de
+  // verdad (desglose con packs, mismo algoritmo que el servidor).
+  const lineasCarrito = items
+    .filter(item => !item.isGWP)
+    .map(item => ({ handle: item.product.node.handle, cantidad: item.quantity }));
+  const subtotalWithDiscount = totalCobro(lineasCarrito) / 100;
+
+  // Suma de los precios mostrados en las líneas, para detectar cuando el
+  // desglose aplica un precio de pack (el total mostrado baja).
+  const sumaLineasMostradas = items
+    .filter(item => !item.isGWP)
+    .reduce((sum, item) => sum + parseFloat(item.price.amount) * item.quantity, 0);
+  const ahorroPack = Math.max(0, sumaLineasMostradas - subtotalWithDiscount);
 
   // Cross-sell: recomendaciones basadas en el contenido del carrito
   const recommendations = useMemo(() => {
@@ -297,20 +306,31 @@ export const CartDrawer = () => {
                   </div>
                 )}
 
-                {/* Price Breakdown */}
-                <div className="space-y-1.5 text-sm">
-                  {/* LED Launch discount */}
-                  {hasLEDLaunch && (
-                    <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
-                      <span className="flex items-center gap-1.5">
-                        <Sparkles className="w-3 h-3" />
-                        Dto. Lanzamiento LED (30%)
-                      </span>
-                      <span>-€{totalSavings.toFixed(2)}</span>
-                    </div>
-                  )}
-                  
-                  <div className="h-px bg-border my-1.5"></div>
+                  {/* Price Breakdown */}
+                  <div className="space-y-1.5 text-sm">
+                    {/* LED Launch discount */}
+                    {hasLEDLaunch && (
+                      <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
+                        <span className="flex items-center gap-1.5">
+                          <Sparkles className="w-3 h-3" />
+                          Dto. Lanzamiento LED (30%)
+                        </span>
+                        <span>-€{totalSavings.toFixed(2)}</span>
+                      </div>
+                    )}
+
+                    {/* Precio de pack aplicado (paridad con el cobro de Stripe) */}
+                    {ahorroPack > 0.005 && (
+                      <div className="flex justify-between text-green-600 dark:text-green-400 text-xs">
+                        <span className="flex items-center gap-1.5">
+                          <Sparkles className="w-3 h-3" />
+                          Precio de pack aplicado
+                        </span>
+                        <span>-€{ahorroPack.toFixed(2)}</span>
+                      </div>
+                    )}
+
+                    <div className="h-px bg-border my-1.5"></div>
                   
                   {/* Total */}
                   <div className="flex justify-between items-center text-base font-bold">

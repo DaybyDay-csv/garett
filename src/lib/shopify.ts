@@ -2,7 +2,6 @@
 // El catálogo vive en src/lib/catalog.ts (datos locales).
 // Este módulo mantiene la interfaz para no romper componentes.
 import { LOCAL_PRODUCTS, LOCAL_PRODUCTS_BY_HANDLE } from './catalog';
-import { STRIPE_PRICE_BY_HANDLE } from './stripePrices';
 export interface ShopifyProduct {
   node: {
     id: string;
@@ -105,7 +104,11 @@ export interface CheckoutLineItem {
 }
 
 // Create Stripe Checkout via Cloudflare Pages Function (/api/create-checkout).
-// Usa los Price IDs de Stripe (productos linkeados) para la contabilidad por producto.
+// Se envía el handle del catálogo; el servidor construye los line_items con
+// price_data a partir de su tabla de precios (functions/api/prices.ts) y cobra
+// SIEMPRE el importe final del carrito. Los Price IDs de Stripe
+// (src/lib/stripePrices.ts) ya no se usan aquí: los productos nuevos (p. ej.
+// los relojes Garett) funcionan sin crear un price_ a mano.
 export async function createStorefrontCheckout(
   items: CheckoutLineItem[]
 ): Promise<string> {
@@ -113,11 +116,7 @@ export async function createStorefrontCheckout(
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      items: items.map((item) => {
-        const price = STRIPE_PRICE_BY_HANDLE[item.handle];
-        if (!price) throw new Error(`Precio de Stripe no encontrado: ${item.handle}`);
-        return { price, quantity: item.quantity };
-      }),
+      items: items.map((item) => ({ handle: item.handle, quantity: item.quantity })),
     }),
   });
 

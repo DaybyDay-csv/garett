@@ -6,6 +6,7 @@ import { Check, Sparkles, Package } from "lucide-react";
 import { Link } from "react-router-dom";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { Bundle, getAllBundles, getBundlesForHandle } from "@/lib/bundles";
+import { desglosaCarrito } from "@/lib/prices";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 
@@ -40,14 +41,21 @@ export const BundlePicker = ({ currentProductHandle, currentProductPrice }: Bund
       toast.error("Faltan productos del pack", { description: "Pocos productos en el catálogo" });
       return;
     }
-    // Apply proportional discount to each item's cart price
-    const totalOriginal = included.reduce((s, p) => s + parseFloat(p.node.priceRange.minVariantPrice.amount), 0);
-    const discountFactor = bundle.bundlePrice / totalOriginal;
+    // Precio por producto = reparto del precio del pack que aplicará el
+    // servidor en el cobro (mismo algoritmo, ver src/lib/prices.ts
+    // `desglosaCarrito`): así el total del carrito y el cobro de Stripe
+    // coinciden al céntimo.
+    const importes = new Map(
+      desglosaCarrito(bundle.includes.map((h) => ({ handle: h, cantidad: 1 }))).map(
+        (l) => [l.handle, l.importeUnitarioCentimos],
+      ),
+    );
     included.forEach((p) => {
       const variant = p.node.variants.edges[0]?.node;
       if (!variant) return;
-      const original = parseFloat(p.node.priceRange.minVariantPrice.amount);
-      const discountedPrice = (original * discountFactor).toFixed(2);
+      const cents = importes.get(p.node.handle);
+      if (cents === undefined) return;
+      const discountedPrice = (cents / 100).toFixed(2);
       addItem({
         product: p,
         variantId: variant.id,

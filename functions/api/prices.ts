@@ -32,6 +32,8 @@ export interface ComponentePack {
 export interface Pack {
   /** Handle del pack. */
   handle: string;
+  /** Nombre del pack para la línea del recibo de Stripe. */
+  nombre: string;
   /** Componentes con sus cantidades. */
   componentes: ComponentePack[];
   /** Precio final del pack, ya rebajado, en céntimos de euro. */
@@ -75,6 +77,7 @@ export const PRECIOS: Record<string, PrecioProducto> = {
 export const PACKS: Pack[] = [
   {
     handle: "pack-ritual-belleza-eco",
+    nombre: "Pack Ritual Belleza Eco",
     componentes: [
       { handle: "multiclean", cantidad: 1 },
       { handle: "serum-skin", cantidad: 1 },
@@ -84,6 +87,7 @@ export const PACKS: Pack[] = [
   },
   {
     handle: "pack-ritual-cara-completa",
+    nombre: "Pack Ritual Cara Completa",
     componentes: [
       { handle: "multiclean", cantidad: 1 },
       { handle: "fresh-eye", cantidad: 1 },
@@ -94,6 +98,7 @@ export const PACKS: Pack[] = [
   },
   {
     handle: "pack-ritual-premium",
+    nombre: "Pack Ritual Premium",
     componentes: [
       { handle: "multiclean", cantidad: 1 },
       { handle: "calm-skin", cantidad: 1 },
