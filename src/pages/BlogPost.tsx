@@ -33,7 +33,7 @@ const BlogPost = () => {
       name: 'Intermex Beauty',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pESnn9BB6adLJMk8NGIHDpkTO553/uploads/1762822197317-3.png'
+        url: 'https://intermexbeauty.es/logo-512.png'
       }
     }
   };

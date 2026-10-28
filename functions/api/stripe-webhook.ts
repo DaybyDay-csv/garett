@@ -146,7 +146,7 @@ async function sendEmail(env: Env, session: StripeSession, items: StripeLineItem
     : '—';
   const total = eur(session.amount_total);
 
-  const subject = `Nuevo pedido Garett — ${total}`;
+  const subject = `Nuevo pedido Intermex Beauty — ${total}`;
   const html = `<h2 style="font-family:sans-serif">Nuevo pedido recibido</h2>
 <table style="width:100%;border-collapse:collapse;font-family:sans-serif;font-size:14px">${ITEMS_TABLE(items)}</table>
 <p style="font-family:sans-serif;font-size:16px"><strong>Total: ${total}</strong></p>
@@ -155,14 +155,14 @@ async function sendEmail(env: Env, session: StripeSession, items: StripeLineItem
 <h3 style="font-family:sans-serif">Envío</h3>
 <p style="font-family:sans-serif;font-size:14px">${shipping}</p>
 <p style="font-family:sans-serif;font-size:12px;color:#888">Session: ${session.id}</p>`;
-  const text = `Nuevo pedido Garett — ${total}\n\n${ITEMS_TEXT(items)}\n\nTotal: ${total}\n\nCliente: ${customerName} <${customerEmail}> (${customerPhone})\nEnvío: ${shipping}\nSession: ${session.id}`;
+  const text = `Nuevo pedido Intermex Beauty — ${total}\n\n${ITEMS_TEXT(items)}\n\nTotal: ${total}\n\nCliente: ${customerName} <${customerEmail}> (${customerPhone})\nEnvío: ${shipping}\nSession: ${session.id}`;
 
   await fetch(`https://api.cloudflare.com/client/v4/accounts/${accountId}/email/sending/send`, {
     method: 'POST',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       to,
-      from: { address: from, name: 'Garett' },
+      from: { address: from, name: 'Intermex Beauty' },
       subject,
       html,
       text,

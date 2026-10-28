@@ -1,1 +1,6 @@
+# 301 de handles renombrados en el rebrand (Garett → Intermex Beauty).
+# Deben ir ANTES del fallback SPA: en Cloudflare Pages gana la primera regla que coincide.
+/producto/manopla-led-garett-beauty    /producto/manopla-led-intermex-beauty    301
+/producto/mascara-led-garett-beauty    /producto/mascara-led-intermex-beauty    301
+
 /*    /index.html   200

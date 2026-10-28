@@ -162,7 +162,7 @@ export const UGCSection = () => {
           </h2>
           <div className="space-y-4">
             <p className="text-muted-foreground leading-relaxed font-extralight text-sm">
-              Nacimos en Polonia tras hacernos de una pregunta sencilla: ¿por qué el cuidado que te hace sentir bien tiene que ser caro, lejano y con cita previa?
+              Empezamos con una pregunta sencilla: ¿por qué el cuidado que te hace sentir bien tiene que ser caro, lejano y con cita previa?
             </p>
             
             <p className="text-muted-foreground leading-relaxed font-extralight text-sm">
