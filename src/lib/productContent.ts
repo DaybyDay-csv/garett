@@ -828,8 +828,8 @@ const productContentMap: Record<string, ProductContent> = {
           description: 'Confiamos en la durabilidad de nuestros dispositivos. 3 años de garantía completa para tu tranquilidad.'
         },
         {
-          title: 'Marca reconocida',
-          description: 'Intermex Beauty es una marca de confianza con presencia en El Corte Inglés y principales retailers.'
+          title: 'Tienda especializada',
+          description: 'Tienda española especializada en dispositivos de belleza con certificación CE y garantía comercial.'
         },
         {
           title: 'Inversión inteligente',

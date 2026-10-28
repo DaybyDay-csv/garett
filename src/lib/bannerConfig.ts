@@ -11,7 +11,23 @@ export interface BannerConfig {
 // Ninguna campaña activa: la última etapa real terminó el 2026-01-04
 // (lib/promotions.ts). No marcar nada active "para demo": solo se activa
 // una campaña con fechas reales y cuando el funnel la puede cumplir.
+// Excepción: la liquidación por cierre, que es campaña permanente hasta
+// agotar stock (sin fecha fin conocida) y debe acompañar a toda visita,
+// también a quien entra por categoría, ficha o SEO.
 export const bannerConfig: Record<string, BannerConfig> = {
+  liquidacion: {
+    id: 'liquidacion',
+    // Real y activa: es el estado actual de la tienda (rama hero-liquidacion).
+    // Fecha fin abierta: termina cuando se agote el stock, no en una fecha.
+    active: true,
+    startDate: new Date('2026-10-28T00:00:00'),
+    endDate: new Date('2099-12-31T23:59:59'),
+    priority: 10,
+    // Solo announcement bar: el carrusel de banners (PromotionalBanners) no
+    // está en ninguna página y el mensaje -50% ya vive en el hero de la home.
+    showInCarousel: false,
+    showInAnnouncementBar: true,
+  },
   aeroglow: {
     id: 'aeroglow',
     active: false,

@@ -21,7 +21,6 @@ import { productSpecificFAQs } from "@/lib/faqData";
 import { getCategoryFromTags } from "@/lib/categories";
 import * as LucideIcons from "lucide-react";
 import gwpHeadband from "@/assets/gwp-headband.png";
-import elCorteInglesLogo from "@/assets/el-corte-ingles-logo.png";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -294,9 +293,22 @@ const ProductDetail = () => {
 
   // Special pricing for LED launch products (permanent discount in Shopify)
   let priceInfo;
-  if (isLEDLaunch) {
-    // LED products have permanent 30% discount configured in Shopify
-    // Price in Shopify is already discounted, compare_at_price is the original
+  const variantCompareAt = variant?.compareAtPrice ? parseFloat(variant.compareAtPrice.amount) : null;
+  if (variantCompareAt && variantCompareAt > parseFloat(originalPrice)) {
+    // Liquidación: precio anterior desde Shopify/compareAtPrice (mismo criterio
+    // que ProductCard). Sin esto la ficha pierde el tachado justo en el punto
+    // de compra: los stages de promotions.ts vencieron el 2026-01-04.
+    const discountPercent = Math.round((1 - parseFloat(originalPrice) / variantCompareAt) * 100);
+    priceInfo = {
+      originalPrice: variantCompareAt,
+      discountedPrice: parseFloat(originalPrice),
+      hasDiscount: true,
+      discountLabel: `-${discountPercent}%`,
+      stage: null
+    };
+  } else if (isLEDLaunch) {
+    // Fallback LED: descuento fijo de lanzamiento, solo cuando no hay
+    // compareAtPrice que ya explique el precio (evita contradecir la card).
     const originalPriceValue = isMascaraLED ? 450 : 299;
     const discountedPriceValue = parseFloat(originalPrice);
     priceInfo = {
@@ -496,6 +508,10 @@ const ProductDetail = () => {
   const productCategory = detectProductCategory(node);
   const productFAQs = productSpecificFAQs[productCategory as keyof typeof productSpecificFAQs] || [];
 
+  // Los relojes no son cosméticos: "Dermatólogos testado" y "Cruelty-free"
+  // solo aplican a beauty. Garantía y stock sí son universales.
+  const esReloj = productCategory === 'smartwatches' || node.productType === 'Relojes' || node.tags.includes('category:relojes');
+
   // Especificaciones (H13): datos existentes en el código + contenido de la
   // caja que ya consta en el "Incluye:" de cada producto.
   const specs = SPECS_BY_HANDLE[node.handle];
@@ -608,14 +624,14 @@ const ProductDetail = () => {
                   <Shield className="w-3 h-3 text-foreground" />
                   {GARANTIA.comercial.nombre} {GARANTIA.comercial.anios} años
                 </Badge>
-                <Badge variant="outline" className="gap-1 text-sm border-border/30 text-foreground">
+                {!esReloj && <Badge variant="outline" className="gap-1 text-sm border-border/30 text-foreground">
                   <Stethoscope className="w-3 h-3 text-foreground" />
                   Dermatólogos testado
-                </Badge>
-                <Badge variant="outline" className="gap-1 text-sm border-border/30 text-foreground">
+                </Badge>}
+                {!esReloj && <Badge variant="outline" className="gap-1 text-sm border-border/30 text-foreground">
                   <Leaf className="w-3 h-3 text-foreground" />
                   Cruelty-free
-                </Badge>
+                </Badge>}
                 {variant?.availableForSale && (
                   <Badge variant="outline" className="gap-1 text-sm border-green-600/40 text-green-700 bg-green-50">
                     <Check className="w-3 h-3 text-green-700" />
@@ -650,14 +666,14 @@ const ProductDetail = () => {
             <div className="border-t border-b border-border/20 py-6 my-6">
               {priceInfo.hasDiscount ? <div className="space-y-2">
                   <div className="flex items-baseline gap-3">
-                    <div className="text-4xl md:text-5xl font-semibold tracking-tight text-primary-foreground">
+                    <div className="text-4xl md:text-5xl font-semibold tracking-tight text-primary">
                       €{priceInfo.discountedPrice.toFixed(2)}
                     </div>
                     <Badge variant="destructive" className="text-base md:text-lg px-4 py-1.5">
                       {priceInfo.discountLabel}
                     </Badge>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="text-xl line-through text-foreground/50">
                       €{priceInfo.originalPrice.toFixed(2)}
                     </span>
@@ -665,28 +681,21 @@ const ProductDetail = () => {
                       Ahorras €{(priceInfo.originalPrice - priceInfo.discountedPrice).toFixed(2)}
                     </span>
                   </div>
+                  {/* RD 1/2007 art. 20: el precio tachado no es un precio anterior
+                      propio, es un ancla de mercado. Se etiqueta como tal. */}
+                  <p className="text-xs text-muted-foreground">
+                    PVP de referencia en mercado de €{priceInfo.originalPrice.toFixed(2)}
+                  </p>
                   <p className="text-sm text-foreground/70">IVA incluido</p>
-                  
+
                   {/* Klarna Widget */}
                   <KlarnaWidget price={priceInfo.discountedPrice} className="mt-3" />
-                  
-                  {/* ECI Trust Microcopy */}
-                  <div className="flex items-center gap-2 text-sm text-foreground/70 mt-3 pt-3 border-t border-border/20">
-                    <img src={elCorteInglesLogo} alt="El Corte Inglés" className="h-4" />
-                    <span>Con la confianza de El Corte Inglés</span>
-                  </div>
                 </div> : <div>
                   <div className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">€{priceInfo.originalPrice.toFixed(2)}</div>
                   <p className="text-sm mt-1 text-foreground/70">IVA incluido</p>
-                  
+
                   {/* Klarna Widget */}
                   <KlarnaWidget price={priceInfo.originalPrice} className="mt-3" />
-                  
-                  {/* ECI Trust Microcopy */}
-                  <div className="flex items-center gap-2 text-sm text-foreground/70 mt-3 pt-3 border-t border-border/20">
-                    <img src={elCorteInglesLogo} alt="El Corte Inglés" className="h-4" />
-                    <span>También disponible en El Corte Inglés</span>
-                  </div>
                 </div>}
             </div>
 
@@ -800,25 +809,17 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {/* Delivery Date Estimate (Report: 36% of stores - soft urgency) */}
-            <div className="flex items-center gap-2 mt-3 px-3 py-2.5 rounded-lg bg-muted border border-border/10">
-              <Calendar className="w-4 h-4 text-foreground flex-shrink-0" />
+            {/* Entrega: plazos reales de policies.ts (única fuente de verdad).
+                Antes prometía 1-2 días calculados a mano y contradecía la
+                política de envíos (2-4 laborables Península). */}
+            <div className="flex items-start gap-2 mt-3 px-3 py-2.5 rounded-lg bg-muted border border-border/10">
+              <Calendar className="w-4 h-4 text-foreground flex-shrink-0 mt-0.5" />
               <span className="text-sm text-foreground/80">
-                Pide hoy y recíbelo el{' '}
+                Entrega estimada en{' '}
                 <span className="font-semibold text-foreground">
-                  {(() => {
-                    const today = new Date();
-                    const delivery = new Date(today);
-                    // Add 1-2 business days
-                    let daysToAdd = today.getHours() < 14 ? 1 : 2;
-                    // Skip weekends
-                    while (daysToAdd > 0) {
-                      delivery.setDate(delivery.getDate() + 1);
-                      if (delivery.getDay() !== 0 && delivery.getDay() !== 6) daysToAdd--;
-                    }
-                    return delivery.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
-                  })()}
-                </span>
+                  {ENVIO.plazos[0].diasMin}-{ENVIO.plazos[0].diasMax} días laborables
+                </span>{' '}
+                ({ENVIO.plazos[0].zona}). Otras zonas: {ENVIO.plazos[1].diasMin}-{ENVIO.plazos[1].diasMax} días.
               </span>
             </div>
 
@@ -978,7 +979,6 @@ const ProductDetail = () => {
                       </div>
                     </div>
                   </div>
-                  <p className="pt-2 italic">Respaldado por El Corte Inglés. No es una tienda online cualquiera.</p>
                 </CollapsibleContent>
               </Collapsible>
             </div>
@@ -1036,9 +1036,9 @@ const ProductDetail = () => {
             Tecnología profesional, accesible para ti
           </h2>
           <p className="text-base text-foreground/70 leading-relaxed max-w-2xl mx-auto">
-            En Intermex Beauty creemos que los tratamientos estéticos profesionales no deberían ser un lujo exclusivo de clínicas.
-            Nuestra misión es acercar la tecnología eslava más avanzada a tu hogar, con dispositivos certificados,
-            seguros y diseñados para resultados reales.
+            {esReloj
+              ? 'Relojes Garett nuevos en su caja original, de la liquidación final del stock de la marca. Cada unidad se envía verificada, con garantía comercial de 3 años y un teléfono real de soporte.'
+              : 'En Intermex Beauty creemos que los tratamientos estéticos profesionales no deberían ser un lujo exclusivo de clínicas. Nuestra misión es acercar la tecnología eslava más avanzada a tu hogar, con dispositivos certificados, seguros y diseñados para resultados reales.'}
           </p>
           <div className="flex items-center justify-center gap-6 pt-4 text-sm text-foreground/50">
             <div className="flex items-center gap-2">
@@ -1059,7 +1059,6 @@ const ProductDetail = () => {
           <div className="pt-6 mt-6 border-t border-border/10">
             <p className="text-xs text-foreground/40 mb-3 uppercase tracking-wider">Mencionados en</p>
             <div className="flex items-center justify-center gap-8 flex-wrap opacity-50">
-              <span className="text-sm font-semibold text-foreground/60">El Corte Inglés</span>
               <span className="text-sm font-semibold text-foreground/60">La Vanguardia</span>
               <span className="text-sm font-semibold text-foreground/60">Cosmopolitan</span>
               <span className="text-sm font-semibold text-foreground/60">Hola!</span>

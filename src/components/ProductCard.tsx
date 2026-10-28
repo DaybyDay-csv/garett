@@ -114,7 +114,16 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
             blurPlaceholder
           />
         )}
-        
+
+        {/* Ahorro en € — siempre visible cuando hay precio anterior (liquidación) */}
+        {priceInfo.hasDiscount && firstVariant?.availableForSale && (
+          <div className="absolute top-2 left-2">
+            <Badge className="text-xs bg-destructive/95 text-destructive-foreground hover:bg-destructive">
+              AHORRA €{(priceInfo.originalPrice - priceInfo.discountedPrice).toFixed(2)}
+            </Badge>
+          </div>
+        )}
+
         {/* Out of stock overlay */}
         {!firstVariant?.availableForSale && (
           <div className="absolute top-2 right-2">
@@ -174,6 +183,9 @@ export const ProductCard = ({ product, tagIndex, hideBadges = false, hideAddToCa
                 </div>
                 <span className="block text-sm text-muted-foreground line-through">
                   €{priceInfo.originalPrice.toFixed(2)}
+                </span>
+                <span className="block text-sm text-muted-foreground">
+                  Ahorras €{(priceInfo.originalPrice - priceInfo.discountedPrice).toFixed(2)}
                 </span>
               </div>
             ) : (

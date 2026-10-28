@@ -66,6 +66,14 @@ export const AnnouncementBar = () => {
       link: "/productos",
       icon: Percent,
       bg: "bg-promo-cm-start text-white"
+    },
+    liquidacion: {
+      // Liquidación por cierre: campaña permanente hasta fin de stock
+      // (bannerConfig → liquidacion). Enlaza a la home, donde está el hero.
+      text: "Liquidación por cierre: hasta -54% en toda la tienda · fin de stock",
+      link: "/",
+      icon: Percent,
+      bg: "bg-destructive text-destructive-foreground"
     }
   };
   const currentBanner = activeBanners[currentMessageIndex];

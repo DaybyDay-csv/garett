@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { getRecommendations, getRoutineSuggestion } from "@/lib/recommendations";
+import { detectProductCategory } from "@/lib/productContent";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
@@ -16,6 +17,13 @@ export const RelatedProducts = ({ currentProduct }: RelatedProductsProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+
+  // En relojes el copy de "rutina" (skincare) no pinta nada: titular propio.
+  const isWatch =
+    currentProduct.node.tags.includes('category:relojes') ||
+    detectProductCategory(currentProduct.node) === 'smartwatches';
+  const eyebrowText = isWatch ? 'Compara modelos Garett' : 'Completa tu rutina';
+  const headingText = isWatch ? 'Otros relojes Garett en liquidación' : 'Recomendado para tu rutina';
 
   useEffect(() => {
     const loadRelated = async () => {
@@ -114,10 +122,10 @@ export const RelatedProducts = ({ currentProduct }: RelatedProductsProps) => {
           <div className="flex items-center gap-2 mb-2">
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-xs uppercase tracking-wider text-primary font-semibold">
-              Completa tu rutina
+              {eyebrowText}
             </span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-semibold">Recomendado para tu rutina</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold">{headingText}</h2>
           {reason && (
             <p className="text-sm text-muted-foreground mt-2 max-w-2xl">{reason}</p>
           )}

@@ -90,20 +90,14 @@ const Index = () => {
             </Badge>
             <h2 className="animate-fade-up [animation-delay:80ms] text-[13vw] sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] text-foreground uppercase">
               Liquidación stock<br />
-              <span className="text-primary">Todo al 50%</span>
+              <span className="text-primary">Hasta -54%</span>
             </h2>
             <p className="animate-fade-up [animation-delay:160ms] text-base md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              <strong className="text-foreground font-semibold">GARETT</strong> — marca de referencia de tech beauty y
-              sportwatch del Norte de Europa.{' '}
+              Liquidación por cierre de Intermex Beauty: beauty tech y relojes Garett con precio de derribo.{' '}
               <span className="whitespace-nowrap font-medium text-foreground">
                 {STOCK_RELOJES} relojes en stock · hasta fin de existencias
               </span>
             </p>
-            <div className="animate-fade-up [animation-delay:200ms] flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-              <span className="flex items-center gap-1.5"><Truck className="w-4 h-4" /> {ENVIO.textoCorto}</span>
-              <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4" /> Garantía {GARANTIA.comercial.anios} años</span>
-              <span className="flex items-center gap-1.5"><Award className="w-4 h-4" /> Pago seguro SSL</span>
-            </div>
           </div>
 
           {/* Dos apartados de tienda: cada mitad lleva a su colección */}
@@ -140,7 +134,7 @@ const Index = () => {
               <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-white">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/75">Apartado sportwatch</p>
                 <p className="mt-1 text-3xl md:text-4xl font-bold tracking-tight">Sportwatch</p>
-                <p className="mt-1 text-sm md:text-base text-white/85">{STOCK_RELOJES} smartwatches Garett desde 39 €</p>
+                <p className="mt-1 text-sm md:text-base text-white/85">Smartwatches Garett nuevos en su caja, desde 39 €</p>
                 <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold">
                   Ver la colección <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </span>
@@ -209,7 +203,7 @@ const Index = () => {
                 <h2 className="text-2xl md:text-4xl text-foreground font-semibold tracking-tight">
                   Garett en tu muñeca
                 </h2>
-                <p className="text-muted-foreground mt-2 text-sm md:text-base">{STOCK_RELOJES} smartwatches de la marca de referencia del Norte de Europa — liquidación final, desde 39 €.</p>
+                <p className="text-muted-foreground mt-2 text-sm md:text-base">{STOCK_RELOJES} smartwatches de la marca polaca Garett, nuevos en su caja — liquidación final, desde 39 €.</p>
               </div>
               <Button asChild variant="outline">
                 <Link to="/categoria/relojes">Ver todos</Link>
@@ -227,7 +221,34 @@ const Index = () => {
           </div>
         </section>}
 
-      {/* [3b] SPORTWATCH — features y garantías */}
+      {/* [3b] NOVEDADES BEAUTY TECH — carrusel propio para que beauty pese lo mismo que sportwatch */}
+      {newProducts.length > 0 && <section id="novedades-beauty" className="py-12 md:py-20 bg-background">
+          <div className="container">
+            <div className="flex items-center justify-between mb-8 md:mb-10">
+              <div>
+                <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Apartado beauty</p>
+                <h2 className="text-2xl md:text-4xl text-foreground font-semibold tracking-tight">
+                  Novedades Beauty Tech
+                </h2>
+                <p className="text-muted-foreground mt-2 text-sm md:text-base">Los últimos dispositivos en llegar a la tienda, ahora en liquidación.</p>
+              </div>
+              <Button asChild variant="outline">
+                <Link to="/categoria/beauty-tech">Ver todos</Link>
+              </Button>
+            </div>
+          </div>
+          <div className="relative">
+            <div className="overflow-x-auto scrollbar-hide">
+              <div className="flex gap-4 md:gap-6 pb-4 px-4 md:px-8">
+                {newProducts.map((product, index) => <div key={product.node.id} className="flex-none w-[260px] md:w-[320px]">
+                    <ProductCard product={product} tagIndex={index} />
+                  </div>)}
+              </div>
+            </div>
+          </div>
+        </section>}
+
+      {/* [3c] SPORTWATCH — features y garantías */}
       <section className="py-12 md:py-20 bg-card border-y border-border">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -246,10 +267,10 @@ const Index = () => {
                 Liquidación final · hasta fin de stock
               </Badge>
               <h2 className="animate-fade-up [animation-delay:80ms] text-3xl md:text-4xl font-semibold tracking-tight leading-[1.05] text-foreground">
-                Sportwatch con ADN nórdico, <span className="text-primary">a precio derribo</span>
+                Smartwatches Garett, <span className="text-primary">a precio de derribo</span>
               </h2>
               <p className="animate-fade-up [animation-delay:140ms] text-base md:text-lg text-muted-foreground leading-relaxed">
-                GARETT es la marca de referencia de tech beauty y sportwatch del Norte de Europa. Quedan {STOCK_RELOJES} unidades nuevas en su caja, que se van y no vuelven.
+                Relojes de la marca polaca Garett, con GPS integrado en los modelos Pro y caja de hasta 52 mm. Quedan unidades nuevas en su caja, que se van y no vuelven.
               </p>
               <ul className="animate-fade-up [animation-delay:200ms] space-y-3 text-sm md:text-base text-foreground">
                 <li className="flex items-start gap-2.5"><Watch className="w-4 h-4 mt-1 text-primary flex-shrink-0" /> GPS integrado para registrar rutas sin móvil (modelos con GPS)</li>
@@ -567,8 +588,8 @@ const Index = () => {
                 </div>
               </div>
               <Button asChild size="lg" variant="white">
-                <Link to="/blog">
-                  Guías y consejos
+                <Link to="/productos">
+                  Ver todo el stock en liquidación
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>

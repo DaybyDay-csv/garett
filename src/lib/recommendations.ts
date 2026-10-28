@@ -137,6 +137,33 @@ export const RECOMMENDATION_MATRIX: Record<string, RecommendationRule> = {
     secondary: ["lift-skin-pro", "multiclean", "serum-skin"],
     reason: "LED + mesoterapia: cara completa",
   },
+
+  // ===== Relojes Garett (liquidación: compara modelos de la marca) =====
+  "reloj-garett-verona": {
+    primary: ["reloj-garett-atom", "reloj-garett-v14", "reloj-garett-grs-pro"],
+    secondary: ["reloj-garett-grc-maxx"],
+    reason: "Compara los modelos Garett que quedan en liquidación",
+  },
+  "reloj-garett-atom": {
+    primary: ["reloj-garett-grs-pro", "reloj-garett-verona", "reloj-garett-v14"],
+    secondary: ["reloj-garett-grc-maxx"],
+    reason: "Compara los modelos Garett que quedan en liquidación",
+  },
+  "reloj-garett-v14": {
+    primary: ["reloj-garett-verona", "reloj-garett-grc-maxx", "reloj-garett-atom"],
+    secondary: ["reloj-garett-grs-pro"],
+    reason: "Compara los modelos Garett que quedan en liquidación",
+  },
+  "reloj-garett-grs-pro": {
+    primary: ["reloj-garett-grc-maxx", "reloj-garett-atom", "reloj-garett-v14"],
+    secondary: ["reloj-garett-verona"],
+    reason: "Compara los modelos Garett que quedan en liquidación",
+  },
+  "reloj-garett-grc-maxx": {
+    primary: ["reloj-garett-grs-pro", "reloj-garett-v14", "reloj-garett-atom"],
+    secondary: ["reloj-garett-verona"],
+    reason: "Compara los modelos Garett que quedan en liquidación",
+  },
 };
 
 /**
