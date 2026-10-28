@@ -14,7 +14,7 @@ import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { LOCAL_PRODUCTS_BY_HANDLE } from "@/lib/catalog";
 import { BUNDLES } from "@/lib/bundles";
 import { homeFAQs } from "@/lib/faqData";
-import { ShoppingBag, ArrowRight, ShieldCheck, Award, Truck, FlaskConical, Leaf, Phone } from "lucide-react";
+import { ShoppingBag, ArrowRight, ShieldCheck, Award, Truck, FlaskConical, Leaf, Phone, Watch, Activity, Bell, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { BRAND } from "@/lib/brand";
 import { DEVOLUCION, ENVIO, GARANTIA, CONTACTO } from "@/lib/policies";
@@ -51,6 +51,10 @@ const Index = () => {
   }, []);
   const newProducts = products.filter(p => p.node.tags.includes('new:true'));
   const bestSellers = products.filter(p => p.node.tags.includes('bestseller:true'));
+  // Sportwatch: los 5 relojes Garett del catálogo local (liquidación de stock).
+  const relojes = ["reloj-garett-verona", "reloj-garett-atom", "reloj-garett-v14", "reloj-garett-grs-pro", "reloj-garett-grc-maxx"]
+    .map(h => LOCAL_PRODUCTS_BY_HANDLE[h])
+    .filter((p): p is ShopifyProduct => Boolean(p));
 
   // Home page schema
   const homeSchema = {
@@ -196,6 +200,81 @@ const Index = () => {
         </div>
       </section>
 
+      {/* [3] SPORTWATCH — carrusel de los 5 Garett (mismo peso que beauty) */}
+      {relojes.length > 0 && <section id="sportwatch" className="py-12 md:py-20 bg-background">
+          <div className="container">
+            <div className="flex items-center justify-between mb-8 md:mb-10">
+              <div>
+                <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Apartado sportwatch</p>
+                <h2 className="text-2xl md:text-4xl text-foreground font-semibold tracking-tight">
+                  Garett en tu muñeca
+                </h2>
+                <p className="text-muted-foreground mt-2 text-sm md:text-base">{STOCK_RELOJES} smartwatches de la marca de referencia del Norte de Europa — liquidación final, desde 39 €.</p>
+              </div>
+              <Button asChild variant="outline">
+                <Link to="/categoria/relojes">Ver todos</Link>
+              </Button>
+            </div>
+          </div>
+          <div className="relative">
+            <div className="overflow-x-auto scrollbar-hide">
+              <div className="flex gap-4 md:gap-6 pb-4 px-4 md:px-8">
+                {relojes.map((product, index) => <div key={product.node.id} className="flex-none w-[260px] md:w-[320px]">
+                    <ProductCard product={product} tagIndex={index} />
+                  </div>)}
+              </div>
+            </div>
+          </div>
+        </section>}
+
+      {/* [3b] SPORTWATCH — features y garantías */}
+      <section className="py-12 md:py-20 bg-card border-y border-border">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div className="animate-fade-up relative">
+              <div className="aspect-[16/10] rounded-2xl overflow-hidden bg-primary-light">
+                <img
+                  src={heroSportwatch}
+                  alt="Sportwatch Garett en actividad, en la montaña"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            <div className="space-y-6">
+              <Badge className="animate-fade-up bg-primary-light text-primary border-primary/10 px-3 py-1.5 text-xs">
+                <Watch className="w-3 h-3 mr-1.5" />
+                Liquidación final · hasta fin de stock
+              </Badge>
+              <h2 className="animate-fade-up [animation-delay:80ms] text-3xl md:text-4xl font-semibold tracking-tight leading-[1.05] text-foreground">
+                Sportwatch con ADN nórdico, <span className="text-primary">a precio derribo</span>
+              </h2>
+              <p className="animate-fade-up [animation-delay:140ms] text-base md:text-lg text-muted-foreground leading-relaxed">
+                GARETT es la marca de referencia de tech beauty y sportwatch del Norte de Europa. Quedan {STOCK_RELOJES} unidades nuevas en su caja, que se van y no vuelven.
+              </p>
+              <ul className="animate-fade-up [animation-delay:200ms] space-y-3 text-sm md:text-base text-foreground">
+                <li className="flex items-start gap-2.5"><Watch className="w-4 h-4 mt-1 text-primary flex-shrink-0" /> GPS integrado para registrar rutas sin móvil (modelos con GPS)</li>
+                <li className="flex items-start gap-2.5"><Activity className="w-4 h-4 mt-1 text-primary flex-shrink-0" /> Pulsómetro y monitorización de actividad las 24 h</li>
+                <li className="flex items-start gap-2.5"><Bell className="w-4 h-4 mt-1 text-primary flex-shrink-0" /> Notificaciones del móvil en la muñeca</li>
+                <li className="flex items-start gap-2.5"><Smartphone className="w-4 h-4 mt-1 text-primary flex-shrink-0" /> Pantalla táctil a color con esferas personalizables</li>
+              </ul>
+              <div className="animate-fade-up [animation-delay:260ms] flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+                <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4" /> Garantía {GARANTIA.comercial.anios} años</span>
+                <span className="flex items-center gap-1.5"><Truck className="w-4 h-4" /> {ENVIO.textoCorto}</span>
+                <span className="flex items-center gap-1.5"><Award className="w-4 h-4" /> Pago seguro SSL</span>
+              </div>
+              <div className="animate-fade-up [animation-delay:320ms] flex flex-wrap gap-3">
+                <Button asChild size="lg">
+                  <Link to="/categoria/relojes">
+                    Ver los 5 modelos — desde 39 €
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* [4] MÁS VENDIDOS — T08 refinado */}
       {bestSellers.length > 0 && <section id="superventas" className="py-12 md:py-20 bg-card border-y border-border">
           <div className="container">
@@ -277,6 +356,21 @@ const Index = () => {
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            <Link to="/categoria/relojes" className="group">
+              <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
+                <div className="aspect-video overflow-hidden">
+                  <OptimizedImage src={heroSportwatch} alt="Sportwatch Garett en liquidación final" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" blurPlaceholder />
+                </div>
+                <CardContent className="p-4 md:p-6">
+                  <h3 className="text-sm md:text-2xl font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">Sportwatch</h3>
+                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 leading-relaxed">Smartwatches Garett en liquidación final · desde 39 €</p>
+                  <div className="flex items-center gap-1 md:gap-2 text-primary font-medium text-xs md:text-base">
+                    <span>Ver productos</span>
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
             <Link to="/categoria/cuidado-capilar" className="group">
               <Card className="overflow-hidden border-2 border-transparent hover:border-primary transition-all duration-300">
                 <div className="aspect-video overflow-hidden">
