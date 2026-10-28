@@ -16,6 +16,7 @@ import catCorporalImg from "@/assets/category-corporales.webp";
 import catCapilarImg from "@/assets/category-cuidado-capilar.webp";
 import catIPLImg from "@/assets/category-depilacion-ipl.webp";
 import catLEDImg from "@/assets/category-terapia-luz-led.jpg";
+import catSmartwatchesImg from "@/assets/category-smartwatches.jpg";
 
 const productImgModules = import.meta.glob(
   "@/assets/products/*.{jpg,png}",
@@ -34,6 +35,7 @@ const IMG = {
   catCapilar: catCapilarImg,
   catIPL: catIPLImg,
   catLED: catLEDImg,
+  catSmartwatches: catSmartwatchesImg,
 };
 
 function photo(...names: string[]): string[] {
@@ -51,6 +53,12 @@ interface LocalProductSeed {
   images: string[];
   options?: Array<{ name: string; values: string[] }>;
   variantTitles?: string[];
+  /**
+   * Unidades reales en stock. Si se define, la variante expone
+   * `quantityAvailable` y `availableForSale` se deriva de él (0 = agotado).
+   * Si no se define, se mantiene el comportamiento anterior (a la venta).
+   */
+  stock?: number;
 }
 
 const seeds: LocalProductSeed[] = [
@@ -299,6 +307,78 @@ const seeds: LocalProductSeed[] = [
     options: [{ name: "Title", values: ["Default Title"] }],
   },
 
+  // ===== Relojes Garett (liquidación final de stock de la marca) =====
+  // Precios PROPUESTA validados en negocio/liquidacion-economia.md (§1):
+  // compare-at = PVP de referencia del doc (anclas 133/75/116/75/84 €).
+  // Stock = unidades reales documentadas en negocio/stock-relojes-2026-09-04.md.
+  // Imágenes provisionales (placeholder de categoría): PENDIENTE sesión de fotos real.
+  // La marca Garett ES visible en el producto (decisión del dueño, por agotamiento de marca).
+  {
+    handle: "reloj-garett-verona",
+    title: "Reloj Garett Verona — Smartwatch (Gen 1)",
+    description:
+      "Smartwatch de la marca polaca Garett, línea Verona (generación 1). Unidad nueva en su caja original, de la liquidación final del stock de la marca: precio de derribo de 69 € frente a su PVP de referencia de 133 € en mercado (-48%). Colores según existencias: plata y rosa. Unidades limitadas hasta fin de existencias. Nota: las fotos son provisionales; sesión de fotos del producto pendiente.",
+    productType: "Relojes",
+    tags: ["type:watch", "category:relojes", "brand:garett", "liquidacion:true"],
+    price: 69,
+    compareAtPrice: 133,
+    stock: 16,
+    images: [IMG.catSmartwatches],
+    options: [{ name: "Title", values: ["Default Title"] }],
+  },
+  {
+    handle: "reloj-garett-atom",
+    title: "Reloj Garett Atom — Smartwatch",
+    description:
+      "Smartwatch de la marca polaca Garett, modelo Atom. Unidad nueva en su caja original, de la liquidación final del stock de la marca: precio de derribo de 39 € frente a su PVP de referencia de 75 € en mercado (-48%). Unidades limitadas hasta fin de existencias. Nota: las fotos son provisionales; sesión de fotos del producto pendiente.",
+    productType: "Relojes",
+    tags: ["type:watch", "category:relojes", "brand:garett", "liquidacion:true"],
+    price: 39,
+    compareAtPrice: 75,
+    stock: 25,
+    images: [IMG.catSmartwatches],
+    options: [{ name: "Title", values: ["Default Title"] }],
+  },
+  {
+    handle: "reloj-garett-v14",
+    title: "Reloj Garett V14 — Smartwatch",
+    description:
+      "Smartwatch de la marca polaca Garett, modelo V14. Unidad nueva en su caja original, de la liquidación final del stock de la marca: precio de derribo de 59 € frente a su PVP de referencia de 116 € (-49%). Unidades limitadas hasta fin de existencias. Nota: las fotos son provisionales; sesión de fotos del producto pendiente.",
+    productType: "Relojes",
+    tags: ["type:watch", "category:relojes", "brand:garett", "liquidacion:true"],
+    price: 59,
+    compareAtPrice: 116,
+    stock: 17,
+    images: [IMG.catSmartwatches],
+    options: [{ name: "Title", values: ["Default Title"] }],
+  },
+  {
+    handle: "reloj-garett-grs-pro",
+    title: "Reloj Garett GRS PRO — Smartwatch GPS 52 mm",
+    description:
+      "Smartwatch de la marca polaca Garett, modelo GRS PRO: GPS integrado y caja de 52 mm. Unidad nueva en su caja original, de la liquidación final del stock de la marca: precio de derribo de 39 € frente a su PVP de referencia de 75 € en mercado (-48%). Unidades limitadas hasta fin de existencias. Nota: las fotos son provisionales; sesión de fotos del producto pendiente.",
+    productType: "Relojes",
+    tags: ["type:watch", "category:relojes", "brand:garett", "liquidacion:true"],
+    price: 39,
+    compareAtPrice: 75,
+    stock: 11,
+    images: [IMG.catSmartwatches],
+    options: [{ name: "Title", values: ["Default Title"] }],
+  },
+  {
+    handle: "reloj-garett-grc-maxx",
+    title: "Reloj Garett GRC MAXX — Smartwatch",
+    description:
+      "Smartwatch de la marca polaca Garett, modelo GRC MAXX. Unidad nueva en su caja original, de la liquidación final del stock de la marca: precio de derribo de 39 € frente a su PVP de referencia de 84 € en la UE (-54%). Unidades limitadas hasta fin de existencias. Nota: las fotos son provisionales; sesión de fotos del producto pendiente.",
+    productType: "Relojes",
+    tags: ["type:watch", "category:relojes", "brand:garett", "liquidacion:true"],
+    price: 39,
+    compareAtPrice: 84,
+    stock: 9,
+    images: [IMG.catSmartwatches],
+    options: [{ name: "Title", values: ["Default Title"] }],
+  },
+
   // ===== GWP (oculto de la tienda, se añade automáticamente) =====
   {
     handle: "gwp-hairband",
@@ -322,6 +402,7 @@ export const LOCAL_PRODUCTS: ShopifyProduct[] = seeds.map((seed, idx) => {
   const compareAmount = seed.compareAtPrice !== null && seed.compareAtPrice !== undefined
     ? seed.compareAtPrice.toFixed(2)
     : null;
+  const availableForSale = seed.stock !== undefined ? seed.stock > 0 : true;
 
   return {
     node: {
@@ -349,7 +430,8 @@ export const LOCAL_PRODUCTS: ShopifyProduct[] = seeds.map((seed, idx) => {
               compareAtPrice: compareAmount
                 ? { amount: compareAmount, currencyCode: "EUR" }
                 : null,
-              availableForSale: true,
+              availableForSale,
+              quantityAvailable: seed.stock,
               selectedOptions: [
                 { name: "Title", value: seed.variantTitles?.[0] ?? "Default Title" },
               ],

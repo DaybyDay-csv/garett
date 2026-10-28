@@ -56,6 +56,12 @@ export const CATEGORIES: Record<string, CategoryConfig> = {
     description: 'Tecnología de luz pulsada para depilación permanente en casa',
     tags: ['category:depilacion-ipl', 'category:ipl'],
     disclaimer: 'No apto para pieles muy oscuras (fototipos V-VI), tatuajes, lunares o zonas pigmentadas. No usar durante el embarazo, con medicación fotosensibilizante o sobre piel irritada. Evitar exposición solar intensa antes y después del tratamiento.'
+  },
+  'relojes': {
+    slug: 'relojes',
+    name: 'Relojes',
+    description: 'Smartwatches Garett en liquidación final de stock: precio derribo hasta fin de existencias',
+    tags: ['category:relojes']
   }
 };
 
@@ -68,7 +74,8 @@ export const CATEGORY_NAV: Array<{ slug: string; name: string }> = [
   { slug: 'mesoterapia', name: 'Mesoterapia' },
   { slug: 'corporales', name: 'Cuidado Corporal' },
   { slug: 'depilacion-ipl', name: 'Depilación IPL' },
-  { slug: 'terapia-luz-led', name: 'Terapia de Luz LED' }
+  { slug: 'terapia-luz-led', name: 'Terapia de Luz LED' },
+  { slug: 'relojes', name: 'Relojes' }
 ];
 
 // Helper para obtener la categoría desde los tags del producto

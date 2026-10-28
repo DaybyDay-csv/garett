@@ -39,6 +39,8 @@ export interface ShopifyProduct {
             currencyCode: string;
           } | null;
           availableForSale: boolean;
+          /** Unidades reales en stock (solo catálogo local; null/undefined si no se declara). */
+          quantityAvailable?: number | null;
           selectedOptions: Array<{
             name: string;
             value: string;

@@ -7,7 +7,8 @@
  * functions/api/prices.ts (las Cloudflare Functions no pueden importar de
  * src/ con seguridad; si cambias uno, cambia el otro).
  *
- * PRECIOS: los 23 productos visibles del catálogo. Queda fuera el GWP oculto
+ * PRECIOS: los 28 productos visibles del catálogo (23 beauty-tech + 5 relojes
+ * Garett en liquidación). Queda fuera el GWP oculto
  * (gwp-hairband), que no se vende. Precios en CÉNTIMOS de euro.
  * PACKS: precio final del pack, YA REBAJADO (bundles.ts `bundlePrice`), en céntimos.
  */
@@ -38,7 +39,7 @@ export interface Pack {
   precioCentimos: number;
 }
 
-/** Los 23 productos visibles del catálogo. */
+/** Los 28 productos visibles del catálogo. */
 export const PRECIOS: Record<string, PrecioProducto> = {
   "fresh-eye": { precioCentimos: 5689, nombre: "Fresh Eye - Masajeador Contorno de Ojos" },
   "lift-skin": { precioCentimos: 8990, nombre: "Lift Skin - Masajeador Facial Reafirmante" },
@@ -63,6 +64,12 @@ export const PRECIOS: Record<string, PrecioProducto> = {
   cool: { precioCentimos: 37900, nombre: "Cool - Depiladora IPL con Sistema de Frío" },
   "manopla-led-intermex-beauty": { precioCentimos: 22400, nombre: "Manopla LED Intermex Beauty - Fototerapia LED" },
   "mascara-led-intermex-beauty": { precioCentimos: 29900, nombre: "Máscara LED Intermex Beauty - Fototerapia LED Facial" },
+  // Relojes Garett (liquidación): precios PROPUESTA validados en negocio/liquidacion-economia.md §1.
+  "reloj-garett-verona": { precioCentimos: 6900, nombre: "Reloj Garett Verona — Smartwatch (Gen 1)" },
+  "reloj-garett-atom": { precioCentimos: 3900, nombre: "Reloj Garett Atom — Smartwatch" },
+  "reloj-garett-v14": { precioCentimos: 5900, nombre: "Reloj Garett V14 — Smartwatch" },
+  "reloj-garett-grs-pro": { precioCentimos: 3900, nombre: "Reloj Garett GRS PRO — Smartwatch GPS 52 mm" },
+  "reloj-garett-grc-maxx": { precioCentimos: 3900, nombre: "Reloj Garett GRC MAXX — Smartwatch" },
 };
 
 /** Los 3 packs de bundles.ts, con su precio final ya rebajado. */
