@@ -56,20 +56,36 @@ export const GARANTIA = {
   },
 } as const;
 
-/** Política de envío. */
+/**
+ * Política de envío. ÚNICA FUENTE: el checkout de Stripe replica estos números
+ * (functions/api/create-checkout.ts guarda los mismos valores duplicados — las
+ * Functions no pueden importar de src/). Si cambia la política, cambiar aquí Y allí.
+ *
+ * Config: envío gratis desde 29 €; por debajo, 3,95 €.
+ * El umbral se aplica sobre el subtotal del carrito ANTES de cupones.
+ */
 export const ENVIO = {
-  /** Envío gratis en TODOS los pedidos, sin mínimo. Es lo que hoy cobra de verdad Stripe (la sesión de checkout no configura ningún gasto de envío). Si algún día se cobra por debajo de un umbral, decidirlo aquí y sincronizarlo con Stripe. */
-  gratisTodosLosPedidos: true,
-  /** Sin umbral: null significa que no hay mínimo de compra para el envío gratis. */
-  umbralCentimos: null,
+  /** Envío gratis a partir de este importe de carrito, en céntimos. */
+  gratisDesdeCentimos: 2900,
+  /** Importe del umbral, con formato para textos. */
+  umbralTexto: "29 €",
+  /** Coste de envío por debajo del umbral, en céntimos. */
+  costeCentimos: 395,
+  /** Coste de envío bajo umbral, con formato para textos. */
+  costeTexto: "3,95 €",
   /** Texto corto para badges. */
-  textoCorto: "Envío gratis en todos los pedidos",
+  textoCorto: "Envío gratis desde 29 €",
   /** Plazos de entrega por zona. */
   plazos: [
     { zona: "Península y Baleares", diasMin: 2, diasMax: 4 },
     { zona: "Canarias, Ceuta y Melilla", diasMin: 5, diasMax: 10 },
   ],
-} as const;
+};
+
+/** Coste de envío (céntimos) para un subtotal de carrito dado, antes de cupones. */
+export function costeEnvioCentimos(subtotalCentimos: number): number {
+  return subtotalCentimos >= ENVIO.gratisDesdeCentimos ? 0 : ENVIO.costeCentimos;
+}
 
 /** Datos de contacto de la tienda. */
 export const CONTACTO = {

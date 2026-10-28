@@ -429,7 +429,7 @@ const ProductDetail = () => {
   const categoryInfo = getCategoryInfo();
 
   // Create SEO meta description from product
-  const metaDescription = node.description ? node.description.substring(0, 157) + '...' : `Compra ${node.title} en Intermex Beauty. ${categoryInfo.name} con la mejor tecnología y calidad profesional. Envío gratis y garantía ${GARANTIA.comercial.anios} años.`;
+  const metaDescription = node.description ? node.description.substring(0, 157) + '...' : `Compra ${node.title} en Intermex Beauty. ${categoryInfo.name} con la mejor tecnología y calidad profesional. ${ENVIO.textoCorto} y garantía ${GARANTIA.comercial.anios} años.`;
 
   // Product schema markup for rich snippets
   const productSchema = {

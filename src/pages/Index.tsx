@@ -182,7 +182,7 @@ const Index = () => {
               <Truck className="w-6 h-6 text-primary flex-shrink-0" />
               <div>
                 <p className="text-xs font-semibold text-foreground leading-tight">Envío gratis</p>
-                <p className="text-[10px] text-muted-foreground leading-tight">Todos los pedidos</p>
+                <p className="text-[10px] text-muted-foreground leading-tight">Desde {ENVIO.umbralTexto} · debajo {ENVIO.costeTexto}</p>
               </div>
             </div>
             <div className="flex items-center gap-3 justify-center">

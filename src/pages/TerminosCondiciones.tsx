@@ -90,7 +90,7 @@ const TerminosCondiciones = () => {
             <div className="text-muted-foreground space-y-3">
               <p>
                 Los precios de los dispositivos de belleza están indicados en euros (€) e incluyen el IVA correspondiente, salvo que se indique expresamente lo contrario.
-                {ENVIO.gratisTodosLosPedidos ? " El envío es gratuito en todos los pedidos, sin importe mínimo de compra." : " Los gastos de envío no están incluidos en el precio y se calcularán en el momento de la compra."}
+                {` El envío es gratuito a partir de ${ENVIO.umbralTexto} de compra; por debajo de ese importe se aplican ${ENVIO.costeTexto} de gastos de envío.`}
               </p>
               <p>Los envíos se realizan a:</p>
               <ul className="space-y-2 ml-6 list-disc">

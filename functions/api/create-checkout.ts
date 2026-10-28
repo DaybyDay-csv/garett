@@ -249,11 +249,34 @@ export async function onRequestPost({
 
   const finales = desglosaCarrito(lineas);
 
+  // Política de envío — duplicado de src/lib/policies.ts ENVIO (las Functions
+  // no pueden importar de src/). Si cambia la política, cambiar aquí Y allí.
+  const ENVIO_GRATIS_DESDE_CENTIMOS = 2900; // gratis desde 29 €
+  const ENVIO_COSTE_CENTIMOS = 395; // 3,95 € por debajo
+  const subtotal = finales.reduce(
+    (s, l) => s + l.importeUnitario * l.cantidad,
+    0,
+  );
+  // Umbral sobre el subtotal ANTES de cupones. Se adjunta UNA sola tarifa, la
+  // que corresponde: el cliente no elige envío, ve el que toca.
+  const envioGratis = subtotal >= ENVIO_GRATIS_DESDE_CENTIMOS;
+
   const form = new URLSearchParams();
   form.append('mode', 'payment');
   form.append('success_url', `${origin}/checkout/gracias?session_id={CHECKOUT_SESSION_ID}`);
   form.append('cancel_url', `${origin}/productos`);
   form.append('allow_promotion_codes', 'true');
+  // Envío (política única con la web: gratis ≥ 29 €, 3,95 € por debajo).
+  form.append('shipping_options[0][shipping_rate_data][type]', 'fixed_amount');
+  form.append(
+    'shipping_options[0][shipping_rate_data][fixed_amount][amount]',
+    envioGratis ? '0' : String(ENVIO_COSTE_CENTIMOS),
+  );
+  form.append('shipping_options[0][shipping_rate_data][fixed_amount][currency]', 'eur');
+  form.append(
+    'shipping_options[0][shipping_rate_data][display_name]',
+    envioGratis ? 'Envío gratis' : 'Envío estándar (2-4 días laborables)',
+  );
   // Recolección de datos de cliente (estilo Shopify): email (por defecto), teléfono y dirección de envío.
   form.append('phone_number_collection[enabled]', 'true');
   form.append('shipping_address_collection[allowed_countries][0]', 'ES');

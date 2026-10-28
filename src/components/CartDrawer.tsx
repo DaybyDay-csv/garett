@@ -10,7 +10,7 @@ import { trackBeginCheckout, trackViewCart, trackRemoveFromCart } from "@/hooks/
 import { getRecommendations } from "@/lib/recommendations";
 import { LOCAL_PRODUCTS, LOCAL_PRODUCTS_BY_HANDLE } from "@/lib/catalog";
 import { ShopifyProduct } from "@/lib/shopify";
-import { DEVOLUCION, ENVIO, GARANTIA } from "@/lib/policies";
+import { DEVOLUCION, ENVIO, GARANTIA, costeEnvioCentimos } from "@/lib/policies";
 import { totalCobro } from "@/lib/prices";
 import { Link } from "react-router-dom";
 
@@ -73,7 +73,13 @@ export const CartDrawer = () => {
   const lineasCarrito = items
     .filter(item => !item.isGWP)
     .map(item => ({ handle: item.product.node.handle, cantidad: item.quantity }));
-  const subtotalWithDiscount = totalCobro(lineasCarrito) / 100;
+  const totalSinEnvio = totalCobro(lineasCarrito);
+  const subtotalWithDiscount = totalSinEnvio / 100;
+
+  // Envío (política única, src/lib/policies.ts ENVIO): gratis ≥ 29 €, 3,95 € debajo.
+  const envioCentimos = costeEnvioCentimos(totalSinEnvio);
+  const totalConEnvio = subtotalWithDiscount + envioCentimos / 100;
+  const faltanParaEnvioGratis = Math.max(0, (ENVIO.gratisDesdeCentimos - totalSinEnvio) / 100);
 
   // Suma de los precios mostrados en las líneas, para detectar cuando el
   // desglose aplica un precio de pack (el total mostrado baja).
@@ -130,7 +136,7 @@ export const CartDrawer = () => {
         price: parseFloat(item.price.amount),
         quantity: item.quantity,
       }));
-      trackBeginCheckout(checkoutItems, subtotalWithDiscount);
+      trackBeginCheckout(checkoutItems, totalConEnvio);
 
       await createCheckout();
       const checkoutUrl = useCartStore.getState().checkoutUrl;
@@ -296,15 +302,17 @@ export const CartDrawer = () => {
                   </div>
                 )}
 
-                {/* Envío gratis en todos los pedidos (policies): sin umbral ni barra de progreso */}
-                {ENVIO.gratisTodosLosPedidos && (
-                  <div className="rounded-lg p-3 border bg-primary-light border-primary/20">
-                    <div className="flex items-center gap-2 text-sm font-medium">
-                      <Truck className="w-4 h-4 flex-shrink-0 text-primary" />
-                      <span className="text-foreground">Envío gratis incluido</span>
-                    </div>
+                {/* Envío: política única (policies). Gratis ≥ umbral; debajo, coste y aviso de lo que falta. */}
+                <div className="rounded-lg p-3 border bg-primary-light border-primary/20">
+                  <div className="flex items-center gap-2 text-sm font-medium">
+                    <Truck className="w-4 h-4 flex-shrink-0 text-primary" />
+                    <span className="text-foreground">
+                      {envioCentimos === 0
+                        ? "Envío gratis incluido"
+                        : `Te faltan ${faltanParaEnvioGratis.toFixed(2).replace('.', ',')} € para el envío gratis`}
+                    </span>
                   </div>
-                )}
+                </div>
 
                   {/* Price Breakdown */}
                   <div className="space-y-1.5 text-sm">
@@ -331,12 +339,18 @@ export const CartDrawer = () => {
                     )}
 
                     <div className="h-px bg-border my-1.5"></div>
-                  
-                  {/* Total */}
-                  <div className="flex justify-between items-center text-base font-bold">
-                    <span>Total</span>
-                    <span>€{subtotalWithDiscount.toFixed(2)}</span>
-                  </div>
+
+                    {/* Envío */}
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                      <span>Envío</span>
+                      <span>{envioCentimos === 0 ? "Gratis" : `${ENVIO.costeTexto}`}</span>
+                    </div>
+
+                    {/* Total: productos + envío = lo que cobrará Stripe */}
+                    <div className="flex justify-between items-center text-base font-bold">
+                      <span>Total</span>
+                      <span>€{totalConEnvio.toFixed(2)}</span>
+                    </div>
                   
                   {/* Total Savings */}
                   {totalSavings > 0 && (
@@ -348,7 +362,7 @@ export const CartDrawer = () => {
                   )}
                   
                   {/* Klarna Widget */}
-                  <KlarnaWidget price={subtotalWithDiscount} variant="cart" />
+                  <KlarnaWidget price={totalConEnvio} variant="cart" />
                 </div>
                 
                 <Button onClick={handleCheckout} className="w-full h-11" disabled={items.length === 0 || isLoading}>

@@ -62,9 +62,9 @@ const EnviosYEntregas = () => {
               {ENVIO.textoCorto}
             </h2>
             <p className="text-muted-foreground">
-              Sin mínimo de compra: todos los pedidos salen con envío gratis.
-              No hay letra pequeña: en el checkout no se añade ningún gasto de
-              envío.
+              Envío gratis a partir de {ENVIO.umbralTexto} de compra; por
+              debajo, {ENVIO.costeTexto}. Lo que ves en el carrito es lo que
+              pagas en el checkout: sin letra pequeña.
             </p>
           </section>
 
