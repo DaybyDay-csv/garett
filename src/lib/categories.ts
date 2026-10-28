@@ -59,23 +59,42 @@ export const CATEGORIES: Record<string, CategoryConfig> = {
   },
   'relojes': {
     slug: 'relojes',
-    name: 'Relojes',
+    name: 'Sportwatch',
     description: 'Smartwatches Garett en liquidación final de stock: precio derribo hasta fin de existencias',
     tags: ['category:relojes']
+  },
+  // Apartado paraguas de beauty tech: agrega todas las categorías de belleza.
+  // Debe ir al final para que getProductCategory devuelva la categoría granular de cada producto.
+  'beauty-tech': {
+    slug: 'beauty-tech',
+    name: 'Beauty Tech',
+    description: 'Tecnología de belleza profesional: IPL, LED, masajeadores y cuidado capilar en liquidación',
+    tags: [
+      'category:terapia-luz-led',
+      'category:cuidado-capilar',
+      'category:capilar',
+      'category:masajeadores-faciales',
+      'category:limpieza-facial',
+      'category:mesoterapia',
+      'category:corporales',
+      'category:depilacion-ipl',
+      'category:ipl',
+    ]
   }
 };
 
 // Orden canónico de categorías para navegación (navbar, menús, cross-links).
-// Solo colecciones con productos reales.
+// Solo colecciones con productos reales. Los dos apartados de tienda van primero.
 export const CATEGORY_NAV: Array<{ slug: string; name: string }> = [
+  { slug: 'beauty-tech', name: 'Beauty Tech' },
+  { slug: 'relojes', name: 'Sportwatch' },
   { slug: 'cuidado-capilar', name: 'Cuidado Capilar' },
   { slug: 'masajeadores-faciales', name: 'Masajeadores Faciales' },
   { slug: 'limpieza-facial', name: 'Limpieza Facial' },
   { slug: 'mesoterapia', name: 'Mesoterapia' },
   { slug: 'corporales', name: 'Cuidado Corporal' },
   { slug: 'depilacion-ipl', name: 'Depilación IPL' },
-  { slug: 'terapia-luz-led', name: 'Terapia de Luz LED' },
-  { slug: 'relojes', name: 'Relojes' }
+  { slug: 'terapia-luz-led', name: 'Terapia de Luz LED' }
 ];
 
 // Helper para obtener la categoría desde los tags del producto

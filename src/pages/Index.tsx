@@ -14,7 +14,7 @@ import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { LOCAL_PRODUCTS_BY_HANDLE } from "@/lib/catalog";
 import { BUNDLES } from "@/lib/bundles";
 import { homeFAQs } from "@/lib/faqData";
-import { ShoppingBag, ArrowRight, ShieldCheck, Award, Truck, FlaskConical, Leaf, Phone, Watch } from "lucide-react";
+import { ShoppingBag, ArrowRight, ShieldCheck, Award, Truck, FlaskConical, Leaf, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { BRAND } from "@/lib/brand";
 import { DEVOLUCION, ENVIO, GARANTIA, CONTACTO } from "@/lib/policies";
@@ -26,6 +26,7 @@ import categoryMesoterapia from "@/assets/category-mesoterapia.jpg";
 import categoryCorporales from "@/assets/category-corporales.jpg";
 import categoryDepilacionIPL from "@/assets/category-depilacion-ipl.jpg";
 import categoryTerapiaLuzLED from "@/assets/category-terapia-luz-led.jpg";
+import heroSportwatch from "@/assets/hero-sportwatch.jpg";
 // Stock real de relojes en liquidación: cifra estática verificada a mano.
 // NUNCA aleatoria ni calculada a partir del catálogo: es una cifra operativa fija.
 const STOCK_RELOJES = 78;
@@ -76,72 +77,71 @@ const Index = () => {
       <SEO title={`${BRAND.name} España - Belleza Profesional`} description={`Descubre los mejores dispositivos de belleza profesional. Cuidado capilar, facial y corporal con tecnología avanzada. ${ENVIO.textoCorto} y garantía comercial de ${GARANTIA.comercial.anios} años.`} canonicalUrl="/" schema={homeSchema} />
       <Header />
 
-      {/* [1] HERO — sin claims sin fuente: solo lo demostrable (CE, garantía, devolución, contacto) */}
-      <section className="bg-card">
-        <div className="container py-14 md:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            <div className="space-y-6">
-              <Badge className="animate-fade-up bg-primary-light text-primary border-primary/10 px-3 py-1.5 text-xs">
-                <ShieldCheck className="w-3 h-3 mr-1.5" />
-                Dispositivos médicos CE clase IIa
-              </Badge>
-              <h2 className="animate-fade-up [animation-delay:80ms] text-3xl md:text-5xl font-semibold tracking-tight leading-[1.05] text-foreground">
-                Las mejores marcas a <span className="text-primary">precios imbatibles</span>
-              </h2>
-              <p className="animate-fade-up [animation-delay:160ms] text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
-                Liquidación por cierre: hasta -50% · hasta fin de stock.
-              </p>
-              {/* Contador de stock real de relojes — cifra estática (STOCK_RELOJES), no aleatoria ni derivada del catálogo */}
-              <div className="animate-fade-up [animation-delay:200ms] inline-flex items-center gap-3 border border-border rounded-xl px-4 py-3 bg-card w-fit">
-                <div className="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center flex-shrink-0">
-                  <Watch className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-foreground leading-none">{STOCK_RELOJES}</p>
-                  <p className="text-xs text-muted-foreground mt-1">relojes en stock · hasta fin de existencias</p>
-                </div>
-              </div>
-              <div className="animate-fade-up [animation-delay:240ms] flex flex-wrap gap-3 pt-2">
-                <Button asChild size="lg">
-                  <Link to="/productos">
-                    Comprar ahora
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline">
-                  <Link to="/blog">
-                    Descubre la tecnología
-                  </Link>
-                </Button>
-              </div>
-              <div className="animate-fade-up [animation-delay:320ms] flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1.5"><Truck className="w-4 h-4" /> {ENVIO.textoCorto}</span>
-                <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4" /> Garantía {GARANTIA.comercial.anios} años</span>
-                <span className="flex items-center gap-1.5"><Award className="w-4 h-4" /> Pago seguro SSL</span>
-              </div>
-              <a href={CONTACTO.telefonoHref} className="animate-fade-up [animation-delay:400ms] inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors">
-                <Phone className="w-4 h-4" />
-                {CONTACTO.textoJuntoAlCta}
-              </a>
+      {/* [1] HERO XXL — liquidación: mensaje masivo + dos apartados de tienda clicables (beauty | sportwatch) */}
+      <section className="bg-card border-b border-border">
+        <div className="container py-12 md:py-16">
+          <div className="text-center space-y-5 md:space-y-6">
+            <Badge className="animate-fade-up bg-primary-light text-primary border-primary/10 px-4 py-2 text-xs uppercase tracking-[0.2em]">
+              Liquidación por cierre · hasta fin de stock
+            </Badge>
+            <h2 className="animate-fade-up [animation-delay:80ms] text-[13vw] sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] text-foreground uppercase">
+              Liquidación stock<br />
+              <span className="text-primary">Todo al 50%</span>
+            </h2>
+            <p className="animate-fade-up [animation-delay:160ms] text-base md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              <strong className="text-foreground font-semibold">GARETT</strong> — marca de referencia de tech beauty y
+              sportwatch del Norte de Europa.{' '}
+              <span className="whitespace-nowrap font-medium text-foreground">
+                {STOCK_RELOJES} relojes en stock · hasta fin de existencias
+              </span>
+            </p>
+            <div className="animate-fade-up [animation-delay:200ms] flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+              <span className="flex items-center gap-1.5"><Truck className="w-4 h-4" /> {ENVIO.textoCorto}</span>
+              <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4" /> Garantía {GARANTIA.comercial.anios} años</span>
+              <span className="flex items-center gap-1.5"><Award className="w-4 h-4" /> Pago seguro SSL</span>
             </div>
-            <div className="animate-fade-up [animation-delay:200ms] relative">
-              <div className="aspect-square rounded-2xl bg-primary-light overflow-hidden">
-                <img
-                  src={categoryTerapiaLuzLED}
-                  alt="Terapia LED Intermex Beauty"
-                  className="w-full h-full object-cover"
-                />
+          </div>
+
+          {/* Dos apartados de tienda: cada mitad lleva a su colección */}
+          <div className="mt-10 md:mt-14 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <Link
+              to="/categoria/beauty-tech"
+              className="group animate-fade-up [animation-delay:240ms] relative block aspect-[4/5] md:aspect-[3/4] lg:aspect-[4/5] rounded-2xl overflow-hidden border border-border bg-primary-light"
+            >
+              <img
+                src={categoryTerapiaLuzLED}
+                alt="Beauty tech en liquidación: IPL, LED, masajeadores y cuidado capilar"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" aria-hidden="true" />
+              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-white">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/75">Apartado beauty</p>
+                <p className="mt-1 text-3xl md:text-4xl font-bold tracking-tight">Beauty Tech</p>
+                <p className="mt-1 text-sm md:text-base text-white/85">IPL, LED, masajeadores y cuidado capilar — hasta -50%</p>
+                <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold">
+                  Ver la colección <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </span>
               </div>
-              <div className="animate-fade-up [animation-delay:450ms] absolute -bottom-4 -left-4 bg-card rounded-xl shadow-lg p-4 flex items-center gap-3 border border-border">
-                <div className="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center">
-                  <ShieldCheck className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">CE clase IIa</p>
-                  <p className="text-xs text-muted-foreground">Dispositivos médicos certificados</p>
-                </div>
+            </Link>
+            <Link
+              to="/categoria/relojes"
+              className="group animate-fade-up [animation-delay:280ms] relative block aspect-[4/5] md:aspect-[3/4] lg:aspect-[4/5] rounded-2xl overflow-hidden border border-border bg-primary-light"
+            >
+              <img
+                src={heroSportwatch}
+                alt="Sportwatch Garett en liquidación: reloj GPS en actividad"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" aria-hidden="true" />
+              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-white">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/75">Apartado sportwatch</p>
+                <p className="mt-1 text-3xl md:text-4xl font-bold tracking-tight">Sportwatch</p>
+                <p className="mt-1 text-sm md:text-base text-white/85">{STOCK_RELOJES} smartwatches Garett desde 39 €</p>
+                <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold">
+                  Ver la colección <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </span>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
