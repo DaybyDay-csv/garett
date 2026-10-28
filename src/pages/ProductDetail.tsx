@@ -1036,9 +1036,9 @@ const ProductDetail = () => {
             Tecnología profesional, accesible para ti
           </h2>
           <p className="text-base text-foreground/70 leading-relaxed max-w-2xl mx-auto">
-            En Intermex Beauty creemos que los tratamientos estéticos profesionales no deberían ser un lujo exclusivo de clínicas. 
-            Nuestra misión es acercar la tecnología eslava más avanzada a tu hogar, con dispositivos certificados, 
-            seguros y diseñados para resultados reales. Respaldados por El Corte Inglés y más de 10.000 clientes satisfechos en Europa.
+            En Intermex Beauty creemos que los tratamientos estéticos profesionales no deberían ser un lujo exclusivo de clínicas.
+            Nuestra misión es acercar la tecnología eslava más avanzada a tu hogar, con dispositivos certificados,
+            seguros y diseñados para resultados reales.
           </p>
           <div className="flex items-center justify-center gap-6 pt-4 text-sm text-foreground/50">
             <div className="flex items-center gap-2">
@@ -1047,11 +1047,11 @@ const ProductDetail = () => {
             </div>
             <div className="flex items-center gap-2">
               <Award className="w-4 h-4" />
-              <span>2 años garantía</span>
+              <span>{GARANTIA.comercial.anios} años de garantía</span>
             </div>
             <div className="flex items-center gap-2">
               <Users className="w-4 h-4" />
-              <span>+10.000 clientes</span>
+              <span>Soporte real: {CONTACTO.telefono}</span>
             </div>
           </div>
           
