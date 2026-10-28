@@ -160,7 +160,11 @@ export function desglosaCarrito(
   let quedanPacks = true;
   while (quedanPacks) {
     quedanPacks = false;
-    for (const pack of PACKS) {
+    // Primero el pack con más componentes: eco es subconjunto de cara-completa
+    // y en orden de declaración el greedy lo matcheaba antes, cobrando el resto
+    // a precio base (pack anunciado a 189,90 € cobraba 200,80 €).
+    const packsPorTamano = [...PACKS].sort((a, b) => b.componentes.length - a.componentes.length);
+    for (const pack of packsPorTamano) {
       if (pack.componentes.every((c) => (disponibles.get(c.handle) ?? 0) >= c.cantidad)) {
         const handles = pack.componentes.map((c) => c.handle);
         const importes = repartePrecioPack(pack, handles);

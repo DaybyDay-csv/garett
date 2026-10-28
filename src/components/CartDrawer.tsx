@@ -193,7 +193,10 @@ export const CartDrawer = () => {
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
                 <ShoppingCart className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground">Tu carrito está vacío</p>
+                <p className="text-muted-foreground mb-4">Tu carrito está vacío</p>
+                <Link to="/productos" onClick={() => setIsOpen(false)} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">
+                  Ver productos <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
           ) : (
