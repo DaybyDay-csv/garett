@@ -316,12 +316,18 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {BUNDLES.map(bundle => {
-              const first = LOCAL_PRODUCTS_BY_HANDLE[bundle.includes[0]];
+              const imgs = bundle.includes
+                .map(h => LOCAL_PRODUCTS_BY_HANDLE[h]?.node.images.edges[0]?.node.url)
+                .filter(Boolean) as string[];
               return (
                 <Card key={bundle.handle} className="overflow-hidden flex flex-col">
-                  <div className="aspect-[16/9] bg-muted relative">
-                    {first && <img src={first.node.images.edges[0]?.node.url} alt={bundle.title} className="w-full h-full object-cover" />}
-                    <Badge className="absolute top-3 left-3">{bundle.badge}</Badge>
+                  <div className="aspect-[16/9] bg-muted relative grid grid-cols-2">
+                    {imgs.map((src, i) => (
+                      <div key={i} className={`relative overflow-hidden ${imgs.length === 3 && i === 0 ? "row-span-2" : ""}`}>
+                        <img src={src} alt={`${bundle.title} — contenido ${i + 1}`} className="absolute inset-0 w-full h-full object-cover" />
+                      </div>
+                    ))}
+                    <Badge className="absolute top-3 left-3 z-10">{bundle.badge}</Badge>
                   </div>
                   <CardContent className="p-6 flex flex-col flex-1">
                     <h3 className="text-lg font-semibold text-foreground mb-2">{bundle.title}</h3>

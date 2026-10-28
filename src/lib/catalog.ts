@@ -345,7 +345,7 @@ const seeds: LocalProductSeed[] = [
       price: 69,
       compareAtPrice: 133,
       stock: 16,
-      images: photo("reloj-garett-verona-2.jpg", "reloj-garett-verona-3.jpg"),
+      images: photo("reloj-garett-verona-2.jpg", "reloj-garett-verona-3.jpg", "reloj-garett-verona-4.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -358,7 +358,7 @@ const seeds: LocalProductSeed[] = [
       price: 39,
       compareAtPrice: 75,
       stock: 25,
-      images: photo("reloj-garett-atom-2.jpg", "reloj-garett-atom-3.jpg", "reloj-garett-atom-silver-2.jpg", "reloj-garett-atom-silver-3.jpg"),
+      images: photo("reloj-garett-atom-2.jpg", "reloj-garett-atom-3.jpg", "reloj-garett-atom-4.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -371,7 +371,7 @@ const seeds: LocalProductSeed[] = [
       price: 59,
       compareAtPrice: 116,
       stock: 17,
-      images: photo("reloj-garett-v14-2.jpg", "reloj-garett-v14-3.jpg"),
+      images: photo("reloj-garett-v14-2.jpg", "reloj-garett-v14-3.jpg", "reloj-garett-v14-4.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
@@ -384,7 +384,7 @@ const seeds: LocalProductSeed[] = [
       price: 39,
       compareAtPrice: 75,
       stock: 11,
-      images: photo("reloj-garett-grs-pro-2.jpg", "reloj-garett-grs-pro-3.jpg", "reloj-garett-grs-pro-9.jpg"),
+      images: photo("reloj-garett-grs-pro-2.jpg", "reloj-garett-grs-pro-3.jpg", "reloj-garett-grs-pro-4.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
