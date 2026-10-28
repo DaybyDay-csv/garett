@@ -3,6 +3,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
+import { DEVOLUCION, ENVIO } from "@/lib/policies";
 import { Zap, Flame, ArrowRight, Timer } from "lucide-react";
 import { Link } from "react-router-dom";
 export const BlackFridayFeatured = () => {
@@ -74,7 +75,7 @@ export const BlackFridayFeatured = () => {
           </Button>
           
           <p className="text-muted-foreground text-sm">
-            Envío gratis en todos los pedidos - Devoluciones hasta 30 días
+            {ENVIO.textoCorto} - {DEVOLUCION.textoCorto}
           </p>
         </div>
       </div>
