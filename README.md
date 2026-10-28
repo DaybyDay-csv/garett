@@ -1,19 +1,19 @@
-# Garett Connect Pro
+# Intermex Beauty
 
 CONEXIÓN SHOPIFY (TIENDA EXISTENTE)
 Conecta mi tienda Shopify existente con estos datos:
 QUIERO UNA TIENDA YA EXISTENTE NO UN SANDBOX NUEVO
-Store Domain: https://admin.shopify.com/store/garett-2
+Store Domain: (pendiente: configurar el dominio de la nueva tienda)
 API Version: 2025-07
 IMPORTANTE: NO crear productos de prueba. Usar los 20 productos reales que ya existen en mi tienda.
-# PROMPT FOR LOVABLE.DEV — **Build a Spanish (ES-only) Shopify 2.0 store for “Garett (Garett España)”**
+# PROMPT FOR LOVABLE.DEV — **Build a Spanish (ES-only) Shopify 2.0 store for “Intermex Beauty”**
 
 **Goal:** Create a **new Shopify 2.0 store** via Lovable’s Shopify integration (new store, sandbox first, then “claim store”). Implement a **CVO-first, mobile-first** storefront optimized for WW/BF/CM. **Do not invent prices or stock.** Use only what’s below.
 
 ## 0) Identity, market, copy guardrails
 
-* **Brand / Trading name:** Garett (Garett España)
-* **Reference domain (no migration now):** [https://xn--garettespaa-beb.es/](https://xn--garettespaa-beb.es/)
+* **Brand / Trading name:** Intermex Beauty
+* **Reference domain (no migration now):** [https://intermexbeauty.es](https://intermexbeauty.es)
 * **Market / Language / Currency:** **Spain**, **Spanish (es-ES)**, **EUR** — **ES-only at launch** (no multi-currency).
 * **Copy guardrails:** No guaranteed results, no “miracle” language. Use disclaimers like “Los resultados pueden variar.” Warranty 3 years, CE, and El Corte Inglés presence as trust spine.
 
@@ -177,7 +177,7 @@ Create `bf_tiers` with fields:
 
 **Home**
 
-* Lightweight preloader (Garett logo spins 2×; respects `prefers-reduced-motion`; non-blocking for LCP).
+* Lightweight preloader (Intermex logo spins 2×; respects `prefers-reduced-motion`; non-blocking for LCP).
 * BF hero with CTA to **BF Hub**.
 * Tiers counter (reads `bf_tiers`).
 * UGC carousel (publish **20 real reviews** initially).
@@ -250,7 +250,7 @@ If you want, I can also generate the CSV skeletons now for quick import.
 
 This project was built with [Lovable](https://lovable.dev).
 
-**Live app**: https://garett.lovable.app
+**Live app**: https://intermexbeauty.es
 
 ## Build with Lovable
 

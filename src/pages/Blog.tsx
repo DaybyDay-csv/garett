@@ -11,12 +11,12 @@ const Blog = () => {
   const blogSchema = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: 'Garett Beauty - Blog de Belleza',
+    name: 'Intermex Beauty - Blog de Belleza',
     description: 'Guías, consejos y tutoriales sobre dispositivos de belleza profesional',
     url: `${window.location.origin}/blog`,
     publisher: {
       '@type': 'Organization',
-      name: 'Garett Beauty',
+      name: 'Intermex Beauty',
       logo: {
         '@type': 'ImageObject',
         url: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pESnn9BB6adLJMk8NGIHDpkTO553/uploads/1762822197317-3.png'

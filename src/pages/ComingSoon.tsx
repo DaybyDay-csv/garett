@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import garettLogoFooter from "@/assets/garett-logo-footer.png";
+import { BrandWordmark } from "@/components/BrandWordmark";
 import { Lock } from "lucide-react";
 
 interface ComingSoonProps {
   onAdminLogin?: () => void;
 }
 
-const ADMIN_PASSWORD = "garett2025";
+const ADMIN_PASSWORD = "intermex2025";
 
 const ComingSoon = ({ onAdminLogin }: ComingSoonProps) => {
   const [email, setEmail] = useState("");
@@ -65,11 +65,7 @@ const ComingSoon = ({ onAdminLogin }: ComingSoonProps) => {
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-2xl mx-auto">
         {/* Logo */}
         <div className="mb-12">
-          <img
-            src={garettLogoFooter}
-            alt="Garett Beauty"
-            className="h-10 md:h-12 object-contain opacity-90"
-          />
+          <BrandWordmark className="text-xl md:text-2xl text-white opacity-90" />
         </div>
 
         {/* Divider */}
@@ -129,7 +125,7 @@ const ComingSoon = ({ onAdminLogin }: ComingSoonProps) => {
         <div className="mt-16 flex flex-col items-center gap-4">
           <div className="w-8 h-px opacity-30" style={{ background: "hsl(0,0%,100%)" }} />
           <p className="text-xs tracking-[0.2em] uppercase opacity-30" style={{ color: "hsl(0,0%,100%)" }}>
-            Garett Beauty España
+            Intermex Beauty España
           </p>
         </div>
       </div>

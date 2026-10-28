@@ -4,7 +4,7 @@ import { Gift, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import gwpImage from "@/assets/gwp-headband.png";
-import patternImage from "@/assets/garett-pattern-2.png";
+import patternImage from "@/assets/intermex-pattern-2.png";
 import { gwpConfig } from "@/lib/bannerConfig";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 export const GWPBanner = () => {
@@ -42,7 +42,7 @@ export const GWPBanner = () => {
             </h1>
             <div className="space-y-2">
               <p className="text-base md:text-xl lg:text-2xl font-semibold text-foreground text-center">
-                Banda de pelo Garett Routine
+                Banda de pelo Intermex Routine
               </p>
               <div className="flex items-center justify-center md:justify-start gap-2 md:gap-3">
                 <Badge className="bg-primary/10 text-primary text-xs md:text-sm px-3 py-1 md:px-4 md:py-1.5 border border-primary/20">

@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Zap, Gift, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import patternImage from "@/assets/garett-pattern-2.png";
+import patternImage from "@/assets/intermex-pattern-2.png";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 export const CyberMondayBanner = () => {
   const [timeLeft, setTimeLeft] = useState({

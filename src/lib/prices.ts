@@ -61,8 +61,8 @@ export const PRECIOS: Record<string, PrecioProducto> = {
   "ipl-flash-dorada": { precioCentimos: 37900, nombre: "IPL Flash Dorada - Depiladora de Luz Pulsada" },
   "ipl-plateada": { precioCentimos: 32900, nombre: "IPL Plateada - Depiladora de Luz Pulsada" },
   cool: { precioCentimos: 37900, nombre: "Cool - Depiladora IPL con Sistema de Frío" },
-  "manopla-led-garett-beauty": { precioCentimos: 22400, nombre: "Manopla LED Garett Beauty - Fototerapia LED" },
-  "mascara-led-garett-beauty": { precioCentimos: 29900, nombre: "Máscara LED Garett Beauty - Fototerapia LED Facial" },
+  "manopla-led-intermex-beauty": { precioCentimos: 22400, nombre: "Manopla LED Intermex Beauty - Fototerapia LED" },
+  "mascara-led-intermex-beauty": { precioCentimos: 29900, nombre: "Máscara LED Intermex Beauty - Fototerapia LED Facial" },
 };
 
 /** Los 3 packs de bundles.ts, con su precio final ya rebajado. */
@@ -82,7 +82,7 @@ export const PACKS: Pack[] = [
       { handle: "multiclean", cantidad: 1 },
       { handle: "fresh-eye", cantidad: 1 },
       { handle: "serum-skin", cantidad: 1 },
-      { handle: "manopla-led-garett-beauty", cantidad: 1 },
+      { handle: "manopla-led-intermex-beauty", cantidad: 1 },
     ],
     precioCentimos: 34900,
   },

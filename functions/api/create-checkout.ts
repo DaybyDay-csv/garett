@@ -53,8 +53,8 @@ const HANDLE_BY_PRICE: Record<string, string> = {
   price_1U9W0HFS9PHCKZwwEhyJsfSs: 'ipl-flash-dorada',
   price_1U9W0HFS9PHCKZwwu11FLaWI: 'ipl-plateada',
   price_1U9W0IFS9PHCKZww6k5MfHWA: 'cool',
-  price_1U9W0JFS9PHCKZwwvPIGvuX3: 'manopla-led-garett-beauty',
-  price_1U9W0JFS9PHCKZwwVA3FPGRH: 'mascara-led-garett-beauty',
+  price_1U9W0JFS9PHCKZwwvPIGvuX3: 'manopla-led-intermex-beauty',
+  price_1U9W0JFS9PHCKZwwVA3FPGRH: 'mascara-led-intermex-beauty',
 };
 
 const GWP_HANDLE = 'gwp-hairband'; // regalo con compra: nunca se vende (el frontend ya lo filtra)

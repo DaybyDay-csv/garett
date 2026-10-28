@@ -620,7 +620,7 @@ const productContentMap: Record<string, ProductContent> = {
       howToUse: {
         steps: [
           'Carga el reloj completamente (primera carga 2 horas)',
-          'Descarga Garett Smart app gratis (Android 8.0+ / iOS 13.0+)',
+          'Descarga la app móvil gratuita (Android 8.0+ / iOS 13.0+)',
           'Vincula por Bluetooth 5.2 y personaliza tu esfera favorita de cientos disponibles',
           'Llévalo 24/7—es resistente al agua IP68 (puedes ducharte, nadar sin problemas)',
           'Revisa tu progreso en la pantalla AMOLED o en la app. Ajusta objetivos según tus datos reales'
@@ -691,7 +691,7 @@ const productContentMap: Record<string, ProductContent> = {
         },
         {
           title: 'Garantía de compatibilidad',
-          description: 'Si está en nuestra tienda oficial, es compatible con tu dispositivo Garett. Sin sorpresas, sin problemas.'
+          description: 'Si está en nuestra tienda oficial, es compatible con tu dispositivo Intermex Beauty. Sin sorpresas, sin problemas.'
         },
         {
           title: 'Stock permanente',
@@ -829,7 +829,7 @@ const productContentMap: Record<string, ProductContent> = {
         },
         {
           title: 'Marca reconocida',
-          description: 'Garett es una marca de confianza con presencia en El Corte Inglés y principales retailers.'
+          description: 'Intermex Beauty es una marca de confianza con presencia en El Corte Inglés y principales retailers.'
         },
         {
           title: 'Inversión inteligente',

@@ -6,8 +6,8 @@ import type { ProductContent } from "./productContent";
 export const IPL_PULSOS = "400.000";
 
 // Contenido de PDP POR PRODUCTO (clave = handle del catálogo local).
-// Extraído de garett.eu (fichas reales de cada dispositivo) y adaptado a
-// la estructura de alta conversión de Garett España.
+// Extraído de las fichas oficiales del fabricante y adaptado a
+// la estructura de alta conversión de Intermex Beauty.
 // Los productos sin entrada específica caen al contenido por categoría.
 export const PRODUCT_CONTENT_BY_HANDLE: Record<string, ProductContent> = {
   // ===== Masajeadores faciales =====

@@ -150,7 +150,7 @@ export const useCartStore = create<CartStore>()(
       }
     }),
     {
-      name: 'garett-cart',
+      name: 'intermex-cart',
       storage: createJSONStorage(() => localStorage),
     }
   )

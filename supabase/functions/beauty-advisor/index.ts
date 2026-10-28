@@ -5,7 +5,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const SYSTEM_PROMPT = `Eres la asesora de belleza virtual de Garett Beauty España. Tu nombre es "Glow", y tu misión es ayudar a cada cliente a encontrar el dispositivo perfecto según sus necesidades, tipo de piel y objetivos estéticos.
+const SYSTEM_PROMPT = `Eres la asesora de belleza virtual de Intermex Beauty España. Tu nombre es "Glow", y tu misión es ayudar a cada cliente a encontrar el dispositivo perfecto según sus necesidades, tipo de piel y objetivos estéticos.
 
 REGLAS:
 - Responde SIEMPRE en español, de forma cálida, profesional y cercana.
@@ -210,8 +210,8 @@ Usa estos handles exactos para los enlaces:
 - Flash Pro → /producto/flash-pro
 - Curly → /producto/curly
 - AeroGlow → /producto/aeroglow
-- Máscara LED → /producto/mascara-led-garett-beauty
-- Manopla LED → /producto/manopla-led-garett-beauty
+- Máscara LED → /producto/mascara-led-intermex-beauty
+- Manopla LED → /producto/manopla-led-intermex-beauty
 
 Ejemplo: "Te recomiendo el [Fresh Skin Pro](/producto/fresh-skin-pro), es ideal para..."
 

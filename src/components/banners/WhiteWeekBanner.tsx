@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Percent, Copy, Check, Gift } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import patternImage from "@/assets/garett-pattern-2.png";
+import patternImage from "@/assets/intermex-pattern-2.png";
 import { getCurrentPromotionalStage } from "@/lib/promotions";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 export const WhiteWeekBanner = () => {

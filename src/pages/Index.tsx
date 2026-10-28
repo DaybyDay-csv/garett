@@ -14,8 +14,9 @@ import { fetchProducts, ShopifyProduct, isGWPProduct } from "@/lib/shopify";
 import { LOCAL_PRODUCTS_BY_HANDLE } from "@/lib/catalog";
 import { BUNDLES } from "@/lib/bundles";
 import { homeFAQs } from "@/lib/faqData";
-import { ShoppingBag, ArrowRight, ShieldCheck, Award, Truck, FlaskConical, Leaf, Phone } from "lucide-react";
+import { ShoppingBag, ArrowRight, ShieldCheck, Award, Truck, FlaskConical, Leaf, Phone, Watch } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BRAND } from "@/lib/brand";
 import { DEVOLUCION, ENVIO, GARANTIA, CONTACTO } from "@/lib/policies";
 import { UGCSection } from "@/components/UGCSection";
 import categoryCuidadoCapilar from "@/assets/category-cuidado-capilar.jpg";
@@ -25,6 +26,10 @@ import categoryMesoterapia from "@/assets/category-mesoterapia.jpg";
 import categoryCorporales from "@/assets/category-corporales.jpg";
 import categoryDepilacionIPL from "@/assets/category-depilacion-ipl.jpg";
 import categoryTerapiaLuzLED from "@/assets/category-terapia-luz-led.jpg";
+// Stock real de relojes en liquidación: cifra estática verificada a mano.
+// NUNCA aleatoria ni calculada a partir del catálogo: es una cifra operativa fija.
+const STOCK_RELOJES = 78;
+
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
@@ -50,12 +55,12 @@ const Index = () => {
   const homeSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Garett Beauty España',
+    name: `${BRAND.name} España`,
     url: window.location.origin,
     description: `Tecnología de belleza profesional para resultados visibles. Dispositivos de cuidado capilar, facial y corporal con garantía comercial de ${GARANTIA.comercial.anios} años.`,
     publisher: {
       '@type': 'Organization',
-      name: 'Garett Beauty',
+      name: BRAND.name,
       logo: {
         '@type': 'ImageObject',
         url: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pESnn9BB6adLJMk8NGIHDpkTO553/uploads/1762822197317-3.png'
@@ -68,7 +73,7 @@ const Index = () => {
     }
   };
   return <div className="min-h-screen bg-background">
-      <SEO title="Garett Beauty España - Belleza Profesional" description={`Descubre los mejores dispositivos de belleza profesional. Cuidado capilar, facial y corporal con tecnología avanzada. ${ENVIO.textoCorto} y garantía comercial de ${GARANTIA.comercial.anios} años.`} canonicalUrl="/" schema={homeSchema} />
+      <SEO title={`${BRAND.name} España - Belleza Profesional`} description={`Descubre los mejores dispositivos de belleza profesional. Cuidado capilar, facial y corporal con tecnología avanzada. ${ENVIO.textoCorto} y garantía comercial de ${GARANTIA.comercial.anios} años.`} canonicalUrl="/" schema={homeSchema} />
       <Header />
 
       {/* [1] HERO — sin claims sin fuente: solo lo demostrable (CE, garantía, devolución, contacto) */}
@@ -81,13 +86,21 @@ const Index = () => {
                 Dispositivos médicos CE clase IIa
               </Badge>
               <h2 className="animate-fade-up [animation-delay:80ms] text-3xl md:text-5xl font-semibold tracking-tight leading-[1.05] text-foreground">
-                Tecnología de belleza <span className="text-primary">profesional</span><br />
-                para usar en casa.
+                Las mejores marcas a <span className="text-primary">precios imbatibles</span>
               </h2>
               <p className="animate-fade-up [animation-delay:160ms] text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
-                Dispositivos con tecnología LED, microcorriente, EMS y luz pulsada para tu rutina facial y corporal.
-                Con garantía comercial de {GARANTIA.comercial.anios} años, {DEVOLUCION.diasPrecintoIntacto} días de devolución con {DEVOLUCION.condicion} y teléfono de soporte si te surge una duda.
+                Liquidación por cierre: hasta -50% · hasta fin de stock.
               </p>
+              {/* Contador de stock real de relojes — cifra estática (STOCK_RELOJES), no aleatoria ni derivada del catálogo */}
+              <div className="animate-fade-up [animation-delay:200ms] inline-flex items-center gap-3 border border-border rounded-xl px-4 py-3 bg-card w-fit">
+                <div className="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center flex-shrink-0">
+                  <Watch className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-foreground leading-none">{STOCK_RELOJES}</p>
+                  <p className="text-xs text-muted-foreground mt-1">relojes en stock · hasta fin de existencias</p>
+                </div>
+              </div>
               <div className="animate-fade-up [animation-delay:240ms] flex flex-wrap gap-3 pt-2">
                 <Button asChild size="lg">
                   <Link to="/productos">
@@ -115,7 +128,7 @@ const Index = () => {
               <div className="aspect-square rounded-2xl bg-primary-light overflow-hidden">
                 <img
                   src={categoryTerapiaLuzLED}
-                  alt="Terapia LED Garett Beauty"
+                  alt="Terapia LED Intermex Beauty"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -464,7 +477,7 @@ const Index = () => {
               <div className="aspect-[4/3] rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
                 <img
                   src={categoryLimpiezaFacial}
-                  alt="Dispositivos de belleza Garett"
+                  alt="Dispositivos de belleza Intermex Beauty"
                   className="w-full h-full object-cover opacity-90"
                 />
               </div>

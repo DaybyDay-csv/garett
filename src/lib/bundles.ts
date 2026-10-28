@@ -1,4 +1,4 @@
-// Packs / bundles Garett — combinatorio de productos con descuento.
+// Packs / bundles Intermex Beauty — combinatorio de productos con descuento.
 // Source: README.md §6 (Ritual Belleza Eco + Ritual Premium) + extensión "Ritual Cara Completa".
 
 import { ShopifyProduct } from "@/lib/shopify";
@@ -29,7 +29,7 @@ export const BUNDLES: Bundle[] = [
     handle: "pack-ritual-cara-completa",
     title: "Pack Ritual Cara Completa",
     description: "Limpieza + contorno de ojos + sérum. Ideal para quienes empiezan y quieren cubrir los 3 pasos clave.",
-    includes: ["multiclean", "fresh-eye", "serum-skin", "manopla-led-garett-beauty"],
+    includes: ["multiclean", "fresh-eye", "serum-skin", "manopla-led-intermex-beauty"],
     originalPrice: 419.80,
     bundlePrice: 349.0,
     badge: "AHORRA 70,80€",

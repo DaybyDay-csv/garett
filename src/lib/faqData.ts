@@ -3,7 +3,7 @@ import { DEVOLUCION, GARANTIA } from "@/lib/policies";
 
 export const homeFAQs: FAQItem[] = [
   {
-    question: "¿Qué hace diferente a los dispositivos de belleza Garett?",
+    question: "¿Qué hace diferente a los dispositivos de belleza Intermex Beauty?",
     answer: "Nuestros dispositivos utilizan tecnología profesional certificada, la misma que se usa en clínicas de belleza y salones profesionales. Cada producto está diseñado con innovaciones probadas clínicamente como tecnología iónica, IPL de última generación, electroestimulación EMS y radiofrecuencia. Además, incluyen garantía de 2 años y soporte técnico en España para tu tranquilidad total."
   },
   {

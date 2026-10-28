@@ -82,10 +82,10 @@ export const UGCSection = () => {
         <div className="text-center mb-12">
           <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">Conecta con nosotros</p>
           <div className="flex items-center justify-center gap-6 mb-8">
-            <a href="https://www.instagram.com/garettbeauty.spain/" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary transition-colors" aria-label="Instagram">
+            <a href="https://www.instagram.com/intermexbeauty/" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary transition-colors" aria-label="Instagram">
               <Instagram className="w-6 h-6" />
             </a>
-            <a href="https://www.youtube.com/@GARETTpl" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary transition-colors" aria-label="YouTube">
+            <a href="https://www.youtube.com/@intermexbeauty" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary transition-colors" aria-label="YouTube">
               <Youtube className="w-6 h-6" />
             </a>
           </div>
@@ -108,7 +108,7 @@ export const UGCSection = () => {
                 {item.type === "image" ? (
                   <OptimizedImage 
                     src={item.src} 
-                    alt={`${item.caption || item.name} - Contenido de usuario Garett Beauty`} 
+                    alt={`${item.caption || item.name} - Contenido de usuario Intermex Beauty`} 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
                     blurPlaceholder
                   />
@@ -158,7 +158,7 @@ export const UGCSection = () => {
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">QUIÉNES SOMOS, NUESTRA HISTORIA</p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-            Garett Beauty: tu spa inteligente en casa
+            Intermex Beauty: tu spa inteligente en casa
           </h2>
           <div className="space-y-4">
             <p className="text-muted-foreground leading-relaxed font-extralight text-sm">
@@ -166,7 +166,7 @@ export const UGCSection = () => {
             </p>
             
             <p className="text-muted-foreground leading-relaxed font-extralight text-sm">
-              En Garett Beauty acercamos la tecnología de clínica a tu casa para que tu rutina sea más eficaz, sencilla y bonita.
+              En Intermex Beauty acercamos la tecnología de clínica a tu casa para que tu rutina sea más eficaz, sencilla y bonita.
             </p>
             
             <p className="text-muted-foreground leading-relaxed font-extralight text-sm">

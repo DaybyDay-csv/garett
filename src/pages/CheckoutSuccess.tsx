@@ -59,7 +59,7 @@ const CheckoutSuccess = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="Gracias por tu compra - Garett Beauty"
+        title="Gracias por tu compra - Intermex Beauty"
         description="Tu pedido se ha completado correctamente."
         canonicalUrl="/checkout/gracias"
       />

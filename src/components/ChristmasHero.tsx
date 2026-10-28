@@ -37,7 +37,7 @@ export const ChristmasHero = () => {
   return <section className="relative overflow-hidden min-h-[600px] md:min-h-[700px] lg:min-h-[800px]">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <OptimizedImage src={heroNew} alt="Garett Beauty - Tecnología estética profesional" className="w-full h-full object-cover object-center" priority blurPlaceholder />
+        <OptimizedImage src={heroNew} alt="Intermex Beauty - Tecnología estética profesional" className="w-full h-full object-cover object-center" priority blurPlaceholder />
         {/* Overlay for text legibility */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
       </div>

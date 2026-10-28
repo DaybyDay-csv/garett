@@ -6,7 +6,7 @@ import { ShopifyProduct, isGWPProduct } from "./shopify";
 const INTENT_GROUPS: Array<{ keywords: string[]; handles: string[] }> = [
   {
     keywords: ['arrugas', 'arruga', 'antiarrugas', 'rejuvenecimiento', 'rejuvenecer', 'antiaging', 'anti-age', 'envejecimiento', 'flacidez', 'flacida', 'flacido', 'firmeza', 'firmar', 'firma', 'lifting', 'reafirmar', 'reafirmante', 'edad', 'papada', 'cuello', 'escote', 'ovalo'],
-    handles: ['lift-skin', 'lift-skin-pro', 'pretty-face', 'beauty-lift', 'fresh-skin-pro', 'manopla-led-garett-beauty', 'mascara-led-garett-beauty'],
+    handles: ['lift-skin', 'lift-skin-pro', 'pretty-face', 'beauty-lift', 'fresh-skin-pro', 'manopla-led-intermex-beauty', 'mascara-led-intermex-beauty'],
   },
   {
     keywords: ['ojos', 'ojeras', 'bolsas', 'contorno', 'mirada', 'parpados', 'párpados'],
@@ -14,7 +14,7 @@ const INTENT_GROUPS: Array<{ keywords: string[]; handles: string[] }> = [
   },
   {
     keywords: ['manchas', 'pigmentacion', 'pigmentación', 'luminosidad', 'tono', 'brillo', 'iluminar', 'apagada'],
-    handles: ['bright-skin', 'manopla-led-garett-beauty', 'mascara-led-garett-beauty'],
+    handles: ['bright-skin', 'manopla-led-intermex-beauty', 'mascara-led-intermex-beauty'],
   },
   {
     keywords: ['celulitis', 'anticelulitico', 'anticelulítico', 'grasa', 'gluteos', 'glúteos', 'piernas', 'abdomen', 'corporal', 'cuerpo', 'radiofrecuencia', 'reafirmar cuerpo'],
@@ -42,7 +42,7 @@ const INTENT_GROUPS: Array<{ keywords: string[]; handles: string[] }> = [
   },
   {
     keywords: ['led', 'fototerapia', 'mascara', 'máscara', 'manopla', 'luz roja', 'luz'],
-    handles: ['manopla-led-garett-beauty', 'mascara-led-garett-beauty'],
+    handles: ['manopla-led-intermex-beauty', 'mascara-led-intermex-beauty'],
   },
   {
     keywords: ['masajeador', 'masaje', 'masajear', 'estimulacion', 'estimulación', 'micorriente', 'ems'],
@@ -64,7 +64,7 @@ const INTENT_GROUPS: Array<{ keywords: string[]; handles: string[] }> = [
     // cualquier búsqueda (intentMatch es substring bidireccional). "Regalo
     // para él" sí funciona vía 'regalo' y "para ella" vía 'ella'.
     keywords: ['regalo', 'regalar', 'regalos', 'gift', 'gifts', 'sorpresa', 'ella', 'cumpleanos', 'navidad', 'reyes', 'aniversario', 'valentin'],
-    handles: ['fresh-eye', 'serum-skin', 'multiclean', 'pretty-face', 'bright-skin', 'lift-skin-pro', 'multi-care-brush', 'fresh-skin-pro', 'cellu-body', 'curly', 'aeroglow', 'manopla-led-garett-beauty', 'mascara-led-garett-beauty', 'ipl-plateada'],
+    handles: ['fresh-eye', 'serum-skin', 'multiclean', 'pretty-face', 'bright-skin', 'lift-skin-pro', 'multi-care-brush', 'fresh-skin-pro', 'cellu-body', 'curly', 'aeroglow', 'manopla-led-intermex-beauty', 'mascara-led-intermex-beauty', 'ipl-plateada'],
   },
 ];
 

@@ -65,7 +65,7 @@ export const CartDrawer = () => {
   const totalItems = items.filter(item => !item.isGWP).reduce((sum, item) => sum + item.quantity, 0);
 
   // Check if product is LED launch (permanent 30% discount in Shopify)
-  const isLEDLaunchProduct = (handle: string) => handle === 'mascara-led-garett-beauty' || handle === 'manopla-led-garett-beauty';
+  const isLEDLaunchProduct = (handle: string) => handle === 'mascara-led-intermex-beauty' || handle === 'manopla-led-intermex-beauty';
 
   // Calculate total price using cart item prices (already correct from Shopify)
   const subtotalWithDiscount = items.filter(item => !item.isGWP).reduce((sum, item) => {
@@ -106,7 +106,7 @@ export const CartDrawer = () => {
     items.filter(item => !item.isGWP && isLEDLaunchProduct(item.product.node.handle)).forEach(item => {
       const handle = item.product.node.handle;
       // LED products have 30% off from compare_at_price
-      const originalPrice = handle === 'mascara-led-garett-beauty' ? 450 : 299;
+      const originalPrice = handle === 'mascara-led-intermex-beauty' ? 450 : 299;
       const currentPrice = parseFloat(item.price.amount);
       totalSavings += (originalPrice - currentPrice) * item.quantity;
     });
@@ -212,14 +212,14 @@ export const CartDrawer = () => {
                           const price = parseFloat(item.price.amount);
                           
                           // LED products show original crossed out price
-                          if (handle === 'mascara-led-garett-beauty') {
+                          if (handle === 'mascara-led-intermex-beauty') {
                             return (
                               <div className="flex items-center gap-1.5 mt-0.5">
                                 <span className="text-xs text-muted-foreground line-through">€450.00</span>
                                 <span className="font-semibold text-sm text-green-600 dark:text-green-400">€{price.toFixed(2)}</span>
                               </div>
                             );
-                          } else if (handle === 'manopla-led-garett-beauty') {
+                          } else if (handle === 'manopla-led-intermex-beauty') {
                             return (
                               <div className="flex items-center gap-1.5 mt-0.5">
                                 <span className="text-xs text-muted-foreground line-through">€299.00</span>

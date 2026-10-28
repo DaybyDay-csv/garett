@@ -1,4 +1,4 @@
-# GARETT — E-commerce Beauty Tech Rebrand Playbook
+# INTERMEX BEAUTY — E-commerce Beauty Tech Rebrand Playbook
 
 Fase 1-4 del proyecto de rediseño: benchmark estratégico, matriz comparativa,
 patrones recurrentes y dirección visual propuesta.
@@ -9,7 +9,7 @@ Documento vivo. Se actualiza al cerrar Fase 5 (UI concreto) y Fase 6 en adelante
 
 ## 1. Resumen ejecutivo
 
-Garett vende tecnología de belleza (IPL, LED, microcurrent, mesoterapia,
+Intermex Beauty vende tecnología de belleza (IPL, LED, microcurrent, mesoterapia,
 masajeadores, cepillos faciales) en España. Hoy es un proyecto Lovable export
 conectado a una capa Shopify offline; la capa de datos ya está sustituida por
 un catálogo local en el repo.
@@ -17,7 +17,7 @@ un catálogo local en el repo.
 El objetivo de este playbook es definir qué prácticas de las 4 referencias
 (CurrentBody, FOREO, ZIIP, Medicube) son obligatorias en una web de Beauty
 Tech premium y cuáles son opcionales/diferenciadoras, y traducirlo a un
-lenguaje propio para Garett.
+lenguaje propio para Intermex Beauty.
 
 **Personalidad elegida:** clínico + premium (data real + elegancia).
 
@@ -250,7 +250,7 @@ lenguaje propio para Garett.
 
 ## 3. Matriz comparativa
 
-| Elemento | CurrentBody | FOREO | ZIIP | Medicube | Garett hoy | Garett v1 |
+| Elemento | CurrentBody | FOREO | ZIIP | Medicube | Intermex Beauty hoy | Intermex Beauty v1 |
 |---|---|---|---|---|---|---|
 | **Home** | | | | | | |
 | Hero con claim cuantitativo | ✓ 72% | ✓ 32% | ✓ 28% | parcial | parcial | ✓ |
@@ -304,7 +304,7 @@ Leyenda: ✓✓ destacado / ✓ presente / parcial / ✗ ausente
 
 ## 4. Patrones recurrentes (must-have)
 
-Lo que aparece en las 4 webs y que por tanto es **obligatorio** en Garett:
+Lo que aparece en las 4 webs y que por tanto es **obligatorio** en Intermex Beauty:
 
 ### 4.1 Sobre la Home
 
@@ -360,11 +360,11 @@ Lo que aparece en las 4 webs y que por tanto es **obligatorio** en Garett:
 
 Lo que solo tiene 1-2 de las 4. Adoptar solo si encaja con la marca.
 
-| Patrón | Quién | Adopción Garett |
+| Patrón | Quién | Adopción Intermex Beauty |
 |---|---|---|
 | Bundles en TOP de la home, antes del hero | FOREO | Evaluar — agresivo pero sube AOV |
-| Cariños de dispositivo + consumible en la home | ZIIP | No — Garett no vende gels hoy |
-| Beauty routine como narrativa | FOREO | **Sí** — encaja con "rutina" Garett |
+| Cariños de dispositivo + consumible en la home | ZIIP | No — Intermex Beauty no vende gels hoy |
+| Beauty routine como narrativa | FOREO | **Sí** — encaja con "rutina" Intermex Beauty |
 | Beauty experts (YouTubers) en lugar de celebrities | Medicube | Evaluar — depende de inversión en UGC |
 | Subscribe & save (suscripción) | Medicube | **Backlog Fase 7+** — modelo de negocio, no UI |
 | Quiz "Find your device" | Medicube | **Sí** — buena idea para med-funnel |
@@ -375,13 +375,13 @@ Lo que solo tiene 1-2 de las 4. Adoptar solo si encaja con la marca.
 
 ---
 
-## 6. Dirección visual para Garett
+## 6. Dirección visual para Intermex Beauty
 
 ### 6.1 Personalidad de marca
 
 **Clínico + premium.** No rosa, no verde médico, no negro agresivo. Limpio,
 blanco, con un acento profundo. La data y la prueba clínica obligan; la
-elegancia de la composición hace que Garett no parezca una marca china de
+elegancia de la composición hace que Intermex Beauty no parezca una marca china de
 AliExpress.
 
 **Tono de voz:**
@@ -523,7 +523,7 @@ ticket de implementación:
 3. **PressLogos** — grid de 6-10 logos.
 4. **ProductCard** — foto, rating, título, precio, "desde" si aplica.
 5. **ProductCardMinimal** — para PLP, más denso.
-6. **ProductCompareTable** — para PDP, comparación entre productos Garett.
+6. **ProductCompareTable** — para PDP, comparación entre productos Intermex Beauty.
 7. **BenefitGrid** — 4-6 items con icono + título + descripción.
 8. **HowItWorks** — 3 pasos visuales, opcional 4.
 9. **WhatsInTheBox** — lista numerada con thumbnails.
@@ -661,5 +661,5 @@ A resolver antes de empezar:
 ## 12. Brain links
 
 Decisiones tomadas en este documento: ver
-`~/Developer/OpenCode-Brain/brain/Garett/decisions.md` (se actualizará al
+`decisions.md` del proyecto en el OpenCode-Brain (se actualizará al
 cerrar cada fase).

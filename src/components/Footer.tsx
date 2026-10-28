@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Instagram, Twitter, Youtube } from "lucide-react";
-import garettLogo from "@/assets/garett-logo-white.png";
-import garettPattern from "@/assets/garett-pattern-2.png";
+import { BrandWordmark } from "@/components/BrandWordmark";
+import { BRAND } from "@/lib/brand";
+import brandPattern from "@/assets/intermex-pattern-2.png";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 import { CATEGORY_NAV } from "@/lib/categories";
 import { CUPON_PRIMER_PEDIDO, GARANTIA } from "@/lib/policies";
@@ -10,7 +11,7 @@ export const Footer = () => {
   return <footer className="relative bg-primary text-primary-foreground overflow-hidden">
       {/* Subtle Pattern Background */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
-      backgroundImage: `url(${garettPattern})`,
+      backgroundImage: `url(brandPattern)`,
       backgroundSize: '150px',
       backgroundRepeat: 'repeat'
     }} />
@@ -19,23 +20,23 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand Section */}
           <div className="space-y-5">
-            <Link to="/">
-              <img src={garettLogo} alt="GARETT" className="h-9 object-contain hover:opacity-80 transition-opacity cursor-pointer" />
+            <Link to="/" aria-label="Inicio">
+              <BrandWordmark className="text-lg text-white hover:opacity-80 transition-opacity cursor-pointer" />
             </Link>
             <p className="text-primary-foreground/80 text-sm leading-relaxed">
               Tecnología de belleza profesional para resultados visibles. Innovación y calidad certificada.
             </p>
             <div className="flex gap-3">
-              <a href="https://www.facebook.com/garettbeautyspain" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Facebook">
+              <a href="https://www.facebook.com/intermexbeauty" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Facebook">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                 </svg>
               </a>
-              <a href="https://www.instagram.com/garettbeauty.spain/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Instagram">
+              <a href="https://www.instagram.com/intermexbeauty/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Instagram">
                 <Instagram className="w-4 h-4" />
               </a>
               
-              <a href="https://www.youtube.com/@GARETTpl" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="YouTube">
+              <a href="https://www.youtube.com/@intermexbeauty" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="YouTube">
                 <Youtube className="w-4 h-4" />
               </a>
             </div>
@@ -114,8 +115,8 @@ export const Footer = () => {
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 mt-0.5 flex-shrink-0 text-primary-foreground/60" />
                 <div>
-                  <a href="mailto:info@intermexbeauty.es" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                    info@intermexbeauty.es
+                  <a href={`mailto:${BRAND.email}`} className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                    {BRAND.email}
                   </a>
                 </div>
               </li>
@@ -176,7 +177,7 @@ export const Footer = () => {
         <div className="pt-8 border-t border-primary-foreground/20">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/50">
             <p>
-              © {currentYear} Garett. Todos los derechos reservados.
+              © {currentYear} {BRAND.name}. Todos los derechos reservados.
             </p>
             <div className="flex items-center gap-4 text-xs">
               <span>Certificado CE</span>

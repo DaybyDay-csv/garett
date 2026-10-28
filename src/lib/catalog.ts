@@ -1,4 +1,4 @@
-// Catálogo local Garett — sustituye la capa Shopify (tienda offline).
+// Catálogo local Intermex Beauty — sustituye la capa Shopify (tienda offline).
 // Mantiene la forma ShopifyProduct para no romper componentes.
 // PRECIOS: derivados de los bundles Navidad + README (ver git log).
 // Los marcados como null están pendientes de confirmar.
@@ -252,7 +252,7 @@ const seeds: LocalProductSeed[] = [
     description: "Depiladora IPL con acabado dorado. 400.000 pulsos y tecnología de luz pulsada para depilación permanente desde casa.",
     productType: "IPL",
     tags: ["type:device", "category:ipl", "area:body", "tech:ipl"],
-    price: 379.00, // ESTIMADO — IPL Dorada (acabado premium, rango Philips Lumea Advanced 549-649, pero Garett no es Philips)
+    price: 379.00, // ESTIMADO — IPL Dorada (acabado premium, rango Philips Lumea Advanced 549-649, pero Intermex Beauty no es Philips)
     images: photo("ipl-flash-dorada-1.jpg", "ipl-flash-dorada-2.jpg", "ipl-flash-dorada-3.jpg"),
     options: [{ name: "Title", values: ["Default Title"] }],
   },
@@ -279,8 +279,8 @@ const seeds: LocalProductSeed[] = [
 
   // ===== Terapia de luz LED =====
   {
-    handle: "manopla-led-garett-beauty",
-    title: "Manopla LED Garett Beauty - Fototerapia LED",
+    handle: "manopla-led-intermex-beauty",
+    title: "Manopla LED Intermex Beauty - Fototerapia LED",
     description: "Manopla de fototerapia LED con 4 modos de luz (Calm, Luminosidad, Rejuvenecimiento, Firmeza) para rejuvenecimiento facial.",
     productType: "LED",
     tags: ["type:device", "category:terapia-luz-led", "area:face", "new:true"],
@@ -289,8 +289,8 @@ const seeds: LocalProductSeed[] = [
     options: [{ name: "Title", values: ["Default Title"] }],
   },
   {
-    handle: "mascara-led-garett-beauty",
-    title: "Máscara LED Garett Beauty - Fototerapia LED Facial",
+    handle: "mascara-led-intermex-beauty",
+    title: "Máscara LED Intermex Beauty - Fototerapia LED Facial",
     description: "Máscara de fototerapia LED con 4 modos de luz, temporizador 5/10/15 min y silicona médica hipoalergénica.",
     productType: "LED",
     tags: ["type:device", "category:terapia-luz-led", "area:face", "bestseller:true", "new:true"],
@@ -302,8 +302,8 @@ const seeds: LocalProductSeed[] = [
   // ===== GWP (oculto de la tienda, se añade automáticamente) =====
   {
     handle: "gwp-hairband",
-    title: "Banda de Pelo Premium Garett - Special BF",
-    description: "Regalo por compras superiores a 70€. Banda de pelo premium Garett.",
+    title: "Banda de Pelo Premium Intermex Beauty - Special BF",
+    description: "Regalo por compras superiores a 70€. Banda de pelo premium Intermex Beauty.",
     productType: "Accesorio",
     tags: ["type:accessory", "category:accesorios", "gift:true"],
     price: 12.99,

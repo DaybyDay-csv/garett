@@ -1,5 +1,5 @@
 # Sitemap
-Sitemap: https://garett.es/sitemap.xml
+Sitemap: https://intermexbeauty.es/sitemap.xml
 
 # Allow all crawlers
 User-agent: *

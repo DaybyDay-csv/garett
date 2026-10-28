@@ -8,7 +8,7 @@ export const HeroSection = () => {
   return <section className="relative overflow-hidden min-h-[600px] md:min-h-[850px] lg:min-h-[900px]">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <OptimizedImage src={heroChristmas} alt="Garett Beauty - Tecnología estética profesional" className="w-full h-full object-cover object-right" priority blurPlaceholder />
+        <OptimizedImage src={heroChristmas} alt="Intermex Beauty - Tecnología estética profesional" className="w-full h-full object-cover object-right" priority blurPlaceholder />
       </div>
       
       <div className="container relative py-8 md:py-24 lg:py-32 h-full px-6">

@@ -11,44 +11,44 @@ export interface RecommendationRule {
 export const RECOMMENDATION_MATRIX: Record<string, RecommendationRule> = {
   // ===== Limpieza facial =====
   "multiclean": {
-    primary: ["breeze-scrub", "fresh-skin-pro", "manopla-led-garett-beauty"],
+    primary: ["breeze-scrub", "fresh-skin-pro", "manopla-led-intermex-beauty"],
     secondary: ["lift-skin-pro", "aeroglow", "pretty-face"],
     reason: "Tu paso 1 limpia, ahora aplica el tratamiento",
   },
   "breeze-scrub": {
-    primary: ["fresh-skin-pro", "manopla-led-garett-beauty", "cellu-body"],
+    primary: ["fresh-skin-pro", "manopla-led-intermex-beauty", "cellu-body"],
     secondary: ["aeroglow", "lift-skin-pro", "serum-skin"],
     reason: "Después de exfoliar, tu piel absorbe mejor los activos",
   },
   "refresh-scrub": {
     primary: ["fresh-skin-pro", "multiclean"],
-    secondary: ["manopla-led-garett-beauty", "lift-skin-pro", "serum-skin"],
+    secondary: ["manopla-led-intermex-beauty", "lift-skin-pro", "serum-skin"],
     reason: "Prepara la piel antes del tratamiento",
   },
 
   // ===== Masajeadores faciales =====
   "fresh-eye": {
-    primary: ["pretty-face", "manopla-led-garett-beauty", "lift-skin-pro"],
+    primary: ["pretty-face", "manopla-led-intermex-beauty", "lift-skin-pro"],
     secondary: ["multiclean", "serum-skin", "calm-skin"],
     reason: "Completa el cuidado del contorno, suma firmeza",
   },
   "lift-skin": {
-    primary: ["lift-skin-pro", "manopla-led-garett-beauty", "serum-skin"],
+    primary: ["lift-skin-pro", "manopla-led-intermex-beauty", "serum-skin"],
     secondary: ["pretty-face", "fresh-eye", "multiclean"],
     reason: "Sube a Pro: más LED, calor y EMS",
   },
   "lift-skin-pro": {
-    primary: ["manopla-led-garett-beauty", "pretty-face", "serum-skin"],
-    secondary: ["fresh-eye", "aeroglow", "mascara-led-garett-beauty"],
+    primary: ["manopla-led-intermex-beauty", "pretty-face", "serum-skin"],
+    secondary: ["fresh-eye", "aeroglow", "mascara-led-intermex-beauty"],
     reason: "Maximiza resultados con LED therapy",
   },
   "pretty-face": {
-    primary: ["lift-skin-pro", "manopla-led-garett-beauty", "fresh-eye"],
-    secondary: ["multiclean", "serum-skin", "mascara-led-garett-beauty"],
+    primary: ["lift-skin-pro", "manopla-led-intermex-beauty", "fresh-eye"],
+    secondary: ["multiclean", "serum-skin", "mascara-led-intermex-beauty"],
     reason: "Completa el triángulo facial: EMS + LED",
   },
   "beauty-lift": {
-    primary: ["lift-skin-pro", "manopla-led-garett-beauty", "pretty-face"],
+    primary: ["lift-skin-pro", "manopla-led-intermex-beauty", "pretty-face"],
     secondary: ["fresh-eye", "multiclean", "serum-skin"],
     reason: "Misma familia con mejor tecnología",
   },
@@ -56,21 +56,21 @@ export const RECOMMENDATION_MATRIX: Record<string, RecommendationRule> = {
   // ===== Mesoterapia =====
   "calm-skin": {
     primary: ["fresh-skin-pro", "bright-skin", "serum-skin"],
-    secondary: ["manopla-led-garett-beauty", "multiclean", "lift-skin-pro"],
+    secondary: ["manopla-led-intermex-beauty", "multiclean", "lift-skin-pro"],
     reason: "Compara la familia mesoterapia o sella con LED",
   },
   "fresh-skin-pro": {
-    primary: ["calm-skin", "bright-skin", "manopla-led-garett-beauty"],
+    primary: ["calm-skin", "bright-skin", "manopla-led-intermex-beauty"],
     secondary: ["serum-skin", "multiclean", "lift-skin-pro"],
     reason: "Tu paso 2: combina mesoterapia con LED",
   },
   "bright-skin": {
-    primary: ["fresh-skin-pro", "calm-skin", "manopla-led-garett-beauty"],
+    primary: ["fresh-skin-pro", "calm-skin", "manopla-led-intermex-beauty"],
     secondary: ["serum-skin", "multiclean", "lift-skin-pro"],
     reason: "Luminosidad + firmeza con LED",
   },
   "serum-skin": {
-    primary: ["fresh-skin-pro", "manopla-led-garett-beauty", "calm-skin"],
+    primary: ["fresh-skin-pro", "manopla-led-intermex-beauty", "calm-skin"],
     secondary: ["multiclean", "breeze-scrub", "lift-skin-pro"],
     reason: "Tu sérum × la máquina",
   },
@@ -88,19 +88,19 @@ export const RECOMMENDATION_MATRIX: Record<string, RecommendationRule> = {
   },
   "multi-care-brush": {
     primary: ["lift-skin-pro", "multiclean", "aeroglow"],
-    secondary: ["manopla-led-garett-beauty", "fresh-skin-pro", "cellu-body"],
+    secondary: ["manopla-led-intermex-beauty", "fresh-skin-pro", "cellu-body"],
     reason: "Multifuncional 5-en-1, recomendado con EMS",
   },
 
   // ===== Capilar =====
   "curly": {
     primary: ["aeroglow", "multi-care-brush"],
-    secondary: ["lift-skin-pro", "fresh-skin-pro", "manopla-led-garett-beauty"],
+    secondary: ["lift-skin-pro", "fresh-skin-pro", "manopla-led-intermex-beauty"],
     reason: "Rutina completa cabello",
   },
   "aeroglow": {
     primary: ["curly", "multi-care-brush"],
-    secondary: ["fresh-skin-pro", "manopla-led-garett-beauty", "lift-skin-pro"],
+    secondary: ["fresh-skin-pro", "manopla-led-intermex-beauty", "lift-skin-pro"],
     reason: "Seca y alisa: completa con scalp massage",
   },
 
@@ -127,13 +127,13 @@ export const RECOMMENDATION_MATRIX: Record<string, RecommendationRule> = {
   },
 
   // ===== LED Therapy =====
-  "manopla-led-garett-beauty": {
-    primary: ["mascara-led-garett-beauty", "lift-skin-pro", "fresh-skin-pro"],
+  "manopla-led-intermex-beauty": {
+    primary: ["mascara-led-intermex-beauty", "lift-skin-pro", "fresh-skin-pro"],
     secondary: ["calm-skin", "multiclean", "serum-skin"],
     reason: "LED terapia corporal + facial",
   },
-  "mascara-led-garett-beauty": {
-    primary: ["manopla-led-garett-beauty", "fresh-skin-pro", "pretty-face"],
+  "mascara-led-intermex-beauty": {
+    primary: ["manopla-led-intermex-beauty", "fresh-skin-pro", "pretty-face"],
     secondary: ["lift-skin-pro", "multiclean", "serum-skin"],
     reason: "LED + mesoterapia: cara completa",
   },

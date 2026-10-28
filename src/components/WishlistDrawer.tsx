@@ -5,7 +5,7 @@ import { Heart, X } from "lucide-react";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { Link } from "react-router-dom";
 
-const WISHLIST_KEY = "garett_wishlist";
+const WISHLIST_KEY = "intermex_wishlist";
 
 function getWishlist(): string[] {
   if (typeof window === "undefined") return [];

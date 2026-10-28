@@ -30,7 +30,7 @@ const BlogPost = () => {
     datePublished: post.date,
     publisher: {
       '@type': 'Organization',
-      name: 'Garett Beauty',
+      name: 'Intermex Beauty',
       logo: {
         '@type': 'ImageObject',
         url: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pESnn9BB6adLJMk8NGIHDpkTO553/uploads/1762822197317-3.png'

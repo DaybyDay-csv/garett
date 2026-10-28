@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { BRAND } from '@/lib/brand';
 
 interface SEOProps {
   title: string;
@@ -23,7 +24,7 @@ export const SEO = ({
   price,
   currency = 'EUR',
   availability,
-  brand = 'Garett Beauty',
+  brand = BRAND.name,
   schema,
   faqs
 }: SEOProps) => {
@@ -57,8 +58,8 @@ export const SEO = ({
   return (
     <Helmet>
       {/* Primary Meta Tags */}
-      <title>{optimizedTitle} | Garett Beauty</title>
-      <meta name="title" content={`${optimizedTitle} | Garett Beauty`} />
+      <title>{optimizedTitle} | {BRAND.name}</title>
+      <meta name="title" content={`${optimizedTitle} | ${BRAND.name}`} />
       <meta name="description" content={optimizedDescription} />
       
       {/* Canonical URL */}
@@ -67,10 +68,10 @@ export const SEO = ({
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={fullUrl} />
-      <meta property="og:title" content={`${optimizedTitle} | Garett Beauty`} />
+      <meta property="og:title" content={`${optimizedTitle} | ${BRAND.name}`} />
       <meta property="og:description" content={optimizedDescription} />
       <meta property="og:image" content={imageUrl} />
-      <meta property="og:site_name" content="Garett Beauty" />
+      <meta property="og:site_name" content={BRAND.name} />
       <meta property="og:locale" content="es_ES" />
       
       {/* Product specific OG tags */}
@@ -88,7 +89,7 @@ export const SEO = ({
       {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={fullUrl} />
-      <meta property="twitter:title" content={`${optimizedTitle} | Garett Beauty`} />
+      <meta property="twitter:title" content={`${optimizedTitle} | ${BRAND.name}`} />
       <meta property="twitter:description" content={optimizedDescription} />
       <meta property="twitter:image" content={imageUrl} />
       

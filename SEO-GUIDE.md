@@ -1,4 +1,4 @@
-# Guía de Optimización SEO - Garett Beauty
+# Guía de Optimización SEO - Intermex Beauty
 
 ## ✅ Implementado
 

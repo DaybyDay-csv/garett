@@ -58,10 +58,10 @@ const GIFT_GROUPS: GiftBudgetGroup[] = [
     label: "200–350 €",
     intro: "El regalo grande: fototerapia LED, depilación IPL y styling con aire.",
     picks: [
-      { handle: "manopla-led-garett-beauty", motivo: "Fototerapia LED con 4 modos de luz, recién llegada." },
+      { handle: "manopla-led-intermex-beauty", motivo: "Fototerapia LED con 4 modos de luz, recién llegada." },
       { handle: "aeroglow", motivo: "La plancha de aire recién llegada: seca y alisa con tecnología iónica." },
       { handle: "curly", motivo: "Para quien trabaja el pelo con calor: rizos definidos sin daño térmico." },
-      { handle: "mascara-led-garett-beauty", motivo: "La máscara LED superventa: 4 modos y temporizador de 5/10/15 min." },
+      { handle: "mascara-led-intermex-beauty", motivo: "La máscara LED superventa: 4 modos y temporizador de 5/10/15 min." },
       { handle: "ipl-plateada", motivo: "Para quien piensa a largo plazo: depilación de luz pulsada en casa." },
     ],
   },

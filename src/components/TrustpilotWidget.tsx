@@ -37,7 +37,7 @@ export const TrustpilotWidget = () => {
             Lo que dicen nuestros clientes
           </h2>
           <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
-            Miles de clientes satisfechos confían en Garett
+            Miles de clientes satisfechos confían en Intermex Beauty
           </p>
         </div>
 
@@ -60,7 +60,7 @@ export const TrustpilotWidget = () => {
           data-schema-type="Organization"
         >
           <a
-            href="https://es.trustpilot.com/review/garett.es"
+            href="https://es.trustpilot.com/review/intermexbeauty.es"
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary hover:underline text-lg"

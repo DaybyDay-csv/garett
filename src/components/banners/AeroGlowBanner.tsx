@@ -8,7 +8,7 @@ import aeroglowHero from "@/assets/aeroglow-hero.png";
 import aeroglowDual from "@/assets/aeroglow-dual.png";
 import hairBefore from "@/assets/hair-before.png";
 import hairAfter from "@/assets/hair-after.jpg";
-import patternImage from "@/assets/garett-pattern-1.png";
+import patternImage from "@/assets/intermex-pattern-1.png";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 import { VideoPlayer } from "@/components/VideoPlayer";
 export const AeroGlowBanner = () => {

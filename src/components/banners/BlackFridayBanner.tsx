@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Flame, Gift, Zap, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import patternImage from "@/assets/garett-pattern-1.png";
+import patternImage from "@/assets/intermex-pattern-1.png";
 import { getCurrentPromotionalStage } from "@/lib/promotions";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 export const BlackFridayBanner = () => {

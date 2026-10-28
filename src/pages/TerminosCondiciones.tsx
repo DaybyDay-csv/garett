@@ -17,7 +17,7 @@ const TerminosCondiciones = () => {
           <div className="text-center border-b pb-6">
             <FileText className="w-12 h-12 text-primary mx-auto mb-4" />
             <h1 className="text-3xl font-bold mb-2">Términos y Condiciones de Uso</h1>
-            <p className="text-muted-foreground">Garett España</p>
+            <p className="text-muted-foreground">Intermex Beauty</p>
           </div>
 
           <section className="space-y-4">
@@ -25,7 +25,7 @@ const TerminosCondiciones = () => {
               <span className="text-primary">1.</span> Información general
             </h2>
             <p className="text-muted-foreground">
-              Este sitio web es operado por GARETT Sp. z o.o. (NIF/VAT: 9591956774, REGON: 260782107, KRS: 0000943657), empresa constituida conforme a las leyes de Polonia, con domicilio en ul. Sandomierska 209, 25-330 Kielce (Polonia), y titular de la marca de dispositivos de belleza Garett, incluyendo aparatos tecnológicos para el cuidado facial y corporal de uso doméstico. Al acceder y utilizar este sitio web, usted acepta cumplir con los siguientes términos y condiciones de uso. Si no está de acuerdo con ellos, le recomendamos no utilizar este sitio.
+              Este sitio web es operado por INTERMEX BEAUTY — razón social pendiente de confirmar, titular de la marca de dispositivos de belleza Intermex Beauty, incluyendo aparatos tecnológicos para el cuidado facial y corporal de uso doméstico. Al acceder y utilizar este sitio web, usted acepta cumplir con los siguientes términos y condiciones de uso. Si no está de acuerdo con ellos, le recomendamos no utilizar este sitio.
             </p>
           </section>
 
@@ -34,7 +34,7 @@ const TerminosCondiciones = () => {
               <span className="text-primary">2.</span> Objeto del sitio web
             </h2>
             <p className="text-muted-foreground">
-              Este sitio tiene como finalidad ofrecer al público información sobre los dispositivos de belleza de la marca Garett, así como facilitar su compra a través de la plataforma Shopify. Los dispositivos están disponibles para usuarios residentes en España (incluyendo Islas Canarias, Ceuta y Melilla), Portugal y, eventualmente, Latinoamérica, sujeto a disponibilidad y condiciones de envío.
+              Este sitio tiene como finalidad ofrecer al público información sobre los dispositivos de belleza de la marca Intermex Beauty, así como facilitar su compra a través de la plataforma Shopify. Los dispositivos están disponibles para usuarios residentes en España (incluyendo Islas Canarias, Ceuta y Melilla), Portugal y, eventualmente, Latinoamérica, sujeto a disponibilidad y condiciones de envío.
             </p>
           </section>
 
@@ -54,7 +54,7 @@ const TerminosCondiciones = () => {
             </h2>
             <div className="text-muted-foreground space-y-3">
               <p>
-                El proceso de compra de dispositivos de belleza de la marca Garett se realiza directamente a través de este sitio web, el cual está integrado con la plataforma segura Shopify.
+                El proceso de compra de dispositivos de belleza de la marca Intermex Beauty se realiza directamente a través de este sitio web, el cual está integrado con la plataforma segura Shopify.
               </p>
               <p>
                 Los usuarios podrán seleccionar los dispositivos de su interés navegando por el catálogo disponible. Para realizar un pedido, el usuario deberá:
@@ -75,7 +75,7 @@ const TerminosCondiciones = () => {
                 Una vez completado el proceso de compra y aceptadas estas condiciones, el usuario recibirá un correo electrónico de confirmación, que incluirá el resumen de los dispositivos adquiridos y el precio final con impuestos aplicables.
               </p>
               <p>
-                GARETT Sp. z o.o. emitirá una factura electrónica correspondiente al pedido realizado. El usuario podrá solicitar una copia en formato papel, sin coste adicional, escribiendo a la dirección de contacto indicada en el sitio web.
+                INTERMEX BEAUTY emitirá una factura electrónica correspondiente al pedido realizado. El usuario podrá solicitar una copia en formato papel, sin coste adicional, escribiendo a la dirección de contacto indicada en el sitio web.
               </p>
               <p>
                 El pedido será entregado en la dirección indicada por el usuario, dentro de los plazos especificados según la zona geográfica. Para más información, consulte la cláusula relativa a envíos y entrega.
@@ -105,7 +105,7 @@ const TerminosCondiciones = () => {
                 También se realizan envíos a Portugal y, sujeto a disponibilidad logística, a Latinoamérica. En esos destinos, los plazos de entrega pueden variar según país y servicio de mensajería local, y el cliente asumirá los gastos de aduana y aranceles aplicables en destino.
               </p>
               <p>
-                GARETT Sp. z o.o. no será responsable por retrasos imputables a servicios de mensajería externa o causas de fuerza mayor.
+                INTERMEX BEAUTY no será responsable por retrasos imputables a servicios de mensajería externa o causas de fuerza mayor.
               </p>
             </div>
           </section>
@@ -116,7 +116,7 @@ const TerminosCondiciones = () => {
             </h2>
             <div className="text-muted-foreground space-y-3">
               <p>
-                Además del derecho legal de desistimiento, GARETT Sp. z o.o. ofrece una devolución comercial de {DEVOLUCION.diasPrecintoIntacto} días desde la recepción del dispositivo, siempre que el producto conserve su precinto intacto y se encuentre en su embalaje original, en perfecto estado.
+                Además del derecho legal de desistimiento, INTERMEX BEAUTY ofrece una devolución comercial de {DEVOLUCION.diasPrecintoIntacto} días desde la recepción del dispositivo, siempre que el producto conserve su precinto intacto y se encuentre en su embalaje original, en perfecto estado.
               </p>
               <p>
                 Conforme al artículo 102 del RDL 1/2007, el usuario dispone asimismo de un derecho legal de desistimiento de un mínimo de {DEVOLUCION.desistimientoLegalDiasMinimo} días naturales desde la recepción del dispositivo.
@@ -125,7 +125,7 @@ const TerminosCondiciones = () => {
                 {DEVOLUCION.desprecintado.texto} Esta excepción se aplica conforme al artículo 103.e) del RDL 1/2007. En caso de defecto verificado, se aplicará la garantía descrita en la cláusula siguiente.
               </p>
               <p>
-                Para tramitar una devolución, el usuario deberá ponerse en contacto con el servicio de atención al cliente a través del correo electrónico indicado en el sitio web. GARETT Sp. z o.o. facilitará instrucciones sobre cómo devolver el producto.
+                Para tramitar una devolución, el usuario deberá ponerse en contacto con el servicio de atención al cliente a través del correo electrónico indicado en el sitio web. INTERMEX BEAUTY facilitará instrucciones sobre cómo devolver el producto.
               </p>
               <p>
                 Los gastos de devolución correrán a cargo del usuario, salvo que la devolución se deba a un defecto de fabricación, error en el envío o incumplimiento de las condiciones acordadas.
@@ -142,7 +142,7 @@ const TerminosCondiciones = () => {
             </h2>
             <div className="text-muted-foreground space-y-3">
               <p>
-                Todos los dispositivos de belleza de la marca Garett cuentan con una garantía comercial del fabricante de {GARANTIA.comercial.anios} años contra defectos de fabricación, siempre que el dispositivo haya sido utilizado conforme a las instrucciones del manual de uso.
+                Todos los dispositivos de belleza de la marca Intermex Beauty cuentan con una garantía comercial del fabricante de {GARANTIA.comercial.anios} años contra defectos de fabricación, siempre que el dispositivo haya sido utilizado conforme a las instrucciones del manual de uso.
               </p>
               <p>
                 Esta garantía comercial es adicional a la garantía legal que asiste al consumidor frente al vendedor ({GARANTIA.legal.anios} años, conforme al RD 7/2021) y no la limita.
@@ -151,7 +151,7 @@ const TerminosCondiciones = () => {
                 La garantía no cubre daños derivados del uso indebido, negligencia, caídas, golpes, exposición a líquidos no recomendados, manipulación no autorizada o desgaste normal del producto.
               </p>
               <p>
-                Para hacer efectiva la garantía, el usuario deberá conservar el comprobante de compra y ponerse en contacto con el servicio de atención al cliente de GARETT Sp. z o.o.
+                Para hacer efectiva la garantía, el usuario deberá conservar el comprobante de compra y ponerse en contacto con el servicio de atención al cliente de INTERMEX BEAUTY
               </p>
             </div>
           </section>
@@ -161,7 +161,7 @@ const TerminosCondiciones = () => {
               <span className="text-primary">8.</span> Propiedad intelectual
             </h2>
             <p className="text-muted-foreground">
-              Todos los contenidos de este sitio web (textos, imágenes, logotipos, diseños, vídeos, software) son propiedad de GARETT Sp. z o.o. y están protegidos por las leyes de propiedad intelectual e industrial vigentes. Queda prohibida su reproducción, distribución, modificación, comunicación pública o cualquier otra forma de explotación sin autorización previa y expresa por escrito.
+              Todos los contenidos de este sitio web (textos, imágenes, logotipos, diseños, vídeos, software) son propiedad de INTERMEX BEAUTY y están protegidos por las leyes de propiedad intelectual e industrial vigentes. Queda prohibida su reproducción, distribución, modificación, comunicación pública o cualquier otra forma de explotación sin autorización previa y expresa por escrito.
             </p>
           </section>
 
@@ -170,7 +170,7 @@ const TerminosCondiciones = () => {
               <span className="text-primary">9.</span> Protección de datos personales
             </h2>
             <p className="text-muted-foreground">
-              Los datos personales proporcionados por los usuarios serán tratados conforme a lo establecido en la Política de Privacidad de GARETT Sp. z o.o., disponible en este sitio web, y de acuerdo con el Reglamento General de Protección de Datos (RGPD) y la normativa española aplicable.
+              Los datos personales proporcionados por los usuarios serán tratados conforme a lo establecido en la Política de Privacidad de INTERMEX BEAUTY, disponible en este sitio web, y de acuerdo con el Reglamento General de Protección de Datos (RGPD) y la normativa española aplicable.
             </p>
           </section>
 
@@ -179,7 +179,7 @@ const TerminosCondiciones = () => {
               <span className="text-primary">10.</span> Modificaciones de los términos y condiciones
             </h2>
             <p className="text-muted-foreground">
-              GARETT Sp. z o.o. se reserva el derecho de modificar estos términos y condiciones en cualquier momento. Las modificaciones serán comunicadas a través del sitio web y entrarán en vigor desde su publicación. Se recomienda a los usuarios revisar periódicamente estos términos.
+              INTERMEX BEAUTY se reserva el derecho de modificar estos términos y condiciones en cualquier momento. Las modificaciones serán comunicadas a través del sitio web y entrarán en vigor desde su publicación. Se recomienda a los usuarios revisar periódicamente estos términos.
             </p>
           </section>
 

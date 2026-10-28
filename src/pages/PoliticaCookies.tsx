@@ -16,7 +16,7 @@ const PoliticaCookies = () => {
           <div className="text-center border-b pb-6">
             <Cookie className="w-12 h-12 text-primary mx-auto mb-4" />
             <h1 className="text-3xl font-bold mb-2">Política de Cookies</h1>
-            <p className="text-muted-foreground">Garett España</p>
+            <p className="text-muted-foreground">Intermex Beauty</p>
           </div>
 
           <section className="space-y-4">
@@ -35,7 +35,7 @@ const PoliticaCookies = () => {
                 <li>para analizar el rendimiento de nuestros sitios web</li>
               </ul>
               <p>
-                Las cookies de Garett.es se clasifican en <strong className="text-foreground">Esenciales</strong> (necesarias para que el sitio web funcione correctamente, como proporcionar un inicio de sesión seguro o recordar sus preferencias de cookies, y siempre están activas), <strong className="text-foreground">Rendimiento</strong> (recopilan datos estadísticos de uso para optimizar y mejorar el sitio web), <strong className="text-foreground">Preferencia</strong> (admitir funcionalidades mejoradas del sitio y recordar sus preferencias para futuras visitas) y <strong className="text-foreground">Publicidad dirigida</strong> (incluidas las redes sociales) (realizar un seguimiento de su actividad dentro y fuera de los sitios web para ofrecerle anuncios personalizados).
+                Las cookies de intermexbeauty.es se clasifican en <strong className="text-foreground">Esenciales</strong> (necesarias para que el sitio web funcione correctamente, como proporcionar un inicio de sesión seguro o recordar sus preferencias de cookies, y siempre están activas), <strong className="text-foreground">Rendimiento</strong> (recopilan datos estadísticos de uso para optimizar y mejorar el sitio web), <strong className="text-foreground">Preferencia</strong> (admitir funcionalidades mejoradas del sitio y recordar sus preferencias para futuras visitas) y <strong className="text-foreground">Publicidad dirigida</strong> (incluidas las redes sociales) (realizar un seguimiento de su actividad dentro y fuera de los sitios web para ofrecerle anuncios personalizados).
               </p>
             </div>
           </section>

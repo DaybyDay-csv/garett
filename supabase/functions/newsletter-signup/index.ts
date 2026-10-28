@@ -23,10 +23,11 @@ serve(async (req) => {
     }
 
     const adminApiToken = Deno.env.get('SHOPIFY_ADMIN_API_TOKEN');
-    const shopDomain = 'garett-connect-shop-w1cxe.myshopify.com';
+    // Dominio de la tienda Shopify: configuración por entorno (no hardcodear).
+    const shopDomain = Deno.env.get('SHOPIFY_SHOP_DOMAIN') || '';
 
-    if (!adminApiToken) {
-      console.error('SHOPIFY_ADMIN_API_TOKEN not configured');
+    if (!adminApiToken || !shopDomain) {
+      console.error('SHOPIFY_ADMIN_API_TOKEN or SHOPIFY_SHOP_DOMAIN not configured');
       return new Response(
         JSON.stringify({ error: 'Configuración del servidor incompleta' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }

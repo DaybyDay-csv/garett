@@ -10,9 +10,12 @@
  * política de devolución en el mismo recorrido (H2) y dos umbrales de envío
  * contradictorios (H4). Este módulo fija una sola versión de cada política.
  *
- * Módulo puro: sin imports, sin efectos. Seguro para usar en el cliente y en
+ * Módulo puro: constantes sin efectos. Seguro para usar en el cliente y en
  * Cloudflare Functions (copiar a functions/ si una Function lo necesita).
+ * La identidad (nombre, dominio, email) vive en ./brand (única fuente).
  */
+
+import { BRAND } from "./brand";
 
 /** Política de devolución (una sola, para todo el recorrido). */
 export const DEVOLUCION = {
@@ -44,7 +47,7 @@ export const GARANTIA = {
   comercial: {
     nombre: "Garantía comercial",
     anios: 2,
-    texto: "2 años de garantía comercial Garett",
+    texto: `2 años de garantía comercial ${BRAND.name}`,
   },
   legal: {
     nombre: "Garantía legal",
@@ -73,7 +76,7 @@ export const CONTACTO = {
   telefono: "+34 679 23 51 48",
   /** Para enlaces tel:. */
   telefonoHref: "tel:+34679235148",
-  email: "info@intermexbeauty.es",
+  email: BRAND.email,
   horario: "L-V 9-18h",
   /** Línea lista para poner junto al botón de compra. */
   textoJuntoAlCta: "¿Dudas? Llámanos: 679 23 51 48 (L-V 9-18h)",

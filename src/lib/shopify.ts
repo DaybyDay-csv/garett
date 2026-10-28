@@ -1,11 +1,5 @@
-// Shopify API Configuration (tienda offline — conservada como referencia)
-export const SHOPIFY_API_VERSION = '2025-07';
-export const SHOPIFY_STORE_PERMANENT_DOMAIN = 'garett-connect-shop-w1cxe.myshopify.com';
-export const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
-export const SHOPIFY_STOREFRONT_TOKEN = 'a85fa80606d59d56da27fc9c3f2075b3';
-
-// La tienda Shopify está offline (plan no activo).
-// El catálogo vive ahora en src/lib/catalog.ts (datos locales).
+// Catálogo local (la tienda Shopify está offline — conservada como referencia).
+// El catálogo vive en src/lib/catalog.ts (datos locales).
 // Este módulo mantiene la interfaz para no romper componentes.
 import { LOCAL_PRODUCTS, LOCAL_PRODUCTS_BY_HANDLE } from './catalog';
 import { STRIPE_PRICE_BY_HANDLE } from './stripePrices';
@@ -91,7 +85,7 @@ export async function fetchProducts(first: number = 50, query?: string): Promise
 export const GWP_PRODUCT_ID = 'gid://local/Product/gwp-hairband';
 export const GWP_VARIANT_ID = 'local://gwp-hairband/variant/0';
 export const GWP_THRESHOLD = 70; // €70 threshold
-export const GWP_PRODUCT_TITLE = 'Banda de Pelo Premium Garett - Special BF';
+export const GWP_PRODUCT_TITLE = 'Banda de Pelo Premium Intermex Beauty - Special BF';
 
 // Helper to check if product is GWP (should be hidden from frontend)
 export const isGWPProduct = (product: ShopifyProduct): boolean => {

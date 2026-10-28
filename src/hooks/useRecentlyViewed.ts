@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ShopifyProduct } from "@/lib/shopify";
 
-const STORAGE_KEY = "garett_recently_viewed";
+const STORAGE_KEY = "intermex_recently_viewed";
 const MAX_ITEMS = 8;
 
 interface RecentlyViewedItem {

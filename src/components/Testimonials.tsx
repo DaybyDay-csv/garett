@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import garettPattern from "@/assets/garett-pattern-2.png";
+import brandPattern from "@/assets/intermex-pattern-2.png";
 const testimonials = [
   {
     name: "Aroa",
@@ -13,7 +13,7 @@ const testimonials = [
     verified: true,
     image: "AR",
     review:
-      "Estoy encantada con los productos de Garett. Desde que los uso he notado una gran diferencia en mi piel. Gran relación calidad-precio y una atención al cliente impecable. Una marca en la que confío plenamente!",
+      "Estoy encantada con los productos de Intermex Beauty. Desde que los uso he notado una gran diferencia en mi piel. Gran relación calidad-precio y una atención al cliente impecable. Una marca en la que confío plenamente!",
     result: "Gran diferencia en la piel",
   },
   {
@@ -46,7 +46,7 @@ const testimonials = [
     verified: true,
     image: "LH",
     review:
-      "Descubrir los dispositivos de belleza de Garett ha sido todo un hallazgo. Empecé con Pretty Face… ¡y ahora ya tengo cuatro! Son una auténtica adicción. Estoy encantada con los resultados, porque desde el primer día se notan los cambios, y además me regalan un momento de relax cada día, potenciando el efecto de todas mis cremas.",
+      "Descubrir los dispositivos de belleza de Intermex Beauty ha sido todo un hallazgo. Empecé con Pretty Face… ¡y ahora ya tengo cuatro! Son una auténtica adicción. Estoy encantada con los resultados, porque desde el primer día se notan los cambios, y además me regalan un momento de relax cada día, potenciando el efecto de todas mis cremas.",
     result: "Cambios desde el primer día",
   },
   {
@@ -202,7 +202,7 @@ export const Testimonials = () => {
       <div
         className="absolute inset-0 opacity-[0.015]"
         style={{
-          backgroundImage: `url(${garettPattern})`,
+          backgroundImage: `url(${brandPattern})`,
           backgroundSize: "150px",
           backgroundRepeat: "repeat",
         }}
@@ -213,7 +213,7 @@ export const Testimonials = () => {
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">Lo que dicen nuestros clientes</h2>
           <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto mb-6">
-            Miles de clientes satisfechos confían en Garett
+            Miles de clientes satisfechos confían en Intermex Beauty
           </p>
 
           {/* Trustpilot Rating Summary */}
@@ -231,7 +231,7 @@ export const Testimonials = () => {
 
           {/* Trustpilot Button */}
           <a
-            href="https://es.trustpilot.com/review/garett.es"
+            href="https://es.trustpilot.com/review/intermexbeauty.es"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#00b67a] hover:bg-[#00a870] text-white font-semibold px-6 py-3 rounded-lg transition-colors"

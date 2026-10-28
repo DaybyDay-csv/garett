@@ -29,9 +29,9 @@ export const blogPosts: BlogPost[] = [
     readTime: "5 min",
     image: blogBeautyTech,
     date: "2025-11-20",
-    author: "Equipo Garett Beauty",
+    author: "Equipo Intermex Beauty",
     content: `
-      <p>En <strong>Garett Beauty</strong>, revolucionamos el cuidado personal con dispositivos de belleza profesional diseñados para uso doméstico. Nuestra tecnología avanzada te permite disfrutar de tratamientos profesionales sin salir de casa.</p>
+      <p>En <strong>Intermex Beauty</strong>, revolucionamos el cuidado personal con dispositivos de belleza profesional diseñados para uso doméstico. Nuestra tecnología avanzada te permite disfrutar de tratamientos profesionales sin salir de casa.</p>
 
       <h2>¿Por Qué Elegir Dispositivos de Belleza Profesional?</h2>
       
@@ -60,7 +60,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "7 min",
     image: blogHairCare,
     date: "2025-11-18",
-    author: "Equipo Garett Beauty",
+    author: "Equipo Intermex Beauty",
     content: `
       <p>Nuestra <a href="/categoria/cuidado-capilar">línea de cuidado capilar</a> incluye planchas y secadores con <strong>tecnología iónica avanzada</strong>. Esta innovación neutraliza la electricidad estática, sella la cutícula del cabello y proporciona un acabado profesional.</p>
 
@@ -109,7 +109,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "6 min",
     image: blogFacialMassage,
     date: "2025-11-15",
-    author: "Equipo Garett Beauty",
+    author: "Equipo Intermex Beauty",
     content: `
       <p>Los <a href="/categoria/masajeadores-faciales">masajeadores faciales profesionales</a> estimulan la circulación, mejoran la absorción de productos y proporcionan un efecto lifting natural.</p>
 
@@ -162,7 +162,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "8 min",
     image: blogIPL,
     date: "2025-11-12",
-    author: "Equipo Garett Beauty",
+    author: "Equipo Intermex Beauty",
     content: `
       <p>La <a href="/categoria/depilacion-ipl">tecnología IPL (Luz Pulsada Intensa)</a> es el método más efectivo para <strong>depilación permanente en casa</strong>. El IPL Flash Pro y la IPL Flash Dorada ofrecen ${IPL_PULSOS} pulsos, suficientes para tratarte durante años.</p>
 
@@ -237,7 +237,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "5 min",
     image: blogCleansing,
     date: "2025-11-10",
-    author: "Equipo Garett Beauty",
+    author: "Equipo Intermex Beauty",
     content: `
       <p>Nuestros <a href="/categoria/limpieza-facial">dispositivos de limpieza facial profunda</a> eliminan impurezas hasta 10 veces más efectivamente que la limpieza manual, dejando tu piel radiante y renovada.</p>
 
@@ -332,7 +332,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "6 min",
     image: blogMesotherapy,
     date: "2025-11-08",
-    author: "Equipo Garett Beauty",
+    author: "Equipo Intermex Beauty",
     content: `
       <p>Nuestros <a href="/categoria/mesoterapia">dispositivos de mesoterapia</a> utilizan electroporación para que tus sérums penetren hasta capas profundas sin agujas ni dolor.</p>
 

@@ -137,7 +137,7 @@ export const NewsletterPopup = () => {
                 </div>
               </div>
               <DialogTitle className="text-2xl font-semibold tracking-tight text-white">
-                Únete a Garett Beauty
+                Únete a Intermex Beauty
               </DialogTitle>
               <DialogDescription className="text-sm text-white/80 leading-relaxed">
                 Suscríbete y recibe ofertas exclusivas, novedades y consejos de belleza directamente en tu email.

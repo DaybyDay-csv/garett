@@ -17,7 +17,7 @@ export default function WarrantyPolicy() {
           <div className="text-center border-b pb-6">
             <Shield className="w-12 h-12 text-primary mx-auto mb-4" />
             <h1 className="text-3xl font-bold mb-2">Condiciones de Garantía Comercial del Fabricante</h1>
-            <p className="text-muted-foreground">Garett Beauty</p>
+            <p className="text-muted-foreground">Intermex Beauty</p>
           </div>
 
           <section className="space-y-4">
@@ -101,7 +101,7 @@ export default function WarrantyPolicy() {
               <li className="flex items-start gap-2">
                 <span className="text-primary font-bold">•</span>
                 <div>
-                  <span>Contactar con el Servicio Técnico Oficial Garett:</span>
+                  <span>Contactar con el Servicio Técnico Oficial Intermex Beauty:</span>
                   <div className="mt-2 space-y-1 bg-background rounded-md p-3">
                     <div className="flex items-center gap-2">
                       <Phone className="w-4 h-4 text-primary" />

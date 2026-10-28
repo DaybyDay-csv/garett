@@ -9,7 +9,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { CategoryNav } from "@/components/CategoryNav";
 import { CATEGORY_NAV } from "@/lib/categories";
 import { cn } from "@/lib/utils";
-import garettLogo from "@/assets/garett-logo-navy.png";
+import { BrandWordmark } from "@/components/BrandWordmark";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -34,8 +34,8 @@ export const Header = () => {
 
   return <header className="sticky top-0 z-50 w-full border-b border-border surface-material">
       <div className="container flex h-20 items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-3 flex-shrink-0">
-          <img src={garettLogo} alt="GARETT" className="h-9 object-contain" />
+        <Link to="/" className="flex items-center gap-3 flex-shrink-0" aria-label="Inicio">
+          <BrandWordmark className="text-lg md:text-xl text-foreground" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -79,7 +79,7 @@ export const Header = () => {
             <SheetContent side="right" className="w-[300px]">
               <SheetHeader className="mb-6">
                 <SheetTitle className="flex items-center gap-2">
-                  <img src={garettLogo} alt="GARETT" className="h-7 object-contain" />
+                  <BrandWordmark className="text-base text-foreground" />
                 </SheetTitle>
               </SheetHeader>
 

@@ -22,6 +22,6 @@ export const STRIPE_PRICE_BY_HANDLE: Record<string, string> = {
   "ipl-flash-dorada": "price_1U9W0HFS9PHCKZwwEhyJsfSs",
   "ipl-plateada": "price_1U9W0HFS9PHCKZwwu11FLaWI",
   "cool": "price_1U9W0IFS9PHCKZww6k5MfHWA",
-  "manopla-led-garett-beauty": "price_1U9W0JFS9PHCKZwwvPIGvuX3",
-  "mascara-led-garett-beauty": "price_1U9W0JFS9PHCKZwwVA3FPGRH",
+  "manopla-led-intermex-beauty": "price_1U9W0JFS9PHCKZwwvPIGvuX3",
+  "mascara-led-intermex-beauty": "price_1U9W0JFS9PHCKZwwVA3FPGRH",
 };

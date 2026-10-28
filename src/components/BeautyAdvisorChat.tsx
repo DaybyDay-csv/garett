@@ -10,7 +10,7 @@ const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/beauty-advis
 
 const WELCOME_MESSAGE: Message = {
   role: "assistant",
-  content: "¡Hola! 👋 Soy **Glow**, tu asesora de belleza Garett. Cuéntame qué necesitas y te ayudo a encontrar el dispositivo perfecto para ti. ¿Qué problema de piel o cuerpo te gustaría mejorar?"
+  content: "¡Hola! 👋 Soy **Glow**, tu asesora de belleza Intermex Beauty. Cuéntame qué necesitas y te ayudo a encontrar el dispositivo perfecto para ti. ¿Qué problema de piel o cuerpo te gustaría mejorar?"
 };
 
 const QUICK_QUESTIONS = [
@@ -150,7 +150,7 @@ export const BeautyAdvisorChat = () => {
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-foreground">Glow - Asesora Beauty</h3>
-                <p className="text-[10px] text-muted-foreground">Tu guía personalizada Garett</p>
+                <p className="text-[10px] text-muted-foreground">Tu guía personalizada Intermex Beauty</p>
               </div>
             </div>
             <button onClick={() => setIsOpen(false)} className="p-1 rounded-full hover:bg-muted transition-colors">

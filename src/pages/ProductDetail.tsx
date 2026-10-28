@@ -288,8 +288,8 @@ const ProductDetail = () => {
   const originalPrice = variant ? variant.price.amount : "0";
 
   // Check if this is a LED launch product (has permanent 30% discount in Shopify)
-  const isMascaraLED = node.handle === 'mascara-led-garett-beauty';
-  const isManopolaLED = node.handle === 'manopla-led-garett-beauty';
+  const isMascaraLED = node.handle === 'mascara-led-intermex-beauty';
+  const isManopolaLED = node.handle === 'manopla-led-intermex-beauty';
   const isLEDLaunch = isMascaraLED || isManopolaLED;
 
   // Special pricing for LED launch products (permanent discount in Shopify)
@@ -429,7 +429,7 @@ const ProductDetail = () => {
   const categoryInfo = getCategoryInfo();
 
   // Create SEO meta description from product
-  const metaDescription = node.description ? node.description.substring(0, 157) + '...' : `Compra ${node.title} en Garett Beauty. ${categoryInfo.name} con la mejor tecnología y calidad profesional. Envío gratis y garantía ${GARANTIA.comercial.anios} años.`;
+  const metaDescription = node.description ? node.description.substring(0, 157) + '...' : `Compra ${node.title} en Intermex Beauty. ${categoryInfo.name} con la mejor tecnología y calidad profesional. Envío gratis y garantía ${GARANTIA.comercial.anios} años.`;
 
   // Product schema markup for rich snippets
   const productSchema = {
@@ -441,7 +441,7 @@ const ProductDetail = () => {
     url: `${window.location.origin}/producto/${node.handle}`,
     brand: {
       '@type': 'Brand',
-      name: 'Garett Beauty'
+      name: 'Intermex Beauty'
     },
     offers: {
       '@type': 'Offer',
@@ -452,7 +452,7 @@ const ProductDetail = () => {
       // Sin priceValidUntil: no hay promoción con fecha que lo respalde.
       seller: {
         '@type': 'Organization',
-        name: 'Garett Beauty'
+        name: 'Intermex Beauty'
       }
     }
     // Sin aggregateRating: no hay reseñas verificadas todavía. Solo se añade
@@ -504,7 +504,7 @@ const ProductDetail = () => {
     ? productContent.dropdowns.howToUse.additionalNote.replace(/^Incluye:\s*/, '')
     : null;
   return <div className="min-h-screen bg-background text-foreground">
-      <SEO title={node.title} description={metaDescription} canonicalUrl={`/producto/${node.handle}`} image={node.images.edges[0]?.node.url} type="product" price={priceInfo.discountedPrice.toFixed(2)} currency={variant?.price.currencyCode || 'EUR'} availability={variant?.availableForSale ? 'in stock' : 'out of stock'} brand="Garett Beauty" schema={combinedSchema} faqs={productFAQs} />
+      <SEO title={node.title} description={metaDescription} canonicalUrl={`/producto/${node.handle}`} image={node.images.edges[0]?.node.url} type="product" price={priceInfo.discountedPrice.toFixed(2)} currency={variant?.price.currencyCode || 'EUR'} availability={variant?.availableForSale ? 'in stock' : 'out of stock'} brand="Intermex Beauty" schema={combinedSchema} faqs={productFAQs} />
       <Header />
       
       <div className="container py-8 px-6">
@@ -532,14 +532,14 @@ const ProductDetail = () => {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  const saved = JSON.parse(localStorage.getItem('garett_wishlist') || '[]');
+                  const saved = JSON.parse(localStorage.getItem('intermex_wishlist') || '[]');
                   const exists = saved.includes(node.handle);
                   if (exists) {
-                    localStorage.setItem('garett_wishlist', JSON.stringify(saved.filter((h: string) => h !== node.handle)));
+                    localStorage.setItem('intermex_wishlist', JSON.stringify(saved.filter((h: string) => h !== node.handle)));
                     toast.info('Eliminado de favoritos');
                   } else {
                     saved.push(node.handle);
-                    localStorage.setItem('garett_wishlist', JSON.stringify(saved));
+                    localStorage.setItem('intermex_wishlist', JSON.stringify(saved));
                     toast.success('Añadido a favoritos', { description: node.title });
                   }
                   // Force re-render
@@ -547,7 +547,7 @@ const ProductDetail = () => {
                 }}
                 className="absolute top-4 left-4 z-10 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center border shadow-sm transition-transform duration-200 ease-out hover:scale-110 active:scale-90"
               >
-                <Heart className={`w-5 h-5 ${JSON.parse(localStorage.getItem('garett_wishlist') || '[]').includes(node.handle) ? 'fill-red-500 text-red-500' : 'text-foreground'}`} />
+                <Heart className={`w-5 h-5 ${JSON.parse(localStorage.getItem('intermex_wishlist') || '[]').includes(node.handle) ? 'fill-red-500 text-red-500' : 'text-foreground'}`} />
               </button>
               
               {/* Zoom Indicator */}
@@ -704,7 +704,7 @@ const ProductDetail = () => {
                       </span>
                     </div>
                     <p className="text-xs text-purple-700 dark:text-purple-300">
-                      Banda de pelo Garett Routine 
+                      Banda de pelo Intermex Beauty Routine 
                     </p>
                   </div>
                 </div>
@@ -1034,7 +1034,7 @@ const ProductDetail = () => {
             Tecnología profesional, accesible para ti
           </h2>
           <p className="text-base text-foreground/70 leading-relaxed max-w-2xl mx-auto">
-            En Garett Beauty creemos que los tratamientos estéticos profesionales no deberían ser un lujo exclusivo de clínicas. 
+            En Intermex Beauty creemos que los tratamientos estéticos profesionales no deberían ser un lujo exclusivo de clínicas. 
             Nuestra misión es acercar la tecnología eslava más avanzada a tu hogar, con dispositivos certificados, 
             seguros y diseñados para resultados reales. Respaldados por El Corte Inglés y más de 10.000 clientes satisfechos en Europa.
           </p>

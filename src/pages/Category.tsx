@@ -47,7 +47,7 @@ const Category = () => {
       <div className="min-h-screen bg-background">
         <SEO 
           title="Categoría no encontrada"
-          description="La categoría que buscas no existe en Garett Beauty"
+          description="La categoría que buscas no existe en Intermex Beauty"
           canonicalUrl={window.location.pathname}
         />
         <Header />
@@ -89,7 +89,7 @@ const Category = () => {
           },
           brand: {
             '@type': 'Brand',
-            name: 'Garett Beauty'
+            name: 'Intermex Beauty'
           }
         }
       }))

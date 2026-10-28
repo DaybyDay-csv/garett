@@ -135,7 +135,7 @@ export const christmasBundles: ChristmasBundle[] = [
     name: "Pack Dúo Glow LED",
     subtitle: "2 Manoplas LED",
     description: "Terapia de luz LED para rostro y cuerpo",
-    products: ["manopla-led-garett-beauty", "manopla-led-garett-beauty"],
+    products: ["manopla-led-intermex-beauty", "manopla-led-intermex-beauty"],
     originalValue: 448,
     bundlePrice: 379,
     savings: 69,
